@@ -9,7 +9,7 @@ const guides = [
   ['/guides/oregon-72-vs-73-chain/', 'Oregon 72 vs 73 chain', '3/8" pitch; 72 is .050" gauge, 73 is .058" gauge.'],
   ['/guides/chainsaw-chain-file-size/', 'Chainsaw chain file size', 'Round file size by pitch.'],
   ['/how-we-verify/', 'How we verify specs', 'Source hierarchy and conflict handling.'],
-  ['/affiliate-disclosure/', 'Affiliate disclosure', 'How the site is funded.'],
+  ['/affiliate-disclosure/', 'Affiliate disclosure', 'No active affiliate relationships; links are untagged and earn no commission.'],
 ];
 
 export async function llmsTxt() {

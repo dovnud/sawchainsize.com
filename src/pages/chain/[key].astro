@@ -3,7 +3,7 @@ import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import FaqList from '../../components/FaqList.astro';
 import { chainGroups, chainUrl, modelUrl, SPEC, codesFor, pitchLabel, gaugeLabel, pitchShort, gaugeShort, barLabel, dlText, statusLabel, fileLabel, partText, SITE } from '../../lib/data';
-import { faqLd, webPageLd, publisher } from '../../lib/ld';
+import { faqLd, specItemLd } from '../../lib/ld';
 export async function getStaticPaths() {
   const groups = await chainGroups();
   return groups.map((g) => ({ params: { key: g.key }, props: { group: g, siblings: groups.map((x) => x.key) } }));
@@ -25,14 +25,14 @@ const faqs = [
 ];
 const desc = `${pitchLabel(pitch)} pitch, ${gaugeLabel(gauge)} gauge chainsaw chain: chain codes (Oregon ${codes.oregon}), ${P.file} file size, and the ${models.length} verified saw${models.length > 1 ? 's' : ''} that use it, with drive-link counts.`;
 const jsonld = [
-  webPageLd(name, path, desc, SITE.dataDate),
-  { '@context': 'https://schema.org', '@type': 'Product', name, url: SITE.url + path, category: 'Chainsaw chain', description: `Chainsaw chain specification: ${pitchLabel(pitch)} pitch, ${gaugeLabel(gauge)} gauge.`,
+  specItemLd(name, path, desc, SITE.dataDate, {
+    name, category: 'Chainsaw chain', description: `Chainsaw chain specification: ${pitchLabel(pitch)} pitch, ${gaugeLabel(gauge)} gauge.`,
     additionalProperty: [
       { '@type': 'PropertyValue', name: 'Pitch', value: pitchLabel(pitch) },
       { '@type': 'PropertyValue', name: 'Gauge', value: gaugeLabel(gauge) },
       { '@type': 'PropertyValue', name: 'Round file size', value: P.file },
       { '@type': 'PropertyValue', name: 'Oregon chain code', value: codes.oregon },
-    ] },
+    ] }),
   faqLd(faqs),
 ];
 ---
