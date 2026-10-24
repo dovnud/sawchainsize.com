@@ -1,0 +1,9 @@
+---
+import { type Model, modelUrl } from '../lib/data';
+const { model } = Astro.props as { model: Model };
+---
+<a class="card" href={modelUrl(model)}>
+  <h3>{model.data.name}</h3>
+  <p class="small">{model.data.blurb}</p>
+  <span class="go">See chain sizes →</span>
+</a>

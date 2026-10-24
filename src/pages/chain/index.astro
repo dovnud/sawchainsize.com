@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import { chainGroups, chainUrl, SPEC, codesFor, pitchLabel, gaugeLabel, SITE } from '../../lib/data';
+import { webPageLd } from '../../lib/ld';
+const groups = await chainGroups();
+const desc = 'Chainsaw chain specs by pitch and gauge: 3/8″ low profile, .325″ and 3/8″ chain in .043″, .050″ and .058″ gauges — chain codes (Oregon, Stihl, Husqvarna, Carlton), file sizes and the saws that use each.';
+---
+<Base title="Chainsaw Chain Specs by Pitch & Gauge" description={desc} path="/chain/" nav="chart" crumbs={[{ name: 'Chain specs', path: '/chain/' }]} jsonld={[webPageLd('Chainsaw chain specs by pitch and gauge', '/chain/', desc, SITE.dataDate, 'CollectionPage')]} modified={SITE.dataDate}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Chain specs' }]} />
+      <h1>Chain specs by pitch &amp; gauge</h1>
+      <p class="lede">A chain is defined by pitch, gauge and drive links. These pages cover each pitch × gauge combination we have verified on real saws: the chain codes sold under that spec, the file size, and every saw that uses it.</p>
+    </div>
+    <div class="tblwrap"><table>
+      <caption class="sr-only">Chain specs we cover, with Oregon, Stihl, Husqvarna codes and file size</caption>
+      <thead><tr><th scope="col">Spec</th><th scope="col">Oregon</th><th scope="col">Stihl</th><th scope="col">Husqvarna</th><th scope="col">File</th><th scope="col">Saws</th></tr></thead>
+      <tbody>
+        {groups.map((g) => { const c = codesFor(g.pitch, g.gauge)!; return (
+          <tr>
+            <td class="num"><a href={chainUrl(g.key)}>{pitchLabel(g.pitch)} · {gaugeLabel(g.gauge)}</a></td>
+            <td class="num">{c.oregon}</td><td class="num">{c.stihl}</td><td class="num">{c.husqvarna}</td>
+            <td class="num">{(SPEC.pitches as any)[g.pitch].file}</td><td class="num">{new Set(g.items.map((i) => i.model.id)).size}</td>
+          </tr>); })}
+      </tbody></table></div>
+    <p class="src">Full cross-reference, including specs without a verified saw yet, on the <a href="/guides/chain-size-chart/">chain identification chart</a>.</p>
+  </div>
+</Base>

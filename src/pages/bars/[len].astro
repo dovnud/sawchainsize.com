@@ -1,0 +1,63 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import { barGroups, barUrl, modelUrl, chainUrl, barChainKey, pitchText, gaugeText, dlText, pitchLabel, gaugeLabel, statusLabel, barLabel, pitchShort, gaugeShort, SITE } from '../../lib/data';
+import { faqLd, webPageLd } from '../../lib/ld';
+export async function getStaticPaths() {
+  const groups = await barGroups();
+  return groups.map((g) => ({ params: { len: `${g.length}-inch` }, props: { group: g } }));
+}
+const { group } = Astro.props;
+const len = group.length;
+const path = barUrl(len);
+const combos = new Map<string, { key: string; pitch: string; gauge: number; dls: Set<number> }>();
+group.items.forEach(({ bar }) => {
+  const k = barChainKey(bar);
+  if (!k || bar.status === 'conflict') return;
+  if (!combos.has(k)) combos.set(k, { key: k, pitch: bar.pitch!, gauge: bar.gauge!, dls: new Set() });
+  if (bar.drive_links) combos.get(k)!.dls.add(bar.drive_links);
+});
+const comboText = [...combos.values()].map((c) => `${pitchLabel(c.pitch)} pitch / ${gaugeLabel(c.gauge)} gauge${c.dls.size ? ` (${[...c.dls].join(' or ')} drive links)` : ''}`);
+const faqs = [
+  { q: `What chain fits a ${len} inch chainsaw bar?`, a: `It depends on the bar's pitch and gauge, not the length. Among the saws verified on this site, ${len} inch bars appear with ${comboText.join('; ')}. Sources disagree for some saws, so read the pitch, gauge and drive-link count stamped on your own bar tail before ordering.` },
+  { q: `How many drive links does a ${len} inch bar take?`, a: `The drive-link count depends on the chain pitch and the bar: on this site, verified ${len} inch setups range over ${[...new Set([...combos.values()].flatMap((c) => [...c.dls]))].sort((a, b) => a - b).join(', ')} drive links. Never order by bar length alone.` },
+];
+const desc = `Chain sizes for ${len}-inch chainsaw bars: ${group.items.length} saw setups across ${new Set(group.items.map((i) => i.model.id)).size} models, with pitch, gauge and drive-link counts and verification status.`;
+const jsonld = [{ ...webPageLd(`${len} inch chainsaw bar chain sizes`, path, desc, SITE.dataDate, 'CollectionPage') }, faqLd(faqs)];
+---
+<Base title={`${len}-Inch Chainsaw Bar: Chain Size by Saw`} description={desc} path={path} nav="models"
+  crumbs={[{ name: 'Bar lengths', path: '/bars/' }, { name: `${len}″ bar`, path }]} jsonld={jsonld} modified={SITE.dataDate}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Bar lengths', path: '/bars/' }, { name: `${len}″ bar` }]} />
+      <h1>{len}-inch bar: chain size by saw</h1>
+      <p class="lede">Every saw setup on this site that runs a {len}″ guide bar, with the pitch, gauge and drive links we could trace to a source. The bar length narrows the choice; the stamp on your bar tail settles it.</p>
+    </div>
+    <section class="block" style="padding-top:10px">
+      <div class="tblwrap"><table>
+        <caption class="sr-only">Saws with a {len} inch bar and their chain specs</caption>
+        <thead><tr><th scope="col">Saw</th><th scope="col">Bar</th><th scope="col">Pitch</th><th scope="col">Gauge</th><th scope="col">Drive links</th><th scope="col">Status</th></tr></thead>
+        <tbody>
+          {group.items.map(({ model, bar }) => (
+            <tr>
+              <td><a href={modelUrl(model)}>{model.data.name}</a></td>
+              <td class="num">{barLabel(bar)}</td>
+              <td class="num">{barChainKey(bar) ? <a href={chainUrl(barChainKey(bar)!)}>{pitchText(bar)}</a> : pitchText(bar)}</td>
+              <td class="num">{gaugeText(bar)}</td>
+              <td class="num">{dlText(bar, model)}</td>
+              <td><span class={`tag ${bar.status !== 'ok' ? 'verify' : ''}`}>{statusLabel(bar.status)}</span></td>
+            </tr>
+          ))}
+        </tbody></table></div>
+      <div class="callout"><b>⚠ A {len}″ bar is not a chain spec</b>
+        <p>The same bar length is sold in more than one pitch and gauge. Read the stamp on your bar tail and match all three numbers — <a href="/guides/how-to-verify-chain-size/">how to read it</a>.</p></div>
+    </section>
+    <section class="block">
+      <h2>Chain specs seen on {len}″ bars</h2>
+      <ul class="chips">{[...combos.values()].map((c) => <li><a class="mono" href={chainUrl(c.key)}>{pitchShort(c.pitch)} · {gaugeShort(c.gauge)}</a></li>)}</ul>
+    </section>
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/bars/">← All bar lengths</a> · <a href="/saws/">All models</a></p>
+  </div>
+</Base>

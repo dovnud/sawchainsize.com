@@ -1,0 +1,118 @@
+{
+  "brand": "husqvarna",
+  "model": "455 Rancher",
+  "name": "Husqvarna 455 Rancher",
+  "aliases": [
+    "455",
+    "H455"
+  ],
+  "type": "gas",
+  "displacement_cc": 55.5,
+  "popular": true,
+  "blurb": "55.5 cc ranch saw. Factory 20″ setup per Husqvarna's own manual table: 3/8″ pitch, 72 drive links — in both .050″ and .058″ gauge versions.",
+  "intro": "The 455 Rancher is Husqvarna's long-running 55.5 cc farm and ranch saw. Husqvarna's operator-manual bar & chain combination table lists this saw with 3/8″ pitch chain at 20″ (72 drive links) in two gauges, plus a family of .325″ combinations at shorter lengths. The gauge is the trap on this model: both versions exist from the factory, so two owners with “the same saw” can need different chains.",
+  "sources": [
+    {
+      "id": "husqvarna-manual-455",
+      "type": "manual",
+      "publisher": "Husqvarna",
+      "title": "Operator-manual bar & chain combination table for the 455 Rancher (20″ 3/8″ .050″/.058″ H80/H81, 72 DL; .325″ options 56–78 DL by length)",
+      "retrieved": "2026-10-23"
+    }
+  ],
+  "sources_note": "Husqvarna operator-manual bar & chain combination table for the 455 Rancher (20″ 3/8″ .050″/.058″ H80/H81, 72 DL; .325″ options 56–78 DL by length), read via the manual record, Oct 2026.",
+  "bars": [
+    {
+      "lengths_in": [
+        20
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 72,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "H80-72",
+          "role": "oem"
+        },
+        {
+          "brand": "Oregon",
+          "part_no": "72LPX072",
+          "role": "equivalent"
+        },
+        {
+          "brand": "Oregon",
+          "part_no": "72EXL072",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-manual-455"
+      ],
+      "note": "Per Husqvarna's manual combination table: 20″, 3/8″, H80 chain, 72 drive links."
+    },
+    {
+      "lengths_in": [
+        20
+      ],
+      "pitch": "3/8",
+      "gauge": 0.058,
+      "drive_links": 72,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "H81-72",
+          "role": "oem"
+        },
+        {
+          "brand": "Oregon",
+          "part_no": "73LPX072",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-manual-455"
+      ],
+      "note": "The same table lists the .058″ version with H81 chain. This is the Oregon 72-vs-73 trap in factory form — check which groove your bar has."
+    },
+    {
+      "lengths_in": [
+        16,
+        18,
+        20
+      ],
+      "pitch": "325",
+      "gauge": null,
+      "drive_links": null,
+      "file_size": "3/16",
+      "status": "verify",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "H30 family",
+          "role": "oem"
+        },
+        {
+          "brand": "Oregon",
+          "part_no": "95TXL / 20BPX family",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-manual-455"
+      ],
+      "note": "Husqvarna's table lists .325″ combinations for this saw spanning 56 to 78 drive links depending on the exact bar. The range is real but useless for ordering — read the count off your bar stamp.",
+      "label": "16″–20″ (.325″ setups)",
+      "drive_links_range": [
+        56,
+        78
+      ],
+      "gauge_note": ".050″ / .058″ by bar"
+    }
+  ],
+  "last_verified": "2026-10-23"
+}

@@ -1,0 +1,171 @@
+---
+import Base from '../layouts/Base.astro';
+import SawHero from '../components/SawHero.astro';
+import ModelCard from '../components/ModelCard.astro';
+import FaqList from '../components/FaqList.astro';
+import { SITE, HOME_FAQS, getModels, getBrands, barGroups, chainGroups, modelUrl, brandUrl, barUrl, chainUrl, barLabel, pitchText, gaugeText, dlText, fileText, oregonType, barHasLength, SPEC, pitchShort, gaugeShort } from '../lib/data';
+import { faqLd, publisher } from '../lib/ld';
+
+const models = await getModels();
+const brands = await getBrands();
+const bars = await barGroups();
+const chains = await chainGroups();
+const popular = models.filter((m) => m.data.popular);
+const finderDb = Object.fromEntries(
+  brands.map((b) => [
+    b.id,
+    {
+      label: b.data.label,
+      models: Object.fromEntries(
+        models.filter((m) => m.data.brand === b.id).map((m) => [
+          m.id,
+          {
+            name: m.data.name, url: modelUrl(m), conflict: m.data.bars.some((x) => x.status === 'conflict'),
+            bars: m.data.bars.map((x) => ({ label: barLabel(x), pitch: pitchText(x), gauge: gaugeText(x), dl: dlText(x, m), file: fileText(x), oregon: oregonType(x), note: x.note, status: x.status })),
+          },
+        ]),
+      ),
+    },
+  ]),
+);
+const description = 'Find the exact chainsaw chain for your saw: pitch, gauge, drive-link count, file size and Oregon equivalents for Stihl, Husqvarna, Echo and Poulan models — verified bar-first against OEM fit-up charts, with a bar-stamp check on every page.';
+const jsonld = [
+  { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.name, url: SITE.url + '/', description: 'Chainsaw chain and bar lookup by saw model and fitted bar length: pitch, gauge, drive links, file size and cross-brand chain equivalents, verified against manufacturer fit-up charts.', publisher, inLanguage: 'en-US' },
+  faqLd(HOME_FAQS),
+];
+const ticker = SPEC.codes.map((c) => ({ code: c.oregon.split(' ')[0].replace('/', ''), spec: `${pitchShort(c.pitch)} · ${gaugeShort(c.gauge)}` }));
+const tick = [
+  ['72LPX', '3/8″ · .050″'], ['61PMM3', '3/8″ LP · .043″'], ['H30', '.325″ · .050″'], ['73LPX', '3/8″ · .058″'],
+  ['90PX', '3/8″ LP · .043″'], ['20BPX', '.325″ · .050″'], ['H80', '3/8″ · .050″'], ['95TXL', '.325″ · .050″'],
+];
+---
+<Base title="SawChainSize.com — Chainsaw Chain Size Lookup by Saw Model & Bar" description={description} path="/" nav="home" jsonld={jsonld} modified={SITE.dataDate}>
+  <div class="hero">
+    <div class="wrap hero-in">
+      <SawHero />
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <h1>What size chain does <em>your saw</em> take?</h1>
+          <p class="lede">Pick your saw and the bar actually fitted to it. You get the pitch, gauge, drive-link count, file size and the Oregon-equivalent chain — checked against manufacturer fit-up charts, with the one verification step that keeps you from ordering the wrong loop.</p>
+          <div><span class="stamp" data-stamp>Specs traced to OEM fit-up charts</span></div>
+        </div>
+        <div class="finder" id="finder">
+          <div class="finder-head">Chain Finder <span>BAR-FIRST LOOKUP · US / CANADA</span></div>
+          <div class="finder-body">
+            <div class="f-grid">
+              <div>
+                <label for="fBrand">1 · Brand</label>
+                <select id="fBrand">
+                  <option value="">Choose a brand…</option>
+                  {brands.map((b) => <option value={b.id}>{b.data.label}</option>)}
+                </select>
+              </div>
+              <div>
+                <label for="fModel">2 · Model</label>
+                <select id="fModel" disabled><option value="">Pick a brand first</option></select>
+              </div>
+              <div>
+                <label for="fBar">3 · Fitted bar length</label>
+                <select id="fBar" disabled><option value="">Pick a model first</option></select>
+              </div>
+            </div>
+            <button class="f-btn" id="fGo" type="button">Show my chain spec</button>
+            <div class="f-result" id="fResult" aria-live="polite"></div>
+            <noscript><p class="small">The finder needs JavaScript. Without it, <a href="/saws/">browse every saw model</a> — each page lists its chain specs.</p></noscript>
+          </div>
+        </div>
+      </div>
+      <script type="application/json" id="finder-data" set:html={JSON.stringify(finderDb).replace(/</g, '\\u003c')} />
+      <p class="small muted hero-hint">No saw handy? The answer is stamped on your bar. Jump to the <a href="/guides/how-to-verify-chain-size/">bar-stamp verification guide</a> — it takes about a minute with the chain off. <span class="muted">The house saw above is always running: tooth spacing is compressed for clarity; a real 72-link loop carries all 72 drive links around this same path.</span></p>
+    </div>
+  </div>
+
+  <div class="ticker" aria-hidden="true"><div class="ticker-track">
+    {[0, 1].map(() => <span>{tick.map(([c, s]) => <><>{c} </><b set:html={s.replace(/″/g, '&Prime;')} /><> &nbsp;·&nbsp; </></>)}</span>)}
+  </div></div>
+
+  <div class="wrap">
+    <section class="block">
+      <p class="kicker">Why bar-first?</p>
+      <h2>The model name alone does not pick the chain</h2>
+      <div class="grid2">
+        <div>
+          <p>A chainsaw model is sold with several bar lengths, and owners swap bars all the time. The chain has to match the <strong>bar that is on the saw today</strong> — its pitch, its groove gauge, and its drive-link count. Get any one of the three wrong and the loop either will not mount, will not seat in the groove, or will run dangerously loose.</p>
+          <p>This is not a theoretical problem. For the Stihl MS&nbsp;250 — one of the most common homeowner saws in North America — the top web results currently <strong>contradict each other</strong>: one roundup lists .325″ pitch / .063″ gauge / 68 drive links, another lists 3/8″ pitch and .050″ gauge, and a marketplace listing gives 62 drive links for a 16″ bar and 72 for an 18″ bar. All three cannot be right for the same saw.</p>
+        </div>
+        <div>
+          <p>So every lookup on this site works the way a good dealer counter does:</p>
+          <ol class="steps">
+            <li><span class="step-num">01</span><strong>Start with the saw and the fitted bar length</strong> — that narrows the spec to the factory combinations.</li>
+            <li><span class="step-num">02</span><strong>Check the stamp on your bar tail</strong> — pitch, gauge and drive links are stamped into the bar itself. If the stamp and the chart disagree, the stamp wins: your bar may not be the one the saw shipped with.</li>
+            <li><span class="step-num">03</span><strong>Order by the three numbers</strong>, not by bar length alone — “18-inch chain” is not a specification.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <hr class="rule" />
+
+    <section class="block">
+      <p class="kicker">Most looked up</p>
+      <h2>Popular saw models</h2>
+      <div class="grid3">{popular.map((m) => <ModelCard model={m} />)}</div>
+      <p style="margin-top:16px"><a href="/saws/">All saw models →</a></p>
+    </section>
+
+    <hr class="rule" />
+
+    <section class="block">
+      <p class="kicker">Browse</p>
+      <h2>By brand, bar length or chain spec</h2>
+      <div class="grid3">
+        <div class="card"><h3>Brands</h3><ul class="chips">{brands.map((b) => <li><a href={brandUrl(b.id)}>{b.data.name}</a></li>)}</ul></div>
+        <div class="card"><h3>Bar length</h3><ul class="chips">{bars.map((g) => <li><a class="mono" href={barUrl(g.length)}>{g.length}″ bar</a></li>)}</ul></div>
+        <div class="card"><h3>Chain spec</h3><ul class="chips">{chains.map((g) => <li><a class="mono" href={chainUrl(g.key)}>{pitchShort(g.pitch)} · {gaugeShort(g.gauge)}</a></li>)}</ul></div>
+      </div>
+    </section>
+
+    <hr class="rule" />
+
+    <section class="block">
+      <p class="kicker">Before you order</p>
+      <h2>Three numbers, one stamp</h2>
+      <figure class="diagram">
+        <svg viewBox="0 0 760 210" role="img" aria-label="Diagram of a guide bar tail showing where the size stamp is located">
+          <rect x="30" y="70" width="560" height="64" rx="30" class="svg-fill"/>
+          <rect x="52" y="94" width="70" height="16" rx="8" class="svg-thin"/>
+          <circle cx="150" cy="102" r="7" class="svg-thin"/>
+          <circle cx="185" cy="102" r="5" class="svg-thin"/>
+          <rect x="330" y="86" width="230" height="34" rx="4" class="svg-acc"/>
+          <text x="348" y="109" class="svg-txt">.325″ · .050″ · 72 DL</text>
+          <line x1="445" y1="86" x2="445" y2="34" class="svg-acc"/>
+          <text x="360" y="24" class="svg-lbl">The stamp: pitch · gauge · drive links</text>
+          <line x1="90" y1="134" x2="90" y2="176" class="svg-thin"/>
+          <text x="52" y="196" class="svg-lbl">Bar tail (mount end)</text>
+          <line x1="640" y1="102" x2="596" y2="102" class="svg-thin"/>
+          <text x="606" y="92" class="svg-lbl">Bar length is measured</text>
+          <text x="606" y="112" class="svg-lbl">from here to the tip</text>
+        </svg>
+        <figcaption>The tail of the guide bar — the end that sits inside the saw — is stamped with the bar length and the chain spec it was made for. A real-world example from a Husqvarna 450 Rancher owner's bar reads “18″ · .325 · 050 · 72”. If your stamp disagrees with any chart (including ours), trust the stamp and the drive-link count on your old loop.</figcaption>
+      </figure>
+      <p><a href="/guides/how-to-verify-chain-size/">Read the full verification guide →</a> &nbsp;·&nbsp; <a href="/guides/chain-size-chart/">Open the chain identification chart →</a></p>
+    </section>
+
+    <hr class="rule" />
+
+    <section class="block">
+      <p class="kicker">Straight answers</p>
+      <h2>Frequently asked questions</h2>
+      <FaqList faqs={HOME_FAQS} />
+      <p style="margin-top:14px">More answers in the <a href="/guides/">guides</a>: <a href="/guides/oregon-72-vs-73-chain/">Oregon 72 vs 73</a>, <a href="/guides/how-to-count-drive-links/">how to count drive links</a>, <a href="/guides/chainsaw-chain-file-size/">file sizes</a>.</p>
+    </section>
+
+    <hr class="rule" />
+
+    <section class="block">
+      <p class="kicker">What a loop costs</p>
+      <h2>Typical prices (examples)</h2>
+      <p style="max-width:70ch">So the buying sections on our model pages make sense: in listings checked on 23 October 2026, a single Oregon replacement loop was listed at about <span class="mono">$21.43</span>, and Oregon 3-packs at about <span class="mono">$47.94–$67.99</span>. Echo's own 20″ 72LPX70CQ loop for the CS-590 was listed at <span class="mono">$43.99</span> by a US power-equipment dealer. These are examples from the day they were checked, not live prices — chains are sold by dealers and marketplaces whose prices move. Every price on this site is labelled with the date it was checked.</p>
+    </section>
+  </div>
+</Base>

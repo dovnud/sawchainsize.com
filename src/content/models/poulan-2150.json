@@ -1,0 +1,54 @@
+{
+  "brand": "poulan",
+  "model": "2150 / 3816",
+  "name": "Poulan 2150 / 3816",
+  "aliases": [
+    "2150",
+    "3816",
+    "Poulan 2150",
+    "Poulan 3816"
+  ],
+  "type": "gas",
+  "popular": false,
+  "blurb": "Common big-box homeowner saws. Oregon lists both for its 91-series chain: 16″ bar, 3/8″ low profile, .050″ gauge, 56 drive links.",
+  "intro": "The Poulan 2150 and 3816 are among the most common budget homeowner saws in US garages, and they appear by name in Oregon's fitment data for its 91-series low-profile chain. McCulloch saws of the same era were built on related platforms, but because we have not traced per-model McCulloch fitments to a citable source, this page covers the Poulan models Oregon names — and points McCulloch owners at the bar stamp, which settles any of these saws in a minute.",
+  "sources": [
+    {
+      "id": "oregon-91vxl056g-s56",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Product data for 91VXL056G / S56 (3/8″ Low Profile, .050″ gauge, 56 drive links; fitments include Poulan 2150 and 3816)",
+      "retrieved": "2026-10-23"
+    }
+  ],
+  "sources_note": "Oregon product data for 91VXL056G / S56 (3/8″ Low Profile, .050″ gauge, 56 drive links; fitments include Poulan 2150 and 3816) — checked Oct 2026.",
+  "bars": [
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 56,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "91PX056 (S56)",
+          "role": "equivalent"
+        },
+        {
+          "brand": "Oregon",
+          "part_no": "91VXL056",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-91vxl056g-s56"
+      ],
+      "note": "Oregon lists the Poulan 2150 and 3816 among the fitments for this exact chain. Many of these saws have had bars swapped over the years — the stamp check is not optional on a 15-year-old saw."
+    }
+  ],
+  "last_verified": "2026-10-23"
+}

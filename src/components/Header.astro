@@ -1,0 +1,22 @@
+---
+const { active = '' } = Astro.props;
+const items = [
+  ['home', '/', 'Chain Finder'],
+  ['chart', '/guides/chain-size-chart/', 'ID Chart'],
+  ['models', '/saws/', 'Models'],
+  ['brands', '/brands/', 'Brands'],
+  ['verify', '/guides/how-to-verify-chain-size/', 'Verify Guide'],
+  ['about', '/about/', 'About'],
+  ['contact', '/contact/', 'Contact'],
+];
+---
+<header class="site">
+  <div class="wrap head-in">
+    <a class="brand" href="/">SawChainSize<span>.com</span><small>Chain &amp; bar lookup — pitch · gauge · drive links</small></a>
+    <nav class="main" aria-label="Main">
+      <ul>
+        {items.map(([k, href, label]) => <li><a href={href} class={active === k ? 'active' : ''} aria-current={active === k ? 'page' : undefined}>{label}</a></li>)}
+      </ul>
+    </nav>
+  </div>
+</header>

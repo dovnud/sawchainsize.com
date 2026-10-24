@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import { SITE } from '../../lib/data';
+import { webPageLd } from '../../lib/ld';
+const guides = [
+  { href: '/guides/how-to-verify-chain-size/', t: 'How to verify your chain size', d: 'Three checks — bar stamp, drive-link count, pitch and gauge measurement — with worked examples.' },
+  { href: '/guides/chain-size-chart/', t: 'Chain identification chart', d: 'Pitch × gauge × file size, plus the Oregon / Stihl / Husqvarna / Carlton code cross-reference.' },
+  { href: '/guides/how-to-count-drive-links/', t: 'How to count drive links', d: 'Mark one link, count the tangs under the loop, match the number on the box.' },
+  { href: '/guides/oregon-72-vs-73-chain/', t: 'Oregon 72 vs 73 chain', d: 'Same 3/8″ pitch, different gauge — the classic wrong buy and how to avoid it.' },
+  { href: '/guides/chainsaw-chain-file-size/', t: 'Chainsaw chain file size', d: 'Which round file sharpens which pitch.' },
+  { href: '/how-we-verify/', t: 'How we verify specs', d: 'Our source hierarchy and how conflicts are shown.' },
+];
+const desc = 'Chainsaw chain guides: verify your chain size, read the identification chart, count drive links, Oregon 72 vs 73, and pick the right file size.';
+---
+<Base title="Chainsaw Chain Guides" description={desc} path="/guides/" nav="verify" crumbs={[{ name: 'Guides', path: '/guides/' }]}
+  jsonld={[webPageLd('Chainsaw chain guides', '/guides/', desc, SITE.dataDate, 'CollectionPage')]} modified={SITE.dataDate}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides' }]} />
+      <h1>Chainsaw chain guides</h1>
+      <p class="lede">Plain-English guides for getting the chain size right the first time.</p>
+    </div>
+    <div class="grid2">{guides.map((g) => <a class="card" href={g.href}><h3>{g.t}</h3><p class="small">{g.d}</p><span class="go">Read →</span></a>)}</div>
+  </div>
+</Base>

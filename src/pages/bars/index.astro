@@ -1,0 +1,19 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import { barGroups, barUrl, SITE } from '../../lib/data';
+import { webPageLd } from '../../lib/ld';
+const groups = await barGroups();
+const desc = 'Chainsaw chain by guide-bar length: which saws we have verified with 16, 18 and 20 inch bars, and the pitch, gauge and drive links each uses.';
+---
+<Base title="Chainsaw Chain Size by Bar Length" description={desc} path="/bars/" nav="models" crumbs={[{ name: 'Bar lengths', path: '/bars/' }]} jsonld={[webPageLd('Chainsaw chain size by bar length', '/bars/', desc, SITE.dataDate, 'CollectionPage')]} modified={SITE.dataDate}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Bar lengths' }]} />
+      <h1>Chain size by bar length</h1>
+      <p class="lede">Bar length alone never picks a chain — a 16″ bar can take 3/8″ low-profile, .325″ or 3/8″ chain depending on the saw — but it is the first thing most owners know. Pick your bar length to see every saw and spec we have verified at that length.</p>
+    </div>
+    <ul class="chips">{groups.map((g) => <li><a class="mono" href={barUrl(g.length)}>{g.length}″ bar · {new Set(g.items.map((i) => i.model.id)).size} saws</a></li>)}</ul>
+    <p class="small muted" style="margin-top:14px">Other lengths appear on individual <a href="/saws/">saw pages</a>; a bar-length page is only published once at least two saws share that length.</p>
+  </div>
+</Base>

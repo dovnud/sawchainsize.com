@@ -1,0 +1,26 @@
+---
+import { type Model, barLabel, pitchText, gaugeText, dlText, fileText, oemParts, equivParts, partText, statusLabel } from '../lib/data';
+const { model } = Astro.props as { model: Model };
+---
+<div class="tblwrap">
+  <table>
+    <caption class="sr-only">Chain specifications for the {model.data.name} by fitted bar</caption>
+    <thead><tr><th scope="col">Bar</th><th scope="col">Pitch</th><th scope="col">Gauge</th><th scope="col">Drive links</th><th scope="col">File</th><th scope="col">OEM chain</th><th scope="col">Equivalent chains</th></tr></thead>
+    <tbody>
+      {model.data.bars.map((b) => (
+        <>
+          <tr>
+            <td class="num"><strong>{barLabel(b)}</strong><br /><span class={`tag ${b.status !== 'ok' ? 'verify' : ''}`}>{statusLabel(b.status)}</span></td>
+            <td class="num">{pitchText(b)}</td>
+            <td class="num">{gaugeText(b)}</td>
+            <td class="num">{dlText(b, model)}</td>
+            <td class="num">{fileText(b)}</td>
+            <td>{oemParts(b).length ? oemParts(b).map((c, i) => <>{i > 0 && <br />}{partText(c)}</>) : '—'}</td>
+            <td>{equivParts(b).length ? equivParts(b).map((c, i) => <>{i > 0 && <br />}{partText(c)}</>) : '—'}</td>
+          </tr>
+          <tr><td></td><td colspan="6" class="small muted">{b.note}</td></tr>
+        </>
+      ))}
+    </tbody>
+  </table>
+</div>

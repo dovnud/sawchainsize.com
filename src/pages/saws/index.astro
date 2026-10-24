@@ -1,0 +1,32 @@
+---
+import Base from '../../layouts/Base.astro';
+import ModelCard from '../../components/ModelCard.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import { getModels, getBrands, modelUrl, SITE } from '../../lib/data';
+import { webPageLd, publisher } from '../../lib/ld';
+const models = await getModels();
+const brands = await getBrands();
+const desc = 'Chain size by chainsaw model: pitch, gauge, drive links and file size for each saw and fitted bar, from manufacturer manuals, fit-up charts and chain-maker data. Specs flagged where sources conflict.';
+const jsonld = [
+  { ...webPageLd('Chain sizes by saw model', '/saws/', desc, SITE.dataDate, 'CollectionPage'),
+    mainEntity: { '@type': 'ItemList', itemListElement: models.map((m, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE.url + modelUrl(m), name: m.data.name })) } },
+];
+---
+<Base title="Chainsaw Chain Size by Saw Model" description={desc} path="/saws/" nav="models" crumbs={[{ name: 'Models', path: '/saws/' }]} jsonld={jsonld} modified={SITE.dataDate}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Models' }]} />
+      <h1>Chain sizes by saw model</h1>
+      <p class="lede">One page per saw: the factory bar-and-chain combinations we could verify from manufacturer manuals, fit-up charts and chain-maker data — each with the bar-stamp check for that saw, the file size, and where to buy the loop. More models are added as their specs are verified, never guessed.</p>
+    </div>
+    {brands.map((b) => (
+      <section class="block" style="padding-top:20px">
+        <h2><a href={`/brands/${b.id}/`} style="color:inherit;text-decoration:none">{b.data.name}</a></h2>
+        <div class="grid3">{models.filter((m) => m.data.brand === b.id).map((m) => <ModelCard model={m} />)}</div>
+      </section>
+    ))}
+    <div class="oknote" style="margin-top:26px">
+      <p><strong>Don't see your saw?</strong> The <a href="/guides/how-to-verify-chain-size/">verification guide</a> gets you the three numbers off your own bar in about five minutes, and the <a href="/guides/chain-size-chart/">identification chart</a> turns those numbers into a chain code in any brand. You can also <a href="/contact/">tell us which model to add next</a> — requests with a photo of the bar stamp go to the front of the queue, because that is exactly the evidence we publish from.</p>
+    </div>
+  </div>
+</Base>

@@ -1,0 +1,93 @@
+{
+  "brand": "echo",
+  "model": "CS-400",
+  "name": "Echo CS-400",
+  "aliases": [
+    "CS400"
+  ],
+  "type": "gas",
+  "displacement_cc": 40.2,
+  "popular": true,
+  "blurb": "40.2 cc homeowner saw on 3/8″ low-profile chain. Oregon's data: 16″ bar, .050″ gauge, 56 drive links, 5/32″ file.",
+  "intro": "The CS-400 is Echo's 40.2 cc homeowner saw, and like most saws in its class it runs 3/8″ low-profile chain — the smaller “Picco-class” profile, not the full-size 3/8″ of its bigger brother the CS-590. Oregon's product data for the chain it lists for this model gives the full spec for the 16″ setup, including the part most pages omit: the 5/32″ file size.",
+  "sources": [
+    {
+      "id": "oregon-91vxl056g",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Product data for 91VXL056G / 91PX056G (3/8″ Low Profile, .050″ gauge, 56 drive links, 5/32″ file; fitments include Echo CS-400; cross-references to Husqvarna H37-56 and Stihl 63 PM3 56)",
+      "retrieved": "2026-10-23"
+    }
+  ],
+  "sources_note": "Oregon product data for 91VXL056G / 91PX056G (3/8″ Low Profile, .050″ gauge, 56 drive links, 5/32″ file; fitments include Echo CS-400), including published cross-references to Husqvarna H37-56 and Stihl 63 PM3 56 — checked Oct 2026.",
+  "bars": [
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 56,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "91PX56CQ family",
+          "role": "oem"
+        },
+        {
+          "brand": "Oregon",
+          "part_no": "91PX056 (S56)",
+          "role": "equivalent"
+        },
+        {
+          "brand": "Oregon",
+          "part_no": "91VXL056",
+          "role": "equivalent"
+        },
+        {
+          "brand": "Husqvarna",
+          "part_no": "H37-56",
+          "role": "equivalent"
+        },
+        {
+          "brand": "Stihl",
+          "part_no": "63 PM3 56",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-91vxl056g"
+      ],
+      "note": "Per Oregon's product data: 91-series chain, 3/8″ LP, .050″, 56 DL, fits Echo CS-400 (and CS-310/352/370), file 5/32″. Cross-references include Husqvarna H37-56 and Stihl 63 PM3 56."
+    },
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": null,
+      "file_size": "5/32",
+      "status": "verify",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "91-series family",
+          "role": "oem"
+        },
+        {
+          "brand": "Oregon",
+          "part_no": "91PX / 91VXL family",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-91vxl056g"
+      ],
+      "note": "CS-400s are also sold with 18″ bars in North America. We list the count only where a chain-maker listing states it for this model — check your stamp, or count the links on the old loop."
+    }
+  ],
+  "last_verified": "2026-10-23"
+}

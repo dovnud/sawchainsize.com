@@ -1,0 +1,35 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import { SITE, SPEC, chainUrl } from '../../lib/data';
+import { webPageLd, faqLd } from '../../lib/ld';
+const path = '/guides/chainsaw-chain-file-size/';
+const desc = 'Chainsaw chain file size by pitch: 5/32″ for 3/8″ low-profile, 3/16″ for .325″, 7/32″ for 3/8″ and .404″ chain. Use the right round file to sharpen.';
+const rows = ['3/8-lp', '325', '3/8', '404'].map((k) => ({ k, ...(SPEC.pitches as any)[k] }));
+const faqs = [
+  { q: 'What size file do I need for .325 chain?', a: '3/16″ (4.8 mm) round file.' },
+  { q: 'What size file for 3/8 chain?', a: '7/32″ (5.2 mm) round file for standard 3/8″ pitch; 5/32″ (4.0 mm) for 3/8″ low-profile ("Picco") chain.' },
+  { q: 'Does gauge change the file size?', a: 'No. File size follows pitch (cutter size); gauge is the drive-link thickness and does not change which file you use.' },
+  { q: 'Is the file size on my saw page?', a: 'Yes — each verified model page lists the round-file size for the chain fitted to that bar.' },
+];
+const jsonld = [webPageLd('Chainsaw chain file size by pitch', path, desc, SITE.dataDate), faqLd(faqs)];
+---
+<Base title="Chainsaw Chain File Size by Pitch" description={desc} path={path} nav="chart"
+  crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Chain file size', path }]} jsonld={jsonld} modified={SITE.dataDate}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Chain file size' }]} />
+      <h1>Chainsaw chain file size</h1>
+      <p class="lede">The round file you sharpen with is set by the chain's pitch. Use the wrong size and you either skip the cutter edge or remove too much metal.</p>
+    </div>
+    <div class="tblwrap"><table>
+      <caption class="sr-only">Round file size by chain pitch</caption>
+      <thead><tr><th scope="col">Pitch</th><th scope="col">Round file</th><th scope="col">Typical use</th></tr></thead>
+      <tbody>{rows.map((r) => <tr><td class="num">{r.k === '404' ? r.label : r.label}</td><td class="num">{r.file}</td><td>{r.used_on}</td></tr>)}</tbody>
+    </table></div>
+    <p class="src">Gauge does not change the file size. Specific chains: <a href={chainUrl('3-8-lp-043')}>3/8″ LP .043″</a>, <a href={chainUrl('325-050')}>.325″ .050″</a>, <a href={chainUrl('3-8-050')}>3/8″ .050″</a>.</p>
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/chain-size-chart/">Identification chart</a> · <a href="/guides/how-to-verify-chain-size/">Verify your chain size</a></p>
+  </div>
+</Base>

@@ -1,0 +1,43 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import ModelCard from '../../components/ModelCard.astro';
+import { getBrands, getModels, brandUrl, modelUrl, chainUrl, barChainKey, pitchShort, gaugeShort, SITE } from '../../lib/data';
+import { webPageLd } from '../../lib/ld';
+export async function getStaticPaths() {
+  const brands = await getBrands();
+  return brands.map((b) => ({ params: { brand: b.id }, props: { brand: b } }));
+}
+const { brand } = Astro.props;
+const b = brand.data;
+const models = (await getModels()).filter((m) => m.data.brand === brand.id);
+const path = brandUrl(brand.id);
+const keys = new Map<string, any>();
+models.forEach((m) => m.data.bars.forEach((x) => { const k = barChainKey(x); if (k) keys.set(k, x); }));
+const verified = models.reduce((n, m) => n + m.data.bars.filter((x) => x.status === 'ok').length, 0);
+const desc = `${b.name} chainsaw chain sizes: ${models.map((m) => m.data.name).join(', ')}. Pitch, gauge, drive links, file size and chain part numbers by fitted bar, with sources and verification dates.`;
+const jsonld = [{ ...webPageLd(`${b.name} chainsaw chain sizes`, path, desc, SITE.dataDate, 'CollectionPage'),
+  mainEntity: { '@type': 'ItemList', itemListElement: models.map((m, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE.url + modelUrl(m), name: m.data.name })) } }];
+---
+<Base title={`${b.name} Chainsaw Chain Sizes by Model`} description={desc} path={path} nav="brands" og={`/og/brand-${brand.id}.png`} ogAlt={`${b.name} chainsaw chain sizes`}
+  crumbs={[{ name: 'Brands', path: '/brands/' }, { name: b.name, path }]} jsonld={jsonld} modified={SITE.dataDate}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Brands', path: '/brands/' }, { name: b.name }]} />
+      <h1>{b.name} chain sizes</h1>
+      <p class="lede">{b.summary}</p>
+      <p class="meta-line">{models.length} SAW MODEL{models.length > 1 ? 'S' : ''} · {verified} VERIFIED BAR SETUP{verified !== 1 ? 'S' : ''} · COUNTRY OF ORIGIN: {b.country.toUpperCase()}</p>
+    </div>
+    <section class="block" style="padding-top:20px">
+      <h2>{b.name} saw models</h2>
+      <div class="grid3">{models.map((m) => <ModelCard model={m} />)}</div>
+    </section>
+    <hr class="rule" />
+    <section class="block">
+      <h2>Chain specs used on these saws</h2>
+      <ul class="chips">{[...keys.entries()].map(([k, x]) => <li><a class="mono" href={chainUrl(k)}>{pitchShort(x.pitch)} · {gaugeShort(x.gauge)}</a></li>)}</ul>
+      <p style="margin-top:14px">Not sure which applies? <a href="/guides/how-to-verify-chain-size/">Read the stamp on your bar</a>, then use the <a href="/guides/chain-size-chart/">chain identification chart</a> to turn pitch and gauge into a chain code in any brand.</p>
+      <p class="small muted">{b.trademark}</p>
+    </section>
+  </div>
+</Base>

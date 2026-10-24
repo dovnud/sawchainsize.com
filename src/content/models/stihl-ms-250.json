@@ -1,0 +1,107 @@
+{
+  "brand": "stihl",
+  "model": "MS 250",
+  "name": "Stihl MS 250",
+  "aliases": [
+    "MS250"
+  ],
+  "type": "gas",
+  "displacement_cc": 45.4,
+  "popular": true,
+  "blurb": "One of the best-selling homeowner saws in North America — and the model where published chain specs contradict each other most. Bar-first verification matters most here.",
+  "intro": "The MS 250 is a 45.4 cc homeowner and firewood saw sold in large numbers across the US and Canada, most often with a 16″ or 18″ bar. It is also the clearest example on this site of why model-only lookups fail: the leading web results for this saw's chain disagree with each other on pitch, gauge and drive links, and shopping listings note a gauge difference between earlier and later production. We therefore publish what each source reports — side by side — and the check that resolves it.",
+  "sources": [
+    {
+      "id": "roundup-smartfix",
+      "type": "roundup",
+      "publisher": "smartfixhardware.com",
+      "title": "Affiliate buying roundup listing the MS 250 chain",
+      "retrieved": "2026-10-23"
+    },
+    {
+      "id": "blog-chainsawnerds",
+      "type": "blog",
+      "publisher": "chainsawnerds.com",
+      "title": "Chainsaw blog's MS 250 pages",
+      "retrieved": "2026-10-23"
+    },
+    {
+      "id": "marketplace-accio",
+      "type": "marketplace",
+      "publisher": "accio.com",
+      "title": "Marketplace listing set for MS 250 chain",
+      "retrieved": "2026-10-23"
+    }
+  ],
+  "sources_note": "Reported variants from: an affiliate buying roundup (smartfixhardware.com), a chainsaw blog's MS 250 pages (chainsawnerds.com), and a marketplace listing set (accio.com), all read 23 Oct 2026. Genuine Stihl chain is sold through dealers rather than online, so replacement buying runs through Oregon-equivalent loops matched on your three numbers.",
+  "bars": [
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": null,
+      "gauge": null,
+      "drive_links": null,
+      "file_size": null,
+      "status": "conflict",
+      "chains": [],
+      "source_ids": [
+        "roundup-smartfix",
+        "blog-chainsawnerds",
+        "marketplace-accio"
+      ],
+      "note": "A marketplace listing gives 62 drive links for the 16″ setup. Pitch and gauge for this length are exactly what the sources argue about — read your bar stamp.",
+      "reported": [
+        {
+          "source_id": "marketplace-accio",
+          "drive_links": 62
+        },
+        {
+          "source_id": "roundup-smartfix",
+          "pitch": "325",
+          "gauge": 0.063
+        },
+        {
+          "source_id": "blog-chainsawnerds",
+          "pitch": "3/8",
+          "gauge": 0.05
+        }
+      ]
+    },
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": null,
+      "gauge": null,
+      "drive_links": null,
+      "file_size": null,
+      "status": "conflict",
+      "chains": [],
+      "source_ids": [
+        "roundup-smartfix",
+        "blog-chainsawnerds",
+        "marketplace-accio"
+      ],
+      "note": "One affiliate roundup lists the MS 250 as .325″ pitch / .063″ gauge / 68 drive links; another lists 3/8″ pitch and .050″ gauge; a marketplace listing gives 72 drive links at 18″. They cannot all describe the same bar.",
+      "reported": [
+        {
+          "source_id": "marketplace-accio",
+          "drive_links": 72
+        },
+        {
+          "source_id": "roundup-smartfix",
+          "pitch": "325",
+          "gauge": 0.063,
+          "drive_links": 68
+        },
+        {
+          "source_id": "blog-chainsawnerds",
+          "pitch": "3/8",
+          "gauge": 0.05
+        }
+      ]
+    }
+  ],
+  "last_verified": "2026-10-23"
+}

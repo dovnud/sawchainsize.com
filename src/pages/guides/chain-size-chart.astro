@@ -1,0 +1,107 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import Email from '../../components/Email.astro';
+import { SITE, chainGroups, chainUrl, pitchShort, gaugeShort } from '../../lib/data';
+import { webPageLd } from '../../lib/ld';
+
+const desc = "Chainsaw chain identification chart: pitch × gauge × file size, plus Oregon, Stihl, Husqvarna and Carlton chain-code cross-reference and how to count drive links.";
+const jsonld = [webPageLd("Chainsaw Chain Identification Chart", "/guides/chain-size-chart/", desc, SITE.dataDate, "WebPage")];
+---
+<Base title={"Chainsaw Chain Identification Chart"} description={desc} path="/guides/chain-size-chart/" nav="chart" crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Chain identification chart', path: '/guides/chain-size-chart/' }]} jsonld={jsonld} modified={SITE.dataDate}>
+  <div class="wrap">
+  <div class="pagehead">
+    <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Chain identification chart', path: '/guides/chain-size-chart/' }]} />
+    <h1>Chainsaw chain identification chart</h1>
+    <p class="lede">Every saw chain is described by three numbers — pitch, gauge and drive-link count — plus a file size for sharpening. This chart ties them together and cross-references the chain codes used by Oregon, Stihl, Husqvarna and Carlton, so a loop sold under any brand's numbering can be matched to your bar.</p>
+  </div>
+
+  <section class="block">
+    <h2>Pitch × gauge × file size</h2>
+    <div class="tblwrap">
+      <table>
+        <thead><tr><th>Pitch</th><th>Used on</th><th>Common gauges</th><th>Round file size</th></tr></thead>
+        <tbody>
+          <tr><td class="num">3/8″ Low Profile (“Picco”)</td><td>Small homeowner &amp; electric/battery saws, pole pruners</td><td class="num">.043″ (1.1 mm) · .050″ (1.3 mm)</td><td class="num">5/32″ (4.0 mm)</td></tr>
+          <tr><td class="num">.325″</td><td>Mid-size homeowner &amp; ranch saws (40–60 cc)</td><td class="num">.050″ (1.3 mm) · .058″ (1.5 mm) · .063″ (1.6 mm)</td><td class="num">3/16″ (4.8 mm)</td></tr>
+          <tr><td class="num">3/8″ (standard)</td><td>Large homeowner, ranch &amp; professional saws (55 cc +)</td><td class="num">.050″ (1.3 mm) · .058″ (1.5 mm) · .063″ (1.6 mm)</td><td class="num">7/32″ (5.2 mm)</td></tr>
+          <tr><td class="num">.404″</td><td>Large professional &amp; harvester saws</td><td class="num">.058″ (1.5 mm) · .063″ (1.6 mm)</td><td class="num">7/32″ (5.5 mm)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">File sizes per Oregon and Husqvarna chain data (e.g. Oregon 91-series 3/8″ LP chain is specified with a 5/32″ file; Husqvarna's H30 .325″ chain with a 3/16″ file). Always confirm against your chain maker's sharpening data.</p>
+    <p><strong>Pitch</strong> is the distance between any three consecutive rivets, divided by two — it must match your drive sprocket and bar nose sprocket. <strong>Gauge</strong> is the thickness of the drive links where they ride in the bar groove. <strong>Drive links</strong> are the tang-shaped links that sit in the groove; their count sets the loop length for a given bar.</p>
+  </section>
+
+  <hr class="rule" />
+
+  <section class="block">
+    <h2>Chain code cross-reference</h2>
+    <p style="max-width:72ch">Chain makers print a short code on the box and on the drive links. The same physical chain is sold under different codes by different brands. Codes below are the ones confirmed in manufacturer and dealer data we checked; a dash means we have not verified that brand's code for that spec — match on pitch, gauge and drive links instead.</p>
+    <div class="tblwrap">
+      <table>
+        <thead><tr><th>Spec (pitch · gauge)</th><th>Oregon</th><th>Stihl</th><th>Husqvarna</th><th>Carlton</th></tr></thead>
+        <tbody>
+          <tr><td class="num">3/8″ LP · .043″</td><td class="num">90PX</td><td class="num">61 PMM3 (Picco Micro Mini 3)</td><td class="num">H38</td><td class="num">N4C</td></tr>
+          <tr><td class="num">3/8″ LP · .050″</td><td class="num">91PX / 91VXL</td><td class="num">63 PM3</td><td class="num">H37</td><td class="num">—</td></tr>
+          <tr><td class="num">.325″ · .050″</td><td class="num">95TXL (SpeedCut) · 20BPX</td><td class="num">—</td><td class="num">H30 · X-CUT SP33G</td><td class="num">—</td></tr>
+          <tr><td class="num">3/8″ · .050″</td><td class="num">72 (72LPX / 72EXL)</td><td class="num">—</td><td class="num">H80</td><td class="num">—</td></tr>
+          <tr><td class="num">3/8″ · .058″</td><td class="num">73 (73LPX)</td><td class="num">—</td><td class="num">H81</td><td class="num">—</td></tr>
+          <tr><td class="num">3/8″ · .063″</td><td class="num">75 (75LPX)</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Oregon's two-digit code is the fastest tell in the aisle: the first digit is the pitch family (9 = 3/8″ low profile, 2 = .325″, 7 = 3/8″ standard) and the second digit encodes the gauge (0 = .043″ LP / 2 = .050″, 3 = .058″, 5 = .063″ in the 7-series). Stihl and Husqvarna equivalents confirmed via dealer cross-reference listings and Husqvarna's bar &amp; chain combination tables.</p>
+  </section>
+
+  <div class="callout">
+    <b>⚠ The classic wrong buy: Oregon 72 vs 73</b>
+    <p>72 and 73 chain are both 3/8″ pitch and the boxes look near-identical — but 72 is <strong>.050″ gauge</strong> and 73 is <strong>.058″ gauge</strong>. Fit a 73 loop to a bar with a .050″ groove and the drive links will not seat in the groove at all; run a 72 in a .058″ groove and the chain slops side-to-side, wears the bar rails and can derail under load. The same trap exists at .325″ (.050 / .058 / .063) and in Stihl's Picco line (.043 vs .050). Read the gauge off your bar stamp — never guess it from the pitch.</p>
+  </div>
+
+  <section class="block">
+    <h2>Counting drive links</h2>
+    <div class="grid2">
+      <div>
+        <p>Drive links are the tang-shaped links on the underside of the chain — the ones that ride inside the bar groove and engage the sprocket. Cutters and tie straps on top do not count.</p>
+        <ol class="steps">
+          <li>Lay the loop flat, or keep it on the bar with the cover off.</li>
+          <li>Mark one drive link with chalk or a marker.</li>
+          <li>Count every drive link around the loop until you get back to the marked one. Count the marked link once.</li>
+          <li>That total is the number on the box: a “72” loop has 72 drive links regardless of brand.</li>
+        </ol>
+      </div>
+      <figure class="diagram" style="margin:0">
+        <svg viewBox="0 0 340 190" role="img" aria-label="Diagram showing drive links on the underside of a saw chain">
+          <path d="M20 60 H320" class="svg-thin"/>
+          <g class="svg-ink">
+            <path d="M40 60 l10 -22 l10 22 Z"/>
+            <path d="M100 60 l10 -22 l10 22 Z"/>
+            <path d="M160 60 l10 -22 l10 22 Z"/>
+            <path d="M220 60 l10 -22 l10 22 Z"/>
+            <path d="M280 60 l10 -22 l10 22 Z"/>
+          </g>
+          <g class="svg-acc">
+            <path d="M66 60 v26 l8 12 l8 -12 v-26"/>
+            <path d="M126 60 v26 l8 12 l8 -12 v-26"/>
+            <path d="M186 60 v26 l8 12 l8 -12 v-26"/>
+            <path d="M246 60 v26 l8 12 l8 -12 v-26"/>
+          </g>
+          <text x="30" y="30" class="svg-lbl">Cutters (top) — do not count</text>
+          <text x="66" y="128" class="svg-lbl">Drive links (underside) — count these,</text>
+          <text x="66" y="148" class="svg-lbl">all the way around the loop</text>
+          <text x="66" y="176" class="svg-lbl">Mark one, count to it, stop.</text>
+        </svg>
+        <figcaption>Only the tangs that drop into the bar groove count toward the drive-link number.</figcaption>
+      </figure>
+    </div>
+    <p style="margin-top:14px"><a href="/guides/how-to-verify-chain-size/">Full verification guide: bar stamps, pitch measurement and gauge checks →</a></p>
+  </section>
+
+    <section class="block">
+      <h2>Chain spec pages</h2>
+      <p>Each pitch × gauge combination we have verified on a real saw has its own page with part numbers and the saws that use it:</p>
+      <ul class="chips">{(await chainGroups()).map((g) => <li><a class="mono" href={chainUrl(g.key)}>{pitchShort(g.pitch)} · {gaugeShort(g.gauge)}</a></li>)}</ul>
+    </section>
+  </div>
+</Base>

@@ -1,0 +1,112 @@
+{
+  "brand": "husqvarna",
+  "model": "450 Rancher",
+  "name": "Husqvarna 450 Rancher",
+  "aliases": [
+    "450",
+    "H450"
+  ],
+  "type": "gas",
+  "displacement_cc": 50.2,
+  "popular": true,
+  "blurb": "50.2 cc ranch saw. Stock 18″ setup: .325″ pitch, .050″ gauge, 72 drive links — Husqvarna H30 / X-CUT SP33G.",
+  "intro": "The 450 Rancher is a 50.2 cc X-Torq ranch saw, most commonly sold in North America with an 18″ narrow-kerf bar. Its factory chain — Husqvarna H30, now also sold as X-CUT SP33G — is a .325″ pitch, .050″ gauge loop with 72 drive links at 18″, sharpened with a 3/16″ file. An owner's actual bar for this saw, stamped “18″ · .325 · 050 · 72”, is the worked example in our verification guide.",
+  "sources": [
+    {
+      "id": "husqvarna-h30-data",
+      "type": "manual",
+      "publisher": "Husqvarna",
+      "title": "H30 chain specifications (18″, .050″ gauge, .325″ pitch, 72 drive links, 3/16″ file) from the chain manual record",
+      "retrieved": "2026-10-23"
+    },
+    {
+      "id": "husqvarna-xforce-bar",
+      "type": "dealer",
+      "publisher": "Husqvarna bar listing",
+      "title": "X-Force bar listing for the 450 Rancher (18″, .325″, .050″, 72 DL, 3/16″ file)",
+      "retrieved": "2026-10-23"
+    },
+    {
+      "id": "husqvarna-fitment-listings",
+      "type": "dealer",
+      "publisher": "Husqvarna chain fitment listings",
+      "title": "Fitment listings for the 435/440/445/450 family (H30-66)",
+      "retrieved": "2026-10-23"
+    },
+    {
+      "id": "owner-stamp-report",
+      "type": "forum",
+      "publisher": "Owner bar-stamp report",
+      "title": "Owner report of an 18″ bar stamped “18″ · .325 · 050 · 72” (illustrative only)",
+      "retrieved": "2026-10-23"
+    }
+  ],
+  "sources_note": "Husqvarna H-30 chain specifications (18″, .050″ gauge, .325″ pitch, 72 drive links, 3/16″ file) from the chain's manual record; Husqvarna X-Force bar listing for the 450 Rancher (18″, .325″, .050″, 72 DL, 3/16″ file); owner bar-stamp report — checked Oct 2026.",
+  "bars": [
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "325",
+      "gauge": 0.05,
+      "drive_links": 72,
+      "file_size": "3/16",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "H30-72",
+          "role": "oem"
+        },
+        {
+          "brand": "Husqvarna",
+          "part_no": "X-CUT SP33G (581643672)",
+          "role": "oem"
+        },
+        {
+          "brand": "Oregon",
+          "part_no": "95TXL072 (SpeedCut)",
+          "role": "equivalent"
+        },
+        {
+          "brand": "Oregon",
+          "part_no": "M72",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-h30-data",
+        "husqvarna-xforce-bar",
+        "owner-stamp-report"
+      ],
+      "note": "Confirmed by Husqvarna's H30 chain data (18″, .325″, .050″, 72 DL) and Husqvarna bar listings for this model. Narrow-kerf chain: pair it with a narrow-kerf (.050″) bar."
+    },
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "325",
+      "gauge": 0.05,
+      "drive_links": 66,
+      "file_size": "3/16",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "H30-66",
+          "role": "oem"
+        },
+        {
+          "brand": "Oregon",
+          "part_no": "95TXL066",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitment-listings"
+      ],
+      "note": "Listed for the 435/440/445/450 family in Husqvarna chain fitment listings. If your 450 wears a 16″ bar, expect 66 — then confirm on the stamp."
+    }
+  ],
+  "last_verified": "2026-10-23"
+}

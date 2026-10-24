@@ -1,0 +1,6 @@
+---
+const { crumbs = [] } = Astro.props as { crumbs: { name: string; path?: string }[] };
+---
+<p class="crumbs">
+  <a href="/">Home</a>{crumbs.map((c, i) => <Fragment> / {c.path && i < crumbs.length - 1 ? <a href={c.path}>{c.name}</a> : <span>{c.name}</span>}</Fragment>)}
+</p>

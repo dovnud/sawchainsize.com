@@ -1,0 +1,96 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import SpecTable from '../../components/SpecTable.astro';
+import BuyBlock from '../../components/BuyBlock.astro';
+import FaqList from '../../components/FaqList.astro';
+import { getModels, getBrands, modelUrl, brandUrl, barUrl, chainUrl, barChainKey, barGroups, hasConflict, modelFaqs, pitchShort, gaugeShort, SOURCE_TYPE_LABEL, SITE } from '../../lib/data';
+import { faqLd, modelLd, webPageLd } from '../../lib/ld';
+
+export async function getStaticPaths() {
+  const models = await getModels();
+  return models.map((m) => ({ params: { slug: m.id }, props: { model: m } }));
+}
+const { model } = Astro.props;
+const d = model.data;
+const path = modelUrl(model);
+const brands = await getBrands();
+const brand = brands.find((b) => b.id === d.brand)!;
+const faqs = modelFaqs(model);
+const conflict = hasConflict(model);
+const okCount = d.bars.filter((b) => b.status === 'ok').length;
+const chainKeys = [...new Map(d.bars.map((b) => [barChainKey(b), b]).filter(([k]) => k) as [string, any][]).entries()];
+const barPages = new Set((await barGroups()).map((g) => g.length));
+const lengths = [...new Set(d.bars.flatMap((b) => b.lengths_in))].sort((a, b) => a - b);
+const desc = `${d.name} chain size: ${conflict ? 'published specs conflict — each reported variant side by side, plus the bar-stamp check' : 'pitch, gauge, drive links and file size by fitted bar'}. ${okCount ? `${okCount} verified bar ${okCount > 1 ? 'setups' : 'setup'}. ` : ''}Last verified ${SITE.dataDateLabel}.`;
+const jsonld = [webPageLd(`${d.name} chain size`, path, d.blurb, d.last_verified), modelLd(model, path), faqLd(faqs)];
+const ogName = `/og/${model.id}.png`;
+---
+<Base title={`${d.name} Chain Size — Pitch, Gauge & Drive Links`} description={desc} path={path} og={ogName} ogAlt={`${d.name} chain size`} nav="models"
+  crumbs={[{ name: 'Models', path: '/saws/' }, { name: brand.data.name, path: brandUrl(brand.id) }, { name: d.name, path }]} jsonld={jsonld} modified={d.last_verified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Models', path: '/saws/' }, { name: brand.data.name, path: brandUrl(brand.id) }, { name: d.name }]} />
+      <h1>{d.name} chain size</h1>
+      <p class="lede">{d.blurb}</p>
+      <p class="meta-line">LAST VERIFIED {d.last_verified} · {d.bars.length} BAR SETUP{d.bars.length > 1 ? 'S' : ''} · {okCount} VERIFIED</p>
+    </div>
+    <section class="block" style="padding-top:10px">
+      <div class="prose"><p>{d.intro}</p></div>
+      {conflict && (
+        <div class="callout"><b>⚠ Read this before ordering</b>
+          <p>For this saw, the sources a normal search turns up <strong>contradict each other</strong> on the chain spec. The table below prints what each reports. The stamp on your bar tail — pitch, gauge, drive links — is the tiebreaker, and it takes a minute to check: <a href="/guides/how-to-verify-chain-size/">verification guide</a>.</p></div>
+      )}
+      <h2 style="margin-top:20px">Chain specifications by fitted bar</h2>
+      <SpecTable model={model} />
+      {conflict && (
+        <>
+          <h3 style="margin-top:20px">What each source reports</h3>
+          <div class="tblwrap"><table>
+            <thead><tr><th scope="col">Bar</th><th scope="col">Source</th><th scope="col">Pitch</th><th scope="col">Gauge</th><th scope="col">Drive links</th></tr></thead>
+            <tbody>
+              {d.bars.filter((b) => b.reported).flatMap((b) => b.reported!.map((r) => {
+                const s = d.sources.find((x) => x.id === r.source_id)!;
+                return <tr><td class="num">{b.lengths_in.join(' / ')}″</td><td>{s.publisher} <small class="muted">({SOURCE_TYPE_LABEL[s.type]})</small></td><td class="num">{r.pitch ? pitchShort(r.pitch) : '—'}</td><td class="num">{r.gauge ? gaugeShort(r.gauge) : '—'}</td><td class="num">{r.drive_links ?? '—'}</td></tr>;
+              }))}
+            </tbody></table></div>
+        </>
+      )}
+      <p class="src">Sources: {d.sources_note}</p>
+      <details class="faq" style="margin-top:12px"><summary>Source list ({d.sources.length})</summary>
+        <div class="a"><ul class="plain">{d.sources.map((s) => <li><strong>{s.publisher}</strong> — {s.title} <span class="mono small">[{SOURCE_TYPE_LABEL[s.type]} · retrieved {s.retrieved}]</span></li>)}</ul></div>
+      </details>
+    </section>
+
+    <hr class="rule" />
+    <section class="block">
+      <h2>The 60-second check for this saw</h2>
+      <div class="prose">
+        <ol class="steps">
+          <li>Take the clutch cover off (two nuts) and lift the bar out.</li>
+          <li>Read the stamp on the bar tail: length, pitch, gauge, and the drive-link count on most bars.</li>
+          <li>Match all three numbers to the table above. If your stamp disagrees with the table, your saw is wearing a non-standard bar — order to the stamp, and tell us via the <a href="/contact/">contact page</a> so we can note the variant.</li>
+        </ol>
+        <p>Full method, with diagrams: <a href="/guides/how-to-verify-chain-size/">How to verify your chain size</a> · <a href="/guides/chain-size-chart/">Chain identification chart</a></p>
+      </div>
+    </section>
+
+    <BuyBlock model={model} />
+
+    <section class="block">
+      <h2>Questions about the {d.name} chain</h2>
+      <FaqList faqs={faqs} />
+    </section>
+
+    <section class="block">
+      <h2>Related</h2>
+      <ul class="chips">
+        <li><a href={brandUrl(brand.id)}>All {brand.data.name} saws</a></li>
+        {chainKeys.map(([k, b]) => <li><a class="mono" href={chainUrl(k)}>{pitchShort(b.pitch)} · {gaugeShort(b.gauge)} chain</a></li>)}
+        {lengths.filter((l) => barPages.has(l)).map((l) => <li><a class="mono" href={barUrl(l)}>{l}″ bar sizes</a></li>)}
+        <li><a href="/saws/">← All models</a></li>
+        <li><a href="/">Chain Finder</a></li>
+      </ul>
+    </section>
+  </div>
+</Base>

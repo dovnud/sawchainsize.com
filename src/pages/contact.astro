@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+import Crumbs from '../components/Crumbs.astro';
+import Email from '../components/Email.astro';
+import { SITE } from '../lib/data';
+import { webPageLd } from '../lib/ld';
+
+const desc = "Send spec corrections, model requests and enquiries to contact@sawchainsize.com. A photo or transcription of your bar stamp gets acted on fastest.";
+const jsonld = [webPageLd("Contact SawChainSize.com", "/contact/", desc, SITE.dataDate, "ContactPage")];
+---
+<Base title={"Contact SawChainSize.com"} description={desc} path="/contact/" nav="contact" crumbs={[{ name: 'Contact', path: '/contact/' }]} jsonld={jsonld} modified={SITE.dataDate}>
+  <div class="wrap">
+  <div class="pagehead"><Crumbs crumbs={[{ name: 'Contact', path: '/contact/' }]} /><h1>Contact us</h1>
+  <p class="lede">Corrections, model requests, business and affiliate-program enquiries — all welcome. A correction with a photo or transcription of your bar stamp gets acted on fastest, because that is the evidence we publish from.</p></div>
+  <div class="grid2" style="align-items:start">
+    <form class="contact" id="contactForm" action="mailto:contact@sawchainsize.com" method="post" enctype="text/plain">
+      <label for="cName">Your name</label>
+      <input id="cName" name="name" type="text" autocomplete="name" />
+      <label for="cEmail">Your email</label>
+      <input id="cEmail" name="email" type="email" autocomplete="email" />
+      <label for="cTopic">Topic</label>
+      <input id="cTopic" name="topic" type="text" value="Spec correction / model request" />
+      <label for="cMsg">Message</label>
+      <textarea id="cMsg" name="message" rows="6" placeholder="Saw model, bar length, and what your bar stamp reads…"></textarea>
+      <button type="submit">Open in my email app</button>
+      <p class="small muted" style="margin-top:10px">This form composes an email in your own mail app addressed to us — nothing is sent until you press send there, and nothing is stored by this page.</p>
+    </form>
+    <div class="card">
+      <h3>Direct email</h3>
+      <p class="mono"><Email /></p>
+      <h3 style="margin-top:18px">What to include in a correction</h3>
+      <ul class="plain">
+        <li>Saw brand and model (e.g. Husqvarna 450 Rancher)</li>
+        <li>Fitted bar length</li>
+        <li>The full stamp text from your bar tail</li>
+        <li>The page on this site you believe is wrong</li>
+      </ul>
+      <h3 style="margin-top:18px">Response time</h3>
+      <p>We read everything and reply to corrections and privacy requests first. There is no phone support — we are a small reference publication, and email keeps a written record that corrections can be checked against.</p>
+    </div>
+  </div>
+
+  </div>
+</Base>

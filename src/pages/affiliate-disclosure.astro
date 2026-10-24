@@ -1,0 +1,37 @@
+---
+import Base from '../layouts/Base.astro';
+import Crumbs from '../components/Crumbs.astro';
+import Email from '../components/Email.astro';
+import { SITE } from '../lib/data';
+import { webPageLd } from '../lib/ld';
+
+const desc = "How SawChainSize.com is funded, which retailer programs are referenced, what links do, and what they never influence.";
+const jsonld = [webPageLd("Affiliate Disclosure", "/affiliate-disclosure/", desc, SITE.dataDate, "WebPage")];
+---
+<Base title={"Affiliate Disclosure"} description={desc} path="/affiliate-disclosure/" nav="about" crumbs={[{ name: 'Affiliate disclosure', path: '/affiliate-disclosure/' }]} jsonld={jsonld} modified={SITE.dataDate}>
+  <div class="wrap">
+  <div class="pagehead"><Crumbs crumbs={[{ name: 'Affiliate disclosure', path: '/affiliate-disclosure/' }]} /><h1>Affiliate disclosure</h1></div>
+  <div class="prose">
+    <p><strong>The short version:</strong> SawChainSize.com earns commissions when you buy through some of the links on this site. It costs you nothing extra — the price at the retailer is the same whether you arrived through our link or went there directly.</p>
+    <h3>Programs we participate in</h3>
+    <ul>
+      <li><strong>Amazon Associates</strong> — SawChainSize.com is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.com and Amazon.ca. <strong>As an Amazon Associate I earn from qualifying purchases.</strong></li>
+      <li><strong>Acme Tools</strong> — via the Impact affiliate network.</li>
+      <li><strong>RepairClinic</strong> — via the CJ Affiliate network.</li>
+      <li>Other retailer and manufacturer programs may be added over time; this page is updated when they are.</li>
+    </ul>
+    <h3>How links work</h3>
+    <p>When you click a retailer link, the retailer (or its affiliate network) places a tracking cookie so the purchase can be attributed to this site for a limited window — for example, Amazon's Associates session is 24 hours, and Acme Tools' tracking window is 15 days. If you buy in that window, we may earn a percentage of the sale. You can read how cookies are used on this site in our <a href="/privacy/">Privacy Policy</a>.</p>
+    <h3>What this does and does not influence</h3>
+    <ul>
+      <li>It does <strong>not</strong> influence any specification on this site. Specs come from manufacturer manuals, fit-up charts and chain-maker data, per our <a href="/how-we-verify/">verification policy</a>.</li>
+      <li>It does <strong>not</strong> change the price you pay.</li>
+      <li>Products are listed because they match the specification on the page, in the sizes the page covers. If a chain does not fit the spec, it is not listed as a buying option, whatever it pays.</li>
+    </ul>
+    <h3>Prices and availability</h3>
+    <p>Prices shown on this site are dated examples from listings checked on the date stated next to them; they are not live. The price and availability at the retailer's checkout are the accurate ones. Product names, chain designations and trademarks belong to their owners — see the footer notice.</p>
+    <p class="small muted">This disclosure is provided in line with the US Federal Trade Commission's guidelines on endorsements and affiliate marketing (16 CFR Part 255) and Canada's Competition Act requirements on disclosure of material connections. Last updated: 23 October 2026.</p>
+  </div>
+
+  </div>
+</Base>

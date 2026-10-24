@@ -1,0 +1,74 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import { SITE } from '../../lib/data';
+import { webPageLd, faqLd } from '../../lib/ld';
+const desc = 'How to count the drive links on a chainsaw chain: mark one link, count the tangs under the loop, and match the total to the number on the box. With a diagram.';
+const path = '/guides/how-to-count-drive-links/';
+const faqs = [
+  { q: 'What are drive links on a chainsaw chain?', a: 'Drive links are the tang-shaped links on the underside of the chain. They ride inside the bar groove and engage the drive sprocket. Cutters and tie straps on top are not drive links and are not counted.' },
+  { q: 'Do I count cutters or drive links?', a: 'Count drive links only — the tangs that drop into the bar groove. Cutters (the teeth) are a different number and are not what the chain box or bar stamp quotes.' },
+  { q: 'Is the drive-link count enough to buy a chain?', a: 'No. The count must be combined with pitch and gauge. Two chains with the same count but different pitch or gauge are not interchangeable. Read the stamp on your bar tail and match all three numbers.' },
+];
+const howto = {
+  '@context': 'https://schema.org', '@type': 'HowTo', name: 'How to count drive links on a chainsaw chain',
+  description: 'Count the drive links on a saw chain loop to confirm the number printed on the chain box.', totalTime: 'PT3M',
+  tool: [{ '@type': 'HowToTool', name: 'Chalk or marker' }],
+  step: [
+    { '@type': 'HowToStep', name: 'Lay out the chain', text: 'Lay the loop flat, or keep it on the bar with the clutch cover off.' },
+    { '@type': 'HowToStep', name: 'Mark one drive link', text: 'Mark one drive link with chalk or a marker.' },
+    { '@type': 'HowToStep', name: 'Count around the loop', text: 'Count every drive link around the loop until you get back to the marked one. Count the marked link once.' },
+    { '@type': 'HowToStep', name: 'Match the number', text: 'That total is the number on the box: a "72" loop has 72 drive links regardless of brand.' },
+  ],
+};
+const jsonld = [webPageLd('How to count drive links on a chainsaw chain', path, desc, SITE.dataDate), howto, faqLd(faqs)];
+---
+<Base title="How to Count Drive Links on a Chainsaw Chain" description={desc} path={path} nav="verify"
+  crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'How to count drive links', path: path }]} jsonld={jsonld} modified={SITE.dataDate}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'How to count drive links' }]} />
+      <h1>How to count drive links</h1>
+      <p class="lede">The drive-link count is the third number you need, after pitch and gauge. It takes a minute with a piece of chalk.</p>
+    </div>
+    <section class="block" style="padding-top:10px">
+        <div class="grid2">
+          <div>
+            <p>Drive links are the tang-shaped links on the underside of the chain — the ones that ride inside the bar groove and engage the sprocket. Cutters and tie straps on top do not count.</p>
+            <ol class="steps">
+              <li>Lay the loop flat, or keep it on the bar with the cover off.</li>
+              <li>Mark one drive link with chalk or a marker.</li>
+              <li>Count every drive link around the loop until you get back to the marked one. Count the marked link once.</li>
+              <li>That total is the number on the box: a “72” loop has 72 drive links regardless of brand.</li>
+            </ol>
+          </div>
+          <figure class="diagram" style="margin:0">
+            <svg viewBox="0 0 340 190" role="img" aria-label="Diagram showing drive links on the underside of a saw chain">
+              <path d="M20 60 H320" class="svg-thin"/>
+              <g class="svg-ink">
+                <path d="M40 60 l10 -22 l10 22 Z"/>
+                <path d="M100 60 l10 -22 l10 22 Z"/>
+                <path d="M160 60 l10 -22 l10 22 Z"/>
+                <path d="M220 60 l10 -22 l10 22 Z"/>
+                <path d="M280 60 l10 -22 l10 22 Z"/>
+              </g>
+              <g class="svg-acc">
+                <path d="M66 60 v26 l8 12 l8 -12 v-26"/>
+                <path d="M126 60 v26 l8 12 l8 -12 v-26"/>
+                <path d="M186 60 v26 l8 12 l8 -12 v-26"/>
+                <path d="M246 60 v26 l8 12 l8 -12 v-26"/>
+              </g>
+              <text x="30" y="30" class="svg-lbl">Cutters (top) — do not count</text>
+              <text x="66" y="128" class="svg-lbl">Drive links (underside) — count these,</text>
+              <text x="66" y="148" class="svg-lbl">all the way around the loop</text>
+              <text x="66" y="176" class="svg-lbl">Mark one, count to it, stop.</text>
+            </svg>
+            <figcaption>Only the tangs that drop into the bar groove count toward the drive-link number.</figcaption>
+          </figure>
+        </div>
+        <p style="margin-top:14px"><a href="/guides/how-to-verify-chain-size/">Full verification guide: bar stamps, pitch measurement and gauge checks →</a></p>
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <div class="callout"><b>⚠ Count alone is not a chain spec</b><p>Always confirm pitch and gauge as well — see <a href="/guides/how-to-verify-chain-size/">how to verify your chain size</a> and the <a href="/guides/chain-size-chart/">identification chart</a>.</p></div>
+  </div>
+</Base>

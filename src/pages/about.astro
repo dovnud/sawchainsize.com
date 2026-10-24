@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import Crumbs from '../components/Crumbs.astro';
+import Email from '../components/Email.astro';
+import { SITE } from '../lib/data';
+import { webPageLd } from '../lib/ld';
+
+const desc = "SawChainSize.com is a bar-first chainsaw chain reference: how we work, who it is for, how the site is funded and what we are not.";
+const jsonld = [webPageLd("About SawChainSize.com", "/about/", desc, SITE.dataDate, "AboutPage")];
+---
+<Base title={"About SawChainSize.com"} description={desc} path="/about/" nav="about" crumbs={[{ name: 'About', path: '/about/' }]} jsonld={jsonld} modified={SITE.dataDate}>
+  <div class="wrap">
+  <div class="pagehead"><Crumbs crumbs={[{ name: 'About', path: '/about/' }]} /><h1>About SawChainSize.com</h1></div>
+  <div class="prose">
+    <p>SawChainSize.com is a reference site with one job: telling you the exact chain — pitch, gauge and drive-link count — that fits the bar on your chainsaw, and the file that sharpens it.</p>
+    <p>It exists because that answer is oddly hard to get right. A saw model is sold with several bar lengths; owners swap bars; dealers fit alternatives; and the pages that rank for “what size chain” questions are often roundups that copy each other. When we researched this site we found the leading results for one of North America's best-selling saws, the Stihl MS 250, giving three different answers. A wrong chain is not a trivial mistake: at best it does not mount, at worst it derails.</p>
+    <h3>Who it is for</h3>
+    <p>Homeowners cutting firewood and storm cleanup, acreage and ranch owners, and anyone standing in a store aisle holding two near-identical chain boxes. The site covers the US and Canada and the brands most commonly sold there: Stihl, Husqvarna, Echo, Poulan and McCulloch, plus the Oregon chain that most of them are fitted with as replacements.</p>
+    <h3>How the site works</h3>
+    <ul>
+      <li><strong>Bar-first, always.</strong> Every lookup starts from the bar fitted to the saw, because that is what determines the chain. Model charts show factory combinations; the bar-stamp check on every page settles it for your specific saw.</li>
+      <li><strong>Verified or flagged.</strong> A spec appears as fact only when it traces to a manufacturer manual, a fit-up chart, or chain-maker product data. Anything we could not verify is labelled “verify on your bar stamp” — we would rather show a gap than a guess.</li>
+      <li><strong>Conflicts shown, not hidden.</strong> Where credible sources disagree, the page prints the disagreement and tells you how to resolve it on your own bar.</li>
+    </ul>
+    <h3>How we are funded</h3>
+    <p>The site is free to use. It earns money from affiliate commissions when readers buy through links to retailers, and may carry display advertising in future. That never changes a specification: a chain is listed because it fits, not because it pays. The full details are in our <a href="/affiliate-disclosure/">Affiliate Disclosure</a>, and our sourcing rules are in <a href="/how-we-verify/">How We Verify Specs</a>.</p>
+    <h3>What we are not</h3>
+    <p>We are an independent reference publication. We are not a dealer, not a repair shop, and not affiliated with any saw or chain manufacturer — see the trademark notice in the footer. For fitting, tensioning and operating instructions, your saw's manufacturer manual is the authority.</p>
+    <p>Questions, corrections and model requests: <a href="/contact/">contact page</a> or <span class="mono"><Email /></span>.</p>
+  </div>
+
+  </div>
+</Base>

@@ -1,0 +1,102 @@
+{
+  "brand": "echo",
+  "model": "CS-590 Timber Wolf",
+  "name": "Echo CS-590 Timber Wolf",
+  "aliases": [
+    "CS590",
+    "CS-590"
+  ],
+  "type": "gas",
+  "displacement_cc": 59.8,
+  "popular": true,
+  "blurb": "59.8 cc firewood saw. Echo's manual specifies Oregon 72LPX chain, 3/8″ pitch; the standard 20″ bar takes 70 drive links at .050″ gauge.",
+  "intro": "The CS-590 Timber Wolf is Echo's 59.8 cc value firewood saw. Echo's operator manual is unusually direct about the chain: it specifies an Oregon 72LPX chain in 3/8″ pitch on a 7-tooth sprocket, with a 20″ bar standard and 16″, 18″, 24″ and 27″ bars optional. The 72 in the Oregon code already tells you the gauge — .050″ — and Echo sells the factory loop as part 72LPX70CQ for the 20″ bar.",
+  "sources": [
+    {
+      "id": "echo-manual-cs590",
+      "type": "manual",
+      "publisher": "Echo",
+      "title": "CS-590 operator manual specifications (saw chain: Oregon 72LPX, 3/8″ pitch; standard 20″ bar, optional 16/18/24/27″; 7-tooth 3/8″ sprocket)",
+      "retrieved": "2026-10-23"
+    },
+    {
+      "id": "dealer-72lpx70cq",
+      "type": "dealer",
+      "publisher": "Echo / US power-equipment dealer",
+      "title": "Listings for 72LPX70CQ (single loop and 3-pack)",
+      "retrieved": "2026-10-23"
+    }
+  ],
+  "sources_note": "Echo CS-590 operator manual specifications (saw chain: Oregon 72LPX, 3/8″ pitch; standard 20″ bar, optional 16/18/24/27″; 7-tooth 3/8″ sprocket) and Echo/dealer listings for 72LPX70CQ — checked Oct 2026.",
+  "bars": [
+    {
+      "lengths_in": [
+        20
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 70,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "72LPX70CQ (Oregon 72LPX)",
+          "role": "oem"
+        },
+        {
+          "brand": "Echo",
+          "part_no": "72LPX70CQ-3 (3-pack)",
+          "role": "oem"
+        },
+        {
+          "brand": "Oregon",
+          "part_no": "72LPX070",
+          "role": "equivalent"
+        },
+        {
+          "brand": "Oregon",
+          "part_no": "72EXL070",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "echo-manual-cs590",
+        "dealer-72lpx70cq"
+      ],
+      "note": "Echo's own 20″ loop for this saw, also sold in a 3-pack (72LPX70CQ-3). One US dealer listed the single loop at $43.99 when checked in Oct 2026 — a dated example, not a live price.",
+      "label": "20″ (standard)"
+    },
+    {
+      "lengths_in": [
+        16,
+        18,
+        24,
+        27
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": null,
+      "file_size": "7/32",
+      "status": "verify",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "72LPX family",
+          "role": "oem"
+        },
+        {
+          "brand": "Oregon",
+          "part_no": "72LPX / 72EXL family",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "echo-manual-cs590"
+      ],
+      "note": "Echo lists these bar lengths as options for the CS-590. Drive-link counts change with each bar and we publish them only from a citable listing — your bar stamp has the count.",
+      "label": "16″ / 18″ / 24″ / 27″ (optional)"
+    }
+  ],
+  "last_verified": "2026-10-23"
+}

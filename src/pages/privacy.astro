@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import Crumbs from '../components/Crumbs.astro';
+import Email from '../components/Email.astro';
+import { SITE } from '../lib/data';
+import { webPageLd } from '../lib/ld';
+
+const desc = "Privacy policy for sawchainsize.com: what we collect (nothing for the lookup tools), cookies, what we never do, and how to make a privacy request.";
+const jsonld = [webPageLd("Privacy Policy", "/privacy/", desc, SITE.dataDate, "WebPage")];
+---
+<Base title={"Privacy Policy"} description={desc} path="/privacy/" nav="about" crumbs={[{ name: 'Privacy policy', path: '/privacy/' }]} jsonld={jsonld} modified={SITE.dataDate}>
+  <div class="wrap">
+  <div class="pagehead"><Crumbs crumbs={[{ name: 'Privacy policy', path: '/privacy/' }]} /><h1>Privacy policy</h1></div>
+  <div class="prose">
+    <p class="small muted">Last updated: 23 October 2026. Applies to sawchainsize.com.</p>
+    <h3>What we collect</h3>
+    <ul>
+      <li><strong>Nothing, for the lookup tools.</strong> The Chain Finder runs entirely in your browser. Your selections are not sent to us or stored.</li>
+      <li><strong>Analytics.</strong> We use privacy-respecting aggregate analytics to understand which pages are used (for example, page views and approximate region). We do not build advertising profiles of individual visitors.</li>
+      <li><strong>Contact messages.</strong> If you email us or use the contact form (which opens your own email app), we receive your email address and the content of your message, and use them only to reply and to act on corrections or requests.</li>
+    </ul>
+    <h3>Cookies</h3>
+    <ul>
+      <li><strong>This site</strong> sets, at most, a functional cookie remembering that you dismissed the cookie notice.</li>
+      <li><strong>Affiliate links.</strong> When you click through to a retailer, that retailer or its affiliate network (Amazon, Impact, CJ Affiliate) may set tracking cookies on the retailer's domain to attribute a purchase to this site for a limited window (for example 24 hours for an Amazon session, 15 days for Acme Tools). Those cookies are governed by the retailer's and network's own privacy policies.</li>
+      <li><strong>Advertising.</strong> If display advertising is added in future, the ad network may set cookies as described in its own policy; this page will be updated before that happens.</li>
+    </ul>
+    <h3>What we never do</h3>
+    <ul>
+      <li>We do not sell personal data. We have none to sell: no accounts, no checkout, no mailing list at this time.</li>
+      <li>We do not collect payment information — purchases happen entirely on the retailer's site.</li>
+      <li>We do not knowingly collect information from children; this is a power-tool reference site intended for adults.</li>
+    </ul>
+    <h3>Your requests</h3>
+    <p>To ask what information we hold about you (for email correspondence, that is simply your messages), or to have it deleted, write to <span class="mono"><Email /></span> or use the <a href="/contact/">contact page</a>. We respond to privacy requests from any jurisdiction, including under Canada's PIPEDA and applicable US state laws.</p>
+    <h3>Changes</h3>
+    <p>If this policy changes, the new version will be posted here with a new date at the top.</p>
+  </div>
+
+  </div>
+</Base>

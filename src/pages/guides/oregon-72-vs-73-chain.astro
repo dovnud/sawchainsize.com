@@ -1,0 +1,41 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import { SITE, chainUrl, codesFor } from '../../lib/data';
+import { webPageLd, faqLd } from '../../lib/ld';
+const path = '/guides/oregon-72-vs-73-chain/';
+const desc = 'Oregon 72 vs 73 chain: both are 3/8″ pitch, but 72 is .050″ gauge and 73 is .058″ gauge. How to tell which your bar takes before you buy.';
+const c72 = codesFor('3/8', 0.05)!, c73 = codesFor('3/8', 0.058)!, c75 = codesFor('3/8', 0.063)!;
+const faqs = [
+  { q: 'What is the difference between Oregon 72 and 73 chain?', a: 'Both are 3/8″ pitch. Oregon 72 is .050″ (1.3 mm) gauge; Oregon 73 is .058″ (1.5 mm) gauge. The gauge is the drive-link thickness, and it must match the groove in your guide bar.' },
+  { q: 'Can I run 73 chain on a bar that takes 72?', a: 'No. A .058″ drive link will not seat in a .050″ bar groove.' },
+  { q: 'Can I run 72 chain on a bar that takes 73?', a: 'It may physically fit, but the .050″ drive links slop side-to-side in a .058″ groove, wear the bar rails and can derail under load. Match the gauge stamped on the bar.' },
+  { q: 'How do I find out which gauge my bar is?', a: 'Read the stamp near the tail of the bar. It states length, pitch and gauge, and often a drive-link count. If it is worn, measure the groove width with a caliper, or see the verification guide.' },
+];
+const jsonld = [webPageLd('Oregon 72 vs 73 chain', path, desc, SITE.dataDate), faqLd(faqs)];
+---
+<Base title="Oregon 72 vs 73 Chain: .050 vs .058 Gauge" description={desc} path={path} nav="chart"
+  crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Oregon 72 vs 73', path }]} jsonld={jsonld} modified={SITE.dataDate}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Oregon 72 vs 73' }]} />
+      <h1>Oregon 72 vs 73 chain</h1>
+      <p class="lede">The most common wrong buy in chainsaw chain: two 3/8″ chains whose boxes look near-identical, differing only in gauge.</p>
+    </div>
+    <div class="tblwrap"><table>
+      <caption class="sr-only">Oregon 72, 73 and 75 compared</caption>
+      <thead><tr><th scope="col">Oregon code</th><th scope="col">Pitch</th><th scope="col">Gauge</th><th scope="col">Husqvarna</th></tr></thead>
+      <tbody>
+        <tr><td class="num"><a href={chainUrl('3-8-050')}>{c72.oregon}</a></td><td class="num">3/8″</td><td class="num">.050″ (1.3 mm)</td><td class="num">{c72.husqvarna}</td></tr>
+        <tr><td class="num"><a href={chainUrl('3-8-058')}>{c73.oregon}</a></td><td class="num">3/8″</td><td class="num">.058″ (1.5 mm)</td><td class="num">{c73.husqvarna}</td></tr>
+        <tr><td class="num">{c75.oregon}</td><td class="num">3/8″</td><td class="num">.063″ (1.6 mm)</td><td class="num">{c75.husqvarna}</td></tr>
+      </tbody></table></div>
+    <div class="callout">
+      <b>⚠ Read the gauge off your bar stamp</b>
+      <p>Fit a 73 loop to a bar with a .050″ groove and the drive links will not seat in the groove at all; run a 72 in a .058″ groove and the chain slops side-to-side, wears the bar rails and can derail under load. The same trap exists at .325″ (.050 / .058 / .063) and in Stihl's Picco line (.043 vs .050).</p>
+    </div>
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/how-to-verify-chain-size/">How to verify your chain size</a> · <a href="/guides/chain-size-chart/">Identification chart</a> · <a href="/chain/">Chain specs</a></p>
+  </div>
+</Base>

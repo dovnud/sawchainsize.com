@@ -1,0 +1,5 @@
+---
+import { SITE } from '../lib/data';
+const { class: cls = '' } = Astro.props;
+---
+<Fragment set:html={`<!--email_off--><a class="${cls}" href="mailto:${SITE.email}">${SITE.email}</a><!--/email_off-->`} />

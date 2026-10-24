@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+import Crumbs from '../components/Crumbs.astro';
+import Email from '../components/Email.astro';
+import { SITE } from '../lib/data';
+import { webPageLd } from '../lib/ld';
+
+const desc = "Terms of use for SawChainSize.com: reference-information-only notice, safety disclaimer, trademarks, external links and liability.";
+const jsonld = [webPageLd("Terms of Use", "/terms/", desc, SITE.dataDate, "WebPage")];
+---
+<Base title={"Terms of Use"} description={desc} path="/terms/" nav="about" crumbs={[{ name: 'Terms of use', path: '/terms/' }]} jsonld={jsonld} modified={SITE.dataDate}>
+  <div class="wrap">
+  <div class="pagehead"><Crumbs crumbs={[{ name: 'Terms of use', path: '/terms/' }]} /><h1>Terms of use</h1></div>
+  <div class="prose">
+    <p class="small muted">Last updated: 23 October 2026.</p>
+    <h3>Reference information only</h3>
+    <p>The specifications on SawChainSize.com are provided as a reference to help you identify parts. They are compiled from manufacturer manuals, fit-up charts and chain-maker data in good faith, but manufacturers change fitments, bars get swapped, and errors can occur. <strong>Always verify pitch, gauge and drive-link count against the stamp on your guide bar and your saw's manual before ordering or fitting a chain.</strong> We are not responsible for parts ordered in reliance on this site where that verification was not done.</p>
+    <h3>Safety disclaimer</h3>
+    <p>Chainsaws are dangerous tools that can cause serious or fatal injury. This site does not provide operating instruction. Fitting, tensioning, sharpening and using a chain must follow the saw manufacturer's manual, including all protective-equipment requirements. A chain that does not match the bar's pitch and gauge must never be run. If you are not confident fitting a chain, have a dealer do it.</p>
+    <h3>Trademarks</h3>
+    <p>Stihl, Husqvarna, Echo, Poulan, McCulloch, Oregon and all model names and chain designations are trademarks of their respective owners. Their use on this site is nominative — to identify the products a specification refers to — and implies no affiliation with or endorsement by those owners. SawChainSize.com is an independent publication and is not affiliated with Stihl Inc., Husqvarna AB, Yamabiko Corporation (Echo), or Oregon Tool, Inc.</p>
+    <h3>External links</h3>
+    <p>Links to retailers and manufacturers take you to sites we do not control. Prices, availability and product descriptions there are theirs. Some links are affiliate links — see the <a href="/affiliate-disclosure/">Affiliate Disclosure</a>.</p>
+    <h3>Acceptable use</h3>
+    <p>You may use this site for personal, non-commercial reference. The compiled charts may not be scraped and republished wholesale; individual specifications are facts and may of course be cited with a link.</p>
+    <h3>Liability</h3>
+    <p>To the maximum extent permitted by law, the site is provided “as is” without warranties of any kind, and our liability for any claim arising from use of the site is limited to the amount you paid us to use it, which is zero. Nothing in these terms limits liability that cannot be limited by law.</p>
+  </div>
+
+  </div>
+</Base>

@@ -1,0 +1,31 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import { getBrands, getModels, brandUrl, SITE } from '../../lib/data';
+import { webPageLd } from '../../lib/ld';
+const brands = await getBrands();
+const models = await getModels();
+const desc = 'Chainsaw chain size by brand: Stihl, Husqvarna, Echo and Poulan / McCulloch — chain codes, factory fitments and the saws we have verified for each.';
+---
+<Base title="Chainsaw Chain Size by Brand" description={desc} path="/brands/" nav="brands" crumbs={[{ name: 'Brands', path: '/brands/' }]} jsonld={[webPageLd('Chainsaw chain size by brand', '/brands/', desc, SITE.dataDate, 'CollectionPage')]} modified={SITE.dataDate}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Brands' }]} />
+      <h1>Chain sizes by brand</h1>
+      <p class="lede">Each brand uses its own chain codes, and the same physical chain is often sold under several. Start with your saw's brand, then pick the model and the bar actually fitted to it.</p>
+    </div>
+    <div class="grid2">
+      {brands.map((b) => {
+        const ms = models.filter((m) => m.data.brand === b.id);
+        return (
+          <a class="card" href={brandUrl(b.id)}>
+            <h3>{b.data.name}</h3>
+            <p class="small">{b.data.summary}</p>
+            <p class="small muted">{ms.length} saw model{ms.length > 1 ? 's' : ''}: {ms.map((m) => m.data.name).join(' · ')}</p>
+            <span class="go">{b.data.name} chain sizes →</span>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</Base>

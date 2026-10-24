@@ -1,0 +1,83 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CookieNote from '../components/CookieNote.astro';
+import { SITE, ldEscape } from '../lib/data';
+
+export interface Props {
+  title: string;
+  description: string;
+  path: string; // canonical path, always with leading + trailing slash
+  og?: string; // path to a 1200x630 png under /og/
+  ogAlt?: string;
+  type?: 'website' | 'article';
+  nav?: string;
+  crumbs?: { name: string; path: string }[]; // excludes Home
+  jsonld?: Record<string, unknown>[];
+  modified?: string; // ISO date
+  noindex?: boolean;
+}
+const { title, description, path, og = SITE.defaultOg, ogAlt, type = 'website', nav = '', crumbs = [], jsonld = [], modified, noindex = false } = Astro.props;
+const canonical = SITE.url + path;
+const ogUrl = SITE.url + og;
+const fullTitle = title.includes('SawChainSize') ? title : `${title} | SawChainSize.com`;
+const breadcrumbLd = crumbs.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [{ name: 'Home', path: '/' }, ...crumbs].map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: SITE.url + c.path })),
+    }
+  : null;
+const graph = [...jsonld, ...(breadcrumbLd ? [breadcrumbLd] : [])];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#232a30" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex,follow" />}
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt" />
+    <link rel="preload" href="/fonts/barlow-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/barlow-condensed-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogAlt ?? `${SITE.name} — ${SITE.tagline}`} />
+    {modified && <meta property="article:modified_time" content={modified} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogUrl} />
+    <meta name="twitter:image:alt" content={ogAlt ?? `${SITE.name} — ${SITE.tagline}`} />
+    {graph.map((g) => <script type="application/ld+json" set:html={ldEscape(g)} />)}
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div id="scrollProgress" aria-hidden="true"></div>
+    <Header active={nav} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <CookieNote />
+    <script>
+      import '../scripts/main.ts';
+    </script>
+  </body>
+</html>
