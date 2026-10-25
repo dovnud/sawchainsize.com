@@ -1,0 +1,90 @@
+{
+  "brand": "stihl",
+  "model": "MS 291",
+  "name": "STIHL MS 291",
+  "aliases": [
+    "MS 291",
+    "MS 291 C-BEQ"
+  ],
+  "type": "gas",
+  "popular": false,
+  "blurb": "16″, 18″ and 20″ bars on .325″ chain, .063″ gauge, 67–81 drive links, per STIHL's chain-selection chart.",
+  "intro": "The STIHL MS 291 appears in STIHL's saw-chain selection chart with 16″, 18″ and 20″ guide bars: the same .325″ pitch, .063″ gauge chain family as the MS 261 and MS 271. Each row below restates the chart's drive-link count, chain marketing number and recommended bar part number. The STIHL chart we could read is dated 1 October 2017, so for any saw made after that, confirm against the bar stamp or STIHL's current chart before ordering.",
+  "bars": [
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "325",
+      "gauge": 0.063,
+      "drive_links": 67,
+      "file_size": "3/16",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "26 RM3 67",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "STIHL's chart lists chain 26 RM3 67 with recommended bar 3003 812 7013."
+    },
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "325",
+      "gauge": 0.063,
+      "drive_links": 74,
+      "file_size": "3/16",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "26 RM3 74",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "STIHL's chart lists chain 26 RM3 74 with recommended bar 3003 812 7017."
+    },
+    {
+      "lengths_in": [
+        20
+      ],
+      "pitch": "325",
+      "gauge": 0.063,
+      "drive_links": 81,
+      "file_size": "3/16",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "26 RM3 81",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "STIHL's chart lists chain 26 RM3 81 with recommended bar 3003 812 7021."
+    }
+  ],
+  "sources": [
+    {
+      "id": "stihl-chain-chart-2017",
+      "type": "fitup-chart",
+      "publisher": "STIHL",
+      "title": "Saw Chain Selection and Identification (STIHL USA catalog page 173; specifications as of 1 October 2017) — recommended chain loop and guide bar per saw model",
+      "url": "https://assets.unilogcorp.com/187/ITEM/DOC/Stihl_102205325_Catalog.pdf",
+      "retrieved": "2026-10-24"
+    }
+  ],
+  "sources_note": "STIHL USA “Saw Chain Selection and Identification” chart (catalog page 173, specifications as of 1 October 2017), read on 24 Oct 2026.",
+  "last_verified": "2026-10-24"
+}

@@ -1,0 +1,84 @@
+{
+  "brand": "husqvarna",
+  "model": "3120 XP",
+  "name": "Husqvarna 3120 XP",
+  "aliases": [
+    "3120",
+    "3120XP"
+  ],
+  "type": "gas",
+  "popular": false,
+  "blurb": "32″, 44″ and 60″ bar setups on .404″ chain, .063″ gauge, 95–172 drive links — straight from Husqvarna's 2026 fit-up guide.",
+  "intro": "The Husqvarna 3120 XP is a rear-handle gas saw. Husqvarna's own 2026 Bar & Chain Fit-up Guide (effective 1 January 2026) lists 3 approved bar lengths for it (32″, 44″ and 60″), running .404″ pitch chain in .063″ gauge. The table below restates each row from that guide: the drive-link count changes with bar length, and the guide also names the matching Husqvarna bar and chain part numbers. The guide also lists a 72″ bar (190 drive links) whose file-size cell is a typo in the PDF, so we have not published that row. If your saw wears a replacement bar, trust the stamp over the chart.",
+  "bars": [
+    {
+      "lengths_in": [
+        32
+      ],
+      "pitch": "404",
+      "gauge": 0.063,
+      "drive_links": 95,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "H64S 591164495",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2026"
+      ],
+      "note": "Husqvarna's 2026 fit-up guide pairs this 32″ setup with bar X-Tough 596690095 and chain H64S 591164495."
+    },
+    {
+      "lengths_in": [
+        44
+      ],
+      "pitch": "404",
+      "gauge": 0.063,
+      "drive_links": 128,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "H57S 591164628",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2026"
+      ],
+      "note": "Husqvarna's 2026 fit-up guide pairs this 44″ setup with bar Solid, RSN 608000144 and chain H57S 591164628."
+    },
+    {
+      "lengths_in": [
+        60
+      ],
+      "pitch": "404",
+      "gauge": 0.063,
+      "drive_links": 172,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [],
+      "source_ids": [
+        "husqvarna-fitup-2026"
+      ],
+      "note": "Husqvarna's 2026 fit-up guide pairs this 60″ setup with bar Solid, RSN 608000146 and chain (no chain part number is printed for this length). (This is a very long solid bar; the guide lists the bar only.)"
+    }
+  ],
+  "sources": [
+    {
+      "id": "husqvarna-fitup-2026",
+      "type": "fitup-chart",
+      "publisher": "Husqvarna",
+      "title": "Bar & Chain Fit-up Guide 2026 (effective 1 January 2026) — certified/approved bar and chain combinations per saw",
+      "url": "https://media.husqvarnagroup.com/original/DI-328359.pdf",
+      "retrieved": "2026-10-24"
+    }
+  ],
+  "sources_note": "Husqvarna 2026 Bar & Chain Fit-up Guide (effective 1 January 2026), read in full on 24 Oct 2026; every row in the table is restated from the saw's entry in that guide.",
+  "last_verified": "2026-10-24"
+}

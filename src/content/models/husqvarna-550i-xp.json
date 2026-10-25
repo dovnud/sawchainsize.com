@@ -1,0 +1,183 @@
+{
+  "brand": "husqvarna",
+  "model": "550i XP",
+  "name": "Husqvarna 550i XP",
+  "aliases": [
+    "550i",
+    "550i XP"
+  ],
+  "type": "battery",
+  "popular": false,
+  "blurb": "16″, 18″ and 20″ bar setups on .325″ chain, .050″ / .058″ gauge, 66–80 drive links — straight from Husqvarna's 2026 fit-up guide.",
+  "intro": "The Husqvarna 550i XP is a rear-handle battery saw. Husqvarna's own 2026 Bar & Chain Fit-up Guide (effective 1 January 2026) lists 3 approved bar lengths for it (16″, 18″ and 20″), running .325″ pitch chain in .050″ / .058″ gauge. The table below restates each row from that guide: the drive-link count changes with bar length, and the guide also names the matching Husqvarna bar and chain part numbers. This saw is listed in more than one gauge (.050″ / .058″), which is where wrong-chain orders come from: the gauge has to match the groove in your bar, so read it off the bar stamp. If your saw wears a replacement bar, trust the stamp over the chart.",
+  "bars": [
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "325",
+      "gauge": 0.05,
+      "drive_links": 66,
+      "file_size": "3/16",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C33 X-Cut 585642266",
+          "role": "oem"
+        },
+        {
+          "brand": "Husqvarna",
+          "part_no": "SP33G X-Cut 581643666",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2026"
+      ],
+      "note": "Husqvarna's 2026 fit-up guide pairs this 16″ setup with bar X-Force 596199766 and chain C33 X-Cut 585642266 / SP33G X-Cut 581643666."
+    },
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "325",
+      "gauge": 0.058,
+      "drive_links": 66,
+      "file_size": "3/16",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C35 X-Cut 581699866",
+          "role": "oem"
+        },
+        {
+          "brand": "Husqvarna",
+          "part_no": "S35G X-Cut 585639666",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2026"
+      ],
+      "note": "Husqvarna's 2026 fit-up guide pairs this 16″ setup with bar X-Force 596199866 and chain C35 X-Cut 581699866 / S35G X-Cut 585639666."
+    },
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "325",
+      "gauge": 0.05,
+      "drive_links": 72,
+      "file_size": "3/16",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C33 X-Cut 585642272",
+          "role": "oem"
+        },
+        {
+          "brand": "Husqvarna",
+          "part_no": "SP33G X-Cut 581643672",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2026"
+      ],
+      "note": "Husqvarna's 2026 fit-up guide pairs this 18″ setup with bar X-Force 596199772 and chain C33 X-Cut 585642272 / SP33G X-Cut 581643672."
+    },
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "325",
+      "gauge": 0.058,
+      "drive_links": 72,
+      "file_size": "3/16",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C35 X-Cut 581699872",
+          "role": "oem"
+        },
+        {
+          "brand": "Husqvarna",
+          "part_no": "S35G X-Cut 585639672",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2026"
+      ],
+      "note": "Husqvarna's 2026 fit-up guide pairs this 18″ setup with bar X-Force 596199872 and chain C35 X-Cut 581699872 / S35G X-Cut 585639672."
+    },
+    {
+      "lengths_in": [
+        20
+      ],
+      "pitch": "325",
+      "gauge": 0.05,
+      "drive_links": 80,
+      "file_size": "3/16",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C33 X-Cut 585642280",
+          "role": "oem"
+        },
+        {
+          "brand": "Husqvarna",
+          "part_no": "SP33G X-Cut 581643680",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2026"
+      ],
+      "note": "Husqvarna's 2026 fit-up guide pairs this 20″ setup with bar X-Force 596199780 and chain C33 X-Cut 585642280 / SP33G X-Cut 581643680."
+    },
+    {
+      "lengths_in": [
+        20
+      ],
+      "pitch": "325",
+      "gauge": 0.058,
+      "drive_links": 78,
+      "file_size": "3/16",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C35 X-Cut 581699878",
+          "role": "oem"
+        },
+        {
+          "brand": "Husqvarna",
+          "part_no": "S35G X-Cut 585639678",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2026"
+      ],
+      "note": "Husqvarna's 2026 fit-up guide pairs this 20″ setup with bar Laminate 596009678 and chain C35 X-Cut 581699878 / S35G X-Cut 585639678."
+    }
+  ],
+  "sources": [
+    {
+      "id": "husqvarna-fitup-2026",
+      "type": "fitup-chart",
+      "publisher": "Husqvarna",
+      "title": "Bar & Chain Fit-up Guide 2026 (effective 1 January 2026) — certified/approved bar and chain combinations per saw",
+      "url": "https://media.husqvarnagroup.com/original/DI-328359.pdf",
+      "retrieved": "2026-10-24"
+    }
+  ],
+  "sources_note": "Husqvarna 2026 Bar & Chain Fit-up Guide (effective 1 January 2026), read in full on 24 Oct 2026; every row in the table is restated from the saw's entry in that guide.",
+  "last_verified": "2026-10-24"
+}

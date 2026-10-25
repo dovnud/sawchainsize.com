@@ -2,35 +2,40 @@
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import FaqList from '../../components/FaqList.astro';
-import { chainGroups, chainUrl, modelUrl, SPEC, codesFor, pitchLabel, gaugeLabel, pitchShort, gaugeShort, barLabel, dlText, statusLabel, fileLabel, partText, SITE } from '../../lib/data';
+import { getBrands, chainGroups, chainUrl, modelUrl, SPEC, codesFor, groupFile, pitchLabel, gaugeLabel, pitchShort, gaugeShort, barLabel, dlText, statusLabel, fileLabel, partText, SITE } from '../../lib/data';
 import { faqLd, specItemLd } from '../../lib/ld';
 export async function getStaticPaths() {
   const groups = await chainGroups();
   return groups.map((g) => ({ params: { key: g.key }, props: { group: g, siblings: groups.map((x) => x.key) } }));
 }
 const { group } = Astro.props;
+const allBrands = await getBrands();
+const brandName = (id: string) => allBrands.find((b) => b.id === id)?.data.name ?? id;
 const { pitch, gauge } = group;
 const path = chainUrl(group.key);
 const P = (SPEC.pitches as any)[pitch];
-const codes = codesFor(pitch, gauge)!;
+const codes = codesFor(pitch, gauge);
+const fileTxt = groupFile(group);
 const name = `${pitchLabel(pitch)} pitch · ${gaugeLabel(gauge)} gauge chainsaw chain`;
 const models = [...new Map(group.items.map((i) => [i.model.id, i.model])).values()];
+const byModel = models.map((m) => ({ model: m, bars: group.items.filter((i) => i.model.id === m.id).map((i) => i.bar) }));
+const brandsInGroup = [...new Set(models.map((m) => m.data.brand))];
 const parts = [...new Map(group.items.flatMap((i) => i.bar.chains.map((c) => [partText(c), c] as const))).values()];
 const sameGaugeOther = SPEC.codes.filter((c) => c.pitch === pitch && c.gauge !== gauge);
 const faqs = [
   { q: `What chain codes are ${pitchLabel(pitch)} ${gaugeShort(gauge)} chain?`, a: `Oregon: ${codes.oregon}. Stihl: ${codes.stihl}. Husqvarna: ${codes.husqvarna}. Carlton: ${codes.carlton}. A dash means we have not verified that brand's code for this spec — match on pitch, gauge and drive links instead.` },
-  { q: `What file sharpens ${pitchLabel(pitch)} chain?`, a: `${P.file} round file. File size follows pitch: 3/8″ low-profile takes 5/32″ (4.0 mm), .325″ takes 3/16″ (4.8 mm), and standard 3/8″ takes 7/32″ (5.2 mm).` },
+  { q: `What file sharpens ${pitchLabel(pitch)} chain?`, a: `${fileTxt} round file for this spec, per the manufacturer data on this page. File size follows the cutter, so it tracks pitch and gauge: 3/8″ low-profile takes 5/32″ (4.0 mm) in .050″ gauge but 11/64″ (4.5 mm) in .043″, .325″ is usually 3/16″ (4.8 mm), and standard 3/8″ takes 7/32″ (5.5 mm).` },
   { q: `Which saws use ${pitchLabel(pitch)} ${gaugeShort(gauge)} chain?`, a: `Among the saws verified on this site: ${models.map((m) => m.data.name).join(', ')}. The drive-link count depends on the bar fitted, so match it on your bar stamp.` },
   { q: `Can I use a different gauge chain on the same pitch?`, a: 'No. Gauge is the thickness of the drive links and must match the groove in your guide bar. A thicker chain will not seat; a thinner one wobbles in the groove, wears the bar rails and can derail.' },
 ];
-const desc = `${pitchLabel(pitch)} pitch, ${gaugeLabel(gauge)} gauge chainsaw chain: chain codes (Oregon ${codes.oregon}), ${P.file} file size, and the ${models.length} verified saw${models.length > 1 ? 's' : ''} that use it, with drive-link counts.`;
+const desc = `${pitchLabel(pitch)} pitch, ${gaugeLabel(gauge)} gauge chainsaw chain: chain codes (Oregon ${codes.oregon}), ${fileTxt} file size, and the ${models.length} verified saw${models.length > 1 ? 's' : ''} that use it, with drive-link counts.`;
 const jsonld = [
   specItemLd(name, path, desc, SITE.dataDate, {
     name, category: 'Chainsaw chain', description: `Chainsaw chain specification: ${pitchLabel(pitch)} pitch, ${gaugeLabel(gauge)} gauge.`,
     additionalProperty: [
       { '@type': 'PropertyValue', name: 'Pitch', value: pitchLabel(pitch) },
       { '@type': 'PropertyValue', name: 'Gauge', value: gaugeLabel(gauge) },
-      { '@type': 'PropertyValue', name: 'Round file size', value: P.file },
+      { '@type': 'PropertyValue', name: 'Round file size', value: fileTxt },
       { '@type': 'PropertyValue', name: 'Oregon chain code', value: codes.oregon },
     ] }),
   faqLd(faqs),
@@ -42,13 +47,13 @@ const jsonld = [
     <div class="pagehead">
       <Crumbs crumbs={[{ name: 'Chain specs', path: '/chain/' }, { name: `${pitchShort(pitch)} · ${gaugeShort(gauge)}` }]} />
       <h1>{pitchLabel(pitch)} · {gaugeLabel(gauge)} chain</h1>
-      <p class="lede">The chain spec for {P.used_on.toLowerCase()}. Pitch {pitchLabel(pitch)}, gauge {gaugeLabel(gauge)}, round file {P.file} — sold as Oregon {codes.oregon}.</p>
+      <p class="lede">The chain spec for {P.used_on.toLowerCase()}. Pitch {pitchLabel(pitch)}, gauge {gaugeLabel(gauge)}, round file {fileTxt} — sold as Oregon {codes.oregon}.</p>
     </div>
     <section class="block" style="padding-top:10px">
       <div class="spec-strip" style="grid-template-columns:repeat(4,1fr)">
         <div class="spec-cell"><span>Pitch</span><b>{pitchShort(pitch)}{pitch === '3/8-lp' ? ' LP' : ''}</b></div>
         <div class="spec-cell"><span>Gauge</span><b>{gaugeShort(gauge)}</b></div>
-        <div class="spec-cell"><span>File size</span><b style="font-size:1rem">{P.file}</b></div>
+        <div class="spec-cell"><span>File size</span><b style="font-size:1rem">{fileTxt}</b></div>
         <div class="spec-cell"><span>Oregon</span><b style="font-size:1rem">{codes.oregon}</b></div>
       </div>
       <h2 style="margin-top:28px">Chain codes by brand</h2>
@@ -61,15 +66,21 @@ const jsonld = [
     <section class="block">
       <h2>Saws that use this chain</h2>
       <div class="tblwrap"><table>
-        <thead><tr><th scope="col">Saw</th><th scope="col">Bar</th><th scope="col">Drive links</th><th scope="col">Status</th></tr></thead>
+        <thead><tr><th scope="col">Saw</th><th scope="col">Bar → drive links</th><th scope="col">Status</th></tr></thead>
         <tbody>
-          {group.items.map(({ model, bar }) => (
-            <tr><td><a href={modelUrl(model)}>{model.data.name}</a></td><td class="num">{barLabel(bar)}</td><td class="num">{dlText(bar, model)}</td>
-              <td><span class={`tag ${bar.status !== 'ok' ? 'verify' : ''}`}>{statusLabel(bar.status)}</span></td></tr>
+          {byModel.map(({ model, bars }) => (
+            <tr><td><a href={modelUrl(model)}>{model.data.name}</a></td>
+              <td class="num">{bars.map((bar, i) => <>{i > 0 && ' · '}{barLabel(bar)} → {dlText(bar, model)}</>)}</td>
+              <td><span class={`tag ${bars.some((b) => b.status !== 'ok') ? 'verify' : ''}`}>{bars.every((b) => b.status === 'ok') ? statusLabel('ok') : bars.some((b) => b.status === 'conflict') ? statusLabel('conflict') : statusLabel('verify')}</span></td></tr>
           ))}
         </tbody></table></div>
-      <h3 style="margin-top:22px">Part numbers on file</h3>
-      <ul class="plain">{parts.map((c) => <li>{partText(c)} <span class="small muted">({c.role === 'oem' ? 'OEM' : 'equivalent'})</span></li>)}</ul>
+      <details class="faq" style="margin-top:18px"><summary>Part numbers on file ({parts.length})</summary>
+        <div class="a"><ul class="plain">{parts.map((c) => <li>{partText(c)} <span class="small muted">({c.role === 'oem' ? 'OEM' : 'equivalent'})</span></li>)}</ul></div>
+      </details>
+    </section>
+    <section class="block">
+      <h2>Browse these saws by brand</h2>
+      <ul class="chips">{brandsInGroup.map((b) => <li><a href={`/brands/${b}/`}>{brandName(b)} saws</a></li>)}</ul>
     </section>
     {sameGaugeOther.length > 0 && (
       <div class="callout"><b>⚠ Same pitch, different gauge</b>

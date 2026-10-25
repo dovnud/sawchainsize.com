@@ -1,0 +1,48 @@
+{
+  "brand": "echo",
+  "model": "CS-4010",
+  "name": "Echo CS-4010",
+  "aliases": [
+    "CS-4010"
+  ],
+  "type": "gas",
+  "displacement_cc": 41.6,
+  "popular": false,
+  "blurb": "A 41.6 cc saw: 18″ bars on 3/8″ low-profile chain, .050″ gauge, 62 drive links per Echo's own chart.",
+  "intro": "The Echo CS-4010 is a 41.6 cc saw. Echo lists an 18″ bar for the CS-4010 on 3/8″ low-profile .050″ chain — the same chain family as the smaller CS-310 and CS-352, just a longer loop. Every row below is restated from the bars-and-chains chart in Echo's chainsaw catalog, which gives the bar part number, chain part number, drive-link count, gauge, pitch and file size for each saw. Echo's catalog is written for dealers selling Echo loops, so the chain numbers are Echo part numbers; the pitch, gauge and drive-link count are what carry over to any other brand's chain. If your saw has had a replacement bar, check the stamp.",
+  "bars": [
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 62,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "91PX62CQ",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "echo-catalog-2023"
+      ],
+      "note": "Echo bar 18A0CD3762C; chain 91PX62CQ. Echo’s specification table lists 18″ as the bar length for this saw."
+    }
+  ],
+  "sources": [
+    {
+      "id": "echo-catalog-2023",
+      "type": "fitup-chart",
+      "publisher": "Echo",
+      "title": "ECHO chainsaws catalog (Jan 2023) — “Bars and Chains” chart: bar and chain part numbers, drive-link count, gauge, pitch and file size per saw; saw specification tables",
+      "url": "https://www.echo-usa.com/getmedia/f0410e25-c7f5-4247-a9cb-8045d8e57b63/ECHO_chainsaws.pdf",
+      "retrieved": "2026-10-24"
+    }
+  ],
+  "sources_note": "Echo chainsaw catalog (January 2023): “Bars and Chains” chart and the saw specification tables, read on 24 Oct 2026.",
+  "last_verified": "2026-10-24"
+}

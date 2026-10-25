@@ -6,8 +6,8 @@ export const SITE = {
   name: 'SawChainSize.com',
   tagline: 'Chainsaw Chain Size Lookup by Saw Model & Bar',
   email: 'contact@sawchainsize.com',
-  dataDate: '2026-10-23',
-  dataDateLabel: '23 October 2026',
+  dataDate: '2026-10-24',
+  dataDateLabel: '24 October 2026',
   defaultOg: '/og/default.png',
 };
 
@@ -74,7 +74,7 @@ export function gaugeText(b: Bar): string {
 }
 export function fileText(b: Bar): string {
   if (b.file_size) return fileLabel(b.file_size);
-  return 'By pitch: .325″ → 3/16″ · 3/8″ → 7/32″';
+  return 'Not stated in the source — see the chain box';
 }
 export const oemParts = (b: Bar) => b.chains.filter((c) => c.role === 'oem');
 export const equivParts = (b: Bar) => b.chains.filter((c) => c.role === 'equivalent');
@@ -115,8 +115,30 @@ export async function barGroups() {
   return [...map.values()].filter((g) => new Set(g.items.map((i) => i.model.id)).size >= 2).sort((a, b) => a.length - b.length);
 }
 
+const NO_CODES = { oregon: '—', stihl: '—', husqvarna: '—', carlton: '—' };
 export function codesFor(pitch: string, gauge: number) {
-  return spec.codes.find((c) => c.pitch === pitch && c.gauge === gauge);
+  return spec.codes.find((c) => c.pitch === pitch && c.gauge === gauge) ?? { pitch, gauge, ...NO_CODES };
+}
+
+/** File size(s) seen in the data for one chain-spec group, falling back to the pitch default. */
+export function groupFile(g: { pitch: string; items: { bar: Bar }[] }): string {
+  const fs = [...new Set(g.items.map((i) => i.bar.file_size).filter(Boolean))] as string[];
+  return fs.length ? fs.map((f) => fileLabel(f)).join(' / ') : (spec.pitches as any)[g.pitch].file;
+}
+
+/** Related models for a model page: same chain spec first, then same brand, then same bar length. Deterministic, capped. */
+export async function relatedModels(model: Model, limit = 6): Promise<Model[]> {
+  const all = await getModels();
+  const keys = new Set(model.data.bars.map(barChainKey).filter(Boolean));
+  const lens = new Set(model.data.bars.flatMap((b) => b.lengths_in));
+  const score = (m: Model) => {
+    const shared = m.data.bars.filter((b) => keys.has(barChainKey(b))).length > 0 ? 1 : 0;
+    const sameBrand = m.data.brand === model.data.brand ? 1 : 0;
+    const sharedLen = m.data.bars.some((b) => b.lengths_in.some((l) => lens.has(l))) ? 1 : 0;
+    return shared * 4 + sameBrand * 2 + sharedLen;
+  };
+  return all.filter((m) => m.id !== model.id).map((m) => ({ m, s: score(m) })).filter((x) => x.s >= 4 || (x.s >= 2 && x.m.data.brand === model.data.brand))
+    .sort((a, b) => b.s - a.s || (a.m.data.popular === b.m.data.popular ? 0 : a.m.data.popular ? -1 : 1) || a.m.data.name.localeCompare(b.m.data.name)).slice(0, limit).map((x) => x.m);
 }
 
 export type Faq = { q: string; a: string };
@@ -126,14 +148,23 @@ export function modelFaqs(m: Model): Faq[] {
   const faqs: Faq[] = [];
   const okBars = d.bars.filter((b) => b.status === 'ok');
   if (hasConflict(m)) {
-    faqs.push({ q: `What size chain does a ${d.name} take?`, a: `Published sources disagree for the ${d.name}: listings variously report .325 inch pitch / .063 inch gauge, 3/8 inch pitch / .050 inch gauge, and 62 drive links (16 inch bar) or 72 drive links (18 inch bar). The chain depends on the bar actually fitted to the saw, so read the stamp on your bar tail before ordering.` });
+    const spots = d.bars.filter((b) => b.status === 'conflict').map((b) => {
+      const rep = (b.reported ?? []).map((r) => [r.pitch && `${pitchShort(r.pitch)} pitch`, r.gauge && `${gaugeShort(r.gauge)} gauge`, r.drive_links && `${r.drive_links} drive links`].filter(Boolean).join(' / ')).filter(Boolean);
+      return `${barLabel(b)} bar: ${[...new Set(rep)].join(' vs ')}`;
+    });
+    const okLines = okBars.map((b) => `${barLabel(b)} bar: ${pitchLabel(b.pitch)} pitch, ${gaugeLabel(b.gauge)} gauge, ${b.drive_links} drive links`);
+    faqs.push({ q: `What size chain does a ${d.name} take?`, a: `Published sources disagree for part of the ${d.name} range. Reported variants — ${spots.join('; ')}.${okLines.length ? ` The setups where sources agree: ${okLines.join('; ')}.` : ''} The chain depends on the bar actually fitted to the saw, so read the stamp on your bar tail before ordering.` });
   } else {
     const lines = okBars.map((b) => `${barLabel(b)} bar: ${pitchLabel(b.pitch)} pitch, ${gaugeLabel(b.gauge)} gauge, ${b.drive_links} drive links${b.chains.find((c) => c.role === 'oem') ? ` (${partText(b.chains.find((c) => c.role === 'oem')!)})` : ''}`);
-    faqs.push({ q: `What size chain does a ${d.name} take?`, a: `${lines.join('; ')}. Other bar lengths are listed as "verify on your bar stamp" because we only print drive-link counts we can trace to a citable source. Always confirm pitch, gauge and drive links on your own bar stamp.` });
+    if (!okBars.length) {
+      const vb = d.bars.map((b) => `${barLabel(b)} bar: ${b.pitch ? `${pitchLabel(b.pitch)} pitch` : 'pitch not confirmed'}${b.gauge ? `, ${gaugeLabel(b.gauge)} gauge` : ''}, drive-link count not confirmed`);
+      faqs.push({ q: `What size chain does a ${d.name} take?`, a: `${vb.join('; ')}. We only print a drive-link count when a source states it, so count the links on your old chain or read the bar-tail stamp before ordering.` });
+    } else
+    faqs.push({ q: `What size chain does a ${d.name} take?`, a: `${lines.join('; ')}.${okBars.length < d.bars.length ? ' Other bar lengths are listed as "verify on your bar stamp" because we only print drive-link counts we can trace to a citable source.' : ''} Always confirm pitch, gauge and drive links on your own bar stamp.` });
   }
   faqs.push({ q: `How do I check the chain size on my ${d.name}?`, a: `Take the clutch cover off, lift the bar out and read the stamp on the bar tail: it shows bar length, pitch, gauge and usually the drive-link count. Match all three numbers; if your stamp disagrees with a chart, order to the stamp.` });
   const files = [...new Set(d.bars.map((b) => b.file_size).filter(Boolean))].map((f) => fileLabel(f as string));
-  if (files.length) faqs.push({ q: `What file size sharpens the ${d.name} chain?`, a: `${files.join(' or ')} round file, depending on the pitch of the chain fitted. File size follows pitch: 3/8 inch low-profile takes 5/32 inch, .325 inch takes 3/16 inch, and standard 3/8 inch takes 7/32 inch.` });
+  if (files.length) faqs.push({ q: `What file size sharpens the ${d.name} chain?`, a: `${files.join(' or ')} round file, depending on the pitch of the chain fitted. File size follows the cutter: 3/8 inch low-profile takes 5/32 inch (11/64 inch in the thin .043 inch gauge), .325 inch takes 3/16 inch, and standard 3/8 inch takes 7/32 inch.` });
   return faqs;
 }
 
@@ -143,7 +174,7 @@ export const HOME_FAQS: Faq[] = [
   { q: 'Oregon 72 vs 73 chain — what is the difference?', a: 'Same pitch (3/8″), different gauge: 72 is .050″ and 73 is .058″. This is the classic wrong buy in this category — the boxes look identical. A .058″ chain will not seat in a .050″ bar groove, and a .050″ chain in a .058″ groove runs sloppy and can derail. Check the gauge number on your bar stamp before you order. Full code table on the identification chart.' },
   { q: 'How many drive links do I need?', a: 'As many as the bar fitted to your saw was built for — the count is stamped on the bar tail on most bars, and it changes with bar length even on the same saw. A 20″ Husqvarna 455 Rancher bar takes 72 drive links; the same saw on a shorter .325″ setup can take anywhere from 56 to 78 depending on the exact bar. Never order by model name alone.' },
   { q: 'Can I run a different-gauge chain if the pitch matches?', a: 'No. Gauge is the thickness of the drive links, and it must match the width of the groove in your guide bar. A thicker chain will not seat; a thinner one wobbles in the groove, wears the bar rails unevenly and can jump off. Pitch, gauge and drive links all have to match.' },
-  { q: 'What file size do I need to sharpen my chain?', a: 'File size follows pitch: 3/8″ low-profile → 5/32″ (4.0 mm); .325″ → 3/16″ (4.8 mm); standard 3/8″ and .404″ → 7/32″ (5.2–5.5 mm). Every model page on this site lists the file size next to the chain spec, and the identification chart has the full table.' },
+  { q: 'What file size do I need to sharpen my chain?', a: 'File size follows pitch: 3/8″ low-profile → 5/32″ (4.0 mm), or 11/64″ (4.5 mm) for .043″ gauge; .325″ → 3/16″ (4.8 mm); standard 3/8″ and .404″ → 7/32″ (5.5 mm). Every model page on this site lists the file size next to the chain spec, and the identification chart has the full table.' },
 ];
 
 export const ldEscape = (o: unknown) => JSON.stringify(o).replace(/</g, '\\u003c');

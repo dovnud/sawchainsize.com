@@ -15,7 +15,7 @@ const path = brandUrl(brand.id);
 const keys = new Map<string, any>();
 models.forEach((m) => m.data.bars.forEach((x) => { const k = barChainKey(x); if (k) keys.set(k, x); }));
 const verified = models.reduce((n, m) => n + m.data.bars.filter((x) => x.status === 'ok').length, 0);
-const desc = `${b.name} chainsaw chain sizes: ${models.map((m) => m.data.name).join(', ')}. Pitch, gauge, drive links, file size and chain part numbers by fitted bar, with sources and verification dates.`;
+const desc = `${b.name} chainsaw chain sizes: ${models.slice(0, 5).map((m) => m.data.name).join(', ')}${models.length > 5 ? ` and ${models.length - 5} more` : ''}. Pitch, gauge, drive links, file size and chain part numbers by fitted bar, with sources and verification dates.`;
 const jsonld = [{ ...webPageLd(`${b.name} chainsaw chain sizes`, path, desc, SITE.dataDate, 'CollectionPage'),
   mainEntity: { '@type': 'ItemList', itemListElement: models.map((m, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE.url + modelUrl(m), name: m.data.name })) } }];
 ---

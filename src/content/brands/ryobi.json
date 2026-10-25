@@ -1,0 +1,9 @@
+{
+  "name": "Ryobi",
+  "label": "Ryobi",
+  "country": "Japan",
+  "site": "https://www.ryobitools.com",
+  "order": 7,
+  "summary": "Ryobi's RY3818 parts list identifies the factory chain by pitch and drive-link count (“18 in. chain, 3/8LP, 62DL”) but doesn't print the gauge, which we take from the chain makers' fitment data and mark as such on the page.",
+  "trademark": "Ryobi is a trademark of its respective owner. SawChainSize.com is not affiliated with or endorsed by Ryobi."
+}

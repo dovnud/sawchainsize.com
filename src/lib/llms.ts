@@ -50,7 +50,7 @@ export async function llmsFull() {
     }
     L.push('Sources: ' + d.sources.map((s) => `${s.publisher} (${s.type}, retrieved ${s.retrieved})`).join('; '), '');
   }
-  L.push('## File size by pitch', '', '- 3/8" low-profile: 5/32" (4.0 mm)', '- .325": 3/16" (4.8 mm)', '- 3/8": 7/32" (5.2 mm)', '- .404": 7/32" (5.5 mm)', '');
+  L.push('## File size by pitch', '', '- 3/8" low-profile: 5/32" (4.0 mm) at .050" gauge; 11/64" (4.5 mm) at .043" gauge', '- .325": 3/16" (4.8 mm)', '- 3/8": 7/32" (5.5 mm)', '- .404": 7/32" (5.5 mm)', '');
   L.push('## Oregon 72 vs 73', '', 'Both 3/8" pitch. Oregon 72 is .050" gauge; Oregon 73 is .058" gauge. Gauge must match the guide-bar groove.', '');
   return L.join('\n');
 }

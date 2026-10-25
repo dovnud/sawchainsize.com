@@ -1,0 +1,90 @@
+{
+  "brand": "stihl",
+  "model": "MS 362",
+  "name": "STIHL MS 362",
+  "aliases": [
+    "MS 362",
+    "MS 362 C-M"
+  ],
+  "type": "gas",
+  "popular": true,
+  "blurb": "18″, 20″ and 25″ bars on 3/8″ chain, .050″ gauge, 66–84 drive links, per STIHL's chain-selection chart.",
+  "intro": "The STIHL MS 362 appears in STIHL's saw-chain selection chart with 18″, 20″ and 25″ guide bars: 3/8″ pitch at .050″ gauge. STIHL's chart lists this saw in a block shared with larger saws that also show heavier .063″ chain options, so confirm the gauge on your stamp. Each row below restates the chart's drive-link count, chain marketing number and recommended bar part number. The STIHL chart we could read is dated 1 October 2017, so for any saw made after that, confirm against the bar stamp or STIHL's current chart before ordering.",
+  "bars": [
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 66,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "33 RS3 66",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "STIHL's chart lists chain 33 RS3 66 with recommended bar 3003 008 8917."
+    },
+    {
+      "lengths_in": [
+        20
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 72,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "33 RS3 72",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "STIHL's chart lists chain 33 RS3 72 with recommended bar 3003 008 8921."
+    },
+    {
+      "lengths_in": [
+        25
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 84,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "33 RS3 84",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "STIHL's chart lists chain 33 RS3 84 with recommended bar 3003 000 4030. This longer bar is an exchangeable-nose (RS) type."
+    }
+  ],
+  "sources": [
+    {
+      "id": "stihl-chain-chart-2017",
+      "type": "fitup-chart",
+      "publisher": "STIHL",
+      "title": "Saw Chain Selection and Identification (STIHL USA catalog page 173; specifications as of 1 October 2017) — recommended chain loop and guide bar per saw model",
+      "url": "https://assets.unilogcorp.com/187/ITEM/DOC/Stihl_102205325_Catalog.pdf",
+      "retrieved": "2026-10-24"
+    }
+  ],
+  "sources_note": "STIHL USA “Saw Chain Selection and Identification” chart (catalog page 173, specifications as of 1 October 2017), read on 24 Oct 2026.",
+  "last_verified": "2026-10-24"
+}

@@ -1,0 +1,190 @@
+{
+  "brand": "makita",
+  "model": "XCU03 / XCU04",
+  "name": "Makita XCU03 / XCU04",
+  "aliases": [
+    "XCU03",
+    "XCU04",
+    "XCU03Z",
+    "XCU04Z",
+    "Makita 36V chain saw"
+  ],
+  "type": "battery",
+  "popular": true,
+  "blurb": "36 V (2×18 V) cordless saws: 12″, 14″ or 16″ bars, 3/8″ low-profile chain, .043″ (90PX) or .050″ (91PX), 46 / 52 / 56 drive links.",
+  "intro": "Makita's XCU03 and XCU04 share one manual and one chain table. The XCU03 ships with a 14″ bar and the XCU04 with a 16″, and the manual approves 12″, 14″ and 16″ bars for both in two chain types: 90PX (.043″ gauge) and 91PX (.050″ gauge), both 3/8″ pitch, at 46, 52 and 56 drive links respectively. The gauge is the trap here: both loops look alike and are the same pitch, so check which groove your bar has — the bar part numbers differ between the two gauges.",
+  "bars": [
+    {
+      "lengths_in": [
+        12
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.043,
+      "drive_links": 46,
+      "file_size": "11/64",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Makita",
+          "part_no": "90PX-type chain, 46 DL",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "makita-xcu0304-manual",
+        "echo-catalog-2023"
+      ],
+      "label": "12″ (90PX, .043″)",
+      "note": "Makita's manual: saw chain type 90PX, 46 drive links, bar part 165245-8, .043″ gauge, 3/8″ pitch, sprocket-nose bar. Echo's chart classes the 90PX chain code as 3/8″ low-profile. Recommended file: 4.5 mm (11/64″; the manual prints it as 3/16″)."
+    },
+    {
+      "lengths_in": [
+        14
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.043,
+      "drive_links": 52,
+      "file_size": "11/64",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Makita",
+          "part_no": "90PX-type chain, 52 DL",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "makita-xcu0304-manual",
+        "echo-catalog-2023"
+      ],
+      "label": "14″ (90PX, .043″)",
+      "note": "Makita's manual: saw chain type 90PX, 52 drive links, bar part 165246-6, .043″ gauge, 3/8″ pitch, sprocket-nose bar. Echo's chart classes the 90PX chain code as 3/8″ low-profile. Recommended file: 4.5 mm (11/64″; the manual prints it as 3/16″)."
+    },
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.043,
+      "drive_links": 56,
+      "file_size": "11/64",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Makita",
+          "part_no": "90PX-type chain, 56 DL",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "makita-xcu0304-manual",
+        "echo-catalog-2023"
+      ],
+      "label": "16″ (90PX, .043″)",
+      "note": "Makita's manual: saw chain type 90PX, 56 drive links, bar part 165247-4, .043″ gauge, 3/8″ pitch, sprocket-nose bar. Echo's chart classes the 90PX chain code as 3/8″ low-profile. Recommended file: 4.5 mm (11/64″; the manual prints it as 3/16″)."
+    },
+    {
+      "lengths_in": [
+        12
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 46,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Makita",
+          "part_no": "91PX-type chain, 46 DL",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "makita-xcu0304-manual",
+        "echo-catalog-2023"
+      ],
+      "label": "12″ (91PX, .050″)",
+      "note": "Makita's manual: saw chain type 91PX, 46 drive links, bar part 165200-0, .050″ gauge, 3/8″ pitch, sprocket-nose bar. Echo's chart classes the 91PX chain code as 3/8″ low-profile. Recommended file: 4.0 mm (5/32″)."
+    },
+    {
+      "lengths_in": [
+        14
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 52,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Makita",
+          "part_no": "91PX-type chain, 52 DL",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "makita-xcu0304-manual",
+        "echo-catalog-2023"
+      ],
+      "label": "14″ (91PX, .050″)",
+      "note": "Makita's manual: saw chain type 91PX, 52 drive links, bar part 165201-8, .050″ gauge, 3/8″ pitch, sprocket-nose bar. Echo's chart classes the 91PX chain code as 3/8″ low-profile. Recommended file: 4.0 mm (5/32″)."
+    },
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 56,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Makita",
+          "part_no": "91PX-type chain, 56 DL",
+          "role": "oem"
+        },
+        {
+          "brand": "Oregon",
+          "part_no": "S56",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "makita-xcu0304-manual",
+        "oregon-s56",
+        "echo-catalog-2023"
+      ],
+      "label": "16″ (91PX, .050″)",
+      "note": "Makita's manual: saw chain type 91PX, 56 drive links, bar part 165202-6, .050″ gauge, 3/8″ pitch, sprocket-nose bar. Echo's chart classes the 91PX chain code as 3/8″ low-profile. Recommended file: 4.0 mm (5/32″)."
+    }
+  ],
+  "sources": [
+    {
+      "id": "makita-xcu0304-manual",
+      "type": "manual",
+      "publisher": "Makita",
+      "title": "Instruction manual XCU03 / XCU04 cordless chain saw: specifications and saw chain, guide bar and sprocket combination tables (90PX .043″, 91PX .050″; 12/14/16 in.)",
+      "url": "https://cdn.makitatools.com/apps/cms/doc/prod/Ins/9d830750-02cb-4aab-927a-4d48af39cd69_Instruction_manual_XCU03Z_XCU04Z.pdf",
+      "retrieved": "2026-10-24"
+    },
+    {
+      "id": "oregon-s56",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Product data and model fit guide for Oregon S56 AdvanceCut chain (3/8″ low profile, .050″ gauge, 56 drive links, 16″ bar)",
+      "url": "https://www.oregonproducts.com/en/advancecut%C3%A2%E2%80%9E%C2%A2-saw-chain,-16%22/p/s56",
+      "retrieved": "2026-10-24"
+    },
+    {
+      "id": "echo-catalog-2023",
+      "type": "fitup-chart",
+      "publisher": "Echo",
+      "title": "ECHO chainsaws catalog (Jan 2023) — “Bars and Chains” chart: bar and chain part numbers, drive-link count, gauge, pitch and file size per saw; saw specification tables",
+      "url": "https://www.echo-usa.com/getmedia/f0410e25-c7f5-4247-a9cb-8045d8e57b63/ECHO_chainsaws.pdf",
+      "retrieved": "2026-10-24"
+    }
+  ],
+  "sources_note": "Makita XCU03/XCU04 instruction manual (chain, guide bar and sprocket combination tables) (including its recommended file sizes) and Oregon's S56 fit guide, which lists the XCU03 and XCU04; checked 24 Oct 2026.",
+  "last_verified": "2026-10-24"
+}

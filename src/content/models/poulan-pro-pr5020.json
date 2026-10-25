@@ -1,0 +1,50 @@
+{
+  "brand": "poulan",
+  "model": "Poulan Pro PR5020",
+  "name": "Poulan Pro PR5020",
+  "aliases": [
+    "PR5020",
+    "PP5020",
+    "PP5020AV"
+  ],
+  "type": "gas",
+  "displacement_cc": 50.2,
+  "popular": false,
+  "blurb": "50.2 cc Poulan Pro: a single 20″ factory setup, 3/8″ pitch, .050″ gauge — the manual does not print a drive-link count, so we flag it.",
+  "intro": "The Poulan Pro PR5020 is a 50.2 cc saw whose operator's manual (May 2016) lists one approved cutting attachment: a 20″ bar (578133803) with chain 545196401, on 3/8″ pitch with .050″ (1.3 mm) drive-link thickness. The manual stops short of printing a drive-link count or file size, and we won't back one out of a part number — so this page gives you the sourced pitch, gauge and part numbers and tells you to read the count off your bar stamp.",
+  "bars": [
+    {
+      "lengths_in": [
+        20
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": null,
+      "file_size": null,
+      "status": "verify",
+      "chains": [
+        {
+          "brand": "Poulan",
+          "part_no": "545196401",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "poulan-pr5020-manual"
+      ],
+      "note": "Per the operator's manual: 20″ bar 578133803, chain 545196401, pitch 3/8″, drive-link thickness .050″. Drive-link count is not stated in the manual."
+    }
+  ],
+  "sources": [
+    {
+      "id": "poulan-pr5020-manual",
+      "type": "manual",
+      "publisher": "Poulan Pro",
+      "title": "Operator's manual PR5020 (967061501, May 2016): chain/bar specification and guide bar and saw chain combinations",
+      "url": "https://assets.unilogcorp.com/187/ITEM/DOC/Poulan_Pro_100061644_Instruction_Installation_Manual.pdf",
+      "retrieved": "2026-10-24"
+    }
+  ],
+  "sources_note": "Poulan Pro PR5020 operator's manual (967061501, May 2016): chain/bar specification table and bar-and-chain combination table, read 24 Oct 2026.",
+  "last_verified": "2026-10-24"
+}

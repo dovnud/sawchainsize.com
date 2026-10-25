@@ -1,0 +1,133 @@
+{
+  "brand": "echo",
+  "model": "CS-620P",
+  "name": "Echo CS-620P",
+  "aliases": [
+    "CS-620P",
+    "CS-620PW"
+  ],
+  "type": "gas",
+  "displacement_cc": 59.8,
+  "popular": false,
+  "blurb": "A 59.8 cc professional saw: 16″, 18″, 20″, 24″ and 27″ bars on 3/8″ chain, .050″ gauge, 60–93 drive links per Echo's own chart.",
+  "intro": "The Echo CS-620P is a 59.8 cc professional saw. Echo lists 16″ (accessory) through 27″ bars for the CS-620P on 3/8″ .050″ chain; the chart groups the CS-620P, CS-620PW and CS-680 on the same bar-and-chain rows. Note the 24″ bar takes 81 links here, while the CS-590's 24″ bar can take 84. Every row below is restated from the bars-and-chains chart in Echo's chainsaw catalog, which gives the bar part number, chain part number, drive-link count, gauge, pitch and file size for each saw. Echo's catalog is written for dealers selling Echo loops, so the chain numbers are Echo part numbers; the pitch, gauge and drive-link count are what carry over to any other brand's chain. If your saw has had a replacement bar, check the stamp.",
+  "bars": [
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 60,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "72LPX60CQ",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "echo-catalog-2023"
+      ],
+      "note": "Echo bar 16D0PS3860C; chain 72LPX60CQ. Echo’s specification table marks 16″ as an accessory-only bar length."
+    },
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 66,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "72LPX66CQ",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "echo-catalog-2023"
+      ],
+      "note": "Echo bar 18D0PS3866C; chain 72LPX66CQ. "
+    },
+    {
+      "lengths_in": [
+        20
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 70,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "72LPX70CQ",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "echo-catalog-2023"
+      ],
+      "note": "Echo bar 20D0PS3870C; chain 72LPX70CQ. "
+    },
+    {
+      "lengths_in": [
+        24
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 81,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "72LPX81CQ",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "echo-catalog-2023"
+      ],
+      "note": "Echo bar 24D0PS3881C; chain 72LPX81CQ. "
+    },
+    {
+      "lengths_in": [
+        27
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 93,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "72LPX93CQ",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "echo-catalog-2023"
+      ],
+      "note": "Echo bar 27D0PS3893C; chain 72LPX93CQ. "
+    }
+  ],
+  "sources": [
+    {
+      "id": "echo-catalog-2023",
+      "type": "fitup-chart",
+      "publisher": "Echo",
+      "title": "ECHO chainsaws catalog (Jan 2023) — “Bars and Chains” chart: bar and chain part numbers, drive-link count, gauge, pitch and file size per saw; saw specification tables",
+      "url": "https://www.echo-usa.com/getmedia/f0410e25-c7f5-4247-a9cb-8045d8e57b63/ECHO_chainsaws.pdf",
+      "retrieved": "2026-10-24"
+    }
+  ],
+  "sources_note": "Echo chainsaw catalog (January 2023): “Bars and Chains” chart and the saw specification tables, read on 24 Oct 2026.",
+  "last_verified": "2026-10-24"
+}

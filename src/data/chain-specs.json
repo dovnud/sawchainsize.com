@@ -1,24 +1,160 @@
 {
   "pitches": {
-    "3/8-lp": { "label": "3/8″ Low Profile", "short": "3/8″ LP", "chart_label": "3/8″ Low Profile (“Picco”)", "used_on": "Small homeowner & electric/battery saws, pole pruners", "gauges": ".043″ (1.1 mm) · .050″ (1.3 mm)", "file": "5/32″ (4.0 mm)", "slug": "3-8-lp" },
-    "325": { "label": ".325″", "short": ".325″", "chart_label": ".325″", "used_on": "Mid-size homeowner & ranch saws (40–60 cc)", "gauges": ".050″ (1.3 mm) · .058″ (1.5 mm) · .063″ (1.6 mm)", "file": "3/16″ (4.8 mm)", "slug": "325" },
-    "3/8": { "label": "3/8″", "short": "3/8″", "chart_label": "3/8″ (standard)", "used_on": "Large homeowner, ranch & professional saws (55 cc +)", "gauges": ".050″ (1.3 mm) · .058″ (1.5 mm) · .063″ (1.6 mm)", "file": "7/32″ (5.2 mm)", "slug": "3-8" },
-    "404": { "label": ".404″", "short": ".404″", "chart_label": ".404″", "used_on": "Large professional & harvester saws", "gauges": ".058″ (1.5 mm) · .063″ (1.6 mm)", "file": "7/32″ (5.5 mm)", "slug": "404" },
-    "1/4": { "label": "1/4″", "short": "1/4″", "chart_label": "1/4″", "used_on": "—", "gauges": "—", "file": "—", "slug": "1-4" }
+    "3/8-lp": {
+      "label": "3/8″ Low Profile",
+      "short": "3/8″ LP",
+      "chart_label": "3/8″ Low Profile (“Picco”)",
+      "used_on": "Small homeowner & electric/battery saws, pole pruners",
+      "gauges": ".043″ (1.1 mm) · .050″ (1.3 mm)",
+      "file": "5/32″ (4.0 mm) at .050″ · 11/64″ (4.5 mm) at .043″",
+      "slug": "3-8-lp"
+    },
+    "325": {
+      "label": ".325″",
+      "short": ".325″",
+      "chart_label": ".325″",
+      "used_on": "Mid-size homeowner & ranch saws (40–60 cc)",
+      "gauges": ".043″ (1.1 mm) · .050″ (1.3 mm) · .058″ (1.5 mm) · .063″ (1.6 mm)",
+      "file": "3/16″ (4.8 mm)",
+      "slug": "325"
+    },
+    "3/8": {
+      "label": "3/8″",
+      "short": "3/8″",
+      "chart_label": "3/8″ (standard)",
+      "used_on": "Large homeowner, ranch & professional saws (55 cc +)",
+      "gauges": ".050″ (1.3 mm) · .058″ (1.5 mm) · .063″ (1.6 mm)",
+      "file": "7/32″ (5.5 mm)",
+      "slug": "3-8"
+    },
+    "404": {
+      "label": ".404″",
+      "short": ".404″",
+      "chart_label": ".404″",
+      "used_on": "Large professional & harvester saws",
+      "gauges": ".058″ (1.5 mm) · .063″ (1.6 mm)",
+      "file": "7/32″ (5.5 mm)",
+      "slug": "404"
+    },
+    "1/4": {
+      "label": "1/4″",
+      "short": "1/4″",
+      "chart_label": "1/4″",
+      "used_on": "—",
+      "gauges": "—",
+      "file": "—",
+      "slug": "1-4"
+    }
   },
   "gauges": {
-    "0.043": { "label": ".043″ (1.1 mm)", "short": ".043″", "slug": "043" },
-    "0.05": { "label": ".050″ (1.3 mm)", "short": ".050″", "slug": "050" },
-    "0.058": { "label": ".058″ (1.5 mm)", "short": ".058″", "slug": "058" },
-    "0.063": { "label": ".063″ (1.6 mm)", "short": ".063″", "slug": "063" }
+    "0.043": {
+      "label": ".043″ (1.1 mm)",
+      "short": ".043″",
+      "slug": "043"
+    },
+    "0.05": {
+      "label": ".050″ (1.3 mm)",
+      "short": ".050″",
+      "slug": "050"
+    },
+    "0.058": {
+      "label": ".058″ (1.5 mm)",
+      "short": ".058″",
+      "slug": "058"
+    },
+    "0.063": {
+      "label": ".063″ (1.6 mm)",
+      "short": ".063″",
+      "slug": "063"
+    }
   },
-  "files": { "1/8": "1/8″", "5/32": "5/32″ (4.0 mm)", "3/16": "3/16″ (4.8 mm)", "7/32": "7/32″ (5.2 mm)" },
+  "files": {
+    "1/8": "1/8″",
+    "5/32": "5/32″ (4.0 mm)",
+    "11/64": "11/64″ (4.5 mm)",
+    "3/16": "3/16″ (4.8 mm)",
+    "7/32": "7/32″ (5.5 mm)"
+  },
   "codes": [
-    { "pitch": "3/8-lp", "gauge": 0.043, "oregon": "90PX", "stihl": "61 PMM3 (Picco Micro Mini 3)", "husqvarna": "H38", "carlton": "N4C" },
-    { "pitch": "3/8-lp", "gauge": 0.05, "oregon": "91PX / 91VXL", "stihl": "63 PM3", "husqvarna": "H37", "carlton": "—" },
-    { "pitch": "325", "gauge": 0.05, "oregon": "95TXL (SpeedCut) · 20BPX", "stihl": "—", "husqvarna": "H30 · X-CUT SP33G", "carlton": "—" },
-    { "pitch": "3/8", "gauge": 0.05, "oregon": "72 (72LPX / 72EXL)", "stihl": "—", "husqvarna": "H80", "carlton": "—" },
-    { "pitch": "3/8", "gauge": 0.058, "oregon": "73 (73LPX)", "stihl": "—", "husqvarna": "H81", "carlton": "—" },
-    { "pitch": "3/8", "gauge": 0.063, "oregon": "75 (75LPX)", "stihl": "—", "husqvarna": "—", "carlton": "—" }
+    {
+      "pitch": "3/8-lp",
+      "gauge": 0.043,
+      "oregon": "90PX",
+      "stihl": "61 PMM3 (Picco Micro Mini 3)",
+      "husqvarna": "H38",
+      "carlton": "N4C"
+    },
+    {
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "oregon": "91PX / 91VXL",
+      "stihl": "63 PM3",
+      "husqvarna": "H37 · S93G X-Cut",
+      "carlton": "—"
+    },
+    {
+      "pitch": "325",
+      "gauge": 0.043,
+      "oregon": "—",
+      "stihl": "—",
+      "husqvarna": "SP21G X-Cut",
+      "carlton": "—"
+    },
+    {
+      "pitch": "325",
+      "gauge": 0.05,
+      "oregon": "95TXL (SpeedCut) · 20BPX",
+      "stihl": "—",
+      "husqvarna": "H30 · SP33G X-Cut · C33 X-Cut",
+      "carlton": "—"
+    },
+    {
+      "pitch": "325",
+      "gauge": 0.058,
+      "oregon": "—",
+      "stihl": "—",
+      "husqvarna": "S35G X-Cut · C35 X-Cut",
+      "carlton": "—"
+    },
+    {
+      "pitch": "325",
+      "gauge": 0.063,
+      "oregon": "—",
+      "stihl": "26 RM3",
+      "husqvarna": "—",
+      "carlton": "—"
+    },
+    {
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "oregon": "72 (72LPX / 72EXL)",
+      "stihl": "33 RS3",
+      "husqvarna": "H80 · S83G X-Cut · C83 X-Cut",
+      "carlton": "—"
+    },
+    {
+      "pitch": "3/8",
+      "gauge": 0.058,
+      "oregon": "73 (73LPX)",
+      "stihl": "—",
+      "husqvarna": "H81 · C85 X-Cut",
+      "carlton": "—"
+    },
+    {
+      "pitch": "3/8",
+      "gauge": 0.063,
+      "oregon": "75 (75LPX)",
+      "stihl": "36 RS3",
+      "husqvarna": "H83",
+      "carlton": "—"
+    },
+    {
+      "pitch": "404",
+      "gauge": 0.063,
+      "oregon": "—",
+      "stihl": "—",
+      "husqvarna": "H64S · H57S",
+      "carlton": "—"
+    }
   ]
 }

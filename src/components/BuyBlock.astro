@@ -1,5 +1,5 @@
 ---
-import { type Model, barLabel, pitchText, gaugeText, partText, equivParts, oemParts } from '../lib/data';
+import { type Model, hasConflict, barLabel, pitchText, gaugeText, partText, equivParts, oemParts } from '../lib/data';
 const { model } = Astro.props as { model: Model };
 const okBars = model.data.bars.filter((b) => b.status === 'ok');
 ---
@@ -13,12 +13,12 @@ const okBars = model.data.bars.filter((b) => b.status === 'ok');
           {okBars.map((b) => {
             const eq = equivParts(b).filter((c) => c.brand === 'Oregon').map(partText).join(' / ') || '—';
             const oem = oemParts(b);
-            return <li><strong>{barLabel(b)} bar:</strong> {pitchText(b)}, {gaugeText(b)}, {b.drive_links} drive links — look for {eq}{oem.length ? ` or OEM ${oem.map(partText).join(' / ')}` : ''}.</li>;
+            return <li><strong>{barLabel(b)} bar:</strong> {pitchText(b)}, {gaugeText(b)}, {b.drive_links} drive links — look for {[eq !== '—' ? eq : null, oem.length ? `OEM ${oem.map(partText).join(' / ')}` : null].filter(Boolean).join(' or ') || 'a loop that matches all three numbers'}.</li>;
           })}
         </ul>
       </>
     ) : (
-      <p>Because published specs conflict for this saw, we do not point you at a specific loop for it. Read the three numbers off your bar stamp, then search any retailer below by pitch + gauge + drive links (for example “.325 .050 72”).</p>
+      <p>{hasConflict(model) ? 'Because published specs conflict for this saw' : 'Because no source we could read confirms a drive-link count for this saw'}, we do not point you at a specific loop for it. Read the three numbers off your bar stamp, then search any retailer below by pitch + gauge + drive links (for example “.325 .050 72”).</p>
     )}
     <ul style="margin-top:12px">
       <li><a href="https://www.oregonproducts.com" target="_blank" rel="noopener">Oregon Products</a> — the chain maker's own site: full spec data for every Oregon loop, sold through its dealers.</li>

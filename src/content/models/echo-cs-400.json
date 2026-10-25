@@ -8,8 +8,8 @@
   "type": "gas",
   "displacement_cc": 40.2,
   "popular": true,
-  "blurb": "40.2 cc homeowner saw on 3/8″ low-profile chain. Oregon's data: 16″ bar, .050″ gauge, 56 drive links, 5/32″ file.",
-  "intro": "The CS-400 is Echo's 40.2 cc homeowner saw, and like most saws in its class it runs 3/8″ low-profile chain — the smaller “Picco-class” profile, not the full-size 3/8″ of its bigger brother the CS-590. Oregon's product data for the chain it lists for this model gives the full spec for the 16″ setup, including the part most pages omit: the 5/32″ file size.",
+  "blurb": "40.2 cc homeowner saw on 3/8″ low-profile .050″ chain. 18″ bar: 62 drive links (Echo's catalog). 16″ bar: Oregon says 56 drive links, Echo's own chart says 57 — so we flag it.",
+  "intro": "The CS-400 is Echo's 40.2 cc homeowner saw, and like most saws in its class it runs 3/8″ low-profile chain — the smaller “Picco-class” profile, not the full-size 3/8″ of its bigger brother the CS-590. Echo's own catalog chart lists a 16″ and an 18″ bar for it, both on .050″ gauge with a 5/32″ file. The 18″ setup is 62 drive links. The 16″ setup is the one to check: Oregon's chain data fits the CS-400 with a 56-link loop, but Echo's chart lists 57 for the 16″ bar, so count before you buy.",
   "sources": [
     {
       "id": "oregon-91vxl056g",
@@ -17,9 +17,17 @@
       "publisher": "Oregon",
       "title": "Product data for 91VXL056G / 91PX056G (3/8″ Low Profile, .050″ gauge, 56 drive links, 5/32″ file; fitments include Echo CS-400; cross-references to Husqvarna H37-56 and Stihl 63 PM3 56)",
       "retrieved": "2026-10-23"
+    },
+    {
+      "id": "echo-catalog-2023",
+      "type": "fitup-chart",
+      "publisher": "Echo",
+      "title": "ECHO chainsaws catalog (Jan 2023) — “Bars and Chains” chart: CS-400 16″ bar 16A0CD3757C with chain 91PX57CQ (57 drive links); 18″ bar 18A0CD3762C with chain 91PX62CQ (62 drive links)",
+      "url": "https://www.echo-usa.com/getmedia/f0410e25-c7f5-4247-a9cb-8045d8e57b63/ECHO_chainsaws.pdf",
+      "retrieved": "2026-10-24"
     }
   ],
-  "sources_note": "Oregon product data for 91VXL056G / 91PX056G (3/8″ Low Profile, .050″ gauge, 56 drive links, 5/32″ file; fitments include Echo CS-400), including published cross-references to Husqvarna H37-56 and Stihl 63 PM3 56 — checked Oct 2026.",
+  "sources_note": "Oregon product data for 91VXL056G / 91PX056G (fitments include Echo CS-400) and Echo's 2023 catalog bars-and-chains chart, which disagree by one drive link on the 16″ bar — checked Oct 2026.",
   "bars": [
     {
       "lengths_in": [
@@ -27,13 +35,18 @@
       ],
       "pitch": "3/8-lp",
       "gauge": 0.05,
-      "drive_links": 56,
+      "drive_links": null,
       "file_size": "5/32",
-      "status": "ok",
+      "status": "conflict",
       "chains": [
         {
           "brand": "Echo",
           "part_no": "91PX56CQ family",
+          "role": "oem"
+        },
+        {
+          "brand": "Echo",
+          "part_no": "91PX57CQ",
           "role": "oem"
         },
         {
@@ -58,9 +71,24 @@
         }
       ],
       "source_ids": [
-        "oregon-91vxl056g"
+        "oregon-91vxl056g",
+        "echo-catalog-2023"
       ],
-      "note": "Per Oregon's product data: 91-series chain, 3/8″ LP, .050″, 56 DL, fits Echo CS-400 (and CS-310/352/370), file 5/32″. Cross-references include Husqvarna H37-56 and Stihl 63 PM3 56."
+      "note": "Pitch and gauge agree, but the drive-link count does not: Oregon's chain data fits the CS-400 with its 56-link loop (91PX056), while Echo's own 2023 catalog lists the CS-400's 16″ bar (16A0CD3757C) with the 57-link chain 91PX57CQ. Count the drive links on your bar stamp or old chain before ordering.",
+      "reported": [
+        {
+          "source_id": "oregon-91vxl056g",
+          "pitch": "3/8-lp",
+          "gauge": 0.05,
+          "drive_links": 56
+        },
+        {
+          "source_id": "echo-catalog-2023",
+          "pitch": "3/8-lp",
+          "gauge": 0.05,
+          "drive_links": 57
+        }
+      ]
     },
     {
       "lengths_in": [
@@ -68,26 +96,27 @@
       ],
       "pitch": "3/8-lp",
       "gauge": 0.05,
-      "drive_links": null,
+      "drive_links": 62,
       "file_size": "5/32",
-      "status": "verify",
+      "status": "ok",
       "chains": [
         {
           "brand": "Echo",
-          "part_no": "91-series family",
+          "part_no": "91PX62CQ",
           "role": "oem"
         },
         {
           "brand": "Oregon",
-          "part_no": "91PX / 91VXL family",
+          "part_no": "S62",
           "role": "equivalent"
         }
       ],
       "source_ids": [
+        "echo-catalog-2023",
         "oregon-91vxl056g"
       ],
-      "note": "CS-400s are also sold with 18″ bars in North America. We list the count only where a chain-maker listing states it for this model — check your stamp, or count the links on the old loop."
+      "note": "Echo's 2023 catalog lists an 18″ bar (18A0CD3762C) with chain 91PX62CQ: 3/8″ low-profile, .050″ gauge, 62 drive links, 5/32″ file. Oregon's S62 is the same 62-link spec."
     }
   ],
-  "last_verified": "2026-10-23"
+  "last_verified": "2026-10-24"
 }

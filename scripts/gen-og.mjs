@@ -17,7 +17,7 @@ const items = [
 const html = (i) => `<body style="margin:0;width:1200px;height:630px;background:#f6f3ec;font-family:Barlow,Arial,sans-serif;position:relative;overflow:hidden">
 <div style="position:absolute;left:0;top:0;bottom:0;width:28px;background:#cf4a08"></div>
 <div style="position:absolute;left:84px;top:70px;font:600 28px monospace;letter-spacing:4px;color:#cf4a08">${i.kicker}</div>
-<div style="position:absolute;left:84px;top:150px;right:80px;font:700 108px/1.02 'Barlow Condensed','Arial Narrow',Arial,sans-serif;color:#232a30;text-transform:uppercase">${i.title}</div>
+<div style="position:absolute;left:84px;top:150px;right:80px;font:700 ${i.title.length > 30 ? 84 : 108}px/1.02 'Barlow Condensed','Arial Narrow',Arial,sans-serif;color:#232a30;text-transform:uppercase">${i.title}</div>
 <div style="position:absolute;left:84px;bottom:150px;font:500 38px sans-serif;color:#5b636c">${i.sub}</div>
 <div style="position:absolute;left:0;right:0;bottom:0;height:90px;background:#232a30;color:#f2efe7;font:600 32px monospace;line-height:90px;padding-left:84px;letter-spacing:2px">SAWCHAINSIZE.COM</div></body>`;
 const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: 1200, height: 630 } });

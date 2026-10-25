@@ -1,10 +1,10 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
-import { chainGroups, chainUrl, SPEC, codesFor, pitchLabel, gaugeLabel, SITE } from '../../lib/data';
+import { chainGroups, chainUrl, SPEC, codesFor, groupFile, pitchLabel, gaugeLabel, SITE } from '../../lib/data';
 import { webPageLd } from '../../lib/ld';
 const groups = await chainGroups();
-const desc = 'Chainsaw chain specs by pitch and gauge: 3/8″ low profile, .325″ and 3/8″ chain in .043″, .050″ and .058″ gauges — chain codes (Oregon, Stihl, Husqvarna, Carlton), file sizes and the saws that use each.';
+const desc = 'Chainsaw chain specs by pitch and gauge: 3/8″ low profile, .325″ and 3/8″ chain in .043″ to .063″ gauges — chain codes (Oregon, Stihl, Husqvarna, Carlton), file sizes and the saws that use each.';
 ---
 <Base title="Chainsaw Chain Specs by Pitch & Gauge" description={desc} path="/chain/" nav="chart" crumbs={[{ name: 'Chain specs', path: '/chain/' }]} jsonld={[webPageLd('Chainsaw chain specs by pitch and gauge', '/chain/', desc, SITE.dataDate, 'CollectionPage')]} modified={SITE.dataDate}>
   <div class="wrap">
@@ -17,11 +17,11 @@ const desc = 'Chainsaw chain specs by pitch and gauge: 3/8″ low profile, .325�
       <caption class="sr-only">Chain specs we cover, with Oregon, Stihl, Husqvarna codes and file size</caption>
       <thead><tr><th scope="col">Spec</th><th scope="col">Oregon</th><th scope="col">Stihl</th><th scope="col">Husqvarna</th><th scope="col">File</th><th scope="col">Saws</th></tr></thead>
       <tbody>
-        {groups.map((g) => { const c = codesFor(g.pitch, g.gauge)!; return (
+        {groups.map((g) => { const c = codesFor(g.pitch, g.gauge); return (
           <tr>
             <td class="num"><a href={chainUrl(g.key)}>{pitchLabel(g.pitch)} · {gaugeLabel(g.gauge)}</a></td>
             <td class="num">{c.oregon}</td><td class="num">{c.stihl}</td><td class="num">{c.husqvarna}</td>
-            <td class="num">{(SPEC.pitches as any)[g.pitch].file}</td><td class="num">{new Set(g.items.map((i) => i.model.id)).size}</td>
+            <td class="num">{groupFile(g)}</td><td class="num">{new Set(g.items.map((i) => i.model.id)).size}</td>
           </tr>); })}
       </tbody></table></div>
     <p class="src">Full cross-reference, including specs without a verified saw yet, on the <a href="/guides/chain-size-chart/">chain identification chart</a>.</p>

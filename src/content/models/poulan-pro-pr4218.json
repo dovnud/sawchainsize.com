@@ -1,0 +1,65 @@
+{
+  "brand": "poulan",
+  "model": "Poulan Pro PR4218 / PP4218",
+  "name": "Poulan Pro PR4218 / PP4218",
+  "aliases": [
+    "PR4218",
+    "PP4218",
+    "PP4218AVX",
+    "PPR4218A",
+    "Poulan Pro 4218"
+  ],
+  "type": "gas",
+  "popular": true,
+  "blurb": "Poulan Pro 18″ saw: 3/8″ low-profile chain, .050″ gauge, 62 drive links — Oregon lists the PR4218 family against its 62-link chain, and Poulan’s parts list shows an 18″ bar and chain.",
+  "intro": "The Poulan Pro PR4218 and PP4218 are budget 18″ homeowner saws that turn up everywhere secondhand. Poulan's own parts list for the PP4218 shows an 18″ bar (952044926) and 18″ chain (952051548) as the factory cutting attachment, and Oregon's fit guide for its 18″ S62 chain — 3/8″ low profile, .050″ gauge, 62 drive links — names the PR4218, PPR4218A and PP4218AVX. Oregon also lists the PR4218 against its 16″ S56 chain, so 16″ bars exist in the wild; we only publish the 18″ setup that both sources support.",
+  "bars": [
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 62,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Poulan",
+          "part_no": "952051548",
+          "role": "oem"
+        },
+        {
+          "brand": "Oregon",
+          "part_no": "S62",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-s62",
+        "poulan-pp4218-parts"
+      ],
+      "note": "Poulan’s parts list gives the 18″ chain and bar part numbers; Oregon’s S62 page supplies the pitch, gauge and drive-link count and names the PR4218 family as fitments."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-s62",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Product data and model fit guide for Oregon S62 AdvanceCut chain (3/8″ low profile, .050″ gauge, 62 drive links, 18″ bar)",
+      "url": "https://www.oregonproducts.com/en/oregon-s62-advancecut-chainsaw-chain-for-18-inch-bar--62-drive-links-%E2%80%93-fits-husqvarna%2C-echo%2C-poulan%2C-craftsman%2C-echo-and-more/p/s62",
+      "retrieved": "2026-10-24"
+    },
+    {
+      "id": "poulan-pp4218-parts",
+      "type": "dealer",
+      "publisher": "Barrett Small Engine",
+      "title": "Poulan Pro PP4218 chainsaw parts list (type 1 and 2): item 43 18″ chain 952051548, item 44 18″ bar 952044926",
+      "url": "https://www.barrettsmallengine.com/p/poulan-pro-pp4218-chainsaw-parts-lookup.html",
+      "retrieved": "2026-10-24"
+    }
+  ],
+  "sources_note": "Oregon S62 fit guide (PR4218, PPR4218A, PP4218AVX) and the Poulan Pro PP4218 parts list (18″ chain and bar part numbers), checked 24 Oct 2026.",
+  "last_verified": "2026-10-24"
+}

@@ -1,0 +1,47 @@
+{
+  "brand": "craftsman",
+  "model": "S165",
+  "name": "Craftsman S165",
+  "aliases": [
+    "S165"
+  ],
+  "type": "gas",
+  "popular": false,
+  "blurb": "16″ homeowner saw: 3/8″ low-profile chain, .050″ gauge, 56 drive links, per Oregon’s model fit guide.",
+  "intro": "The Craftsman S165 is a gas homeowner saw, and Oregon's model fit guide names it against the 16″ S56 chain: 3/8″ low profile, .050″ gauge, 56 drive links. Craftsman never published its own per-bar chain table for this saw in a source we could read, so this page rests on the chain-maker's fitment data alone — it's accurate for a saw still wearing its original bar, but old Craftsman saws change hands a lot, so check the stamp.",
+  "bars": [
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 56,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "S56",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-s56"
+      ],
+      "note": "Oregon lists the Craftsman S165 in the model fit guide for its S56 chain. Single chain-maker source — confirm on the bar stamp."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-s56",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Product data and model fit guide for Oregon S56 AdvanceCut chain (3/8″ low profile, .050″ gauge, 56 drive links, 16″ bar)",
+      "url": "https://www.oregonproducts.com/en/advancecut%C3%A2%E2%80%9E%C2%A2-saw-chain,-16%22/p/s56",
+      "retrieved": "2026-10-24"
+    }
+  ],
+  "sources_note": "Oregon S56 chain product data and model fit guide (lists Craftsman S165), checked 24 Oct 2026.",
+  "last_verified": "2026-10-24"
+}

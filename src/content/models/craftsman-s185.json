@@ -1,0 +1,47 @@
+{
+  "brand": "craftsman",
+  "model": "S185",
+  "name": "Craftsman S185",
+  "aliases": [
+    "S185"
+  ],
+  "type": "gas",
+  "popular": false,
+  "blurb": "18″ homeowner saw: 3/8″ low-profile chain, .050″ gauge, 62 drive links, per Oregon’s model fit guide.",
+  "intro": "The Craftsman S185 is a gas homeowner saw, and Oregon's model fit guide names it against the 18″ S62 chain: 3/8″ low profile, .050″ gauge, 62 drive links. Craftsman never published its own per-bar chain table for this saw in a source we could read, so this page rests on the chain-maker's fitment data alone — it's accurate for a saw still wearing its original bar, but old Craftsman saws change hands a lot, so check the stamp.",
+  "bars": [
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 62,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "S62",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-s62"
+      ],
+      "note": "Oregon lists the Craftsman S185 in the model fit guide for its S62 chain. Single chain-maker source — confirm on the bar stamp."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-s62",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Product data and model fit guide for Oregon S62 AdvanceCut chain (3/8″ low profile, .050″ gauge, 62 drive links, 18″ bar)",
+      "url": "https://www.oregonproducts.com/en/oregon-s62-advancecut-chainsaw-chain-for-18-inch-bar--62-drive-links-%E2%80%93-fits-husqvarna%2C-echo%2C-poulan%2C-craftsman%2C-echo-and-more/p/s62",
+      "retrieved": "2026-10-24"
+    }
+  ],
+  "sources_note": "Oregon S62 chain product data and model fit guide (lists Craftsman S185), checked 24 Oct 2026.",
+  "last_verified": "2026-10-24"
+}

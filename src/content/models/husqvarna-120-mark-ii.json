@@ -1,0 +1,70 @@
+{
+  "brand": "husqvarna",
+  "model": "120 MARK II",
+  "name": "Husqvarna 120 Mark II",
+  "aliases": [
+    "120 Mark II",
+    "120 II",
+    "Husqvarna 120"
+  ],
+  "type": "gas",
+  "popular": true,
+  "blurb": "14″ and 16″ bar setups on 3/8″ low-profile chain, .050″ gauge, 52–56 drive links — straight from Husqvarna's 2026 fit-up guide.",
+  "intro": "The Husqvarna 120 Mark II is a rear-handle gas saw. Husqvarna's own 2026 Bar & Chain Fit-up Guide (effective 1 January 2026) lists 2 approved bar lengths for it (14″ and 16″), running 3/8″ low-profile pitch chain in .050″ gauge. The table below restates each row from that guide: the drive-link count changes with bar length, and the guide also names the matching Husqvarna bar and chain part numbers. If your saw wears a replacement bar, trust the stamp over the chart.",
+  "bars": [
+    {
+      "lengths_in": [
+        14
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 52,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "S93G X-Cut 585422152",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2026"
+      ],
+      "note": "Husqvarna's 2026 fit-up guide pairs this 14″ setup with bar Laminate 596009752 and chain S93G X-Cut 585422152."
+    },
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 56,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "S93G X-Cut 585422156",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2026"
+      ],
+      "note": "Husqvarna's 2026 fit-up guide pairs this 16″ setup with bar Laminate 596009756 and chain S93G X-Cut 585422156."
+    }
+  ],
+  "sources": [
+    {
+      "id": "husqvarna-fitup-2026",
+      "type": "fitup-chart",
+      "publisher": "Husqvarna",
+      "title": "Bar & Chain Fit-up Guide 2026 (effective 1 January 2026) — certified/approved bar and chain combinations per saw",
+      "url": "https://media.husqvarnagroup.com/original/DI-328359.pdf",
+      "retrieved": "2026-10-24"
+    }
+  ],
+  "sources_note": "Husqvarna 2026 Bar & Chain Fit-up Guide (effective 1 January 2026), read in full on 24 Oct 2026; every row in the table is restated from the saw's entry in that guide.",
+  "last_verified": "2026-10-24"
+}

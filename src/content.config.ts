@@ -35,14 +35,14 @@ const reported = z.object({
 });
 
 const bar = z.object({
-  lengths_in: z.array(z.number().int().min(8).max(42)).min(1),
+  lengths_in: z.array(z.number().int().min(8).max(72)).min(1),
   label: z.string().optional(),
   pitch: pitch.nullable(),
   gauge: gauge.nullable(),
-  drive_links: z.number().int().min(20).max(140).nullable(),
+  drive_links: z.number().int().min(20).max(200).nullable(),
   drive_links_range: z.tuple([z.number().int(), z.number().int()]).optional(),
   gauge_note: z.string().optional(),
-  file_size: z.enum(['1/8', '5/32', '3/16', '7/32']).nullable(),
+  file_size: z.enum(['1/8', '5/32', '11/64', '3/16', '7/32']).nullable(),
   status: z.enum(STATUSES),
   chains: z.array(chainPart),
   reported: z.array(reported).optional(),
@@ -76,8 +76,8 @@ const models = defineCollection({
           if (!byId.has(id)) ctx.addIssue({ code: 'custom', path: at, message: `unknown source id ${id}` });
         }
         if (b.status === 'ok') {
-          if (!b.pitch || !b.gauge || !b.drive_links || !b.file_size)
-            ctx.addIssue({ code: 'custom', path: at, message: 'status "ok" requires pitch, gauge, drive_links and file_size' });
+          if (!b.pitch || !b.gauge || !b.drive_links)
+            ctx.addIssue({ code: 'custom', path: at, message: 'status "ok" requires pitch, gauge and drive_links' });
           if (!b.source_ids.some((id) => (AUTHORITATIVE as readonly string[]).includes(byId.get(id)?.type ?? '')))
             ctx.addIssue({ code: 'custom', path: at, message: 'status "ok" requires a manual / fit-up chart / chain-maker / dealer source' });
         }

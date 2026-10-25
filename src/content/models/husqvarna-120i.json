@@ -1,0 +1,47 @@
+{
+  "brand": "husqvarna",
+  "model": "120i",
+  "name": "Husqvarna 120i",
+  "aliases": [
+    "120i"
+  ],
+  "type": "battery",
+  "popular": false,
+  "blurb": "14″ bar setups on 3/8″ low-profile chain, .043″ gauge, 52 drive links — straight from Husqvarna's 2026 fit-up guide.",
+  "intro": "The Husqvarna 120i is a rear-handle battery saw. Husqvarna's own 2026 Bar & Chain Fit-up Guide (effective 1 January 2026) lists 1 approved bar length for it (14″), running 3/8″ low-profile pitch chain in .043″ gauge. The table below restates each row from that guide: the drive-link count changes with bar length, and the guide also names the matching Husqvarna bar and chain part numbers. If your saw wears a replacement bar, trust the stamp over the chart.",
+  "bars": [
+    {
+      "lengths_in": [
+        14
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.043,
+      "drive_links": 52,
+      "file_size": "11/64",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "H38 591105052",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2026"
+      ],
+      "note": "Husqvarna's 2026 fit-up guide pairs this 14″ setup with bar Laminate 595970752 and chain H38 591105052."
+    }
+  ],
+  "sources": [
+    {
+      "id": "husqvarna-fitup-2026",
+      "type": "fitup-chart",
+      "publisher": "Husqvarna",
+      "title": "Bar & Chain Fit-up Guide 2026 (effective 1 January 2026) — certified/approved bar and chain combinations per saw",
+      "url": "https://media.husqvarnagroup.com/original/DI-328359.pdf",
+      "retrieved": "2026-10-24"
+    }
+  ],
+  "sources_note": "Husqvarna 2026 Bar & Chain Fit-up Guide (effective 1 January 2026), read in full on 24 Oct 2026; every row in the table is restated from the saw's entry in that guide.",
+  "last_verified": "2026-10-24"
+}

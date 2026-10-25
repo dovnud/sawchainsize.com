@@ -1,0 +1,111 @@
+{
+  "brand": "husqvarna",
+  "model": "460 Rancher",
+  "name": "Husqvarna 460 Rancher",
+  "aliases": [
+    "460",
+    "460 Rancher"
+  ],
+  "type": "gas",
+  "popular": true,
+  "blurb": "18″, 20″ and 24″ bar setups on 3/8″ chain, .050″ / .058″ gauge, 68–84 drive links — straight from Husqvarna's 2026 fit-up guide.",
+  "intro": "The Husqvarna 460 Rancher is a rear-handle gas saw. Husqvarna's own 2026 Bar & Chain Fit-up Guide (effective 1 January 2026) lists 3 approved bar lengths for it (18″, 20″ and 24″), running 3/8″ pitch chain in .050″ / .058″ gauge. The table below restates each row from that guide: the drive-link count changes with bar length, and the guide also names the matching Husqvarna bar and chain part numbers. This saw is listed in more than one gauge (.050″ / .058″), which is where wrong-chain orders come from: the gauge has to match the groove in your bar, so read it off the bar stamp. If your saw wears a replacement bar, trust the stamp over the chart.",
+  "bars": [
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 68,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "S83G X-Cut 585639068",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2026"
+      ],
+      "note": "Husqvarna's 2026 fit-up guide pairs this 18″ setup with bar Rancher 599999868 and chain S83G X-Cut 585639068."
+    },
+    {
+      "lengths_in": [
+        20
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 72,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "S83G X-Cut 585639072",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2026"
+      ],
+      "note": "Husqvarna's 2026 fit-up guide pairs this 20″ setup with bar Rancher 599999872 and chain S83G X-Cut 585639072."
+    },
+    {
+      "lengths_in": [
+        20
+      ],
+      "pitch": "3/8",
+      "gauge": 0.058,
+      "drive_links": 72,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "H81 591153972",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2026"
+      ],
+      "note": "Husqvarna's 2026 fit-up guide pairs this 20″ setup with bar Rancher 599999972 and chain H81 591153972."
+    },
+    {
+      "lengths_in": [
+        24
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 84,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "S83G X-Cut 585639084",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2026"
+      ],
+      "note": "Husqvarna's 2026 fit-up guide pairs this 24″ setup with bar Rancher 599807084 and chain S83G X-Cut 585639084."
+    }
+  ],
+  "sources": [
+    {
+      "id": "husqvarna-fitup-2026",
+      "type": "fitup-chart",
+      "publisher": "Husqvarna",
+      "title": "Bar & Chain Fit-up Guide 2026 (effective 1 January 2026) — certified/approved bar and chain combinations per saw",
+      "url": "https://media.husqvarnagroup.com/original/DI-328359.pdf",
+      "retrieved": "2026-10-24"
+    }
+  ],
+  "sources_note": "Husqvarna 2026 Bar & Chain Fit-up Guide (effective 1 January 2026), read in full on 24 Oct 2026; every row in the table is restated from the saw's entry in that guide.",
+  "last_verified": "2026-10-24"
+}

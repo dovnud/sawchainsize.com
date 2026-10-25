@@ -1,0 +1,63 @@
+{
+  "brand": "ryobi",
+  "model": "RY3818",
+  "name": "Ryobi RY3818",
+  "aliases": [
+    "RY3818",
+    "Ryobi 38cc 18 in"
+  ],
+  "type": "gas",
+  "displacement_cc": 38,
+  "popular": false,
+  "blurb": "38 cc, 18″ Ryobi: 3/8″ low-profile chain, .050″ gauge, 62 drive links — Ryobi’s own parts list says “18 in. chain (3/8LP, 62DL)”.",
+  "intro": "Ryobi's parts list for the RY3818 (18 in., 38 cc) identifies the factory loop as an 18″ chain, 3/8″ low profile, 62 drive links (part 901361003) on guide bar assembly 312655001. The gauge is not printed in that list; Oregon's fit guide for its 18″ S62 chain (3/8″ low profile, .050″ gauge, 62 drive links) names the RY3818, which supplies it. The two sources agree on everything they both state.",
+  "bars": [
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 62,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Ryobi",
+          "part_no": "901361003",
+          "role": "oem"
+        },
+        {
+          "brand": "Oregon",
+          "part_no": "S62",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "ryobi-ry3818-parts",
+        "oregon-s62"
+      ],
+      "note": "Ryobi parts list: 18 in. chain (3/8LP, 62DL), 901361003; bar assembly 312655001. Gauge and the Oregon equivalent come from Oregon’s S62 fit guide."
+    }
+  ],
+  "sources": [
+    {
+      "id": "ryobi-ry3818-parts",
+      "type": "manual",
+      "publisher": "Ryobi",
+      "title": "RY3818 parts list (part 090382001): item 75 “18 in. Chain (3/8LP, 62DL)” 901361003; item 76 “18 in. Guide Bar Assembly” 312655001",
+      "url": "https://556aa8d9de68ea9c4f29-0a8acad11a4df5016d26cc39a7429843.ssl.cf1.rackcdn.com/2/RY3818_090382001_353_r_08.pdf",
+      "retrieved": "2026-10-24"
+    },
+    {
+      "id": "oregon-s62",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Product data and model fit guide for Oregon S62 AdvanceCut chain (3/8″ low profile, .050″ gauge, 62 drive links, 18″ bar)",
+      "url": "https://www.oregonproducts.com/en/oregon-s62-advancecut-chainsaw-chain-for-18-inch-bar--62-drive-links-%E2%80%93-fits-husqvarna%2C-echo%2C-poulan%2C-craftsman%2C-echo-and-more/p/s62",
+      "retrieved": "2026-10-24"
+    }
+  ],
+  "sources_note": "Ryobi RY3818 parts list (18 in. chain, 3/8LP, 62DL) and Oregon S62 fit guide (names the RY3818), checked 24 Oct 2026.",
+  "last_verified": "2026-10-24"
+}

@@ -4,7 +4,7 @@ import Crumbs from '../../components/Crumbs.astro';
 import SpecTable from '../../components/SpecTable.astro';
 import BuyBlock from '../../components/BuyBlock.astro';
 import FaqList from '../../components/FaqList.astro';
-import { getModels, getBrands, modelUrl, brandUrl, barUrl, chainUrl, barChainKey, barGroups, hasConflict, modelFaqs, pitchShort, gaugeShort, SOURCE_TYPE_LABEL, SITE } from '../../lib/data';
+import { getModels, getBrands, modelUrl, brandUrl, barUrl, chainUrl, barChainKey, barGroups, hasConflict, relatedModels, modelFaqs, pitchShort, gaugeShort, SOURCE_TYPE_LABEL, SITE } from '../../lib/data';
 import { faqLd, modelLd } from '../../lib/ld';
 
 export async function getStaticPaths() {
@@ -23,6 +23,7 @@ const chainKeys = [...new Map(d.bars.map((b) => [barChainKey(b), b]).filter(([k]
 const barPages = new Set((await barGroups()).map((g) => g.length));
 const lengths = [...new Set(d.bars.flatMap((b) => b.lengths_in))].sort((a, b) => a - b);
 const desc = `${d.name} chain size: ${conflict ? 'published specs conflict — each reported variant side by side, plus the bar-stamp check' : 'pitch, gauge, drive links and file size by fitted bar'}. ${okCount ? `${okCount} verified bar ${okCount > 1 ? 'setups' : 'setup'}. ` : ''}Last verified ${SITE.dataDateLabel}.`;
+const related = await relatedModels(model);
 const jsonld = [modelLd(model, path), faqLd(faqs)];
 const ogName = `/og/${model.id}.png`;
 ---
@@ -91,6 +92,12 @@ const ogName = `/og/${model.id}.png`;
         <li><a href="/saws/">← All models</a></li>
         <li><a href="/">Chain Finder</a></li>
       </ul>
+      {related.length > 0 && (
+        <>
+          <h3 style="margin-top:20px">Related saws</h3>
+          <ul class="chips">{related.map((m) => <li><a href={modelUrl(m)}>{m.data.name}</a></li>)}</ul>
+        </>
+      )}
     </section>
   </div>
 </Base>
