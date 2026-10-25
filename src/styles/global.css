@@ -570,3 +570,5 @@ footer.site a{transition:color .15s}
 @media print{header.site,#cookieNote,.ticker,#scrollProgress{display:none}}
 .card h2{font-size:1.35rem;line-height:1.15;margin:0 0 8px}
 .prose h2{font-size:clamp(1.35rem,2vw,1.6rem);text-transform:uppercase;letter-spacing:.03em}
+footer.site .disclaimer a,footer.site .disclaimer a:visited{color:#ffb98a;text-decoration:underline;text-underline-offset:2px}
+footer.site .disclaimer a:hover{color:#fff}
