@@ -4,32 +4,33 @@ import Crumbs from '../components/Crumbs.astro';
 import Email from '../components/Email.astro';
 import { SITE } from '../lib/data';
 import { webPageLd } from '../lib/ld';
+import { AMAZON_DISCLOSURE } from '../config/affiliate';
 
-const desc = "SawChainSize.com has no active affiliate relationships: retailer links are untagged and earn no commission. Any future affiliate programs will be disclosed clearly.";
+const desc = "SawChainSize.com participates in the Amazon Associates Program: links to Amazon are affiliate links, and the site earns from qualifying purchases at no extra cost to you. No other affiliate programs are used.";
 const jsonld = [webPageLd("Affiliate Disclosure", "/affiliate-disclosure/", desc, SITE.dataDate, "WebPage")];
 ---
 <Base title={"Affiliate Disclosure"} description={desc} path="/affiliate-disclosure/" nav="about" crumbs={[{ name: 'Affiliate disclosure', path: '/affiliate-disclosure/' }]} jsonld={jsonld} modified={SITE.dataDate}>
   <div class="wrap">
   <div class="pagehead"><Crumbs crumbs={[{ name: 'Affiliate disclosure', path: '/affiliate-disclosure/' }]} /><h1>Affiliate disclosure</h1></div>
   <div class="prose">
-    <p><strong>The short version:</strong> SawChainSize.com does not currently earn any commission from the links on this site. Outbound retailer links carry no affiliate tags and earn nothing if you click or buy. The site may join affiliate programs in future; if it does, that will be disclosed clearly here and next to the affected links, before any tagged link goes live.</p>
+    <p><strong>The short version:</strong> {AMAZON_DISCLOSURE} SawChainSize.com is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.com. When you click an Amazon link on this site and buy, we may earn a commission at no extra cost to you.</p>
     <h3>Current status</h3>
     <ul>
-      <li><strong>No active affiliate relationships.</strong> SawChainSize.com is not currently a participant in the Amazon Associates program, Acme Tools' affiliate program, RepairClinic's affiliate program, or any other retailer or manufacturer affiliate program.</li>
-      <li><strong>Retailer links are plain links.</strong> Links to Oregon Products, Acme Tools, Amazon and other retailers are untagged and earn no commission. They are there because they are useful places to look for a chain that matches the specification, not because they pay.</li>
-      <li><strong>No compensation for listings.</strong> No retailer or manufacturer has paid for placement, a review, or a mention on this site.</li>
+      <li><strong>Amazon Associates only.</strong> Amazon is the only affiliate program this site participates in. Links to Amazon are tagged with this site's Associates tracking ID, are marked as sponsored links in the page code, open in a new tab, and sit next to the sentence “{AMAZON_DISCLOSURE}”</li>
+      <li><strong>Other links are plain.</strong> Links to Oregon Products and other manufacturer or reference sites are untagged and earn nothing. No other retailer or manufacturer affiliate program is used, and no retailer or manufacturer has paid for placement, a review, or a mention.</li>
+      <li><strong>Two kinds of Amazon link.</strong> Where we have opened the Amazon product page and confirmed the product title matches the spec, a link goes to that product page (labelled “Amazon product page”). Otherwise a link runs an Amazon search built from the pitch, gauge and drive-link numbers (labelled “Amazon search”); you choose the listing. Either way, check the listing against your bar stamp before buying.</li>
     </ul>
-    <h3>If this changes</h3>
-    <p>The site may in future join affiliate programs, which pay a commission on qualifying purchases made after clicking a tracked link, at no extra cost to you. Before any affiliate link is published, this page will be updated to name the program, and the affected links will be labelled as affiliate links. Programs will never be named here until the site has actually been accepted into them. If a retailer or its network places a tracking cookie when you click a tagged link, we will say so in our <a href="/privacy/">Privacy Policy</a>.</p>
     <h3>What this does and does not influence</h3>
     <ul>
-      <li>It does <strong>not</strong> influence any specification on this site. Specs come from manufacturer manuals, fit-up charts and chain-maker data, per our <a href="/how-we-verify/">verification policy</a>.</li>
-      <li>It does <strong>not</strong> change the price you pay, now or under any future affiliate arrangement.</li>
-      <li>Products are listed because they match the specification on the page, in the sizes the page covers. If a chain does not fit the spec, it is not listed as a buying option, whether or not it would ever pay us.</li>
+      <li>It does <strong>not</strong> influence any specification on this site. Specs come from manufacturer manuals, fit-up charts and chain-maker data, per our <a href="/how-we-verify/">verification policy</a>. Where sources conflict, we say so and do not link a spec-matched chain.</li>
+      <li>It does <strong>not</strong> change the price you pay.</li>
+      <li>Amazon links are added after a spec is settled, only for items that match the spec or purpose on the page. Listings are Amazon's: we do not control sellers, stock or fit claims.</li>
     </ul>
+    <h3>Cookies and tracking</h3>
+    <p>This site itself sets no tracking or advertising cookies; its only cookie is a functional one that remembers you dismissed the cookie notice. When you click through to Amazon, Amazon may set its own cookies, which is how it credits a purchase to this site. Amazon's own policies then apply — see our <a href="/privacy/">Privacy Policy</a>.</p>
     <h3>Prices and availability</h3>
-    <p>Prices shown on this site are dated examples from listings checked on the date stated next to them; they are not live. The price and availability at the retailer's checkout are the accurate ones. Product names, chain designations and trademarks belong to their owners — see the footer notice.</p>
-    <p class="small muted">This disclosure is provided in line with the US Federal Trade Commission's guidelines on endorsements and affiliate marketing (16 CFR Part 255) and Canada's Competition Act requirements on disclosure of material connections. Last updated: 24 October 2026.</p>
+    <p>This site shows no prices. Price and availability on Amazon change and are the ones shown at Amazon's checkout. Product names, chain designations and trademarks belong to their owners — see the footer notice.</p>
+    <p class="small muted">This disclosure is provided in line with the US Federal Trade Commission's guidelines on endorsements and affiliate marketing (16 CFR Part 255) and Canada's Competition Act requirements on disclosure of material connections. Last updated: 25 October 2026.</p>
   </div>
 
   </div>

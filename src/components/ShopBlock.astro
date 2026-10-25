@@ -1,0 +1,26 @@
+---
+import { AMAZON_DISCLOSURE, AFFILIATE_REL, AFFILIATE_TARGET } from '../config/affiliate';
+import type { ShopGroup } from '../lib/shop';
+interface Props { groups: ShopGroup[]; title?: string; flagged?: boolean; lead?: string; }
+const { groups, title = 'Shop for matching parts & gear on Amazon', flagged = false, lead } = Astro.props;
+const links = groups.reduce((n, g) => n + g.links.length, 0);
+---
+{links > 0 && (
+<aside class="buy shop" aria-label="Amazon links">
+  <div class="buy-head">{title}</div>
+  <div class="buy-body">
+    <p class="shop-disclosure"><strong>{AMAZON_DISCLOSURE}</strong> <span class="muted">These are Amazon links; <a href="/affiliate-disclosure/">how that works</a>.</span></p>
+    <p class="small">{lead ?? 'Verify pitch, gauge and drive links against your bar stamp before buying — a listing title is not proof of fit.'}{flagged && ' Setups marked “conflict” or “verify” in the table have no spec-matched link here: read your stamp first.'}</p>
+    {groups.map((g) => (
+      <>
+        <h3 class="shop-h">{g.title}</h3>
+        <ul class="shop-list">
+          {g.links.map((l) => (
+            <li><a href={l.href} target={AFFILIATE_TARGET} rel={AFFILIATE_REL}>{l.label}</a> <span class="shop-kind">{l.kind === 'product' ? 'Amazon product page' : 'Amazon search'}{l.note ? ` · ${l.note}` : ''}</span></li>
+          ))}
+        </ul>
+      </>
+    ))}
+  </div>
+</aside>
+)}

@@ -40,6 +40,9 @@ const jsonld = [
     ] }),
   faqLd(faqs),
 ];
+import ShopBlock from '../../components/ShopBlock.astro';
+import { chainSpecShop } from '../../lib/shop';
+const shop = chainSpecShop(group);
 ---
 <Base title={`${pitchLabel(pitch)} · ${gaugeLabel(gauge)} Chainsaw Chain: Codes, Saws & File Size`} description={desc} path={path} nav="chart" og={`/og/chain-${group.key}.png`} ogAlt={name}
   crumbs={[{ name: 'Chain specs', path: '/chain/' }, { name: `${pitchShort(pitch)} · ${gaugeShort(gauge)}`, path }]} jsonld={jsonld} modified={SITE.dataDate}>
@@ -51,7 +54,7 @@ const jsonld = [
     </div>
     <section class="block" style="padding-top:10px">
       <div class="spec-strip" style="grid-template-columns:repeat(4,1fr)">
-        <div class="spec-cell"><span>Pitch</span><b>{pitchShort(pitch)}{pitch === '3/8-lp' ? ' LP' : ''}</b></div>
+        <div class="spec-cell"><span>Pitch</span><b>{pitchShort(pitch)}</b></div>
         <div class="spec-cell"><span>Gauge</span><b>{gaugeShort(gauge)}</b></div>
         <div class="spec-cell"><span>File size</span><b style="font-size:1rem">{fileTxt}</b></div>
         <div class="spec-cell"><span>Oregon</span><b style="font-size:1rem">{codes.oregon}</b></div>
@@ -88,5 +91,6 @@ const jsonld = [
     )}
     <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
     <p><a href="/chain/">← All chain specs</a> · <a href="/guides/chain-size-chart/">Identification chart</a> · <a href="/guides/how-to-verify-chain-size/">Verify on your bar</a></p>
+    <ShopBlock groups={shop.groups} lead={`Match drive links to your own bar stamp before buying — these are common counts for ${pitchShort(pitch)} ${gaugeShort(gauge)} chain, not a list of every length.`} />
   </div>
 </Base>

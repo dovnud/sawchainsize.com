@@ -23,6 +23,9 @@ const howto = {
   ],
 };
 const jsonld = [webPageLd('How to count drive links on a chainsaw chain', path, desc, SITE.dataDate), howto, faqLd(faqs)];
+import ShopBlock from '../../components/ShopBlock.astro';
+import { guideShop } from '../../lib/shop';
+const shop = guideShop('how-to-count-drive-links');
 ---
 <Base title="How to Count Drive Links on a Chainsaw Chain" description={desc} path={path} nav="verify"
   crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'How to count drive links', path: path }]} jsonld={jsonld} modified={SITE.dataDate}>
@@ -70,5 +73,6 @@ const jsonld = [webPageLd('How to count drive links on a chainsaw chain', path, 
         <p style="margin-top:14px"><a href="/guides/how-to-verify-chain-size/">Full verification guide: bar stamps, pitch measurement and gauge checks →</a></p>
     <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
     <div class="callout"><b>⚠ Count alone is not a chain spec</b><p>Always confirm pitch and gauge as well — see <a href="/guides/how-to-verify-chain-size/">how to verify your chain size</a> and the <a href="/guides/chain-size-chart/">identification chart</a>.</p></div>
+    <ShopBlock groups={shop.groups} title="Tools &amp; parts mentioned (Amazon)" lead="Optional. Verify pitch, gauge and drive links against your bar stamp before buying any chain or bar." />
   </div>
 </Base>

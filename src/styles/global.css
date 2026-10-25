@@ -324,3 +324,10 @@ td small{display:block}
 }
 @media (prefers-reduced-motion:reduce){#cookieNote{transition:none}}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ---------- amazon link blocks ---------- */
+.shop-disclosure{margin:0 0 6px}
+.shop-h{font-size:1rem;margin:14px 0 6px}
+.shop-list{margin:0 0 4px;padding-left:1.2em}
+.shop-kind{display:block;font-size:.8rem;color:var(--muted,#5b6470)}
+@media(min-width:700px){.shop-kind{display:inline;margin-left:.4em}.shop-kind::before{content:"· "}}

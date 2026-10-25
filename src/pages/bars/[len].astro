@@ -25,6 +25,9 @@ const faqs = [
 ];
 const desc = `Chain sizes for ${len}-inch chainsaw bars: ${group.items.length} saw setups across ${new Set(group.items.map((i) => i.model.id)).size} models, with pitch, gauge and drive-link counts and verification status.`;
 const jsonld = [{ ...webPageLd(`${len} inch chainsaw bar chain sizes`, path, desc, SITE.dataDate, 'CollectionPage') }, faqLd(faqs)];
+import ShopBlock from '../../components/ShopBlock.astro';
+import { barLengthShop } from '../../lib/shop';
+const shop = barLengthShop(len, group.items);
 ---
 <Base title={`${len}-Inch Chainsaw Bar: Chain Size by Saw`} description={desc} path={path} nav="models"
   crumbs={[{ name: 'Bar lengths', path: '/bars/' }, { name: `${len}″ bar`, path }]} jsonld={jsonld} modified={SITE.dataDate}>
@@ -59,5 +62,6 @@ const jsonld = [{ ...webPageLd(`${len} inch chainsaw bar chain sizes`, path, des
     </section>
     <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
     <p><a href="/bars/">← All bar lengths</a> · <a href="/saws/">All models</a></p>
+    <ShopBlock groups={shop.groups} flagged={group.items.some((i) => i.bar.status !== 'ok')} lead={`A ${len}″ bar comes in several pitch, gauge and drive-link combinations. Verify all three against your bar stamp before buying.`} />
   </div>
 </Base>

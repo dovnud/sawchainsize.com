@@ -7,6 +7,9 @@ import { webPageLd } from '../../lib/ld';
 
 const desc = "Chainsaw chain identification chart: pitch × gauge × file size, plus Oregon, Stihl, Husqvarna and Carlton chain-code cross-reference and how to count drive links.";
 const jsonld = [webPageLd("Chainsaw Chain Identification Chart", "/guides/chain-size-chart/", desc, SITE.dataDate, "WebPage")];
+import ShopBlock from '../../components/ShopBlock.astro';
+import { guideShop } from '../../lib/shop';
+const shop = guideShop('chain-size-chart');
 ---
 <Base title={"Chainsaw Chain Identification Chart"} description={desc} path="/guides/chain-size-chart/" nav="chart" crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Chain identification chart', path: '/guides/chain-size-chart/' }]} jsonld={jsonld} modified={SITE.dataDate}>
   <div class="wrap">
@@ -103,5 +106,6 @@ const jsonld = [webPageLd("Chainsaw Chain Identification Chart", "/guides/chain-
       <p>Each pitch × gauge combination we have verified on a real saw has its own page with part numbers and the saws that use it:</p>
       <ul class="chips">{(await chainGroups()).map((g) => <li><a class="mono" href={chainUrl(g.key)}>{pitchShort(g.pitch)} · {gaugeShort(g.gauge)}</a></li>)}</ul>
     </section>
+    <ShopBlock groups={shop.groups} title="Tools &amp; parts mentioned (Amazon)" lead="Optional. Verify pitch, gauge and drive links against your bar stamp before buying any chain or bar." />
   </div>
 </Base>

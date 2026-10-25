@@ -18,6 +18,9 @@ const howto = {
 };
 const desc = "Three checks to confirm your chainsaw chain size: read the bar-tail stamp, count drive links, measure pitch and gauge. Worked examples from real bars.";
 const jsonld = [webPageLd("How to Verify Your Chainsaw Chain Size", "/guides/how-to-verify-chain-size/", desc, SITE.dataDate, "WebPage"), howto];
+import ShopBlock from '../../components/ShopBlock.astro';
+import { guideShop } from '../../lib/shop';
+const shop = guideShop('how-to-verify-chain-size');
 ---
 <Base title={"How to Verify Your Chainsaw Chain Size"} description={desc} path="/guides/how-to-verify-chain-size/" nav="verify" crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'How to verify your chain size', path: '/guides/how-to-verify-chain-size/' }]} jsonld={jsonld} modified={SITE.dataDate}>
   <div class="wrap">
@@ -105,5 +108,6 @@ const jsonld = [webPageLd("How to Verify Your Chainsaw Chain Size", "/guides/how
     <p style="max-width:72ch">A chain that is wrong for the bar — wrong gauge, wrong pitch, wrong length forced onto the sprocket — can derail at speed. Never run a chain that does not sit fully in the bar groove, never “make do” with a near-enough loop, and always follow the saw manufacturer's manual for fitting, tensioning and protective equipment. If you are unsure, a dealer will check a bar and chain over the counter in minutes. See our <a href="/terms/">Terms of Use</a> for the full disclaimer.</p>
   </section>
 
+    <ShopBlock groups={shop.groups} title="Tools &amp; parts mentioned (Amazon)" lead="Optional. Verify pitch, gauge and drive links against your bar stamp before buying any chain or bar." />
   </div>
 </Base>

@@ -14,6 +14,9 @@ const faqs = [
   { q: 'Is the file size on my saw page?', a: 'Yes — each verified model page lists the round-file size for the chain fitted to that bar.' },
 ];
 const jsonld = [webPageLd('Chainsaw chain file size by pitch', path, desc, SITE.dataDate), faqLd(faqs)];
+import ShopBlock from '../../components/ShopBlock.astro';
+import { guideShop } from '../../lib/shop';
+const shop = guideShop('chainsaw-chain-file-size');
 ---
 <Base title="Chainsaw Chain File Size by Pitch" description={desc} path={path} nav="chart"
   crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Chain file size', path }]} jsonld={jsonld} modified={SITE.dataDate}>
@@ -31,5 +34,6 @@ const jsonld = [webPageLd('Chainsaw chain file size by pitch', path, desc, SITE.
     <p class="src">Gauge does not change the file size. Specific chains: <a href={chainUrl('3-8-lp-043')}>3/8″ LP .043″</a>, <a href={chainUrl('325-050')}>.325″ .050″</a>, <a href={chainUrl('3-8-050')}>3/8″ .050″</a>.</p>
     <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
     <p><a href="/guides/chain-size-chart/">Identification chart</a> · <a href="/guides/how-to-verify-chain-size/">Verify your chain size</a></p>
+    <ShopBlock groups={shop.groups} title="Tools &amp; parts mentioned (Amazon)" lead="Optional. Verify pitch, gauge and drive links against your bar stamp before buying any chain or bar." />
   </div>
 </Base>

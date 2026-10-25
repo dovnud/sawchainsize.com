@@ -9,7 +9,7 @@ const guides = [
   ['/guides/oregon-72-vs-73-chain/', 'Oregon 72 vs 73 chain', '3/8" pitch; 72 is .050" gauge, 73 is .058" gauge.'],
   ['/guides/chainsaw-chain-file-size/', 'Chainsaw chain file size', 'Round file size by pitch.'],
   ['/how-we-verify/', 'How we verify specs', 'Source hierarchy and conflict handling.'],
-  ['/affiliate-disclosure/', 'Affiliate disclosure', 'No active affiliate relationships; links are untagged and earn no commission.'],
+  ['/affiliate-disclosure/', 'Affiliate disclosure', 'Amazon Associates participant (Amazon only): Amazon links are affiliate links and the site earns from qualifying purchases. No other affiliate programs; Oregon and other links are untagged.'],
 ];
 
 export async function llmsTxt() {
@@ -37,7 +37,7 @@ export async function llmsFull() {
   const L: string[] = [];
   L.push('# SawChainSize.com — full reference data', '');
   L.push(`Generated from the site's content files. Data last verified ${SITE.dataDateLabel}. Canonical site: ${SITE.url}/. Contact: ${SITE.email}.`, '');
-  L.push('Rules: pitch, gauge and drive links must all match the guide bar stamped spec. Never order by saw model or bar length alone. Where sources conflict, the conflicting values are listed and no single value is asserted. Retailer links on the site are plain links to the retailer.', '');
+  L.push('Rules: pitch, gauge and drive links must all match the guide bar stamped spec. Never order by saw model or bar length alone. Where sources conflict, the conflicting values are listed and no single value is asserted. Amazon links on the site are affiliate links (Amazon Associates; the site earns from qualifying purchases) and always sit next to that disclosure; they are either a verified product page or an Amazon search by pitch, gauge and drive links. No prices are shown. No other affiliate programs are used.', '');
   for (const m of models) {
     const d = m.data;
     L.push(`## ${d.name}`, '', `URL: ${abs(modelUrl(m))}`, `Type: ${d.type}${d.displacement_cc ? `, ${d.displacement_cc} cc` : ''}`, `Last verified: ${d.last_verified}`, '', d.intro, '');

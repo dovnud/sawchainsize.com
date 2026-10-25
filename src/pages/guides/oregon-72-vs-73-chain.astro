@@ -14,6 +14,9 @@ const faqs = [
   { q: 'How do I find out which gauge my bar is?', a: 'Read the stamp near the tail of the bar. It states length, pitch and gauge, and often a drive-link count. If it is worn, measure the groove width with a caliper, or see the verification guide.' },
 ];
 const jsonld = [webPageLd('Oregon 72 vs 73 chain', path, desc, SITE.dataDate), faqLd(faqs)];
+import ShopBlock from '../../components/ShopBlock.astro';
+import { guideShop } from '../../lib/shop';
+const shop = guideShop('oregon-72-vs-73-chain');
 ---
 <Base title="Oregon 72 vs 73 Chain: .050 vs .058 Gauge" description={desc} path={path} nav="chart"
   crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Oregon 72 vs 73', path }]} jsonld={jsonld} modified={SITE.dataDate}>
@@ -37,5 +40,6 @@ const jsonld = [webPageLd('Oregon 72 vs 73 chain', path, desc, SITE.dataDate), f
     </div>
     <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
     <p><a href="/guides/how-to-verify-chain-size/">How to verify your chain size</a> · <a href="/guides/chain-size-chart/">Identification chart</a> · <a href="/chain/">Chain specs</a></p>
+    <ShopBlock groups={shop.groups} title="Tools &amp; parts mentioned (Amazon)" lead="Optional. Verify pitch, gauge and drive links against your bar stamp before buying any chain or bar." />
   </div>
 </Base>
