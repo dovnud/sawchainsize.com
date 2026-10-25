@@ -18,7 +18,9 @@ export interface Props {
   modified?: string; // ISO date
   noindex?: boolean;
 }
-const { title, description, path, og = SITE.defaultOg, ogAlt, type = 'website', nav = '', crumbs = [], jsonld = [], modified, noindex = false } = Astro.props;
+import { existsSync } from 'node:fs';
+const pageOg = '/og/page-' + Astro.props.path.replace(/^\/|\/$/g, '').replace(/\//g, '-') + '.png';
+const { title, description, path, og = existsSync('./public' + pageOg) ? pageOg : SITE.defaultOg, ogAlt, type = 'website', nav = '', crumbs = [], jsonld = [], modified, noindex = false } = Astro.props;
 const canonical = SITE.url + path;
 const ogUrl = SITE.url + og;
 const fullTitle = title.includes('SawChainSize') ? title : `${title} | SawChainSize.com`;

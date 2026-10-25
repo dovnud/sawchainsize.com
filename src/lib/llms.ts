@@ -28,7 +28,8 @@ export async function llmsTxt() {
   for (const g of bars) L.push(`- [${g.length}-inch bar](${abs(barUrl(g.length))})`);
   L.push('', '## Guides', '');
   for (const [p, t, d] of guides) L.push(`- [${t}](${abs(p)}): ${d}`);
-  L.push('', '## Optional', '', `- [About](${abs('/about/')})`, `- [Contact](${abs('/contact/')})`, `- [Privacy](${abs('/privacy/')})`, `- [Terms](${abs('/terms/')})`, '');
+  L.push('', '## Data', '', `- [Chain size dataset](${abs('/data/')}): pitch, gauge, drive links, file size and part numbers by saw model and bar length, with verification status and sources; license note and citation on the page.`, `- [CSV download](${abs('/data/sawchainsize-chain-sizes.csv')}): one row per saw, bar setup and bar length.`, `- [JSON download](${abs('/data/sawchainsize-chain-sizes.json')}): the same rows with a column dictionary.`);
+  L.push('', '## Optional', '', `- [About (publisher, methodology, last-verified policy)](${abs('/about/')})`, `- [Contact](${abs('/contact/')})`, `- [Privacy](${abs('/privacy/')})`, `- [Terms](${abs('/terms/')})`, '');
   return L.join('\n');
 }
 
@@ -36,7 +37,7 @@ export async function llmsFull() {
   const models = await getModels();
   const L: string[] = [];
   L.push('# SawChainSize.com — full reference data', '');
-  L.push(`Generated from the site's content files. Data last verified ${SITE.dataDateLabel}. Canonical site: ${SITE.url}/. Contact: ${SITE.email}.`, '');
+  L.push(`Generated from the site's content files. Data last verified ${SITE.dataDateLabel}. Canonical site: ${SITE.url}/. Contact: ${SITE.email}. Publisher: Saw Chain Size. Open dataset: ${SITE.url}/data/.`, '');
   L.push('Rules: pitch, gauge and drive links must all match the guide bar stamped spec. Never order by saw model or bar length alone. Where sources conflict, the conflicting values are listed and no single value is asserted. Amazon links on the site are affiliate links (Amazon Associates; the site earns from qualifying purchases) and always sit next to that disclosure; they are either a verified product page or an Amazon search by pitch, gauge and drive links. No prices are shown. No other affiliate programs are used.', '');
   for (const m of models) {
     const d = m.data;

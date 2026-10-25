@@ -1,4 +1,5 @@
 ---
+import Byline from '../components/Byline.astro';
 import Base from '../layouts/Base.astro';
 import Crumbs from '../components/Crumbs.astro';
 import Email from '../components/Email.astro';
@@ -10,7 +11,7 @@ const jsonld = [webPageLd("How We Verify Specs — Editorial Policy", "/how-we-v
 ---
 <Base title={"How We Verify Specs — Editorial Policy"} description={desc} path="/how-we-verify/" nav="about" crumbs={[{ name: 'How we verify specs', path: '/how-we-verify/' }]} jsonld={jsonld} modified={SITE.dataDate}>
   <div class="wrap">
-  <div class="pagehead"><Crumbs crumbs={[{ name: 'How we verify specs', path: '/how-we-verify/' }]} /><h1>How we verify specs — editorial policy</h1></div>
+  <div class="pagehead"><Crumbs crumbs={[{ name: 'How we verify specs', path: '/how-we-verify/' }]} /><h1>How we verify specs — editorial policy</h1><Byline label="Last updated" /></div>
   <div class="prose">
     <p>Every number on this site follows the same rule: <strong>if we cannot point to where it came from, it does not get printed as a fact.</strong> This page explains the method, so you can judge the pages — and so readers can see exactly what they are trusting.</p>
     <h3>Sources, in order of authority</h3>

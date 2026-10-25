@@ -331,3 +331,10 @@ td small{display:block}
 .shop-list{margin:0 0 4px;padding-left:1.2em}
 .shop-kind{display:block;font-size:.8rem;color:var(--muted,#5b6470)}
 @media(min-width:700px){.shop-kind{display:inline;margin-left:.4em}.shop-kind::before{content:"· "}}
+
+.glance{display:grid;grid-template-columns:max-content 1fr;gap:6px 18px;margin:8px 0 4px;padding:14px 16px;background:var(--card2);border-left:4px solid var(--accent,#cf4a08)}
+.glance dt{font-family:var(--mono,monospace);font-size:.78rem;letter-spacing:.04em;text-transform:uppercase;color:#5b636c;align-self:baseline}
+.glance dd{margin:0}
+@media(max-width:560px){.glance{grid-template-columns:1fr}.glance dd{margin-bottom:6px}}
+.byline{margin:8px 0 0;font-family:var(--mono);font-size:.8rem;letter-spacing:.02em;color:var(--muted)}
+.byline a{color:var(--muted)}

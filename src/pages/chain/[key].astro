@@ -1,4 +1,5 @@
 ---
+import Byline from '../../components/Byline.astro';
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import FaqList from '../../components/FaqList.astro';
@@ -51,6 +52,7 @@ const shop = chainSpecShop(group);
       <Crumbs crumbs={[{ name: 'Chain specs', path: '/chain/' }, { name: `${pitchShort(pitch)} · ${gaugeShort(gauge)}` }]} />
       <h1>{pitchLabel(pitch)} · {gaugeLabel(gauge)} chain</h1>
       <p class="lede">The chain spec for {P.used_on.toLowerCase()}. Pitch {pitchLabel(pitch)}, gauge {gaugeLabel(gauge)}, round file {fileTxt} — sold as Oregon {codes.oregon}.</p>
+      <Byline label="Last verified" />
     </div>
     <section class="block" style="padding-top:10px">
       <div class="spec-strip" style="grid-template-columns:repeat(4,1fr)">

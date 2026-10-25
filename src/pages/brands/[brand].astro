@@ -1,4 +1,5 @@
 ---
+import Byline from '../../components/Byline.astro';
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import ModelCard from '../../components/ModelCard.astro';
@@ -30,6 +31,7 @@ const shop = brandShop(brand.id, b.name, models);
       <h1>{b.name} chain sizes</h1>
       <p class="lede">{b.summary}</p>
       <p class="meta-line">{models.length} SAW MODEL{models.length > 1 ? 'S' : ''} · {verified} VERIFIED BAR SETUP{verified !== 1 ? 'S' : ''} · COUNTRY OF ORIGIN: {b.country.toUpperCase()}</p>
+      <Byline label="Last verified" />
     </div>
     <section class="block" style="padding-top:20px">
       <h2>{b.name} saw models</h2>

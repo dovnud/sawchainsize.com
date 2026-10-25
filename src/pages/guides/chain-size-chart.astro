@@ -1,4 +1,5 @@
 ---
+import Byline from '../../components/Byline.astro';
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import Email from '../../components/Email.astro';
@@ -17,6 +18,7 @@ const shop = guideShop('chain-size-chart');
     <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Chain identification chart', path: '/guides/chain-size-chart/' }]} />
     <h1>Chainsaw chain identification chart</h1>
     <p class="lede">Every saw chain is described by three numbers — pitch, gauge and drive-link count — plus a file size for sharpening. This chart ties them together and cross-references the chain codes used by Oregon, Stihl, Husqvarna and Carlton, so a loop sold under any brand's numbering can be matched to your bar.</p>
+    <Byline label="Last updated" />
   </div>
 
   <section class="block">

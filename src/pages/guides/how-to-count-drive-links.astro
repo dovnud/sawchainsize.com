@@ -1,4 +1,5 @@
 ---
+import Byline from '../../components/Byline.astro';
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import FaqList from '../../components/FaqList.astro';
@@ -34,6 +35,7 @@ const shop = guideShop('how-to-count-drive-links');
       <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'How to count drive links' }]} />
       <h1>How to count drive links</h1>
       <p class="lede">The drive-link count is the third number you need, after pitch and gauge. It takes a minute with a piece of chalk.</p>
+      <Byline label="Last updated" />
     </div>
     <section class="block" style="padding-top:10px">
         <div class="grid2">

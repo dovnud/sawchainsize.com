@@ -1,14 +1,11 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
-import { readFileSync, readdirSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 
-// lastmod per URL comes from the data's last_verified dates (see src/lib/data.ts); fallback = site data date.
-const SITE_DATE = '2026-10-23';
-const lastmodByPath = {};
-for (const f of readdirSync('./src/content/models')) {
-  const m = JSON.parse(readFileSync(`./src/content/models/${f}`, 'utf8'));
-  lastmodByPath[`/saws/${f.replace('.json', '')}/`] = m.last_verified;
-}
+// lastmod per URL comes from src/data/page-dates.json (npm run lastmod): model/brand/chain/bar pages use the
+// data's last_verified date; static pages use their source file's last git commit. No constant fallback:
+// a URL missing from the file is left without <lastmod> rather than given a made-up date.
+const lastmodByPath = JSON.parse(readFileSync('./src/data/page-dates.json', 'utf8'));
 
 export default defineConfig({
   site: 'https://sawchainsize.com',
@@ -18,10 +15,11 @@ export default defineConfig({
   compressHTML: true,
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('/404'),
+      filter: (page) => new URL(page).pathname !== '/404/',
       serialize(item) {
         const path = new URL(item.url).pathname;
-        item.lastmod = new Date(lastmodByPath[path] ?? SITE_DATE).toISOString();
+        if (lastmodByPath[path]) item.lastmod = new Date(`${lastmodByPath[path]}T00:00:00Z`).toISOString();
+        else delete item.lastmod;
         return item;
       },
     }),

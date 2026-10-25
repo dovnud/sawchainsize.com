@@ -1,0 +1,72 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import Byline from '../../components/Byline.astro';
+import Email from '../../components/Email.astro';
+import { SITE, getBrands } from '../../lib/data';
+import { webPageLd, datasetLd } from '../../lib/ld';
+import { datasetMeta, COLUMNS, CSV_PATH, JSON_PATH, DATASET_PATH } from '../../lib/dataset';
+
+const meta = await datasetMeta();
+const brands = await getBrands();
+const perBrand = brands.map((b) => ({ name: b.data.name, rows: meta.recs.filter((r) => r.brand === b.id).length, saws: new Set(meta.recs.filter((r) => r.brand === b.id).map((r) => r.model_id)).size }));
+const sample = meta.recs.filter((r) => r.status === 'ok').slice(0, 10);
+const title = 'Chainsaw chain size dataset — pitch, gauge & drive links (CSV + JSON)';
+const desc = `Open dataset of chainsaw chain pitch, gauge, drive-link count and file size by saw model and guide-bar length: ${meta.rows} rows for ${meta.models} saws, as CSV and JSON. Data last verified ${meta.dateModified}.`;
+const jsonld = [
+  webPageLd('Chainsaw chain size dataset', DATASET_PATH, desc, meta.dateModified, 'CollectionPage'),
+  datasetLd({
+    name: 'Chainsaw chain size by saw model and bar length', description: `Chain pitch, gauge, drive-link count, file size and chain part numbers for ${meta.models} chainsaw models across ${meta.rows} saw/bar-length rows (${perBrand.map((b) => b.name).join(', ')}). Each row carries a verification status and the sources behind it.`,
+    path: DATASET_PATH, csv: SITE.url + CSV_PATH, json: SITE.url + JSON_PATH, dateModified: meta.dateModified,
+    keywords: ['chainsaw chain size', 'saw chain pitch', 'chain gauge', 'drive links', 'guide bar length', 'chainsaw file size', 'Oregon chain', 'Stihl', 'Husqvarna', 'Echo'],
+    variables: COLUMNS.map(([c]) => c),
+  }),
+];
+---
+<Base title={title} description={desc} path={DATASET_PATH} og="/og/page-data.png" ogAlt="Chain size dataset — CSV and JSON" nav="verify" crumbs={[{ name: 'Dataset', path: DATASET_PATH }]} jsonld={jsonld} modified={meta.dateModified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Dataset' }]} />
+      <h1>Chainsaw chain size dataset</h1>
+      <p class="lede">The records behind this site, as open files: chain pitch, gauge, drive-link count, file size and part numbers for each saw and guide-bar length, with a verification status and sources on every row.</p>
+      <Byline label="Last verified" />
+    </div>
+    <section class="block" style="padding-top:10px">
+      <div class="spec-strip" style="grid-template-columns:repeat(3,1fr)">
+        <div class="spec-cell"><span>Saw models</span><b>{meta.models}</b></div>
+        <div class="spec-cell"><span>Rows ({meta.verifiedRows} verified)</span><b>{meta.rows}</b></div>
+        <div class="spec-cell"><span>Last verified</span><b style="font-size:1rem">{meta.dateModified}</b></div>
+      </div>
+      <h2 style="margin-top:20px">Download</h2>
+      <ul class="plain">
+        <li><a href={CSV_PATH} download>sawchainsize-chain-sizes.csv</a> — UTF-8, one row per saw, bar setup and bar length; opens in Excel, Sheets, pandas.</li>
+        <li><a href={JSON_PATH} download>sawchainsize-chain-sizes.json</a> — the same rows plus the column dictionary and chain part numbers as arrays.</li>
+      </ul>
+      <p class="small muted">Both files are generated from the same content files as the site pages every time the site is built, so they always match what the pages say.</p>
+
+      <h2 style="margin-top:24px">What is in it</h2>
+      <div class="tblwrap"><table>
+        <thead><tr><th scope="col">Brand</th><th scope="col">Saw models</th><th scope="col">Rows</th></tr></thead>
+        <tbody>{perBrand.map((b) => <tr><td>{b.name}</td><td class="num">{b.saws}</td><td class="num">{b.rows}</td></tr>)}</tbody>
+      </table></div>
+      <h3 style="margin-top:20px">Columns</h3>
+      <div class="tblwrap"><table>
+        <thead><tr><th scope="col">Column</th><th scope="col">Meaning</th></tr></thead>
+        <tbody>{COLUMNS.map(([c, t]) => <tr><td class="mono">{c}</td><td>{t}</td></tr>)}</tbody>
+      </table></div>
+      <h3 style="margin-top:20px">Sample rows</h3>
+      <div class="tblwrap"><table>
+        <thead><tr><th scope="col">Saw</th><th scope="col">Bar</th><th scope="col">Pitch</th><th scope="col">Gauge</th><th scope="col">Drive links</th><th scope="col">File</th></tr></thead>
+        <tbody>{sample.map((r) => <tr><td><a href={`/saws/${r.model_id}/`}>{r.saw_model}</a></td><td class="num">{r.bar_length_in}″</td><td class="num">{r.pitch}″</td><td class="num">{r.gauge_in}″</td><td class="num">{r.drive_links}</td><td class="num">{r.file_size}</td></tr>)}</tbody>
+      </table></div>
+
+      <h2 style="margin-top:24px">How it was made</h2>
+      <p>Each row was transcribed from a manufacturer manual, a bar-and-chain fit-up chart or chain-maker product data, then graded <code>ok</code>, <code>verify</code> or <code>conflict</code>. Where credible sources disagree the conflicting values are kept in <code>reported_values</code> instead of picking one. See <a href="/how-we-verify/">How we verify specs</a> and the <a href="/about/">last-verified policy</a>. The dataset’s modified date is the newest <code>last_verified</code> among its rows.</p>
+
+      <h2 id="license" style="margin-top:24px">License note and how to cite</h2>
+      <p>The figures are factual specifications published by the manufacturers and chain makers named on each row; we claim no ownership of those facts, and brand names and model names belong to their owners. You may use, quote and republish this compilation with a link back to <a href="/data/">sawchainsize.com/data/</a>. It is provided as is, with no warranty: confirm pitch, gauge and drive links on the stamp of your own guide bar before buying a chain.</p>
+      <p><strong>Suggested citation:</strong> Saw Chain Size. “Chainsaw chain size by saw model and bar length.” SawChainSize.com, data last verified {meta.dateModified}. https://sawchainsize.com/data/</p>
+      <p>Corrections, missing models and reuse questions: <span class="mono"><Email /></span>. The site’s source is public at <a href="https://github.com/dovnud/sawchainsize.com" rel="noopener">github.com/dovnud/sawchainsize.com</a>.</p>
+    </section>
+  </div>
+</Base>

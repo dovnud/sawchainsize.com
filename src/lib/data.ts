@@ -162,9 +162,10 @@ export function modelFaqs(m: Model): Faq[] {
     } else
     faqs.push({ q: `What size chain does a ${d.name} take?`, a: `${lines.join('; ')}.${okBars.length < d.bars.length ? ' Other bar lengths are listed as "verify on your bar stamp" because we only print drive-link counts we can trace to a citable source.' : ''} Always confirm pitch, gauge and drive links on your own bar stamp.` });
   }
-  faqs.push({ q: `How do I check the chain size on my ${d.name}?`, a: `Take the clutch cover off, lift the bar out and read the stamp on the bar tail: it shows bar length, pitch, gauge and usually the drive-link count. Match all three numbers; if your stamp disagrees with a chart, order to the stamp.` });
+  const lens = [...new Set(d.bars.flatMap((b) => b.lengths_in))].sort((a, b) => a - b);
+  faqs.push({ q: `Which bar lengths does the ${d.name} come with, and does the drive-link count change?`, a: `${lenList(lens)} bars are on file for the ${d.name}. ${okBars.length ? (okBars.length <= 4 ? `Drive links by bar: ${okBars.map((b) => `${barLabel(b)} → ${b.drive_links}`).join(', ')}.` : `Verified drive-link counts run from ${Math.min(...okBars.map((b) => b.drive_links!))} to ${Math.max(...okBars.map((b) => b.drive_links!))} across ${okBars.length} setups; the table gives each bar's count.`) : 'We have no source-confirmed drive-link count for it, so the stamp on the bar tail is the only reliable number.'} ${d.bars.some((b) => b.status !== 'ok') ? 'Setups flagged conflict or verify in the table are not asserted here.' : ''}`.trim() });
   const files = [...new Set(d.bars.map((b) => b.file_size).filter(Boolean))].map((f) => fileLabel(f as string));
-  if (files.length) faqs.push({ q: `What file size sharpens the ${d.name} chain?`, a: `${files.join(' or ')} round file, depending on the pitch of the chain fitted. File size follows the cutter: 3/8 inch low-profile takes 5/32 inch (11/64 inch in the thin .043 inch gauge), .325 inch takes 3/16 inch, and standard 3/8 inch takes 7/32 inch.` });
+  if (files.length) faqs.push({ q: `What file size sharpens the ${d.name} chain?`, a: `${files.join(' or ')} round file for the chain fitted to the ${d.name} (${[...new Set(d.bars.map((b) => (b.pitch ? pitchShort(b.pitch) : null)).filter(Boolean))].join(' / ')} pitch).` });
   return faqs;
 }
 
@@ -178,3 +179,95 @@ export const HOME_FAQS: Faq[] = [
 ];
 
 export const ldEscape = (o: unknown) => JSON.stringify(o).replace(/</g, '\\u003c');
+
+/* ---------- model-specific facts derived from the sourced data (no invented values) ---------- */
+
+/** Bar part number printed in a bar's source note, for the three note formats the data uses. */
+export function barPart(note: string): string | null {
+  let m = note.match(/pairs this \d+″ setup with bars? (.+?) and chains? /);
+  if (m) return m[1];
+  m = note.match(/(?:recommended|lightweight) bar (\d{4} \d{3} \d{4})/);
+  if (m) return m[1];
+  m = note.match(/^Echo bar (\S+?);/);
+  if (m) return m[1];
+  return null;
+}
+
+/** Table-note text with the templated lead-in removed (the part numbers stay; the chain is in the OEM column). */
+export function compactNote(b: Bar): string {
+  const n = b.note;
+  let m = n.match(/^Husqvarna's 2026 fit-up guide pairs this \d+″ setup with bars? (.+?) and chains? .+?\.(?: (.*))?$/);
+  if (m) return `Bar part: ${m[1]}.${m[2] ? ' ' + m[2] : ''}`;
+  m = n.match(/^STIHL's chart lists chain .+? with (recommended|lightweight) bar ([\d ]+?)\.(?: (.*))?$/);
+  if (m) return `${m[1] === 'lightweight' ? 'Lightweight bar' : 'Bar'} part: ${m[2]}.${m[3] ? ' ' + m[3] : ''}`;
+  m = n.match(/^Echo bar (\S+?); chain \S+\.\s*(.*)$/);
+  if (m) return `Bar part: ${m[1]}.${m[2] ? ' ' + m[2] : ''}`;
+  return n;
+}
+
+const lenList = (ls: number[]) => ls.map((l) => `${l}″`).join(', ').replace(/, ([^,]*)$/, ' and $1');
+const specOf = (b: Bar) => (b.pitch && b.gauge ? `${pitchShort(b.pitch)} ${gaugeShort(b.gauge)} ${b.drive_links ? `${b.drive_links} DL` : 'drive links not confirmed'}` : null);
+
+/** length → set of spec strings for that bar length. */
+function byLength(m: Model) {
+  const map = new Map<number, { specs: Set<string>; part: string | null }>();
+  for (const b of m.data.bars) for (const l of b.lengths_in) {
+    const e = map.get(l) ?? { specs: new Set<string>(), part: null };
+    const s = specOf(b) ?? 'no confirmed spec';
+    e.specs.add(s); e.part = e.part ?? barPart(b.note); map.set(l, e);
+  }
+  return map;
+}
+
+/** Facts for the "At a glance" list. */
+export function glanceFacts(m: Model): { k: string; v: string }[] {
+  const d = m.data;
+  const out: { k: string; v: string }[] = [];
+  out.push({ k: 'Power', v: `${d.type === 'battery' ? 'Battery' : d.type === 'electric' ? 'Electric' : 'Gas'}${d.displacement_cc ? `, ${d.displacement_cc} cc` : ''}` });
+  const lens = [...new Set(d.bars.flatMap((b) => b.lengths_in))].sort((a, b) => a - b);
+  const ok = d.bars.filter((b) => b.status === 'ok').length;
+  out.push({ k: 'Bar lengths on file', v: `${lenList(lens)} — ${d.bars.length} setup${d.bars.length > 1 ? 's' : ''}, ${ok} verified${d.bars.length - ok ? `, ${d.bars.length - ok} flagged` : ''}` });
+  const specs = [...new Set(d.bars.map((b) => (b.pitch && b.gauge ? `${pitchShort(b.pitch)} · ${gaugeShort(b.gauge)}` : null)).filter(Boolean))] as string[];
+  if (specs.length) out.push({ k: 'Chain spec(s)', v: specs.join(' / ') });
+  const dls = d.bars.filter((b) => b.drive_links).map((b) => `${b.lengths_in[0]}″ → ${b.drive_links}`);
+  if (dls.length && dls.length <= 8) out.push({ k: 'Drive links by bar', v: dls.join(' · ') });
+  else if (dls.length) { const n = d.bars.filter((b) => b.drive_links).map((b) => b.drive_links!); out.push({ k: 'Drive links', v: `${Math.min(...n)}–${Math.max(...n)} across ${dls.length} verified setups` }); }
+  const files = [...new Set(d.bars.map((b) => b.file_size).filter(Boolean))].map((f) => fileLabel(f as string));
+  if (files.length) out.push({ k: 'Round file', v: files.join(' / ') });
+  const alias = d.aliases.filter((a) => a.toLowerCase() !== d.model.toLowerCase());
+  if (alias.length) out.push({ k: 'Also listed as', v: alias.join(', ') });
+  const src = d.sources.map((s) => s.publisher + ' ' + SOURCE_TYPE_LABEL[s.type]).filter((v, i, a) => a.indexOf(v) === i);
+  out.push({ k: 'Data from', v: `${src.join(' · ')}, retrieved ${[...new Set(d.sources.map((s) => s.retrieved))].sort().pop()}` });
+  return out;
+}
+
+/** What differs between model a and model b, from the data only. */
+export function compareText(a: Model, b: Model): string {
+  const A = byLength(a), B = byLength(b);
+  const bothL = [...A.keys()].filter((l) => B.has(l)).sort((x, y) => x - y);
+  const same: number[] = [], diff: number[] = [];
+  for (const l of bothL) ([...A.get(l)!.specs].sort().join('|') === [...B.get(l)!.specs].sort().join('|') ? same : diff).push(l);
+  const onlyA = [...A.keys()].filter((l) => !B.has(l)).sort((x, y) => x - y);
+  const onlyB = [...B.keys()].filter((l) => !A.has(l)).sort((x, y) => x - y);
+  const parts: string[] = [];
+  const an = a.data.name, bn = b.data.name;
+  if (a.data.type !== b.data.type) parts.push(`the ${an} is a ${a.data.type === 'battery' ? 'battery' : 'gas'} saw and the ${bn} is a ${b.data.type === 'battery' ? 'battery' : 'gas'} saw`);
+  else if (a.data.displacement_cc && b.data.displacement_cc && a.data.displacement_cc !== b.data.displacement_cc) parts.push(`the ${an} is ${a.data.displacement_cc} cc against the ${bn}'s ${b.data.displacement_cc} cc`);
+  if (same.length && !diff.length && !onlyA.length && !onlyB.length) parts.push(`both list the same bar lengths (${lenList(same)}) with identical pitch, gauge and drive-link counts`);
+  else {
+    if (same.length) parts.push(`${lenList(same)} ${same.length > 1 ? 'bars carry' : 'bar carries'} identical chain specs on both`);
+    for (const l of diff.slice(0, 2)) parts.push(`on a ${l}″ bar the ${an} runs ${[...A.get(l)!.specs].join(' or ')} while the ${bn} runs ${[...B.get(l)!.specs].join(' or ')}`);
+    if (diff.length > 2) parts.push(`${diff.length - 2} more shared length${diff.length > 3 ? 's' : ''} differ in gauge or drive links`);
+    if (onlyA.length) parts.push(`only the ${an} lists ${lenList(onlyA)}`);
+    if (onlyB.length) parts.push(`only the ${bn} lists ${lenList(onlyB)}`);
+  }
+  const partDiffs = same.map((l) => ({ l, pa: A.get(l)!.part, pb: B.get(l)!.part })).filter((x) => x.pa && x.pb && x.pa !== x.pb);
+  if (partDiffs.length) parts.push(`the recommended bar part numbers differ (${partDiffs.slice(0, 2).map((x) => `${x.l}″: ${x.pa} vs ${x.pb}`).join('; ')})`);
+  const fa = a.data.bars.filter((x) => x.status !== 'ok').length, fb = b.data.bars.filter((x) => x.status !== 'ok').length;
+  if (fa !== fb) parts.push(`${fa > fb ? `the ${an}` : `the ${bn}`} has ${Math.max(fa, fb)} setup${Math.max(fa, fb) > 1 ? 's' : ''} flagged conflict or verify, ${fa > fb ? `the ${bn}` : `the ${an}`} ${Math.min(fa, fb) ? `has ${Math.min(fa, fb)}` : 'has none'}`);
+  const pubs = (m: Model) => [...new Set(m.data.sources.map((x) => `${x.publisher} (${SOURCE_TYPE_LABEL[x.type]})`))].sort();
+  const pa = pubs(a), pb = pubs(b);
+  if (pa.join('|') !== pb.join('|')) parts.push(`the ${an} data comes from ${pa.join(' and ')}, the ${bn} data from ${pb.join(' and ')}`);
+  const s = parts.join('; ');
+  return s ? s[0].toUpperCase() + s.slice(1) + '.' : '';
+}

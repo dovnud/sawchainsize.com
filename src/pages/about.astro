@@ -1,27 +1,40 @@
 ---
+import Byline from '../components/Byline.astro';
 import Base from '../layouts/Base.astro';
 import Crumbs from '../components/Crumbs.astro';
 import Email from '../components/Email.astro';
 import { SITE } from '../lib/data';
-import { webPageLd } from '../lib/ld';
+import { webPageLd, organizationLd } from '../lib/ld';
 
 const desc = "SawChainSize.com is a bar-first chainsaw chain reference: how we work, who it is for, how the site is funded and what we are not.";
-const jsonld = [webPageLd("About SawChainSize.com", "/about/", desc, SITE.dataDate, "AboutPage")];
+const jsonld = [webPageLd("About SawChainSize.com", "/about/", desc, SITE.dataDate, "AboutPage"), organizationLd];
 ---
 <Base title={"About SawChainSize.com"} description={desc} path="/about/" nav="about" crumbs={[{ name: 'About', path: '/about/' }]} jsonld={jsonld} modified={SITE.dataDate}>
   <div class="wrap">
-  <div class="pagehead"><Crumbs crumbs={[{ name: 'About', path: '/about/' }]} /><h1>About SawChainSize.com</h1></div>
+  <div class="pagehead"><Crumbs crumbs={[{ name: 'About', path: '/about/' }]} /><h1>About SawChainSize.com</h1><Byline label="Last updated" /></div>
   <div class="prose">
     <p>SawChainSize.com is a reference site with one job: telling you the exact chain — pitch, gauge and drive-link count — that fits the bar on your chainsaw, and the file that sharpens it.</p>
     <p>It exists because that answer is oddly hard to get right. A saw model is sold with several bar lengths; owners swap bars; dealers fit alternatives; and the pages that rank for “what size chain” questions are often roundups that copy each other. When we researched this site we found the leading results for one of North America's best-selling saws, the Stihl MS 250, giving three different answers. A wrong chain is not a trivial mistake: at best it does not mount, at worst it derails.</p>
     <h3>Who it is for</h3>
-    <p>Homeowners cutting firewood and storm cleanup, acreage and ranch owners, and anyone standing in a store aisle holding two near-identical chain boxes. The site covers the US and Canada and the brands most commonly sold there: Stihl, Husqvarna, Echo, Poulan and McCulloch, plus the Oregon chain that most of them are fitted with as replacements.</p>
+    <p>Homeowners cutting firewood and storm cleanup, acreage and ranch owners, and anyone standing in a store aisle holding two near-identical chain boxes. The site covers the US and Canada and the brands most commonly sold there: Stihl, Husqvarna, Echo, Poulan / McCulloch, Craftsman, Ryobi and Makita, plus the Oregon chain that most of them are fitted with as replacements.</p>
     <h3>How the site works</h3>
     <ul>
       <li><strong>Bar-first, always.</strong> Every lookup starts from the bar fitted to the saw, because that is what determines the chain. Model charts show factory combinations; the bar-stamp check on every page settles it for your specific saw.</li>
       <li><strong>Verified or flagged.</strong> A spec appears as fact only when it traces to a manufacturer manual, a fit-up chart, or chain-maker product data. Anything we could not verify is labelled “verify on your bar stamp” — we would rather show a gap than a guess.</li>
       <li><strong>Conflicts shown, not hidden.</strong> Where credible sources disagree, the page prints the disagreement and tells you how to resolve it on your own bar.</li>
     </ul>
+    <h3>Who publishes this site</h3>
+    <p>SawChainSize.com is published by <strong>Saw Chain Size</strong>, an independent reference publication. We do not publish an individual author name: every page is a transcription of manufacturer and chain-maker data, so what matters is the source printed on the page, not who typed it. Pages carry the byline “By Saw Chain Size”, and the site's source code is public at <a href="https://github.com/dovnud/sawchainsize.com" rel="noopener">github.com/dovnud/sawchainsize.com</a>. Corrections go to <span class="mono"><Email /></span>.</p>
+    <h3>Methodology</h3>
+    <ol>
+      <li><strong>Collect.</strong> For each saw we read the manufacturer's manual or bar-and-chain fit-up chart, then cross-check against chain-maker (Oregon) and dealer product data. Each source is listed on the model page with its type and the date we read it.</li>
+      <li><strong>Key to the bar.</strong> A model name does not determine a chain; the fitted bar does. Each bar length is recorded as its own row: pitch, gauge, drive links, file size, and OEM and equivalent chain part numbers.</li>
+      <li><strong>Grade each row.</strong> <em>Verified</em> means a manufacturer or chain-maker source states it. <em>Verify on your bar stamp</em> means we could not trace it to an authoritative source. <em>Sources conflict</em> means credible sources disagree, and each reported value is printed with its source.</li>
+      <li><strong>Publish the data, not just pages.</strong> The same records that render the pages are published as an open <a href="/data/">CSV and JSON dataset</a>, so every figure on the site can be checked or reused.</li>
+    </ol>
+    <p>The full source hierarchy and conflict rules are in <a href="/how-we-verify/">How We Verify Specs</a>.</p>
+    <h3>“Last verified” policy</h3>
+    <p>Every model page, and the dataset, shows a <em>last verified</em> date. It is the date we last read that saw's sources and confirmed its rows. It changes only when we re-check the sources or apply a correction; it does not change because the site was rebuilt or the page layout was edited. Pages that summarise many saws (brand, chain-spec and bar-length pages) show the newest verified date among the saws they list, and the same dates feed the <code>lastmod</code> values in our sitemap. When a correction alters a published spec, the page says so rather than editing silently.</p>
     <h3>How we are funded</h3>
     <p>The site is free to use. It is supported by the Amazon Associates Program: links to Amazon on model, chain-spec and bar-length pages are affiliate links, and the site earns from qualifying purchases at no extra cost to you. Amazon is the only affiliate program used. That never changes a specification: a chain is listed because it fits, not because it pays. The full details are in our <a href="/affiliate-disclosure/">Affiliate Disclosure</a>, and our sourcing rules are in <a href="/how-we-verify/">How We Verify Specs</a>.</p>
     <h3>What we are not</h3>

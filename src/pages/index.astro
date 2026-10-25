@@ -4,7 +4,7 @@ import SawHero from '../components/SawHero.astro';
 import ModelCard from '../components/ModelCard.astro';
 import FaqList from '../components/FaqList.astro';
 import { SITE, HOME_FAQS, getModels, getBrands, barGroups, chainGroups, modelUrl, brandUrl, barUrl, chainUrl, barLabel, pitchText, gaugeText, dlText, fileText, oregonType, barHasLength, SPEC, pitchShort, gaugeShort } from '../lib/data';
-import { faqLd, publisher } from '../lib/ld';
+import { faqLd, publisher, organizationLd } from '../lib/ld';
 
 const models = await getModels();
 const brands = await getBrands();
@@ -32,6 +32,7 @@ const description = 'Find the exact chainsaw chain for your saw: pitch, gauge, d
 const jsonld = [
   { '@context': 'https://schema.org', '@type': 'WebSite', name: SITE.name, url: SITE.url + '/', description: 'Chainsaw chain and bar lookup by saw model and fitted bar length: pitch, gauge, drive links, file size and cross-brand chain equivalents, verified against manufacturer fit-up charts.', publisher, inLanguage: 'en-US' },
   faqLd(HOME_FAQS),
+  organizationLd,
 ];
 const ticker = SPEC.codes.map((c) => ({ code: c.oregon.split(' ')[0].replace('/', ''), spec: `${pitchShort(c.pitch)} · ${gaugeShort(c.gauge)}` }));
 const tick = [

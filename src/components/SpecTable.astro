@@ -1,5 +1,5 @@
 ---
-import { type Model, barLabel, pitchText, gaugeText, dlText, fileText, oemParts, equivParts, partText, statusLabel } from '../lib/data';
+import { type Model, compactNote, barLabel, pitchText, gaugeText, dlText, fileText, oemParts, equivParts, partText, statusLabel } from '../lib/data';
 const { model } = Astro.props as { model: Model };
 ---
 <div class="tblwrap">
@@ -18,7 +18,7 @@ const { model } = Astro.props as { model: Model };
             <td>{oemParts(b).length ? oemParts(b).map((c, i) => <>{i > 0 && <br />}{partText(c)}</>) : '—'}</td>
             <td>{equivParts(b).length ? equivParts(b).map((c, i) => <>{i > 0 && <br />}{partText(c)}</>) : '—'}</td>
           </tr>
-          <tr><td></td><td colspan="6" class="small muted">{b.note}</td></tr>
+          <tr><td></td><td colspan="6" class="small muted">{compactNote(b)}</td></tr>
         </>
       ))}
     </tbody>

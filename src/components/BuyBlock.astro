@@ -1,5 +1,5 @@
 ---
-import { type Model, hasConflict, barLabel, pitchText, gaugeText, partText, equivParts, oemParts } from '../lib/data';
+import { type Model, hasConflict } from '../lib/data';
 const { model } = Astro.props as { model: Model };
 import ShopBlock from './ShopBlock.astro';
 import { modelShop } from '../lib/shop';
@@ -10,23 +10,10 @@ const okBars = model.data.bars.filter((b) => b.status === 'ok');
   <div class="buy-head">Where to buy the right loop</div>
   <div class="buy-body">
     {okBars.length ? (
-      <>
-        <p>Match these three numbers at any retailer — the brand on the box matters less than the numbers on it:</p>
-        <ul>
-          {okBars.map((b) => {
-            const eq = equivParts(b).filter((c) => c.brand === 'Oregon').map(partText).join(' / ') || '—';
-            const oem = oemParts(b);
-            return <li><strong>{barLabel(b)} bar:</strong> {pitchText(b)}, {gaugeText(b)}, {b.drive_links} drive links — look for {[eq !== '—' ? eq : null, oem.length ? `OEM ${oem.map(partText).join(' / ')}` : null].filter(Boolean).join(' or ') || 'a loop that matches all three numbers'}.</li>;
-          })}
-        </ul>
-      </>
+      <p>Match pitch, gauge and drive links to the table above (OEM and equivalent part numbers are listed per bar). Oregon publishes full specs at <a href="https://www.oregonproducts.com" target="_blank" rel="noopener">oregonproducts.com</a>.</p>
     ) : (
       <p>{hasConflict(model) ? 'Because published specs conflict for this saw' : 'Because no source we could read confirms a drive-link count for this saw'}, we do not point you at a specific loop for it. Read the three numbers off your bar stamp, then search any retailer below by pitch + gauge + drive links (for example “.325 .050 72”).</p>
     )}
-    <ul style="margin-top:12px">
-      <li><a href="https://www.oregonproducts.com" target="_blank" rel="noopener">Oregon Products</a> — the chain maker's own site: full spec data for every Oregon loop, sold through its dealers.</li>
-      <li>Your local saw dealer — the right call for genuine Stihl chain, which Stihl sells through dealers rather than online.</li>
-    </ul>
     <p class="small muted" style="margin-top:10px">We show no prices: they change daily and the checkout price is the real one.</p>
   </div>
 </div>

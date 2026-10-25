@@ -8,7 +8,27 @@ const spec = JSON.parse(fs.readFileSync('src/data/chain-specs.json', 'utf8'));
 const keyOf = (p, g) => `${spec.pitches[p].slug}-${spec.gauges[String(g)].slug}`;
 const chains = new Map();
 models.forEach((m) => m.bars.forEach((b) => { if (b.pitch && b.gauge) chains.set(keyOf(b.pitch, b.gauge), `${spec.pitches[b.pitch].label} · ${spec.gauges[String(b.gauge)].short}`); }));
+const barCount = new Map();
+models.forEach((m) => new Set(m.bars.flatMap((b) => b.lengths_in)).forEach((l) => barCount.set(l, (barCount.get(l) ?? 0) + 1)));
+const pages = [
+  ['saws', 'ALL MODELS', 'Chain size by saw model', 'Every verified model and bar'],
+  ['brands', 'BRANDS', 'Chainsaw brands', 'Stihl · Husqvarna · Echo · Poulan Pro and more'],
+  ['chain', 'CHAIN SPECS', 'Chain pitch × gauge', 'Every spec with its saws and file size'],
+  ['bars', 'BAR LENGTHS', 'Chain size by bar length', 'Find the chain from the bar stamp'],
+  ['guides', 'GUIDES', 'Chain sizing guides', 'Bar stamp · drive links · pitch · gauge'],
+  ['guides-chain-size-chart', 'GUIDE', 'Chain identification chart', 'Pitch × gauge × file size × codes'],
+  ['guides-how-to-verify-chain-size', 'GUIDE', 'How to verify your chain size', 'The 60-second bar-stamp check'],
+  ['guides-how-to-count-drive-links', 'GUIDE', 'How to count drive links', 'Mark one link, count the tangs'],
+  ['guides-oregon-72-vs-73-chain', 'GUIDE', 'Oregon 72 vs 73 chain', '.050″ vs .058″ gauge on 3/8″ pitch'],
+  ['guides-chainsaw-chain-file-size', 'GUIDE', 'Chainsaw chain file size', 'Round file size by pitch'],
+  ['about', 'ABOUT', 'About Saw Chain Size', 'Method · sources · last-verified policy'],
+  ['how-we-verify', 'EDITORIAL POLICY', 'How we verify specs', 'Source hierarchy and conflict handling'],
+  ['data', 'OPEN DATASET', 'Chain size dataset', 'CSV + JSON · pitch, gauge, drive links by saw and bar'],
+  ['affiliate-disclosure', 'DISCLOSURE', 'Affiliate disclosure', 'Amazon Associates · no prices shown'],
+];
 const items = [
+  ...pages.map(([file, kicker, title, sub]) => ({ file: `page-${file}`, kicker, title, sub })),
+  ...[...barCount].filter(([, n]) => n >= 2).map(([l]) => ({ file: `page-bars-${l}-inch`, kicker: 'BAR LENGTH', title: `${l}″ bar chain sizes`, sub: 'Pitch · gauge · drive links by saw' })),
   { file: 'default', kicker: 'CHAIN SIZE LOOKUP', title: 'Chainsaw chain size, bar first', sub: 'Pitch · gauge · drive links by saw model' },
   ...models.map((m) => ({ file: m.id, kicker: 'CHAIN SIZE', title: `${m.name} chain size`, sub: 'Pitch · gauge · drive links · file size' })),
   ...brands.map((b) => ({ file: `brand-${b.id}`, kicker: 'BY BRAND', title: `${b.name} chain sizes`, sub: 'Every verified saw model' })),

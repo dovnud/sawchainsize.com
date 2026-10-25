@@ -1,10 +1,11 @@
 ---
+import Byline from '../../components/Byline.astro';
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import SpecTable from '../../components/SpecTable.astro';
 import BuyBlock from '../../components/BuyBlock.astro';
 import FaqList from '../../components/FaqList.astro';
-import { getModels, getBrands, modelUrl, brandUrl, barUrl, chainUrl, barChainKey, barGroups, hasConflict, relatedModels, modelFaqs, pitchShort, gaugeShort, SOURCE_TYPE_LABEL, SITE } from '../../lib/data';
+import { getModels, getBrands, modelUrl, brandUrl, barUrl, chainUrl, barChainKey, barGroups, hasConflict, relatedModels, modelFaqs, glanceFacts, compareText, pitchShort, gaugeShort, SOURCE_TYPE_LABEL, SITE } from '../../lib/data';
 import { faqLd, modelLd } from '../../lib/ld';
 
 export async function getStaticPaths() {
@@ -24,6 +25,8 @@ const barPages = new Set((await barGroups()).map((g) => g.length));
 const lengths = [...new Set(d.bars.flatMap((b) => b.lengths_in))].sort((a, b) => a - b);
 const desc = `${d.name} chain size: ${conflict ? 'published specs conflict — each reported variant side by side, plus the bar-stamp check' : 'pitch, gauge, drive links and file size by fitted bar'}. ${okCount ? `${okCount} verified bar ${okCount > 1 ? 'setups' : 'setup'}. ` : ''}Last verified ${SITE.dataDateLabel}.`;
 const related = await relatedModels(model);
+const facts = glanceFacts(model);
+const compares = related.slice(0, 3).map((m) => ({ m, text: compareText(model, m) })).filter((c) => c.text);
 const jsonld = [modelLd(model, path), faqLd(faqs)];
 const ogName = `/og/${model.id}.png`;
 ---
@@ -35,9 +38,12 @@ const ogName = `/og/${model.id}.png`;
       <h1>{d.name} chain size</h1>
       <p class="lede">{d.blurb}</p>
       <p class="meta-line">LAST VERIFIED {d.last_verified} · {d.bars.length} BAR SETUP{d.bars.length > 1 ? 'S' : ''} · {okCount} VERIFIED</p>
+      <Byline label="Last verified" />
     </div>
     <section class="block" style="padding-top:10px">
       <div class="prose"><p>{d.intro}</p></div>
+      <h2 style="margin-top:20px">{d.name} at a glance</h2>
+      <dl class="glance">{facts.map((f) => <><dt>{f.k}</dt><dd>{f.v}</dd></>)}</dl>
       {conflict && (
         <div class="callout"><b>⚠ Read this before ordering</b>
           <p>For this saw, the sources a normal search turns up <strong>contradict each other</strong> on the chain spec. The table below prints what each reports. The stamp on your bar tail — pitch, gauge, drive links — is the tiebreaker, and it takes a minute to check: <a href="/guides/how-to-verify-chain-size/">verification guide</a>.</p></div>
@@ -65,15 +71,7 @@ const ogName = `/og/${model.id}.png`;
 
     <hr class="rule" />
     <section class="block">
-      <h2>The 60-second check for this saw</h2>
-      <div class="prose">
-        <ol class="steps">
-          <li>Take the clutch cover off (two nuts) and lift the bar out.</li>
-          <li>Read the stamp on the bar tail: length, pitch, gauge, and the drive-link count on most bars.</li>
-          <li>Match all three numbers to the table above. If your stamp disagrees with the table, your saw is wearing a non-standard bar — order to the stamp, and tell us via the <a href="/contact/">contact page</a> so we can note the variant.</li>
-        </ol>
-        <p>Full method, with diagrams: <a href="/guides/how-to-verify-chain-size/">How to verify your chain size</a> · <a href="/guides/chain-size-chart/">Chain identification chart</a></p>
-      </div>
+      <p>Before you order, confirm the bar-tail stamp (length, pitch, gauge, drive links) matches a row above; if it does not, order to the stamp and <a href="/contact/">tell us</a>. Method: <a href="/guides/how-to-verify-chain-size/">how to verify your chain size</a>.</p>
     </section>
 
     <BuyBlock model={model} />
@@ -82,6 +80,13 @@ const ogName = `/og/${model.id}.png`;
       <h2>Questions about the {d.name} chain</h2>
       <FaqList faqs={faqs} />
     </section>
+
+    {compares.length > 0 && (
+      <section class="block">
+        <h2>How the {d.name} differs from similar saws</h2>
+        {compares.map((c) => <><h3><a href={modelUrl(c.m)}>{c.m.data.name}</a></h3><p>{c.text}</p></>)}
+      </section>
+    )}
 
     <section class="block">
       <h2>Related</h2>

@@ -8,7 +8,7 @@
   "type": "gas",
   "popular": false,
   "blurb": "14″ and 16″ bars on 3/8″ low-profile .050″ chain: 52 drive links on the 14″; Husqvarna's own 2026 guide contradicts itself on the 16″ (56 or 66), so we flag that row.",
-  "intro": "The Husqvarna 130 is a rear-handle gas saw. Husqvarna's own 2026 Bar & Chain Fit-up Guide (effective 1 January 2026) lists 2 approved bar lengths for it (14″ and 16″), running 3/8″ low-profile pitch chain in .050″ gauge. The table below restates each row from that guide: the drive-link count changes with bar length, and the guide also names the matching Husqvarna bar and chain part numbers. One 16″ row in the guide contradicts its own part numbers (see the note on that row), so that row is flagged rather than repeated. If your saw wears a replacement bar, trust the stamp over the chart.",
+  "intro": "The Husqvarna 130 is a rear-handle gas saw. Husqvarna's own 2026 Bar & Chain Fit-up Guide (effective 1 January 2026) lists 2 approved bar lengths for it (14″ and 16″), running 3/8″ low-profile pitch chain in .050″ gauge. One 16″ row in the guide contradicts its own part numbers (see the note on that row), so that row is flagged rather than repeated.",
   "bars": [
     {
       "lengths_in": [

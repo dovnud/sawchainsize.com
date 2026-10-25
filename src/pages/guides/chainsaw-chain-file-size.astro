@@ -1,4 +1,5 @@
 ---
+import Byline from '../../components/Byline.astro';
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import FaqList from '../../components/FaqList.astro';
@@ -25,6 +26,7 @@ const shop = guideShop('chainsaw-chain-file-size');
       <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Chain file size' }]} />
       <h1>Chainsaw chain file size</h1>
       <p class="lede">The round file you sharpen with is set by the chain's pitch. Use the wrong size and you either skip the cutter edge or remove too much metal.</p>
+      <Byline label="Last updated" />
     </div>
     <div class="tblwrap"><table>
       <caption class="sr-only">Round file size by chain pitch</caption>

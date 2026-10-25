@@ -1,4 +1,5 @@
 ---
+import Byline from '../../components/Byline.astro';
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import FaqList from '../../components/FaqList.astro';
@@ -25,6 +26,7 @@ const shop = guideShop('oregon-72-vs-73-chain');
       <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Oregon 72 vs 73' }]} />
       <h1>Oregon 72 vs 73 chain</h1>
       <p class="lede">The most common wrong buy in chainsaw chain: two 3/8″ chains whose boxes look near-identical, differing only in gauge.</p>
+      <Byline label="Last updated" />
     </div>
     <div class="tblwrap"><table>
       <caption class="sr-only">Oregon 72, 73 and 75 compared</caption>

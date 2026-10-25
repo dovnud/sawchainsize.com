@@ -1,4 +1,5 @@
 ---
+import Byline from '../../components/Byline.astro';
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import FaqList from '../../components/FaqList.astro';
@@ -36,6 +37,7 @@ const shop = barLengthShop(len, group.items);
       <Crumbs crumbs={[{ name: 'Bar lengths', path: '/bars/' }, { name: `${len}″ bar` }]} />
       <h1>{len}-inch bar: chain size by saw</h1>
       <p class="lede">Every saw setup on this site that runs a {len}″ guide bar, with the pitch, gauge and drive links we could trace to a source. The bar length narrows the choice; the stamp on your bar tail settles it.</p>
+      <Byline label="Last verified" />
     </div>
     <section class="block" style="padding-top:10px">
       <div class="tblwrap"><table>
