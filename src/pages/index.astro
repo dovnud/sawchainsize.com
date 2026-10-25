@@ -85,7 +85,7 @@ const tick = [
     {[0, 1].map(() => <span>{tick.map(([c, s]) => <><>{c} </><b set:html={s.replace(/″/g, '&Prime;')} /><> &nbsp;·&nbsp; </></>)}</span>)}
   </div></div>
 
-  <div class="wrap">
+  <div class="band"><div class="wrap">
     <section class="block">
       <p class="kicker">Why bar-first?</p>
       <h2>The model name alone does not pick the chain</h2>
@@ -104,18 +104,16 @@ const tick = [
         </div>
       </div>
     </section>
-
-    <hr class="rule" />
-
+  </div></div>
+  <div class="band alt"><div class="wrap">
     <section class="block">
       <p class="kicker">Most looked up</p>
       <h2>Popular saw models</h2>
       <div class="grid3">{popular.map((m) => <ModelCard model={m} />)}</div>
       <p style="margin-top:16px"><a href="/saws/">All saw models →</a></p>
     </section>
-
-    <hr class="rule" />
-
+  </div></div>
+  <div class="band"><div class="wrap">
     <section class="block">
       <p class="kicker">Browse</p>
       <h2>By brand, bar length or chain spec</h2>
@@ -125,9 +123,8 @@ const tick = [
         <div class="card"><h3>Chain spec</h3><ul class="chips">{chains.map((g) => <li><a class="mono" href={chainUrl(g.key)}>{pitchShort(g.pitch)} · {gaugeShort(g.gauge)}</a></li>)}</ul></div>
       </div>
     </section>
-
-    <hr class="rule" />
-
+  </div></div>
+  <div class="band alt"><div class="wrap">
     <section class="block">
       <p class="kicker">Before you order</p>
       <h2>Three numbers, one stamp</h2>
@@ -151,22 +148,20 @@ const tick = [
       </figure>
       <p><a href="/guides/how-to-verify-chain-size/">Read the full verification guide →</a> &nbsp;·&nbsp; <a href="/guides/chain-size-chart/">Open the chain identification chart →</a></p>
     </section>
-
-    <hr class="rule" />
-
+  </div></div>
+  <div class="band"><div class="wrap">
     <section class="block">
       <p class="kicker">Straight answers</p>
       <h2>Frequently asked questions</h2>
       <FaqList faqs={HOME_FAQS} />
       <p style="margin-top:14px">More answers in the <a href="/guides/">guides</a>: <a href="/guides/oregon-72-vs-73-chain/">Oregon 72 vs 73</a>, <a href="/guides/how-to-count-drive-links/">how to count drive links</a>, <a href="/guides/chainsaw-chain-file-size/">file sizes</a>.</p>
     </section>
-
-    <hr class="rule" />
-
+  </div></div>
+  <div class="band alt"><div class="wrap">
     <section class="block">
       <p class="kicker">Buying the chain</p>
       <h2>Where the buying links go</h2>
       <p style="max-width:70ch">Model, chain-spec and bar-length pages end with links to matching chains and gear on Amazon. The site is an Amazon Associate, so it earns a commission on qualifying purchases made through those links, at no extra cost to you. We show no prices — they change daily, and the price at checkout is the real one. Read the <a href="/affiliate-disclosure/">affiliate disclosure</a>.</p>
     </section>
-  </div>
+  </div></div>
 </Base>

@@ -19,7 +19,7 @@ const desc = 'Chainsaw chain size by brand: Stihl, Husqvarna, Echo and Poulan / 
         const ms = models.filter((m) => m.data.brand === b.id);
         return (
           <a class="card" href={brandUrl(b.id)}>
-            <h3>{b.data.name}</h3>
+            <h2>{b.data.name}</h2>
             <p class="small">{b.data.summary}</p>
             <p class="small muted">{ms.length} saw model{ms.length > 1 ? 's' : ''}: {ms.map((m) => m.data.name).join(' · ')}</p>
             <span class="go">{b.data.name} chain sizes →</span>

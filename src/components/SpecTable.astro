@@ -2,23 +2,23 @@
 import { type Model, compactNote, barLabel, pitchText, gaugeText, dlText, fileText, oemParts, equivParts, partText, statusLabel } from '../lib/data';
 const { model } = Astro.props as { model: Model };
 ---
-<div class="tblwrap">
-  <table>
+<div class="tblwrap stackwrap">
+  <table class="stack">
     <caption class="sr-only">Chain specifications for the {model.data.name} by fitted bar</caption>
     <thead><tr><th scope="col">Bar</th><th scope="col">Pitch</th><th scope="col">Gauge</th><th scope="col">Drive links</th><th scope="col">File</th><th scope="col">OEM chain</th><th scope="col">Equivalent chains</th></tr></thead>
     <tbody>
       {model.data.bars.map((b) => (
         <>
-          <tr>
-            <td class="num"><strong>{barLabel(b)}</strong><br /><span class={`tag ${b.status !== 'ok' ? 'verify' : ''}`}>{statusLabel(b.status)}</span></td>
-            <td class="num">{pitchText(b)}</td>
-            <td class="num">{gaugeText(b)}</td>
-            <td class="num">{dlText(b, model)}</td>
-            <td class="num">{fileText(b)}</td>
-            <td>{oemParts(b).length ? oemParts(b).map((c, i) => <>{i > 0 && <br />}{partText(c)}</>) : '—'}</td>
-            <td>{equivParts(b).length ? equivParts(b).map((c, i) => <>{i > 0 && <br />}{partText(c)}</>) : '—'}</td>
+          <tr class="r">
+            <td class="num" data-label="Bar"><strong>{barLabel(b)}</strong><br /><span class={`tag ${b.status !== 'ok' ? 'verify' : ''}`}>{statusLabel(b.status)}</span></td>
+            <td class="num" data-label="Pitch">{pitchText(b)}</td>
+            <td class="num" data-label="Gauge">{gaugeText(b)}</td>
+            <td class="num" data-label="Drive links">{dlText(b, model)}</td>
+            <td class="num" data-label="File">{fileText(b)}</td>
+            <td data-label="OEM chain">{oemParts(b).length ? oemParts(b).map((c, i) => <>{i > 0 && <br />}{partText(c)}</>) : '—'}</td>
+            <td data-label="Equivalent chains">{equivParts(b).length ? equivParts(b).map((c, i) => <>{i > 0 && <br />}{partText(c)}</>) : '—'}</td>
           </tr>
-          <tr><td></td><td colspan="6" class="small muted">{compactNote(b)}</td></tr>
+          <tr class="n"><td class="gap"></td><td colspan="6" class="small muted">{compactNote(b)}</td></tr>
         </>
       ))}
     </tbody>
