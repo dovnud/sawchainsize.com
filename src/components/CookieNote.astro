@@ -1,4 +1,10 @@
+---
+import { GA4_ID } from '../config/analytics';
+---
 <div id="cookieNote" role="dialog" aria-label="Cookie notice" hidden>
-  <p><strong>Cookies:</strong> this site sets at most one functional cookie (to remember you closed this note). Amazon may set its own cookies when you click an Amazon link — see our <a href="/privacy/">Privacy Policy</a>.</p>
+  {GA4_ID
+    ? <p><strong>Cookies:</strong> we use Google Analytics (cookies <span class="mono">_ga</span>, <span class="mono">_ga_*</span>) to count which pages are useful, plus one functional cookie for this note. Amazon may set its own cookies if you click an Amazon link. Details in our <a href="/privacy/">Privacy Policy</a>.</p>
+    : <p><strong>Cookies:</strong> this site sets at most one functional cookie (to remember you closed this note). Amazon may set its own cookies when you click an Amazon link — see our <a href="/privacy/">Privacy Policy</a>.</p>}
   <button type="button" id="cookieOk">Got it</button>
+  {GA4_ID && <button type="button" id="cookieOptOut" class="ghost">Opt out</button>}
 </div>

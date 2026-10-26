@@ -305,6 +305,9 @@ td small{display:block}
 #cookieNote[hidden]{display:none}
 #cookieNote p{margin:0;font-size:.8rem;line-height:1.35}
 #cookieNote button{flex:none;padding:6px 14px;font-size:.85rem}
+#cookieNote button.ghost{background:transparent;color:inherit;border:1px solid currentColor;box-shadow:none}
+#cookieNote:has(.ghost){flex-wrap:wrap}
+#cookieNote:has(.ghost) p{flex:1 1 100%}
 
 @media (max-width:860px){
   .head-in{padding:8px 20px}

@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CookieNote from '../components/CookieNote.astro';
 import { SITE, ldEscape } from '../lib/data';
+import { GA4_ID, GA_OPTOUT_COOKIE } from '../config/analytics';
 
 export interface Props {
   title: string;
@@ -31,6 +32,18 @@ const breadcrumbLd = crumbs.length
       itemListElement: [{ name: 'Home', path: '/' }, ...crumbs].map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: SITE.url + c.path })),
     }
   : null;
+// Minimal inline stub; gtag.js itself is injected late (first interaction, or after load + idle) and never if opted out.
+const gaSnippet = GA4_ID ? `(function(){var id=${JSON.stringify(GA4_ID)};
+if(document.cookie.indexOf(${JSON.stringify(GA_OPTOUT_COOKIE + '=0')})>-1){window['ga-disable-'+id]=true;return;}
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}window.gtag=gtag;
+gtag('js',new Date());gtag('config',id,{allow_google_signals:false,allow_ad_personalization_signals:false});
+var done=false;function load(){if(done)return;done=true;
+['pointerdown','keydown','scroll','touchstart'].forEach(function(e){removeEventListener(e,load);});
+var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+id;document.head.appendChild(s);}
+['pointerdown','keydown','scroll','touchstart'].forEach(function(e){addEventListener(e,load,{once:true,passive:true});});
+function later(){if('requestIdleCallback' in window)requestIdleCallback(load,{timeout:4000});else setTimeout(load,4000);}
+if(document.readyState==='complete')later();else addEventListener('load',later);
+})();` : '';
 const graph = [...jsonld, ...(breadcrumbLd ? [breadcrumbLd] : [])];
 ---
 <!doctype html>
@@ -78,6 +91,7 @@ const graph = [...jsonld, ...(breadcrumbLd ? [breadcrumbLd] : [])];
     </main>
     <Footer />
     <CookieNote />
+    {gaSnippet && <script is:inline set:html={gaSnippet} />}
     <script>
       import '../scripts/main.ts';
     </script>

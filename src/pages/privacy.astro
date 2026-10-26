@@ -4,26 +4,35 @@ import Crumbs from '../components/Crumbs.astro';
 import Email from '../components/Email.astro';
 import { SITE } from '../lib/data';
 import { webPageLd } from '../lib/ld';
+import { GA4_ID } from '../config/analytics';
 
-const desc = "Privacy policy for sawchainsize.com: what we collect (nothing for the lookup tools), cookies, what we never do, and how to make a privacy request.";
+const desc = "Privacy policy for sawchainsize.com: what we collect (nothing for the lookup tools; Google Analytics page-view statistics), cookies, how to opt out, and how to make a privacy request.";
 const jsonld = [webPageLd("Privacy Policy", "/privacy/", desc, SITE.dataDate, "WebPage")];
 ---
 <Base title={"Privacy Policy"} description={desc} path="/privacy/" nav="about" crumbs={[{ name: 'Privacy policy', path: '/privacy/' }]} jsonld={jsonld} modified={SITE.dataDate}>
   <div class="wrap">
   <div class="pagehead"><Crumbs crumbs={[{ name: 'Privacy policy', path: '/privacy/' }]} /><h1>Privacy policy</h1></div>
   <div class="prose">
-    <p class="small muted">Last updated: 23 October 2026. Applies to sawchainsize.com.</p>
+    <p class="small muted">Last updated: 26 October 2026. Applies to sawchainsize.com.</p>
     <h2>What we collect</h2>
     <ul>
       <li><strong>Nothing, for the lookup tools.</strong> The Chain Finder runs entirely in your browser. Your selections are not sent to us or stored.</li>
-      <li><strong>Analytics.</strong> We use privacy-respecting aggregate analytics to understand which pages are used (for example, page views and approximate region). We do not build advertising profiles of individual visitors.</li>
+      <li><strong>Analytics (Google Analytics 4).</strong> {GA4_ID ? 'We use' : 'We may use'} Google Analytics 4, a web analytics service from Google, to learn which pages are useful so we can improve them. When it runs, Google receives page views and basic usage events, the page and referrer (the site you came from), your approximate location (country/region/city derived from your IP address), and device, browser and operating-system details. Google Analytics 4 does not log or store individual IP addresses. We do not use Google Analytics to build advertising profiles: Google signals and ad personalization are switched off for this site, and the site shows no ads. The analytics script loads after the page has finished loading, and not at all if you have opted out (below).</li>
       <li><strong>Contact messages.</strong> If you email us or use the contact form (which opens your own email app), we receive your email address and the content of your message, and use them only to reply and to act on corrections or requests.</li>
     </ul>
     <h2>Cookies</h2>
     <ul>
-      <li><strong>This site</strong> sets, at most, a functional cookie remembering that you dismissed the cookie notice.</li>
+      <li><strong>Google Analytics cookies.</strong> Google Analytics sets first-party cookies on this site: <span class="mono">_ga</span> (distinguishes visitors) and <span class="mono">_ga_*</span> (keeps session state; the ending is specific to our measurement property). They hold a random identifier, not your name or email.</li>
+      <li><strong>Functional cookies.</strong> This site sets <span class="mono">scs_note</span> to remember that you dismissed the cookie notice, and, only if you opt out of analytics, <span class="mono">scs_ga</span> to remember that choice.</li>
       <li><strong>Amazon links.</strong> This site participates in the Amazon Associates Program. This site does not set or read tracking identifiers itself, but when you click an Amazon link, Amazon may set its own cookies on your device so it can credit a qualifying purchase to this site. We do not receive your personal information from Amazon, only aggregate commission reports. Once you leave this site, <a href="https://www.amazon.com/privacy" target="_blank" rel="noopener">Amazon's privacy notice</a> applies. Links to other sites (for example Oregon Products) are untagged.</li>
       <li><strong>Advertising.</strong> The site shows no display advertising. If that ever changes, this page will be updated before it happens.</li>
+    </ul>
+    <h2>Analytics: retention, opting out, and Google's policies</h2>
+    <ul>
+      <li><strong>Retention.</strong> We have not configured a custom data-retention period; Google's default settings for Google Analytics 4 apply.</li>
+      <li><strong>Opt out on this site.</strong> Analytics is currently <strong data-ga-status>on</strong> for this browser. <button type="button" data-ga-toggle class="f-btn">Turn analytics off for this browser</button> This sets the <span class="mono">scs_ga</span> cookie, stops the analytics script from loading, and removes <span class="mono">_ga</span> cookies this site set. Clearing cookies resets the choice. This button needs JavaScript; the add-on below does not.</li>
+      <li><strong>Opt out everywhere.</strong> Google's <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics opt-out browser add-on</a> stops Google Analytics on all websites you visit.</li>
+      <li><strong>More about Google's handling of data.</strong> See <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">How Google uses information from sites or apps that use its services</a> and <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.</li>
     </ul>
     <h2>What we never do</h2>
     <ul>

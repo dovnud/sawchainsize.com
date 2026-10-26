@@ -1,4 +1,5 @@
 /* Site behaviour. Everything here is progressive enhancement: pages are complete static HTML. */
+import { GA4_ID, GA_OPTOUT_COOKIE } from '../config/analytics';
 
 /* ---------- legacy hash-route redirect (old single-page site used #/model/... URLs) ---------- */
 (function legacy() {
@@ -28,7 +29,38 @@
     note.hidden = true;
     document.cookie = 'scs_note=1; max-age=15552000; path=/; SameSite=Lax; Secure';
   });
+  document.getElementById('cookieOptOut')?.addEventListener('click', () => {
+    note.hidden = true;
+    document.cookie = 'scs_note=1; max-age=15552000; path=/; SameSite=Lax; Secure';
+    setAnalytics(false);
+  });
 })();
+
+/* ---------- analytics opt-out (first-party cookie; the loader in Base.astro checks it) ---------- */
+function analyticsOff() { return document.cookie.split('; ').some((c) => c === GA_OPTOUT_COOKIE + '=0'); }
+function setAnalytics(on: boolean) {
+  const flag = 'ga-disable-' + GA4_ID;
+  if (on) {
+    document.cookie = GA_OPTOUT_COOKIE + '=; max-age=0; path=/; SameSite=Lax; Secure';
+    (window as any)[flag] = false;
+  } else {
+    document.cookie = GA_OPTOUT_COOKIE + '=0; max-age=31536000; path=/; SameSite=Lax; Secure';
+    (window as any)[flag] = true;
+    // remove Google Analytics cookies already set on this site
+    const host = location.hostname.split('.').slice(-2).join('.');
+    document.cookie.split('; ').map((c) => c.split('=')[0]).filter((n) => n === '_ga' || n.startsWith('_ga_')).forEach((n) => {
+      document.cookie = `${n}=; max-age=0; path=/`;
+      document.cookie = `${n}=; max-age=0; path=/; domain=.${host}`;
+    });
+  }
+  syncToggle();
+}
+function syncToggle() {
+  document.querySelectorAll<HTMLElement>('[data-ga-status]').forEach((el) => { el.textContent = analyticsOff() ? 'off' : 'on'; });
+  document.querySelectorAll<HTMLButtonElement>('[data-ga-toggle]').forEach((b) => { b.textContent = analyticsOff() ? 'Turn analytics on for this browser' : 'Turn analytics off for this browser'; });
+}
+document.querySelectorAll<HTMLButtonElement>('[data-ga-toggle]').forEach((b) => b.addEventListener('click', () => setAnalytics(analyticsOff())));
+syncToggle();
 
 /* ---------- throttle for the running saw: rewrites the SVG motion timing in place ---------- */
 (function saw() {
