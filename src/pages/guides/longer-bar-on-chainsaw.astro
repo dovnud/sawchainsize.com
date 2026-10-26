@@ -54,17 +54,17 @@ const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Longer bar on a c
     <div class="pagehead">
       <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Longer bar on a chainsaw' }]} />
       <h1>Can you put a longer bar on your chainsaw?</h1>
-      <p class="lede"><strong>Yes, up to the longest bar the manufacturer lists for your saw, and no further.</strong> The new bar must take the same pitch and gauge as your chain and drive sprocket, and you’ll need a new, longer chain with the drive-link count for that bar. The table below shows the shortest and longest bar listed for every saw on this site.</p>
+      <p class="lede">Yes, up to the longest bar the manufacturer lists for your saw, and no further. The new bar must take the same pitch and gauge as your chain and drive sprocket, and you’ll need a new, longer chain with the drive-link count for that bar. The table below shows the shortest and longest bar listed for every saw on this site.</p>
       <Byline label="Last updated" />
     </div>
 
     <section class="block">
       <h2>The four checks</h2>
       <ol class="steps">
-        <li><strong>Is the length listed for your saw?</strong> Husqvarna’s 2026 fit-up guide calls its rows “certified / approved bar and chain combinations”. STIHL’s chart gives a recommended bar per saw and length. If a length isn’t listed for your model, treat it as not approved.{ex120 && ex460 && <> For example, Husqvarna lists the {ex120.m.data.model} with {lensTxt(ex120.lens)} bars only, while the {ex460.m.data.model} goes from {ex460.min}{Q} to {ex460.max}{Q}.</>}</li>
-        <li><strong>Same pitch?</strong> Chain pitch has to match the drive sprocket. If the longer bar uses the same pitch as your current chain, the sprocket stays. If it doesn’t, the sprocket has to change too.{ex661 && <> STIHL lists the {ex661.m.data.model} on 3/8″ chain up to 36″, but its 32″ and 36″ .404″ setups need a .404″ sprocket.</>}</li>
-        <li><strong>Same gauge?</strong> The chain’s drive links have to fit the bar groove. A bar in a different gauge needs a chain in that gauge. Several saws here are listed in two gauges at the same length. The <a href="/guides/oregon-72-vs-73-chain/">72 vs 73 guide</a> explains why that matters.</li>
-        <li><strong>New chain, new count.</strong> Longer bars take more drive links.{ex311 && <> On the {ex311.m.data.model}, STIHL lists {dlAt('stihl-ms-311', 16)} links at 16″, {dlAt('stihl-ms-311', 18)} at 18″ and {dlAt('stihl-ms-311', 20)} at 20″.</>} Read the count off the new bar’s tail stamp. Don’t extrapolate from the old one.</li>
+        <li><em>Is the length listed for your saw?</em> Husqvarna’s 2026 fit-up guide calls its rows “certified / approved bar and chain combinations”. STIHL’s chart gives a recommended bar per saw and length. If a length isn’t listed for your model, treat it as not approved.{ex120 && ex460 && <> For example, Husqvarna lists the {ex120.m.data.model} with {lensTxt(ex120.lens)} bars only, while the {ex460.m.data.model} goes from {ex460.min}{Q} to {ex460.max}{Q}.</>}</li>
+        <li><em>Same pitch?</em> Chain pitch has to match the drive sprocket. If the longer bar uses the same pitch as your current chain, the sprocket stays. If it doesn’t, the sprocket has to change too.{ex661 && <> STIHL lists the {ex661.m.data.model} on 3/8″ chain up to 36″, but its 32″ and 36″ .404″ setups need a .404″ sprocket.</>}</li>
+        <li><em>Same gauge?</em> The chain’s drive links have to fit the bar groove. A bar in a different gauge needs a chain in that gauge. Several saws here are listed in two gauges at the same length. The <a href="/guides/oregon-72-vs-73-chain/">72 vs 73 guide</a> explains why that matters.</li>
+        <li><em>New chain, new count.</em> Longer bars take more drive links.{ex311 && <> On the {ex311.m.data.model}, STIHL lists {dlAt('stihl-ms-311', 16)} links at 16″, {dlAt('stihl-ms-311', 18)} at 18″ and {dlAt('stihl-ms-311', 20)} at 20″.</>} Read the count off the new bar’s tail stamp. Don’t extrapolate from the old one.</li>
       </ol>
     </section>
 
