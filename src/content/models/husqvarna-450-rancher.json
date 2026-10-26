@@ -22,14 +22,14 @@
     {
       "id": "husqvarna-xforce-bar",
       "type": "dealer",
-      "publisher": "Husqvarna bar listing",
+      "publisher": "Husqvarna bar",
       "title": "X-Force bar listing for the 450 Rancher (18″, .325″, .050″, 72 DL, 3/16″ file)",
       "retrieved": "2026-10-23"
     },
     {
       "id": "husqvarna-fitment-listings",
       "type": "dealer",
-      "publisher": "Husqvarna chain fitment listings",
+      "publisher": "Husqvarna chain fitment",
       "title": "Fitment listings for the 435/440/445/450 family (H30-66)",
       "retrieved": "2026-10-23"
     },
