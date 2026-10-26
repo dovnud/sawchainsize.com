@@ -1,16 +1,19 @@
 {
   "brand": "husqvarna",
-  "model": "435 / 435e",
-  "name": "Husqvarna 435 / 435e",
+  "model": "435 / 440",
+  "name": "Husqvarna 435 / 440",
   "aliases": [
     "435",
     "435e",
-    "Husqvarna 435"
+    "Husqvarna 435",
+    "440",
+    "440e",
+    "Husqvarna 440"
   ],
   "type": "gas",
   "popular": true,
   "blurb": "13″, 16″ and 18″ bar setups on .325″ chain, .050″ gauge, 56–72 drive links — straight from Husqvarna's 2026 fit-up guide.",
-  "intro": "The Husqvarna 435 / 435e is a rear-handle gas saw. Husqvarna's own 2026 Bar & Chain Fit-up Guide (effective 1 January 2026) lists 3 approved bar lengths for it (13″, 16″ and 18″), running .325″ pitch chain in .050″ gauge.",
+  "intro": "The Husqvarna 435 / 435e is a rear-handle gas saw. Husqvarna's own 2026 Bar & Chain Fit-up Guide (effective 1 January 2026) lists 3 approved bar lengths for it (13″, 16″ and 18″), running .325″ pitch chain in .050″ gauge. The 440 / 440e has its own entry in the same guide, and every row is identical: the same three lengths, drive-link counts, bar and chain part numbers, so this page covers both saws.",
   "bars": [
     {
       "lengths_in": [
@@ -86,6 +89,6 @@
       "retrieved": "2026-10-24"
     }
   ],
-  "sources_note": "Husqvarna 2026 Bar & Chain Fit-up Guide (effective 1 January 2026), read in full on 24 Oct 2026; every row in the table is restated from the saw's entry in that guide.",
-  "last_verified": "2026-10-24"
+  "sources_note": "Husqvarna 2026 Bar & Chain Fit-up Guide (effective 1 January 2026), read in full on 24 Oct 2026; every row in the table is restated from the saw's entry in that guide; 440 / 440e rows compared line by line on 26 Oct 2026 (identical).",
+  "last_verified": "2026-10-26"
 }

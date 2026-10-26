@@ -21,6 +21,8 @@ const pages = [
   ['guides-how-to-count-drive-links', 'GUIDE', 'How to count drive links', 'Mark one link, count the tangs'],
   ['guides-oregon-72-vs-73-chain', 'GUIDE', 'Oregon 72 vs 73 chain', '.050″ vs .058″ gauge on 3/8″ pitch'],
   ['guides-chainsaw-chain-file-size', 'GUIDE', 'Chainsaw chain file size', 'Round file size by pitch'],
+  ['guides-chainsaw-sharpening-angles', 'GUIDE', 'Chain sharpening angles', 'Top plate · down angle · depth gauge'],
+  ['guides-longer-bar-on-chainsaw', 'GUIDE', 'Longer bar on your saw?', 'Listed bar range for every saw'],
   ['about', 'ABOUT', 'About Saw Chain Size', 'Method · sources · last-verified policy'],
   ['how-we-verify', 'EDITORIAL POLICY', 'How we verify specs', 'Source hierarchy and conflict handling'],
   ['data', 'OPEN DATASET', 'Chain size dataset', 'CSV + JSON · pitch, gauge, drive links by saw and bar'],

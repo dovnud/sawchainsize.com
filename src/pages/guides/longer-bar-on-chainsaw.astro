@@ -1,0 +1,112 @@
+---
+import Byline from '../../components/Byline.astro';
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import { getModels, getBrands, modelUrl, chainUrl, chainKey, pitchShort, gaugeShort, SOURCE_TYPE_LABEL } from '../../lib/data';
+import { webPageLd, faqLd } from '../../lib/ld';
+import dates from '../../data/page-dates.json';
+const path = '/guides/longer-bar-on-chainsaw/';
+const modified = (dates as Record<string, string>)[path];
+const models = await getModels();
+const brands = new Map((await getBrands()).map((b) => [b.id, b.data.name]));
+const Q = '″';
+
+// Per saw: listed bar lengths, chain specs, sources — straight from the model data files.
+const sawRows = models.filter((m) => m.data.bars.some((b) => b.status === 'ok')).map((m) => {
+  const lens = [...new Set(m.data.bars.flatMap((b) => b.lengths_in))].sort((a, b) => a - b);
+  const specs = [...new Set(m.data.bars.filter((b) => b.pitch && b.gauge).map((b) => `${pitchShort(b.pitch)} · ${gaugeShort(b.gauge)}`))];
+  const src = [...new Set(m.data.sources.map((s) => `${s.publisher} ${SOURCE_TYPE_LABEL[s.type]}`))].join(' · ');
+  const full = m.data.sources.some((s) => s.type === 'fitup-chart');
+  return { m, lens, specs, src, full, min: lens[0], max: lens[lens.length - 1] };
+});
+
+// Drive links seen at each bar length for the most common specs (verified rows only).
+const bySpec = new Map<string, { pitch: string; gauge: number; byLen: Map<number, Set<number>>; saws: Set<string> }>();
+for (const m of models) for (const b of m.data.bars) {
+  if (b.status !== 'ok' || !b.pitch || !b.gauge || !b.drive_links) continue;
+  const k = chainKey(b.pitch, b.gauge);
+  if (!bySpec.has(k)) bySpec.set(k, { pitch: b.pitch, gauge: b.gauge, byLen: new Map(), saws: new Set() });
+  const s = bySpec.get(k)!; s.saws.add(m.id);
+  for (const l of b.lengths_in) { if (!s.byLen.has(l)) s.byLen.set(l, new Set()); s.byLen.get(l)!.add(b.drive_links); }
+}
+const specTables = [...bySpec.entries()].filter(([, s]) => s.saws.size >= 3).sort((a, b) => b[1].saws.size - a[1].saws.size).slice(0, 4)
+  .map(([k, s]) => ({ k, s, lens: [...s.byLen.keys()].sort((a, b) => a - b) }));
+
+// Worked examples pulled from data.
+const find = (id: string) => sawRows.find((r) => r.m.id === id);
+const ex120 = find('husqvarna-120-mark-ii'), ex460 = find('husqvarna-460-rancher'), ex661 = find('stihl-ms-661'), ex311 = find('stihl-ms-311');
+const lensTxt = (ls: number[]) => { const t = ls.map((l) => `${l}${Q}`); return t.length > 1 ? `${t.slice(0, -1).join(', ')} and ${t[t.length - 1]}` : t.join(''); };
+const dlAt = (id: string, len: number) => [...new Set(models.find((m) => m.id === id)?.data.bars.filter((b) => b.status === 'ok' && b.lengths_in.includes(len)).map((b) => b.drive_links))].join(' or ');
+
+const desc = 'Can you put a longer bar on a chainsaw? Only up to the longest bar the maker lists for your saw, in the same pitch and gauge, with a new chain. Listed bar range for every saw we cover.';
+const faqs = [
+  { q: 'Can I put a longer bar on my chainsaw?', a: 'Yes, if the length is one the manufacturer lists for your saw. Husqvarna’s fit-up guide and STIHL’s chain-selection chart both list specific bar and chain combinations per saw. The longer bar has to take the same pitch and gauge your drive sprocket and chain use, and it needs a longer chain loop with the drive-link count for that bar.' },
+  { q: 'Can I use my old chain on a longer bar?', a: 'No. Drive-link count goes up with bar length, so a longer bar always needs a longer loop. On the STIHL MS 311, for example, STIHL lists 60 links for the 16″ bar, 66 for the 18″ and 72 for the 20″.' },
+  { q: 'Do I need a new sprocket for a longer bar?', a: 'Not if the new bar takes the same pitch as your current chain. You only change the drive sprocket when you change pitch, for example to the .404″ setups STIHL lists for the MS 661 on 32″ and 36″ bars.' },
+  { q: 'Is a bar the same length on every saw?', a: 'Not exactly. STIHL notes on its chart that the listed bar length can differ from the effective cutting length depending on the saw it is fitted to. That is why the drive-link count on the bar stamp matters more than the length printed on the box.' },
+];
+const jsonld = [webPageLd('Can you put a longer bar on your chainsaw?', path, desc, modified), faqLd(faqs)];
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Longer bar on a chainsaw', path }];
+---
+<Base title="Can You Put a Longer Bar on Your Chainsaw?" description={desc} path={path} nav="verify" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Longer bar on a chainsaw' }]} />
+      <h1>Can you put a longer bar on your chainsaw?</h1>
+      <p class="lede"><strong>Yes, up to the longest bar the manufacturer lists for your saw, and no further.</strong> The new bar must take the same pitch and gauge as your chain and drive sprocket, and you’ll need a new, longer chain with the drive-link count for that bar. The table below shows the shortest and longest bar listed for every saw on this site.</p>
+      <Byline label="Last updated" />
+    </div>
+
+    <section class="block">
+      <h2>The four checks</h2>
+      <ol class="steps">
+        <li><strong>Is the length listed for your saw?</strong> Husqvarna’s 2026 fit-up guide calls its rows “certified / approved bar and chain combinations”. STIHL’s chart gives a recommended bar per saw and length. If a length isn’t listed for your model, treat it as not approved.{ex120 && ex460 && <> For example, Husqvarna lists the {ex120.m.data.model} with {lensTxt(ex120.lens)} bars only, while the {ex460.m.data.model} goes from {ex460.min}{Q} to {ex460.max}{Q}.</>}</li>
+        <li><strong>Same pitch?</strong> Chain pitch has to match the drive sprocket. If the longer bar uses the same pitch as your current chain, the sprocket stays. If it doesn’t, the sprocket has to change too.{ex661 && <> STIHL lists the {ex661.m.data.model} on 3/8″ chain up to 36″, but its 32″ and 36″ .404″ setups need a .404″ sprocket.</>}</li>
+        <li><strong>Same gauge?</strong> The chain’s drive links have to fit the bar groove. A bar in a different gauge needs a chain in that gauge. Several saws here are listed in two gauges at the same length. The <a href="/guides/oregon-72-vs-73-chain/">72 vs 73 guide</a> explains why that matters.</li>
+        <li><strong>New chain, new count.</strong> Longer bars take more drive links.{ex311 && <> On the {ex311.m.data.model}, STIHL lists {dlAt('stihl-ms-311', 16)} links at 16″, {dlAt('stihl-ms-311', 18)} at 18″ and {dlAt('stihl-ms-311', 20)} at 20″.</>} Read the count off the new bar’s tail stamp. Don’t extrapolate from the old one.</li>
+      </ol>
+    </section>
+
+    <hr class="rule" />
+
+    <section class="block">
+      <h2>Listed bar range, saw by saw</h2>
+      <p style="max-width:72ch">Shortest and longest bar in our data for each saw, built from the same manufacturer charts, manuals and chain-maker data as the saw pages. For Husqvarna and STIHL that’s the maker’s full fit-up or chain-selection list. For some other brands the source is the owner’s manual or a catalog, which may list only the bars the saw is sold with. The Coverage column tells you which is which: “partial” means a longer approved bar may exist that we haven’t sourced yet. Bars listed include any rows flagged verify-on-stamp. Open the saw page for the drive-link count at each length.</p>
+      <div class="tblwrap">
+        <table>
+          <thead><tr><th>Saw</th><th>Bars listed</th><th>Shortest–longest</th><th>Coverage</th><th>Chain spec(s)</th><th>Source</th></tr></thead>
+          <tbody>
+            {sawRows.map((r) => (
+              <tr><td><a href={modelUrl(r.m)}>{r.m.data.name}</a></td><td class="num">{r.lens.map((l) => `${l}${Q}`).join(', ')}</td><td class="num">{r.min === r.max ? `${r.min}${Q}` : `${r.min}–${r.max}${Q}`}</td><td class="small">{r.full ? 'Maker’s fit-up list' : 'Partial (manual / catalog)'}</td><td class="num">{r.specs.join(' / ') || '—'}</td><td class="small">{r.src}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="src">{sawRows.length} saws with at least one verified setup ({models.length - sawRows.length} saws whose rows are all flagged conflict or verify-on-stamp are left out; see their pages). Generated from the per-saw data files at build time, so it always matches the saw pages. Brands: {[...new Set(sawRows.map((r) => brands.get(r.m.data.brand)))].join(', ')}.</p>
+    </section>
+
+    <section class="block">
+      <h2>Drive links by bar length, across saws</h2>
+      <p style="max-width:72ch">The same bar length can need different loops on different saws, even at the same pitch and gauge. Here are the drive-link counts that appear in verified rows for the most common specs. Where a cell shows two numbers, different saws (or different bars for one saw) take different loops at that length.</p>
+      {specTables.map(({ k, s, lens }) => (
+        <>
+          <h3><a href={chainUrl(k)}>{pitchShort(s.pitch)} · {gaugeShort(s.gauge)}</a> <span class="small muted">({s.saws.size} saws)</span></h3>
+          <div class="tblwrap">
+            <table>
+              <thead><tr><th>Bar</th>{lens.map((l) => <th class="num">{l}{Q}</th>)}</tr></thead>
+              <tbody><tr><td>Drive links</td>{lens.map((l) => <td class="num">{[...s.byLen.get(l)!].sort((a, b) => a - b).join(' / ')}</td>)}</tr></tbody>
+            </table>
+          </div>
+        </>
+      ))}
+      <p class="src">Verified rows only (status “verified” on the saw pages). Flagged rows (conflict or verify on stamp) are left out.</p>
+    </section>
+
+    <div class="callout"><b>⚠ Bar length on the box ≠ cutting length</b><p>STIHL’s chart notes that a bar’s listed length can differ from its effective cutting length depending on the saw. What decides the chain is the bar, not the label: read pitch, gauge and drive links off the new bar’s tail stamp (<a href="/guides/how-to-verify-chain-size/">how to read it</a>) before you order the chain.</p></div>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p class="src">Sources: Husqvarna <a href="https://media.husqvarnagroup.com/original/DI-328359.pdf" rel="nofollow">Bar &amp; Chain Fit-up Guide 2026</a> (effective 1 January 2026); STIHL USA <a href="https://assets.unilogcorp.com/187/ITEM/DOC/Stihl_102205325_Catalog.pdf" rel="nofollow">Saw Chain Selection and Identification</a> chart (specifications as of 1 October 2017); and the manuals, catalogs and chain-maker data cited on each saw page.</p>
+    <p><a href="/bars/">Chain size by bar length</a> · <a href="/saws/">All saws</a> · <a href="/guides/how-to-count-drive-links/">How to count drive links</a></p>
+  </div>
+</Base>

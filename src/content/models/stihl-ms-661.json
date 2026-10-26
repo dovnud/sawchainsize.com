@@ -1,0 +1,368 @@
+{
+  "brand": "stihl",
+  "model": "MS 661 C-M",
+  "name": "STIHL MS 661 C-M",
+  "aliases": [
+    "MS 661",
+    "MS 661 C-M",
+    "MS 661 R C-M"
+  ],
+  "type": "gas",
+  "popular": false,
+  "blurb": "20″ to 36″ bars on 3/8″ chain in .050″ or .063″ gauge (72–115 drive links), plus .404″ on 32″ and 36″ — per STIHL's chain-selection chart.",
+  "intro": "The MS 661 C-M is the biggest STIHL on this site, and the one with the most ways to buy the wrong loop. STIHL's selection chart gives it its own block: 3/8″ Rapid Super chain in two gauges, .050″ (33 RS3) and .063″ (36 RS3), on bars from 20″ to 36″, plus .404″ (46 RS) chain on 32″ and 36″ bars. Bar length alone does not settle it. Two different 28″ .050″ bars take 91 or 92 links, and two 36″ .063″ bars take 114 or 115, depending on the bar's nose sprocket. Get pitch and gauge from the stamp on the bar tail and the drive-link count from the same stamp, or by counting the old loop. Most of the longer bars in this block are yellow-labeled, meaning STIHL does not offer a reduced-kickback version at that length (each row says so). The chart is dated 1 October 2017, so check your bar stamp before you order chain for a newer saw or a non-STIHL bar.",
+  "bars": [
+    {
+      "lengths_in": [
+        20
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 72,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "33 RS3 72",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "MS 661 block: 33 RS3 72 loop, paired with bar part number 3003 008 8921. Laminated bar with a 10-tooth nose sprocket."
+    },
+    {
+      "lengths_in": [
+        25
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 84,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "33 RS3 84",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "MS 661 block: 33 RS3 84 loop, paired with bar part numbers 3003 000 4030 and 3003 000 9630. Both are exchangeable-nose (RS) bars; the 9630 bar has a 13-tooth nose."
+    },
+    {
+      "lengths_in": [
+        28
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 91,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "33 RS3 91",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "MS 661 block: 33 RS3 91 loop, paired with bar part number 3003 000 8838. 11-tooth nose. STIHL marks this length with an asterisk: no green-labeled reduced-kickback bar is offered in it, so the chart lists a yellow-labeled bar.",
+      "label": "28″ (11-tooth nose bar)"
+    },
+    {
+      "lengths_in": [
+        28
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 92,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "33 RS3 92",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "MS 661 block: 33 RS3 92 loop, paired with bar part number 3003 000 9638. 13-tooth nose. This is the one place in the MS 661's .050″ list where two 28″ bars need different loops (91 vs 92 links), so read the count off your own bar. STIHL marks this length with an asterisk: no green-labeled reduced-kickback bar is offered in it, so the chart lists a yellow-labeled bar.",
+      "label": "28″ (13-tooth nose bar)"
+    },
+    {
+      "lengths_in": [
+        32
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 105,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "33 RS3 105",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "MS 661 block: 33 RS3 105 loop, paired with bar part numbers 3003 000 8846 and 3003 000 9646. STIHL marks this length with an asterisk: no green-labeled reduced-kickback bar is offered in it, so the chart lists a yellow-labeled bar."
+    },
+    {
+      "lengths_in": [
+        36
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 114,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "33 RS3 114",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "MS 661 block: 33 RS3 114 loop, paired with bar part numbers 3003 000 8853 and 3003 000 9653. STIHL marks this length with an asterisk: no green-labeled reduced-kickback bar is offered in it, so the chart lists a yellow-labeled bar."
+    },
+    {
+      "lengths_in": [
+        20
+      ],
+      "pitch": "3/8",
+      "gauge": 0.063,
+      "drive_links": 72,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "36 RS3 72",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "MS 661 block: 36 RS3 72 loop, paired with bar part number 3003 008 6121. Laminated bar with a 10-tooth nose sprocket."
+    },
+    {
+      "lengths_in": [
+        22
+      ],
+      "pitch": "3/8",
+      "gauge": 0.063,
+      "drive_links": 76,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "36 RS3 76",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "MS 661 block: 36 RS3 76 loop, paired with bar part number 3003 000 9425. STIHL marks this length with an asterisk: no green-labeled reduced-kickback bar is offered in it, so the chart lists a yellow-labeled bar."
+    },
+    {
+      "lengths_in": [
+        25
+      ],
+      "pitch": "3/8",
+      "gauge": 0.063,
+      "drive_links": 84,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "36 RS3 84",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "MS 661 block: 36 RS3 84 loop, paired with bar part numbers 3003 000 5231 and 3003 000 6038 and 3003 000 9831. STIHL marks this length with an asterisk: no green-labeled reduced-kickback bar is offered in it, so the chart lists a yellow-labeled bar."
+    },
+    {
+      "lengths_in": [
+        28
+      ],
+      "pitch": "3/8",
+      "gauge": 0.063,
+      "drive_links": 91,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "36 RS3 91",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "MS 661 block: 36 RS3 91 loop, paired with bar part number 3003 000 6041. STIHL marks this length with an asterisk: no green-labeled reduced-kickback bar is offered in it, so the chart lists a yellow-labeled bar."
+    },
+    {
+      "lengths_in": [
+        30
+      ],
+      "pitch": "3/8",
+      "gauge": 0.063,
+      "drive_links": 97,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "36 RS3 97",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "MS 661 block: 36 RS3 97 loop, paired with bar part number 3003 000 9842. 13-tooth nose. STIHL marks this length with an asterisk: no green-labeled reduced-kickback bar is offered in it, so the chart lists a yellow-labeled bar."
+    },
+    {
+      "lengths_in": [
+        32
+      ],
+      "pitch": "3/8",
+      "gauge": 0.063,
+      "drive_links": 105,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "36 RS3 105",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "MS 661 block: 36 RS3 105 loop, paired with bar part number 3003 000 6046. STIHL marks this length with an asterisk: no green-labeled reduced-kickback bar is offered in it, so the chart lists a yellow-labeled bar."
+    },
+    {
+      "lengths_in": [
+        36
+      ],
+      "pitch": "3/8",
+      "gauge": 0.063,
+      "drive_links": 114,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "36 RS3 114",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "MS 661 block: 36 RS3 114 loop, paired with bar part number 3003 000 6053. 11-tooth nose. STIHL marks this length with an asterisk: no green-labeled reduced-kickback bar is offered in it, so the chart lists a yellow-labeled bar.",
+      "label": "36″ (11-tooth nose bar)"
+    },
+    {
+      "lengths_in": [
+        36
+      ],
+      "pitch": "3/8",
+      "gauge": 0.063,
+      "drive_links": 115,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "36 RS3 115",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "MS 661 block: 36 RS3 115 loop, paired with bar part number 3003 000 9853. 13-tooth nose: one more drive link than the 6053 bar of the same length. STIHL marks this length with an asterisk: no green-labeled reduced-kickback bar is offered in it, so the chart lists a yellow-labeled bar.",
+      "label": "36″ (13-tooth nose bar)"
+    },
+    {
+      "lengths_in": [
+        32
+      ],
+      "pitch": "404",
+      "gauge": 0.063,
+      "drive_links": 95,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "46 RS 95",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "MS 661 block: 46 RS 95 loop, paired with bar part number 3003 000 7346. STIHL does not offer green-labeled low-kickback chain in .404″, so the chart lists a yellow-labeled chain; the bar is also yellow-labeled. A .404″ bar also needs a .404″ drive sprocket on the saw."
+    },
+    {
+      "lengths_in": [
+        36
+      ],
+      "pitch": "404",
+      "gauge": 0.063,
+      "drive_links": 104,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "46 RS 104",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "MS 661 block: 46 RS 104 loop, paired with bar part number 3003 000 7353. Yellow-labeled .404″ chain and bar (no green-labeled option in this pitch). A .404″ bar also needs a .404″ drive sprocket on the saw."
+    }
+  ],
+  "sources": [
+    {
+      "id": "stihl-chain-chart-2017",
+      "type": "fitup-chart",
+      "publisher": "STIHL",
+      "title": "Saw Chain Selection and Identification (STIHL USA catalog page 173; specifications as of 1 October 2017) — recommended chain loop and guide bar per saw model",
+      "url": "https://assets.unilogcorp.com/187/ITEM/DOC/Stihl_102205325_Catalog.pdf",
+      "retrieved": "2026-10-26"
+    }
+  ],
+  "sources_note": "STIHL USA “Saw Chain Selection and Identification” chart (catalog page 173, specifications as of 1 October 2017), MS 661 C-M / MS 661 R C-M block, re-read from the PDF on 26 Oct 2026.",
+  "last_verified": "2026-10-26"
+}

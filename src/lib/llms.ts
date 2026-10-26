@@ -8,6 +8,8 @@ const guides = [
   ['/guides/how-to-count-drive-links/', 'How to count drive links', 'Mark one link, count the tangs, match the box.'],
   ['/guides/oregon-72-vs-73-chain/', 'Oregon 72 vs 73 chain', '3/8" pitch; 72 is .050" gauge, 73 is .058" gauge.'],
   ['/guides/chainsaw-chain-file-size/', 'Chainsaw chain file size', 'Round file size by pitch.'],
+  ['/guides/chainsaw-sharpening-angles/', 'Chainsaw sharpening angles', 'Top-plate angle, down angle and depth-gauge setting by Oregon chain type.'],
+  ['/guides/longer-bar-on-chainsaw/', 'Can you put a longer bar on your chainsaw?', 'Approved bar lengths per saw; same pitch and gauge; new chain with the right drive-link count.'],
   ['/how-we-verify/', 'How we verify specs', 'Source hierarchy and conflict handling.'],
   ['/affiliate-disclosure/', 'Affiliate disclosure', 'Amazon Associates participant (Amazon only): Amazon links are affiliate links and the site earns from qualifying purchases. No other affiliate programs; Oregon and other links are untagged.'],
 ];

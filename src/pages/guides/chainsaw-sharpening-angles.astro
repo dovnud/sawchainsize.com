@@ -1,0 +1,123 @@
+---
+import Byline from '../../components/Byline.astro';
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { chainUrl } from '../../lib/data';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+const path = '/guides/chainsaw-sharpening-angles/';
+const modified = (dates as Record<string, string>)[path];
+const desc = 'Chainsaw chain sharpening angles by chain type: top-plate angle (25° or 30°), down angle (0° or 10°) and depth-gauge setting (.025″ or .030″), from Oregon’s filing chart.';
+const ORE_CHART = 'https://oregonproducts.com/medias/2020-FilingGrindingAngles.pdf?attachment=true&context=bWFzdGVyfHJvb3R8NDA2MDY0fGFwcGxpY2F0aW9uL3BkZnxoNjUvaGJmLzg4NTMxOTkzODg3MDIucGRmfGQ4MmNmZWZjZDA5MWQ3MmM0NmY0OTM4ZmFhN2MxZWUwMDA2MzgzM2Q4Y2U1MzgyYjQwMzZmYzZhZmY3ZWMzNjQ';
+const ORE_MANUAL = 'https://apps.oregonproducts.com/pdfs/OregonMMANUAL_EN_A106971ab.pdf';
+// Oregon "Filing Angles" chart (2020 sheet; same values as Maintenance & Safety Manual pp. 30–31).
+// [pitch, chain types, file, top-plate A, down B, side-plate C, depth gauge D, site chain-spec key or null]
+type Row = [string, string, string, string, string, string, string, string | null];
+const rows: Row[] = [
+  ['1/4″', '25AP', '5/32″', '30°', '10°', '85°', '.025″', null],
+  ['.325″ Low Profile', '80TXL', '5/32″', '25°', '10°', '70°', '.025″', null],
+  ['3/8″ Low Profile', '90PX, 90SG', '4.5 mm', '30°', '0°', '75°', '.025″', '3-8-lp-043'],
+  ['3/8″ Low Profile', '91P, 91PX, 91PXL', '5/32″', '30°', '0°', '80°', '.025″', '3-8-lp-050'],
+  ['3/8″ Low Profile', '91VXL, M91VXL', '5/32″', '30°', '0°', '80°', '.025″', '3-8-lp-050'],
+  ['.325″', '95VPX', '3/16″', '30°', '10°', '70°', '.025″', null],
+  ['.325″', '20, 21, 22BPX, M20, M21, M22BPX', '3/16″', '30°', '10°', '70°', '.025″', null],
+  ['.325″', '95TXL', '3/16″', '30°', '10°', '70°', '.025″', '325-050'],
+  ['.325″', '20, 21, 22LPX, LGX, M20, M21, M22LPX', '3/16″', '25°', '10°', '60°', '.025″', null],
+  ['3/8″', '72, 73, 75V', '7/32″', '25°', '10°', '60°', '.025″', null],
+  ['3/8″', '72, 75CJ, CK, CL (square ground)', '—', '45°', '45°', '90°', '.025″', null],
+  ['3/8″', '72APX, 72, 73, 75DPX, M72, M73, M75DPX', '7/32″', '30°', '10°', '80°', '.025″', null],
+  ['3/8″', '72, 73, 75EXL, EXJ, LGX, JGX, LPX, JPX', '7/32″', '25°', '10°', '60°', '.025″', null],
+  ['3/8″', 'M72, M73, M75LPX', '7/32″', '25°', '10°', '60°', '.025″', null],
+  ['3/8″', '72, 73, 75RD', '7/32″', '10°', '10°', '75°', '.025″', null],
+  ['.404″', '27X, 27AX', '7/32″', '30°', '10°', '65°', '.030″', null],
+  ['.404″', '27R, RX, RA', '7/32″', '10°', '10°', '75°', '.030″', null],
+  ['.404″', '58CJ, CL, 59CJ, CK, CL (square ground)', '—', '45°', '45°', '85°', '.025″', null],
+  ['.404″', '58, 59J, L', '7/32″', '25°', '10°', '60°', '.025″', null],
+  ['.404″', '68LX, JX', '7/32″', '25°', '10°', '60°', '.030″', null],
+  ['.404″', '68CJ, CL (square ground)', '—', '45°', '45°', '—', '.030″', null],
+];
+const faqs = [
+  { q: 'What angle do you sharpen a chainsaw chain at?', a: 'On Oregon’s round-filed chain the top-plate angle is either 30° or 25°, depending on the chain type: 30° for 3/8″ low-profile (90PX, 91PX, 91VXL), 95TXL and the 72/73/75DPX family, 25° for the 72/73/75LPX and EXL family and for .325″ LPX. Ripping chain (RD, 27R) is filed at 10°. The type code is stamped on the drive links and printed on the box.' },
+  { q: 'Do I tilt the file down?', a: 'Most Oregon types call for a 10° down angle. Oregon’s 3/8″ low-profile types (90PX, 91PX, 91VXL) are the exception at 0°, so the file is held level. If you use an Oregon file guide, Oregon says to keep the guide itself flat on the top plate.' },
+  { q: 'What should the depth-gauge (raker) setting be?', a: 'For almost every Oregon type in the chart, .025″ (0.64 mm). Some .404″ types (27X, 27AX, 27R, 68LX/JX, 68CJ/CL) are set at .030″. Most Oregon chains have the setting stamped on each depth gauge.' },
+  { q: 'How often should I sharpen and lower the depth gauges?', a: 'Oregon’s manual says to touch up the cutters with a file about every hour of cutting, or sooner if needed, and to check the depth gauges every three or four sharpenings.' },
+  { q: 'Are these angles right for STIHL or Husqvarna chain?', a: 'The table is Oregon’s data for Oregon chain types. STIHL and Husqvarna publish their own filing specs, and they can differ. Use the chain maker’s figures for the chain you actually have on the bar.' },
+];
+const howto = {
+  '@context': 'https://schema.org', '@type': 'HowTo', name: 'How to sharpen a chainsaw chain with a round file',
+  description: 'Round-file the cutters at the angles for your chain type, then check and lower the depth gauges.',
+  tool: [{ '@type': 'HowToTool', name: 'Round file and file guide of the size for your chain' }, { '@type': 'HowToTool', name: 'Flat file and depth-gauge tool' }],
+  step: [
+    { '@type': 'HowToStep', name: 'Find your chain type', text: 'Read the chain type code on the drive links or box and look up its file size, angles and depth-gauge setting.' },
+    { '@type': 'HowToStep', name: 'Hold the file at the right height', text: 'Keep one fifth (20%) of the file’s diameter above the cutter’s top plate; a file guide holds it there.' },
+    { '@type': 'HowToStep', name: 'File at the top-plate angle', text: 'Keep the file guide’s top-plate angle line parallel with the chain and file from the inside of each cutter to the outside, all cutters on one side, then the other side.' },
+    { '@type': 'HowToStep', name: 'Keep cutters equal', text: 'File back past any damage to the chrome and keep all cutter lengths equal.' },
+    { '@type': 'HowToStep', name: 'Set the depth gauges', text: 'Every three or four sharpenings, lay a depth-gauge tool on the chain and flat-file any depth gauge that sticks up through the slot, then round off its front corner. Do not file bumper tie straps or bumper drive links.' },
+  ],
+};
+const jsonld = [webPageLd('Chainsaw chain sharpening angles and depth-gauge settings', path, desc, modified), howto, faqLd(faqs)];
+const shop = guideShop('chainsaw-sharpening-angles');
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Sharpening angles', path }];
+---
+<Base title="Chainsaw Chain Sharpening Angles & Depth-Gauge Settings" description={desc} path={path} nav="chart" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Sharpening angles' }]} />
+      <h1>Chainsaw chain sharpening angles</h1>
+      <p class="lede">Most round-filed chain is sharpened at a <strong>30° or 25° top-plate angle</strong>, with the file <strong>tilted 10° down</strong> (level, 0°, on 3/8″ low-profile chain), and the depth gauges set to <strong>.025″</strong> (.030″ on some .404″ chain). Which of those numbers applies depends on the chain type code stamped on the drive links. Look yours up below.</p>
+      <Byline label="Last updated" />
+    </div>
+
+    <section class="block">
+      <h2>Filing angles by chain type (Oregon)</h2>
+      <p style="max-width:72ch">Restated from Oregon’s <em>Filing Angles</em> chart. <strong>Top plate</strong> is the angle of the file across the chain (the line on a file guide). <strong>Down angle</strong> is how far the file tips below horizontal. <strong>Side plate</strong> is the resulting angle on the cutter’s side face, a check value rather than something you set. <strong>Depth gauge</strong> is how far the raker sits below the cutter’s top plate.</p>
+      <div class="tblwrap">
+        <table>
+          <thead><tr><th>Pitch</th><th>Oregon chain type</th><th>File</th><th>Top plate</th><th>Down angle</th><th>Side plate</th><th>Depth gauge</th></tr></thead>
+          <tbody>
+            {rows.map(([p, t, f, a, b, c, d, key]) => (
+              <tr><td class="num">{key ? <a href={chainUrl(key)}>{p}</a> : p}</td><td class="num">{t}</td><td class="num">{f}</td><td class="num">{a}</td><td class="num">{b}</td><td class="num">{c}</td><td class="num">{d}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="src">Source: Oregon, <a href={ORE_CHART} rel="nofollow">Saw Chain Filing Angles / Grinding Angles chart</a> (2020), and the same table in the <a href={ORE_MANUAL} rel="nofollow">Oregon Maintenance and Safety Manual</a>, pp. 30–31. Square-ground (CJ/CK/CL) types have no round-file size: Oregon gives a 45° top-plate angle and 45° down angle, which produces a 15° cutting edge. Linked pitches open our chain-spec pages for that pitch and gauge.</p>
+      <p>Two patterns are worth remembering. <strong>Low-profile 3/8″ chain is filed flat</strong>: every 90- and 91-series row has a 0° down angle, unlike the 10° on standard chain. And <strong>the depth gauge barely changes</strong>: .025″ everywhere except a few .404″ types at .030″. The file size follows pitch. That table lives on the <a href="/guides/chainsaw-chain-file-size/">file size guide</a>, and every saw page lists the file for each bar.</p>
+    </section>
+
+    <hr class="rule" />
+
+    <section class="block">
+      <h2>How to file the cutters</h2>
+      <ol class="steps">
+        <li><strong>Identify the chain.</strong> Read the type code on the drive links or the box (for example 72LPX or 91PX) and find its row above. Not sure of the pitch and gauge? <a href="/guides/how-to-verify-chain-size/">Verify them from the bar stamp</a> first.</li>
+        <li><strong>Hold the file at the right height.</strong> Oregon says to keep one fifth (20%) of the file’s diameter above the cutter’s top plate. A file guide of the matching size holds it there.</li>
+        <li><strong>Hold the angle.</strong> Keep the guide’s top-plate angle line parallel with the chain, at the down angle for your type.</li>
+        <li><strong>File from the inside out.</strong> Do every cutter on one side of the chain, then turn the saw around and do the other side.</li>
+        <li><strong>Remove damage, keep lengths equal.</strong> If the chrome on a top plate or side plate is damaged, file back until it’s gone, then bring every cutter to the same length.</li>
+      </ol>
+      <p class="src">Steps from the Oregon Maintenance and Safety Manual, “Round-File Cutter Sharpening” (pp. 23–24). Oregon’s cutting tips (p. 9) say to touch up the cutters about every hour of use, or sooner.</p>
+    </section>
+
+    <section class="block">
+      <h2>How to set the depth gauges</h2>
+      <ol class="steps">
+        <li>Check them <strong>every three or four sharpenings</strong>, with the chain properly tensioned if it’s on the saw.</li>
+        <li>Lay a depth-gauge tool with the right setting (.025″ or .030″) on the chain so one depth gauge pokes through the slot.</li>
+        <li>If it sticks up above the tool, file it level with a flat file, and never lower than the setting for your chain.</li>
+        <li>Round off the front corner of each lowered depth gauge back to its original shape.</li>
+        <li>Leave the bumper tie straps and bumper drive links alone. Oregon says not to file or alter them, because they’re part of the chain’s kickback reduction.</li>
+      </ol>
+      <p class="src">From the Oregon Maintenance and Safety Manual, “How to Set Depth Gauges” (pp. 25–26). Most Oregon chains have the setting stamped on each depth gauge, e.g. “025”.</p>
+    </section>
+
+    <div class="callout"><b>⚠ When it cuts crooked</b><p>Oregon’s troubleshooting section lists uneven cutter top-plate lengths, and cutters damaged on one side, as causes of a chain that leans or binds in the cut. The fix is to file the cutters back to equal lengths and square up the bar rails if they’ve worn unevenly. Oregon also says to replace the drive sprocket after every two chains, or sooner.</p></div>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/chainsaw-chain-file-size/">File size by pitch</a> · <a href="/guides/chain-size-chart/">Chain identification chart</a> · <a href="/guides/how-to-verify-chain-size/">Verify your chain size</a></p>
+    <ShopBlock groups={shop.groups} title="Files &amp; depth-gauge tools (Amazon)" lead="Optional. Pick the file size for your chain's pitch, and the depth-gauge tool for its setting." />
+  </div>
+</Base>

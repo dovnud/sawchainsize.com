@@ -4,7 +4,7 @@
  * no prices; bars with status conflict/verify never get a spec-matched chain link.
  */
 import { ASINS, amazonProductUrl, amazonSearchUrl } from '../config/affiliate';
-import { type Model, type Bar, pitchShort, gaugeShort, barLabel } from './data';
+import { type Model, type Bar, pitchShort, gaugeShort, barLabel, chainKey } from './data';
 
 export type ShopLink = { href: string; label: string; kind: 'product' | 'search'; note?: string };
 export type ShopGroup = { title: string; links: ShopLink[] };
@@ -58,6 +58,19 @@ export function scabbardLink(len: number): ShopLink {
   return search(`chainsaw bar cover scabbard ${len} inch`, `Bar & chain cover for a ${len}″ bar`);
 }
 
+/** Per-page Amazon link caps for pages added after the bulk link pass (reference pages: 0-3 links).
+ *  Existing pages are not listed and keep their links. Key: 'model:<id>' or 'chain:<pitch-gauge key>'. */
+const LINK_CAP: Record<string, number> = {
+  'model:husqvarna-t540-xp-mark-iii': 3,
+  'model:stihl-ms-661': 3,
+  'chain:325-043': 3,
+};
+const capGroups = (groups: ShopGroup[], cap: number | undefined): ShopGroup[] => {
+  if (cap === undefined) return groups;
+  let left = cap;
+  return groups.map((g) => { const links = g.links.slice(0, Math.max(0, left)); left -= links.length; return { ...g, links }; }).filter((g) => g.links.length);
+};
+
 const pick3 = <T,>(a: T[]): T[] => (a.length <= 3 ? a : [a[0], a[Math.floor(a.length / 2)], a[a.length - 1]]);
 
 /** Model page. */
@@ -82,7 +95,8 @@ export function modelShop(model: Model): { groups: ShopGroup[]; flagged: boolean
   const cl = links.filter((l) => chains.includes(l));
   if (cl.length) groups.push({ title: `Replacement chains matched to the ${d.name}`, links: cl });
   groups.push({ title: ok.length ? 'Bar, sharpening, safety and fluids' : 'Sharpening, safety and fluids', links: links.filter((l) => !chains.includes(l)) });
-  return { groups, flagged, count: links.length };
+  const capped = capGroups(groups, LINK_CAP[`model:${model.id}`]);
+  return { groups: capped, flagged, count: capped.reduce((n, g) => n + g.links.length, 0) };
 }
 
 /** Chain-spec page: one link per common drive-link count for this exact pitch + gauge. */
@@ -101,7 +115,8 @@ export function chainSpecShop(group: { pitch: string; gauge: number; items: { ba
   const groups: ShopGroup[] = [];
   if (chains.length) groups.push({ title: `${specText(group.pitch, group.gauge)} chain by drive-link count`, links: chains });
   groups.push({ title: 'Bars, sharpening and oil', links: gear });
-  return { groups, count: chains.length + gear.length };
+  const capped = capGroups(groups, LINK_CAP[`chain:${chainKey(group.pitch, group.gauge)}`]);
+  return { groups: capped, count: capped.reduce((n, g) => n + g.links.length, 0) };
 }
 
 /** Bar-length page. */
@@ -148,6 +163,7 @@ export function guideShop(slug: string): { groups: ShopGroup[]; count: number } 
   switch (slug) {
     case 'chain-size-chart': links = [CALIPER(), PITCH_GAUGE_TOOL(), product('kit-field'), barOilLink()]; break;
     case 'chainsaw-chain-file-size': title = 'Files and sharpening kits by size'; links = [product('kit-5-32'), product('kit-3-16'), product('kit-field'), search('7/32 chainsaw round file 5.5mm', '7/32″ round files (3/8″ standard and .404″ chain)'), search('11/64 chainsaw round file 4.5mm', '11/64″ round files (3/8″ LP .043″ chain)'), DEPTH_TOOL()]; break;
+    case 'chainsaw-sharpening-angles': title = 'Files and depth-gauge tools'; links = [product('kit-5-32'), product('kit-3-16'), product('kit-field'), search('7/32 chainsaw round file 5.5mm', '7/32″ round files (3/8″ standard and .404″ chain)'), DEPTH_TOOL(), search('chainsaw depth gauge flat file', 'Flat file for lowering depth gauges')]; break;
     case 'how-to-count-drive-links': links = [CALIPER(), PITCH_GAUGE_TOOL()]; break;
     case 'how-to-verify-chain-size': links = [CALIPER(), PITCH_GAUGE_TOOL(), SCRENCH()]; break;
     case 'oregon-72-vs-73-chain': title = 'Check the gauge, then shop by the stamp'; links = [CALIPER(), search('Oregon 72LPX chainsaw chain 3/8 .050 gauge', 'Oregon 72LPX chain (3/8″ .050″) — pick your drive-link count'), search('Oregon 73LPX chainsaw chain 3/8 .058 gauge', 'Oregon 73LPX chain (3/8″ .058″) — pick your drive-link count')]; break;

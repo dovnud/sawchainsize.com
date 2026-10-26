@@ -1,0 +1,92 @@
+{
+  "brand": "husqvarna",
+  "model": "T540 XP Mark III",
+  "name": "Husqvarna T540 XP Mark III",
+  "aliases": [
+    "T540 XP Mark III",
+    "T540XP Mark III",
+    "T540 XP III",
+    "T540 XP"
+  ],
+  "type": "gas",
+  "popular": false,
+  "blurb": "12″, 14″ and 16″ bars on .325″ Mini Pixel chain, .043″ gauge: 51, 59 and 64 drive links, with a 5/32″ file — per Husqvarna's 2026 fit-up guide.",
+  "intro": "The T540 XP Mark III is Husqvarna's top-handle arborist saw, and it runs a chain most owners have never bought before: .325″ pitch in the narrow .043″ gauge (Husqvarna's SP21G X-Cut, sold as .325″ Mini Pixel). That gauge is the trap. The .325″ chain on Husqvarna's 435, 445S and 450 Rancher is .050″, and a .050″ loop will not sit in the narrow groove of the X-Precision bar this saw is fitted with, so match the gauge as well as the drive-link count. The guide pairs this chain with a 5/32″ file, not the 3/16″ file it lists for regular .325″ chain such as the 435's SP33G. The same fit-up guide also has a separate “T540 XP” entry with the identical 14″ and 16″ bar and chain part numbers but no 12″ row.",
+  "bars": [
+    {
+      "lengths_in": [
+        12
+      ],
+      "pitch": "325",
+      "gauge": 0.043,
+      "drive_links": 51,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "SP21G X-Cut 596553351",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2026"
+      ],
+      "note": "Husqvarna's 2026 fit-up guide lists bar X-Precision 596553651 with chain SP21G X-Cut 596553351 (51 drive links) for the 12″ setup."
+    },
+    {
+      "lengths_in": [
+        14
+      ],
+      "pitch": "325",
+      "gauge": 0.043,
+      "drive_links": 59,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "SP21G X-Cut 596553359",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2026"
+      ],
+      "note": "Husqvarna's 2026 fit-up guide lists bar X-Precision 596553659 with chain SP21G X-Cut 596553359 (59 drive links) for the 14″ setup."
+    },
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "325",
+      "gauge": 0.043,
+      "drive_links": 64,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "SP21G X-Cut 596553364",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2026"
+      ],
+      "note": "Husqvarna's 2026 fit-up guide lists bar X-Precision 596553664 with chain SP21G X-Cut 596553364 (64 drive links) for the 16″ setup."
+    }
+  ],
+  "sources": [
+    {
+      "id": "husqvarna-fitup-2026",
+      "type": "fitup-chart",
+      "publisher": "Husqvarna",
+      "title": "Bar & Chain Fit-up Guide 2026 (effective 1 January 2026) — certified/approved bar and chain combinations per saw",
+      "url": "https://media.husqvarnagroup.com/original/DI-328359.pdf",
+      "retrieved": "2026-10-26"
+    }
+  ],
+  "sources_note": "Husqvarna 2026 Bar & Chain Fit-up Guide (effective 1 January 2026), T540 XP Mark III rows, read on 26 Oct 2026.",
+  "last_verified": "2026-10-26"
+}
