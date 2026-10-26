@@ -59,11 +59,12 @@ export function scabbardLink(len: number): ShopLink {
 }
 
 /** Per-page Amazon link caps for pages added after the bulk link pass (reference pages: 0-3 links).
- *  Existing pages are not listed and keep their links. Key: 'model:<id>' or 'chain:<pitch-gauge key>'. */
+ *  Existing pages are not listed and keep their links. Key: 'model:<id>', 'chain:<pitch-gauge key>' or 'bar:<inches>'. */
 const LINK_CAP: Record<string, number> = {
   'model:husqvarna-t540-xp-mark-iii': 3,
   'model:stihl-ms-661': 3,
   'chain:325-043': 3,
+  'bar:25': 3,
 };
 const capGroups = (groups: ShopGroup[], cap: number | undefined): ShopGroup[] => {
   if (cap === undefined) return groups;
@@ -130,7 +131,8 @@ export function barLengthShop(len: number, items: { model: Model; bar: Bar }[]):
   const groups: ShopGroup[] = [];
   if (chains.length) groups.push({ title: `Chains for ${len}″ bars (most common specs on this page)`, links: chains });
   groups.push({ title: 'Bars, sharpening and storage', links: gear });
-  return { groups, count: chains.length + gear.length };
+  const capped = capGroups(groups, LINK_CAP[`bar:${len}`]);
+  return { groups: capped, count: capped.reduce((n, g) => n + g.links.length, 0) };
 }
 
 /** Brand hub. */
