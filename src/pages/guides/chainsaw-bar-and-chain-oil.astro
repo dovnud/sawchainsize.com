@@ -1,0 +1,75 @@
+---
+import Byline from '../../components/Byline.astro';
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+
+const path = '/guides/chainsaw-bar-and-chain-oil/';
+const modified = (dates as Record<string, string>)[path];
+const desc = 'Chainsaw bar and chain oil: Oregon’s rules on filling the oil tank with every gas fill, why used motor oil is barred, and the cold-weather dilution note.';
+const ORE = 'https://apps.oregonproducts.com/pdfs/OregonMMANUAL_EN_A106971ab.pdf';
+const ORE_FAQ = 'https://www.oregonproducts.com/en_gb/faq';
+const faqs = [
+  { q: 'Can I use used motor oil as bar and chain oil?', a: 'No. Oregon’s manual says never to put used oil or old motor oil in the saw or on the chain, because those oils contain acids and grit. Oregon’s FAQ adds that used motor oil contains metal shavings that reduce bar and chain life, and that lubricating the bar and chain with used motor oil voids the warranty. Use clean bar-and-chain oil.' },
+  { q: 'How often do I fill the chain-oil tank?', a: 'Oregon says to fill the oil reservoir each time you fill the gas tank, and to be sure the chain, bar and sprocket are actually receiving oil during operation. A full tank that never reaches the bar is an empty system.' },
+  { q: 'What does Oregon say about bar oil in cold weather?', a: 'In the cold-weather cutting section, Oregon says to dilute guide-bar chain oil 25 percent with clean kerosene or diesel oil, to use twice as much of that diluted oil during operation, and to be certain the chain is receiving oil. The same page marks 0°C / 32°F next to the cold-weather notes. Diluting is for flow in the cold. It is not a substitute for oil, and it is not a fuel-mix instruction.' },
+  { q: 'Is bar oil the same as the oil in the gas?', a: 'No. Bar-and-chain oil lubricates the bar, chain and sprocket. The oil mixed into gasoline lubricates the engine. STIHL, Husqvarna and Echo publish a 50:1 gasoline-to-two-stroke-oil ratio for current gas saws. That mix never goes in the bar-oil tank, and bar oil never goes in the fuel can. The fuel side is covered in the fuel-mix guide.' },
+  { q: 'How do I oil a new chain?', a: 'Oregon’s break-in steps say to oil the chain before use, to run it at half throttle for several minutes before cutting so oil reaches the bar and the chain, and optionally to dip the chain in bar oil or drizzle oil along the chain on the bar. Keep extra oil on the cutting system for the first cuts, and do not apply heavy pressure.' },
+];
+const jsonld = [webPageLd('Chainsaw bar and chain oil', path, desc, modified), faqLd(faqs)];
+const shop = guideShop('chainsaw-bar-and-chain-oil');
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Bar and chain oil', path }];
+---
+<Base title="Chainsaw Bar and Chain Oil" description={desc} path={path} nav="chart" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Bar and chain oil' }]} />
+      <h1>Chainsaw bar and chain oil</h1>
+      <p class="lede">The chain, the bar and the drive sprocket run in oil, or they run in metal. Oregon’s rule is clean bar-and-chain oil, the reservoir filled every time the gas tank is filled, and used motor oil kept out of the saw entirely.</p>
+      <Byline label="Last updated" />
+    </div>
+
+    <section class="block">
+      <h2>What the oil is for</h2>
+      <p style="max-width:72ch">Oregon’s maintenance manual states the requirement as one of the basic chain rules: the chain must be well lubricated. A constant supply of oil to the bar, the chain and the drive sprocket is vital. Without it, friction and wear take over, the chain does not do the work it was made for, and the bar and sprocket wear with it. The oil is not a rust coating you wipe on at the end of the season. It is the film the rivets, the rails and the sprocket teeth are running in while the chain is moving.</p>
+      <p style="max-width:72ch">The saw delivers that film with a pump, from a tank that is separate from the fuel tank. Oregon’s operating list is short. Keep the oiling system filled with clean bar-and-chain oil. Never put used oil or old motor oil in the saw or on the chain. Be sure the chain, the bar and the sprocket are actually receiving oil during operation. Fill the oil reservoir each time you fill the gas tank. The FAQ repeats the fill interval and adds the reason used motor oil is singled out: it contains metal shavings that reduce the life of the bar and chain, and using it as bar-and-chain lubricant voids the warranty. The manual’s version of the same ban mentions acids and grit. Either description is enough to keep drain oil out of the tank.</p>
+      <p class="src">Sources: Oregon <a href={ORE} rel="nofollow">Maintenance and Safety Manual</a>, lubrication rules, cutting tips, cold-weather note, break-in; Oregon <a href={ORE_FAQ} rel="nofollow">FAQ</a>, lubrication questions.</p>
+    </section>
+
+    <section class="block">
+      <h2>Bar oil is not two-stroke oil</h2>
+      <p style="max-width:72ch">A gas chainsaw carries two lubricants, and they are not interchangeable. Bar-and-chain oil stays in its own tank and is pumped onto the bar. Two-stroke oil is mixed into gasoline and burned in the engine. STIHL’s current US guidance is a 50:1 gasoline-to-oil mixture for gasoline-powered equipment. Husqvarna’s support page states 50:1 for Husqvarna chainsaws. Echo’s operator’s manuals for current saws, including the CS-352, state 50:1 with an ISO-L-EGD and JASO FD oil. The ratios, the exceptions for older engines, and the mixing order are in <a href="/guides/chainsaw-fuel-mix/">chainsaw fuel mix</a>. None of that mix belongs on the bar, and none of the bar oil belongs in the fuel can.</p>
+      <p style="max-width:72ch">Oregon’s FAQ describes its bar-and-chain oil as compounded for tack, so it stays on the chain instead of throwing off, including in bad weather. That tack is the opposite of what an engine oil is asked to do in a fuel mix. If a bottle does not say it is bar-and-chain oil, do not put it in the bar-oil tank because it is “an oil.” Motor oil, bar oil, and two-stroke mix oil solve three different problems.</p>
+      <p style="max-width:72ch">Battery and electric saws delete the fuel can and keep the bar-oil tank. Oregon’s FAQ for its own cordless saws says bar-and-chain oil is still required, and it tells the owner to check the oil level at each charge or before each use. The chain spec on those saws is still pitch, gauge and drive links. The <a href="/saws/husqvarna-550i-xp/">Husqvarna 550i XP</a> page is a battery saw whose chain rows come from the same fit-up guide as the gas saws. No fuel mix, same oil film on the bar.</p>
+    </section>
+
+    <section class="block">
+      <h2>Confirm that oil is arriving</h2>
+      <p style="max-width:72ch">A full reservoir is not proof the bar is wet. Oregon’s instruction is to be certain the chain is receiving oil from the saw. The practical check the manuals pair with that sentence is to run the bar tip a few inches above a light-colored surface, with the chain moving, and look for a line of oil. If the surface stays dry, stop. The usual causes are an empty tank, a clogged oil hole in the bar, a groove packed with chips, or a failed pump. Cleaning the groove and the oil hole is a step in <a href="/guides/chainsaw-bar-maintenance/">bar maintenance</a>, and Oregon lists it on the “often” schedule: hourly, or at refueling.</p>
+      <p style="max-width:72ch">Lack of lubrication shows up in the troubleshooting table, not only as a dry bar. Oregon lists it among the causes of cracks under the rear rivet hole of cutters, together with forcing a dull chain, low depth gauges, loose tension and frozen wood. The chain can look oiled at the clutch and be dry at the nose if the hole in the bar is blocked. That is why the manual pairs “oil hole open” with “groove clean” as a single bar instruction.</p>
+      <p style="max-width:72ch">Tension and oil interact. A chain that is loose flings oil and slaps the bar. A chain that was tensioned while hot can bind when it cools and overheat the nose, which cooks whatever film was there. Set tension on a cool chain, with oil already on it, using <a href="/guides/chainsaw-chain-tension/">the tension procedure</a>.</p>
+    </section>
+
+    <section class="block">
+      <h2>Cold weather</h2>
+      <p style="max-width:72ch">Oregon’s cold-weather section is about two different problems. Cutting frozen wood causes rapid wear and possible breakage around the rear rivet hole of the cutters, so the manual says to keep cold-weather wear to a minimum rather than to lean harder on a dull chain. Separately, bar oil thickens as it gets cold, and a pump that worked in summer can stop delivering.</p>
+      <p style="max-width:72ch">The dilution Oregon prints is specific. Dilute guide-bar chain oil 25 percent with clean kerosene or diesel oil. Use twice as much of this diluted oil during operation, and be certain the chain is receiving oil from the saw. The page places 0°C / 32°F with those cold-weather notes. Read that as Oregon’s cold-weather practice for bar oil, not as a recipe for fuel and not as permission to thin oil in mild weather. If the saw’s own manual specifies a winter grade of bar oil instead of dilution, the saw manual governs that saw. The point of either method is flow. The point is not to run the bar dry because summer oil would not pump.</p>
+    </section>
+
+    <section class="block">
+      <h2>A new chain starts wet</h2>
+      <p style="max-width:72ch">Oregon’s break-in procedure puts oil ahead of the first cut. Oil the chain before use. Never run a chain, especially a new one, on a worn sprocket. Run the new chain at half throttle for several minutes before cutting, so oil can reach all parts of the bar and the chain, and let the saw warm up fully. Oregon also recommends dipping the chain in bar-and-chain oil, or drizzling oil down the length of the chain on the bar, so the bearing surfaces and rivets start with as much lubricant as they can hold. Keep the first cuts light, keep extra oil on the system, and do not apply heavy pressure. Then stop, let the chain cool, and reset tension. Stretch during that first half-hour is expected. A dry nose during it is not.</p>
+      <p style="max-width:72ch">Storage is the other end of the same film. Parking a damp chain in a closed scabbard traps moisture; leaving a bare chain in a truck body beats the cutters against metal. A cover for the bar keeps the cutters off everything else once the chain is dry enough not to grow rust under the sheath. The cover does not oil the chain. A wipe of bar oil before a long layoff is the usual manual instruction; follow the saw’s storage section rather than soaking the bar in fuel.</p>
+    </section>
+
+    <div class="callout"><b>⚠ Two tanks, two oils</b><p>Bar-and-chain oil in the fuel mix starves the engine of the two-stroke lubricant it was specified to burn. Two-stroke mix, or used motor oil, in the bar tank is the wrong film on the rails and, in Oregon’s words on used motor oil, voids the bar-and-chain warranty. Fill the oil tank when you fill the gas tank, then look to see that oil is reaching the bar.</p></div>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/chainsaw-fuel-mix/">Fuel mix</a> · <a href="/guides/chainsaw-bar-maintenance/">Bar maintenance</a> · <a href="/guides/chainsaw-chain-tension/">Chain tension</a> · <a href="/guides/when-to-replace-chainsaw-chain/">When to replace a chain</a></p>
+    <ShopBlock groups={shop.groups} title="Bar oil, and the two-stroke oil it is not (Amazon)" lead="Optional. The gallon is bar-and-chain oil for the bar tank. The two-stroke bottles are for mixing fuel at the ratio in your saw’s manual. Do not swap them." />
+  </div>
+</Base>

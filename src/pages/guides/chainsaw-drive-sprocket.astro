@@ -1,0 +1,70 @@
+---
+import Byline from '../../components/Byline.astro';
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+
+const path = '/guides/chainsaw-drive-sprocket/';
+const modified = (dates as Record<string, string>)[path];
+const desc = 'Chainsaw drive sprockets: Oregon’s every-two-chains replacement rule, why pitch has to match, and what a worn rim or spur does to drive links.';
+const ORE = 'https://apps.oregonproducts.com/pdfs/OregonMMANUAL_EN_A106971ab.pdf';
+const ORE_FAQ = 'https://www.oregonproducts.com/en_gb/faq';
+const faqs = [
+  { q: 'How often should a chainsaw drive sprocket be replaced?', a: 'Oregon’s maintenance manual and Oregon’s FAQ both say to replace the drive sprocket after every two chains, or sooner. Do not run a new chain on a badly worn sprocket. The manual also says not to run an old chain on a new sprocket. An older Oregon text says to use two new chains in rotation with each new sprocket so they wear together.' },
+  { q: 'Does the sprocket have to match the chain?', a: 'Yes. Oregon defines pitch as the distance between any three consecutive rivets divided by two, and says the drive sprocket must be the same pitch as the chain. If the bar has a sprocket nose, that nose sprocket has to match as well. A 3/8″ low-profile chain (Oregon 90/91) and a standard 3/8″ chain (Oregon 72/73/75) are different families on Oregon’s chart. Matching a .050″ gauge does not mean the sprockets match.' },
+  { q: 'What does a worn sprocket look like on the chain?', a: 'Oregon’s troubleshooting list ties a worn or broken sprocket to drive links with battered bottoms, peened fronts or backs, tangs turned up, tight joints, and a chain that stretches or breaks. The remedy printed there is to replace the sprocket and replace the chain. Keeping tension correct stops the chain climbing out of a spur sprocket and being hit by it.' },
+  { q: 'Is the sprocket the same part as the clutch drum?', a: 'Oregon’s FAQ says the sprocket and the clutch drum are connected to the saw motor, and that the sprocket is what drives the proper-pitched chain around the bar. On many saws the rim is a replaceable ring on the drum, and on others the spur is part of the drum. Oregon’s instruction covers both: replace the rim or spur system after every two chains, or sooner. Which one comes off your saw is in that saw’s manual.' },
+  { q: 'Can I change pitch by changing only the chain?', a: 'No. Pitch is a set: chain, drive sprocket, and the nose sprocket if the bar has one. Moving a Husqvarna 540 XP Mark III from its .325″ Mini .043″ bar to its 3/8″ Mini .050″ bar is a bar-and-chain change the fit-up guide approves as two complete systems, not a chain swap on one bar. The saw page says not to put one system’s chain on the other system’s bar.' },
+];
+const jsonld = [webPageLd('Chainsaw drive sprocket and chain pitch', path, desc, modified), faqLd(faqs)];
+const shop = guideShop('chainsaw-drive-sprocket');
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Drive sprocket', path }];
+---
+<Base title="Chainsaw Drive Sprocket and Chain Pitch" description={desc} path={path} nav="chart" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Drive sprocket' }]} />
+      <h1>Chainsaw drive sprocket and chain pitch</h1>
+      <p class="lede">The sprocket is what pulls the chain around the bar. Oregon’s rule is that it matches the chain’s pitch, and that it is replaced every two chains, or sooner. A new loop on a hooked sprocket wears into the old damage immediately.</p>
+      <Byline label="Last updated" />
+    </div>
+
+    <section class="block">
+      <h2>What the sprocket is doing</h2>
+      <p style="max-width:72ch">Oregon’s FAQ describes the pair in one sentence. The sprocket and the clutch drum are connected to the saw motor. The sprocket drives the proper-pitched chain around the guide bar. The chain does not propel itself. The motor turns the drum, the drum turns the sprocket, and the sprocket teeth pick up the drive links. If those teeth do not match the spacing of the drive links, the chain rides up, hammers, or will not stay on the bar.</p>
+      <p style="max-width:72ch">Pitch, in Oregon’s definition, is the distance between any three consecutive rivets, divided by two. That is the same measurement the <a href="/guides/how-to-verify-chain-size/">verification guide</a> uses: about 0.650″ across three rivets is .325″ pitch, about 0.750″ is 3/8″, about 0.808″ is .404″. The sprocket has to be made for that pitch. Oregon’s family chart then splits 3/8″ low profile (types 90 and 91) from standard 3/8″ (types 72, 73 and 75). They are separate rows. A sprocket for one is not a sprocket for the other, which is why <a href="/guides/3-8-low-profile-vs-standard-chain/">low profile versus standard 3/8″</a> is its own guide and not a footnote on gauge.</p>
+      <p class="src">Sources: Oregon <a href={ORE} rel="nofollow">Maintenance and Safety Manual</a>, cutting tips, break-in, drive-link troubleshooting; Oregon <a href={ORE_FAQ} rel="nofollow">FAQ</a>, sprocket life and pitch.</p>
+    </section>
+
+    <section class="block">
+      <h2>Every two chains, or sooner</h2>
+      <p style="max-width:72ch">The interval is printed in the cutting tips, in the break-in section, and in the FAQ, in almost the same words. Replace the drive sprocket after every two saw chains, or sooner. Never run any chain on a worn rim or spur system, especially a new chain. Do not run a new chain on an old sprocket, or an old chain on a new sprocket. The older Oregon maintenance text adds the rotation that makes the interval practical: use two new chains in rotation with each new sprocket so all of them wear together.</p>
+      <p style="max-width:72ch">“Or sooner” is doing real work. The troubleshooting table does not tell you to wait for the second chain if the sprocket is already damaging drive links. Battered and broken drive-link bottoms are attributed to a worn or broken sprocket, or to a loose chain jumping the groove and striking the sprocket. Peening on the front or back of the drive link is attributed to a worn sprocket, and the note says spur systems concentrate load on the back of the drive link. A tang turned up is a worn sprocket. Tight joints that cannot be repaired are paired with a worn rim. In each of those rows the remedy includes replacing the sprocket, and where the chain is damaged, replacing the chain with it.</p>
+      <p style="max-width:72ch">Rim and spur are both named. On a rim sprocket the toothed ring can often be replaced while the drum stays. On a spur, the teeth are part of the drum and the drum is the part that is replaced. Oregon’s sentence is “replace your rim or spur system.” Which fastener and which clutch your saw uses is in that saw’s parts list, not in a pitch chart. What the pitch chart tells you is which chain that new sprocket must drive. Tooth count has to match the sprocket you took off, or the count the saw’s parts list gives for that pitch. This page does not invent a tooth count for a pitch, because the clutch drum differs by saw.</p>
+    </section>
+
+    <section class="block">
+      <h2>Pitch is a set of parts</h2>
+      <p style="max-width:72ch">Changing the chain’s pitch without changing the sprocket is how a “it almost fits” loop destroys a bar nose. Oregon is explicit that the bar-nose sprocket, when the bar has one, must be the same pitch as the chain. A solid-nose bar has no nose sprocket; the drive sprocket at the saw is still there. A sprocket-nose bar has both. Fitting a new bar of a different pitch means fitting a chain and a drive sprocket for that pitch, and the nose that came on that bar has to be the nose for that chain. <a href="/guides/longer-bar-on-chainsaw/">Longer bar</a> is about length inside a pitch the saw is already approved for. It is not permission to jump from .325″ to 3/8″ because a longer bar was on sale.</p>
+      <p style="max-width:72ch">The Husqvarna 540 XP Mark III is the worked example on this site of two legal systems that must not be crossed. Husqvarna’s 2026 fit-up guide approves .325″ Mini Pixel .043″ (59 drive links at 14″, 64 at 16″) on one bar type, and 3/8″ Mini .050″ (52 and 56 drive links) on another. The page says the pitch has to match the drive sprocket and the gauge has to match the groove, so a change of system is a bar, chain and sprocket job. The <a href="/saws/husqvarna-540-xp-mark-iii/">540 XP Mark III page</a> lists the part numbers. Putting the 52-link low-profile chain on the .325″ bar is not a tension problem. It is the wrong set.</p>
+      <p style="max-width:72ch">The same logic at a larger scale is why a 450 Rancher’s .325″ .050″ 72-link chain and a 460 Rancher’s 3/8″ .050″ chain are not alternatives for “a Husqvarna rancher.” The gauge can match. The pitch does not, so the sprocket does not. <a href="/chain/325-050/">.325″ .050″</a> and <a href="/chain/3-8-050/">3/8″ .050″</a> collect the saws we have in each.</p>
+    </section>
+
+    <section class="block">
+      <h2>Tension and oil keep a good sprocket good</h2>
+      <p style="max-width:72ch">Oregon names loose tension as the way a chain climbs out of a spur sprocket and gets battered. The tension target — snug, still movable by hand, set only when the chain is cool — is <a href="/guides/chainsaw-chain-tension/">chain tension</a>. A chain left slack because “it will loosen anyway” is the chain that peens its drive links on the sprocket. A chain tensioned while hot shrinks onto the bar as it cools and loads the sprocket and the nose in the other direction.</p>
+      <p style="max-width:72ch">Oil is the other half. The sprocket is in the list of parts that must receive oil whenever the chain is moving. Oregon’s break-in says to oil a new chain, confirm the sprocket is not worn, then run at half throttle so oil reaches the system before any cutting. Used motor oil is banned in the bar-oil tank because of grit and metal. A sprocket bathed in drain oil is being fed the abrasive the FAQ warns about. <a href="/guides/chainsaw-bar-and-chain-oil/">Bar and chain oil</a> keeps that tank separate from the fuel mix.</p>
+      <p style="max-width:72ch">When you do replace the chain and the sprocket together, install the chain with the cutters forward on top of the bar, the drive links in the groove, and the nuts finger-tight until tension is set. That sequence is <a href="/guides/how-to-install-chainsaw-chain/">how to install a chain</a>. Then keep the second chain in the rotation Oregon describes, so the new sprocket does not spend its life against one loop while a second loop waits until the first is ruined.</p>
+    </section>
+
+    <div class="callout"><b>⚠ New chain, old sprocket</b><p>Oregon’s break-in line is absolute on this point: never run a chain on a worn rim or spur, especially a new chain. If the drive links you just took off are peened, hooked, or turned up at the tang, the sprocket that did that does not get the new loop.</p></div>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/when-to-replace-chainsaw-chain/">When to replace a chain</a> · <a href="/guides/3-8-low-profile-vs-standard-chain/">Low profile vs standard 3/8″</a> · <a href="/guides/chainsaw-chain-tension/">Tension</a> · <a href="/guides/why-a-chainsaw-chain-comes-off/">Why a chain comes off</a></p>
+    <ShopBlock groups={shop.groups} title="Sprocket search and chains that name a pitch (Amazon)" lead="Optional. The sprocket link is a search. Match the pitch and the tooth count to the clutch on your saw. The chain links are specific pitch, gauge and drive-link counts." />
+  </div>
+</Base>

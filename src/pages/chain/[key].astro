@@ -92,7 +92,7 @@ const shop = chainSpecShop(group);
         <p>{pitchLabel(pitch)} chain also comes in {sameGaugeOther.map((c) => gaugeLabel(c.gauge)).join(' and ')} (Oregon {sameGaugeOther.map((c) => c.oregon).join(', ')}). The boxes look near-identical, but the gauge must match the groove in your bar — read it off the bar stamp, never guess it from the pitch. See <a href="/guides/oregon-72-vs-73-chain/">Oregon 72 vs 73</a>.</p></div>
     )}
     <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
-    <p><a href="/chain/">← All chain specs</a> · <a href="/guides/chain-size-chart/">Identification chart</a> · <a href="/guides/how-to-verify-chain-size/">Verify on your bar</a></p>
+    <p><a href="/chain/">← All chain specs</a> · <a href="/guides/chain-size-chart/">Identification chart</a> · <a href="/guides/chainsaw-chain-gauge/">Gauge</a> · <a href="/guides/how-to-verify-chain-size/">Verify on your bar</a> · <a href="/guides/chainsaw-chain-file-size/">File size</a></p>
     <ShopBlock groups={shop.groups} lead={`Match drive links to your own bar stamp before buying — these are common counts for ${pitchShort(pitch)} ${gaugeShort(gauge)} chain, not a list of every length.`} />
   </div>
 </Base>

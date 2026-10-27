@@ -164,18 +164,77 @@ const PITCH_GAUGE_TOOL = () => search('chainsaw chain pitch gauge measuring tool
 const SCRENCH = () => search('chainsaw scrench combination wrench bar nut', 'Scrench / combination wrench for bar nuts and spark plug');
 const DEPTH_TOOL = () => search('chainsaw depth gauge tool raker file guide', 'Depth-gauge (raker) filing tool');
 
-/** Guides. */
+const FILE_732 = () => search('7/32 chainsaw round file 5.5mm', '7/32″ round files (3/8″ standard and .404″ chain)');
+const FILE_1164 = () => search('11/64 chainsaw round file 4.5mm', '11/64″ round files (3/8″ LP .043″ chain)');
+const SPROCKET = () => search('chainsaw rim drive sprocket replacement', 'Replacement drive sprocket — match the pitch and tooth count to the chain and clutch');
+const BAR_DRESS = () => search('chainsaw bar rail dresser groove cleaner', 'Bar-rail dresser and groove cleaner');
+const HUSQ_OIL = () => search('Husqvarna 2 stroke oil 50:1 chainsaw', 'Husqvarna two-stroke oil for a 50:1 mix', 'use the ratio in your manual');
+const CHAIN_72 = () => search('Oregon 72LPX chainsaw chain 3/8 .050 gauge', 'Oregon 72-series chain (3/8″ .050″) — pick your drive-link count');
+const CHAIN_73 = () => search('Oregon 73LPX chainsaw chain 3/8 .058 gauge', 'Oregon 73-series chain (3/8″ .058″) — pick your drive-link count');
+const CHAIN_91 = () => search('Oregon 91PX chainsaw chain 3/8 low profile .050', 'Oregon 91PX chain (3/8″ low profile .050″) — pick your drive-link count');
+const CHAIN_90 = () => search('Oregon 90PX chainsaw chain 3/8 low profile .043', 'Oregon 90PX chain (3/8″ low profile .043″) — pick your drive-link count');
+const BAR_18 = () => search('18 inch chainsaw guide bar .325 pitch .050 gauge', '18″ replacement bars in .325″ .050″ — then match drive links to the stamp');
+
+/** Guides. One group, or several, of tagged Amazon links. No prices; /dp/ only for verified ASINs. */
 export function guideShop(slug: string): { groups: ShopGroup[]; count: number } {
-  let links: ShopLink[] = [];
-  let title = 'Tools mentioned in this guide';
+  const groups: ShopGroup[] = [];
+  const add = (title: string, links: ShopLink[]) => { if (links.length) groups.push({ title, links }); };
   switch (slug) {
-    case 'chain-size-chart': links = [CALIPER(), PITCH_GAUGE_TOOL(), product('kit-field'), barOilLink()]; break;
-    case 'chainsaw-chain-file-size': title = 'Files and sharpening kits by size'; links = [product('kit-5-32'), product('kit-3-16'), product('kit-field'), search('7/32 chainsaw round file 5.5mm', '7/32″ round files (3/8″ standard and .404″ chain)'), search('11/64 chainsaw round file 4.5mm', '11/64″ round files (3/8″ LP .043″ chain)'), DEPTH_TOOL()]; break;
-    case 'chainsaw-sharpening-angles': title = 'Files and depth-gauge tools'; links = [product('kit-5-32'), product('kit-3-16'), product('kit-field'), search('7/32 chainsaw round file 5.5mm', '7/32″ round files (3/8″ standard and .404″ chain)'), DEPTH_TOOL(), search('chainsaw depth gauge flat file', 'Flat file for lowering depth gauges')]; break;
-    case 'how-to-count-drive-links': links = [CALIPER(), PITCH_GAUGE_TOOL()]; break;
-    case 'chain-part-numbers': links = [CALIPER(), PITCH_GAUGE_TOOL()]; break;
-    case 'how-to-verify-chain-size': links = [CALIPER(), PITCH_GAUGE_TOOL(), SCRENCH()]; break;
-    case 'oregon-72-vs-73-chain': title = 'Check the gauge, then shop by the stamp'; links = [CALIPER(), search('Oregon 72LPX chainsaw chain 3/8 .050 gauge', 'Oregon 72LPX chain (3/8″ .050″) — pick your drive-link count'), search('Oregon 73LPX chainsaw chain 3/8 .058 gauge', 'Oregon 73LPX chain (3/8″ .058″) — pick your drive-link count')]; break;
+    case 'chain-size-chart': add('Tools mentioned in this guide', [CALIPER(), PITCH_GAUGE_TOOL(), product('kit-field'), barOilLink()]); break;
+    case 'chainsaw-chain-file-size': add('Files and sharpening kits by size', [product('kit-5-32'), product('kit-3-16'), product('kit-field'), FILE_732(), FILE_1164(), DEPTH_TOOL()]); break;
+    case 'chainsaw-sharpening-angles': add('Files and depth-gauge tools', [product('kit-5-32'), product('kit-3-16'), product('kit-field'), FILE_732(), DEPTH_TOOL(), search('chainsaw depth gauge flat file', 'Flat file for lowering depth gauges')]); break;
+    case 'how-to-count-drive-links': add('Tools mentioned in this guide', [CALIPER(), PITCH_GAUGE_TOOL()]); break;
+    case 'chain-part-numbers': add('Tools mentioned in this guide', [CALIPER(), PITCH_GAUGE_TOOL()]); break;
+    case 'how-to-verify-chain-size': add('Tools mentioned in this guide', [CALIPER(), PITCH_GAUGE_TOOL(), SCRENCH()]); break;
+    case 'oregon-72-vs-73-chain': add('Check the gauge, then shop by the stamp', [CALIPER(), CHAIN_72(), CHAIN_73()]); break;
+    case 'chainsaw-chain-tension':
+      add('Chain, bar and the wrench that tensions them', [product('chain|3/8-lp|0.05|56'), product('chain|325|0.05|72'), product('chain|3/8|0.05|72'), BAR_18(), SCRENCH()]);
+      add('Oil and gloves', [barOilLink(), glovesLink()]);
+      break;
+    case 'chainsaw-kickback':
+      add('Safety gear', [chapsLink(), helmetLink(), glovesLink()]);
+      add('Low-profile chain and a file kit', [CHAIN_91(), product('kit-5-32'), product('scabbard-18-22')]);
+      break;
+    case 'chainsaw-safety-gear':
+      add('Chainsaw safety gear', [chapsLink(), helmetLink(), glovesLink(), product('scabbard-18-22')]);
+      add('A sharp chain is part of staying in control', [product('kit-field'), product('kit-5-32'), barOilLink()]);
+      break;
+    case 'when-to-replace-chainsaw-chain':
+      add('Replacement chains by a common spec', [product('chain|3/8-lp|0.05|56'), product('chain|325|0.05|72'), product('chain|3/8|0.05|68'), product('chain|3/8|0.05|72')]);
+      add('Files, sprocket and oil', [product('kit-field'), DEPTH_TOOL(), SPROCKET(), barOilLink()]);
+      break;
+    case 'chainsaw-bar-and-chain-oil':
+      add('Bar and chain oil', [barOilLink(), product('scabbard-18-22')]);
+      add('Two-stroke fuel mix is a different oil', [product('fuel-stihl'), product('fuel-echo'), HUSQ_OIL()]);
+      break;
+    case '3-8-low-profile-vs-standard-chain':
+      add('3/8″ low-profile chain', [CHAIN_91(), CHAIN_90(), product('chain|3/8-lp|0.05|52'), product('chain|3/8-lp|0.05|56'), product('kit-5-32')]);
+      add('Standard 3/8″ chain', [CHAIN_72(), CHAIN_73(), product('chain|3/8|0.05|72'), FILE_732(), search('18 inch chainsaw guide bar 3/8 pitch .050 gauge', '18″ bars in standard 3/8″ .050″ — match the nose sprocket and drive links')]);
+      break;
+    case 'how-to-install-chainsaw-chain':
+      add('Chains and a bar', [product('chain|3/8-lp|0.05|56'), product('chain|325|0.05|72'), product('chain|3/8|0.05|72'), BAR_18()]);
+      add('Wrench, gloves and oil', [SCRENCH(), glovesLink(), barOilLink()]);
+      break;
+    case 'chainsaw-drive-sprocket':
+      add('Sprocket and the chain that has to match it', [SPROCKET(), product('chain|325|0.05|72'), product('chain|3/8|0.05|72'), CHAIN_91()]);
+      add('Bar and oil', [BAR_18(), barOilLink()]);
+      break;
+    case 'chainsaw-chain-gauge':
+      add('Measure, then match the stamp', [CALIPER(), PITCH_GAUGE_TOOL(), CHAIN_90(), CHAIN_91(), CHAIN_72(), CHAIN_73()]);
+      add('Bars in a stated gauge', [search('chainsaw guide bar .050 gauge', 'Guide bars marked .050″ — then match pitch, length and drive links'), search('chainsaw guide bar .058 gauge', 'Guide bars marked .058″ — then match pitch, length and drive links'), search('chainsaw guide bar .063 gauge', 'Guide bars marked .063″ — then match pitch, length and drive links')]);
+      break;
+    case 'chainsaw-fuel-mix':
+      add('Two-stroke oil for a 50:1 mix', [product('fuel-stihl'), product('fuel-echo'), HUSQ_OIL()]);
+      add('Bar oil is not fuel oil', [barOilLink(), glovesLink()]);
+      break;
+    case 'chainsaw-bar-maintenance':
+      add('Bar, oil and dressing tools', [barOilLink(), BAR_DRESS(), BAR_18(), product('scabbard-18-22')]);
+      add('Chain and a file', [product('chain|3/8|0.05|72'), product('kit-field')]);
+      break;
+    case 'why-a-chainsaw-chain-comes-off':
+      add('The parts that hold the chain on', [SCRENCH(), CALIPER(), SPROCKET(), BAR_18(), product('chain|3/8|0.05|72')]);
+      add('Oil and a cover', [barOilLink(), product('scabbard-18-22'), glovesLink()]);
+      break;
   }
-  return { groups: links.length ? [{ title, links }] : [], count: links.length };
+  return { groups, count: groups.reduce((n, g) => n + g.links.length, 0) };
 }

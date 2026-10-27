@@ -1,0 +1,78 @@
+---
+import Byline from '../../components/Byline.astro';
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+
+const path = '/guides/why-a-chainsaw-chain-comes-off/';
+const modified = (dates as Record<string, string>)[path];
+const desc = 'Why a chainsaw chain comes off the bar: loose tension, a worn sprocket, a shallow groove, spread rails, and a gauge that does not match, from Oregon’s troubleshooting list.';
+const ORE = 'https://apps.oregonproducts.com/pdfs/OregonMMANUAL_EN_A106971ab.pdf';
+const faqs = [
+  { q: 'Why does a chainsaw chain keep falling off?', a: 'Oregon’s troubleshooting list names the mechanical causes: drive-link tangs worn straight or concave because the bar groove is too shallow, which creates a tendency to throw the chain; a loose chain jumping the groove and being hit by the sprocket; rails spread or worn down so the chain can lean out; and a worn sprocket that no longer holds the drive links. Wrong gauge does the same thing from the start: a thin drive link in a wide groove has the clearance a worn rail eventually creates.' },
+  { q: 'Can tension alone stop a chain coming off?', a: 'Only if tension was the cause. Oregon says loose tension lets the chain climb out of a spur sprocket. The fix is the cold-chain adjustment: snug on the underside, still movable by hand, nose held up while the nuts are tightened. If the groove is shallow, the sprocket is hooked, or the gauge is wrong, a tighter screw loads damaged parts and the chain still leaves.' },
+  { q: 'Does a new chain come off if the sprocket is old?', a: 'It is the combination Oregon tells you not to run. A worn sprocket peens drive links, turns tangs up, and batters the bottoms of the links until they no longer fit the groove or clean it. Replace the sprocket with the chain — every two chains, or sooner if it is already worn — rather than tensioning the new loop onto the old teeth.' },
+  { q: 'Will the wrong gauge throw the chain?', a: 'A drive link that is thicker than the groove will not go in, so the chain never really “comes off”; it never seats. A drive link that is thinner than the groove can run and then derail, because it can tilt. Oregon 72 (.050″) in a bar made for Oregon 73 (.058″) is the usual version of that second case. Match the gauge stamped on the bar.' },
+  { q: 'What do I check first?', a: 'Engine off, gloves on. Look at tension on a cool chain. Look at whether every drive link sits in the groove. Sight the rails for a flare or a low side. Look at the sprocket teeth for hooks and at the drive links for peening. Read the gauge and pitch on the bar stamp and compare them to the chain. Then oil: a dry bar wears the groove into the shallow shape that throws the chain.' },
+];
+const jsonld = [webPageLd('Why a chainsaw chain comes off the bar', path, desc, modified), faqLd(faqs)];
+const shop = guideShop('why-a-chainsaw-chain-comes-off');
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Why a chain comes off', path }];
+---
+<Base title="Why a Chainsaw Chain Comes Off the Bar" description={desc} path={path} nav="verify" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Why a chain comes off' }]} />
+      <h1>Why a chainsaw chain comes off the bar</h1>
+      <p class="lede">A chain leaves the bar when the drive links are no longer held in the groove. Oregon’s troubleshooting list points at four conditions that produce that: a shallow groove, a worn sprocket, rails that have opened up, and tension loose enough to let the chain climb. The wrong gauge arrives at the same place without any of those parts being worn.</p>
+      <Byline label="Last updated" />
+    </div>
+
+    <section class="block">
+      <h2>Loose tension is the one you can fix in a minute</h2>
+      <p style="max-width:72ch">Oregon’s drive-link notes name loose tension directly. A chain that jumps the groove is then hit by the revolving sprocket, which batters the bottoms of the drive links until they no longer fit or no longer clean the groove. The remedy printed there is to keep proper tension so the chain does not climb out of a spur sprocket, and to replace the chain if many drive links are already damaged. On the cutter side, loose tension is also in the list of causes for cracks under the rear rivet hole, along with a dull chain, low depth gauges, poor lubrication and frozen wood.</p>
+      <p style="max-width:72ch">The setting that prevents the climb is not “as tight as the screw will go.” With the engine off and the chain cool, the chain sits against the underside of the bar and still pulls by hand. On a sprocket-nose bar it passes Oregon’s snap test. The nuts are tightened while the nose is held up, so clamping the bar does not immediately slack what you set. Heat lengthens a chain; tensioning it hot makes it too tight when it cools, which is a different failure. The steps are <a href="/guides/chainsaw-chain-tension/">how to tension a chain</a>. If the chain was installed backwards or the tensioner peg missed the hole, tension will not hold because the chain was never seated. That is <a href="/guides/how-to-install-chainsaw-chain/">installation</a>, and it is worth redoing once before you condemn the bar.</p>
+      <p class="src">Source: Oregon <a href={ORE} rel="nofollow">Maintenance and Safety Manual</a>, drive-link troubleshooting, tension chapter, and bar-rail notes.</p>
+    </section>
+
+    <section class="block">
+      <h2>A shallow groove cannot hold a tang</h2>
+      <p style="max-width:72ch">The drive-link tang is what runs in the groove and what clears chips out of it. Oregon’s troubleshooting row for straight or concave tang bottoms gives the causes and the result in the same breath. Straight bottoms come from a shallow groove in the body of the bar. Concave bottoms come from a shallow groove in the nose. The symptoms are tangs that can no longer clean the groove, and a tendency to throw the chain. The remedy is to replace the bar, the drive sprocket, or both, and to replace the chain if the tangs cannot be sharpened back to a shape that cleans.</p>
+      <p style="max-width:72ch">Dressing the rails without checking groove depth is one way a groove becomes too shallow. Oregon’s bar schedule says to check depth after dressing. Cleaning the groove at each refuel is how packed chips, which mimic a shallow groove by filling it, get removed before they push the chain out. The cleaning direction and the “do not flip a Guard Tip bar” exception are in <a href="/guides/chainsaw-bar-maintenance/">bar maintenance</a>. A bar that has been run dry wears the same way faster: no oil film, more friction, rails and groove gone. <a href="/guides/chainsaw-bar-and-chain-oil/">Bar oil</a> is the prevention. It will not restore a groove that is already too shallow to hold a tang.</p>
+    </section>
+
+    <section class="block">
+      <h2>Spread rails and a worn sprocket</h2>
+      <p style="max-width:72ch">Oregon describes rails that have spread, or one rail worn lower than the other, as letting the chain lean out of the groove. The drive-link sides wear round or thin, rail wear accelerates, and the chain is no longer guided. The remedy is to service the rails — dress them square, from the tip toward the mount — or to replace the bar if the spread is past dressing. A chain whose tie-strap bottoms are worn out of square has been running on those rails. Minor chain wear can be filed square. Extensive wear means a new chain, on rails that have been corrected. A new chain on a still-spread bar learns the same lean.</p>
+      <p style="max-width:72ch">The sprocket throws the chain by damaging the part that should hold it. Peened drive links change shape, joints tighten, the chain stretches, and the tangs can turn up until they hit the bottom of the groove instead of riding in it. Oregon’s interval is every two chains, or sooner, and the break-in rule is never to run a new chain on a worn rim or spur. If the chain you just picked up off the ground has battered drive-link bottoms, look at the sprocket before you put the chain back on and add tension. The replacement rule is <a href="/guides/chainsaw-drive-sprocket/">drive sprocket and pitch</a>. Pitch still has to match. A sprocket in a different pitch will throw a chain that is otherwise new, correctly gauged, and properly tensioned, because the teeth and the rivet spacing do not agree.</p>
+    </section>
+
+    <section class="block">
+      <h2>Wrong gauge, from the first pull</h2>
+      <p style="max-width:72ch">Wear takes time. Gauge is immediate. Oregon’s definition is that gauge is the drive-link thickness and that it must match the bar groove. A link that is too thick never enters the groove, so the chain sits on the rails and walks off as soon as it moves. A link that is too thin enters and then cocks, which is the same freedom a spread rail gives a correct chain. The common purchase is Oregon 72 (.050″, standard 3/8″) and Oregon 73 (.058″). They share a pitch family and a 7/32″ file. They do not share a groove. <a href="/guides/oregon-72-vs-73-chain/">72 versus 73</a> is that pair. <a href="/guides/chainsaw-chain-gauge/">Gauge</a> is the full set: .043″, .050″, .058″, .063″.</p>
+      <p style="max-width:72ch">A second “it is 3/8 and .050, so it fits” error is the family error. Oregon 91 is 3/8″ low profile at .050″. Oregon 72 is standard 3/8″ at .050″. The gauge matches and the sprocket does not. A low-profile chain on a standard-3/8″ sprocket, or the reverse, is a chain that will not stay driven even when the groove width is right. <a href="/guides/3-8-low-profile-vs-standard-chain/">Low profile versus standard</a> uses Oregon’s own family chart. The Husqvarna 455 Rancher shows the gauge-only version: 20″, 3/8″, 72 drive links, in both .050″ and .058″, depending on the bar. The <a href="/saws/husqvarna-455-rancher/">455 page</a> is where to see both rows before assuming every 455 takes the chain a neighbor’s saw uses.</p>
+    </section>
+
+    <section class="block">
+      <h2>A check order that does not skip the stamp</h2>
+      <ol class="steps">
+        <li><strong>Stop, cool, gloves.</strong> Do not inspect a chain by pulling the starter or by touching cutters bare-handed. <a href="/guides/chainsaw-safety-gear/">Gloves</a> are the minimum. The brake stays on until you need to pull the chain by hand.</li>
+        <li><strong>Read the stamp and the drive-link number.</strong> Pitch, gauge, length, drive-link count, and the type stamped on a drive link (72, 73, 91, 95). Compare that to the chain in your hand. If they disagree, the chain comes off because it was never the chain for that bar. <a href="/guides/how-to-verify-chain-size/">Verification</a> and <a href="/guides/how-to-count-drive-links/">counting drive links</a> are the two measurements if the stamp is faint.</li>
+        <li><strong>Seat and tension.</strong> Every tang in the groove, cutters pointing forward on the top of the bar, cool-chain tension, nose up while the nuts are tightened, snap test on a sprocket nose. Run the chain by hand around the bar. A link that hops out during that pull will hop out in a log.</li>
+        <li><strong>Look at the bar and the sprocket.</strong> Groove cleaned, oil hole open, rails not flared or uneven, nose clearance still there (Oregon’s sprocket-nose figure is 1/32″ before the chain contacts the chassis). Sprocket teeth not hooked. Drive links not peened. If they are, replace the damaged part rather than adding tension.</li>
+        <li><strong>Oil, then a short cut, then look again.</strong> A chain that stays on for ten seconds and leaves on the first plunge is often dry, loose after the first heat cycle, or both. Fill bar oil, confirm a spray at the tip, make a light cut, let it cool, and reset tension. Repeat derailment after that is a bar, a sprocket, or a spec problem, not a screw that needs one more turn.</li>
+      </ol>
+      <p style="max-width:72ch">Kickback is a different event — the nose throwing the saw — but a chain that is off the bar is already out of control. Keep the brake maintained and both hands on the saw as <a href="/guides/chainsaw-kickback/">the kickback guide</a> describes. A chain on the ground with the engine running is the situation the chaps are built for, and it is also the situation you stop by releasing the throttle and setting the brake before you pick anything up.</p>
+    </section>
+
+    <div class="callout"><b>⚠ Tightening a chain that does not match the stamp</b><p>More tension will not make a .050″ chain behave in a .058″ groove, and it will not make a worn sprocket hold a new loop. Match gauge and pitch, replace the part Oregon’s table says to replace, then set tension on a cool chain.</p></div>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/chainsaw-chain-tension/">Tension</a> · <a href="/guides/chainsaw-chain-gauge/">Gauge</a> · <a href="/guides/chainsaw-bar-maintenance/">Bar maintenance</a> · <a href="/guides/chainsaw-drive-sprocket/">Drive sprocket</a> · <a href="/guides/">All guides</a></p>
+    <ShopBlock groups={shop.groups} title="Wrench, caliper, sprocket, bar and chain (Amazon)" lead="Optional. Replace the part that failed, matched to the stamp. A new chain on the sprocket that threw the old one repeats the failure." />
+  </div>
+</Base>

@@ -94,6 +94,11 @@ const ogName = `/og/${model.id}.png`;
         <li><a href={brandUrl(brand.id)}>All {brand.data.name} saws</a></li>
         {chainKeys.map(([k, b]) => <li><a class="mono" href={chainUrl(k)}>{pitchShort(b.pitch)} · {gaugeShort(b.gauge)} chain</a></li>)}
         {lengths.filter((l) => barPages.has(l)).map((l) => <li><a class="mono" href={barUrl(l)}>{l}″ bar sizes</a></li>)}
+        <li><a href="/guides/how-to-verify-chain-size/">Verify the chain</a></li>
+        <li><a href="/guides/how-to-install-chainsaw-chain/">Install a chain</a></li>
+        <li><a href="/guides/chainsaw-chain-tension/">Tension</a></li>
+        <li><a href="/guides/chainsaw-safety-gear/">Safety gear</a></li>
+        <li><a href="/guides/">All guides</a></li>
         <li><a href="/saws/">← All models</a></li>
         <li><a href="/">Chain Finder</a></li>
       </ul>

@@ -1,0 +1,86 @@
+---
+import Byline from '../../components/Byline.astro';
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+
+const path = '/guides/chainsaw-chain-gauge/';
+const modified = (dates as Record<string, string>)[path];
+const desc = 'Chainsaw chain gauge explained: .043″, .050″, .058″ and .063″ are drive-link thickness, they must match the bar groove, and a worn chain is a bad thing to measure.';
+const ORE = 'https://www.oregonproducts.com/en/product-support/chainsaw/finding-the-right-saw-chain/c/finding-the-right-saw-chain-s';
+const faqs = [
+  { q: 'What is chainsaw chain gauge?', a: 'Oregon defines gauge as the thickness of the drive link where it fits into the guide-bar groove. The chain gauge and the bar gauge have to match. Oregon’s chains are made in .043″, .050″, .058″ and .063″. On bar stamps those are often written 043, 050, 058 and 063, and also as 1.1 mm, 1.3 mm, 1.5 mm and 1.6 mm.' },
+  { q: 'Can I measure gauge with a caliper?', a: 'You can measure drive-link thickness, and a new chain will read close to its nominal gauge. Oregon says normal wear makes a worn chain hard to measure accurately, and says to order by the number stamped on the drive link of the old chain. The bar-tail stamp is the better source, because it states the groove the bar was made with.' },
+  { q: 'What happens if the gauge is wrong?', a: 'A drive link thicker than the groove will not seat in it. A drive link thinner than the groove has side clearance: the chain can wander, wear the rails unevenly, and come off under load. Oregon’s rule is that the gauges match. The 72 versus 73 guide is the common case, .050″ versus .058″, both in standard 3/8″ pitch.' },
+  { q: 'Does gauge change the file size?', a: 'Pitch sets the file, with one low-profile exception. Standard 3/8″ chain takes a 7/32″ file at .050″, .058″ and .063″. .325″ chain takes a 3/16″ file across its gauges. 3/8″ low profile at .050″ takes 5/32″, and 3/8″ low profile at .043″ takes 4.5 mm (11/64″). So gauge does not change the file inside a pitch family, except that the .043″ low-profile chain is filed with the larger of the two small files.' },
+  { q: 'Why do two gauges exist for one saw?', a: 'Factories offer more than one bar. The Husqvarna 455 Rancher’s manual table lists the 20″ 3/8″ setup in both .050″ (H80, 72 drive links) and .058″ (H81, 72 drive links). Same length, same pitch, same drive-link count, different groove. The bar on your saw is the one you order for.' },
+];
+const jsonld = [webPageLd('Chainsaw chain gauge: .043, .050, .058, .063', path, desc, modified), faqLd(faqs)];
+const shop = guideShop('chainsaw-chain-gauge');
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Chain gauge', path }];
+---
+<Base title="Chainsaw Chain Gauge: .043, .050, .058 and .063" description={desc} path={path} nav="chart" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Chain gauge' }]} />
+      <h1>Chainsaw chain gauge</h1>
+      <p class="lede">Gauge is how thick the drive link is, and how wide the groove in the bar was cut. Oregon makes chain in four gauges. The chain and the bar have to name the same one. A neighboring gauge is not a close-enough fit.</p>
+      <Byline label="Last updated" />
+    </div>
+
+    <section class="block">
+      <h2>The four thicknesses</h2>
+      <p style="max-width:72ch">Oregon’s definition is the drive link’s thickness where it fits into the bar groove. The chain gauge and the bar gauge must match. The gauges Oregon lists are .043″, .050″, .058″ and .063″. Bar stamps often drop the decimal and the inch mark: 043, 050, 058, 063. The same four show up in millimetres on many bars. The equivalents used throughout this site, and printed on the verification diagram, are .043″ = 1.1 mm, .050″ = 1.3 mm, .058″ = 1.5 mm, and .063″ = 1.6 mm. A Forestry Forum stamp cited in the verification guide reads both at once — .058 and 1.5 — which is the same groove written two ways.</p>
+      <div class="tblwrap">
+        <table>
+          <caption class="sr-only">Chain gauge in inches and millimetres, with Oregon families</caption>
+          <thead><tr><th scope="col">Gauge</th><th scope="col">Millimetres</th><th scope="col">Oregon families that use it</th><th scope="col">On this site</th></tr></thead>
+          <tbody>
+            <tr><td class="num">.043″</td><td class="num">1.1 mm</td><td>90 (3/8″ low profile). Husqvarna SP21G is .325″ at .043″.</td><td><a href="/chain/3-8-lp-043/">3/8″ LP .043″</a> · <a href="/chain/325-043/">.325″ .043″</a></td></tr>
+            <tr><td class="num">.050″</td><td class="num">1.3 mm</td><td>91 (3/8″ low profile), 20 and 95 (.325″), 72 (standard 3/8″).</td><td><a href="/chain/3-8-lp-050/">3/8″ LP .050″</a> · <a href="/chain/325-050/">.325″ .050″</a> · <a href="/chain/3-8-050/">3/8″ .050″</a></td></tr>
+            <tr><td class="num">.058″</td><td class="num">1.5 mm</td><td>21 (.325″), 73 (standard 3/8″).</td><td><a href="/chain/325-058/">.325″ .058″</a> · <a href="/chain/3-8-058/">3/8″ .058″</a></td></tr>
+            <tr><td class="num">.063″</td><td class="num">1.6 mm</td><td>22 (.325″), 75 (standard 3/8″). .404″ chain on this site is .063″.</td><td><a href="/chain/325-063/">.325″ .063″</a> · <a href="/chain/3-8-063/">3/8″ .063″</a> · <a href="/chain/404-063/">.404″ .063″</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="src">Gauges and the “must match” rule: Oregon, <a href={ORE} rel="nofollow">Finding the Right Saw Chain</a>. Family numbers by pitch and gauge: Oregon’s saw-chain family chart on that page. Millimetre twins: the equivalents printed on our <a href="/guides/how-to-verify-chain-size/">verification guide</a>. .404″ and the Husqvarna .043″ .325″ rows are from the saws on this site, not from a claim that every pitch exists in every gauge.</p>
+    </section>
+
+    <section class="block">
+      <h2>Where to read it</h2>
+      <p style="max-width:72ch">The bar stamp is the measurement that matters, because it describes the groove in the bar you have, not the groove a catalog expects. It sits on the flat of the tail, near the mount. A typical readable stamp carries length, pitch, gauge and a drive-link count, in some order. The worked example on the 450 Rancher page is an owner’s bar marked 18″, .325, .050, 72. That .050 is the gauge. The procedure for cleaning the stamp and reading it is the first method in <a href="/guides/how-to-verify-chain-size/">how to verify your chain size</a>.</p>
+      <p style="max-width:72ch">Oregon’s second instruction is for the chain you already have. The type number stamped into the drive link encodes the family, and with it the gauge: 90 is 3/8″ low profile .043″, 91 is 3/8″ low profile .050″, 72 is standard 3/8″ .050″, 73 is .058″, 75 is .063″. Oregon says normal wear makes a caliper reading on an old drive link unreliable, so order by that stamped number rather than by a measurement of a worn tang. A new, unused drive link can be checked with a caliper. An old one is evidence of what the stamp said, not a precision gauge block.</p>
+      <p style="max-width:72ch">Pitch is a different measurement. It is the rivet spacing, divided by two, and it does not tell you the thickness. Two chains can share a pitch and differ in gauge. That is the entire 72 versus 73 problem, and it is also the 455 Rancher’s 20″ bar, which Husqvarna’s manual table lists in 3/8″ at both .050″ and .058″, both with 72 drive links. The <a href="/saws/husqvarna-455-rancher/">455 Rancher page</a> prints both rows. Ordering by length and pitch alone picks a gauge at random.</p>
+    </section>
+
+    <section class="block">
+      <h2>What a mismatch does</h2>
+      <p style="max-width:72ch">The drive link has to enter the groove and stay there while the chain is pulled around the bar. If the link is thicker than the groove, it does not seat. You find out while installing: the chain rides on the rails instead of in them, and no amount of tension pulls it down. If the link is thinner than the groove, it may go on and run, with clearance on both sides. That clearance lets the chain tilt. Oregon’s troubleshooting list describes the related bar condition from the other direction: rails that have spread, or one rail worn low, let the chain lean, and the drive-link sides wear thin. Starting with a chain that is already thinner than the groove is the same geometry, on purpose.</p>
+      <p style="max-width:72ch">The site’s 72 versus 73 page states the buying version of those two outcomes. A .058″ chain will not seat in a .050″ groove. A .050″ chain in a .058″ groove runs with side play, wears the rails, and can derail under load. The full code comparison is <a href="/guides/oregon-72-vs-73-chain/">Oregon 72 vs 73</a>. The derailment side, including shallow grooves and worn sprockets, is <a href="/guides/why-a-chainsaw-chain-comes-off/">why a chain comes off</a>. Gauge is one cause. It is not the only one. Tension and the sprocket still have to be right on a chain whose gauge is correct.</p>
+      <p style="max-width:72ch">There is no “in between” gauge to split the difference. Oregon’s list is those four thicknesses. A bar is manufactured to one of them. If a stamp is ambiguous, do not average .050″ and .058″ into a chain that does not exist. Measure a new drive link from a known-good loop, or replace the bar and match the new stamp.</p>
+    </section>
+
+    <section class="block">
+      <h2>Gauge is not the file, and it is not the family</h2>
+      <p style="max-width:72ch">File size follows the cutter, which follows pitch, with one split inside low profile. From the file table on this site: 3/8″ low profile .050″ takes 5/32″ (4.0 mm); 3/8″ low profile .043″ takes 11/64″ (4.5 mm); .325″ takes 3/16″ (4.8 mm); standard 3/8″ and .404″ take 7/32″ (5.5 mm). So a 72, a 73 and a 75 — three gauges — share a 7/32″ file. Changing gauge does not give you a reason to change files inside that family. Jumping from a 91 (.050″ low profile) to a 72 (.050″ standard) does, because that is a different cutter at the same gauge. <a href="/guides/3-8-low-profile-vs-standard-chain/">Low profile versus standard</a> is that mistake. <a href="/guides/chainsaw-chain-file-size/">File size</a> is the table.</p>
+      <p style="max-width:72ch">Drive-link count is the third independent number. The 455 Rancher’s two 20″ chains are both 72 drive links and differ only in gauge. Other saws change the count when the length changes and keep the gauge. The Husqvarna 460 Rancher’s 2026 fit-up rows are 3/8″ in .050″ and .058″, with 68 drive links at 18″ and a higher count as the bar gets longer. The <a href="/saws/husqvarna-460-rancher/">460 page</a> has each row. Gauge does not tell you the count, and the count does not tell you the gauge.</p>
+    </section>
+
+    <section class="block">
+      <h2>Narrow kerf is a gauge conversation</h2>
+      <p style="max-width:72ch">A .050″ groove on a standard-pitch saw is often sold as a narrow-kerf bar: the cut is narrower because the chain is narrower than the .058″ or .063″ chain that pitch also comes in. The 450 Rancher note on this site says the H30 / SP33G loop is a narrow-kerf chain and should be paired with a narrow-kerf .050″ bar. That is gauge matching under a marketing name. “Narrow kerf” on a box is not a size until you read .050″, the pitch, and the drive-link count.</p>
+      <p style="max-width:72ch">.043″ is the thinner low-profile and mini-pitch groove, used on small saws where reducing the amount of wood removed matters. The 540 XP Mark III’s .043″ system is .325″ Mini Pixel, not 3/8″ low profile, and its .050″ system is 3/8″ Mini. Both gauges appear on that one saw, on different bars, with different drive-link counts. The stamp is the only honest way to order. <a href="/saws/husqvarna-540-xp-mark-iii/">The saw page</a> lists them side by side so the two .050-looking descriptions in a search result are not collapsed into one chain.</p>
+      <p style="max-width:72ch">If you are buying a replacement bar rather than a chain, the bar’s gauge is part of the listing you have to match, along with length, pitch, and the drive-link count the bar’s tail will be stamped with. A bar in the wrong gauge forces the wrong chain forever after. <a href="/guides/longer-bar-on-chainsaw/">Longer bar</a> covers length. This page is why the new bar’s gauge line has to be the gauge you meant.</p>
+    </section>
+
+    <div class="callout"><b>⚠ Worn chain, worn measurement</b><p>Oregon says not to trust a caliper on a worn drive link. Read the bar stamp, or the number on the drive link. If both are gone, the saw page is a list of combinations that model was sold with — still confirm which bar is on the saw before you order.</p></div>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/oregon-72-vs-73-chain/">Oregon 72 vs 73</a> · <a href="/guides/how-to-verify-chain-size/">Verify on the bar</a> · <a href="/guides/chain-size-chart/">Identification chart</a> · <a href="/chain/">All chain specs</a></p>
+    <ShopBlock groups={shop.groups} title="A caliper, and chains in named gauges (Amazon)" lead="Optional. Measure if you need to, then buy the gauge stamped on the bar. A .050″ loop does not fit a .058″ groove, and a 91-series .050″ loop is not a 72-series .050″ loop." />
+  </div>
+</Base>

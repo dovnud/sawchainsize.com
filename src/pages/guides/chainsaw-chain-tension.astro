@@ -1,0 +1,101 @@
+---
+import Byline from '../../components/Byline.astro';
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+
+const path = '/guides/chainsaw-chain-tension/';
+const modified = (dates as Record<string, string>)[path];
+const desc = 'How to tension a chainsaw chain: the cold-chain rule, solid-nose versus sprocket-nose settings, the snap test, and why a new loop stretches.';
+const ORE = 'https://apps.oregonproducts.com/pdfs/OregonMMANUAL_EN_A106971ab.pdf';
+const STIHL_SHARP = 'https://www.stihl.com/content/dam/stihl/vu/ic/en/download-files/pdf-files/sharpening-brochures/EN-Sharpening-STIHL-Saw-Chains.pdf';
+const STIHL_MS = 'https://ssc.stihl.com/tsa/techdoc-documents/DVS_STIHL%2FZBA%2FZBA%2F0458-209-0121-B_ZBA_04_01.pdf';
+const HUSQ = 'https://us-support.husqvarna.com/en/petrol-chainsaw/How-to-adjust-the-tension-of-the-saw-chain-9321';
+const faqs = [
+  { q: 'How tight should a chainsaw chain be?', a: 'With the engine off and the chain cool, the chain should sit against the underside of the bar and still pull freely by hand with the chain brake released. On a sprocket-nose bar, Oregon’s snap test is to pull the chain down at the bottom of the bar and let go: it should snap back against the rail. STIHL’s check is the same idea: snug on the underside, and still possible to pull along the bar by hand.' },
+  { q: 'Can I tension a hot chainsaw chain?', a: 'No. Oregon says never to tension a chain right after cutting, because heat has lengthened it. A chain tensioned while hot shrinks as it cools and can damage the bar and the chain. Husqvarna’s support page says the same: a hot chain expands and tightens as it cools. Stop, let it cool, then adjust.' },
+  { q: 'Why does a new chainsaw chain go loose?', a: 'STIHL’s sharpening brochure says it is normal for a new chain to stretch, even when the factory has pre-stretched it, and that tension should be checked often. Oregon’s break-in steps say to stop, let the chain cool, and adjust often, especially in the first half-hour. Husqvarna says to check again after the first one or two minutes of cutting.' },
+  { q: 'Does a solid-nose bar tension the same as a sprocket-nose bar?', a: 'Oregon sets them differently. On a solid-nose bar, turn the adjuster until the bottoms of the lowest tie-straps and cutters just touch the bottom rail. On a sprocket-nose bar, tension is tighter: those same parts should solidly contact the bottom rail, and the chain should pass the snap test.' },
+  { q: 'What if my saw has a tool-less tensioner?', a: 'Husqvarna notes that the adjuster may be a front screw, a side screw, or a dial, and that all three do the same job. The cold-chain rule, the “snug but still movable by hand” check, and lifting the bar nose while you tighten the nuts still apply. If the dial’s direction is unmarked, the operator’s manual for that model is the authority.' },
+];
+const howto = {
+  '@context': 'https://schema.org', '@type': 'HowTo', name: 'How to tension a chainsaw chain',
+  description: 'Tension a cool chain with the engine off: loosen the bar nuts, hold the nose up, adjust until the chain is snug and still moves by hand, then tighten the nuts.',
+  tool: [{ '@type': 'HowToTool', name: 'Scrench or the wrench supplied with the saw' }, { '@type': 'HowToTool', name: 'Work gloves' }],
+  step: [
+    { '@type': 'HowToStep', name: 'Stop and cool the saw', text: 'Turn the engine off, engage the chain brake for handling, and let the chain cool. Do not tension a hot chain.' },
+    { '@type': 'HowToStep', name: 'Release the brake and loosen the bar nuts', text: 'Wear gloves. Disengage the chain brake so the chain can be pulled by hand. Loosen the bar nuts enough for the bar to move. Do not take them off.' },
+    { '@type': 'HowToStep', name: 'Hold the nose up and adjust', text: 'Pull the bar nose up and keep it up. Turn the tension screw until the chain sits against the underside of the bar and still pulls freely. On a sprocket-nose bar, confirm the snap test.' },
+    { '@type': 'HowToStep', name: 'Tighten the nuts and recheck', text: 'Still holding the nose up, tighten the rear bar nut, then the front nut. Pull the chain along the top of the bar. If it binds or sags, cool the saw and adjust again.' },
+  ],
+};
+const jsonld = [webPageLd('How to tension a chainsaw chain', path, desc, modified), howto, faqLd(faqs)];
+const shop = guideShop('chainsaw-chain-tension');
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Chain tension', path }];
+---
+<Base title="How to Tension a Chainsaw Chain" description={desc} path={path} nav="verify" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Chain tension' }]} />
+      <h1>How to tension a chainsaw chain</h1>
+      <p class="lede">A chain that is right sits against the underside of the bar and still pulls by hand. Tension it only when the engine is off and the chain is cool. A new loop will need that check again before the first tank is gone.</p>
+      <Byline label="Last updated" />
+    </div>
+
+    <section class="block">
+      <h2>What “tight enough” means</h2>
+      <p style="max-width:72ch">Three makers describe the same finished state, in slightly different words. Oregon’s maintenance manual says to pull the chain by hand along the top of the bar, from the engine toward the tip: it should feel snug and still pull freely. STIHL’s sharpening brochure says a properly tensioned chain fits snugly against the underside of the bar and, with the chain brake disengaged, can still be pulled along the bar by hand. Husqvarna’s support page adds the snap: lift the chain at the bottom and let go, and it should snap back into place, with no visible slack.</p>
+      <p style="max-width:72ch">Those checks are done with gloves on and the saw stopped. A running chain is not a tension gauge. If the drive links are climbing out of the groove, or the chain hangs in a loop under the bar, it is loose. If you cannot pull it along the bar by hand, it is tight. Both conditions wear the bar, the chain and the sprocket, and a loose chain is one of the ways a loop leaves the bar. The causes are listed in <a href="/guides/why-a-chainsaw-chain-comes-off/">why a chain comes off</a>.</p>
+      <p class="src">Sources: Oregon <a href={ORE} rel="nofollow">Maintenance and Safety Manual</a>, “How to Tension your Saw Chain”; STIHL <a href={STIHL_SHARP} rel="nofollow">Sharpening STIHL Saw Chains</a>, “Tensioning the Saw Chain”; Husqvarna <a href={HUSQ} rel="nofollow">How to adjust the tension of the saw chain</a>.</p>
+    </section>
+
+    <section class="block">
+      <h2>Only tension a cool chain</h2>
+      <p style="max-width:72ch">Oregon prints this as a note on the procedure: never tension the chain right after cutting, when heat has expanded it. A chain set while it is long will contract as it cools, and that contraction can damage the bar and the chain. The instruction is to tension only after the chain has cooled. Husqvarna states the same mechanism from the other side: a hot chain expands, and it tightens as it cools, so the adjustment is made after the chain has cooled.</p>
+      <p style="max-width:72ch">That is why a chain that was fine at the end of a cut can feel drum-tight the next morning, and why the fix is not to leave it that way. Loosen it once it is cool, set it again, and then tighten the bar nuts while the nose is held up. If the chain loosens again during work, Oregon says to stop, let the saw cool, and readjust. Do not chase a hot chain with the tension screw.</p>
+    </section>
+
+    <section class="block">
+      <h2>The adjustment, step by step</h2>
+      <p style="max-width:72ch">The screw may sit at the front of the saw, beside the bar nuts, or behind a tool-less knob. Husqvarna says those layouts do the same job. The sequence below is Oregon’s procedure for a saw without the Intenz slot, which matches the STIHL MS 290/310/390 manual’s retensioning steps and Husqvarna’s support steps. If your saw’s manual shows a different control, follow that manual. The checks at the end do not change.</p>
+      <ol class="steps">
+        <li><strong>Engine off, chain cool, gloves on.</strong> Oregon, STIHL and Husqvarna all start there. A dull chain still cuts skin, which is why the gloves are in the procedure and not an optional extra. See <a href="/guides/chainsaw-safety-gear/">safety gear</a>.</li>
+        <li><strong>Chain brake off for the check, bar nuts loosened but not removed.</strong> You have to pull the chain by hand, so the brake is released. Loosen the two nuts (or the knob) only enough that the bar can slide. STIHL’s manual says to shut the engine off and slacken the nuts before turning the tensioning screw.</li>
+        <li><strong>Hold the bar nose up while you adjust.</strong> Oregon says to pull the nose up and keep it up as you turn the screw. Husqvarna says to lift the tip while the nuts are tightened, so the bar does not drop and slack the chain as the clamps take up.</li>
+        <li><strong>Set the chain against the rail.</strong> Clockwise tightens on the Husqvarna screws described in that support article. Turn until the chain meets the test in the next section, then stop. More turns are not safer.</li>
+        <li><strong>Rear nut first, then the front nut.</strong> Oregon’s order is the rear guide-bar mounting nut, then the front nut, still with the nose held up. STIHL’s MS 290 manual says to hold the nose up and tighten the nuts firmly.</li>
+        <li><strong>Pull the chain around the bar.</strong> Several pulls along the top, engine toward tip. It should stay snug and move freely. If a drive link hops out of the groove, the <a href="/guides/chainsaw-chain-gauge/">gauge</a> or the <a href="/guides/how-to-install-chainsaw-chain/">install</a> is wrong, and tension will not fix it.</li>
+      </ol>
+    </section>
+
+    <section class="block">
+      <h2>Solid nose, sprocket nose, and the snap test</h2>
+      <p style="max-width:72ch">Oregon splits the target by bar type. On a solid-nose bar, turn the adjuster until the bottoms of the lowest tie-straps and cutters come up and just touch the bottom of the bar rail. On a sprocket-nose bar, tension is tighter than that: the same parts should come up and solidly contact the bottom rail. Then do the snap test. Grasp the chain along the bottom of the bar, pull down, and let go. The chain should snap back to where it was, solidly against the bar.</p>
+      <p style="max-width:72ch">STIHL adds one exception, and only for carving bars. On those bars the brochure says tension should be reduced slightly, so that half the drive links are visible on the underside, because a very small nose radius is loaded hard if the chain is too tight. For every other STIHL bar in that brochure, sag on the underside means retension. If you are not holding a carving bar, do not borrow the carving setting.</p>
+      <p style="max-width:72ch">The stamp on the bar still decides which loop you are tensioning. A 16″ bar and an 18″ bar on the same saw take different drive-link counts, and a chain with the wrong count cannot be tensioned into a fit. Count the tangs with the <a href="/guides/how-to-count-drive-links/">drive-link method</a>, or read the count off the bar tail as in the <a href="/guides/how-to-verify-chain-size/">verification guide</a>, before you blame the tension screw.</p>
+    </section>
+
+    <section class="block">
+      <h2>New chains stretch, and they stretch early</h2>
+      <p style="max-width:72ch">STIHL’s brochure says new chains stretch even after factory pre-stretching, and that tension has a decisive effect on how long the cutting attachment lasts. The instruction is to check and adjust at regular intervals, and more often on a new chain than on one that has already been in use. The MS 290/310/390 manual repeats that a new chain has to be retensioned more often, and points the reader at the operating-instructions check.</p>
+      <p style="max-width:72ch">Oregon’s break-in list is more specific about the first minutes. Oil the chain before use. Do not run any chain, and especially not a new one, on a worn rim or spur sprocket; replace that sprocket after every two chains, or sooner. Run the new chain at half throttle for several minutes before cutting, so oil reaches the bar and the chain, and let the saw warm up. Oregon also suggests dipping the chain in bar-and-chain oil, or drizzling oil along the chain on the bar, so the rivets and bearing surfaces are wet. Then stop, let the chain cool, and reset tension often. Keep the first cuts light, with extra oil, and do not lean on the saw. The full oil rules are in <a href="/guides/chainsaw-bar-and-chain-oil/">bar and chain oil</a>, and the sprocket interval is in <a href="/guides/chainsaw-drive-sprocket/">drive sprocket and pitch</a>.</p>
+      <p style="max-width:72ch">Husqvarna’s support page puts a clock on the first recheck: after one or two minutes of cutting, look again, because a new or freshly adjusted chain can stretch quickly. Oregon’s manual says to check often during operation, especially during the first half-hour, and if the chain loosens, to stop and let the saw cool before the next adjustment. Those two sentences are compatible. The first minutes are when a new loop moves the most; the half-hour is how long Oregon tells you to keep checking.</p>
+    </section>
+
+    <div class="callout"><b>⚠ A chain that will not pull by hand is too tight</b><p>Forcing a hot or over-tight chain around the bar overheats the nose, especially a sprocket nose, and it wears the rails. If the chain was correct when cool and now binds, let it cool and reset it. If it binds when cool, the drive-link count, the bar groove, or a damaged drive link is the problem — see <a href="/guides/when-to-replace-chainsaw-chain/">when to replace a chain</a>.</p></div>
+
+    <section class="block">
+      <h2>Where this sits next to the bar stamp</h2>
+      <p style="max-width:72ch">Tension assumes the loop is the loop that bar was made for. Pitch has to match the drive sprocket and, on a sprocket-nose bar, the nose sprocket. Gauge has to match the groove. Drive links have to match the length. A Husqvarna 450 Rancher’s common 18″ setup on this site is .325″ pitch, .050″ gauge, 72 drive links; the same 72-link count on a standard 3/8″ bar is a different chain, with a different sprocket and a 7/32″ file instead of a 3/16″ file. The <a href="/saws/husqvarna-450-rancher/">450 Rancher page</a> and the <a href="/chain/325-050/">.325″ .050″ chain page</a> keep those numbers apart. Tensioning the wrong loop does not make it the right loop.</p>
+      <p style="max-width:72ch">If you are changing length rather than replacing the same bar, the drive-link count changes with it. The limits for each saw we list are on <a href="/guides/longer-bar-on-chainsaw/">longer bar on a chainsaw</a>. After the new bar is on, the tension procedure on this page is the same procedure: cool chain, nose up, snug, still movable, nuts tight, check again once it has run.</p>
+    </section>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/how-to-install-chainsaw-chain/">Install a chain</a> · <a href="/guides/chainsaw-bar-maintenance/">Bar maintenance</a> · <a href="/guides/how-to-verify-chain-size/">Verify the chain size</a> · <a href="/guides/">All guides</a></p>
+    <ShopBlock groups={shop.groups} title="Chain, bar, wrench and oil (Amazon)" lead="Optional. Match pitch, gauge and drive links to the bar stamp before you buy a chain or a bar. The wrench and oil are general; the chain links are specific loops." />
+  </div>
+</Base>
