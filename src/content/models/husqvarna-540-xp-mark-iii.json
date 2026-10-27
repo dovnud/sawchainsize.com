@@ -1,0 +1,117 @@
+{
+  "brand": "husqvarna",
+  "model": "540 XP Mark III",
+  "name": "Husqvarna 540 XP Mark III",
+  "aliases": [
+    "540 XP Mark III",
+    "540XP Mark III",
+    "540 XP III",
+    "540 XP Mk III"
+  ],
+  "type": "gas",
+  "popular": false,
+  "blurb": "Two chain systems on 14″ and 16″ bars: .325″ Mini Pixel .043″ (59 / 64 drive links) or 3/8″ Mini .050″ (52 / 56) — per Husqvarna's 2026 fit-up guide.",
+  "intro": "The 540 XP Mark III is a rear-handle saw in the Professional section of Husqvarna's fit-up guide, and its fit-up guide entry is unusual: it approves two different chain systems at the same two bar lengths. On an X-Precision bar it runs .325″ Mini Pixel chain in .043″ gauge (SP21G X-Cut), 59 drive links at 14″ and 64 at 16″. On an X-Force bar it runs 3/8″ Mini (low-profile) chain in .050″ gauge (S93G X-Cut), 52 drive links at 14″ and 56 at 16″. So a 14″ bar alone does not tell you the chain: pitch, gauge and drive-link count all change with the bar type. Read the stamp on your bar tail before you order, and do not swap one system's chain onto the other's bar. The pitch has to match the saw's drive sprocket and the gauge has to match the bar groove, so a change of system is a bar, chain and sprocket job, not a chain swap. Both chains use a 5/32″ file. The .325″ rows use the same bar and chain part numbers as the top-handle T540 XP Mark III; the 3/8″ Mini chains are the same S93G loops listed for Husqvarna's small rear-handle saws.",
+  "bars": [
+    {
+      "lengths_in": [
+        14
+      ],
+      "label": "14″ (.325″ Mini Pixel, X-Precision bar)",
+      "pitch": "325",
+      "gauge": 0.043,
+      "drive_links": 59,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "SP21G X-Cut 596553359",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2026"
+      ],
+      "note": "Husqvarna's 2026 fit-up guide pairs this 14″ setup with bar X-Precision 596553659 and chain SP21G X-Cut 596553359."
+    },
+    {
+      "lengths_in": [
+        16
+      ],
+      "label": "16″ (.325″ Mini Pixel, X-Precision bar)",
+      "pitch": "325",
+      "gauge": 0.043,
+      "drive_links": 64,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "SP21G X-Cut 596553364",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2026"
+      ],
+      "note": "Husqvarna's 2026 fit-up guide pairs this 16″ setup with bar X-Precision 596553664 and chain SP21G X-Cut 596553364."
+    },
+    {
+      "lengths_in": [
+        14
+      ],
+      "label": "14″ (3/8″ Mini, X-Force bar)",
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 52,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "S93G X-Cut 585422152",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2026"
+      ],
+      "note": "Husqvarna's 2026 fit-up guide pairs this 14″ setup with bar X-Force 599583952 and chain S93G X-Cut 585422152."
+    },
+    {
+      "lengths_in": [
+        16
+      ],
+      "label": "16″ (3/8″ Mini, X-Force bar)",
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 56,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "S93G X-Cut 585422156",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2026"
+      ],
+      "note": "Husqvarna's 2026 fit-up guide pairs this 16″ setup with bar X-Force 599583956 and chain S93G X-Cut 585422156."
+    }
+  ],
+  "sources": [
+    {
+      "id": "husqvarna-fitup-2026",
+      "type": "fitup-chart",
+      "publisher": "Husqvarna",
+      "title": "Bar & Chain Fit-up Guide 2026 (effective 1 January 2026) — certified/approved bar and chain combinations per saw",
+      "url": "https://media.husqvarnagroup.com/original/DI-328359.pdf",
+      "retrieved": "2026-10-27"
+    }
+  ],
+  "sources_note": "Husqvarna 2026 Bar & Chain Fit-up Guide (effective 1 January 2026), 540 XP Mark III rows (Professional, Rear Handle), read on 27 Oct 2026.",
+  "last_verified": "2026-10-27"
+}

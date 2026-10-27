@@ -1,0 +1,193 @@
+---
+import Byline from '../../components/Byline.astro';
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { getModels, modelUrl, chainUrl, chainKey, pitchShort, gaugeShort, fileLabel, barPart, type Model } from '../../lib/data';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+const path = '/guides/chain-part-numbers/';
+const modified = (dates as Record<string, string>)[path];
+const shop = guideShop('chain-part-numbers');
+const models = await getModels();
+const Q = '″';
+const STIHL_CHART = 'https://assets.unilogcorp.com/187/ITEM/DOC/Stihl_102205325_Catalog.pdf';
+const HUSQ_GUIDE = 'https://media.husqvarnagroup.com/original/DI-328359.pdf';
+const ECHO_CAT = 'https://www.echo-usa.com/getmedia/f0410e25-c7f5-4247-a9cb-8045d8e57b63/ECHO_chainsaws.pdf';
+
+type Row = { m: Model; pitch: string; gauge: number; dl: number; file: string | null; part: string; len: number };
+const rowsFor = (brand: string): Row[] => models.flatMap((m) => m.data.bars.flatMap((b) => {
+  const c = b.chains.find((x) => x.role === 'oem' && x.brand === brand);
+  if (!c || b.status !== 'ok' || !b.pitch || !b.gauge || !b.drive_links) return [];
+  return [{ m, pitch: b.pitch, gauge: b.gauge, dl: b.drive_links, file: b.file_size, part: c.part_no, len: b.lengths_in[0], note: b.note } as Row & { note: string }];
+}));
+const uniq = <T,>(a: T[]) => [...new Set(a)];
+const sawLinks = (rs: Row[]) => uniq(rs.map((r) => r.m)).sort((a, b) => a.data.name.localeCompare(b.data.name));
+
+// ---- STIHL: marketing number = pitch digit, gauge digit, cutter letters + specials, then drive links.
+// Legend restated from STIHL's "Identifying STIHL Saw Chain" panel on the chain-selection chart (2017).
+const ST_PITCH: Record<string, string> = { '1': '1/4', '2': '325', '3': '3/8', '4': '404', '6': '3/8-lp' };
+const ST_GAUGE: Record<string, number> = { '1': 0.043, '3': 0.05, '5': 0.058, '6': 0.063 };
+const ST_FAMILY: Record<string, string> = {
+  RS3: 'RAPID (R) Super (S, chisel cutter), single-humped drive link (3)',
+  RS: 'RAPID (R) Super (S, chisel cutter)',
+  RM3: 'RAPID (R) Micro (M), single-humped drive link (3)',
+  PM3: 'PICCO (P) Micro (M), single-humped drive link (3)',
+  PMM3: 'PICCO (P) Micro Mini (MM), single-humped drive link (3)',
+};
+const stRows = rowsFor('STIHL');
+const stFam = new Map<string, { code: string; rows: Row[] }>();
+for (const r of stRows) {
+  const m = r.part.match(/^(\d)(\d) ([A-Z]+\d?) (\d+)$/);
+  if (!m) throw new Error(`STIHL code not parseable: ${r.part}`);
+  const [, p, g, fam, dl] = m;
+  if (ST_PITCH[p] !== r.pitch || ST_GAUGE[g] !== r.gauge) throw new Error(`STIHL code ${r.part} does not decode to the row's pitch/gauge (${r.m.id})`);
+  if (Number(dl) !== r.dl) throw new Error(`STIHL code ${r.part} drive links != row (${r.m.id})`);
+  if (!ST_FAMILY[fam]) throw new Error(`STIHL family ${fam} not in legend table`);
+  const code = `${p}${g} ${fam}`;
+  if (!stFam.has(code)) stFam.set(code, { code, rows: [] });
+  stFam.get(code)!.rows.push(r);
+}
+const stTable = [...stFam.values()].sort((a, b) => a.code.localeCompare(b.code));
+
+// ---- Husqvarna: chain type name + 9-digit part number (2026 fit-up guide).
+// Only rows in the 2026 fit-up guide format ("<type> <9-digit part>"); older-manual rows such as H30-72 are left out.
+const huRows = rowsFor('Husqvarna').flatMap((r) => { const m = r.part.match(/^(.+) (\d{9})$/); return m ? [{ ...r, type: m[1], pn: m[2] }] : []; });
+const huTypes = new Map<string, typeof huRows>();
+for (const r of huRows) { if (!huTypes.has(r.type)) huTypes.set(r.type, []); huTypes.get(r.type)!.push(r); }
+const huTable = [...huTypes.entries()].map(([type, rs]) => ({ type, rs, specs: uniq(rs.map((r) => `${r.pitch}|${r.gauge}`)) }))
+  .sort((a, b) => a.rs[0].pitch.localeCompare(b.rs[0].pitch) || a.rs[0].gauge - b.rs[0].gauge || a.type.localeCompare(b.type));
+const huPn = uniq(huRows.map((r) => `${r.pn}|${r.dl}`)).map((k) => k.split('|'));
+const huMatch = huPn.filter(([pn, dl]) => pn.slice(-2) === dl.padStart(2, '0').slice(-2)).length;
+
+// ---- Echo: chain = 2-digit prefix + type letters + drive links + CQ; bar = length, series letter, gauge digit, 2 letters, pitch code, last two digits of DL, C.
+const ecRows = rowsFor('Echo');
+const ecChain = ecRows.map((r) => ({ r, m: r.part.split(' ')[0].match(/^(\d\d)([A-Z]+?)(\d+)CQ$/) }));
+for (const { r, m } of ecChain) if (!m || Number(m[3]) !== r.dl) throw new Error(`Echo chain ${r.part} pattern/DL mismatch (${r.m.id})`);
+const ecPrefix = new Map<string, Set<string>>();
+for (const { r, m } of ecChain) { const k = m![1]; if (!ecPrefix.has(k)) ecPrefix.set(k, new Set()); ecPrefix.get(k)!.add(`${r.pitch}|${r.gauge}`); }
+for (const [k, s] of ecPrefix) if (s.size !== 1) throw new Error(`Echo prefix ${k} maps to more than one spec`);
+const ecPrefixTable = [...ecPrefix.entries()].map(([k, s]) => { const [p, g] = [...s][0].split('|'); return { k, pitch: p, gauge: Number(g), types: uniq(ecChain.filter((x) => x.m![1] === k).map((x) => x.m![2])).sort(), files: uniq(ecRows.filter((r) => r.part.startsWith(k)).map((r) => r.file).filter(Boolean)) as string[] }; })
+  .sort((a, b) => a.k.localeCompare(b.k));
+const EC_GAUGE: Record<string, number> = { '0': 0.05, '4': 0.043, '8': 0.058 };
+const EC_PITCH: Record<string, string> = { '37': '3/8-lp', '33': '325', '38': '3/8' };
+const ecBars = ecRows.map((r) => ({ r, bar: barPart((r as any).note) })).filter((x) => x.bar);
+const ecBarOk = ecBars.filter(({ r, bar }) => { const m = bar!.match(/^(\d+)([A-Z])(\d)([A-Z]{2})(\d\d)(\d\d)C\*?$/); return m && Number(m[1]) === r.len && EC_GAUGE[m[3]] === r.gauge && EC_PITCH[m[5]] === r.pitch && m[6] === String(r.dl).slice(-2); });
+if (ecBarOk.length !== ecBars.length) throw new Error(`Echo bar pattern fails on ${ecBars.length - ecBarOk.length} site rows`);
+const ecEx = ecRows.find((r) => r.part === '90PX52CQ');
+
+const desc = 'Chainsaw chain part numbers decoded: what STIHL’s 33 RS3 84, Husqvarna’s S93G and SP33G and Echo’s 91PX52CQ mean for pitch, gauge and drive links, checked against every saw on this site.';
+const faqs = [
+  { q: 'What does STIHL 33 RS3 84 mean?', a: 'First digit 3 = 3/8″ pitch, second digit 3 = .050″ gauge, RS = RAPID Super (chisel) cutters, the trailing 3 = single-humped drive link, and 84 = drive links in the loop. That is the loop STIHL lists for a 25″ .050″ bar on the MS 362 and MS 661.' },
+  { q: 'Is the last number on a chain the drive-link count?', a: 'On STIHL loop numbers and Echo chain part numbers, yes: 33 RS3 72 has 72 drive links and Echo 91PX57CQ has 57. Husqvarna part numbers are different, a 9-digit number whose last two digits matched the drive-link count on the saw rows we checked, but that is a pattern, not a published rule, so confirm the count on the box or bar stamp.' },
+  { q: 'What is the difference between STIHL 33 RS3 and 36 RS3?', a: 'Only the gauge: the second digit 3 means .050″ and 6 means .063″. Pitch (3/8″) and cutter type are the same, but a 36 RS3 loop will not seat in a .050″ bar groove.' },
+  { q: 'What do PX, PXL and LPX mean on Echo chain?', a: 'They are Echo’s chain-type codes. PX: low-vibration chisel cutters with ramped depth gauges and bumper drive links. PXL: low-vibration semi-chisel cutters with ramped depth gauges, bumper drive links and a longer top plate. BPX: low-vibration chisel cutters with bumper drive links. LPX (a professional chain): round-ground chisel cutters with bumper drive links. VXL (professional): low-vibration semi-chisel cutters with ramped depth gauges and a longer top plate.' },
+  { q: 'What does “Mini” or “Pixel” mean in Husqvarna’s chain names?', a: 'In Husqvarna’s 2026 fit-up guide, “3/8 Mini” is 3/8″ low-profile chain, “Pixel” marks a narrow-kerf chain, and “Mini Pixel” is the narrow .043″ gauge: 3/8 Mini Pixel (H38) on saws like the 120i, .325 Mini Pixel (SP21G) on the T540 XP Mark III.' },
+];
+const jsonld = [webPageLd('Chainsaw chain part numbers explained: STIHL, Husqvarna and Echo', path, desc, modified), faqLd(faqs)];
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Chain part numbers', path }];
+const specHref = (p: string, g: number) => chainUrl(chainKey(p, g));
+const specText = (p: string, g: number) => `${pitchShort(p)} · ${gaugeShort(g)}`;
+---
+<Base title="Chainsaw Chain Part Numbers Explained: STIHL, Husqvarna, Echo" description={desc} path={path} nav="chart" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Chain part numbers' }]} />
+      <h1>Chainsaw chain part numbers, decoded</h1>
+      <p class="lede">A STIHL loop number such as 33 RS3 84 spells out the chain: the first digit is the pitch (3 = 3/8″), the second is the gauge (3 = .050″), the letters are the cutter type, and the last number is the drive-link count. Echo part numbers such as 91PX52CQ carry the drive-link count too (52). Husqvarna names its chain types (S93G, SP33G, H38) and you look the spec up. The tables below decode the STIHL, Husqvarna and Echo chain numbers in our verified saw data.</p>
+      <Byline label="Last updated" />
+    </div>
+
+    <section class="block">
+      <h2>STIHL: the marketing number</h2>
+      <p style="max-width:72ch">STIHL prints a marketing number on the chain box alongside the part number. Read it left to right: pitch digit, gauge digit, cutter letters and any special codes, then the drive-link count. STIHL’s own example is 33RS3 = 3/8″ pitch, .050″ gauge, RAPID Super cutters, single-humped drive link.</p>
+      <div class="grid2">
+        <div class="tblwrap">
+          <table>
+            <thead><tr><th>1st digit</th><th>Pitch</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td>1/4″</td></tr>
+              <tr><td class="num">2</td><td>.325″</td></tr>
+              <tr><td class="num">3</td><td>3/8″</td></tr>
+              <tr><td class="num">4</td><td>.404″</td></tr>
+              <tr><td class="num">6</td><td>STIHL PICCO (3/8″ Extended)</td></tr>
+              <tr><td class="num">7</td><td>STIHL PICCO (1/4″ Extended)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tblwrap">
+          <table>
+            <thead><tr><th>2nd digit</th><th>Gauge</th></tr></thead>
+            <tbody>
+              <tr><td class="num">1</td><td>.043″ (1.1 mm)</td></tr>
+              <tr><td class="num">3</td><td>.050″ (1.3 mm)</td></tr>
+              <tr><td class="num">5</td><td>.058″ (1.5 mm)</td></tr>
+              <tr><td class="num">6</td><td>.063″ (1.6 mm)</td></tr>
+              <tr><td class="num">0</td><td>.080″ (2.0 mm), harvester chain only</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p style="max-width:72ch">Letters: cutter type P = PICCO, R = RAPID; cutter shape S = Super (chisel), M = Micro, D = Duro (carbide tip), DS = Duro Special, R = Rescue. Special codes after the letters include 3 = single-humped drive link, 1 and 2 = triple-humped tie strap (on PM and RM chain), F = full skip, H = semi-skip, K = classic cutter, L = square ground, M = Mini, MM = Micro Mini, N = Narrow. Gauge is the thickness of the drive link.</p>
+      <p class="src">Legend restated from STIHL USA, <a href={STIHL_CHART} rel="nofollow">Saw Chain Selection and Identification</a> (“Identifying STIHL Saw Chain” panel; specifications as of 1 October 2017). On every STIHL saw page here, a code starting with 6 is listed by STIHL as 3/8″ PICCO, which this site files under 3/8″ low profile.</p>
+
+      <h3>Every STIHL loop on this site, decoded</h3>
+      <div class="tblwrap">
+        <table>
+          <thead><tr><th>Code</th><th>Pitch · gauge</th><th>What the letters say</th><th>Drive-link counts listed</th><th>Saws</th></tr></thead>
+          <tbody>
+            {stTable.map((f) => (
+              <tr><td class="num">{f.code}</td><td class="num"><a href={specHref(f.rows[0].pitch, f.rows[0].gauge)}>{specText(f.rows[0].pitch, f.rows[0].gauge)}</a></td><td class="small">{ST_FAMILY[f.code.split(' ')[1]]}</td><td class="num">{uniq(f.rows.map((r) => r.dl)).sort((a, b) => a - b).join(', ')}</td><td class="small">{sawLinks(f.rows).map((m, i) => <>{i ? ', ' : ''}<a href={modelUrl(m)}>{m.data.name}</a></>)}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="src">Built from the {stRows.length} verified STIHL rows in our data at build time. Each code is decoded with the legend above and checked against that row’s pitch, gauge and drive-link count; the build fails if one disagrees.</p>
+    </section>
+
+    <hr class="rule" />
+
+    <section class="block">
+      <h2>Husqvarna: chain type names</h2>
+      <p style="max-width:72ch">Husqvarna’s fit-up guide gives each chain a type name and a 9-digit part number, and describes pitch in its own words: “3/8 Mini” is 3/8″ low profile, “Pixel” is a narrow-kerf chain, and “Mini Pixel” is the .043″ gauge version. The type name alone tells you pitch and gauge, but not length.</p>
+      <div class="tblwrap">
+        <table>
+          <thead><tr><th>Chain type</th><th>Pitch · gauge</th><th>File</th><th>Drive links listed</th><th>Saws</th></tr></thead>
+          <tbody>
+            {huTable.map((t) => (
+              <tr><td class="num">{t.type}</td><td class="num">{t.specs.map((s, i) => { const [p, g] = s.split('|'); return <>{i ? ' / ' : ''}<a href={specHref(p, Number(g))}>{specText(p, Number(g))}</a></>; })}</td><td class="num">{uniq(t.rs.map((r) => r.file).filter(Boolean)).map((f) => fileLabel(f as string)).join(' / ')}</td><td class="num">{uniq(t.rs.map((r) => r.dl)).sort((a, b) => a - b).join(', ')}</td><td class="small">{sawLinks(t.rs).map((m, i) => <>{i ? ', ' : ''}<a href={modelUrl(m)}>{m.data.name}</a></>)}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p style="max-width:72ch">A useful cross-check: on {huMatch} of the {huPn.length} distinct Husqvarna part numbers in our verified rows, the last two digits equal the drive-link count (585422156 is a 56-link S93G loop; a 105-link loop ends in 05). Husqvarna doesn’t publish that as a rule, and one 16″ row in its 2026 guide prints 66 links beside the 56-link part, which is why the <a href="/saws/husqvarna-130/">Husqvarna 130</a> page flags it. Use the pattern to catch a typo, not to choose a chain.</p>
+      <p class="src">Type names, part numbers and the “Mini / Pixel” wording from Husqvarna’s <a href={HUSQ_GUIDE} rel="nofollow">Bar &amp; Chain Fit-up Guide 2026</a> (effective 1 January 2026). Table built from the {huRows.length} verified Husqvarna rows in our data that carry a 2026-guide part number.</p>
+    </section>
+
+    <hr class="rule" />
+
+    <section class="block">
+      <h2>Echo: chain and bar part numbers</h2>
+      <p style="max-width:72ch">An Echo chain part number reads as a two-digit prefix, a type code, the drive-link count and the suffix CQ.{ecEx && <> For example, 90PX52CQ is 90 (3/8″ low profile, .043″), PX, 52 drive links, the chain Echo lists for the 14″ .043″ bar on the <a href={modelUrl(ecEx.m)}>{ecEx.m.data.name}</a>.</>} In Echo’s chart each prefix goes with exactly one pitch and gauge:</p>
+      <div class="tblwrap">
+        <table>
+          <thead><tr><th>Prefix</th><th>Pitch · gauge</th><th>Type codes seen</th><th>File</th></tr></thead>
+          <tbody>
+            {ecPrefixTable.map((e) => <tr><td class="num">{e.k}…</td><td class="num"><a href={specHref(e.pitch, e.gauge)}>{specText(e.pitch, e.gauge)}</a></td><td class="num">{e.types.join(', ')}</td><td class="num">{e.files.map((f) => fileLabel(f)).join(' / ')}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+      <p style="max-width:72ch">Echo’s type codes: PX = low-vibration chisel cutters with ramped depth gauges and bumper drive links; PXL = low-vibration semi-chisel cutters with ramped depth gauges, bumper drive links and a longer top plate; BPX = low-vibration chisel cutters with bumper drive links (all three are Echo’s low-kickback chains). LPX = round-ground chisel cutters with bumper drive links; VXL = low-vibration semi-chisel with ramped depth gauges and a longer top plate (Echo’s professional chains).</p>
+      <p style="max-width:72ch">Echo bar part numbers follow a pattern too, though Echo doesn’t spell it out: bar length, a series letter, a gauge digit (0 = .050″, 4 = .043″, 8 = .058″), two letters, a pitch code (37 = 3/8″ low profile, 33 = .325″, 38 = 3/8″), the last two digits of the drive-link count, then C. So 14A4CD3752C is a 14″ .043″ 3/8″ low-profile bar for 52 links, and 20H8PS3872C is a 20″ .058″ 3/8″ bar for 72. We checked it against all 54 rows of Echo’s Bars and Chains chart and the {ecBars.length} Echo rows on this site; it holds on every one. Two bars can still share the spec and differ in the series letters (the CS-355T’s 14A0ES3752C against the CS-310’s 14A0CD3752C), so order by the full part number.</p>
+      <p class="src">Chain codes, type definitions and bar numbers from the <a href={ECHO_CAT} rel="nofollow">ECHO chainsaws catalog</a> (January 2023), “Bars and Chains” chart and chain-type key, p. 37. The bar-number reading is our analysis of that chart, not an Echo specification.</p>
+    </section>
+
+    <div class="callout"><b>⚠ A code is not a length</b><p>Every number above gives pitch and gauge, and STIHL and Echo numbers give the drive-link count. None of them tell you the bar length, and the same length can take different loops: STIHL lists 104 and 108 links for two 36″ bars on the <a href="/saws/stihl-ms-880/">MS 880</a>. Take the count from your bar stamp or old loop (<a href="/guides/how-to-count-drive-links/">how to count</a>), then match all three numbers.</p></div>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/chain-size-chart/">Chain identification chart</a> (Oregon, STIHL, Husqvarna and Carlton codes by spec) · <a href="/guides/how-to-verify-chain-size/">Verify your chain size</a> · <a href="/chain/">All chain specs</a></p>
+    <ShopBlock groups={shop.groups} title="If the numbers are worn off (Amazon)" lead="Optional. With no readable code, measure gauge and pitch instead, then count the drive links." />
+  </div>
+</Base>

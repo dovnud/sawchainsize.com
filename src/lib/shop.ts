@@ -65,6 +65,12 @@ const LINK_CAP: Record<string, number> = {
   'model:stihl-ms-661': 3,
   'chain:325-043': 3,
   'bar:25': 3,
+  'model:husqvarna-540-xp-mark-iii': 3,
+  'model:stihl-ms-880': 3,
+  'model:echo-cs-2511t': 3,
+  'model:echo-cs-355t': 3,
+  'bar:30': 3,
+  'bar:36': 3,
 };
 const capGroups = (groups: ShopGroup[], cap: number | undefined): ShopGroup[] => {
   if (cap === undefined) return groups;
@@ -167,6 +173,7 @@ export function guideShop(slug: string): { groups: ShopGroup[]; count: number } 
     case 'chainsaw-chain-file-size': title = 'Files and sharpening kits by size'; links = [product('kit-5-32'), product('kit-3-16'), product('kit-field'), search('7/32 chainsaw round file 5.5mm', '7/32″ round files (3/8″ standard and .404″ chain)'), search('11/64 chainsaw round file 4.5mm', '11/64″ round files (3/8″ LP .043″ chain)'), DEPTH_TOOL()]; break;
     case 'chainsaw-sharpening-angles': title = 'Files and depth-gauge tools'; links = [product('kit-5-32'), product('kit-3-16'), product('kit-field'), search('7/32 chainsaw round file 5.5mm', '7/32″ round files (3/8″ standard and .404″ chain)'), DEPTH_TOOL(), search('chainsaw depth gauge flat file', 'Flat file for lowering depth gauges')]; break;
     case 'how-to-count-drive-links': links = [CALIPER(), PITCH_GAUGE_TOOL()]; break;
+    case 'chain-part-numbers': links = [CALIPER(), PITCH_GAUGE_TOOL()]; break;
     case 'how-to-verify-chain-size': links = [CALIPER(), PITCH_GAUGE_TOOL(), SCRENCH()]; break;
     case 'oregon-72-vs-73-chain': title = 'Check the gauge, then shop by the stamp'; links = [CALIPER(), search('Oregon 72LPX chainsaw chain 3/8 .050 gauge', 'Oregon 72LPX chain (3/8″ .050″) — pick your drive-link count'), search('Oregon 73LPX chainsaw chain 3/8 .058 gauge', 'Oregon 73LPX chain (3/8″ .058″) — pick your drive-link count')]; break;
   }

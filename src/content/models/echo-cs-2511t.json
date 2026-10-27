@@ -1,0 +1,117 @@
+{
+  "brand": "echo",
+  "model": "CS-2511T",
+  "name": "Echo CS-2511T",
+  "aliases": [
+    "CS-2511T",
+    "CS2511T",
+    "2511T"
+  ],
+  "type": "gas",
+  "displacement_cc": 25.0,
+  "popular": false,
+  "blurb": "12″ and 14″ bars on 3/8″ low-profile chain in two gauges: .050″ (45 / 52 links, 5/32″ file) or .043″ (45 / 52 links, 11/64″ file), per Echo's chart.",
+  "intro": "The CS-2511T is Echo's 25 cc top-handle saw. Echo's Bars and Chains chart lists it on 12″ and 14″ bars, always 3/8″ low-profile pitch with 45 drive links at 12″ and 52 at 14″, but in two gauges: .050″ (91PXL chain) and the narrower .043″ (90PX chain). Each gauge has its own bar, and the bar part numbers differ by one character (12A0CD3745C for .050″, 12A4CD3745C for .043″), so check the gauge on your bar stamp. A .050″ loop will not seat in the .043″ groove, and a .043″ loop runs loose in a .050″ one. The two chains also take different files: 5/32″ for the .050″ chain, 11/64″ for the .043″. The rear-handle CS-2511P has the same engine size and lists only the two .050″ setups.",
+  "bars": [
+    {
+      "lengths_in": [
+        12
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 45,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "91PXL45CQ",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "echo-catalog-2023"
+      ],
+      "note": "Echo bar 12A0CD3745C; chain 91PXL45CQ. Low-vibration semi-chisel PXL chain. The rear-handle CS-2511P lists this same bar and chain.",
+      "label": "12″ (.050″ gauge)"
+    },
+    {
+      "lengths_in": [
+        12
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.043,
+      "drive_links": 45,
+      "file_size": "11/64",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "90PX45CQ",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "echo-catalog-2023"
+      ],
+      "note": "Echo bar 12A4CD3745C; chain 90PX45CQ. Narrow .043″ 90PX chain on its own .043″ bar; it takes an 11/64″ file, not 5/32″. The CS-2511P chart entry has no .043″ row.",
+      "label": "12″ (.043″ gauge)"
+    },
+    {
+      "lengths_in": [
+        14
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 52,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "91PXL52CQ",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "echo-catalog-2023"
+      ],
+      "note": "Echo bar 14A0CD3752C; chain 91PXL52CQ. Low-vibration semi-chisel PXL chain. The rear-handle CS-2511P lists this same bar and chain.",
+      "label": "14″ (.050″ gauge)"
+    },
+    {
+      "lengths_in": [
+        14
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.043,
+      "drive_links": 52,
+      "file_size": "11/64",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "90PX52CQ",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "echo-catalog-2023"
+      ],
+      "note": "Echo bar 14A4CD3752C; chain 90PX52CQ. Narrow .043″ 90PX chain on its own .043″ bar; it takes an 11/64″ file. The CS-2511P chart entry has no .043″ row.",
+      "label": "14″ (.043″ gauge)"
+    }
+  ],
+  "sources": [
+    {
+      "id": "echo-catalog-2023",
+      "type": "fitup-chart",
+      "publisher": "Echo",
+      "title": "ECHO chainsaws catalog (Jan 2023) — “Bars and Chains” chart: bar and chain part numbers, drive-link count, gauge, pitch and file size per saw; saw specification tables",
+      "url": "https://www.echo-usa.com/getmedia/f0410e25-c7f5-4247-a9cb-8045d8e57b63/ECHO_chainsaws.pdf",
+      "retrieved": "2026-10-27"
+    }
+  ],
+  "sources_note": "Echo chainsaw catalog (January 2023): “Bars and Chains” chart (CS-2511T and CS-2511P rows) and the saw specification table, read on 27 Oct 2026.",
+  "last_verified": "2026-10-27"
+}

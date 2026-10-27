@@ -1,0 +1,94 @@
+{
+  "brand": "echo",
+  "model": "CS-355T / CS-361P",
+  "name": "Echo CS-355T / CS-361P",
+  "aliases": [
+    "CS-355T",
+    "CS-361P",
+    "CS355T",
+    "CS361P"
+  ],
+  "type": "gas",
+  "displacement_cc": 35.8,
+  "popular": false,
+  "blurb": "3/8″ low-profile .050″ chain on 14″ (52 links) and 16″ (57 links) bars for both saws, plus a 12″ (45-link) bar for the CS-355T, per Echo's chart.",
+  "intro": "The CS-355T (top handle) and CS-361P (rear handle) share a 35.8 cc engine and Echo lists the same 14″ and 16″ bar and chain for both: 3/8″ low-profile pitch, .050″ gauge, 52 drive links (91PXL52CQ) at 14″ and 57 (91PXL57CQ) at 16″, sharpened with a 5/32″ file. The CS-355T also has a 12″ row in Echo's chart, with 45 links of 91PX chain on bar 12A0ED3745C, although Echo's specification table lists only 14″ and 16″ for it. These saws use their own bars: the 14″ and 16″ part numbers (14A0ES3752C, 16A0ES3757C) differ from the CD-series bars on Echo's smaller saws, even though the chain spec is the same. Match the bar part or stamp, not just the length, if you are buying a replacement bar.",
+  "bars": [
+    {
+      "lengths_in": [
+        12
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 45,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "91PX45CQ",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "echo-catalog-2023"
+      ],
+      "note": "Echo bar 12A0ED3745C; chain 91PX45CQ. Chart row for the CS-355T only (the CS-361P entry starts at 14″). Echo's specification table gives 14″ and 16″ as the CS-355T's bar lengths, so the 12″ setup appears only in the Bars and Chains chart.",
+      "label": "12″ (CS-355T)"
+    },
+    {
+      "lengths_in": [
+        14
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 52,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "91PXL52CQ",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "echo-catalog-2023"
+      ],
+      "note": "Echo bar 14A0ES3752C; chain 91PXL52CQ. Listed for both the CS-355T and the CS-361P. Low-vibration semi-chisel PXL chain."
+    },
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 57,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "91PXL57CQ",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "echo-catalog-2023"
+      ],
+      "note": "Echo bar 16A0ES3757C; chain 91PXL57CQ. Listed for both the CS-355T and the CS-361P. Low-vibration semi-chisel PXL chain."
+    }
+  ],
+  "sources": [
+    {
+      "id": "echo-catalog-2023",
+      "type": "fitup-chart",
+      "publisher": "Echo",
+      "title": "ECHO chainsaws catalog (Jan 2023) — “Bars and Chains” chart: bar and chain part numbers, drive-link count, gauge, pitch and file size per saw; saw specification tables",
+      "url": "https://www.echo-usa.com/getmedia/f0410e25-c7f5-4247-a9cb-8045d8e57b63/ECHO_chainsaws.pdf",
+      "retrieved": "2026-10-27"
+    }
+  ],
+  "sources_note": "Echo chainsaw catalog (January 2023): “Bars and Chains” chart (CS-355T and CS-355T/361P rows) and the saw specification table, read on 27 Oct 2026.",
+  "last_verified": "2026-10-27"
+}
