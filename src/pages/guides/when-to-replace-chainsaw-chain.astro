@@ -1,0 +1,75 @@
+---
+import Byline from '../../components/Byline.astro';
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+
+const path = '/guides/when-to-replace-chainsaw-chain/';
+const modified = (dates as Record<string, string>)[path];
+const desc = 'When to replace a chainsaw chain: Oregon’s chip-versus-dust test, chrome worn off by dirt, depth gauges, cracked cutters, and the sprocket that retires every two chains.';
+const ORE = 'https://apps.oregonproducts.com/pdfs/OregonMMANUAL_EN_A106971ab.pdf';
+const ORE_FAQ = 'https://www.oregonproducts.com/en_gb/faq';
+const faqs = [
+  { q: 'How do I know a chainsaw chain is dull?', a: 'Oregon’s FAQ says a sharp chain cuts large chips and feeds itself with only light pressure. A dull chain, or one with abrasive damage, makes sawdust, and you have to push the saw. The manual says to touch up the cutters about every hour of cutting, or sooner, and the FAQ offers a rule of thumb: sharpen every time you refill the gas. Do not force a dull chain to cut.' },
+  { q: 'Does a dull chain mean I should buy a new one?', a: 'Not by itself. Oregon’s remedy for dull or lightly damaged cutters is to file them back until the damage is gone and the cutters are equal. Replacement is what the troubleshooting list specifies when parts are cracked, when many drive links are battered, when joints are too tight to repair, or when wear on the bottoms of the tie-straps and cutters is extensive.' },
+  { q: 'How often do I replace the drive sprocket?', a: 'Oregon’s manual and Oregon’s FAQ agree: replace the drive sprocket after every two chains, or sooner. Do not run a new chain on a badly worn sprocket, and do not run an old chain on a new sprocket. The manual’s older wording also says to use two new chains in rotation with each new sprocket so they wear together.' },
+  { q: 'What does dirt do to a chain?', a: 'Oregon says dirt is extremely abrasive and will wear away the chain’s chrome plating in less than a second. The chain is made to cut wood only. Once the chrome is gone, the softer metal underneath dulls immediately. File back to clean chrome if the damage is shallow. If the cutters are down to the witness marks or the bodies are cracked, replace the chain.' },
+  { q: 'How often are depth gauges set?', a: 'Every three or four sharpenings, or more often if needed. Most Oregon chains have the setting stamped on the depth gauge. Filing the depth gauge below the specified setting is not a way to make a tired chain cut. On the types Oregon lists at .025″, that is the floor.' },
+];
+const jsonld = [webPageLd('When to replace a chainsaw chain', path, desc, modified), faqLd(faqs)];
+const shop = guideShop('when-to-replace-chainsaw-chain');
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'When to replace a chain', path }];
+---
+<Base title="When to Replace a Chainsaw Chain" description={desc} path={path} nav="chart" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'When to replace a chain' }]} />
+      <h1>When to replace a chainsaw chain</h1>
+      <p class="lede">A chain that makes dust instead of chips needs a file, not automatically a new loop. Oregon’s troubleshooting list is where “sharpen it” stops and “replace it” starts: cracked cutters, battered drive links, joints that will not free, and a sprocket that has already worn through two chains.</p>
+      <Byline label="Last updated" />
+    </div>
+
+    <section class="block">
+      <h2>Chips, dust, and the hourly file</h2>
+      <p style="max-width:72ch">Oregon gives two observations that do not require a gauge. A sharp chain produces larger wood chips and is designed to feed itself into the wood with only light pressure. A dull chain produces fine dust, and the operator has to push. The FAQ repeats the test: it is time to sharpen when you have to push, or the saw is no longer self-feeding, and when the waste has turned from chips to dust. Dust also loads the air filter, which the cutting-tips page notes as a reason not to keep working a dull chain.</p>
+      <p style="max-width:72ch">The maintenance interval Oregon prints next to that test is short. Touch up the cutting edge with a file about every hour, more often if needed. The FAQ’s rule of thumb is every time you refill the gas. Those are sharpening intervals, not replacement intervals. The file size follows pitch — 5/32″ for 3/8″ low-profile .050″, 3/16″ for .325″, 7/32″ for standard 3/8″ and .404″ — and the angles follow the chain type. Both tables are already on this site: <a href="/guides/chainsaw-chain-file-size/">file size</a> and <a href="/guides/chainsaw-sharpening-angles/">sharpening angles</a>. The wrong file is itself a reason a chain cuts poorly. Oregon’s troubleshooting list attributes a top plate with too little angle, and a back-sloped side plate, to a file held too high or a file that is too large, and the remedy is to resharpen with the right guide, not to throw the chain out.</p>
+      <p class="src">Sources: Oregon <a href={ORE} rel="nofollow">Maintenance and Safety Manual</a>, cutting tips and troubleshooting; Oregon <a href={ORE_FAQ} rel="nofollow">FAQ</a>, “How do I know when my chain is dull”.</p>
+    </section>
+
+    <section class="block">
+      <h2>Chrome, dirt, and damage you file out</h2>
+      <p style="max-width:72ch">Oregon’s cutting tips forbid two things that destroy cutters faster than wood does. Do not cut anything but wood. Never let the chain contact rocks or dirt. The manual’s wording on dirt is specific: dirt may seem soft, and it is extremely abrasive, and it will wear away the chrome plating in less than a second. The chrome is the hard skin on the top plate and side plate. Under it, the steel does not hold an edge.</p>
+      <p style="max-width:72ch">The troubleshooting remedy for abrasive damage on the side plate or top plate — the damage Oregon associates with rock, dirt or sand, typically from cutting close to the ground — is to file the cutters back until all the damage is removed. If only one side is damaged, the chain cuts crooked until those cutters match the others. The sharpening procedure on this site already states Oregon’s rule: file back past damaged chrome, and keep cutter lengths equal. A chain that leans in the cut is often that mismatch, or a bar rail worn on one side, which is a <a href="/guides/chainsaw-bar-maintenance/">bar</a> problem as well as a chain problem.</p>
+      <p style="max-width:72ch">Replacement enters when filing cannot restore a cutter. Oregon tells you not to run cutters that are cracked, and the breakage notes in the troubleshooting section tie cracks under the rear rivet hole to forcing a dull chain, low depth-gauge settings, lack of lubrication, loose tension, and cutting frozen wood. The remedy line for cracked cutters and tie-straps is to replace the worn or cracked parts. On a loop where many cutters are in that condition, replacing parts one by one is no longer the practical reading of “replace the saw chain,” which is the remedy Oregon prints for extensive wear in several other rows of the same table.</p>
+    </section>
+
+    <section class="block">
+      <h2>Depth gauges are a sharpening job, until they are not</h2>
+      <p style="max-width:72ch">Every time the cutter is filed back, the depth gauge (the raker in front of the cutter) becomes taller relative to the new edge. Oregon says to check and adjust depth gauges every three or four sharpenings, or more often as needed. The setting for almost every type on Oregon’s filing chart is .025″; some .404″ types are .030″. The chart and the method — depth-gauge tool, flat file, then restore the rounded front corner — are on the <a href="/guides/chainsaw-sharpening-angles/">sharpening-angles guide</a>. Most Oregon chains have the number stamped on the depth gauge itself.</p>
+      <p style="max-width:72ch">Setting the depth gauge lower than the specified figure is not a repair for a tired chain. Oregon says never to file a depth gauge down enough to exceed the setting for that chain. The troubleshooting list connects low depth-gauge settings with cracks at the rear rivet and with the chain grabbing. If the cutters have been filed so far back that you cannot restore the stamped setting without destroying the cutter, that loop is at the end of its filing life. Bumper tie-straps and bumper drive links are left alone; Oregon says not to file them, because they are part of kickback reduction.</p>
+    </section>
+
+    <section class="block">
+      <h2>Drive links, tight joints, and the sprocket</h2>
+      <p style="max-width:72ch">Oregon’s drive-link troubleshooting is the clearest replacement list in the manual. Battered or broken bottoms on the drive links come from a worn or broken sprocket, or from a loose chain jumping the groove and being hit by the sprocket. If many drive links are damaged, the remedy is to replace the chain, and to keep tension correct so the chain does not climb out of a spur sprocket. Peening on the front or back of the drive link is attributed to a worn sprocket; the remedy is to replace the sprocket and replace the chain, and not to run a new chain on an old sprocket or an old chain on a new one. A drive-link tang that has turned up means the sprocket is worn. Sides of drive links worn thin are tied to bar rails that have spread or worn low.</p>
+      <p style="max-width:72ch">The interval that prevents that list is printed in the cutting tips and again in the FAQ. Replace the drive sprocket after every two saw chains, or sooner. The manual also says not to run a chain on a worn rim or spur, especially a new chain. An older Oregon maintenance text puts the rotation explicitly: do not run an old chain on a new sprocket or a new chain on an old sprocket; use two new chains in rotation with each new sprocket so they wear together. The pitch of that sprocket has to be the pitch of the chain. Details and the reason a 3/8″ low-profile sprocket is not a standard 3/8″ sprocket are on <a href="/guides/chainsaw-drive-sprocket/">drive sprocket and pitch</a>.</p>
+      <p style="max-width:72ch">Tight joints that cannot be freed are a replacement, not a soak. Oregon’s note on peening of the bottoms of cutters and tie-straps says a chain with tight joints cannot be repaired: replace the chain, keep tension correct, and replace a worn rim sprocket. Tensioning harder will not free a peened joint. It will load the bar. The tension procedure, including the rule against tensioning a hot chain, is <a href="/guides/chainsaw-chain-tension/">how to tension a chain</a>.</p>
+    </section>
+
+    <section class="block">
+      <h2>A new loop is a spec, not a bar length</h2>
+      <p style="max-width:72ch">When the chain does have to be replaced, the box is identified by pitch, gauge and drive links, plus the chain family. “18-inch chain” is not one of those. On this site the Husqvarna 460 Rancher’s 18″ bar in 3/8″ .050″ is 68 drive links, from Husqvarna’s 2026 fit-up guide. The 455 Rancher’s 20″ bar in the same 3/8″ .050″ pitch and gauge is 72 drive links, from that saw’s manual table. Same pitch, same gauge, different length, different count. An 18″ bar in .325″, such as the common 450 Rancher setup at 72 drive links, is a different sprocket again. The <a href="/saws/husqvarna-460-rancher/">460 Rancher</a>, <a href="/saws/husqvarna-455-rancher/">455 Rancher</a> and <a href="/bars/18-inch/">18″ bar</a> pages keep those rows apart. Read the stamp, then match it, using <a href="/guides/how-to-verify-chain-size/">the verification guide</a> if the stamp is faint and <a href="/guides/how-to-count-drive-links/">the drive-link count</a> if you still have the old loop and it was the right one.</p>
+      <p style="max-width:72ch">Break the new chain in the way Oregon describes, rather than burying it in a log on the first pull. Oil it first. Confirm the sprocket is not the worn one you just retired. Run at half throttle for several minutes before cutting so oil reaches the bar and the chain. Keep the first cuts light, with extra oil, and reset tension after the chain cools. A new chain that is immediately loose is the stretch STIHL and Oregon both describe, not a defective loop, provided the drive-link count was right to begin with.</p>
+    </section>
+
+    <div class="callout"><b>⚠ Do not put a new chain on a worn sprocket</b><p>Oregon repeats this often enough that it is the replacement rule, not a suggestion. Two chains per sprocket, or sooner if the sprocket is already hooked, grooved or letting the drive links peen. The bar rails need the same honesty: if they are spread or worn out of square, a new chain will wear into the same shape.</p></div>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/chainsaw-sharpening-angles/">Sharpening angles</a> · <a href="/guides/chainsaw-drive-sprocket/">Drive sprocket</a> · <a href="/guides/chainsaw-bar-maintenance/">Bar maintenance</a> · <a href="/chain/">Chain specs</a></p>
+    <ShopBlock groups={shop.groups} title="Replacement chains, files and a sprocket search (Amazon)" lead="Optional. The chain links are verified loops at a specific pitch, gauge and drive-link count. If your stamp differs, use the search and match all three numbers. The sprocket link is a search: match pitch and tooth count to the clutch you have." />
+  </div>
+</Base>

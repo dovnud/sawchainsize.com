@@ -1,29 +1,85 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
-import { SITE } from '../../lib/data';
+import Byline from '../../components/Byline.astro';
 import { webPageLd } from '../../lib/ld';
-const guides = [
-  { href: '/guides/how-to-verify-chain-size/', t: 'How to verify your chain size', d: 'Three checks — bar stamp, drive-link count, pitch and gauge measurement — with worked examples.' },
-  { href: '/guides/chain-size-chart/', t: 'Chain identification chart', d: 'Pitch × gauge × file size, plus the Oregon / Stihl / Husqvarna / Carlton code cross-reference.' },
-  { href: '/guides/how-to-count-drive-links/', t: 'How to count drive links', d: 'Mark one link, count the tangs under the loop, match the number on the box.' },
-  { href: '/guides/oregon-72-vs-73-chain/', t: 'Oregon 72 vs 73 chain', d: 'Same 3/8″ pitch, different gauge — the classic wrong buy and how to avoid it.' },
-  { href: '/guides/chainsaw-chain-file-size/', t: 'Chainsaw chain file size', d: 'Which round file sharpens which pitch.' },
-  { href: '/guides/chainsaw-sharpening-angles/', t: 'Chainsaw sharpening angles', d: 'Top-plate angle, down angle and depth-gauge setting for each Oregon chain type.' },
-  { href: '/guides/chain-part-numbers/', t: 'Chainsaw chain part numbers, decoded', d: 'What STIHL 33 RS3 84, Husqvarna S93G and Echo 91PX52CQ say about pitch, gauge and drive links.' },
-  { href: '/guides/longer-bar-on-chainsaw/', t: 'Can you put a longer bar on your chainsaw?', d: 'The four checks, plus the shortest and longest bar listed for every saw we cover.' },
-  { href: '/how-we-verify/', t: 'How we verify specs', d: 'Our source hierarchy and how conflicts are shown.' },
-];
-const desc = 'Chainsaw chain guides: verify your chain size, read the identification chart, count drive links, Oregon 72 vs 73, file size, sharpening angles, fitting a longer bar and decoding chain part numbers.';
+import { GUIDE_GROUPS, guidesIn } from '../../data/guides';
+import dates from '../../data/page-dates.json';
+
+const path = '/guides/';
+const modified = (dates as Record<string, string>)[path];
+const desc = 'Chainsaw chain guides: identify pitch, gauge and drive links, install and tension a chain, sharpen and oil it, and the safety gear and kickback rules that sit around the cut.';
+const crumbs = [{ name: 'Guides', path: '/guides/' }];
 ---
-<Base title="Chainsaw Chain Guides" description={desc} path="/guides/" nav="verify" crumbs={[{ name: 'Guides', path: '/guides/' }]}
-  jsonld={[webPageLd('Chainsaw chain guides', '/guides/', desc, SITE.dataDate, 'CollectionPage')]} modified={SITE.dataDate}>
+<Base title="Chainsaw Chain Guides" description={desc} path={path} nav="verify" crumbs={crumbs}
+  jsonld={[webPageLd('Chainsaw chain guides', path, desc, modified, 'CollectionPage')]} modified={modified}>
   <div class="wrap">
     <div class="pagehead">
       <Crumbs crumbs={[{ name: 'Guides' }]} />
       <h1>Chainsaw chain guides</h1>
-      <p class="lede">Plain-English guides for getting the chain size right the first time.</p>
+      <p class="lede">The lookup tells you the pitch, gauge and drive links for a saw and a bar we have sourced. These guides are the work around that number: how to read it off your own bar, how to put the loop on, how to keep it cutting, and what the safety standards actually require while it is moving.</p>
+      <Byline label="Last updated" />
     </div>
-    <div class="grid2">{guides.map((g) => <a class="card" href={g.href}><h2>{g.t}</h2><p class="small">{g.d}</p><span class="go">Read →</span></a>)}</div>
+
+    <section class="block">
+      <h2>Start with the bar, not the model name</h2>
+      <p style="max-width:72ch">A chainsaw is sold with more than one bar, and owners change bars. The chain follows the bar that is mounted, which is why every guide on this site ends at the same three numbers: pitch, gauge and drive-link count, stamped on the tail of the bar. Model charts, including ours, list the combinations a manufacturer published. They do not know which bar is on your saw today. If the stamp and a page disagree, the stamp wins, and the <a href="/guides/how-to-verify-chain-size/">verification guide</a> is how you read it: length, pitch, gauge, and usually the drive-link count, wiped clean and lit from the side.</p>
+      <p style="max-width:72ch">Two confusions account for most of the wrong boxes. The first is gauge. Oregon 72 and Oregon 73 are both standard 3/8″ pitch; 72 is .050″ and 73 is .058″. The second is the word “3/8” itself. Oregon’s chart splits 3/8″ low profile (types 90 and 91) from standard 3/8″ (types 72, 73 and 75). Both families are sold in .050″ gauge. They do not share a sprocket or a file. The <a href="/guides/chainsaw-chain-gauge/">gauge guide</a> and the <a href="/guides/3-8-low-profile-vs-standard-chain/">low-profile versus standard guide</a> keep those apart, and the <a href="/guides/chain-size-chart/">identification chart</a> is the cross-reference into STIHL, Husqvarna and Carlton codes.</p>
+      <p style="max-width:72ch">Drive links are the count of tangs in the loop, and they change when the bar length changes even if pitch and gauge stay put. A Husqvarna 460 Rancher 18″ bar in 3/8″ .050″ is 68 drive links in the 2026 fit-up guide; the 20″ bar in the same pitch and gauge is 72. Counting them is a chalk mark and a lap of the loop, written up in <a href="/guides/how-to-count-drive-links/">how to count drive links</a>. Part numbers encode the same facts when you still have the box: STIHL’s digits, Husqvarna’s type codes, Echo’s suffixes. That decoder is <a href="/guides/chain-part-numbers/">chain part numbers</a>.</p>
+      <p style="max-width:72ch">The saw pages are where a specific model’s sourced rows live. Start at <a href="/saws/">all models</a>, or at a brand such as <a href="/brands/stihl/">STIHL</a> or <a href="/brands/husqvarna/">Husqvarna</a>. Bar length has its own index at <a href="/bars/">bar lengths</a>, and each pitch-and-gauge pair has a page under <a href="/chain/">chain specs</a>. Use those when you already know the three numbers and want every saw we list that shares them. Use the guides on this page when you do not know the numbers yet, or when the chain is the right chain and is still misbehaving.</p>
+    </section>
+
+    {GUIDE_GROUPS.filter((g) => g.id === 'identify').map((g) => (
+      <section class="block">
+        <p class="kicker">{g.kicker}</p>
+        <h2>{g.title}</h2>
+        <div class="grid2">{guidesIn(g.id).map((item) => <a class="card" href={item.href}><h3>{item.title}</h3><p class="small">{item.card}</p><span class="go">Read →</span></a>)}</div>
+      </section>
+    ))}
+
+    <section class="block">
+      <h2>Fitting is a sequence, not a tighter nut</h2>
+      <p style="max-width:72ch">Once the loop matches the stamp, the install order is the one STIHL and Husqvarna print: engine off, gloves on, brake released so the chain can be seated, cutters pointing forward on the top of the bar, drive links in the groove, cover nuts only finger-tight, then tension, then the wrench, with the bar nose held up. <a href="/guides/how-to-install-chainsaw-chain/">How to install a chain</a> follows those manuals. <a href="/guides/chainsaw-chain-tension/">Tension</a> is the cold-chain rule. Oregon says not to tension a chain that heat has lengthened, because it shrinks as it cools and can damage the bar. A new chain stretches. STIHL, Husqvarna and Oregon all say to check it again early, and to adjust only after it has cooled.</p>
+      <p style="max-width:72ch">The drive sprocket is part of the fit. Oregon’s interval is every two chains, or sooner, and a new chain does not go on a worn rim or spur. The sprocket also has to be the chain’s pitch, including the difference between low profile and standard 3/8″. <a href="/guides/chainsaw-drive-sprocket/">Drive sprocket and pitch</a> is that rule. A longer bar is allowed only inside the lengths the maker lists for that saw, and the new bar brings its own drive-link count. <a href="/guides/longer-bar-on-chainsaw/">Longer bar</a> has the shortest and longest bar we have sourced for each model, and it says when that list is the maker’s full fit-up chart and when it is only the bars a manual happened to mention.</p>
+      <p style="max-width:72ch">If the chain will not stay on, tightening it further is the wrong next step until you know why it left. Oregon’s troubleshooting rows cover a shallow groove, spread rails, a worn sprocket, and loose tension. Wrong gauge produces the same derailment without any of those parts being worn out. <a href="/guides/why-a-chainsaw-chain-comes-off/">Why a chain comes off</a> puts those causes in the order you can check them, with the engine stopped.</p>
+    </section>
+
+    {GUIDE_GROUPS.filter((g) => g.id === 'fit').map((g) => (
+      <section class="block">
+        <p class="kicker">{g.kicker}</p>
+        <h2>{g.title}</h2>
+        <div class="grid2">{guidesIn(g.id).map((item) => <a class="card" href={item.href}><h3>{item.title}</h3><p class="small">{item.card}</p><span class="go">Read →</span></a>)}</div>
+      </section>
+    ))}
+
+    <section class="block">
+      <h2>Sharpening, oil, and the point where a file is not enough</h2>
+      <p style="max-width:72ch">Oregon’s dull-chain test does not need a gauge. A sharp chain makes chips and feeds itself with light pressure. A dull chain makes dust, and you have to push. The touch-up interval in the manual is about every hour, and the FAQ’s rule of thumb is every time you refill the gas. The file diameter follows pitch: 5/32″ for 3/8″ low-profile .050″, 3/16″ for .325″, 7/32″ for standard 3/8″ and .404″, with 11/64″ for .043″ low profile. Angles follow the chain type stamped on the drive link, not a single number for “chainsaw chain.” Both tables are Oregon’s, restated on the <a href="/guides/chainsaw-chain-file-size/">file-size</a> and <a href="/guides/chainsaw-sharpening-angles/">angles</a> guides. Depth gauges are checked every three or four sharpenings, at the setting stamped on the gauge, usually .025″.</p>
+      <p style="max-width:72ch">Replace the chain when filing cannot restore it: chrome gone and cutters cracked, drive links battered, joints that will not free. Replace the sprocket on Oregon’s two-chain interval at the same time, not after the new loop has been ruined by the old teeth. That decision is <a href="/guides/when-to-replace-chainsaw-chain/">when to replace a chain</a>. The bar needs its own hour. Clean the groove and the oil hole, flip a symmetrical bar (not a Guard Tip bar), dress rails from the tip toward the mount, and retire a sprocket nose before the chain contacts the chassis. <a href="/guides/chainsaw-bar-maintenance/">Bar maintenance</a> is Oregon’s schedule in that order.</p>
+      <p style="max-width:72ch">Two oils live on a gas saw, and they are not substitutes. Bar-and-chain oil goes in the oil tank, filled whenever the gas tank is filled. Oregon bans used motor oil there. Two-stroke oil goes into the gasoline. STIHL, Husqvarna and Echo publish 50:1 for the current gas saws their guides and manuals describe, and the manual for your saw overrides a general rule if it prints a different ratio. <a href="/guides/chainsaw-bar-and-chain-oil/">Bar and chain oil</a> and <a href="/guides/chainsaw-fuel-mix/">fuel mix</a> keep the tanks straight. A battery saw skips the fuel can and keeps the bar-oil tank. The chain spec does not change because the motor did.</p>
+    </section>
+
+    {GUIDE_GROUPS.filter((g) => g.id === 'maintain').map((g) => (
+      <section class="block">
+        <p class="kicker">{g.kicker}</p>
+        <h2>{g.title}</h2>
+        <div class="grid2">{guidesIn(g.id).map((item) => <a class="card" href={item.href}><h3>{item.title}</h3><p class="small">{item.card}</p><span class="go">Read →</span></a>)}</div>
+      </section>
+    ))}
+
+    <section class="block">
+      <h2>Kickback and the gear around it</h2>
+      <p style="max-width:72ch">Kickback is the upper quadrant of the bar nose hitting wood and throwing the saw back in the cutting plane. Husqvarna’s manuals say a smaller tip radius reduces the force, a low-kickback chain reduces the effect, and no chain fully prevents it. A chain brake reduces injury if it trips in time. STIHL’s warning says it does not prevent the kickback itself. OSHA’s logging standard incorporates ANSI B175.1-1991, requires a chain brake on saws placed in service after that rule, and forbids removing the device. The consumer-saw split those manuals restate — under 3.8 cubic inches (62 cc) versus at and above that displacement — is explained in <a href="/guides/chainsaw-kickback/">kickback</a>, including STIHL’s warning that the computed angle is a lab figure, not a promise about a real cut.</p>
+      <p style="max-width:72ch">Leg protection, cut-resistant boots, a hard hat, eye or mesh face protection, hearing protection on a gas saw, and gloves are the kit in OSHA’s logging PPE paragraphs and on the Forest Service chain-saw chart. The OSHA text binds employers on logging operations. It does not cite a homeowner. The garments are the same ones the chain makers describe, and chaps are specified to ASTM F1897, long enough to overlap the boots. They are not cut-proof. Oregon describes them as fibers that tangle a moving chain. Fit and the legal scope are in <a href="/guides/chainsaw-safety-gear/">safety gear</a>.</p>
+      <p style="max-width:72ch">Figures on the saw pages are traced to a manual, a fit-up chart, or chain-maker data, and a conflict is printed instead of averaged. That policy is <a href="/how-we-verify/">how we verify specs</a>. A correction, with a photo of the bar stamp if you have one, goes to <a href="/contact/">contact@sawchainsize.com</a>. Amazon links on the guides are optional and labeled, use only this site’s Associates tag, and sit next to the Associates disclosure. They do not decide a specification. The <a href="/affiliate-disclosure/">affiliate disclosure</a> is the full version.</p>
+    </section>
+
+    {GUIDE_GROUPS.filter((g) => g.id === 'safety' || g.id === 'editorial').map((g) => (
+      <section class="block">
+        <p class="kicker">{g.kicker}</p>
+        <h2>{g.title}</h2>
+        <div class="grid2">{guidesIn(g.id).map((item) => <a class="card" href={item.href}><h3>{item.title}</h3><p class="small">{item.card}</p><span class="go">Read →</span></a>)}</div>
+      </section>
+    ))}
   </div>
 </Base>

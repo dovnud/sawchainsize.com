@@ -1,0 +1,86 @@
+---
+import Byline from '../../components/Byline.astro';
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+
+const path = '/guides/chainsaw-bar-maintenance/';
+const modified = (dates as Record<string, string>)[path];
+const desc = 'Chainsaw bar maintenance from Oregon’s manual: clean the groove and oil hole, flip a symmetrical bar, dress rails from tip to tail, and when a sprocket nose is finished.';
+const ORE = 'https://apps.oregonproducts.com/pdfs/OregonMMANUAL_EN_A106971ab.pdf';
+const ORE_FAQ = 'https://www.oregonproducts.com/en_gb/faq';
+const faqs = [
+  { q: 'How do you maintain a chainsaw bar?', a: 'Oregon’s schedule is: tension the chain before each use; daily, inspect for damage and wear and check groove depth after dressing; often (hourly, or at refueling), clean the groove and the oil holes, turn the bar over to equalize wear, and dress the rails from the tip toward the mount. The engine is off before you handle the bar. Never use the bar as a lever.' },
+  { q: 'Do you flip every chainsaw bar?', a: 'Oregon says to turn symmetrical guide bars over so the rails wear evenly. The cutting-tips page adds an exception: do not turn Guard Tip guide bars over. If the bar is marked as a Guard Tip, leave its orientation alone and follow that bar’s instructions.' },
+  { q: 'Which direction do you dress the rails?', a: 'From the bar tip toward the mount. Oregon’s note on grinding wheels says to direct the debris toward the tail and then clean the groove, because grinding dust sent into the nose wears the nose parts quickly or jams them. A rail dresser is the tool Oregon names for normal wear and minor damage.' },
+  { q: 'When is a sprocket-nose bar done?', a: 'Oregon says to check clearance at the tip between the tops of the rails and the chassis, and to replace nose sprockets before the cutters or tie-straps contact the chassis. The manual marks that clearance at 1/32″ (0.8 mm). A nose that lets the chain touch the chassis is eating the chain. Shallow nose grooves, which wear drive-link tangs concave, are a replace-the-bar remedy in the troubleshooting list.' },
+  { q: 'How is bar length measured?', a: 'Oregon’s FAQ says guide bars are measured by the cutting length when mounted: from the front of the saw to the tip, rounded to the nearest inch. The overall length of a 16″ bar may be about 20″. The called length is not the length of the steel you can see end to end, and it is not the drive-link count.' },
+];
+const howto = {
+  '@context': 'https://schema.org', '@type': 'HowTo', name: 'How to maintain a chainsaw guide bar',
+  description: 'With the engine off, clean the bar groove and oil hole, flip a symmetrical bar, and dress the rails from the tip toward the mount.',
+  tool: [{ '@type': 'HowToTool', name: 'Groove cleaner or scraper' }, { '@type': 'HowToTool', name: 'Bar-rail dresser' }, { '@type': 'HowToTool', name: 'Work gloves' }],
+  step: [
+    { '@type': 'HowToStep', name: 'Stop the saw', text: 'Turn the engine off and wear gloves before you handle the bar. Do not use the bar as a lever.' },
+    { '@type': 'HowToStep', name: 'Clean the groove and the oil hole', text: 'Remove packed chips from the groove and make sure the oil hole is open so bar oil can reach the chain.' },
+    { '@type': 'HowToStep', name: 'Flip a symmetrical bar', text: 'Turn a symmetrical bar over so the rails wear evenly. Do not flip a Guard Tip bar.' },
+    { '@type': 'HowToStep', name: 'Dress the rails toward the tail', text: 'Dress from the tip toward the mount. Keep grinding debris out of the nose, then clean the groove again. On a sprocket nose, replace the nose before the chain contacts the chassis.' },
+  ],
+};
+const jsonld = [webPageLd('Chainsaw bar maintenance', path, desc, modified), howto, faqLd(faqs)];
+const shop = guideShop('chainsaw-bar-maintenance');
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Bar maintenance', path }];
+---
+<Base title="Chainsaw Bar Maintenance" description={desc} path={path} nav="chart" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Bar maintenance' }]} />
+      <h1>Chainsaw bar maintenance</h1>
+      <p class="lede">Oregon’s bar schedule is short: oil hole open, groove clean, symmetrical bars flipped, rails dressed from the tip back toward the saw. The engine is off. The bar is not a pry bar. A sprocket nose is finished when the chain is about to touch the chassis.</p>
+      <Byline label="Last updated" />
+    </div>
+
+    <section class="block">
+      <h2>The schedule Oregon prints</h2>
+      <p style="max-width:72ch">The guide-bar chapter in Oregon’s maintenance manual sorts the work by how often it happens. Before each use, tension the chain (the procedure is the tension chapter). Daily, inspect for damage and wear, and check groove depth after you have dressed the rails. Often — the manual’s parenthetical is hourly, or at refueling — clean the grooves and the oil holes, turn the bar over to equalize wear, and dress the rails. The warning above that list is to turn the engine off before you handle the bar. The notes under it are that a bar needs a constant supply of oil in operation, and that you never use the bar as a lever to lift, twist or pry.</p>
+      <p style="max-width:72ch">The cutting-tips page says the same jobs in one line: keep the groove clean and the oil hole open, and turn symmetrical bars over to equalize rail wear. It adds the exception the maintenance list does not spell in that first line: do not turn Guard Tip bars over. If the bar is a Guard Tip, flipping it is not the wear-equalizing step; it is the thing the manual tells you not to do. Everything else in the schedule still applies.</p>
+      <p class="src">Source: Oregon <a href={ORE} rel="nofollow">Maintenance and Safety Manual</a>, “Guide Bar Maintenance” and cutting tips; Oregon <a href={ORE_FAQ} rel="nofollow">FAQ</a>, how bar length is measured.</p>
+    </section>
+
+    <section class="block">
+      <h2>Groove, oil hole, and why they clog together</h2>
+      <p style="max-width:72ch">The groove is where the drive links run. Chips, sap and dirt pack it, and a packed groove is one of the ways drive-link tangs stop cleaning the bar and start climbing out. Oregon’s troubleshooting list connects shallow grooves with drive-link tangs worn straight or concave, and with a chain that tends to be thrown from the bar. The remedy in that row is to replace the bar, the sprocket, or both, and to replace the chain if the tangs cannot be restored. Cleaning the groove every refuel is how you avoid arriving at that row. A groove cleaner, or the scraper end of a bar tool, is what Oregon’s tool list names. A screwdriver will work in a pinch and will also nick the rails if you lever with it. The bar is not a pry point for the tool either.</p>
+      <p style="max-width:72ch">The oil hole is the small port that has to line up with the saw’s oil outlet. Oregon’s cold-weather and lubrication chapters both end on the same demand: be certain the chain is receiving oil. A hole packed with debris makes a full oil tank look like a working oiler. Clean it when you clean the groove. If you have just dressed the rails with a grinding wheel, Oregon says to send the debris toward the tail and then clean the groove, because dust pushed into the nose wears the nose parts or jams them. Dressing and cleaning are one job, in that order. The oil itself — clean bar-and-chain oil, never used motor oil — is <a href="/guides/chainsaw-bar-and-chain-oil/">bar and chain oil</a>.</p>
+    </section>
+
+    <section class="block">
+      <h2>Flipping the bar, and dressing the rails</h2>
+      <p style="max-width:72ch">Most of the cutting on a chainsaw happens on the bottom of the bar, so the bottom rail wears faster. Turning a symmetrical bar over swaps that rail to the top and lets the pair wear together. Oregon’s interval for the flip is the “often” bucket: hourly, or when you refuel, which is the same moment you are already looking at tension and oil. Do it with the chain retensioned afterward, because the bar does not go back into the same sag it had. <a href="/guides/chainsaw-chain-tension/">Tension</a> is a cool-chain job. Flip, then set tension once the chain is cool, not instead of setting it.</p>
+      <p style="max-width:72ch">Rails also develop a wire edge and a flare. Oregon’s instruction is to dress the rail, always from the tip toward the mount. The named tool is a bar-rail dresser (Oregon’s manual cites part number 111589) for normal wear and minor damage. The direction matters because of the nose. Grinding debris sent forward into a sprocket nose is the failure the note warns about. After dressing, check groove depth with the groove-depth tool Oregon mentions; a groove dressed until it is too shallow will not hold a drive link even if the rails look shiny. The troubleshooting symptom of a shallow body groove is drive-link tangs worn straight. The symptom of a shallow nose groove is tangs worn concave. Both throw chain. Both are a bar replacement if cleaning and dressing cannot restore the depth.</p>
+      <p style="max-width:72ch">Uneven rails make a chain cut crooked. Oregon lists uneven rail wear next to uneven cutter lengths as a reason a chain leans. The chain-side fix is to file cutters to equal length, which is the <a href="/guides/chainsaw-sharpening-angles/">sharpening guide</a>. The bar-side fix is to dress the rails square. Bottoms of tie-straps and cutters worn out of square are attributed to worn rails; minor cases can be filed square on the chain, and extensive wear means a new chain after the rails are dressed. Putting a new chain on rails that are still belled puts the new chain into the old shape. <a href="/guides/when-to-replace-chainsaw-chain/">When to replace a chain</a> belongs next to a bar that has been dressed, not instead of it.</p>
+    </section>
+
+    <section class="block">
+      <h2>Sprocket noses and the 1/32″ line</h2>
+      <p style="max-width:72ch">A sprocket-nose bar has a bearing in the tip. Oregon says to check the clearance around the tip between the tops of the rails and the chassis, and to replace the nose sprocket before the cutters or the tie-straps contact that chassis. The figure printed with the instruction is 1/32″ (0.8 mm). That is a wear limit, not a tension target. If the chain is touching metal that is not the rail, the nose is done. Running it further grinds the cutters and packs the bearing with steel.</p>
+      <p style="max-width:72ch">The nose sprocket is also a pitch part. Oregon says a replacement nose has to be the correct pitch for the bar and the chain. A reduced-kickback Double Guard nose, in Oregon’s note, can go on a PowerCut bar and can use the same drive-link count. A nose in a different pitch cannot. The drive sprocket at the engine has to match that same pitch. Changing the nose to “upgrade” the bar into another chain family, without changing the drive sprocket and the chain together, is the mismatch in <a href="/guides/chainsaw-drive-sprocket/">drive sprocket and pitch</a>.</p>
+      <p style="max-width:72ch">Oregon’s PowerCut nose replacement has a side. The nose is marked on one side only with a dimple or an X, and you strike only that side to drive the rivet. Striking the other side damages the nose and the bar body. The new rivet goes in from the side opposite the X, because it will not secure if it is inserted from the marked side. That procedure is for Oregon PowerCut noses. A welded sprocket nose that is not a replaceable PowerCut tip is not repaired by drilling it. When that nose is worn to the 1/32″ line, the bar is replaced.</p>
+    </section>
+
+    <section class="block">
+      <h2>Length, stamp, and a bar that is actually straight</h2>
+      <p style="max-width:72ch">Oregon measures called length as cutting length with the bar mounted: from the front of the saw body to the tip, rounded to the nearest inch. The FAQ’s example is that the overall length of a 16″ bar may be about 20″. Buying by the steel you can see, or by the length printed on a different saw’s bar, is how an 18″ called bar and a 20″ called bar get confused. The chain does not follow the called length by a universal table. It follows the drive-link count stamped on that bar. The <a href="/bars/16-inch/">16″</a> and <a href="/bars/18-inch/">18″</a> pages on this site show how many different pitch and gauge combinations share a called length. <a href="/guides/longer-bar-on-chainsaw/">Longer bar</a> is the question of whether your saw is listed for the length you want. This page is how to keep the bar you have from destroying the chain that matches it.</p>
+      <p style="max-width:72ch">A bent bar is not dressed straight. If the cut pulls to one side and the rails are even and the cutters are equal, sight down the bar. Oregon’s “never use the bar as a lever” line is how many bars get bent in the first place: stuck in a cut, then twisted to free the saw. Back the saw out. A bar that is bent, cracked at the mount, or worn blue at the nose from running dry is a replacement, with a chain and, if the sprocket has worn with it, a sprocket. Match the new bar’s stamp — length, pitch, gauge, drive links — before the first cut, using <a href="/guides/how-to-verify-chain-size/">the verification guide</a>.</p>
+    </section>
+
+    <div class="callout"><b>⚠ Do not flip a Guard Tip bar</b><p>Symmetrical bars are turned over so both rails wear. Oregon’s cutting tips say not to turn Guard Tip bars over. Dressing still runs from the tip toward the mount, and grinding dust still stays out of the nose.</p></div>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/chainsaw-bar-and-chain-oil/">Bar oil</a> · <a href="/guides/chainsaw-chain-tension/">Tension</a> · <a href="/guides/why-a-chainsaw-chain-comes-off/">Why a chain comes off</a> · <a href="/bars/">Bar lengths</a></p>
+    <ShopBlock groups={shop.groups} title="Oil, a rail dresser, and a replacement bar search (Amazon)" lead="Optional. A dresser and bar oil maintain the bar you have. A replacement bar has to match length, pitch, gauge and the drive-link count on the stamp." />
+  </div>
+</Base>

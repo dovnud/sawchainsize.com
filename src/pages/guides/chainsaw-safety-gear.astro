@@ -1,0 +1,91 @@
+---
+import Byline from '../../components/Byline.astro';
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+
+const path = '/guides/chainsaw-safety-gear/';
+const modified = (dates as Record<string, string>)[path];
+const desc = 'Chainsaw safety gear from the OSHA logging rule and the Forest Service kit list: chaps to ASTM F1897, cut-resistant boots, helmet, eye, hearing and gloves.';
+const OSHA = 'https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XVII/part-1910/subpart-R/section-1910.266';
+const OSHA_ETOOL = 'https://www.osha.gov/etools/logging/manual-operations/logger/personal-protective-equipment/leg-protection';
+const FS = 'https://www.fs.usda.gov/sites/default/files/PPE%20chart.pdf';
+const ASTM = 'https://www.astm.org/f1897-08.html';
+const ORE = 'https://www.oregonproducts.com/en_gb/faq';
+const faqs = [
+  { q: 'Do I have to wear chaps to use a chainsaw at home?', a: 'OSHA’s chain-saw leg-protection rule is in the logging standard, 29 CFR 1910.266. It binds employers on logging operations, not a person cutting firewood at home. The equipment itself is the same equipment the Forest Service requires for its own chain-saw operations, and it is what Oregon describes as the way to keep a moving chain off the leg. Home use does not repeal the injury.' },
+  { q: 'What standard should chainsaw chaps meet?', a: 'The U.S. Forest Service PPE chart (updated 2022, National Trail Program March 2023) says chaps or cut-resistant pants for chain-saw use shall meet Forest Service 6170-4 or ASTM F1897, current version, and shall overlap the boots by at least 2 inches. ASTM F1897 is the specification for leg protection for chain-saw users. OSHA’s logging eTool points to ASTM F1897 for the cut-resistance testing that UL has labeled. Oregon’s FAQ also names ASTM F1414 as the test method paired with F1897.' },
+  { q: 'Are chainsaw chaps cut-proof?', a: 'Oregon’s FAQ says they are not cut-proof. The protective fibers are there to tangle in the moving chain and stop it from continuing through the leg, which gives a moment to get the saw off the leg or shut it off. Coverage still has to run from the upper thigh to the boot. A gap at the boot, or a pair so long that you trip, is a failure of fit even if the label is right.' },
+  { q: 'What else does the logging rule require on the body?', a: 'For employees on covered logging operations: foot protection that covers and supports the ankle, and, for anyone operating a chain saw, foot protection constructed with cut-resistant material. Head protection meeting Subpart I where falling or flying objects can injure the head. Eye protection where there is a potential for eye injury, and face protection where there is a potential for facial injury. Logger-type mesh screens are expressly allowed for chain-saw operations. A face shield that covers both eyes and face removes the need for a separate eye device.' },
+  { q: 'How long should chaps be?', a: 'Oregon’s FAQ says to measure from the waist, just below the belt where the chaps sit, to the beginning of the foot. The Forest Service chart adds that leg protection shall overlap the boots by at least 2 inches. Oregon notes that the length printed on chaps is the overall length, not an inseam, and that chaps which are too long are a trip hazard.' },
+];
+const jsonld = [webPageLd('Chainsaw safety gear', path, desc, modified), faqLd(faqs)];
+const shop = guideShop('chainsaw-safety-gear');
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Safety gear', path }];
+---
+<Base title="Chainsaw Safety Gear: Chaps, Boots, Helmet, Eyes and Ears" description={desc} path={path} nav="verify" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Safety gear' }]} />
+      <h1>Chainsaw safety gear</h1>
+      <p class="lede">The kit that shows up in the OSHA logging rule and on the Forest Service’s own chain-saw chart is leg protection, cut-resistant boots, a hard hat, eye or mesh face protection, hearing protection on a gas saw, and gloves. The rule’s legal trigger is employment in logging. The injury it is written around is not limited to logging.</p>
+      <Byline label="Last updated" />
+    </div>
+
+    <section class="block">
+      <h2>Who the OSHA text actually binds</h2>
+      <p style="max-width:72ch">29 CFR 1910.266 is OSHA’s logging-operations standard. Its personal-protective-equipment paragraphs are duties placed on the employer: provide certain items at no cost, and assure that employees wear them. It is not a statute aimed at a homeowner bucking a downed limb. Citing it as if it fined weekend firewood cutters would be wrong. Citing the hazards it names, and the equipment it specifies, is how the Forest Service and the chain makers talk about the same saw.</p>
+      <p style="max-width:72ch">The leg rule is 1910.266(d)(1)(iv). The employer shall provide, at no cost to the employee, and assure that each employee who operates a chain saw wears, leg protection constructed with cut-resistant material, such as ballistic nylon. The protection shall cover the full length of the thigh to the top of the boot on each leg, to protect against contact with a moving chain saw. There are two stated exceptions: a climber, if the employer shows that leg protection poses a greater hazard in that situation, and an employee on a vehicular elevating and rotating work platform that meets 1910.67. Everyone else operating a chain saw on a covered logging operation is in the rule.</p>
+      <p style="max-width:72ch">OSHA’s logging eTool restates the coverage in shorter form: from the upper thigh down to the boot top, adequately covering the leg. It notes that the garment may be chaps, logger pants or leggings, and that the material may be ballistic nylon, polyester or other cut-resistant fiber. It points to ASTM F1897 as the specification UL has used when labeling leg protection. The eTool’s older citation is F1897-98; Oregon’s current FAQ cites ASTM F1897-14 for performance and ASTM F1414 for the test. Buy to the current revision of F1897 named on the label, not to a year remembered from a webpage.</p>
+      <p class="src">Sources: <a href={OSHA} rel="nofollow">29 CFR 1910.266</a>; OSHA <a href={OSHA_ETOOL} rel="nofollow">logging eTool, leg protection</a>; <a href={ASTM} rel="nofollow">ASTM F1897</a>; Oregon <a href={ORE} rel="nofollow">chainsaw chaps FAQ</a>; U.S. Forest Service <a href={FS} rel="nofollow">PPE chart</a> (chart updated 3 March 2022, National Trail Program March 2023).</p>
+    </section>
+
+    <section class="block">
+      <h2>What the chaps are designed to do</h2>
+      <p style="max-width:72ch">Oregon’s FAQ is direct about the limit. Chain-saw chaps are not cut-proof. The fibers, which Oregon describes as the material that tangles in the chain, are there to stop a moving chain from continuing through the leg and to give time to get the saw clear or shut off. That is a jam, not armor. It depends on the chain actually reaching the protective layers, which is why a short pair that stops above the boot fails even if the hang-tag is correct.</p>
+      <p style="max-width:72ch">Oregon’s sizing method is a tape measure, not a trouser inseam. Measure from the waist, just below the belt where the chaps will sit, to the beginning of the foot. The length marked on the product is the overall length. Too short leaves leg exposed. Too long is a trip hazard, and Oregon says that explicitly. The Forest Service chart adds a numerical overlap: chaps or cut-resistant pants shall overlap the boots by at least 2 inches. Those two instructions together are the fit check. A pair that passes ASTM F1897 and still leaves the boot-top gap is the wrong size.</p>
+      <p style="max-width:72ch">Oregon also says to confirm compliance with a certifying body’s standard rather than with a layer count alone. The FAQ names OSHA’s coverage requirement (thigh to boot top, cut-resistant material), ASTM F1897 for performance, ASTM F1414 for testing, and a UL label as evidence that a garment met ASTM’s performance and test standards. Oregon’s own apron chaps and full-wrap chaps are described there as eight layers. That sentence is about those Oregon garments. A different brand’s listing has to be read on its own label. Layer count is not a substitute for the ASTM mark, and a UL or ASTM mark is not a substitute for length.</p>
+      <p style="max-width:72ch">Care is part of the standard’s idea of serviceable equipment. OSHA requires the employer to keep PPE in serviceable condition and to inspect it before initial use each workshift, repairing or replacing anything damaged before work starts. Oregon’s washing instruction for chaps is by hand, then hang to dry, so the structure of the material is not beaten in a machine. A pair with a cut, a missing layer, or a strap that no longer holds the garment on the leg is not “close enough.” Replace it.</p>
+    </section>
+
+    <section class="block">
+      <h2>Boots, head, eyes, ears, hands</h2>
+      <p style="max-width:72ch">Foot protection under 1910.266(d)(1)(v) is heavy-duty logging boots that are waterproof or water-repellent and that cover and support the ankle. Anyone operating a chain saw wears foot protection constructed with cut-resistant material that will protect against contact with a running chain saw. Calk-soled or other slip-resistant boots are allowed where the employer shows they are necessary for the job, the terrain, the timber and the weather, provided the cut-resistant requirement is still met. The Forest Service chart compresses this, for its own chain-saw operations, to cut-resistant or leather laced boots with ankle support and nonskid soles.</p>
+      <p style="max-width:72ch">Head protection under (d)(1)(vi) is required where there is potential for head injury from falling or flying objects, and it must meet Subpart I of Part 1910. OSHA’s general PPE publication, 3151, identifies the head standards it accepts as ANSI Z89.1 editions (the publication lists Z89.1-2009, Z89.1-2003 and Z89.1-1997, or equivalent protection). The Forest Service chart says the helmet for chain-saw operations meets ANSI Z89.1. A climbing or forestry helmet with a mount for a faceshield and muffs is the usual way those requirements share one shell. The shell is not optional because the weather is hot; the suspension is what keeps the shell off the skull, and a helmet with a cracked shell or a cut suspension is due for replacement under the serviceable-condition rule.</p>
+      <p style="max-width:72ch">Eyes and face are (d)(1)(vii). Eye protection meeting Subpart I is required where falling or flying objects can injure the eye. Face protection meeting Subpart I is required where the face can be injured; the examples include a chipper, and the note expressly allows logger-type mesh screens for chain-saw operations and yarding. If the face protection covers both the eyes and the face, a separate eye device is not required. The Forest Service chart accepts safety glasses meeting ANSI Z87.1, or equivalent mesh “bug-eye” or mesh faceshield types, and cites 1910.266(d)(1)(vii). Glasses under a mesh screen are a common way to meet both a dust day and the mesh allowance. Mesh alone stops chunks; it does not stop fine dust the way a sealed goggle does. The standard’s text allows the mesh screen for this work. It does not say to run the saw with nothing in front of the eyes.</p>
+      <p style="max-width:72ch">Hearing is not given its own sentence inside 1910.266(d)(1). The Forest Service chart is explicit for the agency’s own operations: hearing protection is required for gasoline-powered chain-saw use, and it is not required for a crosscut saw. Gas saws are loud enough that the manual for the saw states a sound-pressure figure and tells the operator to wear hearing protection. Battery saws are quieter and still not silent; read that saw’s manual rather than assuming the gas-saw line applies unchanged. Gloves are required by the Forest Service chart for all chain-saw operations (gloves or chain-saw mitts). OSHA’s logging standard requires the employer to provide hand protection for employees handling wire rope; it does not, in 1910.266(d)(1), write a separate glove specification for the chain saw itself. Oregon’s sharpening and tension procedures still say to wear gloves because the cutters cut skin whether or not the engine is running. The <a href="/guides/chainsaw-chain-tension/">tension guide</a> and the <a href="/guides/how-to-install-chainsaw-chain/">install guide</a> both start with gloves on and the engine off.</p>
+    </section>
+
+    <div class="tblwrap">
+      <table>
+        <caption class="sr-only">Chain-saw PPE named by OSHA 1910.266 and by the Forest Service chart</caption>
+        <thead><tr><th scope="col">Item</th><th scope="col">What the text requires</th><th scope="col">Where it is written</th></tr></thead>
+        <tbody>
+          <tr><td>Leg protection</td><td>Cut-resistant material, full thigh to the top of the boot. Forest Service: ASTM F1897 or FS 6170-4, overlap boots at least 2″.</td><td>1910.266(d)(1)(iv); FS PPE chart</td></tr>
+          <tr><td>Boots</td><td>Ankle support, water-resistant. Chain-saw operators: cut-resistant construction.</td><td>1910.266(d)(1)(v); FS PPE chart</td></tr>
+          <tr><td>Head</td><td>Where falling or flying objects can injure the head; Subpart I. Forest Service: ANSI Z89.1.</td><td>1910.266(d)(1)(vi); FS PPE chart</td></tr>
+          <tr><td>Eyes and face</td><td>Eye protection where eyes are at risk; face protection where the face is at risk. Mesh logger screens are allowed for chain-saw work.</td><td>1910.266(d)(1)(vii); FS chart cites ANSI Z87.1</td></tr>
+          <tr><td>Hearing</td><td>Required by the Forest Service for gasoline chain-saw use.</td><td>FS PPE chart</td></tr>
+          <tr><td>Gloves</td><td>Required by the Forest Service for all chain-saw operations. Maker procedures require them while handling chain.</td><td>FS PPE chart; Oregon and Husqvarna procedures</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">The OSHA rows apply to employers on logging operations covered by 1910.266. The Forest Service rows are that agency’s requirements for its own chain-saw and crosscut operations.</p>
+
+    <section class="block">
+      <h2>Gear does not replace a chain that fits</h2>
+      <p style="max-width:72ch">Chaps assume the rest of the saw is in the condition the manuals describe. A chain brake that has been removed, a chain at the wrong tension, or a loop in the wrong gauge are not problems the chap is meant to solve. <a href="/guides/chainsaw-kickback/">Kickback</a> explains what the brake does and does not do. <a href="/guides/why-a-chainsaw-chain-comes-off/">Why a chain comes off</a> is the derailment side. A scabbard on the bar when the saw is stored or carried in a vehicle keeps the cutters off legs, upholstery and other tools; it is not a substitute for shutting the engine off.</p>
+      <p style="max-width:72ch">On this site the chain decision is still the bar stamp: pitch, gauge and drive links. Safety gear is what you wear while you make that cut with a chain that already matches. The model pages, starting from the <a href="/saws/">saw list</a>, are where the spec is. The buying links below are protective equipment and a sharpening kit, not a promise that a listed chap has been independently retested for this page. Read the ASTM or UL mark, the length, and the overlap over your own boots before you trust the tag line on a listing.</p>
+    </section>
+
+    <div class="callout"><b>⚠ A chap that does not cover the boot top does not meet the rule</b><p>OSHA’s text ends the protection at the top of the boot, and it has to get there. The Forest Service wants at least 2 inches of overlap. Oregon’s tape method — waist to the start of the foot — is how you check a size before you find the gap in the woods.</p></div>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/chainsaw-kickback/">Kickback</a> · <a href="/guides/chainsaw-chain-tension/">Chain tension</a> · <a href="/guides/how-to-install-chainsaw-chain/">Install a chain</a> · <a href="/guides/">All guides</a></p>
+    <ShopBlock groups={shop.groups} title="Chaps, helmet, gloves and a bar cover (Amazon)" lead="Optional. Check the listing for an ASTM F1897 or UL mark and for a length that overlaps your boots. A sharpening kit belongs to the chain’s pitch, not to the chaps." />
+  </div>
+</Base>

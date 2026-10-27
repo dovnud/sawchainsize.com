@@ -1,0 +1,91 @@
+---
+import Byline from '../../components/Byline.astro';
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+
+const path = '/guides/how-to-install-chainsaw-chain/';
+const modified = (dates as Record<string, string>)[path];
+const desc = 'How to install a chainsaw chain: engine off, cutters forward on top of the bar, drive links in the groove, nuts finger-tight, then tension on a cool chain.';
+const STIHL = 'https://ssc.stihl.com/tsa/techdoc-documents/DVS_STIHL%2FZBA%2FZBA%2F0458-209-0121-B_ZBA_04_01.pdf';
+const HUSQ = 'https://www.husqvarna.com/hbd/tdrdownload/v2/pub000098220/doc000248482/OM/ZbGaLvN_JJg9K9XAHTO6SZnF6ng';
+const faqs = [
+  { q: 'Which way does a chainsaw chain face?', a: 'The cutting edges on the top of the bar point forward, toward the tip. STIHL’s MS 290/310/390 manual says the cutting edges on the top of the bar must point to the right when the bar is viewed from the clutch side in the usual layout. Husqvarna’s 120 Mark II manual says the edges of the cutting links are turned forward on the top edge of the guide bar. If the cutters on top point back at the saw, the chain is on backwards.' },
+  { q: 'Do I tighten the bar nuts before I tension the chain?', a: 'Finger-tight, not final. STIHL says to refit the sprocket cover and screw the nuts on only fingertight, then go to the tensioning chapter. Husqvarna says to tighten the bar nuts with your fingers, tension until the chain does not sag and still turns easily by hand, then hold the tip up and tighten the nuts with the wrench. Final torque on a slack chain clamps the slack in.' },
+  { q: 'What has to match before the chain goes on?', a: 'Pitch, gauge and drive links, against the stamp on the bar. STIHL’s 036 manual states two of those directly: the chain pitch must match the guide bar, and the drive-link gauge must match the guide-bar groove width. The drive-link count has to match the length of that bar. The sprocket has to match the pitch. A new chain also does not go on a worn-out sprocket.' },
+  { q: 'When do I check a new chain again?', a: 'After it has run, once it has cooled. STIHL says a new chain has to be retensioned more often than a chain that has been in use. Husqvarna says to examine tension frequently until the chain has been run in. Oregon says to check often during the first half-hour, and only to adjust once the chain has cooled. The tension guide has the snap test and the solid-nose versus sprocket-nose difference.' },
+  { q: 'Can I install the chain with the brake on?', a: 'The brake has to be released so the chain can be placed on the sprocket and pulled by hand. Husqvarna’s tool-less procedure starts by pulling the hand guard back toward the front handle to disengage the brake. You set the brake again before starting. OSHA’s logging rule requires chain saws on covered operations to be started with the chain brake engaged, on the ground, and not drop-started.' },
+];
+const howto = {
+  '@context': 'https://schema.org', '@type': 'HowTo', name: 'How to install a chainsaw chain',
+  description: 'Install a chain that matches the bar stamp, with cutters facing forward on top of the bar, then tension it before the bar nuts are tightened.',
+  tool: [{ '@type': 'HowToTool', name: 'Scrench or combination wrench' }, { '@type': 'HowToTool', name: 'Work gloves' }],
+  step: [
+    { '@type': 'HowToStep', name: 'Confirm the chain and make the saw safe', text: 'Match pitch, gauge and drive links to the bar stamp. Engine off, spark-plug cap off on a gas saw if the manual says so, gloves on, chain brake released.' },
+    { '@type': 'HowToStep', name: 'Fit the bar and the chain', text: 'Bar fully back on the studs. Chain around the sprocket and into the bar groove, starting at the top, with the cutters pointing forward on the top of the bar. Tensioner peg in the bar hole.' },
+    { '@type': 'HowToStep', name: 'Cover on, nuts finger-tight', text: 'Fit the clutch cover. Thread the nuts only finger-tight so the bar can still move.' },
+    { '@type': 'HowToStep', name: 'Tension, then tighten', text: 'Hold the nose up. Adjust until the chain is snug underneath and still pulls by hand. Tighten the nuts with the nose still up. Recheck after the first run, once the chain has cooled.' },
+  ],
+};
+const jsonld = [webPageLd('How to install a chainsaw chain', path, desc, modified), howto, faqLd(faqs)];
+const shop = guideShop('how-to-install-chainsaw-chain');
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Install a chain', path }];
+---
+<Base title="How to Install a Chainsaw Chain" description={desc} path={path} nav="verify" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Install a chain' }]} />
+      <h1>How to install a chainsaw chain</h1>
+      <p class="lede">The chain goes on with the engine off and the cutters pointing forward along the top of the bar. The bar nuts stay finger-tight until the chain is tensioned. The loop only belongs there if its pitch, gauge and drive-link count match the stamp on that bar.</p>
+      <Byline label="Last updated" />
+    </div>
+
+    <section class="block">
+      <h2>Match the chain before you open the cover</h2>
+      <p style="max-width:72ch">Installation cannot correct a wrong loop. STIHL’s 036 manual states two of the three checks in one place: the chain pitch must match the guide bar, and the drive-link gauge must match the groove width. The third number, the drive-link count, has to match the length of the bar you are fitting. Oregon adds the sprocket: the drive sprocket must be the same pitch as the chain, and a new chain does not go onto a sprocket that has already worn out its two chains. If the old sprocket is hooked or the drive links on the old chain were peened, replace the sprocket with the chain. That interval is <a href="/guides/chainsaw-drive-sprocket/">drive sprocket and pitch</a>.</p>
+      <p style="max-width:72ch">Read the stamp on the bar tail rather than the model name on the saw. A Husqvarna 460 Rancher 18″ bar in 3/8″ .050″ takes 68 drive links in Husqvarna’s 2026 fit-up guide. A 450 Rancher 18″ bar in .325″ .050″ takes 72. Both are 18″ ranch saws. The chains are not interchangeable, and the files are not either: 7/32″ versus 3/16″. The pages are <a href="/saws/husqvarna-460-rancher/">460 Rancher</a> and <a href="/saws/husqvarna-450-rancher/">450 Rancher</a>. If the stamp is gone, use <a href="/guides/how-to-verify-chain-size/">the three checks</a> and <a href="/guides/how-to-count-drive-links/">count the old loop</a> only if that loop was the right one.</p>
+      <p style="max-width:72ch">Low profile and standard 3/8″ both get sold in .050″ gauge. Oregon 91 is not Oregon 72. If the drive-link stamp or the saw page says low profile, Picco, Mini, or 91, do not fit a 72-series loop because the gauge matched. <a href="/guides/3-8-low-profile-vs-standard-chain/">The family difference</a> is the sprocket and the cutter, not a preference.</p>
+      <p class="src">Mounting steps below are taken from the STIHL <a href={STIHL} rel="nofollow">MS 290, 310, 390 instruction manual</a> and the Husqvarna <a href={HUSQ} rel="nofollow">120 Mark II operator’s manual</a> (2024). Your saw’s manual wins where the tensioner is in a different place.</p>
+    </section>
+
+    <section class="block">
+      <h2>Make the saw safe to handle</h2>
+      <ol class="steps">
+        <li><strong>Engine off, and stay off.</strong> Husqvarna’s 120 Mark II procedure starts by removing the spark-plug cap so the saw cannot start while your hands are on the chain. Do that on a gas saw when the manual tells you to. A battery saw gets the pack off or the switch locked, per its manual.</li>
+        <li><strong>Gloves on.</strong> STIHL’s mounting section says to wear work gloves because the cutters are sharp with the engine stopped. The same warning is on Husqvarna’s assembly steps. <a href="/guides/chainsaw-safety-gear/">Chaps and the rest of the kit</a> are for when the saw is running. Gloves are for this step too.</li>
+        <li><strong>Chain brake released.</strong> You cannot seat the chain on the sprocket with the brake locked. Husqvarna’s knob-adjuster procedure says to pull the front hand guard toward the front handle until the brake is disengaged. STIHL’s manual uses the same motion. You will engage the brake again before a start.</li>
+        <li><strong>Cover off, bar back.</strong> Remove the bar nuts and the clutch cover. Push the bar toward the sprocket, to its rearmost position, so the chain has slack to drop into the groove. STIHL also says to run the tensioner screw back until the tensioner slide is at the inner end of its slot, so it is not fighting you while you fit the chain.</li>
+      </ol>
+    </section>
+
+    <section class="block">
+      <h2>Direction, groove, and the tensioner peg</h2>
+      <p style="max-width:72ch">Husqvarna’s order on the 120 Mark II is: bar on the bar bolts, chain lifted over the drive sprocket and engaged in the groove, starting on the top edge of the bar. The edges of the cutting links are turned forward on that top edge. The drive links have to sit on the sprocket and in the groove, not on top of the rails. STIHL’s MS 290 manual fits the bar over the studs with the cutting edges on the top of the bar pointing to the right (clutch side, bar pointing away from you in the usual view), engages the tensioner peg in the bar’s locating hole, and places the chain over the sprocket at the same time. STIHL also says to fit the chain starting at the bar nose.</p>
+      <p style="max-width:72ch">Those two “where to start” sentences differ. The direction does not. Cutters on the top of the bar point toward the tip, so they cut on the bottom of the bar as the chain returns. If you have followed the chain around and the top cutters point at the engine, take it off and turn the loop around. Forcing it with the tension screw will not reverse a cutter.</p>
+      <p style="max-width:72ch">The tensioner peg has to find the hole in the bar. If the cover will not sit flat, the peg is on the bar instead of in the hole, or a drive link is sitting on a rail. Back up. Do not draw the nuts down to flatten a cover that is proud. STIHL’s next move, once the peg is in and the chain is on, is to turn the tensioning screw until there is very little sag on the underside and the drive-link tangs are in the groove. Then the cover goes on.</p>
+    </section>
+
+    <section class="block">
+      <h2>Finger-tight, then tension, then the wrench</h2>
+      <p style="max-width:72ch">Both manuals refuse to let you finish the nuts first. STIHL: refit the sprocket cover and screw the nuts on only fingertight, then tension. Husqvarna: install the cover, guide the chain-adjuster pin into the bar hole, confirm the drive links are on the sprocket and in the groove, tighten the nuts with your fingers, then turn the tensioning screw clockwise until the chain does not sag below the bar but still turns easily by hand. Hold the end of the bar up and tighten the nuts with the combination wrench.</p>
+      <p style="max-width:72ch">Holding the nose up matters because the bar can slide back as the nuts clamp, which loosens what you just set. Oregon’s tension procedure uses the same nose-up rule and adds a distinction the model manuals compress into “snug but movable.” On a solid-nose bar the bottoms of the lowest tie-straps and cutters just touch the bottom rail. On a sprocket-nose bar they solidly contact it, and the chain should pass the snap test. Do that adjustment on a cool chain. The full sequence, including why a hot chain must not be tensioned, is <a href="/guides/chainsaw-chain-tension/">how to tension a chainsaw chain</a>.</p>
+      <p style="max-width:72ch">Pull the chain by hand around the bar before you call it done. It should move freely, and every drive link should stay in the groove. A link that pops out means the count is wrong, the groove is packed, or the chain is not the gauge of the bar. Clean the groove if you have not already; that step is part of <a href="/guides/chainsaw-bar-maintenance/">bar maintenance</a> and it is easier with the chain off, which is now.</p>
+    </section>
+
+    <section class="block">
+      <h2>The first run</h2>
+      <p style="max-width:72ch">Oil the new chain before it cuts anything. Oregon’s break-in is half throttle for several minutes with no cutting load, so oil reaches the bar and the chain, then light cuts, with tension reset once the chain has cooled. A new chain stretches. STIHL says to retension it more often than a used chain. Husqvarna says to examine tension frequently until it has been run in, and the support page suggests looking again after the first one or two minutes of cutting. None of those rechecks are done by turning the screw while the chain is still hot. Stop, cool, then adjust.</p>
+      <p style="max-width:72ch">Starting is a separate procedure from fitting. On logging operations, OSHA 1910.266 requires the saw to be started with the chain brake engaged, on the ground or otherwise firmly supported, at least 10 feet from the fueling spot. Drop-starting is prohibited. Consumer manuals describe the same hold: saw on the ground, bar clear, brake on, both hands placed as the manual shows. <a href="/guides/chainsaw-kickback/">Kickback</a> covers why the brake is on for the start and why it does not prevent a kickback once you are cutting. <a href="/guides/chainsaw-bar-and-chain-oil/">Bar oil</a> is the tank you fill before that first start, not the two-stroke mix.</p>
+    </section>
+
+    <div class="callout"><b>⚠ Backwards chain still “fits”</b><p>A reversed loop will tension and it will not cut. Look at the top of the bar before the nuts are final. The sharp edges of the cutters point toward the tip. If they point toward the engine, turn the loop around.</p></div>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/chainsaw-chain-tension/">Tension</a> · <a href="/guides/how-to-verify-chain-size/">Verify the size</a> · <a href="/guides/chainsaw-bar-maintenance/">Bar maintenance</a> · <a href="/guides/why-a-chainsaw-chain-comes-off/">Why a chain comes off</a></p>
+    <ShopBlock groups={shop.groups} title="Chains, a bar, a wrench and gloves (Amazon)" lead="Optional. Install only a loop whose pitch, gauge and drive-link count match the bar on the saw. The wrench and gloves are general." />
+  </div>
+</Base>

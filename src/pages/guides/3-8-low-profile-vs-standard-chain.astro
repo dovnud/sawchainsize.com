@@ -1,0 +1,84 @@
+---
+import Byline from '../../components/Byline.astro';
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+
+const path = '/guides/3-8-low-profile-vs-standard-chain/';
+const modified = (dates as Record<string, string>)[path];
+const desc = '3/8″ low-profile chain versus standard 3/8″: Oregon’s 90/91 families versus 72/73/75, different files, and why the sprocket has to match the family.';
+const ORE = 'https://www.oregonproducts.com/en/product-support/chainsaw/finding-the-right-saw-chain/c/finding-the-right-saw-chain-s';
+const faqs = [
+  { q: 'Is 3/8″ low-profile chain the same as 3/8″ chain?', a: 'Oregon’s identification chart lists them as different families. 3/8″ Low Profile is type 90 at .043″ gauge and type 91 at .050″ gauge. Standard 3/8″ is type 72 at .050″, type 73 at .058″ and type 75 at .063″. A 91-series loop is not a substitute for a 72-series loop. The drive sprocket has to be the same pitch family as the chain, and so does the bar-nose sprocket when the bar has one.' },
+  { q: 'What does STIHL call 3/8″ low profile?', a: 'Picco. On STIHL’s chain-number system, a leading 6 is 3/8″ Picco (low profile) and a leading 3 is standard 3/8″. STIHL 63 PM is the .050″ Picco family; 61 PMM3 is the .043″ Picco Micro Mini. The part-number guide on this site decodes those digits from STIHL’s own chart.' },
+  { q: 'Which file sharpens which?', a: 'Oregon’s chart and this site’s file table agree on the split. 3/8″ low-profile .050″ (91PX and the 91 cousins) takes a 5/32″ (4.0 mm) round file. The .043″ low-profile chain (90PX) takes 4.5 mm (11/64″). Standard 3/8″ (72, 73, 75) takes a 7/32″ (5.5 mm) file. Filing a 91 cutter with a 7/32″ file is the “file too large” fault in Oregon’s troubleshooting list.' },
+  { q: 'Can both families be .050″ gauge?', a: 'Yes. Gauge is the drive-link thickness, and both 91 (low profile) and 72 (standard) are offered at .050″. Matching the gauge does not match the family. The sprocket, the cutter size and the file still differ. Read the type number stamped on the drive link, not only the gauge on the bar.' },
+  { q: 'Which saws on this site use low profile?', a: 'Smaller and many battery saws. The Husqvarna 540 XP Mark III is a clear case: Husqvarna’s 2026 fit-up guide approves both .325″ Mini .043″ and 3/8″ Mini .050″ on 14″ and 16″ bars, and the drive-link counts differ. 3/8″ Mini in that guide is the low-profile family (S93G), not a 72-series full-size 3/8″ chain. The saw page lists both systems. Do not put one system’s chain on the other system’s bar.' },
+];
+const jsonld = [webPageLd('3/8″ low profile vs standard 3/8″ chainsaw chain', path, desc, modified), faqLd(faqs)];
+const shop = guideShop('3-8-low-profile-vs-standard-chain');
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: '3/8″ low profile vs standard', path }];
+---
+<Base title="3/8″ Low Profile vs Standard 3/8″ Chainsaw Chain" description={desc} path={path} nav="chart" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: '3/8″ low profile vs standard' }]} />
+      <h1>3/8″ low profile vs standard 3/8″ chain</h1>
+      <p class="lede">Both names contain “3/8.” Oregon’s chart does not treat them as one chain. Low profile is the 90 and 91 families. Standard 3/8″ is 72, 73 and 75. The sprocket, the file and the cutter are different, even when the gauge number on the box is the same .050″.</p>
+      <Byline label="Last updated" />
+    </div>
+
+    <section class="block">
+      <h2>Oregon’s two rows</h2>
+      <p style="max-width:72ch">Oregon defines pitch as the distance between any three consecutive rivets, divided by two, and says the drive sprocket must be the same pitch as the chain, as must the bar-nose sprocket when the bar has one. The servicing chart then splits “3/8” into two pitch rows, with different type numbers in each gauge column.</p>
+      <div class="tblwrap">
+        <table>
+          <caption class="sr-only">Oregon chain families for 3/8 low profile and standard 3/8</caption>
+          <thead><tr><th scope="col">Oregon pitch row</th><th scope="col">.043″</th><th scope="col">.050″</th><th scope="col">.058″</th><th scope="col">.063″</th><th scope="col">Round file</th></tr></thead>
+          <tbody>
+            <tr><td>3/8″ Low Profile</td><td class="num"><a href="/chain/3-8-lp-043/">90</a></td><td class="num"><a href="/chain/3-8-lp-050/">91</a></td><td class="num">—</td><td class="num">—</td><td class="num">4.5 mm at .043″; 5/32″ at .050″</td></tr>
+            <tr><td>3/8″ (standard)</td><td class="num">—</td><td class="num"><a href="/chain/3-8-050/">72</a></td><td class="num"><a href="/chain/3-8-058/">73</a></td><td class="num"><a href="/chain/3-8-063/">75</a></td><td class="num">7/32″ (5.5 mm)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="src">Type numbers by gauge: Oregon, <a href={ORE} rel="nofollow">Finding the Right Saw Chain</a>, saw-chain family chart. File sizes: Oregon filing chart, restated on our <a href="/guides/chainsaw-chain-file-size/">file-size guide</a> and <a href="/guides/chainsaw-sharpening-angles/">angles guide</a>. A dash means that family is not in Oregon’s row for that gauge.</p>
+      <p style="max-width:72ch">The type number is stamped on the drive link. Oregon’s instructions for identifying a chain say to order by that stamp, because a worn chain is hard to measure for gauge. If the stamp reads 91, you are in the low-profile .050″ family (91PX, 91PXL, 91VXL and the rest of that row). If it reads 72, you are in standard 3/8″ .050″. The boxes can both say 3/8″ and .050″. The stamp is what keeps them apart. <a href="/guides/chain-part-numbers/">Part numbers</a> shows how the same split appears in STIHL and Husqvarna codes.</p>
+    </section>
+
+    <section class="block">
+      <h2>Why the same gauge is not enough</h2>
+      <p style="max-width:72ch">Gauge is the thickness of the drive link where it enters the bar groove. Oregon offers .043″, .050″, .058″ and .063″. Both the 91 family and the 72 family include a .050″ chain, so a bar stamped .050″ does not tell you which family it is. The pitch row does. A low-profile chain is built on a smaller cutter and a drive link shaped for a low-profile sprocket. A standard 3/8″ chain is the larger cutter used on larger saws, filed with a 7/32″ file instead of a 5/32″ file.</p>
+      <p style="max-width:72ch">Oregon’s own wording on pitch is that the drive sprocket must match the chain, and the nose sprocket must match when there is one. Putting a 72-series chain on a sprocket and a nose that were made for 91-series chain, or the reverse, breaks that match even if a caliper says both drive links are .050″ thick. The bar groove may accept the gauge. The sprocket still has to drive that chain’s pitch family. If you are changing families, you are changing the bar, the chain and the sprocket together. That is the same warning this site prints on the <a href="/saws/husqvarna-540-xp-mark-iii/">Husqvarna 540 XP Mark III</a>, which is approved for two different systems at the same bar lengths.</p>
+      <p style="max-width:72ch">Inside the standard 3/8″ row there is a second trap that is only about gauge. Oregon 72 is .050″, 73 is .058″, and 75 is .063″. Those three share the standard 3/8″ family and the 7/32″ file, and they still do not share a bar groove. That comparison is <a href="/guides/oregon-72-vs-73-chain/">72 versus 73</a>. Low profile has its own gauge split: 90 at .043″ and 91 at .050″, with different files. <a href="/guides/chainsaw-chain-gauge/">Chain gauge</a> is the thickness story for all four gauges.</p>
+    </section>
+
+    <section class="block">
+      <h2>How STIHL and Husqvarna name the same split</h2>
+      <p style="max-width:72ch">STIHL’s marketing number, as decoded from STIHL’s chain-selection chart on our part-number guide, uses the first digit for pitch. A 3 is standard 3/8″. A 6 is 3/8″ Picco, which is STIHL’s name for the low-profile family. The second digit is gauge: 1 is .043″, 3 is .050″, 6 is .063″. So 63 PM is Picco Micro at .050″, the low-profile side, and 33 RS is Rapid Super at standard 3/8″ .050″. The letters after the digits name the cutter, not the length. The last number on a loop is the drive-link count. 63 PM3 55 and 63 PM3 50 are the same family at two lengths. Neither is a 33 RS loop.</p>
+      <p style="max-width:72ch">Husqvarna’s small-saw chain in the 2026 fit-up guide uses the same low-profile .050″ system under names such as S93G and H37, and the .043″ low-profile system under H38. Full-size 3/8″ on the larger saws is H80, S83G or C83 at .050″, H81 or C85 at .058″, and H83 at .063″. The cross-reference table is the <a href="/guides/chain-size-chart/">identification chart</a>. When a Husqvarna page on this site says “3/8″ Mini,” it means the low-profile family. When it says 3/8″ on a 60 cc-class saw, it means the standard family. The word “mini” is doing the work that Oregon’s “low profile” does.</p>
+    </section>
+
+    <section class="block">
+      <h2>A saw that is approved for both</h2>
+      <p style="max-width:72ch">The 540 XP Mark III is the example to keep, because the bar length does not decide the chain. Husqvarna’s 2026 fit-up guide lists two systems at 14″ and at 16″. On an X-Precision bar the chain is .325″ Mini Pixel, .043″ gauge, SP21G, with 59 drive links at 14″ and 64 at 16″. On an X-Force bar the chain is 3/8″ Mini, .050″ gauge, S93G, with 52 drive links at 14″ and 56 at 16″. Both use a 5/32″ file. The .325″ rows share part numbers with the top-handle T540 XP Mark III. The 3/8″ Mini chains are the S93G low-profile loops, not 72-series chain.</p>
+      <p style="max-width:72ch">Ordering “a 16″ chain for a 540 XP” can therefore land on 64 drive links of .325″ .043″ or on 56 drive links of 3/8″ low-profile .050″. Both are real approved setups. Only the stamp on the bar that is actually mounted is the order. The <a href="/saws/husqvarna-540-xp-mark-iii/">540 XP Mark III page</a> prints each row. The <a href="/saws/husqvarna-t540-xp-mark-iii/">T540 XP Mark III</a> is the top-handle cousin for the .325″ side. This is also why a low-profile loop from a homeowner saw will not “just go on” a ranch saw that left the factory with 72LPX. The drive-link count might even be coaxed into a similar length. The sprocket and the cutter will not be the chain that bar was made for.</p>
+    </section>
+
+    <section class="block">
+      <h2>File, kickback, and the bar you already have</h2>
+      <p style="max-width:72ch">The file is the check you can do without removing the sprocket. A 5/32″ file is the Oregon size for 91-series .050″ cutters. A 7/32″ file is the size for 72, 73 and 75. If the file that came with the saw is 5/32″, you are almost certainly not on standard 3/8″ chain. If someone has been filing 91 cutters with a 7/32″ file, Oregon’s troubleshooting section describes the result: too little top-plate angle, or a back-sloped side plate, because the file was too large or held too high, and the remedy is to resharpen with the correct guide. The angles for each Oregon type, including the 0° down-angle on 90 and 91 versus 10° on the 72LPX family, are in the angles table.</p>
+      <p style="max-width:72ch">Low profile is also not a synonym for low-kickback. Low-kickback is the ANSI designation discussed in <a href="/guides/chainsaw-kickback/">kickback</a>. A consumer saw under 3.8 cubic inches (62 cc) was evaluated with specified chain. Replacing a 91-series low-kickback loop with a standard 3/8″ chisel chain is a different cutting system, and it is the wrong sprocket match besides. Stay inside the family the bar and the sprocket already use, unless you are changing all three with a combination the saw’s manual lists.</p>
+      <p style="max-width:72ch">The order of operations is the same as every other page here. Read the bar stamp for length, pitch, gauge and drive links. Read the drive-link stamp for the family if the bar’s pitch line only says 3/8. Count the drive links if you still have the old chain and it was the right one. Then buy that loop, not the neighboring box. <a href="/guides/how-to-verify-chain-size/">How to verify your chain size</a> is the stamp procedure. <a href="/chain/3-8-lp-050/">3/8″ LP .050″</a> and <a href="/chain/3-8-050/">3/8″ .050″</a> list the saws on this site that we have in each family.</p>
+    </section>
+
+    <div class="callout"><b>⚠ .050″ on the box is not the family</b><p>91 and 72 are both sold in .050″ gauge. One is low profile and takes a 5/32″ file. The other is standard 3/8″ and takes a 7/32″ file. The drive-link stamp, or the saw page that matches your bar, is the tie-breaker. Gauge still has to match the groove — see <a href="/guides/oregon-72-vs-73-chain/">72 vs 73</a> for the standard-family version of that mistake.</p></div>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/chain-size-chart/">Identification chart</a> · <a href="/guides/chain-part-numbers/">Part numbers</a> · <a href="/guides/chainsaw-chain-gauge/">Gauge</a> · <a href="/guides/chainsaw-drive-sprocket/">Drive sprocket</a></p>
+    <ShopBlock groups={shop.groups} title="Low-profile and standard 3/8″ chains (Amazon)" lead="Optional. Pick the family your drive-link stamp and bar stamp name, then the drive-link count. A 91PX loop does not replace a 72-series loop." />
+  </div>
+</Base>

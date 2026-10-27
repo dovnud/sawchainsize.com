@@ -1,0 +1,78 @@
+---
+import Byline from '../../components/Byline.astro';
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+
+const path = '/guides/chainsaw-kickback/';
+const modified = (dates as Record<string, string>)[path];
+const desc = 'Chainsaw kickback: the bar-tip kickback zone, ANSI B175.1’s consumer-saw rules as OSHA and the makers state them, and what a chain brake does not prevent.';
+const OSHA = 'https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XVII/part-1910/subpart-R/section-1910.266';
+const ORE_FAQ = 'https://www.oregonproducts.com/en_gb/faq';
+const HUSQ = 'https://www-static-nw.husqvarna.com/hbd/tdrdownload/v2/pub000093415/doc000236602/OM/6om3lERaxgj7SlAW_xoibWWRG_g?httproute=True';
+const faqs = [
+  { q: 'What is chainsaw kickback?', a: 'Husqvarna’s 565/572 operator’s manual describes it as the reaction when the kickback zone of the guide bar touches an object. The bar can be thrown back toward the operator in the cutting plane, suddenly and with large force. The kickback zone is the upper part of the bar tip. A smaller tip radius reduces the force. No saw chain fully prevents it.' },
+  { q: 'Does a chain brake prevent kickback?', a: 'No. STIHL’s owner’s-manual warning states that no Quickstop or other chain brake prevents kickback. The brake is designed to reduce the risk of injury, if it activates, in certain kickback situations. It has to be maintained, and there has to be enough distance for it to stop the chain. OSHA’s logging rule also forbids removing or disabling a kickback device.' },
+  { q: 'What does ANSI B175.1 require?', a: 'OSHA’s logging standard incorporates ANSI B175.1-1991 and requires a chain brake on chain saws placed into service after that rule’s effective date. STIHL’s manuals restate section 5.12 of that edition: saws under 3.8 cubic inches must, with specified cutting attachments, meet a computed kickback angle of 45 degrees and must have at least two kickback-reducing devices. Saws at 3.8 cubic inches and above must have at least one such device. Oregon’s FAQ states the same split, and notes that 3.8 cubic inches is 62 cc. STIHL warns that the computed angle is a lab figure and may not equal the rotation in a real cut.' },
+  { q: 'Is low-kickback chain the same as low-profile chain?', a: 'No. Low-profile (Oregon 90 and 91, STIHL Picco) is a chain family with its own sprocket. Low-kickback is a safety designation under the ANSI rules for how the chain behaves in a kickback test. A replacement chain on a saw under 3.8 cubic inches has to be one the standard allows for that saw if you want the saw to stay inside the kickback performance it was evaluated with. The bar stamp still has to match pitch, gauge and drive links.' },
+  { q: 'What does OSHA require while the saw is running?', a: 'In logging operations covered by 29 CFR 1910.266, the chain saw is started with the chain brake engaged, on the ground or otherwise firmly supported. Drop-starting is prohibited. Both hands encircle the handles unless the employer can show that a greater hazard would result. The saw is not used to cut directly overhead. It is shut off or the brake is engaged when it is carried more than 50 feet, and also for shorter carries when terrain, brush or slippery ground creates a hazard.' },
+];
+const jsonld = [webPageLd('Chainsaw kickback', path, desc, modified), faqLd(faqs)];
+const shop = guideShop('chainsaw-kickback');
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Kickback', path }];
+---
+<Base title="Chainsaw Kickback: Zone, Chain Brake, and the ANSI Rule" description={desc} path={path} nav="verify" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Kickback' }]} />
+      <h1>Chainsaw kickback</h1>
+      <p class="lede">Kickback is the bar tip throwing the saw back at you when the upper quadrant of the nose hits wood. A chain brake can shorten the injury if it trips in time. It does not stop the kickback from starting, and no chain fully prevents it.</p>
+      <Byline label="Last updated" />
+    </div>
+
+    <section class="block">
+      <h2>Where kickback starts</h2>
+      <p style="max-width:72ch">Husqvarna’s operator’s manual for the 565 and 572 XP (2025) states the geometry in plain language. A kickback occurs when the kickback zone of the guide bar touches an object. It can happen suddenly and with large force, throwing the product toward the operator. Kickback always occurs in the cutting plane of the guide bar. Usually the saw is thrown against the operator, but the direction depends on how the saw is being used when the contact happens. A smaller bar-tip radius decreases the force. A low-kickback saw chain decreases the effects. The manual’s warning is that no saw chain fully prevents kickback, and that the kickback zone must not be allowed to touch an object.</p>
+      <p style="max-width:72ch">That zone is the upper part of the tip, not the straight bottom edge you bore with on purpose and not the top of the bar in a normal felling cut. The practical instruction in the same manual family is to avoid letting that quadrant contact a log, a limb, or a second piece of wood. Oregon’s maintenance manual tells the operator to use low-kickback chain and a reduced-kickback guide bar whenever possible, to keep the chain, bar and sprocket maintained, and to cut only wood. Those are maintenance rules sitting next to the kickback warning, because a dull or damaged chain changes how the nose behaves. Sharpening intervals are on the <a href="/guides/chainsaw-sharpening-angles/">angles guide</a> and the <a href="/guides/when-to-replace-chainsaw-chain/">replacement guide</a>.</p>
+      <p class="src">Sources: Husqvarna <a href={HUSQ} rel="nofollow">565, 572 XP operator’s manual</a> (2025), kickback information; Oregon Maintenance and Safety Manual, saw-operation list.</p>
+    </section>
+
+    <section class="block">
+      <h2>What the chain brake actually does</h2>
+      <p style="max-width:72ch">STIHL’s printed warning, carried in the owner’s manuals, is unambiguous: no Quickstop or other chain brake device prevents kickback. The devices are designed to reduce the risk of kickback injury, if activated, in certain kickback situations. For STIHL’s Quickstop to do that, it has to be maintained and in working order, and there has to be enough distance between the bar and the operator for the brake to have time to act. The same warning says never to run the saw without the front hand guard. On a braked saw, removing that guard deactivates the brake. In a kickback, the guard is also what the left hand is meant to hit.</p>
+      <p style="max-width:72ch">The activation STIHL describes is mechanical. If the left hand is around the front handle behind the hand guard, and a kickback rotates that hand into the guard with enough force, the guard trips the brake. On most newer STIHL saws the brake can also trip by inertia. Neither sentence is a promise that every kickback will trip it. A saw held with one hand, or with the left hand off the front handle, is outside the condition STIHL describes. OSHA’s logging rule says the same thing as a work rule: thumbs and fingers of both hands encircle the handles during operation, unless the employer demonstrates that a greater hazard is posed by keeping both hands on the saw in that particular situation.</p>
+      <p style="max-width:72ch">Test the brake the way the saw’s manual says, with the engine stopped or at the idle the manual specifies, before you depend on it. If it does not lock the chain, STIHL says to stop using the saw and have it repaired. Do not remove the mechanism to make a cut easier. OSHA 1910.266 states that no chain-saw kickback device shall be removed or otherwise disabled.</p>
+    </section>
+
+    <section class="block">
+      <h2>ANSI B175.1, as the rule and the manuals state it</h2>
+      <p style="max-width:72ch">The standard’s full text is published by ANSI and is not free. What follows is the part that OSHA and the manufacturers reprint, not a paraphrase of a later edition’s unpublished tables.</p>
+      <p style="max-width:72ch">OSHA’s logging standard, 29 CFR 1910.266, incorporates ANSI B175.1-1991, “Safety Requirements for Gasoline-Powered Chain Saws.” Each chain saw placed into initial service after that section’s effective date shall be equipped with a chain brake and shall otherwise meet that standard. Saws already in service before the effective date had to have a protective device that minimizes kickback. The rule is a logging rule. It is the federal text that names the standard.</p>
+      <p style="max-width:72ch">STIHL’s manuals restate section 5.12 of ANSI B175.1-1991. Saws with a displacement under 3.8 cubic inches must, in their original condition and with certain cutting attachments, meet a computed kickback angle of 45 degrees, and they must be equipped with at least two devices to reduce the risk of kickback injury, such as a chain brake, low-kickback chain, or a reduced-kickback bar. Saws at 3.8 cubic inches and above must be equipped with at least one such device. STIHL then warns that the computer-derived angles may bear no relationship to the bar rotation that happens in a real cut, and that compliance does not mean a real kickback will stop at 45 degrees.</p>
+      <p style="max-width:72ch">Oregon’s FAQ uses the same split and gives the metric equivalent: under 3.8 cubic inches (62 cc), the chainsaw must meet the low-kickback provisions; at 3.8 cubic inches (62 cc) and larger, it may or may not. Oregon quotes the warning label that a non-qualifying saw has to be able to carry, beginning “This chainsaw is capable of severe kickback.” Read the label on the powerhead before you treat a pro saw as if it had been built to the consumer angle.</p>
+      <p style="max-width:72ch">Husqvarna’s 2025 manual for the 565 and 572 XP says those models met ANSI B175.1-2021, plus CSA Z62.1-15 and CSA Z62.3-11 (R2016), when equipped with the bar-and-chain combinations listed in that manual. That is a later edition than the 1991 text OSHA incorporated, cited by the manufacturer for specific saws and specific cutting equipment. The combination is the point. A bar or chain that was not part of the evaluation is not automatically inside the result. STIHL’s warning says the same: for a powerhead under 3.8 cubic inches to stay inside the computed-angle requirement, use the listed combinations, or replacements marked for that powerhead, or replacement chain designated low-kickback.</p>
+    </section>
+
+    <section class="block">
+      <h2>Replacement chain still has to fit the bar</h2>
+      <p style="max-width:72ch">Low-kickback is not a size. Pitch, gauge and drive links still have to match the bar that is on the saw. Oregon’s chain families make the common confusion concrete. 3/8″ low-profile chain is the 90 series at .043″ and the 91 series at .050″. Standard 3/8″ chain is 72 at .050″, 73 at .058″ and 75 at .063″. They are different families. Putting a 72-series loop on a saw that left the factory on 91-series chain changes the sprocket match and the kickback behavior together. The difference is written up in <a href="/guides/3-8-low-profile-vs-standard-chain/">3/8″ low profile versus standard 3/8″</a>, and the gauge trap inside the standard 3/8″ family is <a href="/guides/oregon-72-vs-73-chain/">72 versus 73</a>.</p>
+      <p style="max-width:72ch">A longer bar also changes the nose you are exposing. The approved lengths we have sourced for each model are on <a href="/guides/longer-bar-on-chainsaw/">longer bar on a chainsaw</a>. A longer bar with a larger nose radius is the opposite of Husqvarna’s statement that a smaller tip radius decreases kickback force. If you change length, read the new bar’s stamp and use the chain that stamp names, then tension it with the <a href="/guides/chainsaw-chain-tension/">cold-chain procedure</a>. A loose chain at the nose is a kickback problem and a derailment problem at the same time.</p>
+    </section>
+
+    <section class="block">
+      <h2>How the saw is started and carried</h2>
+      <p style="max-width:72ch">Kickback is a cutting event. Several of the injuries around saws happen before the cut, and OSHA’s logging rule states those steps as requirements for employers on covered operations. The chain saw is fueled at least 10 feet (3 m) from any open flame or other ignition source, and it is started at least 10 feet from the fueling area. It is started on the ground or where it is otherwise firmly supported. Drop-starting is prohibited. It is started with the chain brake engaged. The operator is sure of footing before cutting, and the saw is not used in a position that puts the operator off balance or forces a one-handed grip. It is not used to cut directly overhead. It is carried so the operator does not contact the chain or the muffler. The chain is shut off or the throttle is released before the feller’s retreat. When the saw is carried farther than 50 feet (15.2 m), it is shut down or the chain brake is engaged. The same applies to a shorter carry if terrain, underbrush or a slippery surface creates a hazard.</p>
+      <p style="max-width:72ch">Homeowner manuals from STIHL, Husqvarna and Echo repeat the same physical rules — brake on to start, saw on the ground, no drop starts, both hands on the handles — without making the reader an employer under 1910.266. The legal scope of that section is logging. The handling rules are how the saw is designed to be held. Gear that covers the legs if the chain does reach the body is covered in <a href="/guides/chainsaw-safety-gear/">safety gear</a>, including the OSHA logging requirement for cut-resistant leg protection and the ASTM specification Oregon cites for chaps.</p>
+    </section>
+
+    <div class="callout"><b>⚠ The computed angle is not a promise about your cut</b><p>STIHL prints this next to the 45-degree figure: the computer-derived angle may bear no relationship to the rotation in a real kickback, and compliance does not mean the bar will stop at 45 degrees. Treat the number as the lab gate a consumer saw had to pass with specified equipment, then keep the nose out of the wood and both hands on the saw.</p></div>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/chainsaw-safety-gear/">Safety gear</a> · <a href="/guides/chainsaw-chain-tension/">Chain tension</a> · <a href="/guides/3-8-low-profile-vs-standard-chain/">3/8″ low profile vs standard</a> · <a href={OSHA} rel="nofollow">29 CFR 1910.266</a> · <a href={ORE_FAQ} rel="nofollow">Oregon FAQ on ANSI</a></p>
+    <ShopBlock groups={shop.groups} title="Safety gear and low-profile chain (Amazon)" lead="Optional. Chaps, a helmet and gloves reduce injury if something goes wrong. A chain link is only a match if the pitch, gauge and drive-link count agree with your bar stamp, and if that chain is one your saw’s manual allows." />
+  </div>
+</Base>

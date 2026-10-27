@@ -1,0 +1,89 @@
+---
+import Byline from '../../components/Byline.astro';
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+
+const path = '/guides/chainsaw-fuel-mix/';
+const modified = (dates as Record<string, string>)[path];
+const desc = 'Chainsaw fuel mix: the 50:1 ratio STIHL, Husqvarna and Echo publish for current gas saws, how they say to mix it, and why the operator’s manual still wins.';
+const STIHL = 'https://www.stihlusa.com/en/guides-projects/how-to-use-start/mixing-oil-and-gasoline';
+const HUSQ = 'https://us-support.husqvarna.com/en/petrol-chainsaw/KA-01557';
+const ECHO = 'https://www.echo-usa.com/getattachment/e7544d8b-7e45-43ee-94d9-f9f8e2d90270/filev2_';
+const OSHA = 'https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XVII/part-1910/subpart-R/section-1910.266';
+const faqs = [
+  { q: 'What fuel mix do STIHL, Husqvarna and Echo specify?', a: 'For current gasoline saws, all three publish 50:1, which is 2 percent two-stroke oil. STIHL’s US mixing guide says gasoline-powered STIHL equipment uses 50:1. Husqvarna’s support page says 50:1, and gives 5 litres of gasoline to 100 ml of oil. Echo’s CS-352 operator’s manual states 50:1 and shows 2.6 fl oz of oil per US gallon, or 100 ml per 5 litres. The saw’s own manual is the document that applies to that saw.' },
+  { q: 'How do you mix it?', a: 'Oil into the can first, or into half the gasoline, then gasoline, then shake. STIHL says pour the oil in first, add the gasoline, and shake. Husqvarna’s 120 Mark II manual says put in half the gasoline, add all the oil, shake, add the rest of the gasoline, and shake again. Echo’s CS-352 manual uses that same half-then-rest sequence. Mix only what you will use: Husqvarna’s support page says about one month; the 120 Mark II manual says not more than 30 days; Echo says 30 days, or 90 with a stabilizer.' },
+  { q: 'What about older saws that say 32:1 or 40:1?', a: 'Use the ratio printed in that saw’s manual if you are not following a later instruction from the manufacturer. Echo’s current fuel answer says older Echo engines were specified at 32:1 or 16:1, and that Echo branded two-stroke oils may now be mixed at 50:1 for Echo engines sold in the past. That sentence is Echo’s, about Echo oil and Echo engines. It is not a reason to run 50:1 in a different brand’s saw whose manual still prints another ratio.' },
+  { q: 'Can I put bar oil in the gas?', a: 'No. Bar-and-chain oil lubricates the bar. Two-stroke oil mixed at 50:1 lubricates the engine. They go in different tanks. Oregon forbids used motor oil in the bar tank as well. The bar-oil guide covers that tank.' },
+  { q: 'How far from the saw do I mix and start?', a: 'Echo’s manual says to move the saw at least 10 feet (3 m) from the fueling point before starting, and not to fuel a hot or running engine. OSHA’s logging rule uses the same 10 feet: fuel at least 10 feet from any ignition source, and start at least 10 feet from the fueling area. Mix outdoors. Gasoline vapor is heavier than air and can travel along the ground to a pilot light or a hot engine.' },
+];
+const jsonld = [webPageLd('Chainsaw fuel mix ratio', path, desc, modified), faqLd(faqs)];
+const shop = guideShop('chainsaw-fuel-mix');
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Fuel mix', path }];
+---
+<Base title="Chainsaw Fuel Mix: The 50:1 Ratio, and When It Does Not Apply" description={desc} path={path} nav="chart" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Fuel mix' }]} />
+      <h1>Chainsaw fuel mix</h1>
+      <p class="lede">Current STIHL, Husqvarna and Echo gas saws are specified at 50:1 — one part two-stroke oil to fifty parts gasoline. That is the ratio those makers publish. The ratio in your saw’s manual is the one that saw was built for, and bar-and-chain oil is not this oil.</p>
+      <Byline label="Last updated" />
+    </div>
+
+    <section class="block">
+      <h2>What 50:1 means in the can</h2>
+      <p style="max-width:72ch">50:1 is 2 percent oil by volume. The useful kitchen-table quantities, taken from the manuals rather than rounded into a guess, are these. Echo’s CS-352 operator’s manual prints a mix table: 2.6 fl oz of oil per 1 US gallon of gasoline, 5.2 fl oz per 2 gallons, 13 fl oz per 5 gallons, and in metric 100 ml of oil per 5 litres, 200 ml per 10 litres, 500 ml per 25 litres. Husqvarna’s support page uses the same metric point: 5 litres of fuel to 100 ml of two-stroke oil. Husqvarna’s 120 Mark II manual (2024) states the US gallon as 77 ml (2.6 oz) of oil, the UK gallon as 95 ml (3.2 oz), and 5 litres as 100 ml (3.4 oz). STIHL’s MS 290/310/390 manual states the ratio as 1:50 with STIHL two-stroke oil, defined as 1 part oil plus 50 parts gasoline, and its example table shows 1 litre of gasoline to 0.02 litre (20 ml) of oil.</p>
+      <p style="max-width:72ch">Those bottles are small on purpose. Husqvarna’s 120 Mark II manual cautions that small errors change the ratio drastically when you mix small quantities, and tells you to measure the oil carefully. A capful “looks about right” is how a 50:1 mix becomes something the carburetor was not jetted for. Use a marked bottle. The 2.6 oz figure and the 100 ml figure are the same ratio in two unit systems. Do not add both.</p>
+      <div class="tblwrap">
+        <table>
+          <caption class="sr-only">50 to 1 mix quantities published by Echo, Husqvarna and STIHL</caption>
+          <thead><tr><th scope="col">Gasoline</th><th scope="col">Two-stroke oil at 50:1</th><th scope="col">Where that figure is printed</th></tr></thead>
+          <tbody>
+            <tr><td class="num">1 US gallon</td><td class="num">2.6 fl oz (Echo); 77 ml / 2.6 oz (Husqvarna 120 Mark II)</td><td>Echo CS-352 manual; Husqvarna 120 Mark II manual</td></tr>
+            <tr><td class="num">5 litres</td><td class="num">100 ml</td><td>Echo CS-352 table; Husqvarna support page; Husqvarna 120 Mark II manual (100 ml / 3.4 oz)</td></tr>
+            <tr><td class="num">1 litre</td><td class="num">20 ml (0.02 litre)</td><td>STIHL MS 290/310/390 manual, 1:50 example</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="src">STIHL US overview: <a href={STIHL} rel="nofollow">Mixing Oil and Gasoline</a>. Husqvarna support: <a href={HUSQ} rel="nofollow">How to mix two-stroke oil and fuel</a>. Echo CS-352 manual: <a href={ECHO} rel="nofollow">operator’s manual</a>, fuel-to-oil table. Confirm the ratio in the manual for the saw you are filling.</p>
+    </section>
+
+    <section class="block">
+      <h2>Who publishes 50:1, and who still might not</h2>
+      <p style="max-width:72ch">STIHL’s US guide says most STIHL gasoline-powered equipment runs on 50:1, and then states it as the mix for STIHL gasoline-powered equipment, with MotoMix offered as a pre-mixed alternative that needs no measuring. The MS 290 manual’s mixing section is more precise about oil grade: if you mix fuel yourself, use STIHL two-stroke oil or another high-performance oil classified JASO FB, FC or FD, or ISO-L-EGB, EGC or EGD. STIHL specifies HP Ultra, or an equivalent, to maintain emission limits over the service life. Gasoline in that manual is high-quality gasoline with an octane rating of at least 90 RON. The same section warns that a ratio other than the specification, or unsuitable fuel, can damage the engine, and it distinguishes ethanol limits by carburetor type. Read that page for the saw in your hands rather than treating every STIHL engine as identical.</p>
+      <p style="max-width:72ch">Husqvarna’s support page states the ratio for Husqvarna chainsaws as 50:1 and tells you to check the operator’s manual for the specific model. The 120 Mark II manual repeats 50:1 and adds limits that support page compresses: do not use gasoline with an octane number less than 90 RON (87 AKI), and do not use gasoline with more than 10 percent ethanol (E10). It also says to use a high-quality air-cooled two-stroke oil, not some other oil. The support page’s “one month’s supply” and the manual’s “not more than 30 days” are the same shelf life in different words.</p>
+      <p style="max-width:72ch">Echo’s CS-352 manual specifies 50:1 with an oil meeting ISO-L-EGD (ISO/CD 13738) and JASO M345-FD. Echo branded oils are stated to meet those standards, and the manual says engine problems from inadequate lubrication caused by skipping that certification void the two-stroke warranty. Gasoline in Echo’s current chainsaw specifications is 89 octane unleaded, with methanol disallowed, ethanol held to 10 percent, MTBE to 15 percent, and E15 and E85 called out as not approved. Echo’s fuel-requirement answer for older engines is the exception that has to stay attached to Echo: older manuals may say 32:1 or 16:1, and Echo says its current two-stroke oils may be mixed at 50:1 for Echo engines sold in the past. That is a manufacturer revising its own earlier ratio for its own oil. It is not a universal permission slip.</p>
+      <p style="max-width:72ch">If your saw’s manual prints 40:1, 32:1, or anything else, and the maker has not published a later instruction that covers that engine, mix what the manual prints. This site’s model pages are about chain specs. They are not a fuel-ratio database, and a chain page should not be where a ratio gets invented. The <a href="/saws/echo-cs-352/">Echo CS-352</a>, <a href="/saws/stihl-ms-271/">STIHL MS 271</a> and <a href="/saws/husqvarna-455-rancher/">Husqvarna 455 Rancher</a> pages will tell you the chain. The fuel can still gets filled from the manual in the box.</p>
+    </section>
+
+    <section class="block">
+      <h2>Order of mixing, and how long it keeps</h2>
+      <p style="max-width:72ch">The three procedures agree on the idea and differ slightly in the choreography. STIHL’s US guide: oil into the canister first, then gasoline, then shake vigorously. Husqvarna’s 120 Mark II: half the gasoline, then all of the oil, shake, then the rest of the gasoline, shake again. Echo’s CS-352: the same half-tank sequence. Putting oil in first, or into half the fuel, is how the oil actually disperses instead of sitting in a layer. Shake again before you pour it into the saw if the can has been standing. Husqvarna’s support page includes that remix-before-refueling step.</p>
+      <p style="max-width:72ch">Do not mix a season’s worth. Echo: do not mix more than you expect to use in 30 days, or 90 days if a fuel stabilizer is added, and use gasoline purchased within the last 30 days. Husqvarna 120 Mark II: do not make more than 30 days’ quantity. Husqvarna support: about one month, and mix again before each refueling. Old mix sheds, varnishes a carburetor, and is a poor place to discover that the oil has separated. Label the can as mixed fuel so it is not poured into a car or a four-stroke mower.</p>
+      <p style="max-width:72ch">Pre-mixed fuel is the other legal option when the maker names it. STIHL points at MotoMix, which uses HP Ultra and is already at the ratio. Echo’s fuel answer says a pre-mix can be used if it meets the same oil specification, and names Echo Red Armor fuel as Echo’s own. A pre-mix that does not state the oil grade or the ratio is not “close enough” because the can says premix.</p>
+    </section>
+
+    <section class="block">
+      <h2>Where you pour it, and where you must not</h2>
+      <p style="max-width:72ch">The fuel cap and the bar-oil cap are different tanks. Two-stroke mix goes in the fuel tank. Bar-and-chain oil goes in the oil tank, filled every time the fuel tank is filled, and it is never used motor oil. Oregon’s reasons are on <a href="/guides/chainsaw-bar-and-chain-oil/">bar and chain oil</a>. Pouring bar oil into the gasoline starves the crankshaft of the two-stroke lubricant the ratio was calculated to deliver. Pouring mix onto the bar does not lubricate a chain the way bar oil does, and it throws gasoline around the muffler.</p>
+      <p style="max-width:72ch">Fueling distance is not etiquette. Echo’s manual says fuel is very flammable, not to smoke, not to fuel indoors, not to fuel a hot or running engine, to wipe spills, and to move the unit at least 10 feet (3 m) from the fueling point before starting. It also notes that gasoline vapor is heavier than air and can travel along the ground to a pilot light, an electric motor, or another hot engine, and flash back. OSHA’s logging standard, 29 CFR 1910.266, requires the chain saw to be fueled at least 10 feet from any open flame or other ignition source, and started at least 10 feet from the fueling area. The OSHA text binds employers on logging operations. The 10-foot figure in Echo’s manual is the manufacturer telling every owner of that saw the same distance.</p>
+      <p style="max-width:72ch">Starting after you have moved is covered with the brake and the grip in <a href="/guides/chainsaw-kickback/">kickback</a>. OSHA requires covered logging operations to start the saw on the ground or otherwise firmly supported, with the chain brake engaged, and prohibits drop-starting. That is the right way to start a saw that was just fueled, whether or not a compliance officer is present. <a href="/guides/chainsaw-safety-gear/">Safety gear</a> is what you already have on before the fuel cap comes off: fuel on bare arms and a running chain is a bad combination, and Echo’s oil warning says to wear safety glasses when mixing.</p>
+    </section>
+
+    <section class="block">
+      <h2>Battery saws skip this page</h2>
+      <p style="max-width:72ch">A battery saw has no mix. It still has a bar-oil tank. The chain rules — pitch, gauge, drive links, tension, sprocket match — do not relax because the motor is electric. The <a href="/saws/husqvarna-550i-xp/">550i XP</a> and the <a href="/saws/makita-xcu03-xcu04/">Makita XCU03 / XCU04</a> pages are chain pages. If you are here because a gas saw would not start after a fresh can of fuel, the checks that stay inside the published instructions are: ratio measured rather than guessed, oil grade as specified, gasoline within the ethanol limit the manual names, mix shaken, saw moved clear of the can, and the bar-oil tank filled with bar oil rather than with whatever was left in the measuring bottle.</p>
+    </section>
+
+    <div class="callout"><b>⚠ The manual’s ratio overrides a general 50:1</b><p>50:1 is what STIHL, Husqvarna and Echo publish for the current saws cited above. A different number in your manual, or a later service bulletin from that manufacturer, is the number you mix. Measure the oil. Do not put bar oil in the gas.</p></div>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/chainsaw-bar-and-chain-oil/">Bar and chain oil</a> · <a href="/guides/chainsaw-kickback/">Starting and kickback</a> · <a href="/guides/chainsaw-safety-gear/">Safety gear</a> · <a href={OSHA} rel="nofollow">29 CFR 1910.266</a></p>
+    <ShopBlock groups={shop.groups} title="Two-stroke oil for a 50:1 mix (Amazon)" lead="Optional. These are engine oils for the fuel can, at the ratio in your manual. The bar-oil link is a different bottle for a different tank." />
+  </div>
+</Base>
