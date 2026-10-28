@@ -117,6 +117,8 @@ const specText = (p: string, g: number) => `${pitchShort(p)} · ${gaugeShort(g)}
             </tbody>
           </table>
         </div>
+    <ShopBlock groups={shop.groups} compact />
+
         <div class="tblwrap">
           <table>
             <thead><tr><th>2nd digit</th><th>Gauge</th></tr></thead>
@@ -188,6 +190,6 @@ const specText = (p: string, g: number) => `${pitchShort(p)} · ${gaugeShort(g)}
 
     <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
     <p><a href="/guides/chain-size-chart/">Chain identification chart</a> (Oregon, STIHL, Husqvarna and Carlton codes by spec) · <a href="/guides/3-8-low-profile-vs-standard-chain/">3/8″ low profile vs standard</a> · <a href="/guides/chainsaw-chain-gauge/">Gauge</a> · <a href="/guides/how-to-verify-chain-size/">Verify your chain size</a> · <a href="/chain/">All chain specs</a></p>
-    <ShopBlock groups={shop.groups} title="If the numbers are worn off (Amazon)" lead="Optional. With no readable code, measure gauge and pitch instead, then count the drive links." />
+    <ShopBlock groups={shop.groups} title="If the numbers are worn off (Amazon)" lead="With no readable code, measure gauge and pitch instead, then count the drive links." />
   </div>
 </Base>

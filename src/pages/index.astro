@@ -4,6 +4,7 @@ import SawHero from '../components/SawHero.astro';
 import ModelCard from '../components/ModelCard.astro';
 import FaqList from '../components/FaqList.astro';
 import { SITE, HOME_FAQS, getModels, getBrands, barGroups, chainGroups, modelUrl, brandUrl, barUrl, chainUrl, barLabel, pitchText, gaugeText, dlText, fileText, oregonType, barHasLength, SPEC, pitchShort, gaugeShort } from '../lib/data';
+import { chainLink, okSpec } from '../lib/shop';
 import { faqLd, publisher, organizationLd } from '../lib/ld';
 
 const models = await getModels();
@@ -21,7 +22,11 @@ const finderDb = Object.fromEntries(
           m.id,
           {
             name: m.data.name, url: modelUrl(m), conflict: m.data.bars.some((x) => x.status === 'conflict'),
-            bars: m.data.bars.map((x) => ({ label: barLabel(x), pitch: pitchText(x), gauge: gaugeText(x), dl: dlText(x, m), file: fileText(x), oregon: oregonType(x), note: x.note, status: x.status })),
+            bars: m.data.bars.map((x) => {
+              const spec = okSpec(x);
+              const link = spec ? chainLink(spec) : null;
+              return { label: barLabel(x), pitch: pitchText(x), gauge: gaugeText(x), dl: dlText(x, m), file: fileText(x), oregon: oregonType(x), note: x.note, status: x.status, shop: link ? { href: link.href, kind: link.kind } : null };
+            }),
           },
         ]),
       ),
@@ -162,6 +167,8 @@ const tick = [
       <p class="kicker">Buying the chain</p>
       <h2>Where the buying links go</h2>
       <p style="max-width:70ch">Model, chain-spec, bar-length and guide pages end with links to matching chains, bars, sharpening tools and safety gear on Amazon. The site is an Amazon Associate, so it earns a commission on qualifying purchases made through those links, at no extra cost to you. We show no prices — they change daily, and the price at checkout is the real one. Read the <a href="/affiliate-disclosure/">affiliate disclosure</a>.</p>
+      <ul class="chips">{popular.map((m) => <li><a href={`${modelUrl(m)}#shop`}>{m.data.name}</a></li>)}</ul>
+      <p class="small">Each link opens that saw’s page at the chain button, or at the stamp search when published specs conflict.</p>
     </section>
   </div></div>
 </Base>

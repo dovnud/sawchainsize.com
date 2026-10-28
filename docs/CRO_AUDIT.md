@@ -1,5 +1,23 @@
 # CRO audit — SawChainSize.com
 
+## Implemented
+
+Built on this branch after the review. Expert estimate, not measured data.
+
+**Moneymaker score now: 8/10.** Affiliate 8/10. AdSense stays 1/10. Leads stay later.
+
+- Finder result: “See on Amazon” or “Search on Amazon” for a verified bar, with the Associates sentence under the button. Conflict results say “Sources disagree — read the stamp” and do not link a product. Hrefs come from `amazonProductUrl` / `amazonSearchUrl`.
+- Model pages: the same buttons sit under the spec table (`#shop`) and again at the end. Gear is behind “Also on Amazon”. Page head links to `#shop`.
+- Conflict saws (MS 250): a pitch / gauge / drive-link form labeled “Search on Amazon”. It does not guess a loop.
+- Phone: the finder is above the saw, and a Menu control lists all seven header links. The cookie note is in normal flow so it does not cover the form.
+- Guides: “Optional.” removed. A button sits after the first answer. How-to pages that used to offer a specific unmatched loop now lead with “Look up your chain”. Safety gear, files, oil and the 72-vs-73 / gauge compares still shop the thing the page names.
+- Chain-spec pages: the gauge warning states that the buttons are this gauge only, and one button per drive-link count sits under that note.
+- Hubs: model cards go to `#shop` (“See the spec”). The homepage buying band links popular saws there. Guide cards say “See the spec”.
+
+Skipped: ad slots, `ads.txt`, privacy edits, and any AdSense prep. No second affiliate program — this site has no other approved ID, so none was added. No new saw models; specs are not invented here. Contact remains contact@sawchainsize.com. The only Amazon tag is `sawchainsize-20`.
+
+
+
 Live review, 27 Oct 2026, at 1280px and 390px: homepage, Stihl MS 250, Husqvarna 450 Rancher, verification guide, guides hub, models hub, a chain-spec page, about, affiliate disclosure, and contact. Repo read alongside. Scores are expert estimates, not measured data. No traffic or revenue figures.
 
 ## 1. Conversion score
@@ -63,7 +81,7 @@ Live review, 27 Oct 2026, at 1280px and 390px: homepage, Stihl MS 250, Husqvarna
 
 ## 6. Moneymaker scale
 
-**Current moneymaker score: 4/10.** Readiness to earn, not a revenue figure.
+**Review score, before the fixes: 4/10.** The implemented score is 8/10 (see the top of this file). Readiness to earn, not a revenue figure.
 
 | Channel | Score | Why |
 | --- | ---: | --- |

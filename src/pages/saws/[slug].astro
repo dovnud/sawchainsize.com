@@ -38,6 +38,7 @@ const ogName = `/og/${model.id}.png`;
       <h1>{d.name} chain size</h1>
       <p class="lede">{d.blurb}</p>
       <p class="meta-line">LAST VERIFIED {d.last_verified} · {d.bars.length} BAR SETUP{d.bars.length > 1 ? 'S' : ''} · {okCount} VERIFIED</p>
+      <p class="shop-jump"><a href="#shop">{okCount ? 'Shop this spec' : 'Search from your stamp'}</a></p>
       <Byline label="Last verified" />
     </div>
     <section class="block" style="padding-top:10px">
@@ -50,6 +51,7 @@ const ogName = `/og/${model.id}.png`;
       )}
       <h2 style="margin-top:20px">Chain specifications by fitted bar</h2>
       <SpecTable model={model} />
+      <BuyBlock model={model} anchor />
       {conflict && (
         <>
           <h3 style="margin-top:20px">What each source reports</h3>

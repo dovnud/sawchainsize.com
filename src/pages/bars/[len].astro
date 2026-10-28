@@ -64,6 +64,6 @@ const shop = barLengthShop(len, group.items);
     </section>
     <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
     <p><a href="/bars/">← All bar lengths</a> · <a href="/saws/">All models</a></p>
-    <ShopBlock groups={shop.groups} flagged={group.items.some((i) => i.bar.status !== 'ok')} lead={`A ${len}″ bar comes in several pitch, gauge and drive-link combinations. Verify all three against your bar stamp before buying.`} />
+    <ShopBlock groups={shop.groups} anchor flagged={group.items.some((i) => i.bar.status !== 'ok')} lead={`A ${len}″ bar comes in several pitch, gauge and drive-link combinations. Verify all three against your bar stamp before buying.`} />
   </div>
 </Base>

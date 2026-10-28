@@ -45,6 +45,8 @@ const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: '3/8″ low profil
           </tbody>
         </table>
       </div>
+    <ShopBlock groups={shop.groups} compact />
+
       <p class="src">Type numbers by gauge: Oregon, <a href={ORE} rel="nofollow">Finding the Right Saw Chain</a>, saw-chain family chart. File sizes: Oregon filing chart, restated on our <a href="/guides/chainsaw-chain-file-size/">file-size guide</a> and <a href="/guides/chainsaw-sharpening-angles/">angles guide</a>. A dash means that family is not in Oregon’s row for that gauge.</p>
       <p style="max-width:72ch">The type number is stamped on the drive link. Oregon’s instructions for identifying a chain say to order by that stamp, because a worn chain is hard to measure for gauge. If the stamp reads 91, you are in the low-profile .050″ family (91PX, 91PXL, 91VXL and the rest of that row). If it reads 72, you are in standard 3/8″ .050″. The boxes can both say 3/8″ and .050″. The stamp is what keeps them apart. <a href="/guides/chain-part-numbers/">Part numbers</a> shows how the same split appears in STIHL and Husqvarna codes.</p>
     </section>
@@ -79,6 +81,6 @@ const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: '3/8″ low profil
 
     <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
     <p><a href="/guides/chain-size-chart/">Identification chart</a> · <a href="/guides/chain-part-numbers/">Part numbers</a> · <a href="/guides/chainsaw-chain-gauge/">Gauge</a> · <a href="/guides/chainsaw-drive-sprocket/">Drive sprocket</a></p>
-    <ShopBlock groups={shop.groups} title="Low-profile and standard 3/8″ chains (Amazon)" lead="Optional. Pick the family your drive-link stamp and bar stamp name, then the drive-link count. A 91PX loop does not replace a 72-series loop." />
+    <ShopBlock groups={shop.groups} title="Low-profile and standard 3/8″ chains (Amazon)" lead="Pick the family your drive-link stamp and bar stamp name, then the drive-link count. A 91PX loop does not replace a 72-series loop." />
   </div>
 </Base>

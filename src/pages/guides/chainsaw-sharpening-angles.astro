@@ -84,6 +84,8 @@ const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Sharpening angles
           </tbody>
         </table>
       </div>
+    <ShopBlock groups={shop.groups} compact />
+
       <p class="src">Source: Oregon, <a href={ORE_CHART} rel="nofollow">Saw Chain Filing Angles / Grinding Angles chart</a> (2020), and the same table in the <a href={ORE_MANUAL} rel="nofollow">Oregon Maintenance and Safety Manual</a>, pp. 30–31. Square-ground (CJ/CK/CL) types have no round-file size: Oregon gives a 45° top-plate angle and 45° down angle, which produces a 15° cutting edge. Linked pitches open our chain-spec pages for that pitch and gauge.</p>
       <p>Two patterns are worth remembering. <strong>Low-profile 3/8″ chain is filed flat</strong>: every 90- and 91-series row has a 0° down angle, unlike the 10° on standard chain. And <strong>the depth gauge barely changes</strong>: .025″ everywhere except a few .404″ types at .030″. The file size follows pitch. That table lives on the <a href="/guides/chainsaw-chain-file-size/">file size guide</a>, and every saw page lists the file for each bar.</p>
     </section>
@@ -118,6 +120,6 @@ const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Sharpening angles
 
     <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
     <p><a href="/guides/chainsaw-chain-file-size/">File size by pitch</a> · <a href="/guides/when-to-replace-chainsaw-chain/">When to replace a chain</a> · <a href="/guides/chainsaw-bar-maintenance/">Bar maintenance</a> · <a href="/guides/chain-size-chart/">Chain identification chart</a> · <a href="/guides/how-to-verify-chain-size/">Verify your chain size</a></p>
-    <ShopBlock groups={shop.groups} title="Files &amp; depth-gauge tools (Amazon)" lead="Optional. Pick the file size for your chain's pitch, and the depth-gauge tool for its setting." />
+    <ShopBlock groups={shop.groups} title="Files &amp; depth-gauge tools (Amazon)" lead="Pick the file size for your chain's pitch, and the depth-gauge tool for its setting." />
   </div>
 </Base>

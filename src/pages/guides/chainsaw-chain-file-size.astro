@@ -33,9 +33,11 @@ const shop = guideShop('chainsaw-chain-file-size');
       <thead><tr><th scope="col">Pitch</th><th scope="col">Round file</th><th scope="col">Typical use</th></tr></thead>
       <tbody>{rows.map((r) => <tr><td class="num">{r.k === '404' ? r.label : r.label}</td><td class="num">{r.file}</td><td>{r.used_on}</td></tr>)}</tbody>
     </table></div>
+    <ShopBlock groups={shop.groups} compact />
+
     <p class="src">Gauge does not change the file size. Specific chains: <a href={chainUrl('3-8-lp-043')}>3/8″ LP .043″</a>, <a href={chainUrl('325-050')}>.325″ .050″</a>, <a href={chainUrl('3-8-050')}>3/8″ .050″</a>.</p>
     <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
     <p><a href="/guides/chainsaw-sharpening-angles/">Sharpening angles &amp; depth gauges</a> · <a href="/guides/when-to-replace-chainsaw-chain/">When to replace a chain</a> · <a href="/guides/3-8-low-profile-vs-standard-chain/">3/8″ low profile vs standard</a> · <a href="/guides/chain-size-chart/">Identification chart</a> · <a href="/guides/how-to-verify-chain-size/">Verify your chain size</a></p>
-    <ShopBlock groups={shop.groups} title="Tools &amp; parts mentioned (Amazon)" lead="Optional. Verify pitch, gauge and drive links against your bar stamp before buying any chain or bar." />
+    <ShopBlock groups={shop.groups} title="Tools &amp; parts mentioned (Amazon)" lead="Verify pitch, gauge and drive links against your bar stamp before buying any chain or bar." />
   </div>
 </Base>
