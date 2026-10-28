@@ -1,4 +1,4 @@
-const bots = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-Web', 'anthropic-ai', 'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Applebot-Extended', 'CCBot', 'Bytespider', 'Amazonbot', 'Meta-ExternalAgent', 'cohere-ai', 'DuckAssistBot', 'MistralAI-User'];
+const bots = ['OAI-SearchBot', 'ChatGPT-User', 'GPTBot', 'Claude-SearchBot', 'Claude-User', 'ClaudeBot', 'PerplexityBot', 'Google-Extended', 'Applebot-Extended', 'Claude-Web', 'anthropic-ai', 'Perplexity-User', 'CCBot', 'Bytespider', 'Amazonbot', 'Meta-ExternalAgent', 'cohere-ai', 'DuckAssistBot', 'MistralAI-User'];
 export const GET = () => {
   const body = ['# SawChainSize.com — all crawlers, including AI search and assistants, are welcome.', '', 'User-agent: *', 'Allow: /', '',
     ...bots.flatMap((b) => [`User-agent: ${b}`, 'Allow: /', '']),
