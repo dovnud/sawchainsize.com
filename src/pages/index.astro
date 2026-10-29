@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Byline from '../components/Byline.astro';
 import SawHero from '../components/SawHero.astro';
 import ModelCard from '../components/ModelCard.astro';
 import FaqList from '../components/FaqList.astro';
@@ -53,6 +54,7 @@ const tick = [
         <div class="hero-copy">
           <h1>What size chain does <em>your saw</em> take?</h1>
           <p class="lede">Pick your saw and the bar actually fitted to it. You get the pitch, gauge, drive-link count, file size and the Oregon-equivalent chain — checked against manufacturer fit-up charts, with the one verification step that keeps you from ordering the wrong loop.</p>
+          <Byline label="Last updated" />
           <div><span class="stamp" data-stamp>Specs traced to OEM fit-up charts</span></div>
         </div>
         <div class="finder" id="finder">

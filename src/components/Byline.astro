@@ -1,6 +1,6 @@
 ---
 import dates from '../data/page-dates.json';
-const { label = 'Last verified' } = Astro.props as { label?: string };
+const { label: _label = 'Last updated' } = Astro.props as { label?: string };
 const date = (dates as Record<string, string>)[Astro.url.pathname];
 ---
-<p class="byline">By <a href="/about/" rel="author">Saw Chain Size</a>{date && <> · {label}{" "}<time datetime={date}>{date}</time></>} · <a href="/how-we-verify/">How we verify</a></p>
+<p class="byline">By <a href="/about/" rel="author">Saw Chain Size</a>{date && <> · Last updated <time datetime={date}>{date}</time></>} · <a href="/how-we-verify/">How we verify</a></p>

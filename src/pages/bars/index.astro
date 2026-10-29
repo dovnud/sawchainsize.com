@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import Byline from '../../components/Byline.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import { barGroups, barUrl, SITE } from '../../lib/data';
 import { webPageLd } from '../../lib/ld';
@@ -12,6 +13,7 @@ const desc = 'Chainsaw chain by guide-bar length: which saws we have verified wi
       <Crumbs crumbs={[{ name: 'Bar lengths' }]} />
       <h1>Chain size by bar length</h1>
       <p class="lede">Bar length alone never picks a chain — a 16″ bar can take 3/8″ low-profile, .325″ or 3/8″ chain depending on the saw — but it is the first thing most owners know. Pick your bar length to see every saw and spec we have verified at that length.</p>
+      <Byline label="Last updated" />
     </div>
     <ul class="chips">{groups.map((g) => <li><a class="mono" href={barUrl(g.length)}>{g.length}″ bar · {new Set(g.items.map((i) => i.model.id)).size} saws</a></li>)}</ul>
     <p class="small muted" style="margin-top:14px">Other lengths appear on individual <a href="/saws/">saw pages</a>; a bar-length page is only published once at least two saws share that length.</p>

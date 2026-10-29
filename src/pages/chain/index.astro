@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import Byline from '../../components/Byline.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import { chainGroups, chainUrl, SPEC, codesFor, groupFile, pitchLabel, gaugeLabel, SITE } from '../../lib/data';
 import { webPageLd } from '../../lib/ld';
@@ -12,6 +13,7 @@ const desc = 'Chainsaw chain specs by pitch and gauge: 3/8″ low profile, .325�
       <Crumbs crumbs={[{ name: 'Chain specs' }]} />
       <h1>Chain specs by pitch &amp; gauge</h1>
       <p class="lede">A chain is defined by pitch, gauge and drive links. These pages cover each pitch × gauge combination we have verified on real saws: the chain codes sold under that spec, the file size, and every saw that uses it.</p>
+      <Byline label="Last updated" />
     </div>
     <div class="tblwrap"><table>
       <caption class="sr-only">Chain specs we cover, with Oregon, Stihl, Husqvarna codes and file size</caption>

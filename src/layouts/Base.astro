@@ -4,6 +4,9 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CookieNote from '../components/CookieNote.astro';
 import { SITE, ldEscape } from '../lib/data';
+import { pageGraph } from '../lib/ld';
+import { isoDate, metaDescription, serpTitle } from '../lib/seo';
+import pageDates from '../data/page-dates.json';
 import { GA4_ID, GA_OPTOUT_COOKIE } from '../config/analytics';
 
 export interface Props {
@@ -24,14 +27,10 @@ const pageOg = '/og/page-' + Astro.props.path.replace(/^\/|\/$/g, '').replace(/\
 const { title, description, path, og = existsSync('./public' + pageOg) ? pageOg : SITE.defaultOg, ogAlt, type = 'website', nav = '', crumbs = [], jsonld = [], modified, noindex = false } = Astro.props;
 const canonical = SITE.url + path;
 const ogUrl = SITE.url + og;
-const fullTitle = title.includes('SawChainSize') ? title : `${title} | SawChainSize.com`;
-const breadcrumbLd = crumbs.length
-  ? {
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: [{ name: 'Home', path: '/' }, ...crumbs].map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, item: SITE.url + c.path })),
-    }
-  : null;
+const fullTitle = serpTitle(title);
+const metaDesc = metaDescription(description);
+const dated = (pageDates as Record<string, string>)[path] ?? modified;
+const modifiedIso = isoDate(dated);
 // Minimal inline stub; gtag.js itself is injected late (first interaction, or after load + idle) and never if opted out.
 const gaSnippet = GA4_ID ? `(function(){var id=${JSON.stringify(GA4_ID)};
 if(document.cookie.indexOf(${JSON.stringify(GA_OPTOUT_COOKIE + '=0')})>-1){window['ga-disable-'+id]=true;return;}
@@ -44,7 +43,14 @@ var s=document.createElement('script');s.async=true;s.src='https://www.googletag
 function later(){if('requestIdleCallback' in window)requestIdleCallback(load,{timeout:4000});else setTimeout(load,4000);}
 if(document.readyState==='complete')later();else addEventListener('load',later);
 })();` : '';
-const graph = [...jsonld, ...(breadcrumbLd ? [breadcrumbLd] : [])];
+const graph = pageGraph({
+  title: fullTitle,
+  description: metaDesc,
+  path,
+  modified: modifiedIso,
+  crumbs,
+  extra: jsonld,
+});
 ---
 <!doctype html>
 <html lang="en">
@@ -54,7 +60,7 @@ const graph = [...jsonld, ...(breadcrumbLd ? [breadcrumbLd] : [])];
     <meta name="color-scheme" content="light dark" />
     <meta name="theme-color" content="#232a30" />
     <title>{fullTitle}</title>
-    <meta name="description" content={description} />
+    <meta name="description" content={metaDesc} />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex,follow" />}
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
@@ -68,26 +74,28 @@ const graph = [...jsonld, ...(breadcrumbLd ? [breadcrumbLd] : [])];
     <meta property="og:locale" content="en_US" />
     <meta property="og:type" content={type} />
     <meta property="og:title" content={fullTitle} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={metaDesc} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={ogAlt ?? `${SITE.name} — ${SITE.tagline}`} />
-    {modified && <meta property="article:modified_time" content={modified} />}
+    {modifiedIso && <meta property="article:modified_time" content={modifiedIso} />}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={metaDesc} />
     <meta name="twitter:image" content={ogUrl} />
     <meta name="twitter:image:alt" content={ogAlt ?? `${SITE.name} — ${SITE.tagline}`} />
-    {graph.map((g) => <script type="application/ld+json" set:html={ldEscape(g)} />)}
+    <script type="application/ld+json" set:html={ldEscape(graph)} />
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
     <div id="scrollProgress" aria-hidden="true"></div>
     <Header active={nav} />
     <main id="main">
-      <slot />
+      <article>
+        <slot />
+      </article>
     </main>
     <Footer />
     <CookieNote />
