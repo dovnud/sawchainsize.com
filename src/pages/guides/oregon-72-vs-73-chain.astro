@@ -36,12 +36,14 @@ const shop = guideShop('oregon-72-vs-73-chain');
         <tr><td class="num"><a href={chainUrl('3-8-058')}>{c73.oregon}</a></td><td class="num">3/8″</td><td class="num">.058″ (1.5 mm)</td><td class="num">{c73.husqvarna}</td></tr>
         <tr><td class="num">{c75.oregon}</td><td class="num">3/8″</td><td class="num">.063″ (1.6 mm)</td><td class="num">{c75.husqvarna}</td></tr>
       </tbody></table></div>
+    <ShopBlock groups={shop.groups} compact />
+
     <div class="callout">
       <b>⚠ Read the gauge off your bar stamp</b>
       <p>Fit a 73 loop to a bar with a .050″ groove and the drive links will not seat in the groove at all; run a 72 in a .058″ groove and the chain slops side-to-side, wears the bar rails and can derail under load. The same trap exists at .325″ (.050 / .058 / .063) and in Stihl's Picco line (.043 vs .050).</p>
     </div>
     <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
     <p><a href="/guides/how-to-verify-chain-size/">How to verify your chain size</a> · <a href="/guides/chainsaw-chain-gauge/">All four gauges</a> · <a href="/guides/3-8-low-profile-vs-standard-chain/">3/8″ low profile vs standard</a> · <a href="/guides/chain-size-chart/">Identification chart</a> · <a href="/chain/">Chain specs</a></p>
-    <ShopBlock groups={shop.groups} title="Tools &amp; parts mentioned (Amazon)" lead="Optional. Verify pitch, gauge and drive links against your bar stamp before buying any chain or bar." />
+    <ShopBlock groups={shop.groups} title="Tools &amp; parts mentioned (Amazon)" lead="Verify pitch, gauge and drive links against your bar stamp before buying any chain or bar." />
   </div>
 </Base>

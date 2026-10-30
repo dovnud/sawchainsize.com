@@ -1,5 +1,6 @@
 /* Site behaviour. Everything here is progressive enhancement: pages are complete static HTML. */
 import { GA4_ID, GA_OPTOUT_COOKIE } from '../config/analytics';
+import { AMAZON_DISCLOSURE, amazonSearchUrl } from '../config/affiliate';
 
 /* ---------- legacy hash-route redirect (old single-page site used #/model/... URLs) ---------- */
 (function legacy() {
@@ -98,7 +99,7 @@ syncToggle();
   const fResult = document.getElementById('fResult');
   const fGo = document.getElementById('fGo');
   if (!dataEl || !fBrand || !fModel || !fBar || !fResult || !fGo) return;
-  type Bar = { label: string; pitch: string; gauge: string; dl: string; file: string; oregon: string; note: string; status: string };
+  type Bar = { label: string; pitch: string; gauge: string; dl: string; file: string; oregon: string; note: string; status: string; shop: { href: string; kind: 'product' | 'search' } | null };
   type Model = { name: string; url: string; conflict: boolean; bars: Bar[] };
   const DB: Record<string, { label: string; models: Record<string, Model> }> = JSON.parse(dataEl.textContent!);
 
@@ -138,18 +139,41 @@ syncToggle();
     const m = DB[fBrand.value].models[fModel.value];
     const b = m.bars[parseInt(fBar.value, 10)];
     if (b.status === 'conflict') {
-      const d = el('div', 'callout'); d.append(el('b', undefined, '⚠ Sources conflict for this saw — check your bar stamp'));
+      const d = el('div', 'callout'); d.append(el('b', undefined, 'Sources disagree — read the stamp'));
       const p = el('p', undefined, `Published sources give different specs for the ${m.name}. The numbers below are what is reported; the stamp on your bar tail is the version that fits your saw. `);
       const a = el('a', undefined, 'How to read it →'); a.setAttribute('href', '/guides/how-to-verify-chain-size/'); p.append(a); d.append(p); fResult.append(d);
     }
     const strip = el('div', 'spec-strip');
     strip.append(cell('Pitch', b.pitch), cell('Gauge', b.gauge), cell('Drive links', b.dl), cell('File size', b.file), cell('Oregon type', b.oregon));
     fResult.append(strip, el('p', 'result-note', b.note));
+    if (b.status === 'ok' && b.shop) {
+      const btn = el('a', 'shop-btn');
+      btn.setAttribute('href', b.shop.href);
+      btn.setAttribute('target', '_blank');
+      btn.setAttribute('rel', 'sponsored nofollow noopener');
+      btn.append(el('span', 'shop-btn-verb', b.shop.kind === 'search' ? 'Search on Amazon' : 'See on Amazon'), el('span', 'shop-btn-spec', `${b.pitch} · ${b.gauge} · ${b.dl}`));
+      const disc = el('p', 'shop-disclosure');
+      disc.append(el('strong', undefined, AMAZON_DISCLOSURE));
+      fResult.append(btn, disc);
+    }
     const src = el('p', 'src', 'Full table, OEM part numbers and buying options: ');
     const a = el('a', undefined, `${m.name} chain size page →`); a.setAttribute('href', m.url); src.append(a); fResult.append(src);
   });
 })();
 
+
+/* ---------- stamp search: Amazon search built only through amazonSearchUrl (tag stays in affiliate.ts) ---------- */
+document.querySelectorAll('form.stamp-search').forEach((form) => {
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(form as HTMLFormElement);
+    const pitch = String(data.get('pitch') || '');
+    const gauge = String(data.get('gauge') || '');
+    const dl = parseInt(String(data.get('dl') || ''), 10);
+    if (!pitch || !gauge || !Number.isInteger(dl) || dl < 20 || dl > 200) return;
+    window.open(amazonSearchUrl(`Oregon chainsaw chain ${pitch} pitch ${gauge} gauge ${dl} drive links`), '_blank', 'noopener');
+  });
+});
 
 /* ---------- contact form: compose a mailto in the visitor's own mail app (no server, nothing stored) ---------- */
 (function contact() {

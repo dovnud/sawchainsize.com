@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import Byline from '../../components/Byline.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import { getBrands, getModels, brandUrl, SITE } from '../../lib/data';
 import { webPageLd } from '../../lib/ld';
@@ -13,6 +14,7 @@ const desc = 'Chainsaw chain size by brand: Stihl, Husqvarna, Echo and Poulan / 
       <Crumbs crumbs={[{ name: 'Brands' }]} />
       <h1>Chain sizes by brand</h1>
       <p class="lede">Each brand uses its own chain codes, and the same physical chain is often sold under several. Start with your saw's brand, then pick the model and the bar actually fitted to it.</p>
+      <Byline label="Last updated" />
     </div>
     <div class="grid2">
       {brands.map((b) => {

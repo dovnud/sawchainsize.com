@@ -34,6 +34,8 @@ const shop = guideShop('chain-size-chart');
         </tbody>
       </table>
     </div>
+    <ShopBlock groups={shop.groups} compact />
+
     <p class="src">File sizes per Oregon and Husqvarna chain data (e.g. Oregon 91-series 3/8″ LP chain is specified with a 5/32″ file; Husqvarna's H30 .325″ chain with a 3/16″ file). Always confirm against your chain maker's sharpening data.</p>
     <p><strong>Pitch</strong> is the distance between any three consecutive rivets, divided by two — it must match your drive sprocket and bar nose sprocket. <strong>Gauge</strong> is the thickness of the drive links where they ride in the bar groove. <strong>Drive links</strong> are the tang-shaped links that sit in the groove; their count sets the loop length for a given bar.</p>
   </section>
@@ -109,6 +111,6 @@ const shop = guideShop('chain-size-chart');
       <p>Each pitch × gauge combination we have verified on a real saw has its own page with part numbers and the saws that use it:</p>
       <ul class="chips">{(await chainGroups()).map((g) => <li><a class="mono" href={chainUrl(g.key)}>{pitchShort(g.pitch)} · {gaugeShort(g.gauge)}</a></li>)}</ul>
     </section>
-    <ShopBlock groups={shop.groups} title="Tools &amp; parts mentioned (Amazon)" lead="Optional. Verify pitch, gauge and drive links against your bar stamp before buying any chain or bar." />
+    <ShopBlock groups={shop.groups} title="Tools &amp; parts mentioned (Amazon)" lead="Verify pitch, gauge and drive links against your bar stamp before buying any chain or bar." />
   </div>
 </Base>

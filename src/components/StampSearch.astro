@@ -1,0 +1,32 @@
+---
+import { AMAZON_DISCLOSURE } from '../config/affiliate';
+---
+<form class="stamp-search">
+  <p class="shop-disclosure"><strong>{AMAZON_DISCLOSURE}</strong> <span class="muted">This opens an Amazon search for the three numbers you enter. It is not a matched product. <a href="/affiliate-disclosure/">How that works</a>.</span></p>
+  <div class="stamp-grid">
+    <label>Pitch
+      <select name="pitch" required>
+        <option value="">Choose</option>
+        <option value="3/8 low profile">3/8″ low profile</option>
+        <option value=".325">.325″</option>
+        <option value="3/8">3/8″</option>
+        <option value=".404">.404″</option>
+        <option value="1/4">1/4″</option>
+      </select>
+    </label>
+    <label>Gauge
+      <select name="gauge" required>
+        <option value="">Choose</option>
+        <option value=".043">.043″</option>
+        <option value=".050">.050″</option>
+        <option value=".058">.058″</option>
+        <option value=".063">.063″</option>
+      </select>
+    </label>
+    <label>Drive links
+      <input name="dl" type="number" inputmode="numeric" min="20" max="200" required placeholder="72" />
+    </label>
+  </div>
+  <button class="f-btn" type="submit">Search on Amazon</button>
+  <p class="small muted">Read the numbers off your bar stamp first. <a href="/guides/how-to-verify-chain-size/">How to read the stamp</a>.</p>
+</form>

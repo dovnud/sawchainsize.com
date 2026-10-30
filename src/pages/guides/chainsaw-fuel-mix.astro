@@ -50,6 +50,8 @@ const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Fuel mix', path }
           </tbody>
         </table>
       </div>
+    <ShopBlock groups={shop.groups} compact />
+
       <p class="src">STIHL US overview: <a href={STIHL} rel="nofollow">Mixing Oil and Gasoline</a>. Husqvarna support: <a href={HUSQ} rel="nofollow">How to mix two-stroke oil and fuel</a>. Echo CS-352 manual: <a href={ECHO} rel="nofollow">operator’s manual</a>, fuel-to-oil table. Confirm the ratio in the manual for the saw you are filling.</p>
     </section>
 
@@ -84,6 +86,6 @@ const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Fuel mix', path }
 
     <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
     <p><a href="/guides/chainsaw-bar-and-chain-oil/">Bar and chain oil</a> · <a href="/guides/chainsaw-kickback/">Starting and kickback</a> · <a href="/guides/chainsaw-safety-gear/">Safety gear</a> · <a href={OSHA} rel="nofollow">29 CFR 1910.266</a></p>
-    <ShopBlock groups={shop.groups} title="Two-stroke oil for a 50:1 mix (Amazon)" lead="Optional. These are engine oils for the fuel can, at the ratio in your manual. The bar-oil link is a different bottle for a different tank." />
+    <ShopBlock groups={shop.groups} title="Two-stroke oil for a 50:1 mix (Amazon)" lead="These are engine oils for the fuel can, at the ratio in your manual. The bar-oil link is a different bottle for a different tank." />
   </div>
 </Base>

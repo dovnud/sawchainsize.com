@@ -1,20 +1,27 @@
 ---
 import { type Model, hasConflict } from '../lib/data';
-const { model } = Astro.props as { model: Model };
 import ShopBlock from './ShopBlock.astro';
+import StampSearch from './StampSearch.astro';
 import { modelShop } from '../lib/shop';
+const { model, anchor = false } = Astro.props as { model: Model; anchor?: boolean };
 const shop = modelShop(model);
+const hasChain = shop.groups.some((g) => g.allButtons && g.links.length);
 const okBars = model.data.bars.filter((b) => b.status === 'ok');
 ---
-<div class="buy">
-  <div class="buy-head">Where to buy the right loop</div>
-  <div class="buy-body">
-    {okBars.length ? (
-      <p>Match pitch, gauge and drive links to the table above (OEM and equivalent part numbers are listed per bar). Oregon publishes full specs at <a href="https://www.oregonproducts.com" target="_blank" rel="noopener">oregonproducts.com</a>.</p>
-    ) : (
-      <p>{hasConflict(model) ? 'Because published specs conflict for this saw' : 'Because no source we could read confirms a drive-link count for this saw'}, we do not point you at a specific loop for it. Read the three numbers off your bar stamp, then search any retailer below by pitch + gauge + drive links (for example “.325 .050 72”).</p>
-    )}
-    <p class="small muted" style="margin-top:10px">We show no prices: they change daily and the checkout price is the real one.</p>
-  </div>
+<div class="shop-slot" id={anchor ? 'shop' : undefined}>
+  {hasChain ? (
+    <ShopBlock groups={shop.groups} flagged={shop.flagged} title="The chain for this saw" lead="The button uses the pitch, gauge and drive links in the table. Confirm them on your bar stamp before you buy." />
+  ) : (
+    <>
+      <div class="buy">
+        <div class="buy-head">Where to buy the right loop</div>
+        <div class="buy-body">
+          <p>{hasConflict(model) ? 'Published specs conflict for this saw' : okBars.length ? 'A drive-link count is still missing for this saw' : 'No source we could read confirms a drive-link count for this saw'}, so this page does not point at one loop. Enter the three numbers from your bar stamp and search those.</p>
+          <StampSearch />
+          <p class="small muted">We show no prices: they change daily and the checkout price is the real one.</p>
+        </div>
+      </div>
+      <ShopBlock groups={shop.groups} flagged={shop.flagged} title="Sharpening, safety and fluids" lead="These links are not a chain match for this saw." />
+    </>
+  )}
 </div>
-<ShopBlock groups={shop.groups} flagged={shop.flagged} />

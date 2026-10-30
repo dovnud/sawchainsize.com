@@ -13,6 +13,14 @@ const items = [
 <header class="site">
   <div class="wrap head-in">
     <a class="brand" href="/">SawChainSize<span>.com</span><small>Chain &amp; bar lookup — pitch · gauge · drive links</small></a>
+    <details class="nav-pop">
+      <summary>Menu</summary>
+      <nav aria-label="Main">
+        <ul>
+          {items.map(([k, href, label]) => <li><a href={href} class={active === k ? 'active' : ''} aria-current={active === k ? 'page' : undefined}>{label}</a></li>)}
+        </ul>
+      </nav>
+    </details>
     <nav class="main" aria-label="Main">
       <ul>
         {items.map(([k, href, label]) => <li><a href={href} class={active === k ? 'active' : ''} aria-current={active === k ? 'page' : undefined}>{label}</a></li>)}

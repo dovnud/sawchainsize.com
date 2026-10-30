@@ -1,25 +1,54 @@
 ---
 import { AMAZON_DISCLOSURE } from '../config/affiliate';
 import ProductCard from './ProductCard.astro';
-import type { ShopGroup } from '../lib/shop';
-interface Props { groups: ShopGroup[]; title?: string; flagged?: boolean; lead?: string; }
-const { groups, title = 'Shop for matching parts & gear on Amazon', flagged = false, lead } = Astro.props;
-const links = groups.reduce((n, g) => n + g.links.length, 0);
+import type { ShopGroup, ShopLink } from '../lib/shop';
+interface Props { groups: ShopGroup[]; title?: string; flagged?: boolean; lead?: string; anchor?: boolean; compact?: boolean; }
+const { groups, title = 'Shop for matching parts & gear on Amazon', flagged = false, lead, anchor = false, compact = false } = Astro.props;
+const visible = (compact ? groups.filter((g) => g.feature) : groups).filter((g) => g.links.length);
+const links = visible.reduce((n, g) => n + g.links.length, 0);
+const open = visible.filter((g) => g.feature);
+const more = compact ? [] : visible.filter((g) => !g.feature);
+const hasPage = visible.some((g) => g.links.some((l) => l.kind === 'page'));
+const pageLink = (l: ShopLink) => l.kind === 'page';
 ---
 {links > 0 && (
-<aside class="buy shop" aria-label="Amazon links">
-  <div class="buy-head">{title}</div>
+<aside class="buy shop" id={anchor ? 'shop' : undefined} aria-label="Amazon links">
+  <div class="buy-head">{compact ? 'See it on Amazon' : title}</div>
   <div class="buy-body">
-    <p class="shop-disclosure"><strong>{AMAZON_DISCLOSURE}</strong> <span class="muted">These are Amazon links; <a href="/affiliate-disclosure/">how that works</a>. No price is printed here.</span></p>
-    <p class="small">{lead ?? 'Verify pitch, gauge and drive links against your bar stamp before buying — a listing title is not proof of fit.'}{flagged && ' Setups marked “conflict” or “verify” in the table have no spec-matched link here: read your stamp first.'}</p>
-    {groups.map((g) => (
-      <>
-        <h3 class="shop-h">{g.title}</h3>
+    <p class="shop-disclosure"><strong>{AMAZON_DISCLOSURE}</strong> <span class="muted">{hasPage ? 'Amazon links are the cards. “Look up your chain” stays on this site. ' : 'These are Amazon links. '}<a href="/affiliate-disclosure/">How that works</a>. No price is printed here.</span></p>
+    {!compact && <p class="small">{lead ?? 'Verify pitch, gauge and drive links against your bar stamp before buying — a listing title is not proof of fit.'}{flagged && ' Setups marked “conflict” or “verify” in the table have no spec-matched link here: read your stamp first.'}</p>}
+    {open.map((g) => (
+      <div>
+        {!compact && <h3 class="shop-h">{g.title}</h3>}
         <div class="product-cards">
-          {g.links.map((l) => <ProductCard link={l} />)}
+          {(g.allButtons ? g.links : g.links.slice(0, 1)).map((l) => pageLink(l)
+            ? <a class="shop-btn shop-btn-page" href={l.href}><span class="shop-btn-verb">{l.label}</span>{l.note && <span class="shop-btn-spec">{l.note}</span>}</a>
+            : <ProductCard link={l} />)}
         </div>
-      </>
+        {!g.allButtons && g.links.length > 1 && (
+          <div class="product-cards">
+            {g.links.slice(1).map((l) => pageLink(l)
+              ? <a class="shop-btn shop-btn-page" href={l.href}><span class="shop-btn-verb">{l.label}</span></a>
+              : <ProductCard link={l} />)}
+          </div>
+        )}
+      </div>
     ))}
+    {more.length > 0 && (
+      <details class="shop-more">
+        <summary>Also on Amazon</summary>
+        {more.map((g) => (
+          <div>
+            <h3 class="shop-h">{g.title}</h3>
+            <div class="product-cards">
+              {g.links.map((l) => pageLink(l)
+                ? <a href={l.href}>{l.label}</a>
+                : <ProductCard link={l} />)}
+            </div>
+          </div>
+        ))}
+      </details>
+    )}
   </div>
 </aside>
 )}
