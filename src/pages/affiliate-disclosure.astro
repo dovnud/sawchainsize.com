@@ -1,15 +1,16 @@
 ---
 import Base from '../layouts/Base.astro';
 import Crumbs from '../components/Crumbs.astro';
-import Email from '../components/Email.astro';
-import { SITE } from '../lib/data';
 import { webPageLd } from '../lib/ld';
 import { AMAZON_DISCLOSURE } from '../config/affiliate';
+import dates from '../data/page-dates.json';
 
+const path = '/affiliate-disclosure/';
+const modified = (dates as Record<string, string>)[path];
 const desc = "SawChainSize.com participates in the Amazon Associates Program: links to Amazon are affiliate links, and the site earns from qualifying purchases at no extra cost to you. No other affiliate programs are used.";
-const jsonld = [webPageLd("Affiliate Disclosure", "/affiliate-disclosure/", desc, SITE.dataDate, "WebPage")];
+const jsonld = [webPageLd("Affiliate Disclosure", path, desc, modified, "WebPage")];
 ---
-<Base title={"Affiliate Disclosure"} description={desc} path="/affiliate-disclosure/" nav="about" crumbs={[{ name: 'Affiliate disclosure', path: '/affiliate-disclosure/' }]} jsonld={jsonld} modified={SITE.dataDate}>
+<Base title={"Affiliate Disclosure"} description={desc} path={path} nav="about" crumbs={[{ name: 'Affiliate disclosure', path }]} jsonld={jsonld} modified={modified}>
   <div class="wrap">
   <div class="pagehead"><Crumbs crumbs={[{ name: 'Affiliate disclosure', path: '/affiliate-disclosure/' }]} /><h1>Affiliate disclosure</h1></div>
   <div class="prose">
@@ -28,9 +29,9 @@ const jsonld = [webPageLd("Affiliate Disclosure", "/affiliate-disclosure/", desc
     </ul>
     <h2>Cookies and tracking</h2>
     <p>This site uses Google Analytics 4 for aggregate page-view statistics (it sets the <span class="mono">_ga</span> and <span class="mono">_ga_*</span> cookies; you can opt out) and a functional cookie that remembers you dismissed the cookie notice. It does not use advertising cookies or ad personalization. When you click through to Amazon, Amazon may set its own cookies, which is how it credits a purchase to this site. Amazon's own policies then apply — see our <a href="/privacy/">Privacy Policy</a> for details and opt-out options.</p>
-    <h2>Prices and availability</h2>
-    <p>This site shows no prices. Price and availability on Amazon change and are the ones shown at Amazon's checkout. Product names, chain designations and trademarks belong to their owners — see the footer notice.</p>
-    <p class="small muted">This disclosure is provided in line with the US Federal Trade Commission's guidelines on endorsements and affiliate marketing (16 CFR Part 255) and Canada's Competition Act requirements on disclosure of material connections. Last updated: 26 October 2026.</p>
+    <h2>Prices, photos and availability</h2>
+    <p>This site shows no prices. Price and availability on Amazon change and are the ones shown at Amazon's checkout. Amazon links are shown as product cards: the product name, a short note on why it matches the page, and a button that opens Amazon. A card includes a photograph only when that image came from Amazon’s Product Advertising API or from an official SiteStripe image or text-and-image link. Photographs are not downloaded from Amazon product pages and are not hotlinked from them. No other affiliate program’s widgets are used, because no other affiliate program is used. Product names, chain designations and trademarks belong to their owners — see the footer notice.</p>
+    <p class="small muted">This disclosure is provided in line with the US Federal Trade Commission's guidelines on endorsements and affiliate marketing (16 CFR Part 255) and Canada's Competition Act requirements on disclosure of material connections. Last updated: 30 October 2026.</p>
   </div>
 
   </div>

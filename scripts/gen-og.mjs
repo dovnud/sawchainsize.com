@@ -21,6 +21,8 @@ const pages = [
   ['guides-how-to-count-drive-links', 'GUIDE', 'How to count drive links', 'Mark one link, count the tangs'],
   ['guides-oregon-72-vs-73-chain', 'GUIDE', 'Oregon 72 vs 73 chain', '.050″ vs .058″ gauge on 3/8″ pitch'],
   ['guides-chainsaw-chain-file-size', 'GUIDE', 'Chainsaw chain file size', 'Round file size by pitch'],
+  ['guides-gifts-for-chainsaw-owners-2026', 'GUIDE', 'Gifts for chainsaw owners, 2026', 'Oil · a matched chain · safety gear'],
+  ['guides-black-friday-chainsaw-chain', 'GUIDE', 'Black Friday chain and accessories', 'November 27 · fit still comes first'],
   ['guides-chainsaw-sharpening-angles', 'GUIDE', 'Chain sharpening angles', 'Top plate · down angle · depth gauge'],
   ['guides-chain-part-numbers', 'GUIDE', 'Chain part numbers decoded', 'STIHL · Husqvarna · Echo codes'],
   ['guides-longer-bar-on-chainsaw', 'GUIDE', 'Longer bar on your saw?', 'Listed bar range for every saw'],

@@ -1,5 +1,7 @@
 /** Guide catalog. The hub, llms.txt and cross-links read this so a new guide is listed in one place. */
-export type GuideGroup = 'identify' | 'fit' | 'maintain' | 'safety' | 'editorial';
+import { BF_PATH, GIFT_PATH } from './holiday-2026';
+
+export type GuideGroup = 'identify' | 'fit' | 'maintain' | 'safety' | 'editorial' | 'holiday';
 
 export type Guide = {
   href: string;
@@ -10,6 +12,7 @@ export type Guide = {
 };
 
 export const GUIDE_GROUPS: { id: GuideGroup; title: string; kicker: string }[] = [
+  { id: 'holiday', title: 'Holiday 2026', kicker: 'Gifts and Black Friday' },
   { id: 'identify', title: 'Identify the chain', kicker: 'Pitch, gauge, drive links' },
   { id: 'fit', title: 'Fit the bar and chain', kicker: 'Install, tension, length' },
   { id: 'maintain', title: 'Sharpen, oil and replace', kicker: 'Files, bars, fuel' },
@@ -18,6 +21,8 @@ export const GUIDE_GROUPS: { id: GuideGroup; title: string; kicker: string }[] =
 ];
 
 export const GUIDES: Guide[] = [
+  { href: GIFT_PATH, title: 'Gifts for chainsaw owners and woodcutters, 2026', card: 'Three gift tiers — consumables, a spare chain matched to the bar stamp, and safety gear — with no prices and no invented dollar cutoffs.', group: 'holiday' },
+  { href: BF_PATH, title: 'Black Friday chainsaw chain and accessories', card: 'Black Friday is November 27, 2026 and Cyber Monday is November 30. How to buy a chain during a sale without buying the wrong loop, plus USPS, UPS and FedEx dates cited from the carriers.', group: 'holiday' },
   { href: '/guides/how-to-verify-chain-size/', title: 'How to verify your chain size', card: 'Three checks — bar stamp, drive-link count, pitch and gauge measurement — with worked examples.', group: 'identify' },
   { href: '/guides/chain-size-chart/', title: 'Chain identification chart', card: 'Pitch × gauge × file size, plus the Oregon / Stihl / Husqvarna / Carlton code cross-reference.', group: 'identify' },
   { href: '/guides/how-to-count-drive-links/', title: 'How to count drive links', card: 'Mark one link, count the tangs under the loop, match the number on the box.', group: 'identify' },
