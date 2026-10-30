@@ -35,6 +35,7 @@ const ST_FAMILY: Record<string, string> = {
   RS: 'RAPID (R) Super (S, chisel cutter)',
   RM3: 'RAPID (R) Micro (M), single-humped drive link (3)',
   PM3: 'PICCO (P) Micro (M), single-humped drive link (3)',
+  PS3: 'PICCO (P) Super (S), single-humped drive link (3)',
   PMM3: 'PICCO (P) Micro Mini (MM), single-humped drive link (3)',
 };
 const stRows = rowsFor('STIHL');
@@ -147,6 +148,7 @@ const specText = (p: string, g: number) => `${pitchShort(p)} · ${gaugeShort(g)}
         </table>
       </div>
       <p class="src">Built from the {stRows.length} verified STIHL rows in our data at build time. Each code is decoded with the legend above and checked against that row’s pitch, gauge and drive-link count; the build fails if one disagrees.</p>
+      <p style="max-width:72ch">To turn a marketing number into the 11-digit number a parts counter orders by (33 RS3 72 is 3624 005 0072), see <a href="/guides/stihl-chain-order-numbers/">STIHL chain order numbers</a>.</p>
     </section>
 
     <hr class="rule" />

@@ -25,6 +25,7 @@ const pages = [
   ['guides-black-friday-chainsaw-chain', 'GUIDE', 'Black Friday chain and accessories', 'November 27 · fit still comes first'],
   ['guides-chainsaw-sharpening-angles', 'GUIDE', 'Chain sharpening angles', 'Top plate · down angle · depth gauge'],
   ['guides-chain-part-numbers', 'GUIDE', 'Chain part numbers decoded', 'STIHL · Husqvarna · Echo codes'],
+  ['guides-stihl-chain-order-numbers', 'GUIDE', 'STIHL chain order numbers', '33 RS3 72 = 3624 005 0072'],
   ['guides-longer-bar-on-chainsaw', 'GUIDE', 'Longer bar on your saw?', 'Listed bar range for every saw'],
   ['about', 'ABOUT', 'About Saw Chain Size', 'Method · sources · last-verified policy'],
   ['how-we-verify', 'EDITORIAL POLICY', 'How we verify specs', 'Source hierarchy and conflict handling'],

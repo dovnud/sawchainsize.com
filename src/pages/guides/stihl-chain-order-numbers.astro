@@ -1,0 +1,142 @@
+---
+import Byline from '../../components/Byline.astro';
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import { getModels, modelUrl, chainUrl, chainKey, pitchShort, gaugeShort, type Model } from '../../lib/data';
+import { webPageLd, faqLd } from '../../lib/ld';
+import dates from '../../data/page-dates.json';
+const path = '/guides/stihl-chain-order-numbers/';
+const modified = (dates as Record<string, string>)[path];
+const CAT25 = 'https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf';
+const Q = '″';
+
+// 4-digit chain codes, read from the saw-chain pages of STIHL's 2025 Full Line catalog (catalog pp. 68–71).
+// lk = true: STIHL's low-kickback (green-labelled) symbol; false: STIHL's kickback warning symbol.
+type Code = { type: string; name: string; lk: boolean; pitch: string; gauge: number; code: string };
+const C = (type: string, name: string, lk: boolean, rows: [string, number, string][]): Code[] => rows.map(([pitch, gauge, code]) => ({ type, name, lk, pitch, gauge, code }));
+const CODES: Code[] = [
+  ...C('PMM3', 'PICCO Micro Mini 3', true, [['3/8-lp', 0.043, '3610']]),
+  ...C('PM3', 'PICCO Micro 3', true, [['1/4', 0.043, '3670'], ['3/8-lp', 0.05, '3636']]),
+  ...C('PS3', 'PICCO Super 3', true, [['3/8-lp', 0.043, '3699'], ['3/8-lp', 0.05, '3616']]),
+  ...C('PM', 'PICCO Micro', false, [['3/8-lp', 0.05, '3613']]),
+  ...C('PS', 'PICCO Super', false, [['3/8-lp', 0.05, '3617']]),
+  ...C('RM3', 'RAPID Micro 3', true, [['325', 0.05, '3695'], ['3/8', 0.05, '3662'], ['325', 0.058, '3688'], ['325', 0.063, '3689'], ['3/8', 0.063, '3664']]),
+  ...C('RS3', 'RAPID Super 3', true, [['325', 0.05, '3694'], ['3/8', 0.05, '3624'], ['3/8', 0.063, '3626']]),
+  ...C('RM', 'RAPID Micro', false, [['1/4', 0.05, '3660'], ['325', 0.05, '3693'], ['3/8', 0.05, '3650'], ['325', 0.058, '3685'], ['3/8', 0.058, '3651'], ['325', 0.063, '3686'], ['3/8', 0.063, '3652'], ['404', 0.063, '3668']]),
+  ...C('RMF', 'RAPID Micro full skip', false, [['3/8', 0.05, '3654'], ['404', 0.063, '3671']]),
+  ...C('RS', 'RAPID Super', false, [['325', 0.05, '3690'], ['3/8', 0.05, '3623'], ['325', 0.058, '3638'], ['3/8', 0.058, '3622'], ['325', 0.063, '3639'], ['3/8', 0.063, '3621']]),
+  ...C('RSF', 'RAPID Super full skip', false, [['3/8', 0.05, '3676']]),
+];
+const codeFor = (type: string, pitch: string, gauge: number) => CODES.find((c) => c.type === type && c.pitch === pitch && c.gauge === gauge);
+/** STIHL's rule: 4-digit code + 005 + 00 + drive links (for three-digit counts, only one zero). */
+const orderNo = (code: string, dl: number) => `${code} 005 ${String(dl).padStart(4, '0')}`;
+if (orderNo('3670', 56) !== '3670 005 0056') throw new Error('order-number rule broken');
+
+// Every verified STIHL loop on the site.
+const models = await getModels();
+type Row = { m: Model; pitch: string; gauge: number; dl: number; mkt: string; type: string; part: string };
+const rows: Row[] = models.flatMap((m) => m.data.bars.flatMap((b) => b.chains.filter((c) => c.role === 'oem' && c.brand.toLowerCase() === 'stihl').flatMap((c) => {
+  if (b.status !== 'ok' || !b.pitch || !b.gauge || !b.drive_links) return [];
+  const mm = c.part_no.match(/^(\d\d) ([A-Z]+\d?) (\d+)/);
+  if (!mm) throw new Error(`STIHL part ${c.part_no} (${m.id}) not in marketing-number form`);
+  if (Number(mm[3]) !== b.drive_links) throw new Error(`STIHL part ${c.part_no} disagrees with drive links ${b.drive_links} (${m.id})`);
+  return [{ m, pitch: b.pitch, gauge: b.gauge, dl: b.drive_links, mkt: `${mm[1]} ${mm[2]}`, type: mm[2], part: c.part_no }];
+})));
+// Cross-check: any 11-digit STIHL number already printed in our data must equal the computed one.
+let checked = 0;
+for (const r of rows) {
+  const eleven = r.part.match(/\b(\d{4} \d{3} \d{4})\b/);
+  const code = codeFor(r.type, r.pitch, r.gauge);
+  if (eleven) { checked++; if (!code || orderNo(code.code, r.dl) !== eleven[1]) throw new Error(`Order number ${eleven[1]} does not match the rule for ${r.part} (${r.m.id})`); }
+}
+for (const m of models) for (const b of m.data.bars) for (const c of b.chains) {
+  if (c.role !== 'oem' || c.brand.toLowerCase() !== 'stihl') continue;
+  const n = (b.note + ' ' + c.part_no).match(/\b(36\d\d 005 \d{4})\b/);
+  if (n) { const r = rows.find((x) => x.m === m && x.dl === b.drive_links && x.part === c.part_no); const code = r && codeFor(r.type, r.pitch, r.gauge); if (!code || orderNo(code.code, r!.dl) !== n[1]) throw new Error(`${n[1]} on ${m.id} fails the rule`); if (!c.part_no.includes(n[1])) checked++; }
+}
+if (checked < 1) throw new Error('expected at least one printed STIHL order number to cross-check (MS 170 3610 005 0055)');
+const key = (r: Row) => `${r.mkt} ${r.dl}`;
+const groups = new Map<string, Row[]>();
+for (const r of rows) { if (!groups.has(key(r))) groups.set(key(r), []); groups.get(key(r))!.push(r); }
+const table = [...groups.entries()].map(([k, rs]) => ({ k, r: rs[0], code: codeFor(rs[0].type, rs[0].pitch, rs[0].gauge), saws: [...new Set(rs.map((x) => x.m))].sort((a, b) => a.data.name.localeCompare(b.data.name)) }))
+  .sort((a, b) => a.r.mkt.localeCompare(b.r.mkt) || a.r.dl - b.r.dl);
+const missing = [...new Set(table.filter((t) => !t.code).map((t) => t.r.mkt))];
+const nComputed = table.filter((t) => t.code).length;
+const specText = (p: string, g: number) => `${pitchShort(p)} · ${gaugeShort(g)}`;
+const ex = table.find((t) => t.k === '33 RS3 72');
+
+const desc = 'How a STIHL chain loop number such as 33 RS3 72 becomes the 11-digit order number 3624 005 0072, the 4-digit code for each chain type, and the order number for every STIHL loop on this site.';
+const faqs = [
+  { q: 'What is the order number for STIHL 33 RS3 72?', a: '3624 005 0072. 3624 is STIHL’s code for RAPID Super 3 chain in 3/8″ pitch and .050″ gauge, 005 is the same for every loop, and 0072 is the 72 drive links padded to four digits.' },
+  { q: 'Can I work out a STIHL order number myself?', a: 'Yes. STIHL’s 2025 catalog gives the rule: take the 4-digit code for the chain type, pitch and gauge, add 005, then 00 and the drive-link count. If the count has three digits, use only one zero: 105 links becomes 0105.' },
+  { q: 'Is 63 PM3 the same as 63 PS3?', a: 'Same pitch (3/8″ PICCO) and gauge (.050″), so both fit the same bar at the same drive-link count, but the cutters differ and so do the order numbers: 63 PM3 55 is 3636 005 0055 and 63 PS3 55 is 3616 005 0055. STIHL describes PS3 as needing less feed force and lasting about 15% longer than PM3.' },
+  { q: 'What do the green label and the warning symbol mean on STIHL chain?', a: 'STIHL’s catalog marks its low-kickback chains (PMM3, PM3, PS3, RM3 and RS3 in our table) with a low-kickback symbol and recommends green-labelled chain for all users. Types without the 3, such as RS, RM and the full-skip RSF and RMF, carry a warning symbol: STIHL says they have an increased risk of kickback injury and are for users with extraordinary cutting needs, experience and specialised training.' },
+  { q: 'Why is there no order number for 46 RS?', a: 'The 2025 catalog’s code table for RAPID Super chain has no .404″ entry, so we do not compute one. Ask the dealer with the marketing number, 46 RS and the drive-link count, or read the number off the old chain box.' },
+];
+const jsonld = [webPageLd('STIHL chain order numbers: from 33 RS3 72 to 3624 005 0072', path, desc, modified), faqLd(faqs)];
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'STIHL chain order numbers', path }];
+const types = [...new Set(CODES.map((c) => c.type))];
+const liveKeys = new Set(models.flatMap((m) => m.data.bars.flatMap((b) => (b.pitch && b.gauge ? [chainKey(b.pitch, b.gauge)] : []))));
+---
+<Base title="STIHL Chain Order Numbers: 33 RS3 72 = 3624 005 0072" description={desc} path={path} nav="chart" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'STIHL chain order numbers' }]} />
+      <h1>STIHL chain order numbers</h1>
+      <p class="lede">A STIHL chain’s 11-digit order number is three blocks: a 4-digit code for the chain type, pitch and gauge, then 005, then the drive-link count padded to four digits. So the loop STIHL calls 33 RS3 72 is ordered as 3624 005 0072. The code table and the order number for every STIHL loop on this site are below.</p>
+      <Byline label="Last updated" />
+    </div>
+    <section class="block">
+      <h2>The rule, from STIHL’s catalog</h2>
+      <p style="max-width:72ch">STIHL’s 2025 catalog gives the steps on its “Finding the right chain” page. Block A is the 4-digit part order number for the chain type, pitch and groove width (gauge). Block B is always 005. Block C is 00 plus the number of drive links; when the count runs to three digits, drop one zero. STIHL’s worked example is 3670 005 0056: 3670 is PICCO Micro 3 in 1/4″ pitch and .043″ gauge, and the loop has 56 drive links.</p>
+      <div class="tblwrap">
+        <table>
+          <thead><tr><th>Block</th><th>Digits</th><th>What it is</th><th>33 RS3 72</th></tr></thead>
+          <tbody>
+            <tr><td class="num">A</td><td class="num">4</td><td>Chain type × pitch × gauge (table below)</td><td class="num">3624</td></tr>
+            <tr><td class="num">B</td><td class="num">3</td><td>Always 005 for a saw-chain loop</td><td class="num">005</td></tr>
+            <tr><td class="num">C</td><td class="num">4</td><td>Drive links, zero-padded (56 → 0056, 105 → 0105)</td><td class="num">0072</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="max-width:72ch">The marketing number on the box (33 RS3 72) and the order number (3624 005 0072) describe the same loop. The marketing number is the readable one: the first digit is pitch, the second gauge, then the cutter letters and the drive-link count, decoded in <a href="/guides/chain-part-numbers/">chain part numbers</a>. The order number is what a parts counter types in. The two agree only if the drive-link count does, so take that from the bar stamp first (<a href="/guides/how-to-count-drive-links/">how to count</a>).</p>
+      <p class="src">Rule and example from STIHL, <a href={CAT25} rel="nofollow">2025 Full Line catalog</a>, “Finding the right chain” and saw-chain pages (catalog pp. 68–71). We checked the rule against STIHL dealer listings for 33 RS3 72 (3624 005 0072), 26 RM3 68 (3689 005 0068), 63 PM3 55 (3636 005 0055) and 63 PS3 50 (3616 005 0050), and against the 3610 005 0055 dealer listing already cited on our MS 170 / MS 180 page.</p>
+    </section>
+    <hr class="rule" />
+    <section class="block">
+      <h2>The 4-digit codes</h2>
+      <p style="max-width:72ch">Each chain type has its own code for each pitch and gauge it is made in. A “3” at the end of the type name means a single-humped drive link: STIHL’s catalog marks those types with its low-kickback symbol and recommends green-labelled, low-kickback chain for all users. Types without it carry STIHL’s warning symbol, which says the chain has an increased risk of kickback injury and is meant only for users with extraordinary cutting needs and training in dealing with kickback. That split is worth knowing before you order by code. 3624 (RS3) and 3623 (RS) are one digit apart and fit the same bar.</p>
+      <div class="tblwrap">
+        <table>
+          <thead><tr><th>Type</th><th>Name</th><th>STIHL symbol</th><th>Pitch · gauge</th><th>Code</th></tr></thead>
+          <tbody>
+            {types.map((t) => CODES.filter((c) => c.type === t).map((c, i) => (
+              <tr><td class="num">{i === 0 ? c.type : ''}</td><td class="small">{i === 0 ? c.name : ''}</td><td class="small">{i === 0 ? (c.lk ? 'Low-kickback' : 'Warning: increased kickback risk') : ''}</td><td class="num">{liveKeys.has(chainKey(c.pitch, c.gauge)) ? <a href={chainUrl(chainKey(c.pitch, c.gauge))}>{specText(c.pitch, c.gauge)}</a> : specText(c.pitch, c.gauge)}</td><td class="num">{c.code}</td></tr>
+            )))}
+          </tbody>
+        </table>
+      </div>
+      <p class="src">Codes read from the code tables on the saw-chain pages of STIHL’s <a href={CAT25} rel="nofollow">2025 Full Line catalog</a> (catalog pp. 68–71), which also hold carving, carbide and harvester chains not listed here. A combination missing from this table is missing from STIHL’s table too. 3/8″ PICCO is the chain this site files under 3/8″ low profile.</p>
+    </section>
+    <hr class="rule" />
+    <section class="block">
+      <h2>Order numbers for every STIHL loop on this site</h2>
+      <p style="max-width:72ch">These are the loops STIHL lists for the saws we cover, with the order number worked out by the rule above.{ex && ex.code && <> The most common one here is {ex.k}, which comes out as {orderNo(ex.code.code, ex.r.dl)}.</>} Match the saw and the bar first. The same saw takes a different loop on a different bar.</p>
+      <div class="tblwrap">
+        <table>
+          <thead><tr><th>Loop</th><th>Pitch · gauge</th><th>Order number</th><th>Saws</th></tr></thead>
+          <tbody>
+            {table.map((t) => (
+              <tr><td class="num">{t.k}</td><td class="num"><a href={chainUrl(chainKey(t.r.pitch, t.r.gauge))}>{specText(t.r.pitch, t.r.gauge)}</a></td><td class="num">{t.code ? orderNo(t.code.code, t.r.dl) : 'Not in STIHL’s code table'}</td><td class="small">{t.saws.map((m, i) => <>{i ? ', ' : ''}<a href={modelUrl(m)}>{m.data.name}</a></>)}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="src">Built at publish time from the {rows.length} verified STIHL rows in our saw data: {nComputed} distinct loops computed{missing.length ? <>, {missing.join(', ')} left blank because the 2025 code table has no entry for it</> : ''}. The build checks every marketing number against its row’s drive-link count and fails if a printed order number on a saw page disagrees with the rule.</p>
+    </section>
+    <div class="callout"><b>⚠ The order number is only as good as the count</b><p>One wrong digit in block C orders a loop of a different length, and nothing in the number flags the mistake. Before you order, check the bar stamp, then confirm the pitch, gauge and drive links on <a href="/guides/how-to-verify-chain-size/">how to verify your chain size</a>.</p></div>
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/chain-part-numbers/">Chain part numbers decoded</a> · <a href="/guides/chain-size-chart/">Chain identification chart</a> · <a href="/guides/3-8-low-profile-vs-standard-chain/">3/8″ low profile vs standard</a> · <a href="/guides/chainsaw-kickback/">Kickback</a> · <a href="/brands/stihl/">STIHL saws</a></p>
+  </div>
+</Base>

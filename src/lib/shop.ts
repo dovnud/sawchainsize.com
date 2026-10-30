@@ -72,7 +72,22 @@ const LINK_CAP: Record<string, number> = {
   'model:echo-cs-355t': 3,
   'bar:30': 3,
   'bar:36': 3,
+  'model:stihl-msa-220-c-b': 3,
 };
+/**
+ * Links a page already carried before a data update reshuffled its frequency-ranked picks.
+ * Existing affiliate links are never dropped by a data change, so the old pick is pinned here.
+ * (2026-10-30: MS 170 / MS 180 gained verified 12″ and 14″ rows.)
+ */
+const CHAIN_PIN: Record<string, Spec[]> = {
+  'chain:3-8-lp-043': [{ pitch: '3/8-lp', gauge: 0.043, dl: 55 }],
+  'bar:12': [{ pitch: '3/8-lp', gauge: 0.05, dl: 44 }],
+};
+/** Model pages whose link list grew with new verified rows: max links and the bar length the bar link keeps. */
+const MODEL_SHOP: Record<string, { max: number; barLen: number }> = {
+  'stihl-ms-170-180': { max: 10, barLen: 16 },
+};
+const pinned = (key: string, have: Spec[]): Spec[] => (CHAIN_PIN[key] ?? []).filter((p) => !have.some((h) => h.pitch === p.pitch && h.gauge === p.gauge && h.dl === p.dl));
 const capGroups = (groups: ShopGroup[], cap: number | undefined): ShopGroup[] => {
   if (cap === undefined) return groups;
   let left = cap;
@@ -94,11 +109,13 @@ export function modelShop(model: Model): { groups: ShopGroup[]; flagged: boolean
   const chosen = pick3(specs);
   const chains = chosen.map(({ b, s }) => chainLink(s, `${barLabel(b)} bar: `));
   const first = chosen[0];
-  const bar = first ? [barLink(first.b.lengths_in[0], first.s, `${d.name}: `)] : [];
+  const ov = MODEL_SHOP[model.id];
+  const barPick = (ov && specs.find((x) => x.b.lengths_in.includes(ov.barLen))) || first;
+  const bar = barPick ? [barLink(ov ? ov.barLen : barPick.b.lengths_in[0], barPick.s, `${d.name}: `)] : [];
   const kit = kitLink(first ? first.s : null);
   const mid = ok.length ? ok[Math.floor((ok.length - 1) / 2)].lengths_in[0] : 0;
   const gear: ShopLink[] = [kit, ...(gas ? [chapsLink()] : []), ...bar, barOilLink(), ...(gas ? [fuelLink(d.brand)] : []), helmetLink(), glovesLink(), ...(mid ? [scabbardLink(mid)] : [])];
-  const links = [...chains, ...gear].slice(0, 8);
+  const links = [...chains, ...gear].slice(0, ov ? ov.max : 8);
   const groups: ShopGroup[] = [];
   const cl = links.filter((l) => chains.includes(l));
   if (cl.length) groups.push({ title: `Replacement chains matched to the ${d.name}`, links: cl, feature: true, allButtons: true });
@@ -136,7 +153,9 @@ export function chainSpecShop(group: { pitch: string; gauge: number; items: { ba
   const lens = new Map<number, number>();
   for (const { bar } of group.items) { const s = okSpec(bar); if (!s) continue; counts.set(s.dl, (counts.get(s.dl) ?? 0) + 1); lens.set(s.dl, bar.lengths_in[0]); }
   const dls = [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0] - b[0]).slice(0, 5).map(([dl]) => dl).sort((a, b) => a - b);
-  const chains = dls.map((dl) => chainLink({ pitch: group.pitch, gauge: group.gauge, dl }));
+  const cKey = `chain:${chainKey(group.pitch, group.gauge)}`;
+  const cSpecs = dls.map((dl) => ({ pitch: group.pitch, gauge: group.gauge, dl }));
+  const chains = [...cSpecs, ...pinned(cKey, cSpecs)].sort((a, b) => a.dl - b.dl).map((x) => chainLink(x));
   const gearSpec = { pitch: group.pitch, gauge: group.gauge };
   const topDl = dls[0];
   const gear: ShopLink[] = [
@@ -155,7 +174,8 @@ export function barLengthShop(len: number, items: { model: Model; bar: Bar }[]):
   const tally = new Map<string, { s: Spec; n: Set<string> }>();
   for (const { model, bar } of items) { const s = okSpec(bar); if (!s || !bar.lengths_in.includes(len)) continue; const k = `${s.pitch}|${s.gauge}|${s.dl}`; if (!tally.has(k)) tally.set(k, { s, n: new Set() }); tally.get(k)!.n.add(model.id); }
   const top = [...tally.values()].sort((a, b) => b.n.size - a.n.size || a.s.dl - b.s.dl);
-  const chains = top.slice(0, 4).map((t) => chainLink(t.s, `${len}″ bar: `));
+  const topSpecs = top.slice(0, 4).map((t) => t.s);
+  const chains = [...topSpecs, ...pinned(`bar:${len}`, topSpecs)].map((x) => chainLink(x, `${len}″ bar: `));
   const bars = top.slice(0, 2).map((t) => barLink(len, t.s));
   const gear = [...bars, kitLink(top[0] ? top[0].s : null), scabbardLink(len)];
   const groups: ShopGroup[] = [];

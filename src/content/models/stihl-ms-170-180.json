@@ -12,8 +12,8 @@
   ],
   "type": "gas",
   "popular": true,
-  "blurb": "Stihl's entry-level saws. Stock 16″ setup: 3/8″ Picco low-profile, .043″ gauge, 55 drive links — Stihl 61 PMM3.",
-  "intro": "The MS 170 and MS 180 (including C-BE variants) are Stihl's lightest homeowner saws, sold with 12″, 14″ and — most commonly in recent years — 16″ bars. All use Stihl's Picco Micro Mini low-profile chain in .043″ gauge. The 16″ specification below is confirmed from the OEM chain listing; the shorter bars share the pitch and gauge but not the drive-link count, which is why we list the 16″ row as fact and point the other lengths at your bar stamp.",
+  "blurb": "Stihl's entry-level saws: 3/8″ Picco low-profile, .043″ gauge — 44 drive links on 12″, 50 on 14″, 55 on the stock 16″ bar (Stihl 61 PMM3).",
+  "intro": "The MS 170 and MS 180 (including C-BE variants) are Stihl's lightest homeowner saws, sold with 12″, 14″ and — most commonly in recent years — 16″ bars. All use Stihl's Picco Micro Mini low-profile chain in .043″ gauge (61 PMM3): 44 drive links on a 12″ bar, 50 on a 14″ and 55 on a 16″. Stihl's own chain-selection charts (2017 and the 2025 catalog) list those three counts for one block of saws that also includes the MS 171, MS 180 C-BE and MS 181 C-BE, so the same loops fit all of them. The 16″ count is also confirmed by the OEM chain listing for part 3610 005 0055.",
   "sources": [
     {
       "id": "dealer-3610-005-0055",
@@ -28,10 +28,70 @@
       "publisher": "Dealer cross-reference",
       "title": "Cross-references naming Oregon 90PX, Carlton N4C and Husqvarna H38 equivalents",
       "retrieved": "2026-10-23"
+    },
+    {
+      "id": "stihl-chain-chart-2025",
+      "type": "fitup-chart",
+      "publisher": "STIHL",
+      "title": "STIHL 2025 Full Line catalog — Saw Chain Selection and Identification chart (catalog pages 166–167), chainsaw spec tables and saw chain pages",
+      "url": "https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf",
+      "retrieved": "2026-10-30"
+    },
+    {
+      "id": "stihl-chain-chart-2017",
+      "type": "fitup-chart",
+      "publisher": "STIHL",
+      "title": "Saw Chain Selection and Identification (STIHL USA catalog page 173; specifications as of 1 October 2017) — recommended chain loop and guide bar per saw model",
+      "url": "https://assets.unilogcorp.com/187/ITEM/DOC/Stihl_102205325_Catalog.pdf",
+      "retrieved": "2026-10-30"
     }
   ],
-  "sources_note": "16″ spec from a Stihl dealer listing of OEM part 3610 005 0055 (61 PMM3 55: 3/8″ pitch, .043″ gauge, 55 drive links; fitments include MS 170, MS 171, MS 180, MS 181) and cross-reference listings naming Oregon 90PX, Carlton N4C and Husqvarna H38 equivalents — checked Oct 2026.",
+  "sources_note": "12″, 14″ and 16″ rows from STIHL's Saw Chain Selection and Identification charts (2025 Full Line catalog p.166 and the 1 October 2017 chart, catalog p.173), read 30 Oct 2026. 16″ spec from a Stihl dealer listing of OEM part 3610 005 0055 (61 PMM3 55: 3/8″ pitch, .043″ gauge, 55 drive links; fitments include MS 170, MS 171, MS 180, MS 181) and cross-reference listings naming Oregon 90PX, Carlton N4C and Husqvarna H38 equivalents — checked Oct 2026.",
   "bars": [
+    {
+      "lengths_in": [
+        12
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.043,
+      "drive_links": 44,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Stihl",
+          "part_no": "61 PMM3 44",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2025",
+        "stihl-chain-chart-2017"
+      ],
+      "note": "Both STIHL charts list chain 61 PMM3 44 for this saw group; the recommended bar is 3005 008 3905 in the 2025 chart (3005 000 3905 in 2017)."
+    },
+    {
+      "lengths_in": [
+        14
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.043,
+      "drive_links": 50,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Stihl",
+          "part_no": "61 PMM3 50",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2025",
+        "stihl-chain-chart-2017"
+      ],
+      "note": "Both STIHL charts list chain 61 PMM3 50 for this saw group; the recommended bar is 3005 008 3909 in the 2025 chart (3005 000 3909 in 2017)."
+    },
     {
       "lengths_in": [
         16
@@ -65,38 +125,12 @@
       ],
       "source_ids": [
         "dealer-3610-005-0055",
-        "xref-listings"
+        "xref-listings",
+        "stihl-chain-chart-2025",
+        "stihl-chain-chart-2017"
       ],
-      "note": "The stock fitment for current MS 170 / MS 180 saws. Discontinued pre-2023 examples on the older .050″ Picco setup exist — if your stamp reads .050″ / 1.3 mm, your chain is the 63 PM3 type instead."
-    },
-    {
-      "lengths_in": [
-        12,
-        14
-      ],
-      "pitch": "3/8-lp",
-      "gauge": 0.043,
-      "drive_links": null,
-      "file_size": "5/32",
-      "status": "verify",
-      "chains": [
-        {
-          "brand": "Stihl",
-          "part_no": "61 PMM3 (length by drive links)",
-          "role": "oem"
-        },
-        {
-          "brand": "Oregon",
-          "part_no": "90PX series",
-          "role": "equivalent"
-        }
-      ],
-      "source_ids": [
-        "dealer-3610-005-0055"
-      ],
-      "note": "Both lengths were factory options. We have not traced their drive-link counts to an OEM listing we can cite, so we do not print a number — the stamp on the bar tail states it.",
-      "label": "12″ / 14″"
+      "note": "The stock fitment for current MS 170 / MS 180 saws. Discontinued pre-2023 examples on the older .050″ Picco setup exist — if your stamp reads .050″ / 1.3 mm, your chain is the 63 PM3 type instead. STIHL's 2017 and 2025 chain charts list the same 61 PMM3 55 loop with bar 3005 008 3913."
     }
   ],
-  "last_verified": "2026-10-23"
+  "last_verified": "2026-10-30"
 }

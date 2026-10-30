@@ -1,0 +1,72 @@
+{
+  "brand": "stihl",
+  "model": "MSA 220 C-B",
+  "name": "STIHL MSA 220 C-B",
+  "aliases": [
+    "MSA 220",
+    "MSA220",
+    "MSA 220 C",
+    "MSA 220 CB",
+    "MSA220C-B"
+  ],
+  "type": "battery",
+  "popular": false,
+  "blurb": "Battery saw on 3/8″ PICCO Super 3 chain, .050″ gauge: 50 drive links on a 14″ bar, 55 on a 16″ (STIHL 63 PS3), per STIHL's 2025 chain chart.",
+  "intro": "The MSA 220 C-B is a 36-volt saw on STIHL's AP battery system, and it runs 3/8″ PICCO chain in .050″ gauge. STIHL's 2025 chain chart gives two setups: a 14″ bar with a 50-link loop and a 16″ bar with a 55-link loop, both 63 PS3 (PICCO Super 3), the low-kickback, low-vibration PICCO chain that STIHL says needs less feed force and lasts about 15% longer than PM3. The pitch and gauge are the same as the 63 PM3 chain on many small STIHL gas saws, so a PM3 loop with the same drive-link count fits the bar, but the chart's recommended chain for this saw is PS3. The same catalog's spec table lists 12″ to 18″ as the recommended bar range, but the chain chart only gives drive-link counts for 14″ and 16″, so for a 12″ or 18″ bar read the count off the bar tail rather than guessing it. Do not confuse it with the MSA 220 TC-O top-handle saw, which STIHL's chart lists with lightweight (LW) bars and different part numbers.",
+  "bars": [
+    {
+      "lengths_in": [
+        14
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 50,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "63 PS3 50",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2025"
+      ],
+      "note": "STIHL's 2025 chart lists chain 63 PS3 50 with laminated bar 3005 000 4809 (9-tooth nose sprocket)."
+    },
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 55,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "63 PS3 55",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2025"
+      ],
+      "note": "STIHL's 2025 chart lists chain 63 PS3 55 with laminated bar 3005 000 4813."
+    }
+  ],
+  "sources": [
+    {
+      "id": "stihl-chain-chart-2025",
+      "type": "fitup-chart",
+      "publisher": "STIHL",
+      "title": "STIHL 2025 Full Line catalog — Saw Chain Selection and Identification chart (catalog pages 166–167), chainsaw spec tables and saw chain pages",
+      "url": "https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf",
+      "retrieved": "2026-10-30"
+    }
+  ],
+  "sources_note": "STIHL 2025 Full Line catalog: Saw Chain Selection and Identification chart, battery-powered models (catalog p.167), and the chainsaw spec table (catalog p.64: AP battery, 36 V, recommended bars 12–18″, 3/8″ P, PS3), read on 30 Oct 2026. File size from the same catalog's file list (3/8″ STIHL PICCO: 4.0 mm / 5/32″).",
+  "last_verified": "2026-10-30"
+}

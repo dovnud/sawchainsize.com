@@ -27,6 +27,7 @@ export const GUIDES: Guide[] = [
   { href: '/guides/chain-size-chart/', title: 'Chain identification chart', card: 'Pitch × gauge × file size, plus the Oregon / Stihl / Husqvarna / Carlton code cross-reference.', group: 'identify' },
   { href: '/guides/how-to-count-drive-links/', title: 'How to count drive links', card: 'Mark one link, count the tangs under the loop, match the number on the box.', group: 'identify' },
   { href: '/guides/chain-part-numbers/', title: 'Chainsaw chain part numbers, decoded', card: 'What STIHL 33 RS3 84, Husqvarna S93G and Echo 91PX52CQ say about pitch, gauge and drive links.', group: 'identify' },
+  { href: '/guides/stihl-chain-order-numbers/', title: 'STIHL chain order numbers', card: 'How 33 RS3 72 becomes 3624 005 0072: STIHL’s 4-digit chain codes and the order number for every STIHL loop we list.', group: 'identify' },
   { href: '/guides/chainsaw-chain-gauge/', title: 'Chainsaw chain gauge', card: '.043″, .050″, .058″ and .063″ — what the number measures, and why a close gauge is still the wrong chain.', group: 'identify' },
   { href: '/guides/3-8-low-profile-vs-standard-chain/', title: '3/8″ low profile vs standard 3/8″ chain', card: 'Oregon 90/91 versus 72/73/75: two families that both say 3/8″ and do not substitute for each other.', group: 'identify' },
   { href: '/guides/oregon-72-vs-73-chain/', title: 'Oregon 72 vs 73 chain', card: 'Same 3/8″ pitch family, different gauge — the classic wrong buy and how to avoid it.', group: 'identify' },
