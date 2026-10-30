@@ -1,0 +1,26 @@
+---
+import ProductCard from './ProductCard.astro';
+import { AMAZON_DISCLOSURE } from '../config/affiliate';
+import { BF_PATH, GIFT_PATH } from '../data/holiday-2026';
+import { holidayChain } from '../lib/shop';
+import type { Model } from '../lib/data';
+
+interface Props { model: Model }
+const { model } = Astro.props;
+const link = holidayChain(model);
+---
+<aside class="buy" aria-label="Holiday 2026">
+  <div class="buy-head">Holiday 2026</div>
+  <div class="buy-body">
+    <p>Black Friday is Friday, November 27, 2026. Cyber Monday is Monday, November 30, 2026. Amazon’s newsroom says shoppers can browse early Holiday Shop deals and should check back for more on the sale. There is no countdown on this page and no claim about how many are left.</p>
+    {link ? (
+      <>
+        <div class="product-cards"><ProductCard link={link} /></div>
+        <p class="shop-disclosure"><strong>{AMAZON_DISCLOSURE}</strong> <span class="muted">The button opens Amazon. <a href="/affiliate-disclosure/">How that works</a>. No price is printed here.</span></p>
+      </>
+    ) : (
+      <p>Published specs for the {model.data.name} conflict or are not verified to a single loop, so this page does not point at a chain. Read the stamp — pitch, gauge and drive links — and order those three numbers. The <a href="/guides/how-to-verify-chain-size/">verification guide</a> is the check.</p>
+    )}
+    <p class="small">Carrier send-by dates, and what a sale does not change about fit, are on the <a href={BF_PATH}>Black Friday chainsaw chain and accessories</a> page. Gift tiers, still with no dollar amounts, are in <a href={GIFT_PATH}>gifts for chainsaw owners and woodcutters, 2026</a>.</p>
+  </div>
+</aside>

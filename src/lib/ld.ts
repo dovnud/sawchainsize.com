@@ -25,6 +25,19 @@ export const webPageLd = (name: string, path: string, description: string, modif
   ...(modified ? { dateModified: modified } : {}), inLanguage: 'en-US',
 });
 
+/** Editorial guide. No prices, offers, or ratings — those are not known and are not invented. */
+export const articleLd = (headline: string, path: string, description: string, modified?: string) => ({
+  '@context': 'https://schema.org', '@type': 'Article', headline, name: headline, description,
+  url: SITE.url + path, mainEntityOfPage: SITE.url + path,
+  isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.url + '/' }, publisher, author,
+  ...(modified ? { datePublished: modified, dateModified: modified } : {}), inLanguage: 'en-US',
+});
+
+export const itemListLd = (name: string, items: { name: string; description: string }[]) => ({
+  '@context': 'https://schema.org', '@type': 'ItemList', name,
+  itemListElement: items.map((item, i) => ({ '@type': 'ListItem', position: i + 1, name: item.name, description: item.description })),
+});
+
 /**
  * A saw's chain data is a specification, not a retail offer, so it is marked up as a schema.org
  * ProductModel ("a datasheet or vendor specification of a product") inside an ItemPage. Google's

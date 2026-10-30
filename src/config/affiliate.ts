@@ -36,6 +36,40 @@ export function amazonProductUrl(asin: string): string {
   return `https://${AMAZON_DOMAIN}/dp/${asin}?tag=${AMAZON_TAG}`;
 }
 
+/**
+ * Optional product-card image. Amazon allows an image here only when it came from the Product
+ * Advertising API (GetItems Images) or from the image URL inside an official SiteStripe image
+ * or text-and-image link. Do not download, copy, or hotlink a photo off a product page, and do
+ * not invent a widget URL. This site has no PA-API credentials and no stored SiteStripe HTML,
+ * so cards ship without images until one of those two sources is actually in hand.
+ */
+export type AmazonImageSource = 'pa-api' | 'sitestripe';
+
+export type AmazonImage = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  source: AmazonImageSource;
+};
+
+const SITESTRIPE_HOSTS = new Set(['ws-na.amazon-adsystem.com', 'ws-eu.amazon-adsystem.com', 'ws-fe.amazon-adsystem.com']);
+
+export function compliantAmazonImage(image: AmazonImage | undefined | null): AmazonImage | null {
+  if (!image || (image.source !== 'pa-api' && image.source !== 'sitestripe')) return null;
+  if (!Number.isInteger(image.width) || !Number.isInteger(image.height) || image.width < 1 || image.height < 1 || image.width > 800 || image.height > 800) return null;
+  let url: URL;
+  try { url = new URL(image.src); } catch { return null; }
+  if (url.protocol !== 'https:') return null;
+  const host = url.hostname.toLowerCase();
+  if (image.source === 'sitestripe') {
+    if (!SITESTRIPE_HOSTS.has(host) || !url.pathname.includes('/widgets/')) return null;
+    return image;
+  }
+  const pa = host === 'm.media-amazon.com' || host.endsWith('.media-amazon.com') || host.endsWith('.ssl-images-amazon.com') || host.endsWith('.images-amazon.com');
+  return pa ? image : null;
+}
+
 export type VerifiedAsin = {
   asin: string;
   /** Product title as shown on the amazon.com product page when verified (abridged where very long). */
