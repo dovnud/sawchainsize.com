@@ -1,5 +1,6 @@
 ---
-import { AMAZON_DISCLOSURE, AFFILIATE_REL, AFFILIATE_TARGET } from '../config/affiliate';
+import { AMAZON_DISCLOSURE } from '../config/affiliate';
+import ProductCard from './ProductCard.astro';
 import type { ShopGroup, ShopLink } from '../lib/shop';
 interface Props { groups: ShopGroup[]; title?: string; flagged?: boolean; lead?: string; anchor?: boolean; compact?: boolean; }
 const { groups, title = 'Shop for matching parts & gear on Amazon', flagged = false, lead, anchor = false, compact = false } = Astro.props;
@@ -8,30 +9,28 @@ const links = visible.reduce((n, g) => n + g.links.length, 0);
 const open = visible.filter((g) => g.feature);
 const more = compact ? [] : visible.filter((g) => !g.feature);
 const hasPage = visible.some((g) => g.links.some((l) => l.kind === 'page'));
-const verb = (l: ShopLink) => (l.kind === 'product' ? 'See on Amazon' : l.kind === 'search' ? 'Search on Amazon' : l.label);
+const pageLink = (l: ShopLink) => l.kind === 'page';
 ---
 {links > 0 && (
 <aside class="buy shop" id={anchor ? 'shop' : undefined} aria-label="Amazon links">
   <div class="buy-head">{compact ? 'See it on Amazon' : title}</div>
   <div class="buy-body">
-    <p class="shop-disclosure"><strong>{AMAZON_DISCLOSURE}</strong> <span class="muted">{hasPage ? 'Amazon links are labeled See or Search on Amazon. “Look up your chain” stays on this site. ' : 'These are Amazon links. '}<a href="/affiliate-disclosure/">How that works</a>.</span></p>
+    <p class="shop-disclosure"><strong>{AMAZON_DISCLOSURE}</strong> <span class="muted">{hasPage ? 'Amazon links are the cards. “Look up your chain” stays on this site. ' : 'These are Amazon links. '}<a href="/affiliate-disclosure/">How that works</a>. No price is printed here.</span></p>
     {!compact && <p class="small">{lead ?? 'Verify pitch, gauge and drive links against your bar stamp before buying — a listing title is not proof of fit.'}{flagged && ' Setups marked “conflict” or “verify” in the table have no spec-matched link here: read your stamp first.'}</p>}
     {open.map((g) => (
       <div>
         {!compact && <h3 class="shop-h">{g.title}</h3>}
-        {g.allButtons ? (
-          g.links.map((l) => <a class:list={['shop-btn', l.kind === 'page' && 'shop-btn-page']} href={l.href} target={l.kind === 'page' ? undefined : AFFILIATE_TARGET} rel={l.kind === 'page' ? undefined : AFFILIATE_REL}><span class="shop-btn-verb">{verb(l)}</span>{l.kind !== 'page' && <span class="shop-btn-spec">{l.label}</span>}</a>)
-        ) : (
-          <>
-            <a class:list={['shop-btn', g.links[0].kind === 'page' && 'shop-btn-page']} href={g.links[0].href} target={g.links[0].kind === 'page' ? undefined : AFFILIATE_TARGET} rel={g.links[0].kind === 'page' ? undefined : AFFILIATE_REL}><span class="shop-btn-verb">{verb(g.links[0])}</span>{g.links[0].kind !== 'page' && <span class="shop-btn-spec">{g.links[0].label}</span>}</a>
-            {g.links.length > 1 && (
-              <ul class="shop-list">
-                {g.links.slice(1).map((l) => (
-                  <li><a href={l.href} target={l.kind === 'page' ? undefined : AFFILIATE_TARGET} rel={l.kind === 'page' ? undefined : AFFILIATE_REL}>{l.kind === 'page' ? l.label : `${verb(l)} — ${l.label}`}</a>{l.note && <span class="shop-kind">{l.note}</span>}</li>
-                ))}
-              </ul>
-            )}
-          </>
+        <div class="product-cards">
+          {(g.allButtons ? g.links : g.links.slice(0, 1)).map((l) => pageLink(l)
+            ? <a class="shop-btn shop-btn-page" href={l.href}><span class="shop-btn-verb">{l.label}</span>{l.note && <span class="shop-btn-spec">{l.note}</span>}</a>
+            : <ProductCard link={l} />)}
+        </div>
+        {!g.allButtons && g.links.length > 1 && (
+          <div class="product-cards">
+            {g.links.slice(1).map((l) => pageLink(l)
+              ? <a class="shop-btn shop-btn-page" href={l.href}><span class="shop-btn-verb">{l.label}</span></a>
+              : <ProductCard link={l} />)}
+          </div>
         )}
       </div>
     ))}
@@ -41,11 +40,11 @@ const verb = (l: ShopLink) => (l.kind === 'product' ? 'See on Amazon' : l.kind =
         {more.map((g) => (
           <div>
             <h3 class="shop-h">{g.title}</h3>
-            <ul class="shop-list">
-              {g.links.map((l) => (
-                <li><a href={l.href} target={l.kind === 'page' ? undefined : AFFILIATE_TARGET} rel={l.kind === 'page' ? undefined : AFFILIATE_REL}>{l.kind === 'page' ? l.label : `${verb(l)} — ${l.label}`}</a>{l.note && <span class="shop-kind">{l.note}</span>}</li>
-              ))}
-            </ul>
+            <div class="product-cards">
+              {g.links.map((l) => pageLink(l)
+                ? <a href={l.href}>{l.label}</a>
+                : <ProductCard link={l} />)}
+            </div>
           </div>
         ))}
       </details>

@@ -1,0 +1,77 @@
+---
+import Byline from '../../components/Byline.astro';
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { articleLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import { AMAZON_BF, AMAZON_GUARANTEE, BF_PATH, FEDEX_PDF, FEDEX_SCHEDULE, GIFT_PATH, UPS_SCHEDULE, USPS_CONTIGUOUS, USPS_DATES, USPS_NEWS } from '../../data/holiday-2026';
+import dates from '../../data/page-dates.json';
+
+const path = BF_PATH;
+const modified = (dates as Record<string, string>)[path];
+const desc = 'Black Friday 2026 is November 27 and Cyber Monday is November 30. How to buy a chainsaw chain or accessory without a fake deal, plus USPS, UPS and FedEx shipping dates cited from the carriers.';
+const faqs = [
+  { q: 'When is Black Friday 2026, and when is Cyber Monday?', a: 'Black Friday is Friday, November 27, 2026, the Friday after Thanksgiving. Cyber Monday is Monday, November 30, 2026. Both dates are the ones Amazon’s newsroom published. Amazon also said shoppers can browse early deals in the Holiday Shop and should check back for more information. This page does not turn that into a start time, an end time, or a chainsaw discount.' },
+  { q: 'Does a Black Friday price make the wrong chain acceptable?', a: 'No. Pitch, gauge and drive links still have to match the bar stamp. A low-profile 3/8″ chain does not fit a standard 3/8″ bar. Oregon 72 (.050″) does not fit an Oregon 73 (.058″) groove. A sale changes what you pay. It does not change the groove in the bar.' },
+  { q: 'What is the last day to order on Amazon for Christmas?', a: 'Amazon’s customer-help page does not publish one order-by date for the whole site. At checkout, eligible orders show a guaranteed delivery date and an “order within” countdown, and that date can change before you place the order. The confirmation email is the date Amazon commits to. This site does not copy that countdown.' },
+  { q: 'What are the USPS send-by dates for delivery before Christmas 2026?', a: 'For the contiguous United States, USPS recommends Thursday, December 17 for Ground Advantage and First-Class Mail, Friday, December 18 for Priority Mail, and Saturday, December 19 for Priority Mail Express, for expected delivery before December 25. USPS says the actual day can vary with origin, destination and when the Post Office accepts the package. Alaska, Hawaii, international and military mail have their own dates on the USPS holiday page.' },
+];
+const jsonld = [articleLd('Black Friday chainsaw chain and accessories, 2026', path, desc, modified), faqLd(faqs)];
+const shop = guideShop('black-friday-chainsaw-chain');
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Black Friday', path }];
+---
+<Base title="Black Friday Chainsaw Chain and Accessories, 2026" description={desc} path={path} nav="verify" crumbs={crumbs} jsonld={jsonld} modified={modified} type="article">
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Black Friday' }]} />
+      <h1>Black Friday chainsaw chain and accessories</h1>
+      <p class="lede">Black Friday 2026 is Friday, November 27. Cyber Monday is Monday, November 30. A sale is a reason to look at the price Amazon is charging. It is not a reason to skip the bar stamp. This page does not invent discounts, does not run a countdown, and does not say how many of anything are left.</p>
+      <Byline label="Last updated" />
+    </div>
+
+    <section class="block">
+      <h2>The dates that are actually published</h2>
+      <p style="max-width:72ch">Thanksgiving Day 2026 is Thursday, November 26. Black Friday is the Friday after it. <a href={AMAZON_BF} rel="nofollow">Amazon’s newsroom</a> states Black Friday 2026 as November 27 and Cyber Monday as November 30. The same page says customers can browse early deals in the Holiday Shop now, and it says to check back for more information. It does not publish a chainsaw-chain percent off, a start hour, or an end hour. Until Amazon prints those, this site will not fill them in. A product card below is a link to a listing whose title matched a chain spec or a piece of gear. It is not a claim that the listing is discounted today.</p>
+      <p style="max-width:72ch">What you pay is the price at Amazon’s checkout. This site never prints a price, including a crossed-out “was” price. If a listing is in the Holiday Shop, Amazon’s page is where that shows. The button on each card says “Check price on Amazon” because that is the only price that counts.</p>
+    </section>
+
+    <section class="block">
+      <h2>What to buy when you know the bar, and what to buy when you do not</h2>
+      <p style="max-width:72ch">A replacement chain is three numbers: pitch, gauge, drive links. They are stamped on the tail of the guide bar. The <a href="/guides/how-to-verify-chain-size/">verification guide</a> is the minute it takes to read them. Buy the loop that matches. During a sale the failure mode is the same as the rest of the year, only faster: a 3/8″ low-profile chain ordered for a standard 3/8″ bar, or an Oregon 72 (.050″) ordered for an Oregon 73 (.058″) groove. Those two pages — <a href="/guides/3-8-low-profile-vs-standard-chain/">low profile versus standard</a> and <a href="/guides/oregon-72-vs-73-chain/">72 versus 73</a> — are the checks. Gauge in general is the <a href="/guides/chainsaw-chain-gauge/">gauge guide</a>.</p>
+      <p style="max-width:72ch">If the saw is one this site has sourced, use that page before a generic sale search. The <a href="/saws/stihl-ms-170-180/">Stihl MS 170 / MS 180</a> 16″ chain is 3/8″ low profile, .043″, 55 drive links. The <a href="/saws/husqvarna-455-rancher/">Husqvarna 455 Rancher</a> 20″ bar exists in both .050″ and .058″ at 72 drive links. The <a href="/saws/stihl-ms-250/">Stihl MS 250</a> sources conflict, so a sale page that names one loop for it is guessing. The <a href="/saws/">model list</a> and the <a href="/chain/">pitch-and-gauge index</a> are the rest. A row marked conflict or verify does not get a spec-matched chain link on this site, in November or any other month.</p>
+      <p style="max-width:72ch">Some accessories do not need the bar in the room. Bar-and-chain oil. Gloves. A field sharpening kit that includes 5/32″, 3/16″ and 7/32″ files. Chaps, if you can measure from the waist to the start of the foot and you will read the ASTM F1897 or UL mark — the <a href="/guides/chainsaw-safety-gear/">safety gear guide</a> is that measurement, and the <a href={GIFT_PATH}>2026 gift guide</a> puts oil, files, chain and chaps in tiers without dollar amounts. A single file size, a guide bar, a sprocket, or a chain all need a spec. A caliper is the tool that checks gauge and rivet spacing before the order, which is more useful in a sale week than another unmarked loop.</p>
+      <p style="max-width:72ch">A dull chain is not fixed by a cheaper dull chain. If the cutters still have chrome and the right file is in the kit, sharpen it: file size and angles are on the <a href="/guides/chainsaw-chain-file-size/">file-size</a> and <a href="/guides/chainsaw-sharpening-angles/">angles</a> guides. Replace the loop when filing will not restore it, and retire the sprocket on the interval Oregon prints. That decision is <a href="/guides/when-to-replace-chainsaw-chain/">when to replace a chain</a>, and it does not move because a listing has a badge on it.</p>
+    </section>
+
+    <div class="callout"><b>No countdown, and no “only a few left”</b><p>The dates on this page are calendar days and carrier send-by dates. They are not a timer, and they are not a stock count. If a retailer is showing either of those, it is on the retailer’s page, about the retailer’s inventory. This site does not repeat them.</p></div>
+
+    <section class="block">
+      <h2>Shipping so a gift arrives before December 25</h2>
+      <p style="max-width:72ch">Two different clocks get mixed together. One is Amazon delivering an order to the recipient. The other is you mailing a package yourself. Amazon’s help page on <a href={AMAZON_GUARANTEE} rel="nofollow">guaranteed delivery</a> does not give a single “order by” date. Checkout shows a guaranteed date and an “order within” window for that address and that item, the window can close early if inventory or capacity changes, and the confirmation email is the date that stuck. Marketplace sellers can differ. This page does not embed Amazon’s countdown.</p>
+      <h3>USPS, contiguous United States</h3>
+      <p style="max-width:72ch">For expected delivery before December 25, 2026, the Postal Service’s <a href={USPS_DATES} rel="nofollow">holiday shipping page</a> and its <a href={USPS_NEWS} rel="nofollow">September 22, 2026 newsroom release</a> give these recommended send-by dates for the contiguous United States. USPS says the actual delivery day depends on origin, destination, when the Post Office accepts the piece, and other conditions.</p>
+      <div class="tblwrap">
+        <table>
+          <caption class="sr-only">USPS recommended send-by dates for the contiguous United States, holiday 2026</caption>
+          <thead><tr><th scope="col">Service</th><th scope="col">Send by, for expected delivery before December 25</th></tr></thead>
+          <tbody>
+            {USPS_CONTIGUOUS.map((row) => <tr><td>{row.service}</td><td>{row.sendBy}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+      <p style="max-width:72ch">The same USPS page gives Alaska, Hawaii, Puerto Rico and U.S. territories the same First-Class (December 17), Priority Mail (December 18) and Priority Mail Express (December 19) dates, and it says Ground Advantage to or from those places is a 10-day-or-more service that has to be looked up by ZIP. For the international regions on that table, USPS lists Wednesday, December 9 for First-Class Package International and Priority Mail International, and Wednesday, December 16 for Priority Mail Express International. Military mail is earlier: Ground Advantage is Wednesday, November 4 for the APO/FPO/DPO ZIP groups USPS lists. Use the USPS page for the ZIP you are actually sending to. USPS also notes that Hanukkah 2026 is December 4–12, so the Christmas send-by dates are too late for Hanukkah, and that Kwanzaa runs December 26 through January 1.</p>
+      <h3>UPS</h3>
+      <p style="max-width:72ch"><a href={UPS_SCHEDULE} rel="nofollow">UPS’s 2026 holiday schedule</a> does not publish one last ship day for delivery by Christmas. UPS says the last day depends on the service, the origin and the destination, and it points shippers at its own time-and-cost calculator. What the schedule does state: on December 24, 2026 there is no UPS Ground pickup, and Air and international Air pickup happens only if it was prearranged by December 18, 2026. UPS is closed on Christmas Day, December 25, 2026. A Ground package dropped on Christmas Eve is not a plan the schedule supports.</p>
+      <h3>FedEx</h3>
+      <p style="max-width:72ch">FedEx’s <a href={FEDEX_PDF} rel="nofollow">2026 last-day-to-ship chart</a> is written so packages are scheduled to arrive by December 24, 2026. Domestic FedEx Ground and FedEx Home Delivery on that chart depend on the transit time for the ZIP pair. FedEx says those transit times are typically 1 to 5 business days inside the contiguous United States, and 3 to 7 business days to and from Alaska and Hawaii, and that the last day assumes a regular pickup or a drop-off at a staffed location. The chart’s date columns run from December 15 through December 24. FedEx says the dates can change and that the Service Guide controls if it disagrees with the rate finder. This page does not restate a domestic Ground zone as a single calendar day, because reading the wrong column would invent a deadline.</p>
+      <p style="max-width:72ch">Where the chart states a full date in the same sentence as the service, it is safe to repeat. U.S. to Canada: FedEx International Next Flight and FedEx International First, Wednesday, December 23. U.S. to Mexico: FedEx International Next Flight, Tuesday, December 22. U.S. to Puerto Rico: International Next Flight, International First and International Priority, Wednesday, December 23, and International Economy, Tuesday, December 22. Other lanes are on the PDF. FedEx’s <a href={FEDEX_SCHEDULE} rel="nofollow">holiday operating schedule</a> shows modified service on December 24, including early pickups in some areas, and FedEx closed on December 25.</p>
+      <p class="src">Sources: <a href={AMAZON_BF} rel="nofollow">About Amazon, Black Friday 2026</a>; <a href={AMAZON_GUARANTEE} rel="nofollow">Amazon guaranteed delivery help</a>; <a href={USPS_DATES} rel="nofollow">USPS 2026 holiday shipping dates</a>; <a href={USPS_NEWS} rel="nofollow">USPS newsroom, September 22, 2026</a>; <a href={UPS_SCHEDULE} rel="nofollow">UPS 2026 holiday schedule</a>; <a href={FEDEX_PDF} rel="nofollow">FedEx 2026 last day to ship (PDF)</a>; <a href={FEDEX_SCHEDULE} rel="nofollow">FedEx holiday schedule</a>.</p>
+    </section>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href={GIFT_PATH}>Gifts for chainsaw owners, 2026</a> · <a href="/guides/how-to-verify-chain-size/">Verify the chain</a> · <a href="/guides/oregon-72-vs-73-chain/">Oregon 72 vs 73</a> · <a href="/guides/chainsaw-safety-gear/">Safety gear</a> · <a href="/saws/">Saw models</a> · <a href="/guides/">All guides</a></p>
+    <ShopBlock groups={shop.groups} title="Chains, files and gear on Amazon" lead="These are not sale prices and not a stock list. Match a chain card to your bar stamp. Oil, the multi-file kit, gloves, chaps and a helmet do not require a drive-link count." />
+  </div>
+</Base>

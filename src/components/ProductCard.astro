@@ -1,0 +1,32 @@
+---
+import { AFFILIATE_REL, AFFILIATE_TARGET, compliantAmazonImage } from '../config/affiliate';
+import type { ShopLink } from '../lib/shop';
+
+interface Props { link: ShopLink }
+const { link } = Astro.props;
+const image = compliantAmazonImage(link.image);
+const why = link.why ?? link.note ?? (link.kind === 'product'
+  ? 'Product page whose title matched this spec when it was checked. Confirm the listing still shows the same pitch, gauge and drive links.'
+  : 'Amazon search for this description, not one listing. Match the result to your bar stamp before you buy.');
+const kind = link.kind === 'product' ? 'Amazon product page' : 'Amazon search';
+---
+<article class="product-card">
+  {image && (
+    <img
+      class="product-card-img"
+      src={image.src}
+      alt={image.alt}
+      width={image.width}
+      height={image.height}
+      loading="lazy"
+      decoding="async"
+      fetchpriority="low"
+    />
+  )}
+  <p class="product-card-name">{link.label}</p>
+  <p class="product-card-why">{why}</p>
+  <p class="product-card-kind">{kind}{link.note && link.why ? ` · ${link.note}` : ''}</p>
+  <a class="product-card-btn" href={link.href} target={AFFILIATE_TARGET} rel={AFFILIATE_REL} aria-label={`Check price on Amazon: ${link.label}`}>
+    Check price on Amazon<span class="sr-only"> (opens in a new tab)</span>
+  </a>
+</article>

@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import SpecTable from '../../components/SpecTable.astro';
 import BuyBlock from '../../components/BuyBlock.astro';
+import HolidayCta from '../../components/HolidayCta.astro';
 import FaqList from '../../components/FaqList.astro';
 import { getModels, getBrands, modelUrl, brandUrl, barUrl, chainUrl, barChainKey, barGroups, hasConflict, relatedModels, modelFaqs, glanceFacts, compareText, pitchShort, gaugeShort, SOURCE_TYPE_LABEL, SITE } from '../../lib/data';
 import { faqLd, modelLd } from '../../lib/ld';
@@ -76,6 +77,7 @@ const ogName = `/og/${model.id}.png`;
       <p>Before you order, confirm the bar-tail stamp (length, pitch, gauge, drive links) matches a row above; if it does not, order to the stamp and <a href="/contact/">tell us</a>. Method: <a href="/guides/how-to-verify-chain-size/">how to verify your chain size</a>.</p>
     </section>
 
+    {d.popular && <HolidayCta model={model} />}
     <BuyBlock model={model} />
 
     <section class="block">

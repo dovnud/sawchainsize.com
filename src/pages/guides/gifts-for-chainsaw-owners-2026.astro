@@ -1,0 +1,80 @@
+---
+import Byline from '../../components/Byline.astro';
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { articleLd, faqLd, itemListLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import { BF_PATH, GIFT_PATH, GIFT_TIERS } from '../../data/holiday-2026';
+import dates from '../../data/page-dates.json';
+
+const path = GIFT_PATH;
+const modified = (dates as Record<string, string>)[path];
+const desc = '2026 gift guide for chainsaw owners and woodcutters: three tiers from bar oil and files to a spare chain and safety gear. No prices, and no chain picked from the saw model alone.';
+const faqs = [
+  { q: 'Can I buy a chainsaw chain as a gift if I do not have the saw in front of me?', a: 'Only if you already have the three numbers stamped on the bar: pitch, gauge and drive-link count. A model name and a bar length are not those numbers. The Stihl MS 250 is the clearest example on this site — published sources disagree with each other — and the Husqvarna 455 Rancher leaves the factory in more than one gauge. If you do not have the stamp or the old loop to count, buy oil, a multi-size file kit, gloves, or chaps, and leave the chain for someone who can read the bar.' },
+  { q: 'Why are there no dollar amounts on the tiers?', a: 'A printed price, or a printed dollar cutoff, would be a number this site made up or copied on a day it will not stay true. Amazon’s price changes. The checkout price is the real one. The tiers are ordered by what the gift is — something used up, one matched chain, then gear that stays with the saw — not by a dollar band.' },
+  { q: 'What should chainsaw chaps say on the label?', a: 'The U.S. Forest Service PPE chart says chaps or cut-resistant pants for chain-saw use shall meet Forest Service 6170-4 or ASTM F1897, current version, and shall overlap the boots by at least 2 inches. Oregon’s FAQ says chaps are not cut-proof. Measure from the waist, where the chaps sit, to the start of the foot, and treat a pair that stops above the boot as the wrong size even if the hang-tag is right.' },
+  { q: 'Is bar oil the same gift as two-stroke oil?', a: 'No. Bar-and-chain oil goes in the oil tank and is filled when the gas tank is filled. Two-stroke oil is mixed into the gasoline on a gas saw, at the ratio in that saw’s manual. Used motor oil does not belong in the bar-oil tank. A battery saw still has a bar-oil tank and has no fuel mix.' },
+];
+const jsonld = [
+  articleLd('Gifts for chainsaw owners and woodcutters, 2026', path, desc, modified),
+  itemListLd('Gift tiers for chainsaw owners, 2026', GIFT_TIERS.map((t) => ({ name: t.name, description: t.description }))),
+  faqLd(faqs),
+];
+const shop = guideShop('gifts-for-chainsaw-owners-2026');
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Gifts 2026', path }];
+---
+<Base title="Gifts for Chainsaw Owners and Woodcutters, 2026" description={desc} path={path} nav="verify" crumbs={crumbs} jsonld={jsonld} modified={modified} type="article">
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Gifts 2026' }]} />
+      <h1>Gifts for chainsaw owners and woodcutters, 2026</h1>
+      <p class="lede">The useful gift is the one the saw can actually take. A chain has to match the bar that is mounted today — pitch, gauge and drive links — and a file has to match the pitch. Oil, gloves and chaps do not. That split is the whole guide. Nothing below is a price, a percent off, or a claim that a listing is on sale.</p>
+      <Byline label="Last updated" />
+    </div>
+
+    <section class="block">
+      <h2>Three tiers, and why they are not dollar bands</h2>
+      <p style="max-width:72ch">People ask for a budget. A budget printed here would be a guess. This site does not show prices, because the number on Amazon changes and the checkout price is the one that matters. The tiers are ordered by what you are buying: something the saw uses up, one spare chain, then the gear that should already be in the truck. Move up a tier only when you know the fact that tier requires. If you do not, stay on tier 1.</p>
+      <div class="tblwrap">
+        <table>
+          <caption class="sr-only">Gift tiers for a chainsaw owner, without prices</caption>
+          <thead><tr><th scope="col">Tier</th><th scope="col">What it is</th><th scope="col">What has to be true first</th></tr></thead>
+          <tbody>
+            {GIFT_TIERS.map((t) => <tr><td>{t.name}</td><td>{t.description.split('.')[0]}.</td><td>{t.name.startsWith('Tier 1') ? 'Nothing about the bar. A single-size file still needs the pitch.' : t.name.startsWith('Tier 2') ? 'Pitch, gauge and drive links off the bar stamp, or counted off the old loop.' : 'Chaps: length that overlaps the boots, and an ASTM F1897 or UL mark. Helmet and scabbard: the person’s size, and the bar length.'}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+      <p class="src">Shipping dates for a gift that has to arrive before Christmas, Hanukkah or Kwanzaa are on the <a href={BF_PATH}>Black Friday chainsaw chain and accessories</a> page. They are the carriers’ published dates, not a countdown.</p>
+    </section>
+
+    <section class="block">
+      <h2>Tier 1 — used up this season</h2>
+      <p style="max-width:72ch">Bar-and-chain oil is the consumable every saw on this site still needs, gas or battery. It goes in the oil tank, filled when the fuel tank is filled on a gas saw. Oregon’s rule, restated on the <a href="/guides/chainsaw-bar-and-chain-oil/">bar and chain oil</a> guide, is that used motor oil does not go in that tank. Two-stroke oil is a different bottle and a different tank. The ratio for current gas saws from STIHL, Husqvarna and Echo is on the <a href="/guides/chainsaw-fuel-mix/">fuel mix</a> guide, and the manual for the saw wins if it prints another ratio. Fuel mix is a poor surprise gift: the bottle is easy to put in the wrong tank, and this page does not feature it.</p>
+      <p style="max-width:72ch">A file is the other consumable, and it is where tier 1 gets specific. Round-file diameter follows pitch: 5/32″ for 3/8″ low-profile chain in .050″ gauge, 11/64″ for .043″ low profile, 3/16″ for .325″, 7/32″ for standard 3/8″ and .404″. The table is on the <a href="/guides/chainsaw-chain-file-size/">file-size guide</a>. If you know the pitch, buy that file. If you do not, the field kit that holds 5/32″, 3/16″ and 7/32″ is the one that survives the uncertainty. A single 5/32″ kit is the wrong present for a .325″ saw. Gloves belong in this tier because sharpening and chain fitting both start with them, engine off. They are sized to the hand, not to the saw.</p>
+    </section>
+
+    <section class="block">
+      <h2>Tier 2 — one spare chain, matched to the stamp</h2>
+      <p style="max-width:72ch">This is the gift people want to buy, and the one that gets returned. The chain follows the bar, not the model name. Pitch, gauge and the count of drive links all have to match the stamp on the bar tail. “18-inch chain” is not a specification. The <a href="/guides/how-to-verify-chain-size/">verification guide</a> is how to read the stamp, and <a href="/guides/how-to-count-drive-links/">counting drive links</a> is the check when the stamp is worn: mark one tang and lap the loop.</p>
+      <p style="max-width:72ch">Two confusions account for most wrong boxes, and both show up as holiday orders. Oregon 72 and Oregon 73 are both standard 3/8″ pitch; 72 is .050″ gauge and 73 is .058″. The <a href="/guides/oregon-72-vs-73-chain/">72 vs 73 guide</a> is that trap. The other is the word “3/8” itself. Low-profile 3/8″ (Oregon 90 and 91, STIHL Picco) does not substitute for standard 3/8″ (Oregon 72, 73, 75). The <a href="/guides/3-8-low-profile-vs-standard-chain/">low-profile versus standard guide</a> keeps them apart. Gauge, including .043″ against .050″ on the same low-profile pitch, is the <a href="/guides/chainsaw-chain-gauge/">gauge guide</a>.</p>
+      <p style="max-width:72ch">If you are buying for a saw this site covers, start at that saw’s page, not at a generic “chainsaw chain” search. The <a href="/saws/stihl-ms-170-180/">Stihl MS 170 / MS 180</a> stock 16″ loop is 3/8″ low profile, .043″, 55 drive links — not the .050″ loop a lot of gift lists assume. The <a href="/saws/husqvarna-455-rancher/">Husqvarna 455 Rancher</a> 20″ bar is 3/8″ and 72 drive links in both .050″ and .058″, so two owners of “the same saw” need different chains. The <a href="/saws/stihl-ms-250/">Stihl MS 250</a> is worse: the sources disagree, and this site will not name a loop for it. The <a href="/saws/">full model list</a> is the rest. Where a page is marked conflict or verify, do not guess a chain as a gift.</p>
+      <p style="max-width:72ch">The product cards lower on this page are examples of three common specs, each tied to a pitch, a gauge and a drive-link count. They are not “the chainsaw chain.” A 56-drive-link low-profile loop does not fit a 62-link bar. When the stamp does not match the card, use the saw page or do not buy the chain.</p>
+    </section>
+
+    <section class="block">
+      <h2>Tier 3 — gear that stays with the saw</h2>
+      <p style="max-width:72ch">Chaps, a forestry helmet and a bar cover are the gifts that are still in use next December. They are also the gifts that fail on fit. The <a href="/guides/chainsaw-safety-gear/">safety gear guide</a> is the long version: OSHA’s logging rule binds employers on logging operations, not a person cutting firewood at home, and the garments it names are still the ones the Forest Service and the chain makers describe. Chaps are specified to ASTM F1897 (or Forest Service 6170-4), from the upper thigh to the boot, overlapping the boots. Oregon says they are not cut-proof. A pair that is too long is a trip hazard. Buy the length, not the brand story on the listing.</p>
+      <p style="max-width:72ch">A helmet with a mesh screen and muffs covers the head, the face and, on a gas saw, hearing. Mesh stops chunks. It does not stop fine dust the way a sealed goggle does. Glasses under the screen are a common way to cover both. The helmet does not replace chaps. A scabbard keeps the cutters off legs and upholstery while the saw is stored or riding in a vehicle. The one linked below is sized for 18–22″ bars. A 14″ or 16″ homeowner bar needs a cover made for that length. A scabbard is not a reason to move a saw with the engine running.</p>
+      <p style="max-width:72ch"><a href="/guides/chainsaw-kickback/">Kickback</a> is the reason the safety tier exists at all. A new chain, a sharp chain, and chaps are three different problems. Replacing a dull loop is the <a href="/guides/when-to-replace-chainsaw-chain/">replacement guide</a>: chips versus dust, chrome worn through, and the sprocket Oregon retires every two chains. A gift chain on a worn sprocket is a short-lived gift.</p>
+    </section>
+
+    <div class="callout"><b>Do not buy the chain from the model name</b><p>If the only fact you have is “Husqvarna” or “a Stihl,” stay on tier 1 or tier 3. Tier 2 starts when someone has read the bar, or when the old chain is on the bench and the drive links have been counted.</p></div>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href={BF_PATH}>Black Friday chain and accessories</a> · <a href="/guides/chainsaw-safety-gear/">Safety gear</a> · <a href="/guides/how-to-verify-chain-size/">Verify the chain</a> · <a href="/guides/chainsaw-chain-file-size/">File size</a> · <a href="/guides/">All guides</a></p>
+    <ShopBlock groups={shop.groups} title="Gift ideas on Amazon, by tier" lead="No prices are shown. A tier 2 chain is only a gift when the bar stamp matches the card. Tier 1 and tier 3 do not require the chain spec, except a single-size file." />
+  </div>
+</Base>

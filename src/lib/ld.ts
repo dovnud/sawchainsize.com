@@ -26,6 +26,19 @@ export const webPageLd = (name: string, path: string, description: string, modif
   ...(modified ? { dateModified: isoDate(modified) } : {}), inLanguage: 'en-US',
 });
 
+/** Editorial guide. No prices, offers, or ratings — those are not known and are not invented. */
+export const articleLd = (headline: string, path: string, description: string, modified?: string) => ({
+  '@context': 'https://schema.org', '@type': 'Article', headline, name: headline, description,
+  url: SITE.url + path, mainEntityOfPage: SITE.url + path,
+  isPartOf: { '@type': 'WebSite', name: SITE.name, url: SITE.url + '/' }, publisher, author,
+  ...(modified ? { datePublished: isoDate(modified), dateModified: isoDate(modified) } : {}), inLanguage: 'en-US',
+});
+
+export const itemListLd = (name: string, items: { name: string; description: string }[]) => ({
+  '@context': 'https://schema.org', '@type': 'ItemList', name,
+  itemListElement: items.map((item, i) => ({ '@type': 'ListItem', position: i + 1, name: item.name, description: item.description })),
+});
+
 /**
  * A saw's chain data is a specification, not a retail offer, so it is marked up as a schema.org
  * ProductModel ("a datasheet or vendor specification of a product") inside an ItemPage. Google's
@@ -120,6 +133,10 @@ export function pageGraph(opts: {
       node.publisher = { '@id': orgId };
       node.isPartOf = { '@id': siteId };
       if (opts.path !== '/') node.breadcrumb = { '@id': crumbId };
+    }
+    if (types.includes('Article')) {
+      node.dateModified = dateModified ?? isoDate(typeof node.dateModified === 'string' ? node.dateModified : undefined);
+      node.datePublished = isoDate(typeof node.datePublished === 'string' ? node.datePublished : undefined) ?? node.dateModified;
     }
     if ((types.includes('Dataset') || types.includes('Product') || types.includes('ProductModel')) && dateModified && !node.dateModified) {
       node.dateModified = dateModified;

@@ -4,6 +4,7 @@ import Crumbs from '../../components/Crumbs.astro';
 import Byline from '../../components/Byline.astro';
 import { webPageLd } from '../../lib/ld';
 import { GUIDE_GROUPS, guidesIn } from '../../data/guides';
+import { BF_PATH, GIFT_PATH } from '../../data/holiday-2026';
 import dates from '../../data/page-dates.json';
 
 const path = '/guides/';
@@ -20,6 +21,13 @@ const crumbs = [{ name: 'Guides', path: '/guides/' }];
       <p class="lede">The lookup tells you the pitch, gauge and drive links for a saw and a bar we have sourced. These guides are the work around that number: how to read it off your own bar, how to put the loop on, how to keep it cutting, and what the safety standards actually require while it is moving.</p>
       <Byline label="Last updated" />
     </div>
+
+    <section class="block">
+      <p class="kicker">Holiday 2026</p>
+      <h2>Gifts and Black Friday</h2>
+      <p style="max-width:72ch">Black Friday is Friday, November 27, 2026, and Cyber Monday is Monday, November 30. The <a href={GIFT_PATH}>gift guide</a> is three tiers — oil and files, a spare chain matched to the bar stamp, and safety gear — with no prices. The <a href={BF_PATH}>Black Friday page</a> is how to buy a chain during a sale without buying the wrong loop, plus the USPS, UPS and FedEx send-by dates those carriers published. Neither page runs a countdown or a stock claim.</p>
+      <div class="grid2">{guidesIn('holiday').map((item) => <a class="card" href={item.href}><h3>{item.title}</h3><p class="small">{item.card}</p><span class="go">Read →</span></a>)}</div>
+    </section>
 
     <section class="block">
       <h2>Start with the bar, not the model name</h2>

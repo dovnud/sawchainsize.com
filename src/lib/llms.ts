@@ -1,5 +1,6 @@
 import { getModels, getBrands, chainGroups, barGroups, modelUrl, brandUrl, barUrl, chainUrl, barLabel, pitchLabel, gaugeLabel, dlText, pitchText, gaugeText, fileText, partText, statusLabel, SITE } from './data';
 import { GUIDES } from '../data/guides';
+import { BF_PATH, GIFT_PATH } from '../data/holiday-2026';
 
 const abs = (p: string) => SITE.url + p;
 
@@ -47,6 +48,7 @@ export async function llmsFull() {
     }
     L.push('Sources: ' + d.sources.map((s) => `${s.publisher} (${s.type}, retrieved ${s.retrieved})`).join('; '), '');
   }
+  L.push('## Holiday 2026', '', `Gifts for chainsaw owners and woodcutters: ${abs(GIFT_PATH)}`, `Black Friday chainsaw chain and accessories: ${abs(BF_PATH)}`, 'Black Friday 2026 is November 27. Cyber Monday 2026 is November 30. The site prints no prices, no countdown and no stock claims. Shipping dates are the ones USPS, UPS, FedEx and Amazon published, and each is linked from the Black Friday page.', '');
   L.push('## File size by pitch', '', '- 3/8" low-profile: 5/32" (4.0 mm) at .050" gauge; 11/64" (4.5 mm) at .043" gauge', '- .325": 3/16" (4.8 mm)', '- 3/8": 7/32" (5.5 mm)', '- .404": 7/32" (5.5 mm)', '');
   L.push('## Oregon 72 vs 73', '', 'Both 3/8" pitch. Oregon 72 is .050" gauge; Oregon 73 is .058" gauge. Gauge must match the guide-bar groove.', '');
   return L.join('\n');

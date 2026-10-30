@@ -3,10 +3,10 @@
  * is never written anywhere else. Rules: /dp/ links only for verified ASINs; otherwise a precise Amazon search;
  * no prices; bars with status conflict/verify never get a spec-matched chain link.
  */
-import { ASINS, amazonProductUrl, amazonSearchUrl } from '../config/affiliate';
+import { ASINS, amazonProductUrl, amazonSearchUrl, type AmazonImage } from '../config/affiliate';
 import { type Model, type Bar, pitchShort, gaugeShort, barLabel, chainKey } from './data';
 
-export type ShopLink = { href: string; label: string; kind: 'product' | 'search' | 'page'; note?: string };
+export type ShopLink = { href: string; label: string; kind: 'product' | 'search' | 'page'; note?: string; why?: string; image?: AmazonImage };
 export type ShopGroup = { title: string; links: ShopLink[]; feature?: boolean; allButtons?: boolean };
 
 const PITCH_Q: Record<string, string> = { '3/8-lp': '3/8 low profile', '325': '.325', '3/8': '3/8', '404': '.404', '1/4': '1/4' };
@@ -15,6 +15,7 @@ const specText = (pitch: string, gauge: number, dl?: number) => `${pitchShort(pi
 
 const product = (id: string, label?: string, note?: string): ShopLink => ({ href: amazonProductUrl(ASINS[id].asin), label: label ?? ASINS[id].label, kind: 'product', note });
 const search = (query: string, label: string, note?: string): ShopLink => ({ href: amazonSearchUrl(query), label, kind: 'search', note });
+const why = (link: ShopLink, text: string): ShopLink => ({ ...link, why: text });
 
 export type Spec = { pitch: string; gauge: number; dl: number };
 export const okSpec = (b: Bar): Spec | null => (b.status === 'ok' && b.pitch && b.gauge && b.drive_links ? { pitch: b.pitch, gauge: b.gauge, dl: b.drive_links } : null);
@@ -104,6 +105,29 @@ export function modelShop(model: Model): { groups: ShopGroup[]; flagged: boolean
   groups.push({ title: ok.length ? 'Bar, sharpening, safety and fluids' : 'Sharpening, safety and fluids', links: links.filter((l) => !chains.includes(l)) });
   const capped = capGroups(groups, LINK_CAP[`model:${model.id}`]);
   return { groups: capped, flagged, count: capped.reduce((n, g) => n + g.links.length, 0) };
+}
+
+/**
+ * One chain for a holiday CTA on a popular saw page: the shortest verified bar that has a
+ * checked product page, otherwise the shortest verified bar's spec search. Conflict / unverified
+ * saws return nothing — those pages must not point at a loop.
+ */
+export function holidayChain(model: Model): ShopLink | null {
+  const ok = model.data.bars.flatMap((b) => { const s = okSpec(b); return s ? [{ b, s }] : []; });
+  if (!ok.length) return null;
+  const seen = new Set<string>();
+  const specs = ok.filter(({ s }) => { const k = `${s.pitch}|${s.gauge}|${s.dl}`; if (seen.has(k)) return false; seen.add(k); return true; })
+    .sort((a, b) => a.b.lengths_in[0] - b.b.lengths_in[0] || a.s.gauge - b.s.gauge);
+  const withProduct = specs.filter(({ s }) => ASINS[`chain|${s.pitch}|${s.gauge}|${s.dl}`]);
+  const pick = (withProduct[0] ?? specs[0])!;
+  const link = chainLink(pick.s, `${barLabel(pick.b)} bar: `);
+  const otherGauge = specs.some((x) => x !== pick && x.b.lengths_in.some((l) => pick.b.lengths_in.includes(l)) && (x.s.gauge !== pick.s.gauge || x.s.pitch !== pick.s.pitch));
+  const otherLength = specs.some((x) => x !== pick && x.b.lengths_in[0] !== pick.b.lengths_in[0]);
+  let text = `Matches the ${barLabel(pick.b)} bar on this page (${specText(pick.s.pitch, pick.s.gauge, pick.s.dl)}). Buy it only if your bar stamp shows those three numbers.`;
+  if (otherGauge) text += ' This saw is also listed with another pitch or gauge. This listing does not fit that bar.';
+  if (otherLength) text += ' A different bar length on this page takes a different drive-link count.';
+  if (model.data.bars.some((b) => b.status !== 'ok')) text += ' Rows marked verify or conflict are not what this button is for.';
+  return { ...link, why: text };
 }
 
 /** Chain-spec page: one link per common drive-link count for this exact pitch + gauge. */
@@ -231,10 +255,50 @@ export function guideShop(slug: string): { groups: ShopGroup[]; count: number } 
     case 'why-a-chainsaw-chain-comes-off':
       add('The parts that hold the chain on', [LOOKUP(), SCRENCH(), CALIPER(), SPROCKET(), barOilLink(), glovesLink()]);
       break;
+    case 'gifts-for-chainsaw-owners-2026':
+      add('Tier 1 — used up this season', [
+        why(barOilLink(), 'Bar-and-chain oil goes in the oil tank, filled with the gas. It is not two-stroke engine oil.'),
+        why(product('kit-field'), 'Holds 5/32″, 3/16″ and 7/32″ files, so it still fits if you are not sure of the pitch. A single-size file is the wrong gift unless you know the chain.'),
+        why(glovesLink(), 'For handling chain with the engine off. Pick the glove size, not a chainsaw model name.'),
+        why(product('kit-5-32'), 'Only for 3/8″ low-profile chain in .050″ gauge. Wrong file for .325″ or standard 3/8″ chain.'),
+      ]);
+      add('Tier 2 — a spare chain, and only if the stamp matches', [
+        why(product('chain|3/8-lp|0.05|56', '3/8″ low profile · .050″ · 56 drive links'), '16″ class. Not low-profile .043″, and not standard 3/8″. Wrong loop if the stamp shows a different count.'),
+        why(product('chain|325|0.05|72', '.325″ · .050″ · 72 drive links'), '18″ class. A different length in the same pitch is a different drive-link count.'),
+        why(product('chain|3/8|0.05|72', 'Standard 3/8″ · .050″ · 72 drive links'), '20″ class. Oregon 72, not Oregon 73 (.058″) and not 3/8″ low profile.'),
+      ]);
+      add('Tier 3 — gear that stays with the saw', [
+        why(chapsLink(), 'Leg protection. Read the listing for an ASTM F1897 or UL mark and a length that overlaps the boots. Chaps are not cut-proof.'),
+        why(helmetLink(), 'Hard hat with a mesh face shield and hearing protection. It does not replace chaps or boots.'),
+        why(product('scabbard-18-22'), 'Covers an 18–22″ bar in the truck. Measure the bar if it is outside that range. It is not a substitute for shutting the engine off.'),
+      ]);
+      break;
+    case 'black-friday-chainsaw-chain':
+      add('A chain is right for one spec only', [
+        why(product('chain|3/8-lp|0.05|56', '3/8″ low profile · .050″ · 56 drive links'), 'A sale does not change the spec. This is the low-profile loop, not standard 3/8″.'),
+        why(product('chain|325|0.05|72', '.325″ · .050″ · 72 drive links'), 'Match the stamp, then look at the price Amazon shows. A different bar length is a different count.'),
+        why(product('chain|3/8|0.05|68', 'Standard 3/8″ · .050″ · 68 drive links'), 'A common 18″ full-size loop, not a 20″ one and not 3/8″ low profile.'),
+        why(product('chain|3/8|0.05|72', 'Standard 3/8″ · .050″ · 72 drive links'), 'Oregon 72. Not .058″ gauge and not 3/8″ low profile.'),
+        why(product('chain|325|0.063|67', '.325″ · .063″ · 67 drive links'), 'Gauge has to match the bar groove. This is not the .050″ .325″ loop.'),
+      ]);
+      add('Sharpening and oil', [
+        why(product('kit-field'), 'Three file diameters. Safer than a single file when you have not read the pitch off the saw.'),
+        why(CALIPER(), 'Measures drive-link thickness and rivet spacing before you commit to a loop you cannot return to the woods.'),
+        why(barOilLink(), 'Bar-and-chain oil. A discount does not make used motor oil acceptable in the oil tank.'),
+      ]);
+      add('Safety gear', [
+        why(chapsLink(), 'Check ASTM F1897 or a UL mark and the overlap over the boots. No price is printed here.'),
+        why(helmetLink(), 'Forestry helmet with face shield and ear muffs. Fit is the check, not a percent-off badge.'),
+        why(glovesLink(), 'Gloves for sharpening and for running the saw. Size them to the hand.'),
+      ]);
+      break;
   }
   if (slug === '3-8-low-profile-vs-standard-chain' && groups[1]) {
     groups[1].feature = true;
     groups[1].allButtons = true;
+  }
+  if (slug === 'gifts-for-chainsaw-owners-2026' || slug === 'black-friday-chainsaw-chain') {
+    for (const g of groups) { g.feature = true; g.allButtons = true; }
   }
   return { groups, count: groups.reduce((n, g) => n + g.links.length, 0) };
 }
