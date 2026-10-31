@@ -6,19 +6,20 @@ import { SITE } from '../lib/data';
 import { webPageLd } from '../lib/ld';
 import { GA4_ID } from '../config/analytics';
 
-const desc = "Privacy policy for sawchainsize.com: what we collect (nothing for the lookup tools; Google Analytics page-view statistics), cookies, how to opt out, and how to make a privacy request.";
+const desc = "Privacy policy for sawchainsize.com: lookup tools, analytics, stored email requests, and deletion by email to contact@sawchainsize.com only.";
 const jsonld = [webPageLd("Privacy Policy", "/privacy/", desc, SITE.dataDate, "WebPage")];
 ---
 <Base title={"Privacy Policy"} description={desc} path="/privacy/" nav="about" crumbs={[{ name: 'Privacy policy', path: '/privacy/' }]} jsonld={jsonld} modified={SITE.dataDate}>
   <div class="wrap">
   <div class="pagehead"><Crumbs crumbs={[{ name: 'Privacy policy', path: '/privacy/' }]} /><h1>Privacy policy</h1></div>
   <div class="prose">
-    <p class="small muted">Last updated: <time datetime="2026-10-26">26 October 2026</time>. Applies to sawchainsize.com.</p>
+    <p class="small muted">Last updated: <time datetime="2026-10-31">31 October 2026</time>. Applies to sawchainsize.com.</p>
     <h2>What we collect</h2>
     <ul>
       <li><strong>Nothing, for the lookup tools.</strong> The Chain Finder runs entirely in your browser. Your selections are not sent to us or stored.</li>
       <li><strong>Analytics (Google Analytics 4).</strong> {GA4_ID ? 'We use' : 'We may use'} Google Analytics 4, a web analytics service from Google, to learn which pages are useful so we can improve them. When it runs, Google receives page views and basic usage events, the page and referrer (the site you came from), your approximate location (country/region/city derived from your IP address), and device, browser and operating-system details. Google Analytics 4 does not log or store individual IP addresses. We do not use Google Analytics to build advertising profiles: Google signals and ad personalization are switched off for this site, and the site shows no ads. The analytics script loads after the page has finished loading, and not at all if you have opted out (below).</li>
-      <li><strong>Contact messages.</strong> If you email us or use the contact form (which opens your own email app), we receive your email address and the content of your message, and use them only to reply and to act on corrections or requests.</li>
+      <li><strong>Contact messages.</strong> If you email us or use the contact form (which opens your own email app), we receive your email address and the content of your message, and use them only to reply and to act on corrections or requests. That form does not store anything on this site.</li>
+      <li><strong>Stored requests.</strong> Saw pages have an “Email me my chain specs” form. If you submit it, we store your email address, the page address, the purpose (chain specs for that saw and bar length, or a sharpen or replace reminder), the details you selected (saw, bar length, and, for a reminder, whether you asked about sharpening or replacing), the consent sentence on the form (“We'll only use your email for this request.”), the time the request was stored, and a hash of the IP address used to submit it. We do not store the IP address itself. We keep the request so it can be acted on later, and only for that request. The form does not send email. It is not a newsletter, a weekly email, or a deals list. Rate-limit records (the IP hash and a time) are deleted after about a day. The stored request itself is kept until you ask us to delete it.</li>
     </ul>
     <h2>Cookies</h2>
     <ul>
@@ -36,12 +37,13 @@ const jsonld = [webPageLd("Privacy Policy", "/privacy/", desc, SITE.dataDate, "W
     </ul>
     <h2>What we never do</h2>
     <ul>
-      <li>We do not sell personal data. We have none to sell: no accounts, no checkout, no mailing list at this time.</li>
+      <li>We do not sell, rent, or trade personal data. Email addresses stored with a request are not sold and are not shared for advertising.</li>
+      <li>We do not use a stored email for a newsletter, a weekly email, or deals. There are no accounts and no checkout on this site.</li>
       <li>We do not collect payment information — purchases happen entirely on the retailer's site.</li>
       <li>We do not knowingly collect information from children; this is a power-tool reference site intended for adults.</li>
     </ul>
     <h2>Your requests</h2>
-    <p>To ask what information we hold about you (for email correspondence, that is simply your messages), or to have it deleted, write to <span class="mono"><Email /></span> or use the <a href="/contact/">contact page</a>. We respond to privacy requests from any jurisdiction, including under Canada's PIPEDA and applicable US state laws.</p>
+    <p>To ask what information we hold about you, or to have a stored request or an email correspondence deleted, email <span class="mono"><Email /></span> only. That address is the only deletion path. We respond to privacy requests from any jurisdiction, including under Canada's PIPEDA and applicable US state laws.</p>
     <h2>Changes</h2>
     <p>If this policy changes, the new version will be posted here with a new date at the top.</p>
   </div>
