@@ -1,0 +1,143 @@
+---
+import { TURNSTILE_SITEKEY } from '../config/turnstile';
+
+const CONSENT = "We'll only use your email for this request.";
+interface Props {
+  sawName: string;
+  sawId: string;
+  lengths: number[];
+  pagePath: string;
+}
+const { sawName, sawId, lengths, pagePath } = Astro.props;
+const bars = [...new Set(lengths)].filter((n) => Number.isInteger(n)).sort((a, b) => a - b);
+---
+{bars.length > 0 && (
+<section class="block" id="email-specs" aria-labelledby="email-specs-title">
+  <h2 id="email-specs-title">Email me my chain specs</h2>
+  <p class="request-lead">Store a request for the {sawName}. Pick the bar length, and choose chain specs or a sharpen or replace reminder. We save the request. This form does not send email.</p>
+  <form class="request" id="email-specs-form" action="/api/subscribe" method="post" data-sitekey={TURNSTILE_SITEKEY || undefined}>
+    <fieldset class="choice">
+      <legend>What should we store?</legend>
+      <label><input type="radio" name="purpose" value="chain-specs" checked required /> Email me my chain specs</label>
+      <label><input type="radio" name="purpose" value="sharpen-replace" /> Request a sharpen or replace reminder</label>
+    </fieldset>
+    <label for="req-bar">Bar length</label>
+    <select id="req-bar" name="bar_length" required>
+      {bars.map((n) => <option value={n}>{n}″</option>)}
+    </select>
+    <fieldset class="choice">
+      <legend>For a reminder request</legend>
+      <label><input type="radio" name="kind" value="sharpen" /> Sharpen</label>
+      <label><input type="radio" name="kind" value="replace" /> Replace</label>
+    </fieldset>
+    <p class="small muted">A reminder request stores this saw, the bar length, and whether you asked about sharpening or replacing. It does not schedule or send a reminder.</p>
+    <label for="req-email">Email</label>
+    <input id="req-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" required />
+    <p class="consent">{CONSENT}</p>
+    <label class="check">
+      <input type="checkbox" name="consent" value="yes" required />
+      Store this request under that sentence.
+    </label>
+    <input type="hidden" name="consent_text" value={CONSENT} />
+    <input type="hidden" name="page_url" value={pagePath} />
+    <input type="hidden" name="saw" value={sawName} />
+    <input type="hidden" name="saw_id" value={sawId} />
+    <div class="hp" aria-hidden="true">
+      <label for="req-fax">Fax number</label>
+      <input id="req-fax" name="fax_number" type="text" tabindex="-1" autocomplete="off" />
+    </div>
+    <div data-turnstile></div>
+    <button type="submit">Store this request</button>
+    <p class="status" data-status role="status" aria-live="polite"></p>
+  </form>
+  <noscript><p class="small muted">Storing a request from this browser needs JavaScript so the bot check can run. Nothing is sent until that check finishes.</p></noscript>
+</section>
+)}
+<script is:inline>
+(function () {
+  var form = document.getElementById('email-specs-form');
+  if (!form || !window.fetch) return;
+  var status = form.querySelector('[data-status]');
+  var button = form.querySelector('button[type="submit"]');
+  var sitekey = form.getAttribute('data-sitekey') || '';
+  var widgetId = null;
+  function setStatus(msg, kind) {
+    status.textContent = msg;
+    status.className = 'status' + (kind ? ' ' + kind : '');
+  }
+  function loadTurnstile() {
+    if (window.turnstile) return Promise.resolve();
+    return new Promise(function (resolve, reject) {
+      var s = document.createElement('script');
+      s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      s.async = true;
+      s.onload = function () { resolve(); };
+      s.onerror = function () { reject(new Error('load')); };
+      document.head.appendChild(s);
+    });
+  }
+  function token() {
+    if (!sitekey) return Promise.resolve('');
+    return loadTurnstile().then(function () {
+      return new Promise(function (resolve, reject) {
+        var el = form.querySelector('[data-turnstile]');
+        if (widgetId !== null && window.turnstile.remove) {
+          window.turnstile.remove(widgetId);
+          widgetId = null;
+        }
+        widgetId = window.turnstile.render(el, {
+          sitekey: sitekey,
+          size: 'invisible',
+          execution: 'execute',
+          action: 'subscribe',
+          callback: function (t) { resolve(t || ''); },
+          'error-callback': function () { reject(new Error('verify')); },
+          'timeout-callback': function () { reject(new Error('timeout')); }
+        });
+        window.turnstile.execute(widgetId);
+      });
+    });
+  }
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    button.disabled = true;
+    setStatus('Storing the request…', '');
+    token().then(function (t) {
+      var fd = new FormData(form);
+      if (t) fd.set('cf-turnstile-response', t);
+      return fetch('/api/subscribe', { method: 'POST', body: fd, headers: { accept: 'application/json' } });
+    }).then(function (res) {
+      return res.json().then(function (data) { return { ok: res.ok, data: data }; }, function () { return { ok: false, data: {} }; });
+    }).then(function (out) {
+      var msg = (out.data && out.data.message) || (out.ok ? 'Request stored.' : 'Could not store the request.');
+      setStatus(msg, out.ok ? 'ok' : 'bad');
+    }).catch(function (err) {
+      var verify = err && (err.message === 'load' || err.message === 'verify' || err.message === 'timeout');
+      setStatus(verify ? 'Verification did not complete. Reload the page and try again.' : 'Could not store the request. You can try again.', 'bad');
+    }).then(function () {
+      button.disabled = false;
+    });
+  });
+})();
+</script>
+<style>
+  .request-lead{max-width:68ch}
+  form.request{position:relative;max-width:560px;margin-top:8px}
+  form.request legend{font-weight:700;padding:0}
+  form.request fieldset.choice{border:1px solid var(--line);border-radius:4px;margin:14px 0 0;padding:10px 12px 12px;display:flex;flex-direction:column;gap:8px}
+  form.request fieldset.choice label{font-weight:500;margin:0;display:flex;gap:8px;align-items:flex-start}
+  form.request label{display:block;font-weight:600;font-size:.9rem;margin:14px 0 5px}
+  form.request input[type="email"],form.request select{width:100%;padding:11px 12px;font:inherit;background:var(--card);color:var(--ink);border:1.5px solid var(--line-strong);border-radius:4px}
+  form.request .consent{margin:14px 0 6px;font-weight:600}
+  form.request .check{display:flex;gap:8px;align-items:flex-start;font-weight:500}
+  form.request .check input{margin-top:4px}
+  form.request button{margin-top:16px;background:var(--accent);color:#fff;border:0;font:inherit;font-weight:700;padding:12px 24px;border-radius:4px;cursor:pointer}
+  form.request button:hover{background:var(--accent-dark)}
+  form.request button:disabled{opacity:.7;cursor:progress}
+  form.request .status{min-height:1.4em;margin:10px 0 0}
+  form.request .status.ok{color:var(--ok)}
+  form.request .status.bad{color:var(--accent-dark)}
+  form.request .hp{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(1px,1px,1px,1px)}
+  form.request [data-turnstile]{position:absolute;width:0;height:0;overflow:hidden}
+</style>
+)
