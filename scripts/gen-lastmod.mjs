@@ -44,6 +44,11 @@ idx('/bars/', 'src/pages/bars/index.astro');
 idx('/data/', 'src/pages/data/index.astro');
 for (const [url, f] of [['/about/', 'about'], ['/how-we-verify/', 'how-we-verify'], ['/affiliate-disclosure/', 'affiliate-disclosure'], ['/privacy/', 'privacy'], ['/terms/', 'terms'], ['/contact/', 'contact']]) out[url] = gitDate(`src/pages/${f}.astro`);
 out['/guides/'] = gitDate('src/pages/guides/index.astro');
+const toolsDir = 'src/pages/tools';
+if (fs.existsSync(toolsDir)) {
+  out['/tools/'] = gitDate('src/pages/tools/index.astro');
+  for (const f of fs.readdirSync(toolsDir).filter((f) => f.endsWith('.astro') && f !== 'index.astro')) out[`/tools/${f.replace('.astro', '')}/`] = gitDate(path.join(toolsDir, f));
+}
 for (const f of fs.readdirSync('src/pages/guides').filter((f) => f !== 'index.astro')) out[`/guides/${f.replace('.astro', '')}/`] = gitDate(`src/pages/guides/${f}`);
 const sorted = Object.fromEntries(Object.entries(out).sort(([a], [b]) => a.localeCompare(b)));
 fs.writeFileSync('src/data/page-dates.json', JSON.stringify(sorted, null, 2) + '\n');

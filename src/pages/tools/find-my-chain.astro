@@ -1,0 +1,153 @@
+---
+import Base from '../../layouts/Base.astro';
+import Byline from '../../components/Byline.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ToolHoliday from '../../components/ToolHoliday.astro';
+import { AMAZON_DISCLOSURE, AMAZON_TAG } from '../../config/affiliate';
+import { SPEC } from '../../lib/data';
+import { faqLd, webPageLd } from '../../lib/ld';
+import { AFFILIATE_REL, AFFILIATE_TARGET, toolDataset } from '../../lib/tool-data';
+import { specKey } from '../../lib/fit-explain';
+import dates from '../../data/page-dates.json';
+
+const path = '/tools/find-my-chain/';
+const modified = (dates as Record<string, string>)[path];
+const data = await toolDataset();
+const loop = data.specs.find((s) => s.key === specKey('3/8', 0.05, 72));
+if (!loop?.parts.some((p) => p.brand === 'Oregon' && p.partNo === '72LPX072')) throw new Error('Find my chain is missing Oregon 72LPX072 on 3/8 .050 72');
+if (!loop.parts.some((p) => p.brand === 'Husqvarna' && p.partNo === 'H80-72')) throw new Error('Find my chain is missing Husqvarna H80-72');
+const ms250 = data.models['stihl-ms-250'];
+if (!ms250 || ms250.bars.some((b) => b.status === 'ok')) throw new Error('MS 250 must not be treated as a verified loop');
+for (const spec of data.specs) {
+  if (!spec.shop) continue;
+  if (!spec.shop.href.startsWith('https://www.amazon.com/')) throw new Error(`Bad Amazon host on ${spec.key}`);
+  if (!spec.shop.href.includes(`tag=${AMAZON_TAG}`)) throw new Error(`Untagged Amazon URL on ${spec.key}`);
+}
+const pitches = Object.entries(SPEC.pitches).map(([id, p]) => ({ id, label: (p as { label: string }).label }));
+const gauges = Object.entries(SPEC.gauges).map(([id, g]) => ({ id, label: (g as { label: string }).label }));
+const desc = 'Find chainsaw chain part numbers by saw or by pitch, gauge and drive links. Verified Oregon, STIHL, Husqvarna and Echo loops, each linked to its saw page.';
+const faqs = [
+  { q: 'What does Find my chain return?', a: 'Part numbers stored on verified rows that share the pitch, gauge and drive-link count you asked for. The chain brands are whatever those rows name, including Oregon, STIHL, Husqvarna and Echo. Each number links to the saw page it came from. The homepage Chain Finder is a different tool: it shows the spec for one saw and one bar, not this cross-brand list.' },
+  { q: 'Does a matching part number from another brand fit?', a: 'It fits the three numbers on that verified row. It fits your saw only when your bar stamp shows the same pitch, gauge and drive-link count. A family code such as Oregon 72 is the pitch and gauge. The loop is the part number that carries the drive-link count.' },
+  { q: 'Why does bar length not pick the chain?', a: 'Two bars of different lengths can be listed with the same drive-link count, and one length can be listed with more than one count. The tool can mark rows that include the length you type. The match is still the three numbers.' },
+  { q: 'What if my saw is not listed?', a: 'Enter pitch, gauge and drive links from the bar stamp. If no verified row has those three numbers, the tool says so and does not invent a part number. The verification guide is how to read the stamp.' },
+  { q: 'Can this page email me the specs?', a: 'Saw pages have an Email me my chain specs form. It stores a request for that saw and a bar length. It does not send email, and it is not a newsletter. This page links to that form after you pick a saw. It does not add a second form.' },
+];
+const crumbs = [{ name: 'Tools', path: '/tools/' }, { name: 'Find my chain', path }];
+const jsonld = [
+  webPageLd('Find chainsaw chain part numbers', path, desc, modified),
+  faqLd(faqs),
+  {
+    '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Find my chain',
+    applicationCategory: 'ReferenceApplication', operatingSystem: 'Any', url: 'https://sawchainsize.com' + path,
+    isAccessibleForFree: true,
+    description: 'Look up chainsaw chain part numbers by saw model or by pitch, gauge and drive links, from verified rows on SawChainSize.com.',
+  },
+];
+---
+<Base title="Find Chainsaw Chain Part Numbers" description={desc} path={path} crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Tools', path: '/tools/' }, { name: 'Find my chain' }]} />
+      <h1>Find my chain</h1>
+      <p class="lede">Pick the saw, or type the pitch, gauge and drive links. The result is the part numbers stored on verified rows that share those three numbers, across Oregon, STIHL, Husqvarna, Echo and the other brands on those rows. Each number links to the saw page it came from.</p>
+      <Byline label="Last updated" />
+    </div>
+
+    <section class="block">
+      <h2>Example: standard 3/8″, .050″, 72 drive links</h2>
+      <p style="max-width:72ch">One verified spec, from the same rows the tool uses. Each part number is stored on the saw pages linked beside it. A family code is not in this table: these are the loop numbers that carry the drive-link count.</p>
+      <div class="tblwrap"><table>
+        <thead><tr><th scope="col">Part number</th><th scope="col">Brand</th><th scope="col">On the row</th><th scope="col">Listed on</th></tr></thead>
+        <tbody>
+          {loop.parts.map((part) => (
+            <tr>
+              <td class="num">{part.partNo}</td>
+              <td>{part.brand}</td>
+              <td>{part.role === 'oem' ? 'OEM' : 'Equivalent'}</td>
+              <td>{part.saws.map((saw, i) => <>{i > 0 && '; '}<a href={saw.url}>{saw.name}</a> ({saw.lengths.map((n) => `${n}″`).join(', ')})</>)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table></div>
+      <p class="src">Verified rows only. The tool below runs the same match for any saw or any pitch, gauge and drive-link count in the dataset.</p>
+    </section>
+
+    <section class="block">
+      <p style="max-width:72ch">The <a href="/#finder">homepage Chain Finder</a> answers a different question: the spec for one saw and one fitted bar. This page takes a spec and lists every matching part number in the dataset. It uses verified rows only. A row marked conflict or verify is not turned into a part number. Bar length is optional and only labels which rows mention that length.</p>
+      <p style="max-width:72ch">Family codes (Oregon 72, STIHL 33 RS3, Husqvarna H80) are pitch and gauge. They are shown separately from the loop part numbers, which carry the drive-link count. The code table is the same one as the <a href="/guides/chain-size-chart/">identification chart</a>. A dash means that brand’s code is not verified here for that pitch and gauge.</p>
+    </section>
+
+    <div class="finder" id="find-chain" data-rel={AFFILIATE_REL} data-target={AFFILIATE_TARGET}>
+      <div class="finder-head">Find my chain <span>VERIFIED ROWS ONLY</span></div>
+      <div class="finder-body">
+        <form id="find-saw-form">
+          <p class="kicker">From the saw</p>
+          <div class="f-grid">
+            <div>
+              <label for="fc-brand">Brand</label>
+              <select id="fc-brand">
+                <option value="">Choose a brand…</option>
+                {data.brands.map((b) => <option value={b.id}>{b.label}</option>)}
+              </select>
+            </div>
+            <div>
+              <label for="fc-model">Model</label>
+              <select id="fc-model" disabled><option value="">Pick a brand first</option></select>
+            </div>
+          </div>
+          <button class="f-btn" type="submit">Show part numbers for this saw</button>
+        </form>
+        <form id="find-spec-form">
+          <p class="kicker" style="margin-top:22px">Or from the bar</p>
+          <div class="stamp-grid">
+            <label>Bar length (optional)
+              <input id="fs-len" name="len" type="number" inputmode="numeric" min="8" max="72" placeholder="18" />
+            </label>
+            <label>Pitch
+              <select id="fs-pitch" name="pitch">
+                <option value="">Choose</option>
+                {pitches.map((p) => <option value={p.id}>{p.label}</option>)}
+              </select>
+            </label>
+            <label>Gauge
+              <select id="fs-gauge" name="gauge">
+                <option value="">Choose</option>
+                {gauges.map((g) => <option value={g.id}>{g.label}</option>)}
+              </select>
+            </label>
+            <label>Drive links
+              <input id="fs-dl" name="dl" type="number" inputmode="numeric" min="20" max="200" placeholder="72" />
+            </label>
+          </div>
+          <button class="f-btn" type="submit">Show part numbers for these numbers</button>
+        </form>
+        <div class="f-result" id="find-result" aria-live="polite"></div>
+        <noscript><p class="small">The lookup needs JavaScript. Without it, open the <a href="/saws/">saw pages</a> or the <a href="/chain/">pitch and gauge pages</a>. Each lists the part numbers we have for that saw or spec.</p></noscript>
+      </div>
+    </div>
+    <script type="application/json" id="tool-data" set:html={JSON.stringify(data).replace(/</g, '\\u003c')} />
+    <template id="shop-disclosure-tpl">
+      <p class="shop-disclosure"><strong>{AMAZON_DISCLOSURE}</strong> <span class="muted">The button opens Amazon. <a href="/affiliate-disclosure/">How that works</a>. No price is printed here.</span></p>
+    </template>
+
+    <section class="block" id="email-specs">
+      <h2>Email me my chain specs</h2>
+      <p style="max-width:72ch" id="email-hook">Pick a saw in the tool and the link here opens that saw’s form. The form stores a request. It does not send email.</p>
+      <p class="small">The form is the one already on the saw page. It is not a newsletter and it does not sign you up for updates. Nothing on this tool is mailed.</p>
+    </section>
+
+    <ToolHoliday />
+
+    <section class="block">
+      <h2>Questions</h2>
+      <FaqList faqs={faqs} />
+      <p style="margin-top:14px"><a href="/tools/chain-compatibility/">Compatibility checker</a> · <a href="/guides/how-to-verify-chain-size/">Read the bar stamp</a> · <a href="/guides/chain-part-numbers/">How part numbers are decoded</a> · <a href="/chain/">Chain specs</a> · <a href="/saws/">All saws</a></p>
+    </section>
+  </div>
+</Base>
+<script>
+  import { mountFind } from '../../scripts/chain-tools';
+  mountFind();
+</script>

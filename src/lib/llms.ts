@@ -23,6 +23,10 @@ export async function llmsTxt() {
   for (const g of chains) L.push(`- [${pitchLabel(g.pitch)} pitch, ${gaugeLabel(g.gauge)} gauge](${abs(chainUrl(g.key))})`);
   L.push('', '## Bar lengths', '');
   for (const g of bars) L.push(`- [${g.length}-inch bar](${abs(barUrl(g.length))})`);
+  L.push('', '## Tools', '');
+  L.push(`- [Chain tools](${abs('/tools/')}): Find my chain and the bar/chain compatibility checker. Both read the same verified rows as the saw pages.`);
+  L.push(`- [Find my chain](${abs('/tools/find-my-chain/')}): part numbers from verified rows that share a pitch, gauge and drive-link count, across the chain brands stored on those rows, each linked to its saw page. Not the homepage Chain Finder.`);
+  L.push(`- [Bar and chain compatibility checker](${abs('/tools/chain-compatibility/')}): says whether a chain’s pitch, gauge and drive links match a published bar or the numbers on a stamp, citing Oregon’s fit rules. Does not call a fit when sources conflict.`);
   L.push('', '## Guides', '');
   for (const [p, t, d] of guides) L.push(`- [${t}](${abs(p)}): ${d}`);
   L.push('', '## Data', '', `- [Chain size dataset](${abs('/data/')}): pitch, gauge, drive links, file size and part numbers by saw model and bar length, with verification status and sources; license note and citation on the page.`, `- [CSV download](${abs('/data/sawchainsize-chain-sizes.csv')}): one row per saw, bar setup and bar length.`, `- [JSON download](${abs('/data/sawchainsize-chain-sizes.json')}): the same rows with a column dictionary.`);
@@ -48,6 +52,7 @@ export async function llmsFull() {
     }
     L.push('Sources: ' + d.sources.map((s) => `${s.publisher} (${s.type}, retrieved ${s.retrieved})`).join('; '), '');
   }
+  L.push('## Tools', '', `Find my chain: ${abs('/tools/find-my-chain/')}`, `Bar and chain compatibility: ${abs('/tools/chain-compatibility/')}`, 'Both use verified rows only. A conflict or verify row is not turned into a matched part number. The tools do not show prices. Amazon links, when a verified spec has one, use the site Associates tag and sit next to the disclosure. The email hook points at the existing saw-page form, which stores a request and does not send mail.', '');
   L.push('## Holiday 2026', '', `Gifts for chainsaw owners and woodcutters: ${abs(GIFT_PATH)}`, `Black Friday chainsaw chain and accessories: ${abs(BF_PATH)}`, 'Black Friday 2026 is November 27. Cyber Monday 2026 is November 30. The site prints no prices, no countdown and no stock claims. Shipping dates are the ones USPS, UPS, FedEx and Amazon published, and each is linked from the Black Friday page.', '');
   L.push('## File size by pitch', '', '- 3/8" low-profile: 5/32" (4.0 mm) at .050" gauge; 11/64" (4.5 mm) at .043" gauge', '- .325": 3/16" (4.8 mm)', '- 3/8": 7/32" (5.5 mm)', '- .404": 7/32" (5.5 mm)', '');
   L.push('## Oregon 72 vs 73', '', 'Both 3/8" pitch. Oregon 72 is .050" gauge; Oregon 73 is .058" gauge. Gauge must match the guide-bar groove.', '');
