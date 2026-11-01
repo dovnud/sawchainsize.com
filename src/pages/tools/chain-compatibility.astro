@@ -1,0 +1,173 @@
+---
+import Base from '../../layouts/Base.astro';
+import Byline from '../../components/Byline.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ToolHoliday from '../../components/ToolHoliday.astro';
+import { AMAZON_DISCLOSURE } from '../../config/affiliate';
+import { SPEC } from '../../lib/data';
+import { explainFit, OREGON_FAQ, OREGON_FINDING, OREGON_MANUAL } from '../../lib/fit-explain';
+import { faqLd, webPageLd } from '../../lib/ld';
+import { AFFILIATE_REL, AFFILIATE_TARGET, toolDataset } from '../../lib/tool-data';
+import dates from '../../data/page-dates.json';
+
+const path = '/tools/chain-compatibility/';
+const modified = (dates as Record<string, string>)[path];
+const data = await toolDataset();
+const mismatch = explainFit({ pitch: '3/8', gauge: 0.05, dl: 72, status: 'stamp' }, { pitch: '3/8', gauge: 0.058, dl: 72 });
+const aligned = explainFit({ pitch: '3/8', gauge: 0.05, dl: 72, status: 'stamp' }, { pitch: '3/8', gauge: 0.05, dl: 72 });
+if (mismatch.verdict !== 'nomatch' || !mismatch.lines.some((l) => l.text.includes('Oregon 73'))) throw new Error('72 vs 73 example drifted');
+if (aligned.verdict !== 'match') throw new Error('equal triple should match');
+const pitches = Object.entries(SPEC.pitches).map(([id, p]) => ({ id, label: (p as { label: string }).label }));
+const gauges = Object.entries(SPEC.gauges).map(([id, g]) => ({ id, label: (g as { label: string }).label }));
+const desc = 'Compare a chainsaw chain’s pitch, gauge and drive links with a published bar or a stamp. Oregon’s rules explain a match. A conflict is not called a fit.';
+const faqs = [
+  { q: 'What does the compatibility checker decide?', a: 'Whether the pitch, gauge and drive-link count on a chain match the bar you named. A match means those three numbers are the same. It does not mean this site has inspected your bar or your sprocket.' },
+  { q: 'Why does the wrong gauge fail when the pitch matches?', a: 'Oregon defines gauge as the drive-link thickness where it fits the guide-bar groove, and says the chain gauge and the bar gauge have to match. A thicker drive link will not seat. A thinner one has side clearance. Oregon 72 and Oregon 73 are the common case: both standard 3/8″, .050″ versus .058″.' },
+  { q: 'Are 3/8″ low profile and standard 3/8″ the same pitch?', a: 'No. Oregon’s chart lists them as different families. Low profile is types 90 and 91. Standard 3/8″ is types 72, 73 and 75. Oregon says the drive sprocket must be the same pitch as the chain, and the bar-nose sprocket must match when the bar has one.' },
+  { q: 'What if the saw page says the sources conflict?', a: 'The checker does not call a fit. It repeats what each stored report says. The stamp on the bar is the tiebreaker, which is the same rule as the saw page.' },
+  { q: 'Does a matching published spec prove the sprocket matches?', a: 'No. Oregon says the drive sprocket must be the same pitch as the chain. The rows name the chain on the bar. They do not name the sprocket tooth count on your saw.' },
+];
+const crumbs = [{ name: 'Tools', path: '/tools/' }, { name: 'Compatibility checker', path }];
+const ext = (href: string) => (href.startsWith('http') ? { target: '_blank' as const, rel: 'nofollow noopener' } : {});
+const jsonld = [
+  webPageLd('Chainsaw bar and chain compatibility checker', path, desc, modified),
+  faqLd(faqs),
+  {
+    '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Bar and chain compatibility checker',
+    applicationCategory: 'ReferenceApplication', operatingSystem: 'Any', url: 'https://sawchainsize.com' + path,
+    isAccessibleForFree: true,
+    description: 'Compare a chainsaw chain’s pitch, gauge and drive links with a published bar spec or with numbers read from the bar stamp.',
+  },
+];
+---
+<Base title="Chainsaw Bar and Chain Compatibility" description={desc} path={path} crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Tools', path: '/tools/' }, { name: 'Compatibility checker' }]} />
+      <h1>Bar and chain compatibility</h1>
+      <p class="lede">Enter the bar and the chain you are about to buy. The checker says whether pitch, gauge and drive links match, and which number failed. It uses Oregon’s published fit rules and, when you pick a saw, the row already on that saw’s page.</p>
+      <Byline label="Last updated" />
+    </div>
+
+    <section class="block">
+      <h2>The three rules</h2>
+      <p style="max-width:72ch">Pitch is the distance between any three consecutive rivets, divided by two. Oregon says the drive sprocket must be the same pitch as the chain, and the bar-nose sprocket must match when the bar has one. 3/8″ low profile (Oregon 90 and 91) and standard 3/8″ (Oregon 72, 73 and 75) are different families on that chart.</p>
+      <p style="max-width:72ch">Gauge is the thickness of the drive link where it fits the guide-bar groove. Oregon says the chain gauge and the bar gauge have to match. A thicker drive link will not seat. A thinner one has side clearance. Oregon 72 is .050″ and Oregon 73 is .058″, both standard 3/8″.</p>
+      <p style="max-width:72ch">Drive links are the tangs in the loop. A fit-up row names one count for a bar. A different count is a different loop. This checker treats only an equal count as a match. It does not guess that a near count will tension.</p>
+      <p class="src">Pitch, gauge, the low-profile split and the sprocket rule: Oregon, <a href={OREGON_FINDING} target="_blank" rel="nofollow noopener">Finding the Right Saw Chain</a>; <a href={OREGON_MANUAL} target="_blank" rel="nofollow noopener">Maintenance and Safety Manual</a>; <a href={OREGON_FAQ} target="_blank" rel="nofollow noopener">FAQ</a>. Restated on the <a href="/guides/chainsaw-chain-gauge/">gauge</a>, <a href="/guides/3-8-low-profile-vs-standard-chain/">low profile vs standard</a>, <a href="/guides/oregon-72-vs-73-chain/">72 vs 73</a> and <a href="/guides/chainsaw-drive-sprocket/">sprocket</a> guides. Drive-link counting: <a href="/guides/how-to-count-drive-links/">how to count drive links</a>. A saw row cites the source printed on that saw’s page.</p>
+    </section>
+
+    <section class="block">
+      <h2>Worked example: Oregon 72 against Oregon 73</h2>
+      <p style="max-width:72ch">Bar numbers: standard 3/8″, .050″, 72 drive links. Chain on the box: standard 3/8″, .058″, 72 drive links. Same pitch family, same count, different gauge. The checker does not call that a fit.</p>
+      <div class="callout"><b>{mismatch.headline}</b><p>{mismatch.detail}</p></div>
+      {mismatch.lines.map((line) => (
+        <>
+          <h3>{line.title}</h3>
+          <p>{line.ok === true && <><span class="tag">MATCH</span> </>}{line.ok === false && <><span class="tag verify">DOES NOT MATCH</span> </>}{line.text}</p>
+          {line.links.length > 0 && <p class="src">Sources: {line.links.map((item, i) => <>{i > 0 && ' · '}<a href={item.href} {...ext(item.href)}>{item.label}</a></>)}</p>}
+        </>
+      ))}
+      <div class="oknote"><b>{aligned.headline}</b><p>The same checker, with the chain changed to .050″ and 72 drive links, returns a match of the three numbers. {aligned.detail}</p></div>
+    </section>
+
+    <div class="finder" id="compat-check" data-rel={AFFILIATE_REL} data-target={AFFILIATE_TARGET}>
+      <div class="finder-head">Compatibility checker <span>PUBLISHED SPECS ONLY</span></div>
+      <div class="finder-body">
+        <form id="ck-form">
+          <div class="stamp-grid">
+            <label>Compare the chain with
+              <select id="ck-mode">
+                <option value="saw">A published bar on a saw</option>
+                <option value="stamp">Numbers I read on the bar stamp</option>
+              </select>
+            </label>
+          </div>
+          <div id="ck-saw-fields">
+            <div class="f-grid" style="margin-top:14px">
+              <div>
+                <label for="ck-brand">Brand</label>
+                <select id="ck-brand">
+                  <option value="">Choose a brand…</option>
+                  {data.brands.map((b) => <option value={b.id}>{b.label}</option>)}
+                </select>
+              </div>
+              <div>
+                <label for="ck-model">Model</label>
+                <select id="ck-model" disabled><option value="">Pick a brand first</option></select>
+              </div>
+              <div>
+                <label for="ck-bar">Bar</label>
+                <select id="ck-bar" disabled><option value="">Pick a model first</option></select>
+              </div>
+            </div>
+          </div>
+          <div id="ck-stamp-fields">
+            <p class="kicker" style="margin-top:16px">Stamp on the bar</p>
+            <div class="stamp-grid">
+              <label>Pitch
+                <select id="ck-bp">
+                  <option value="">Choose</option>
+                  {pitches.map((p) => <option value={p.id}>{p.label}</option>)}
+                </select>
+              </label>
+              <label>Gauge
+                <select id="ck-bg">
+                  <option value="">Choose</option>
+                  {gauges.map((g) => <option value={g.id}>{g.label}</option>)}
+                </select>
+              </label>
+              <label>Drive links
+                <input id="ck-bd" type="number" inputmode="numeric" min="20" max="200" placeholder="72" />
+              </label>
+            </div>
+          </div>
+          <p class="kicker" style="margin-top:18px">Chain you are about to buy</p>
+          <div class="stamp-grid">
+            <label>Pitch
+              <select id="ck-cp">
+                <option value="">Choose</option>
+                {pitches.map((p) => <option value={p.id}>{p.label}</option>)}
+              </select>
+            </label>
+            <label>Gauge
+              <select id="ck-cg">
+                <option value="">Choose</option>
+                {gauges.map((g) => <option value={g.id}>{g.label}</option>)}
+              </select>
+            </label>
+            <label>Drive links
+              <input id="ck-cd" type="number" inputmode="numeric" min="20" max="200" placeholder="72" />
+            </label>
+          </div>
+          <button class="f-btn" type="submit">Check this chain</button>
+        </form>
+        <div class="f-result" id="ck-result" aria-live="polite"></div>
+        <noscript><p class="small">The checker needs JavaScript. Without it, use the worked example above and the saw page for your model. The stamp still decides.</p></noscript>
+      </div>
+    </div>
+    <script type="application/json" id="tool-data" set:html={JSON.stringify(data).replace(/</g, '\\u003c')} />
+    <template id="shop-disclosure-tpl">
+      <p class="shop-disclosure"><strong>{AMAZON_DISCLOSURE}</strong> <span class="muted">The button opens Amazon. <a href="/affiliate-disclosure/">How that works</a>. No price is printed here. A chain that does not match the bar does not get a buying link.</span></p>
+    </template>
+
+    <section class="block" id="email-specs">
+      <h2>Email me my chain specs</h2>
+      <p style="max-width:72ch" id="email-hook">Pick a published saw in the checker and the link here opens that saw’s form. The form stores a request. It does not send email.</p>
+      <p class="small">The form is the one already on the saw page. It is not a newsletter and it does not sign you up for updates. Nothing on this checker is mailed.</p>
+    </section>
+
+    <ToolHoliday />
+
+    <section class="block">
+      <h2>Questions</h2>
+      <FaqList faqs={faqs} />
+      <p style="margin-top:14px"><a href="/tools/find-my-chain/">Find my chain</a> · <a href="/guides/how-to-verify-chain-size/">Read the bar stamp</a> · <a href="/guides/chainsaw-chain-gauge/">Gauge</a> · <a href="/guides/oregon-72-vs-73-chain/">Oregon 72 vs 73</a> · <a href="/saws/">All saws</a></p>
+    </section>
+  </div>
+</Base>
+<script>
+  import { mountCheck } from '../../scripts/chain-tools';
+  mountCheck();
+</script>

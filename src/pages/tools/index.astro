@@ -1,0 +1,43 @@
+---
+import Base from '../../layouts/Base.astro';
+import Byline from '../../components/Byline.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import ToolHoliday from '../../components/ToolHoliday.astro';
+import { webPageLd } from '../../lib/ld';
+import dates from '../../data/page-dates.json';
+
+const path = '/tools/';
+const modified = (dates as Record<string, string>)[path];
+const desc = 'Two chainsaw tools: part numbers for a pitch, gauge and drive-link count, and a checker for whether a chain matches a published bar. Verified rows only.';
+const crumbs = [{ name: 'Tools', path }];
+---
+<Base title="Chainsaw Chain Lookup Tools" description={desc} path={path} nav="" crumbs={crumbs}
+  jsonld={[webPageLd('Chainsaw chain lookup tools', path, desc, modified, 'CollectionPage')]} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Tools' }]} />
+      <h1>Chain tools</h1>
+      <p class="lede">Two lookups for the moment you are buying a loop. Both read the same verified rows as the saw pages. Neither one replaces the bar stamp, and neither one is the homepage Chain Finder, which shows the spec for a single saw and bar.</p>
+      <Byline label="Last updated" />
+    </div>
+    <section class="block">
+      <div class="grid2">
+        <a class="card" href="/tools/find-my-chain/">
+          <h3>Find my chain</h3>
+          <p class="small">Pick a saw, or enter bar length plus pitch, gauge and drive links. The page lists the part numbers on verified rows that share those three numbers, across the brands stored in the dataset, each linked to its saw page.</p>
+          <span class="go">Open the tool →</span>
+        </a>
+        <a class="card" href="/tools/chain-compatibility/">
+          <h3>Bar and chain compatibility</h3>
+          <p class="small">Compare a chain you are about to buy with a published bar, or with the three numbers on your stamp. The checker says which of pitch, gauge and drive links match, using Oregon’s published fit rules and the row on the saw page.</p>
+          <span class="go">Open the checker →</span>
+        </a>
+      </div>
+    </section>
+    <section class="block">
+      <h2>Email me my chain specs</h2>
+      <p style="max-width:72ch">That form already lives on each <a href="/saws/">saw page</a>. It stores a request for the saw and a bar length. It does not send email, and it is not a newsletter. The tools link to the form after you pick a saw. They do not add a second one.</p>
+    </section>
+    <ToolHoliday />
+  </div>
+</Base>

@@ -79,6 +79,7 @@ const shop = chainSpecShop(group);
               <td><span class={`tag ${bars.some((b) => b.status !== 'ok') ? 'verify' : ''}`}>{bars.every((b) => b.status === 'ok') ? statusLabel('ok') : bars.some((b) => b.status === 'conflict') ? statusLabel('conflict') : statusLabel('verify')}</span></td></tr>
           ))}
         </tbody></table></div>
+      <p>Loop part numbers for one drive-link count of this pitch and gauge are on <a href={`/tools/find-my-chain/?pitch=${encodeURIComponent(pitch)}&gauge=${gauge}`}>Find my chain</a>. Compare a box with a bar on the <a href="/tools/chain-compatibility/">compatibility checker</a>.</p>
       <details class="faq" style="margin-top:18px"><summary>Part numbers on file ({parts.length})</summary>
         <div class="a"><ul class="plain">{parts.map((c) => <li>{partText(c)} <span class="small muted">({c.role === 'oem' ? 'OEM' : 'equivalent'})</span></li>)}</ul></div>
       </details>
