@@ -9,12 +9,11 @@ export const faqLd = (faqs: Faq[], strip = false) => ({
 
 export const ORG_ID = SITE.url + '/#organization';
 /** The site's own publisher entity. No individual is named anywhere on the site, so none is invented;
- *  sameAs lists only profiles that exist (the public source repository). */
+ *  the data is credited to SawChainSize.com itself. */
 export const publisher = {
   '@type': 'Organization', '@id': ORG_ID, name: 'Saw Chain Size', alternateName: SITE.name, url: SITE.url + '/',
   logo: { '@type': 'ImageObject', url: SITE.url + '/icon-512.png', width: 512, height: 512 },
   email: SITE.email,
-  sameAs: ['https://github.com/dovnud/sawchainsize.com'],
   publishingPrinciples: SITE.url + '/how-we-verify/',
 };
 export const organizationLd = { '@context': 'https://schema.org', ...publisher, description: 'Independent chainsaw chain and bar reference: pitch, gauge, drive links and file size by saw model, each traced to a manufacturer manual, fit-up chart or chain-maker data.' };
@@ -75,7 +74,6 @@ export const datasetLd = (o: { name: string; description: string; path: string; 
   measurementTechnique: 'Transcribed from manufacturer manuals, bar-and-chain fit-up charts and chain-maker product data; each row graded ok / verify / conflict.',
   isBasedOn: SITE.url + '/how-we-verify/',
   citation: `Saw Chain Size. “${o.name}”. SawChainSize.com, data last verified ${o.dateModified}. ${SITE.url}${o.path}`,
-  sameAs: ['https://github.com/dovnud/sawchainsize.com'],
   distribution: [
     { '@type': 'DataDownload', encodingFormat: 'text/csv', contentUrl: o.csv, name: 'CSV' },
     { '@type': 'DataDownload', encodingFormat: 'application/json', contentUrl: o.json, name: 'JSON' },

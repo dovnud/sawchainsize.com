@@ -8,8 +8,8 @@
   "type": "gas",
   "displacement_cc": 45.0,
   "popular": false,
-  "blurb": "A 45 cc saw: 16″ and 18″ bars on .325″ chain, .050″ gauge, 66–72 drive links per Echo's own chart.",
-  "intro": "The Echo CS-4510 is a 45 cc saw. Echo lists 16″ and 18″ bars for the CS-4510, on .325″ pitch .050″ chain. This is the step up from 3/8″ low-profile: a different pitch, so the loops are not interchangeable with the CS-310 family.",
+  "blurb": "A 45 cc saw: 16″, 18″ and 20″ bars on .325″ chain, .050″ gauge, 66–78 drive links per Echo's own chart.",
+  "intro": "The Echo CS-4510 is a 45 cc saw on .325″ pitch .050″ chain. Echo's specification table lists 16″ and 18″ bars, and Echo's Bars and Chains chart adds a 20″ bar (20B0AD3378C, 78 drive links of 20BPX78CQ). This is the step up from 3/8″ low-profile: a different pitch, so the loops are not interchangeable with the CS-310 family.",
   "bars": [
     {
       "lengths_in": [
@@ -52,6 +52,27 @@
         "echo-catalog-2023"
       ],
       "note": "Echo bar 18B0AD3372C; chain 20BPX72CQ. "
+    },
+    {
+      "lengths_in": [
+        20
+      ],
+      "pitch": "325",
+      "gauge": 0.05,
+      "drive_links": 78,
+      "file_size": "3/16",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "20BPX78CQ",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "echo-catalog-2023"
+      ],
+      "note": "Echo bar 20B0AD3378C; chain 20BPX78CQ. From Echo's Bars and Chains chart (CS-4510 block; the spec table lists 16″ and 18″)."
     }
   ],
   "sources": [
@@ -64,6 +85,6 @@
       "retrieved": "2026-10-24"
     }
   ],
-  "sources_note": "Echo chainsaw catalog (January 2023): “Bars and Chains” chart and the saw specification tables, read on 24 Oct 2026.",
-  "last_verified": "2026-10-24"
+  "sources_note": "Echo chainsaw catalog (January 2023): “Bars and Chains” chart and the saw specification tables, read on 24 Oct 2026. Extra bar rows from the same chart re-read 2 Nov 2026.",
+  "last_verified": "2026-11-02"
 }

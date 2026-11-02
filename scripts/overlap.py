@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Measure text overlap between sibling saw pages in dist/.
-Text = visible text of <main> (nav, header, footer, scripts and the Amazon link block excluded).
+Text = visible text of <main> (nav, header, footer, scripts, the Amazon link block and the stored-request form section excluded).
 Overlap(A,B) = |S(A) ∩ S(B)| / min(|S(A)|, |S(B)|) over word 5-shingles (containment of the smaller page),
 and Jaccard is reported too. A pair counts as 'overlapping' when containment > 0.5.
 Sibling = two saw pages of the same brand OR sharing at least one chain spec (pitch+gauge).
@@ -13,6 +13,8 @@ def text_of(path):
     h = open(path, encoding='utf8').read()
     m = re.search(r'<main[^>]*>(.*?)</main>', h, re.S); h = m.group(1) if m else h
     h = re.sub(r'<aside class="buy shop".*?</aside>', ' ', h, flags=re.S)
+    # shared stored-request form boilerplate (RequestCapture, PR #5) is identical on every saw page
+    h = re.sub(r'<section[^>]*id="email-specs".*?</section>', ' ', h, flags=re.S)
     h = re.sub(r'<(script|style|nav)[^>]*>.*?</\1>', ' ', h, flags=re.S)
     h = re.sub(r'<[^>]+>', ' ', h); h = html.unescape(h)
     return re.findall(r"[a-z0-9.\"″/'’-]+", h.lower())

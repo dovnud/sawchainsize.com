@@ -17,8 +17,8 @@ const data = await toolDataset();
 const loop = data.specs.find((s) => s.key === specKey('3/8', 0.05, 72));
 if (!loop?.parts.some((p) => p.brand === 'Oregon' && p.partNo === '72LPX072')) throw new Error('Find my chain is missing Oregon 72LPX072 on 3/8 .050 72');
 if (!loop.parts.some((p) => p.brand === 'Husqvarna' && p.partNo === 'H80-72')) throw new Error('Find my chain is missing Husqvarna H80-72');
-const ms250 = data.models['stihl-ms-250'];
-if (!ms250 || ms250.bars.some((b) => b.status === 'ok')) throw new Error('MS 250 must not be treated as a verified loop');
+const cs400 = data.models['echo-cs-400'];
+if (!cs400 || cs400.bars.some((b) => b.status === 'conflict' && b.drive_links)) throw new Error('Echo CS-400 16″ conflict must not print a single verified loop');
 for (const spec of data.specs) {
   if (!spec.shop) continue;
   if (!spec.shop.href.startsWith('https://www.amazon.com/')) throw new Error(`Bad Amazon host on ${spec.key}`);

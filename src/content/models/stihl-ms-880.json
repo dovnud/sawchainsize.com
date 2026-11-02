@@ -41,7 +41,7 @@
       "pitch": "404",
       "gauge": 0.063,
       "drive_links": 80,
-      "file_size": null,
+      "file_size": "7/32",
       "status": "ok",
       "chains": [
         {
@@ -51,9 +51,10 @@
         }
       ],
       "source_ids": [
-        "stihl-chain-chart-2017"
+        "stihl-chain-chart-2017",
+        "stihl-chain-chart-2025"
       ],
-      "note": "STIHL's chart lists chain 46 RS 80 with recommended bar 3002 000 9731. RS bar, 12-tooth nose. STIHL marks this bar with an asterisk: no green-labeled reduced-kickback bar is offered at this length, so the chart lists a yellow-labeled bar. STIHL offers no green-labeled low-kickback chain in .404″, so the chart lists a yellow-labeled chain."
+      "note": "STIHL's chart lists chain 46 RS 80 with recommended bar 3002 000 9731. RS bar, 12-tooth nose. STIHL marks this bar with an asterisk: no green-labeled reduced-kickback bar is offered at this length, so the chart lists a yellow-labeled bar. STIHL offers no green-labeled low-kickback chain in .404″, so the chart lists a yellow-labeled chain. File size: STIHL's 2025 catalog lists the 5.5 mm (7/32″) file for .404″ chain."
     },
     {
       "lengths_in": [
@@ -62,7 +63,7 @@
       "pitch": "404",
       "gauge": 0.063,
       "drive_links": 91,
-      "file_size": null,
+      "file_size": "7/32",
       "status": "ok",
       "chains": [
         {
@@ -72,9 +73,10 @@
         }
       ],
       "source_ids": [
-        "stihl-chain-chart-2017"
+        "stihl-chain-chart-2017",
+        "stihl-chain-chart-2025"
       ],
-      "note": "STIHL's chart lists chain 46 RS 91 with recommended bar 3002 000 9741. RS bar. STIHL marks this bar with an asterisk: no green-labeled reduced-kickback bar is offered at this length, so the chart lists a yellow-labeled bar. STIHL offers no green-labeled low-kickback chain in .404″, so the chart lists a yellow-labeled chain."
+      "note": "STIHL's chart lists chain 46 RS 91 with recommended bar 3002 000 9741. RS bar. STIHL marks this bar with an asterisk: no green-labeled reduced-kickback bar is offered at this length, so the chart lists a yellow-labeled bar. STIHL offers no green-labeled low-kickback chain in .404″, so the chart lists a yellow-labeled chain. File size: STIHL's 2025 catalog lists the 5.5 mm (7/32″) file for .404″ chain."
     },
     {
       "lengths_in": [
@@ -83,7 +85,7 @@
       "pitch": "404",
       "gauge": 0.063,
       "drive_links": 108,
-      "file_size": null,
+      "file_size": "7/32",
       "status": "ok",
       "chains": [
         {
@@ -93,9 +95,10 @@
         }
       ],
       "source_ids": [
-        "stihl-chain-chart-2017"
+        "stihl-chain-chart-2017",
+        "stihl-chain-chart-2025"
       ],
-      "note": "STIHL's chart lists chain 46 RS 108 with recommended bar 3002 000 9753. Exchangeable-nose (RS) bar: 108 links, four more than the 36″ DUROMATIC bar. STIHL marks this bar with an asterisk: no green-labeled reduced-kickback bar is offered at this length, so the chart lists a yellow-labeled bar. STIHL offers no green-labeled low-kickback chain in .404″, so the chart lists a yellow-labeled chain.",
+      "note": "STIHL's chart lists chain 46 RS 108 with recommended bar 3002 000 9753. Exchangeable-nose (RS) bar: 108 links, four more than the 36″ DUROMATIC bar. STIHL marks this bar with an asterisk: no green-labeled reduced-kickback bar is offered at this length, so the chart lists a yellow-labeled bar. STIHL offers no green-labeled low-kickback chain in .404″, so the chart lists a yellow-labeled chain. File size: STIHL's 2025 catalog lists the 5.5 mm (7/32″) file for .404″ chain.",
       "label": "36″ (RS bar)"
     },
     {
@@ -105,7 +108,7 @@
       "pitch": "404",
       "gauge": 0.063,
       "drive_links": 123,
-      "file_size": null,
+      "file_size": "7/32",
       "status": "ok",
       "chains": [
         {
@@ -115,9 +118,10 @@
         }
       ],
       "source_ids": [
-        "stihl-chain-chart-2017"
+        "stihl-chain-chart-2017",
+        "stihl-chain-chart-2025"
       ],
-      "note": "STIHL's chart lists chain 46 RS 123 with recommended bar 3002 000 9757. RS bar. STIHL marks this bar with an asterisk: no green-labeled reduced-kickback bar is offered at this length, so the chart lists a yellow-labeled bar. STIHL offers no green-labeled low-kickback chain in .404″, so the chart lists a yellow-labeled chain.",
+      "note": "STIHL's chart lists chain 46 RS 123 with recommended bar 3002 000 9757. RS bar. STIHL marks this bar with an asterisk: no green-labeled reduced-kickback bar is offered at this length, so the chart lists a yellow-labeled bar. STIHL offers no green-labeled low-kickback chain in .404″, so the chart lists a yellow-labeled chain. File size: STIHL's 2025 catalog lists the 5.5 mm (7/32″) file for .404″ chain.",
       "label": "41″ (RS bar)"
     },
     {
@@ -127,7 +131,7 @@
       "pitch": "404",
       "gauge": 0.063,
       "drive_links": 173,
-      "file_size": null,
+      "file_size": "7/32",
       "status": "ok",
       "chains": [
         {
@@ -137,9 +141,10 @@
         }
       ],
       "source_ids": [
-        "stihl-chain-chart-2017"
+        "stihl-chain-chart-2017",
+        "stihl-chain-chart-2025"
       ],
-      "note": "STIHL's chart lists chain 46 RS 173 with recommended bar 3002 000 9576. RS bar; the longest bar on STIHL's chart. The chain carries STIHL's triple-asterisk note: read the yellow warning information supplied with the bars and chains that fit the 088 / MS 880 powerhead."
+      "note": "STIHL's chart lists chain 46 RS 173 with recommended bar 3002 000 9576. RS bar; the longest bar on STIHL's chart. The chain carries STIHL's triple-asterisk note: read the yellow warning information supplied with the bars and chains that fit the 088 / MS 880 powerhead. File size: STIHL's 2025 catalog lists the 5.5 mm (7/32″) file for .404″ chain."
     },
     {
       "lengths_in": [
@@ -148,7 +153,7 @@
       "pitch": "404",
       "gauge": 0.063,
       "drive_links": 104,
-      "file_size": null,
+      "file_size": "7/32",
       "status": "ok",
       "chains": [
         {
@@ -158,9 +163,10 @@
         }
       ],
       "source_ids": [
-        "stihl-chain-chart-2017"
+        "stihl-chain-chart-2017",
+        "stihl-chain-chart-2025"
       ],
-      "note": "STIHL's chart lists chain 46 RS 104 with recommended bar 3002 001 8052. STIHL DUROMATIC bar (type D in the chart): 104 links, four fewer than the 36″ RS bar. STIHL marks this bar with an asterisk: no green-labeled reduced-kickback bar is offered at this length, so the chart lists a yellow-labeled bar. STIHL offers no green-labeled low-kickback chain in .404″, so the chart lists a yellow-labeled chain.",
+      "note": "STIHL's chart lists chain 46 RS 104 with recommended bar 3002 001 8052. STIHL DUROMATIC bar (type D in the chart): 104 links, four fewer than the 36″ RS bar. STIHL marks this bar with an asterisk: no green-labeled reduced-kickback bar is offered at this length, so the chart lists a yellow-labeled bar. STIHL offers no green-labeled low-kickback chain in .404″, so the chart lists a yellow-labeled chain. File size: STIHL's 2025 catalog lists the 5.5 mm (7/32″) file for .404″ chain.",
       "label": "36″ (DUROMATIC bar)"
     },
     {
@@ -170,7 +176,7 @@
       "pitch": "404",
       "gauge": 0.063,
       "drive_links": 123,
-      "file_size": null,
+      "file_size": "7/32",
       "status": "ok",
       "chains": [
         {
@@ -180,9 +186,10 @@
         }
       ],
       "source_ids": [
-        "stihl-chain-chart-2017"
+        "stihl-chain-chart-2017",
+        "stihl-chain-chart-2025"
       ],
-      "note": "STIHL's chart lists chain 46 RS 123 with recommended bar 3002 000 8058. STIHL DUROMATIC bar; same 123-link loop as the 41″ RS bar. STIHL marks this bar with an asterisk: no green-labeled reduced-kickback bar is offered at this length, so the chart lists a yellow-labeled bar.",
+      "note": "STIHL's chart lists chain 46 RS 123 with recommended bar 3002 000 8058. STIHL DUROMATIC bar; same 123-link loop as the 41″ RS bar. STIHL marks this bar with an asterisk: no green-labeled reduced-kickback bar is offered at this length, so the chart lists a yellow-labeled bar. File size: STIHL's 2025 catalog lists the 5.5 mm (7/32″) file for .404″ chain.",
       "label": "41″ (DUROMATIC bar)"
     },
     {
@@ -192,7 +199,7 @@
       "pitch": "404",
       "gauge": 0.063,
       "drive_links": 138,
-      "file_size": null,
+      "file_size": "7/32",
       "status": "ok",
       "chains": [
         {
@@ -202,9 +209,10 @@
         }
       ],
       "source_ids": [
-        "stihl-chain-chart-2017"
+        "stihl-chain-chart-2017",
+        "stihl-chain-chart-2025"
       ],
-      "note": "STIHL's chart lists chain 46 RS 138 with recommended bar 3002 000 8064. STIHL DUROMATIC bar. STIHL marks this bar with an asterisk: no green-labeled reduced-kickback bar is offered at this length, so the chart lists a yellow-labeled bar. STIHL offers no green-labeled low-kickback chain in .404″, so the chart lists a yellow-labeled chain."
+      "note": "STIHL's chart lists chain 46 RS 138 with recommended bar 3002 000 8064. STIHL DUROMATIC bar. STIHL marks this bar with an asterisk: no green-labeled reduced-kickback bar is offered at this length, so the chart lists a yellow-labeled bar. STIHL offers no green-labeled low-kickback chain in .404″, so the chart lists a yellow-labeled chain. File size: STIHL's 2025 catalog lists the 5.5 mm (7/32″) file for .404″ chain."
     }
   ],
   "sources": [
@@ -215,8 +223,16 @@
       "title": "Saw Chain Selection and Identification (STIHL USA catalog page 173; specifications as of 1 October 2017) — recommended chain loop and guide bar per saw model",
       "url": "https://assets.unilogcorp.com/187/ITEM/DOC/Stihl_102205325_Catalog.pdf",
       "retrieved": "2026-10-27"
+    },
+    {
+      "id": "stihl-chain-chart-2025",
+      "type": "fitup-chart",
+      "publisher": "STIHL",
+      "title": "STIHL 2025 Full Line catalog — Saw Chain Selection and Identification chart (catalog pages 166–167), chainsaw spec tables, saw chain and file pages",
+      "url": "https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf",
+      "retrieved": "2026-11-02"
     }
   ],
-  "sources_note": "STIHL USA “Saw Chain Selection and Identification” chart (catalog page 173, specifications as of 1 October 2017), MS 880 / MS 880 R block and its footnotes, read from the PDF on 27 Oct 2026.",
-  "last_verified": "2026-10-27"
+  "sources_note": "STIHL USA “Saw Chain Selection and Identification” chart (catalog page 173, specifications as of 1 October 2017), MS 880 / MS 880 R block and its footnotes, read from the PDF on 27 Oct 2026. File size for .404″ rows from the STIHL 2025 Full Line catalog file table, read 2 Nov 2026.",
+  "last_verified": "2026-11-02"
 }

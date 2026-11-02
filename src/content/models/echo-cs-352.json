@@ -8,9 +8,56 @@
   "type": "gas",
   "displacement_cc": 34.0,
   "popular": false,
-  "blurb": "A 34 cc homeowner saw: 16″ bars on 3/8″ low-profile chain, .050″ gauge, 57 drive links per Echo's own chart.",
-  "intro": "The Echo CS-352 is a 34 cc homeowner saw. Echo lists a 16″ bar for the CS-352 on 3/8″ low-profile .050″ chain. Echo's Bars and Chains chart goes further than its specification table for this saw: the CS-352 block also lists a 12″ bar (12A0CD3745C, 45 drive links of 91PX45CQ) and a 14″ bar (14A0CD3752C, 52 drive links of 91PX52CQ), on the same 3/8″ low-profile .050″ chain. This page keeps to the 16″ bar the specification table gives, so if your CS-352 wears a shorter bar, take the count from its stamp. The 16″ loop is also sold as a 3-pack, 91PX57CQ-3.",
+  "blurb": "A 34 cc homeowner saw: 12″, 14″ and 16″ bars on 3/8″ low-profile chain, .050″ gauge, 45–57 drive links per Echo's own chart.",
+  "intro": "The Echo CS-352 is a 34 cc homeowner saw on 3/8″ low-profile .050″ chain. Echo's specification table gives it a 16″ bar, and Echo's Bars and Chains chart lists two shorter bars for it too: 12″ (12A0CD3745C, 45 drive links of 91PX45CQ) and 14″ (14A0CD3752C, 52 drive links of 91PX52CQ). All three are in the table below. The 14″ and 16″ loops are also sold as 3-packs, 91PX52CQ-3 and 91PX57CQ-3.",
   "bars": [
+    {
+      "lengths_in": [
+        12
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 45,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "91PX45CQ",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "echo-catalog-2023"
+      ],
+      "note": "Echo bar 12A0CD3745C; chain 91PX45CQ. From Echo's Bars and Chains chart (CS-352 block; not in the spec table's bar list)."
+    },
+    {
+      "lengths_in": [
+        14
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 52,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "91PX52CQ",
+          "role": "oem"
+        },
+        {
+          "brand": "Echo",
+          "part_no": "91PX52CQ-3 (3-pack)",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "echo-catalog-2023"
+      ],
+      "note": "Echo bar 14A0CD3752C; chain 91PX52CQ. From Echo's Bars and Chains chart (CS-352 block; not in the spec table's bar list)."
+    },
     {
       "lengths_in": [
         16
@@ -43,6 +90,6 @@
       "retrieved": "2026-10-24"
     }
   ],
-  "sources_note": "Echo chainsaw catalog (January 2023): “Bars and Chains” chart and the saw specification tables, read on 24 Oct 2026.",
-  "last_verified": "2026-10-24"
+  "sources_note": "Echo chainsaw catalog (January 2023): “Bars and Chains” chart and the saw specification tables, read on 24 Oct 2026. Extra bar rows from the same chart re-read 2 Nov 2026.",
+  "last_verified": "2026-11-02"
 }

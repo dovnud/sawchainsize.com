@@ -8,100 +8,162 @@
   "type": "gas",
   "displacement_cc": 45.4,
   "popular": true,
-  "blurb": "One of the best-selling homeowner saws in North America — and the model where published chain specs contradict each other most. Bar-first verification matters most here.",
-  "intro": "The MS 250 is a 45.4 cc homeowner and firewood saw sold in large numbers across the US and Canada, most often with a 16″ or 18″ bar. It is also the clearest example on this site of why model-only lookups fail: the leading web results for this saw's chain disagree with each other on pitch, gauge and drive links, and shopping listings note a gauge difference between earlier and later production. We therefore publish what each source reports — side by side — and the check that resolves it.",
+  "blurb": "Two factory chain families per STIHL's charts: 3/8″ PICCO™ .050″ (12–18″, 44–61 drive links) or .325″ .063″ (16″ 62, 18″ 68). Read the bar stamp to know which one you have.",
+  "intro": "The MS 250 is a 45.4 cc homeowner and firewood saw sold in large numbers across the US and Canada, most often with a 16″ or 18″ bar. STIHL's own Saw Chain Selection and Identification charts — the 1 October 2017 chart and the 2025 Full Line catalog — agree that it was fitted with two different chain families: 3/8″ PICCO™ (low-profile) at .050″ gauge on 12″ to 18″ bars, and .325″ at .063″ gauge on 16″ and 18″ bars. A 16″ MS 250 can therefore take 55 or 62 drive links depending on which bar is on it, which is why web listings for this saw seem to disagree. The bar stamp tells you which family yours is.",
   "sources": [
     {
-      "id": "roundup-smartfix",
-      "type": "roundup",
-      "publisher": "smartfixhardware.com",
-      "title": "Affiliate buying roundup listing the MS 250 chain",
-      "retrieved": "2026-10-23"
+      "id": "stihl-chain-chart-2025",
+      "type": "fitup-chart",
+      "publisher": "STIHL",
+      "title": "STIHL 2025 Full Line catalog — Saw Chain Selection and Identification chart (catalog pages 166–167), chainsaw spec tables, saw chain and file pages",
+      "url": "https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf",
+      "retrieved": "2026-11-02"
     },
     {
-      "id": "blog-chainsawnerds",
-      "type": "blog",
-      "publisher": "chainsawnerds.com",
-      "title": "Chainsaw blog's MS 250 pages",
-      "retrieved": "2026-10-23"
-    },
-    {
-      "id": "marketplace-accio",
-      "type": "marketplace",
-      "publisher": "accio.com",
-      "title": "Marketplace listing set for MS 250 chain",
-      "retrieved": "2026-10-23"
+      "id": "stihl-chain-chart-2017",
+      "type": "fitup-chart",
+      "publisher": "STIHL",
+      "title": "Saw Chain Selection and Identification (STIHL USA catalog page 173; specifications as of 1 October 2017) — recommended chain loop and guide bar per saw model",
+      "url": "https://assets.unilogcorp.com/187/ITEM/DOC/Stihl_102205325_Catalog.pdf",
+      "retrieved": "2026-11-02"
     }
   ],
-  "sources_note": "Reported variants from: an affiliate buying roundup (smartfixhardware.com), a chainsaw blog's MS 250 pages (chainsawnerds.com), and a marketplace listing set (accio.com), all read 23 Oct 2026. Genuine Stihl chain is sold through dealers rather than online, so replacement buying runs through Oregon-equivalent loops matched on your three numbers.",
+  "sources_note": "All rows from STIHL USA's Saw Chain Selection and Identification charts: the 2025 Full Line catalog (pp. 166–167) and the chart with specifications as of 1 October 2017 (catalog p. 173), both read 2 Nov 2026. Rows are shown only where both charts agree. File size for 3/8″ PICCO™ from the 2025 catalog's file table. Earlier versions of this page printed conflicting third-party listings; they were replaced by the manufacturer charts.",
   "bars": [
+    {
+      "lengths_in": [
+        12
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 44,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "63 PM3 44",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2025",
+        "stihl-chain-chart-2017"
+      ],
+      "note": "Both STIHL charts list chain 63 PM3 44 for the MS 241 C-M / MS 250 / MS 251 group; recommended bar 3005 000 4805. 3/8″ PICCO™ chain is filed with STIHL's 4.0 mm (5/32″) file per the 2025 catalog file table."
+    },
+    {
+      "lengths_in": [
+        14
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 50,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "63 PM3 50",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2025",
+        "stihl-chain-chart-2017"
+      ],
+      "note": "Both STIHL charts list chain 63 PM3 50 for the MS 241 C-M / MS 250 / MS 251 group; recommended bar 3005 000 4809. 3/8″ PICCO™ chain is filed with STIHL's 4.0 mm (5/32″) file per the 2025 catalog file table."
+    },
     {
       "lengths_in": [
         16
       ],
-      "pitch": null,
-      "gauge": null,
-      "drive_links": null,
-      "file_size": null,
-      "status": "conflict",
-      "chains": [],
-      "source_ids": [
-        "roundup-smartfix",
-        "blog-chainsawnerds",
-        "marketplace-accio"
-      ],
-      "note": "A marketplace listing gives 62 drive links for the 16″ setup. Pitch and gauge for this length are exactly what the sources argue about — read your bar stamp.",
-      "reported": [
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 55,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
         {
-          "source_id": "marketplace-accio",
-          "drive_links": 62
-        },
-        {
-          "source_id": "roundup-smartfix",
-          "pitch": "325",
-          "gauge": 0.063
-        },
-        {
-          "source_id": "blog-chainsawnerds",
-          "pitch": "3/8",
-          "gauge": 0.05
+          "brand": "STIHL",
+          "part_no": "63 PM3 55",
+          "role": "oem"
         }
-      ]
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2025",
+        "stihl-chain-chart-2017"
+      ],
+      "note": "Both STIHL charts list chain 63 PM3 55 for the MS 241 C-M / MS 250 / MS 251 group; recommended bar 3005 008 4813 in the 2025 chart (3005 000 4813 in 2017). 3/8″ PICCO™ chain is filed with STIHL's 4.0 mm (5/32″) file per the 2025 catalog file table."
     },
     {
       "lengths_in": [
         18
       ],
-      "pitch": null,
-      "gauge": null,
-      "drive_links": null,
-      "file_size": null,
-      "status": "conflict",
-      "chains": [],
-      "source_ids": [
-        "roundup-smartfix",
-        "blog-chainsawnerds",
-        "marketplace-accio"
-      ],
-      "note": "One affiliate roundup lists the MS 250 as .325″ pitch / .063″ gauge / 68 drive links; another lists 3/8″ pitch and .050″ gauge; a marketplace listing gives 72 drive links at 18″. They cannot all describe the same bar.",
-      "reported": [
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 61,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
         {
-          "source_id": "marketplace-accio",
-          "drive_links": 72
-        },
-        {
-          "source_id": "roundup-smartfix",
-          "pitch": "325",
-          "gauge": 0.063,
-          "drive_links": 68
-        },
-        {
-          "source_id": "blog-chainsawnerds",
-          "pitch": "3/8",
-          "gauge": 0.05
+          "brand": "STIHL",
+          "part_no": "63 PM3 61",
+          "role": "oem"
         }
-      ]
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2025",
+        "stihl-chain-chart-2017"
+      ],
+      "note": "Both STIHL charts list chain 63 PM3 61 for the MS 241 C-M / MS 250 / MS 251 group; recommended bar 3005 008 4817 in the 2025 chart (3005 000 4817 in 2017). 3/8″ PICCO™ chain is filed with STIHL's 4.0 mm (5/32″) file per the 2025 catalog file table."
+    },
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "325",
+      "gauge": 0.063,
+      "drive_links": 62,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "26 RM3 62",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2025",
+        "stihl-chain-chart-2017"
+      ],
+      "note": "Both STIHL charts list chain 26 RM3 62 for the MS 241 C-M / MS 250 / MS 251 group; recommended bar 3005 000 4713. STIHL sells .325″ files in both 4.5 mm (11/64″) and 4.8 mm (3/16″) and does not tie one to this loop, so no file size is printed.",
+      "label": "16″ (.325″ option)"
+    },
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "325",
+      "gauge": 0.063,
+      "drive_links": 68,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "26 RM3 68",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2025",
+        "stihl-chain-chart-2017"
+      ],
+      "note": "Both STIHL charts list chain 26 RM3 68 for the MS 241 C-M / MS 250 / MS 251 group; recommended bar 3005 008 4717. STIHL sells .325″ files in both 4.5 mm (11/64″) and 4.8 mm (3/16″) and does not tie one to this loop, so no file size is printed. The 2025 chart also lists a .050″-gauge 18″ option (23 RM3 68) that the 2017 chart does not; it is not shown as a row because the two charts do not agree on it.",
+      "label": "18″ (.325″ option)"
     }
   ],
-  "last_verified": "2026-10-23"
+  "last_verified": "2026-11-02"
 }
