@@ -1,6 +1,5 @@
 ---
 import Base from '../../layouts/Base.astro';
-import Byline from '../../components/Byline.astro';
 import ModelCard from '../../components/ModelCard.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import { getModels, getBrands, modelUrl, SITE } from '../../lib/data';
@@ -18,8 +17,7 @@ const jsonld = [
     <div class="pagehead">
       <Crumbs crumbs={[{ name: 'Models' }]} />
       <h1>Chain sizes by saw model</h1>
-      <p class="lede">One page per saw: the factory bar-and-chain combinations we could verify from manufacturer manuals, fit-up charts and chain-maker data — each with the bar-stamp check for that saw, the file size, and where to buy the loop. More models are added as their specs are verified, never guessed.</p>
-      <Byline label="Last updated" />
+      <p class="lede">One page per saw: the factory bar-and-chain combinations we could verify from manufacturer manuals, fit-up charts and chain-maker data. Each with the bar-stamp check for that saw, the file size, and where to buy the loop. More models are added as their specs are verified, never guessed.</p>
     </div>
     {brands.map((b) => (
       <section class="block" style="padding-top:20px">
@@ -28,7 +26,7 @@ const jsonld = [
       </section>
     ))}
     <div class="oknote" style="margin-top:26px">
-      <p><strong>Don't see your saw?</strong> The <a href="/guides/how-to-verify-chain-size/">verification guide</a> gets you the three numbers off your own bar in about five minutes, and the <a href="/guides/chain-size-chart/">identification chart</a> turns those numbers into a chain code in any brand. <a href="/tools/find-my-chain/">Find my chain</a> then lists part numbers we have stored for those three numbers. You can also <a href="/contact/">tell us which model to add next</a> — requests with a photo of the bar stamp go to the front of the queue, because that is exactly the evidence we publish from.</p>
+      <p><strong>Don't see your saw?</strong> The <a href="/guides/how-to-verify-chain-size/">verification guide</a> gets you the three numbers off your own bar in about five minutes, and the <a href="/guides/chain-size-chart/">identification chart</a> turns those numbers into a chain code in any brand. <a href="/tools/find-my-chain/">Find my chain</a> then lists part numbers we have stored for those three numbers. You can also <a href="/contact/">tell us which model to add next</a>, requests with a photo of the bar stamp go to the front of the queue, because that is exactly the evidence we publish from.</p>
     </div>
   </div>
 </Base>

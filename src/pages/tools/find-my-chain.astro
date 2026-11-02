@@ -1,6 +1,5 @@
 ---
 import Base from '../../layouts/Base.astro';
-import Byline from '../../components/Byline.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import FaqList from '../../components/FaqList.astro';
 import ToolHoliday from '../../components/ToolHoliday.astro';
@@ -52,7 +51,6 @@ const jsonld = [
       <Crumbs crumbs={[{ name: 'Tools', path: '/tools/' }, { name: 'Find my chain' }]} />
       <h1>Find my chain</h1>
       <p class="lede">Pick the saw, or type the pitch, gauge and drive links. The result is the part numbers stored on verified rows that share those three numbers, across Oregon, STIHL, Husqvarna, Echo and the other brands on those rows. Each number links to the saw page it came from.</p>
-      <Byline label="Last updated" />
     </div>
 
     <section class="block">
@@ -76,14 +74,14 @@ const jsonld = [
 
     <section class="block">
       <p style="max-width:72ch">The <a href="/#finder">homepage Chain Finder</a> answers a different question: the spec for one saw and one fitted bar. This page takes a spec and lists every matching part number in the dataset. It uses verified rows only. A row marked conflict or verify is not turned into a part number. Bar length is optional and only labels which rows mention that length.</p>
-      <p style="max-width:72ch">Family codes (Oregon 72, STIHL 33 RS3, Husqvarna H80) are pitch and gauge. They are shown separately from the loop part numbers, which carry the drive-link count. The code table is the same one as the <a href="/guides/chain-size-chart/">identification chart</a>. A dash means that brand’s code is not verified here for that pitch and gauge.</p>
+      <p style="max-width:72ch">Family codes (Oregon 72, STIHL 33 RS3, Husqvarna H80) are pitch and gauge. They are shown separately from the loop part numbers, which carry the drive-link count. The code table is the same one as the <a href="/guides/chain-size-chart/">identification chart</a>. n/a means that brand’s code is not verified here for that pitch and gauge.</p>
     </section>
 
     <div class="finder" id="find-chain" data-rel={AFFILIATE_REL} data-target={AFFILIATE_TARGET}>
       <div class="finder-head">Find my chain <span>VERIFIED ROWS ONLY</span></div>
       <div class="finder-body">
         <form id="find-saw-form">
-          <p class="kicker">From the saw</p>
+          <h2>From the saw</h2>
           <div class="f-grid">
             <div>
               <label for="fc-brand">Brand</label>
@@ -100,7 +98,7 @@ const jsonld = [
           <button class="f-btn" type="submit">Show part numbers for this saw</button>
         </form>
         <form id="find-spec-form">
-          <p class="kicker" style="margin-top:22px">Or from the bar</p>
+          <h2 style="margin-top:22px">Or from the bar</h2>
           <div class="stamp-grid">
             <label>Bar length (optional)
               <input id="fs-len" name="len" type="number" inputmode="numeric" min="8" max="72" placeholder="18" />

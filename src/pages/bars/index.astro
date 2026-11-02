@@ -1,21 +1,42 @@
 ---
 import Base from '../../layouts/Base.astro';
-import Byline from '../../components/Byline.astro';
 import Crumbs from '../../components/Crumbs.astro';
-import { barGroups, barUrl, SITE } from '../../lib/data';
+import { barGroups, barUrl, modelUrl, pitchShort, gaugeShort, SITE } from '../../lib/data';
 import { webPageLd } from '../../lib/ld';
+
 const groups = await barGroups();
-const desc = 'Chainsaw chain by guide-bar length: which saws we have verified with 16, 18 and 20 inch bars, and the pitch, gauge and drive links each uses.';
+const rows = groups.map((g) => {
+  const saws = [...new Map(g.items.map((i) => [i.model.id, i.model])).values()];
+  const specs = [...new Set(g.items.map(({ bar }) => (bar.pitch && bar.gauge ? `${pitchShort(bar.pitch)} ${gaugeShort(bar.gauge)}` : 'unconfirmed')))];
+  return { length: g.length, saws, specs, setups: g.items.length };
+});
+const desc = 'Chainsaw chain by guide-bar length: which saws we have verified at each length, and the pitch and gauge those bars use. Length alone does not pick a chain.';
 ---
 <Base title="Chainsaw Chain Size by Bar Length" description={desc} path="/bars/" nav="models" crumbs={[{ name: 'Bar lengths', path: '/bars/' }]} jsonld={[webPageLd('Chainsaw chain size by bar length', '/bars/', desc, SITE.dataDate, 'CollectionPage')]} modified={SITE.dataDate}>
   <div class="wrap">
     <div class="pagehead">
       <Crumbs crumbs={[{ name: 'Bar lengths' }]} />
       <h1>Chain size by bar length</h1>
-      <p class="lede">Bar length alone never picks a chain — a 16″ bar can take 3/8″ low-profile, .325″ or 3/8″ chain depending on the saw — but it is the first thing most owners know. Pick your bar length to see every saw and spec we have verified at that length.</p>
-      <Byline label="Last updated" />
+      <p class="lede">Bar length is the cutting length, from the saw out to the tip. It is not a chain specification. Pitch, gauge, and drive-link count have to match the bar that is mounted, and the same inch measurement shows up with more than one of those specs in this dataset.</p>
     </div>
-    <ul class="chips">{groups.map((g) => <li><a class="mono" href={barUrl(g.length)}>{g.length}″ bar · {new Set(g.items.map((i) => i.model.id)).size} saws</a></li>)}</ul>
-    <p class="small muted" style="margin-top:14px">Other lengths appear on individual <a href="/saws/">saw pages</a>; a bar-length page is only published once at least two saws share that length.</p>
+    <div class="prose">
+      <p>A length page is published only when at least two saws share that length. A length that appears on a single saw stays on that saw’s page. Drive-link count changes when the length changes, even when pitch and gauge stay the same. Ordering an “18-inch chain” without the other two numbers is how the wrong loop gets bought. The check is the stamp on the bar tail, in the <a href="/guides/how-to-verify-chain-size/">verification guide</a>.</p>
+      <p>The table is every published length, the chain specs those rows use, and the saws. Open a length for the drive-link count on each row. Pitch and gauge pages are under <a href="/chain/">chain specs</a>. The full model list is <a href="/saws/">saws</a>.</p>
+    </div>
+    <div class="tblwrap"><table>
+      <caption class="sr-only">Bar lengths, the chain specs on those bars, and the saws</caption>
+      <thead><tr><th scope="col">Length</th><th scope="col">Setups</th><th scope="col">Chain specs</th><th scope="col">Saws</th></tr></thead>
+      <tbody>
+        {rows.map((row) => (
+          <tr>
+            <td class="num"><a href={barUrl(row.length)}>{row.length}″</a></td>
+            <td class="num">{row.setups}</td>
+            <td class="num">{row.specs.join(', ')}</td>
+            <td>{row.saws.map((m, i) => <>{i > 0 && ', '}<a href={modelUrl(m)}>{m.data.name}</a></>)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table></div>
+    <p class="src">Specs come from the same manufacturer manuals, fit-up charts, and chain-maker rows as the saw pages. A cell marked unconfirmed is a bar whose pitch or gauge is not stated in those sources. <a href="/how-we-verify/">How we verify specs</a> is the rule for that.</p>
   </div>
 </Base>

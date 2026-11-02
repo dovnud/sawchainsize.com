@@ -63,7 +63,7 @@ const where = (bar: BarSide) => (bar.sawName && bar.barLabel ? `the ${bar.barLab
 
 function sourceLine(sources: FitSource[] | undefined): FitLine | null {
   if (!sources?.length) return null;
-  const text = sources.map((s) => `${s.publisher} — ${s.title} (${s.typeLabel}, retrieved ${s.retrieved})`).join(' ');
+  const text = sources.map((s) => `${s.publisher}: ${s.title} (${s.typeLabel}, retrieved ${s.retrieved})`).join(' ');
   const links = sources.filter((s) => s.url).map((s) => ({ href: s.url!, label: `${s.publisher}: ${s.title}` }));
   return { ok: null, title: 'Where this row came from', text, links };
 }
@@ -187,7 +187,7 @@ export function explainFit(bar: BarSide, chain: ChainSide): FitResult {
     }
     return {
       verdict: 'unresolved',
-      headline: 'No fit called — sources conflict',
+      headline: 'No fit called, sources conflict',
       detail: `Published sources disagree for ${where(bar)}. This checker does not call a fit while they disagree, even where one report matches the chain on the fields it states. The stamp on the bar is the tiebreaker.${sawBit}${note}`,
       lines,
     };
@@ -262,7 +262,7 @@ export function explainFit(bar: BarSide, chain: ChainSide): FitResult {
   if (open || bar.status === 'verify') {
     return {
       verdict: 'unresolved',
-      headline: 'No fit called — the row is not one loop',
+      headline: 'No fit called, the row is not one loop',
       detail: `This site does not print a single complete spec for ${place}, so this checker does not call a fit from the chart.${bar.note ? ` Row note: ${bar.note}` : ''} Read the stamp.`,
       lines,
     };

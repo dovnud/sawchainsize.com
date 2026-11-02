@@ -1,7 +1,7 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-/** Allowed enums — a build fails on anything else. */
+/** Allowed enums. A build fails on anything else. */
 export const PITCHES = ['1/4', '3/8-lp', '325', '3/8', '404'] as const;
 export const GAUGES = [0.043, 0.05, 0.058, 0.063] as const;
 export const STATUSES = ['ok', 'verify', 'conflict'] as const;

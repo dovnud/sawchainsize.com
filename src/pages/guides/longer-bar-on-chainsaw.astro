@@ -1,5 +1,4 @@
 ---
-import Byline from '../../components/Byline.astro';
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import FaqList from '../../components/FaqList.astro';
@@ -12,7 +11,7 @@ const models = await getModels();
 const brands = new Map((await getBrands()).map((b) => [b.id, b.data.name]));
 const Q = '″';
 
-// Per saw: listed bar lengths, chain specs, sources — straight from the model data files.
+// Per saw: listed bar lengths, chain specs, sources, straight from the model data files.
 const sawRows = models.filter((m) => m.data.bars.some((b) => b.status === 'ok')).map((m) => {
   const lens = [...new Set(m.data.bars.flatMap((b) => b.lengths_in))].sort((a, b) => a - b);
   const specs = [...new Set(m.data.bars.filter((b) => b.pitch && b.gauge).map((b) => `${pitchShort(b.pitch)} · ${gaugeShort(b.gauge)}`))];
@@ -55,7 +54,6 @@ const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Longer bar on a c
       <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Longer bar on a chainsaw' }]} />
       <h1>Can you put a longer bar on your chainsaw?</h1>
       <p class="lede">Yes, up to the longest bar the manufacturer lists for your saw, and no further. The new bar must take the same pitch and gauge as your chain and drive sprocket, and you’ll need a new, longer chain with the drive-link count for that bar. The table below shows the shortest and longest bar listed for every saw on this site.</p>
-      <Byline label="Last updated" />
     </div>
 
     <section class="block">
@@ -78,7 +76,7 @@ const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Longer bar on a c
           <thead><tr><th>Saw</th><th>Bars listed</th><th>Shortest–longest</th><th>Coverage</th><th>Chain spec(s)</th><th>Source</th></tr></thead>
           <tbody>
             {sawRows.map((r) => (
-              <tr><td><a href={modelUrl(r.m)}>{r.m.data.name}</a></td><td class="num">{r.lens.map((l) => `${l}${Q}`).join(', ')}</td><td class="num">{r.min === r.max ? `${r.min}${Q}` : `${r.min}–${r.max}${Q}`}</td><td class="small">{r.full ? 'Maker’s fit-up list' : 'Partial (manual / catalog)'}</td><td class="num">{r.specs.join(' / ') || '—'}</td><td class="small">{r.src}</td></tr>
+              <tr><td><a href={modelUrl(r.m)}>{r.m.data.name}</a></td><td class="num">{r.lens.map((l) => `${l}${Q}`).join(', ')}</td><td class="num">{r.min === r.max ? `${r.min}${Q}` : `${r.min}–${r.max}${Q}`}</td><td class="small">{r.full ? 'Maker’s fit-up list' : 'Partial (manual / catalog)'}</td><td class="num">{r.specs.join(' / ') || 'n/a'}</td><td class="small">{r.src}</td></tr>
             ))}
           </tbody>
         </table>

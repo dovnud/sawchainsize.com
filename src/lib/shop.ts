@@ -1,5 +1,5 @@
 /**
- * Builds the Amazon link blocks for every page. All URLs come from src/config/affiliate.ts — the tracking ID
+ * Builds the Amazon link blocks for every page. All URLs come from src/config/affiliate.ts, the tracking ID
  * is never written anywhere else. Rules: /dp/ links only for verified ASINs; otherwise a precise Amazon search;
  * no prices; bars with status conflict/verify never get a spec-matched chain link.
  */
@@ -24,27 +24,27 @@ export const okSpec = (b: Bar): Spec | null => (b.status === 'ok' && b.pitch && 
 export function chainLink(s: Spec, prefix = ''): ShopLink {
   const id = `chain|${s.pitch}|${s.gauge}|${s.dl}`;
   const label = `${prefix}${specText(s.pitch, s.gauge, s.dl)} chain`;
-  if (ASINS[id]) return product(id, `${label} — ${ASINS[id].label}`);
-  return search(`Oregon chainsaw chain ${PITCH_Q[s.pitch]} pitch ${gaugeQ(s.gauge)} gauge ${s.dl} drive links`, `${label} — find matching chains`);
+  if (ASINS[id]) return product(id, `${label}: ${ASINS[id].label}`);
+  return search(`Oregon chainsaw chain ${PITCH_Q[s.pitch]} pitch ${gaugeQ(s.gauge)} gauge ${s.dl} drive links`, `${label}, find matching chains`);
 }
 
 /** Replacement guide bar for a length plus the chain spec it must carry. */
 export function barLink(len: number, s: Spec, prefix = ''): ShopLink {
-  return search(`${len} inch chainsaw guide bar ${PITCH_Q[s.pitch]} pitch ${gaugeQ(s.gauge)} gauge ${s.dl} drive links`, `${prefix}${len}″ replacement bar — ${specText(s.pitch, s.gauge, s.dl)}`);
+  return search(`${len} inch chainsaw guide bar ${PITCH_Q[s.pitch]} pitch ${gaugeQ(s.gauge)} gauge ${s.dl} drive links`, `${prefix}${len}″ replacement bar: ${specText(s.pitch, s.gauge, s.dl)}`);
 }
 
 /** Sharpening kit for the file size the pitch/gauge needs. */
 export function kitLink(s: { pitch: string; gauge: number } | null): ShopLink {
   if (s) {
-    if (s.pitch === '3/8-lp' && s.gauge === 0.05) return product('kit-5-32', 'Oregon 5/32″ file kit — fits 3/8″ LP .050″ chain');
-    if (s.pitch === '3/8-lp') return search('11/64 chainsaw sharpening kit round file 4.5mm', '11/64″ file kit — for 3/8″ LP .043″ chain');
-    if (s.pitch === '325') return product('kit-3-16', 'Oregon 3/16″ file kit — fits .325″ chain');
+    if (s.pitch === '3/8-lp' && s.gauge === 0.05) return product('kit-5-32', 'Oregon 5/32″ file kit: fits 3/8″ LP .050″ chain');
+    if (s.pitch === '3/8-lp') return search('11/64 chainsaw sharpening kit round file 4.5mm', '11/64″ file kit, for 3/8″ LP .043″ chain');
+    if (s.pitch === '325') return product('kit-3-16', 'Oregon 3/16″ file kit: fits .325″ chain');
   }
   return product('kit-field');
 }
 
 export const barOilLink = () => product('bar-oil');
-export const chapsLink = () => product('chaps', 'Chainsaw chaps (Forester) — check the listing for its protection rating');
+export const chapsLink = () => product('chaps', 'Chainsaw chaps (Forester). Check the listing for its protection rating');
 export const helmetLink = () => product('helmet');
 export const glovesLink = () => product('gloves');
 
@@ -127,7 +127,7 @@ export function modelShop(model: Model): { groups: ShopGroup[]; flagged: boolean
 /**
  * One chain for a holiday CTA on a popular saw page: the shortest verified bar that has a
  * checked product page, otherwise the shortest verified bar's spec search. Conflict / unverified
- * saws return nothing — those pages must not point at a loop.
+ * saws return nothing, those pages must not point at a loop.
  */
 export function holidayChain(model: Model): ShopLink | null {
   const ok = model.data.bars.flatMap((b) => { const s = okSpec(b); return s ? [{ b, s }] : []; });
@@ -159,7 +159,7 @@ export function chainSpecShop(group: { pitch: string; gauge: number; items: { ba
   const gearSpec = { pitch: group.pitch, gauge: group.gauge };
   const topDl = dls[0];
   const gear: ShopLink[] = [
-    ...(topDl ? [search(`replacement chainsaw guide bar ${PITCH_Q[group.pitch]} pitch ${gaugeQ(group.gauge)} gauge`, `Replacement bars in ${specText(group.pitch, group.gauge)} — then match length and drive links to your stamp`)] : []),
+    ...(topDl ? [search(`replacement chainsaw guide bar ${PITCH_Q[group.pitch]} pitch ${gaugeQ(group.gauge)} gauge`, `Replacement bars in ${specText(group.pitch, group.gauge)}. Then match length and drive links to your stamp`)] : []),
     kitLink(gearSpec), barOilLink(),
   ];
   const groups: ShopGroup[] = [];
@@ -193,7 +193,7 @@ export function brandShop(brandId: string, brandName: string, models: Model[]): 
   const top = [...tally.values()].sort((a, b) => b.n - a.n || a.s.dl - b.s.dl).slice(0, 2);
   const chains = top.map((t) => chainLink(t.s, `Common on ${brandName} saws: `));
   const gear: ShopLink[] = [
-    search(`${brandName} chainsaw replacement guide bar`, `Replacement bars for ${brandName} saws — match your model and bar stamp`),
+    search(`${brandName} chainsaw replacement guide bar`, `Replacement bars for ${brandName} saws. Match your model and bar stamp`),
     kitLink(top[0] ? top[0].s : null), barOilLink(),
     ...(gas ? [chapsLink(), fuelLink(brandId)] : []), helmetLink(),
   ];
@@ -203,20 +203,20 @@ export function brandShop(brandId: string, brandName: string, models: Model[]): 
   return { groups, count: chains.length + gear.length };
 }
 
-const CALIPER = () => search('digital caliper 6 inch 0.001 inch', 'Digital caliper — measure drive-link gauge and rivet spacing');
+const CALIPER = () => search('digital caliper 6 inch 0.001 inch', 'Digital caliper, measure drive-link gauge and rivet spacing');
 const PITCH_GAUGE_TOOL = () => search('chainsaw chain pitch gauge measuring tool', 'Chain pitch and gauge measuring tool');
 const SCRENCH = () => search('chainsaw scrench combination wrench bar nut', 'Scrench / combination wrench for bar nuts and spark plug');
 const DEPTH_TOOL = () => search('chainsaw depth gauge tool raker file guide', 'Depth-gauge (raker) filing tool');
 
 const FILE_732 = () => search('7/32 chainsaw round file 5.5mm', '7/32″ round files (3/8″ standard and .404″ chain)');
 const FILE_1164 = () => search('11/64 chainsaw round file 4.5mm', '11/64″ round files (3/8″ LP .043″ chain)');
-const SPROCKET = () => search('chainsaw rim drive sprocket replacement', 'Replacement drive sprocket — match the pitch and tooth count to the chain and clutch');
+const SPROCKET = () => search('chainsaw rim drive sprocket replacement', 'Replacement drive sprocket. Match the pitch and tooth count to the chain and clutch');
 const BAR_DRESS = () => search('chainsaw bar rail dresser groove cleaner', 'Bar-rail dresser and groove cleaner');
 const HUSQ_OIL = () => search('Husqvarna 2 stroke oil 50:1 chainsaw', 'Husqvarna two-stroke oil for a 50:1 mix', 'use the ratio in your manual');
-const CHAIN_72 = () => search('Oregon 72LPX chainsaw chain 3/8 .050 gauge', 'Oregon 72-series chain (3/8″ .050″) — pick your drive-link count');
-const CHAIN_73 = () => search('Oregon 73LPX chainsaw chain 3/8 .058 gauge', 'Oregon 73-series chain (3/8″ .058″) — pick your drive-link count');
-const CHAIN_91 = () => search('Oregon 91PX chainsaw chain 3/8 low profile .050', 'Oregon 91PX chain (3/8″ low profile .050″) — pick your drive-link count');
-const CHAIN_90 = () => search('Oregon 90PX chainsaw chain 3/8 low profile .043', 'Oregon 90PX chain (3/8″ low profile .043″) — pick your drive-link count');
+const CHAIN_72 = () => search('Oregon 72LPX chainsaw chain 3/8 .050 gauge', 'Oregon 72-series chain (3/8″ .050″): pick your drive-link count');
+const CHAIN_73 = () => search('Oregon 73LPX chainsaw chain 3/8 .058 gauge', 'Oregon 73-series chain (3/8″ .058″): pick your drive-link count');
+const CHAIN_91 = () => search('Oregon 91PX chainsaw chain 3/8 low profile .050', 'Oregon 91PX chain (3/8″ low profile .050″): pick your drive-link count');
+const CHAIN_90 = () => search('Oregon 90PX chainsaw chain 3/8 low profile .043', 'Oregon 90PX chain (3/8″ low profile .043″): pick your drive-link count');
 /** In-site lookup. Not an affiliate link. */
 const LOOKUP = (): ShopLink => ({ href: '/#finder', label: 'Look up your chain', kind: 'page', note: 'Then match pitch, gauge and drive links on your stamp' });
 
@@ -253,8 +253,8 @@ export function guideShop(slug: string): { groups: ShopGroup[]; count: number } 
       add('Two-stroke fuel mix is a different oil', [product('fuel-stihl'), product('fuel-echo'), HUSQ_OIL()]);
       break;
     case '3-8-low-profile-vs-standard-chain':
-      add('3/8″ low-profile chain — pick the drive-link count', [CHAIN_91(), CHAIN_90(), product('kit-5-32')], true);
-      add('Standard 3/8″ chain — pick the drive-link count', [CHAIN_72(), CHAIN_73(), FILE_732(), search('18 inch chainsaw guide bar 3/8 pitch .050 gauge', '18″ bars in standard 3/8″ .050″ — match the nose sprocket and drive links')]);
+      add('3/8″ low-profile chain: pick the drive-link count', [CHAIN_91(), CHAIN_90(), product('kit-5-32')], true);
+      add('Standard 3/8″ chain (pick the drive-link count', [CHAIN_72(), CHAIN_73(), FILE_732(), search('18 inch chainsaw guide bar 3/8 pitch .050 gauge', '18″ bars in standard 3/8″ .050″) match the nose sprocket and drive links')]);
       break;
     case 'how-to-install-chainsaw-chain':
       add('Look up the chain, then the wrench', [LOOKUP(), SCRENCH(), glovesLink(), barOilLink()]);
@@ -264,7 +264,7 @@ export function guideShop(slug: string): { groups: ShopGroup[]; count: number } 
       break;
     case 'pole-saw-chain-size': {
       const lp = (gauge: number, dl: number) => ({ pitch: '3/8-lp', gauge, dl });
-      add('3/8″ low-profile pole saw loops — match the count on your bar', [
+      add('3/8″ low-profile pole saw loops. Match the count on your bar', [
         chainLink(lp(0.05, 39), '10″ ECHO · '), chainLink(lp(0.05, 40), '10″ Husqvarna · '), chainLink(lp(0.05, 44), '12″ · '), chainLink(lp(0.05, 45), '12″ · '), chainLink(lp(0.043, 44), '12″ narrow kerf · '), product('kit-5-32'),
       ], true);
       break;
@@ -283,18 +283,18 @@ export function guideShop(slug: string): { groups: ShopGroup[]; count: number } 
       add('The parts that hold the chain on', [LOOKUP(), SCRENCH(), CALIPER(), SPROCKET(), barOilLink(), glovesLink()]);
       break;
     case 'gifts-for-chainsaw-owners-2026':
-      add('Tier 1 — used up this season', [
+      add('Tier 1, used up this season', [
         why(barOilLink(), 'Bar-and-chain oil goes in the oil tank, filled with the gas. It is not two-stroke engine oil.'),
         why(product('kit-field'), 'Holds 5/32″, 3/16″ and 7/32″ files, so it still fits if you are not sure of the pitch. A single-size file is the wrong gift unless you know the chain.'),
         why(glovesLink(), 'For handling chain with the engine off. Pick the glove size, not a chainsaw model name.'),
         why(product('kit-5-32'), 'Only for 3/8″ low-profile chain in .050″ gauge. Wrong file for .325″ or standard 3/8″ chain.'),
       ]);
-      add('Tier 2 — a spare chain, and only if the stamp matches', [
+      add('Tier 2, a spare chain, and only if the stamp matches', [
         why(product('chain|3/8-lp|0.05|56', '3/8″ low profile · .050″ · 56 drive links'), '16″ class. Not low-profile .043″, and not standard 3/8″. Wrong loop if the stamp shows a different count.'),
         why(product('chain|325|0.05|72', '.325″ · .050″ · 72 drive links'), '18″ class. A different length in the same pitch is a different drive-link count.'),
         why(product('chain|3/8|0.05|72', 'Standard 3/8″ · .050″ · 72 drive links'), '20″ class. Oregon 72, not Oregon 73 (.058″) and not 3/8″ low profile.'),
       ]);
-      add('Tier 3 — gear that stays with the saw', [
+      add('Tier 3, gear that stays with the saw', [
         why(chapsLink(), 'Leg protection. Read the listing for an ASTM F1897 or UL mark and a length that overlaps the boots. Chaps are not cut-proof.'),
         why(helmetLink(), 'Hard hat with a mesh face shield and hearing protection. It does not replace chaps or boots.'),
         why(product('scabbard-18-22'), 'Covers an 18–22″ bar in the truck. Measure the bar if it is outside that range. It is not a substitute for shutting the engine off.'),

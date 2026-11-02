@@ -8,7 +8,7 @@
   "type": "gas",
   "popular": false,
   "blurb": "16″ homeowner saw: 3/8″ low-profile chain, .050″ gauge, 56 drive links, per Oregon’s model fit guide.",
-  "intro": "The Craftsman S165 is a gas homeowner saw, and Oregon's model fit guide names it against the 16″ S56 chain: 3/8″ low profile, .050″ gauge, 56 drive links. Craftsman never published its own per-bar chain table for this saw in a source we could read, so this page rests on the chain-maker's fitment data alone — it's accurate for a saw still wearing its original bar, but old Craftsman saws change hands a lot, so check the stamp.",
+  "intro": "The Craftsman S165 is a gas homeowner saw, and Oregon's model fit guide names it against the 16″ S56 chain: 3/8″ low profile, .050″ gauge, 56 drive links. Craftsman never published its own per-bar chain table for this saw in a source we could read, so this page rests on the chain-maker's fitment data alone. It's accurate for a saw still wearing its original bar, but old Craftsman saws change hands a lot, so check the stamp.",
   "bars": [
     {
       "lengths_in": [
@@ -29,7 +29,7 @@
       "source_ids": [
         "oregon-s56"
       ],
-      "note": "Oregon lists the Craftsman S165 in the model fit guide for its S56 chain. Single chain-maker source — confirm on the bar stamp."
+      "note": "Oregon lists the Craftsman S165 in the model fit guide for its S56 chain. Single chain-maker source. Confirm on the bar stamp."
     }
   ],
   "sources": [

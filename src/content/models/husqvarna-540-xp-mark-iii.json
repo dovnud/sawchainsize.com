@@ -10,7 +10,7 @@
   ],
   "type": "gas",
   "popular": false,
-  "blurb": "Two chain systems on 14″ and 16″ bars: .325″ Mini Pixel .043″ (59 / 64 drive links) or 3/8″ Mini .050″ (52 / 56) — per Husqvarna's 2026 fit-up guide.",
+  "blurb": "Two chain systems on 14″ and 16″ bars: .325″ Mini Pixel .043″ (59 / 64 drive links) or 3/8″ Mini .050″ (52 / 56), per Husqvarna's 2026 fit-up guide.",
   "intro": "The 540 XP Mark III is a rear-handle saw in the Professional section of Husqvarna's fit-up guide, and its fit-up guide entry is unusual: it approves two different chain systems at the same two bar lengths. On an X-Precision bar it runs .325″ Mini Pixel chain in .043″ gauge (SP21G X-Cut), 59 drive links at 14″ and 64 at 16″. On an X-Force bar it runs 3/8″ Mini (low-profile) chain in .050″ gauge (S93G X-Cut), 52 drive links at 14″ and 56 at 16″. So a 14″ bar alone does not tell you the chain: pitch, gauge and drive-link count all change with the bar type. Read the stamp on your bar tail before you order, and do not swap one system's chain onto the other's bar. The pitch has to match the saw's drive sprocket and the gauge has to match the bar groove, so a change of system is a bar, chain and sprocket job, not a chain swap. Both chains use a 5/32″ file. The .325″ rows use the same bar and chain part numbers as the top-handle T540 XP Mark III; the 3/8″ Mini chains are the same S93G loops listed for Husqvarna's small rear-handle saws.",
   "bars": [
     {
@@ -107,7 +107,7 @@
       "id": "husqvarna-fitup-2026",
       "type": "fitup-chart",
       "publisher": "Husqvarna",
-      "title": "Bar & Chain Fit-up Guide 2026 (effective 1 January 2026) — certified/approved bar and chain combinations per saw",
+      "title": "Bar & Chain Fit-up Guide 2026 (effective 1 January 2026): certified/approved bar and chain combinations per saw",
       "url": "https://media.husqvarnagroup.com/original/DI-328359.pdf",
       "retrieved": "2026-10-27"
     }

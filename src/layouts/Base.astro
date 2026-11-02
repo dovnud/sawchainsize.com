@@ -79,13 +79,13 @@ const graph = pageGraph({
     <meta property="og:image" content={ogUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content={ogAlt ?? `${SITE.name} — ${SITE.tagline}`} />
+    <meta property="og:image:alt" content={ogAlt ?? `${SITE.name}: ${SITE.tagline}`} />
     {modifiedIso && <meta property="article:modified_time" content={modifiedIso} />}
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={metaDesc} />
     <meta name="twitter:image" content={ogUrl} />
-    <meta name="twitter:image:alt" content={ogAlt ?? `${SITE.name} — ${SITE.tagline}`} />
+    <meta name="twitter:image:alt" content={ogAlt ?? `${SITE.name}: ${SITE.tagline}`} />
     <script type="application/ld+json" set:html={ldEscape(graph)} />
   </head>
   <body>

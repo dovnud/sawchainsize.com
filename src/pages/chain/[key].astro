@@ -1,5 +1,4 @@
 ---
-import Byline from '../../components/Byline.astro';
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import FaqList from '../../components/FaqList.astro';
@@ -23,8 +22,10 @@ const byModel = models.map((m) => ({ model: m, bars: group.items.filter((i) => i
 const brandsInGroup = [...new Set(models.map((m) => m.data.brand))];
 const parts = [...new Map(group.items.flatMap((i) => i.bar.chains.map((c) => [partText(c), c] as const))).values()];
 const sameGaugeOther = SPEC.codes.filter((c) => c.pitch === pitch && c.gauge !== gauge);
+const driveLinkCounts = [...new Set(group.items.flatMap((i) => (i.bar.drive_links ? [i.bar.drive_links] : [])))].sort((a, b) => a - b);
+const sawList = models.map((m) => m.data.name).join(', ');
 const faqs = [
-  { q: `What chain codes are ${pitchLabel(pitch)} ${gaugeShort(gauge)} chain?`, a: `Oregon: ${codes.oregon}. Stihl: ${codes.stihl}. Husqvarna: ${codes.husqvarna}. Carlton: ${codes.carlton}. A dash means we have not verified that brand's code for this spec — match on pitch, gauge and drive links instead.` },
+  { q: `What chain codes are ${pitchLabel(pitch)} ${gaugeShort(gauge)} chain?`, a: `Oregon: ${codes.oregon}. Stihl: ${codes.stihl}. Husqvarna: ${codes.husqvarna}. Carlton: ${codes.carlton}. n/a means we have not verified that brand's code for this spec. Match on pitch, gauge and drive links instead.` },
   { q: `What file sharpens ${pitchLabel(pitch)} chain?`, a: `${fileTxt} round file for this spec, per the manufacturer data on this page. File size follows the cutter, so it tracks pitch and gauge: 3/8″ low-profile takes 5/32″ (4.0 mm) in .050″ gauge but 11/64″ (4.5 mm) in .043″, .325″ is usually 3/16″ (4.8 mm), and standard 3/8″ takes 7/32″ (5.5 mm).` },
   { q: `Which saws use ${pitchLabel(pitch)} ${gaugeShort(gauge)} chain?`, a: `Among the saws verified on this site: ${models.map((m) => m.data.name).join(', ')}. The drive-link count depends on the bar fitted, so match it on your bar stamp.` },
   { q: `Can I use a different gauge chain on the same pitch?`, a: 'No. Gauge is the thickness of the drive links and must match the groove in your guide bar. A thicker chain will not seat; a thinner one wobbles in the groove, wears the bar rails and can derail.' },
@@ -51,21 +52,14 @@ const shop = chainSpecShop(group);
     <div class="pagehead">
       <Crumbs crumbs={[{ name: 'Chain specs', path: '/chain/' }, { name: `${pitchShort(pitch)} · ${gaugeShort(gauge)}` }]} />
       <h1>{pitchLabel(pitch)} · {gaugeLabel(gauge)} chain</h1>
-      <p class="lede">The chain spec for {P.used_on.toLowerCase()}. Pitch {pitchLabel(pitch)}, gauge {gaugeLabel(gauge)}, round file {fileTxt} — sold as Oregon {codes.oregon}.</p>
-      <Byline label="Last verified" />
+      <p class="lede">{P.used_on && P.used_on !== 'n/a' ? `Used on ${P.used_on.toLowerCase()}. ` : ''}Pitch {pitchLabel(pitch)}, gauge {gaugeLabel(gauge)}, round file {fileTxt}, Oregon {codes.oregon}. Saws in this dataset: {sawList}.{driveLinkCounts.length ? ` Drive-link counts on verified rows: ${driveLinkCounts.join(', ')}.` : ''}</p>
     </div>
     <section class="block" style="padding-top:10px">
-      <div class="spec-strip" style="grid-template-columns:repeat(4,1fr)">
-        <div class="spec-cell"><span>Pitch</span><b>{pitchShort(pitch)}</b></div>
-        <div class="spec-cell"><span>Gauge</span><b>{gaugeShort(gauge)}</b></div>
-        <div class="spec-cell"><span>File size</span><b style="font-size:1rem">{fileTxt}</b></div>
-        <div class="spec-cell"><span>Oregon</span><b style="font-size:1rem">{codes.oregon}</b></div>
-      </div>
-      <h2 style="margin-top:28px">Chain codes by brand</h2>
+      <h2>Chain codes by brand</h2>
       <div class="tblwrap"><table>
         <thead><tr><th scope="col">Oregon</th><th scope="col">Stihl</th><th scope="col">Husqvarna</th><th scope="col">Carlton</th></tr></thead>
         <tbody><tr><td class="num">{codes.oregon}</td><td class="num">{codes.stihl}</td><td class="num">{codes.husqvarna}</td><td class="num">{codes.carlton}</td></tr></tbody></table></div>
-      <p class="src">Codes are the ones confirmed in manufacturer and dealer data we checked; a dash means we have not verified that brand's code for this spec — match on pitch, gauge and drive links instead.</p>
+      <p class="src">Codes are the ones confirmed in manufacturer and dealer data we checked; n/a means we have not verified that brand's code for this spec. Match on pitch, gauge and drive links instead.</p>
     </section>
     <hr class="rule" />
     <section class="block">
@@ -90,9 +84,9 @@ const shop = chainSpecShop(group);
     </section>
     {sameGaugeOther.length > 0 && (
       <div class="callout"><b>⚠ Same pitch, different gauge</b>
-        <p>{pitchLabel(pitch)} chain also comes in {sameGaugeOther.map((c) => gaugeLabel(c.gauge)).join(' and ')} (Oregon {sameGaugeOther.map((c) => c.oregon).join(', ')}). The boxes look near-identical, but the gauge must match the groove in your bar — read it off the bar stamp, never guess it from the pitch. The buttons below are this page’s gauge ({gaugeShort(gauge)}) only. See <a href="/guides/oregon-72-vs-73-chain/">Oregon 72 vs 73</a>.</p></div>
+        <p>{pitchLabel(pitch)} chain also comes in {sameGaugeOther.map((c) => gaugeLabel(c.gauge)).join(' and ')} (Oregon {sameGaugeOther.map((c) => c.oregon).join(', ')}). The boxes look near-identical, but the gauge must match the groove in your bar. Read it off the bar stamp, never guess it from the pitch. The buttons below are this page’s gauge ({gaugeShort(gauge)}) only. See <a href="/guides/oregon-72-vs-73-chain/">Oregon 72 vs 73</a>.</p></div>
     )}
-    <ShopBlock groups={shop.groups} anchor lead={`Match drive links to your own bar stamp before buying — these are common counts for ${pitchShort(pitch)} ${gaugeShort(gauge)} chain, not a list of every length.`} />
+    <ShopBlock groups={shop.groups} anchor lead={`Match drive links to your own bar stamp before buying. These are common counts for ${pitchShort(pitch)} ${gaugeShort(gauge)} chain, not a list of every length.`} />
     <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
     <p><a href="/chain/">← All chain specs</a> · <a href="/guides/chain-size-chart/">Identification chart</a> · <a href="/guides/chainsaw-chain-gauge/">Gauge</a> · <a href="/guides/how-to-verify-chain-size/">Verify on your bar</a> · <a href="/guides/chainsaw-chain-file-size/">File size</a></p>
   </div>

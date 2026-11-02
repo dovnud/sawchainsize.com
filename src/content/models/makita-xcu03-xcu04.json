@@ -12,7 +12,7 @@
   "type": "battery",
   "popular": true,
   "blurb": "36 V (2×18 V) cordless saws: 12″, 14″ or 16″ bars, 3/8″ low-profile chain, .043″ (90PX) or .050″ (91PX), 46 / 52 / 56 drive links.",
-  "intro": "Makita's XCU03 and XCU04 share one manual and one chain table. The XCU03 ships with a 14″ bar and the XCU04 with a 16″, and the manual approves 12″, 14″ and 16″ bars for both in two chain types: 90PX (.043″ gauge) and 91PX (.050″ gauge), both 3/8″ pitch, at 46, 52 and 56 drive links respectively. The gauge is the trap here: both loops look alike and are the same pitch, so check which groove your bar has — the bar part numbers differ between the two gauges.",
+  "intro": "Makita's XCU03 and XCU04 share one manual and one chain table. The XCU03 ships with a 14″ bar and the XCU04 with a 16″, and the manual approves 12″, 14″ and 16″ bars for both in two chain types: 90PX (.043″ gauge) and 91PX (.050″ gauge), both 3/8″ pitch, at 46, 52 and 56 drive links respectively. The gauge is the trap here: both loops look alike and are the same pitch, so check which groove your bar has, the bar part numbers differ between the two gauges.",
   "bars": [
     {
       "lengths_in": [
@@ -180,7 +180,7 @@
       "id": "echo-catalog-2023",
       "type": "fitup-chart",
       "publisher": "Echo",
-      "title": "ECHO chainsaws catalog (Jan 2023) — “Bars and Chains” chart: bar and chain part numbers, drive-link count, gauge, pitch and file size per saw; saw specification tables",
+      "title": "ECHO chainsaws catalog (Jan 2023): “Bars and Chains” chart: bar and chain part numbers, drive-link count, gauge, pitch and file size per saw; saw specification tables",
       "url": "https://www.echo-usa.com/getmedia/f0410e25-c7f5-4247-a9cb-8045d8e57b63/ECHO_chainsaws.pdf",
       "retrieved": "2026-10-24"
     }

@@ -11,8 +11,8 @@
   ],
   "type": "gas",
   "popular": true,
-  "blurb": "Poulan Pro 18″ saw: 3/8″ low-profile chain, .050″ gauge, 62 drive links — Oregon lists the PR4218 family against its 62-link chain, and Poulan’s parts list shows an 18″ bar and chain.",
-  "intro": "The Poulan Pro PR4218 and PP4218 are budget 18″ homeowner saws that turn up everywhere secondhand. Poulan's own parts list for the PP4218 shows an 18″ bar (952044926) and 18″ chain (952051548) as the factory cutting attachment, and Oregon's fit guide for its 18″ S62 chain — 3/8″ low profile, .050″ gauge, 62 drive links — names the PR4218, PPR4218A and PP4218AVX. Oregon also lists the PR4218 against its 16″ S56 chain, so 16″ bars exist in the wild; we only publish the 18″ setup that both sources support.",
+  "blurb": "Poulan Pro 18″ saw: 3/8″ low-profile chain, .050″ gauge, 62 drive links: Oregon lists the PR4218 family against its 62-link chain, and Poulan’s parts list shows an 18″ bar and chain.",
+  "intro": "The Poulan Pro PR4218 and PP4218 are budget 18″ homeowner saws that turn up everywhere secondhand. Poulan's own parts list for the PP4218 shows an 18″ bar (952044926) and 18″ chain (952051548) as the factory cutting attachment, and Oregon's fit guide for its 18″ S62 chain (3/8″ low profile, .050″ gauge, 62 drive links) names the PR4218, PPR4218A and PP4218AVX. Oregon also lists the PR4218 against its 16″ S56 chain, so 16″ bars exist in the wild; we only publish the 18″ setup that both sources support.",
   "bars": [
     {
       "lengths_in": [

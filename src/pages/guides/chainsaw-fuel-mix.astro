@@ -1,5 +1,4 @@
 ---
-import Byline from '../../components/Byline.astro';
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import FaqList from '../../components/FaqList.astro';
@@ -31,8 +30,7 @@ const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Fuel mix', path }
     <div class="pagehead">
       <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Fuel mix' }]} />
       <h1>Chainsaw fuel mix</h1>
-      <p class="lede">Current STIHL, Husqvarna and Echo gas saws are specified at 50:1 — one part two-stroke oil to fifty parts gasoline. That is the ratio those makers publish. The ratio in your saw’s manual is the one that saw was built for, and bar-and-chain oil is not this oil.</p>
-      <Byline label="Last updated" />
+      <p class="lede">Current STIHL, Husqvarna and Echo gas saws are specified at 50:1. One part two-stroke oil to fifty parts gasoline. That is the ratio those makers publish. The ratio in your saw’s manual is the one that saw was built for, and bar-and-chain oil is not this oil.</p>
     </div>
 
     <section class="block">
@@ -65,7 +63,7 @@ const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Fuel mix', path }
 
     <section class="block">
       <h2>Order of mixing, and how long it keeps</h2>
-      <p style="max-width:72ch">The three procedures agree on the idea and differ slightly in the choreography. STIHL’s US guide: oil into the canister first, then gasoline, then shake vigorously. Husqvarna’s 120 Mark II: half the gasoline, then all of the oil, shake, then the rest of the gasoline, shake again. Echo’s CS-352: the same half-tank sequence. Putting oil in first, or into half the fuel, is how the oil actually disperses instead of sitting in a layer. Shake again before you pour it into the saw if the can has been standing. Husqvarna’s support page includes that remix-before-refueling step.</p>
+      <p style="max-width:72ch">The three procedures agree on the idea and differ slightly in the choreography. STIHL’s US guide: oil into the canister first, then gasoline, then shake vigorously. Husqvarna’s 120 Mark II: half the gasoline, then all of the oil, shake, then the rest of the gasoline, shake again. Echo’s CS-352: the same half-tank sequence. Putting oil in first, or into half the fuel, is how the oil disperses instead of sitting in a layer. Shake again before you pour it into the saw if the can has been standing. Husqvarna’s support page includes that remix-before-refueling step.</p>
       <p style="max-width:72ch">Do not mix a season’s worth. Echo: do not mix more than you expect to use in 30 days, or 90 days if a fuel stabilizer is added, and use gasoline purchased within the last 30 days. Husqvarna 120 Mark II: do not make more than 30 days’ quantity. Husqvarna support: about one month, and mix again before each refueling. Old mix sheds, varnishes a carburetor, and is a poor place to discover that the oil has separated. Label the can as mixed fuel so it is not poured into a car or a four-stroke mower.</p>
       <p style="max-width:72ch">Pre-mixed fuel is the other legal option when the maker names it. STIHL points at MotoMix, which uses HP Ultra and is already at the ratio. Echo’s fuel answer says a pre-mix can be used if it meets the same oil specification, and names Echo Red Armor fuel as Echo’s own. A pre-mix that does not state the oil grade or the ratio is not “close enough” because the can says premix.</p>
     </section>
@@ -79,7 +77,7 @@ const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Fuel mix', path }
 
     <section class="block">
       <h2>Battery saws skip this page</h2>
-      <p style="max-width:72ch">A battery saw has no mix. It still has a bar-oil tank. The chain rules — pitch, gauge, drive links, tension, sprocket match — do not relax because the motor is electric. The <a href="/saws/husqvarna-550i-xp/">550i XP</a> and the <a href="/saws/makita-xcu03-xcu04/">Makita XCU03 / XCU04</a> pages are chain pages. If you are here because a gas saw would not start after a fresh can of fuel, the checks that stay inside the published instructions are: ratio measured rather than guessed, oil grade as specified, gasoline within the ethanol limit the manual names, mix shaken, saw moved clear of the can, and the bar-oil tank filled with bar oil rather than with whatever was left in the measuring bottle.</p>
+      <p style="max-width:72ch">A battery saw has no mix. It still has a bar-oil tank. The chain rules (pitch, gauge, drive links, tension, sprocket match) do not relax because the motor is electric. The <a href="/saws/husqvarna-550i-xp/">550i XP</a> and the <a href="/saws/makita-xcu03-xcu04/">Makita XCU03 / XCU04</a> pages are chain pages. If you are here because a gas saw would not start after a fresh can of fuel, the checks that stay inside the published instructions are: ratio measured rather than guessed, oil grade as specified, gasoline within the ethanol limit the manual names, mix shaken, saw moved clear of the can, and the bar-oil tank filled with bar oil rather than with whatever was left in the measuring bottle.</p>
     </section>
 
     <div class="callout"><b>⚠ The manual’s ratio overrides a general 50:1</b><p>50:1 is what STIHL, Husqvarna and Echo publish for the current saws cited above. A different number in your manual, or a later service bulletin from that manufacturer, is the number you mix. Measure the oil. Do not put bar oil in the gas.</p></div>

@@ -16,7 +16,7 @@ const pageLink = (l: ShopLink) => l.kind === 'page';
   <div class="buy-head">{compact ? 'See it on Amazon' : title}</div>
   <div class="buy-body">
     <p class="shop-disclosure"><strong>{AMAZON_DISCLOSURE}</strong> <span class="muted">{hasPage ? 'Amazon links are the cards. “Look up your chain” stays on this site. ' : 'These are Amazon links. '}<a href="/affiliate-disclosure/">How that works</a>. No price is printed here.</span></p>
-    {!compact && <p class="small">{lead ?? 'Verify pitch, gauge and drive links against your bar stamp before buying — a listing title is not proof of fit.'}{flagged && ' Setups marked “conflict” or “verify” in the table have no spec-matched link here: read your stamp first.'}</p>}
+    {!compact && <p class="small">{lead ?? 'Verify pitch, gauge and drive links against your bar stamp before buying, a listing title is not proof of fit.'}{flagged && ' Setups marked “conflict” or “verify” in the table have no spec-matched link here: read your stamp first.'}</p>}
     {open.map((g) => (
       <div>
         {!compact && <h3 class="shop-h">{g.title}</h3>}

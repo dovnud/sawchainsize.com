@@ -8,7 +8,7 @@
   ],
   "type": "gas",
   "popular": false,
-  "blurb": "13″, 16″, 18″ and 20″ bar setups on .325″ chain, .050″ gauge, 56–80 drive links — straight from Husqvarna's 2026 fit-up guide.",
+  "blurb": "13″, 16″, 18″ and 20″ bar setups on .325″ chain, .050″ gauge, 56–80 drive links, straight from Husqvarna's 2026 fit-up guide.",
   "intro": "The Husqvarna 445S is a rear-handle gas saw. Husqvarna's own 2026 Bar & Chain Fit-up Guide (effective 1 January 2026) lists 4 approved bar lengths for it (13″, 16″, 18″ and 20″), running .325″ pitch chain in .050″ gauge.",
   "bars": [
     {
@@ -101,7 +101,7 @@
       "id": "husqvarna-fitup-2026",
       "type": "fitup-chart",
       "publisher": "Husqvarna",
-      "title": "Bar & Chain Fit-up Guide 2026 (effective 1 January 2026) — certified/approved bar and chain combinations per saw",
+      "title": "Bar & Chain Fit-up Guide 2026 (effective 1 January 2026): certified/approved bar and chain combinations per saw",
       "url": "https://media.husqvarnagroup.com/original/DI-328359.pdf",
       "retrieved": "2026-10-24"
     }

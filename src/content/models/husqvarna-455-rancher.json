@@ -9,7 +9,7 @@
   "type": "gas",
   "displacement_cc": 55.5,
   "popular": true,
-  "blurb": "55.5 cc ranch saw. Factory 20″ setup per Husqvarna's own manual table: 3/8″ pitch, 72 drive links — in both .050″ and .058″ gauge versions.",
+  "blurb": "55.5 cc ranch saw. Factory 20″ setup per Husqvarna's own manual table: 3/8″ pitch, 72 drive links, in both .050″ and .058″ gauge versions.",
   "intro": "The 455 Rancher is Husqvarna's long-running 55.5 cc farm and ranch saw. Husqvarna's operator-manual bar & chain combination table lists this saw with 3/8″ pitch chain at 20″ (72 drive links) in two gauges, plus a family of .325″ combinations at shorter lengths. The gauge is the trap on this model: both versions exist from the factory, so two owners with “the same saw” can need different chains.",
   "sources": [
     {
@@ -77,7 +77,7 @@
       "source_ids": [
         "husqvarna-manual-455"
       ],
-      "note": "The same table lists the .058″ version with H81 chain. This is the Oregon 72-vs-73 trap in factory form — check which groove your bar has."
+      "note": "The same table lists the .058″ version with H81 chain. This is the Oregon 72-vs-73 trap in factory form. Check which groove your bar has."
     },
     {
       "lengths_in": [
@@ -105,7 +105,7 @@
       "source_ids": [
         "husqvarna-manual-455"
       ],
-      "note": "Husqvarna's table lists .325″ combinations for this saw spanning 56 to 78 drive links depending on the exact bar. The range is real but useless for ordering — read the count off your bar stamp.",
+      "note": "Husqvarna's table lists .325″ combinations for this saw spanning 56 to 78 drive links depending on the exact bar. The range is real but useless for ordering. Read the count off your bar stamp.",
       "label": "16″–20″ (.325″ setups)",
       "drive_links_range": [
         56,

@@ -9,7 +9,7 @@
   ],
   "type": "gas",
   "popular": false,
-  "blurb": "20″ to 36″ bars on 3/8″ chain in .050″ or .063″ gauge (72–115 drive links), plus .404″ on 32″ and 36″ — per STIHL's chain-selection chart.",
+  "blurb": "20″ to 36″ bars on 3/8″ chain in .050″ or .063″ gauge (72–115 drive links), plus .404″ on 32″ and 36″, per STIHL's chain-selection chart.",
   "intro": "The MS 661 C-M is the biggest STIHL on this site, and the one with the most ways to buy the wrong loop. STIHL's selection chart gives it its own block: 3/8″ Rapid Super chain in two gauges, .050″ (33 RS3) and .063″ (36 RS3), on bars from 20″ to 36″, plus .404″ (46 RS) chain on 32″ and 36″ bars. Bar length alone does not settle it. Two different 28″ .050″ bars take 91 or 92 links, and two 36″ .063″ bars take 114 or 115, depending on the bar's nose sprocket. Get pitch and gauge from the stamp on the bar tail and the drive-link count from the same stamp, or by counting the old loop. Most of the longer bars in this block are yellow-labeled, meaning STIHL does not offer a reduced-kickback version at that length (each row says so). The chart is dated 1 October 2017, so check your bar stamp before you order chain for a newer saw or a non-STIHL bar.",
   "bars": [
     {
@@ -360,7 +360,7 @@
       "id": "stihl-chain-chart-2017",
       "type": "fitup-chart",
       "publisher": "STIHL",
-      "title": "Saw Chain Selection and Identification (STIHL USA catalog page 173; specifications as of 1 October 2017) — recommended chain loop and guide bar per saw model",
+      "title": "Saw Chain Selection and Identification (STIHL USA catalog page 173; specifications as of 1 October 2017): recommended chain loop and guide bar per saw model",
       "url": "https://assets.unilogcorp.com/187/ITEM/DOC/Stihl_102205325_Catalog.pdf",
       "retrieved": "2026-10-26"
     },
@@ -368,7 +368,7 @@
       "id": "stihl-chain-chart-2025",
       "type": "fitup-chart",
       "publisher": "STIHL",
-      "title": "STIHL 2025 Full Line catalog — Saw Chain Selection and Identification chart (catalog pages 166–167), chainsaw spec tables, saw chain and file pages",
+      "title": "STIHL 2025 Full Line catalog: Saw Chain Selection and Identification chart (catalog pages 166–167), chainsaw spec tables, saw chain and file pages",
       "url": "https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf",
       "retrieved": "2026-11-02"
     }

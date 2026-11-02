@@ -1,5 +1,4 @@
 ---
-import Byline from '../../components/Byline.astro';
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import FaqList from '../../components/FaqList.astro';
@@ -98,7 +97,6 @@ const specText = (p: string, g: number) => `${pitchShort(p)} · ${gaugeShort(g)}
       <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Chain part numbers' }]} />
       <h1>Chainsaw chain part numbers, decoded</h1>
       <p class="lede">A STIHL loop number such as 33 RS3 84 spells out the chain: the first digit is the pitch (3 = 3/8″), the second is the gauge (3 = .050″), the letters are the cutter type, and the last number is the drive-link count. Echo part numbers such as 91PX52CQ carry the drive-link count too (52). Husqvarna names its chain types (S93G, SP33G, H38) and you look the spec up. The tables below decode the STIHL, Husqvarna and Echo chain numbers in our verified saw data.</p>
-      <Byline label="Last updated" />
     </div>
 
     <section class="block">

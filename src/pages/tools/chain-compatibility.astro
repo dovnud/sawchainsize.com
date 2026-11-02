@@ -1,6 +1,5 @@
 ---
 import Base from '../../layouts/Base.astro';
-import Byline from '../../components/Byline.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import FaqList from '../../components/FaqList.astro';
 import ToolHoliday from '../../components/ToolHoliday.astro';
@@ -47,7 +46,6 @@ const jsonld = [
       <Crumbs crumbs={[{ name: 'Tools', path: '/tools/' }, { name: 'Compatibility checker' }]} />
       <h1>Bar and chain compatibility</h1>
       <p class="lede">Enter the bar and the chain you are about to buy. The checker says whether pitch, gauge and drive links match, and which number failed. It uses Oregon’s published fit rules and, when you pick a saw, the row already on that saw’s page.</p>
-      <Byline label="Last updated" />
     </div>
 
     <section class="block">
@@ -104,7 +102,7 @@ const jsonld = [
             </div>
           </div>
           <div id="ck-stamp-fields">
-            <p class="kicker" style="margin-top:16px">Stamp on the bar</p>
+            <h2 style="margin-top:16px">Stamp on the bar</h2>
             <div class="stamp-grid">
               <label>Pitch
                 <select id="ck-bp">
@@ -123,7 +121,7 @@ const jsonld = [
               </label>
             </div>
           </div>
-          <p class="kicker" style="margin-top:18px">Chain you are about to buy</p>
+          <h2 style="margin-top:18px">Chain you are about to buy</h2>
           <div class="stamp-grid">
             <label>Pitch
               <select id="ck-cp">

@@ -1,5 +1,4 @@
 ---
-import Byline from '../../components/Byline.astro';
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import FaqList from '../../components/FaqList.astro';
@@ -20,6 +19,11 @@ group.items.forEach(({ bar }) => {
   if (bar.drive_links) combos.get(k)!.dls.add(bar.drive_links);
 });
 const comboText = [...combos.values()].map((c) => `${pitchLabel(c.pitch)} pitch / ${gaugeLabel(c.gauge)} gauge${c.dls.size ? ` (${[...c.dls].join(' or ')} drive links)` : ''}`);
+const sawNames = [...new Map(group.items.map((i) => [i.model.id, i.model.data.name])).values()];
+const specBits = [...combos.values()].map((c) => {
+  const dls = [...c.dls].sort((a, b) => a - b);
+  return `${pitchShort(c.pitch)} ${gaugeShort(c.gauge)}${dls.length ? ` (${dls.join(', ')} drive links)` : ''}`;
+});
 const faqs = [
   { q: `What chain fits a ${len} inch chainsaw bar?`, a: `It depends on the bar's pitch and gauge, not the length. Among the saws verified on this site, ${len} inch bars appear with ${comboText.join('; ')}. Sources disagree for some saws, so read the pitch, gauge and drive-link count stamped on your own bar tail before ordering.` },
   { q: `How many drive links does a ${len} inch bar take?`, a: `The drive-link count depends on the chain pitch and the bar: on this site, verified ${len} inch setups range over ${[...new Set([...combos.values()].flatMap((c) => [...c.dls]))].sort((a, b) => a - b).join(', ')} drive links. Never order by bar length alone.` },
@@ -36,8 +40,7 @@ const shop = barLengthShop(len, group.items);
     <div class="pagehead">
       <Crumbs crumbs={[{ name: 'Bar lengths', path: '/bars/' }, { name: `${len}″ bar` }]} />
       <h1>{len}-inch bar: chain size by saw</h1>
-      <p class="lede">Every saw setup on this site that runs a {len}″ guide bar, with the pitch, gauge and drive links we could trace to a source. The bar length narrows the choice; the stamp on your bar tail settles it.</p>
-      <Byline label="Last verified" />
+      <p class="lede">Saws on this site with a {len}″ bar: {sawNames.join(', ')}. Confirmed chain specs at that length: {specBits.length ? specBits.join('; ') : 'none of the rows are fully confirmed'}. Length does not set pitch or gauge. The stamp on the bar tail does.</p>
     </div>
     <section class="block" style="padding-top:10px">
       <div class="tblwrap"><table>
@@ -55,8 +58,8 @@ const shop = barLengthShop(len, group.items);
             </tr>
           ))}
         </tbody></table></div>
-      <div class="callout"><b>⚠ A {len}″ bar is not a chain spec</b>
-        <p>The same bar length is sold in more than one pitch and gauge. Read the stamp on your bar tail and match all three numbers — <a href="/guides/how-to-verify-chain-size/">how to read it</a>. Length changes the drive-link count; it does not change how you <a href="/guides/chainsaw-chain-tension/">tension</a> the loop or <a href="/guides/chainsaw-bar-maintenance/">maintain the bar</a>.</p></div>
+      <div class="callout"><b>A {len}″ bar is not a chain spec</b>
+        <p>{specBits.length ? `Confirmed specs at ${len}″ here: ${specBits.join('; ')}. ` : ''}Read the stamp on your bar tail and match pitch, gauge, and drive links. <a href="/guides/how-to-verify-chain-size/">How to read the stamp</a>. Length changes the drive-link count. It does not change <a href="/guides/chainsaw-chain-tension/">tension</a> or <a href="/guides/chainsaw-bar-maintenance/">bar maintenance</a>.</p></div>
     </section>
     <section class="block">
       <h2>Chain specs seen on {len}″ bars</h2>

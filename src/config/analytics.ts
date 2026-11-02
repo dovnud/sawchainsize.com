@@ -1,5 +1,5 @@
 /**
- * ANALYTICS CONFIG — the ONE place the Google Analytics 4 Measurement ID lives.
+ * ANALYTICS CONFIG: the ONE place the Google Analytics 4 Measurement ID lives.
  *
  * >>> SWAP POINT: change GA4_ID below. Set it to '' and NO analytics script is emitted anywhere. <<<
  *

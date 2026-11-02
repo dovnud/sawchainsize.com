@@ -15,8 +15,8 @@ const { model } = Astro.props as { model: Model };
             <td class="num" data-label="Gauge">{gaugeText(b)}</td>
             <td class="num" data-label="Drive links">{dlText(b, model)}</td>
             <td class="num" data-label="File">{fileText(b)}</td>
-            <td data-label="OEM chain">{oemParts(b).length ? oemParts(b).map((c, i) => <>{i > 0 && <br />}{partText(c)}</>) : '—'}</td>
-            <td data-label="Equivalent chains">{equivParts(b).length ? equivParts(b).map((c, i) => <>{i > 0 && <br />}{partText(c)}</>) : '—'}</td>
+            <td data-label="OEM chain">{oemParts(b).length ? oemParts(b).map((c, i) => <>{i > 0 && <br />}{partText(c)}</>) : 'n/a'}</td>
+            <td data-label="Equivalent chains">{equivParts(b).length ? equivParts(b).map((c, i) => <>{i > 0 && <br />}{partText(c)}</>) : 'n/a'}</td>
           </tr>
           <tr class="n"><td class="gap"></td><td colspan="6" class="small muted">{compactNote(b)}</td></tr>
         </>

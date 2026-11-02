@@ -1,5 +1,4 @@
 ---
-import Byline from '../../components/Byline.astro';
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import FaqList from '../../components/FaqList.astro';
@@ -12,7 +11,7 @@ const faqs = [
   { q: 'What size file do I need for .325 chain?', a: '3/16″ (4.8 mm) round file.' },
   { q: 'What size file for 3/8 chain?', a: '7/32″ (5.5 mm) round file for standard 3/8″ pitch; 5/32″ (4.0 mm) for 3/8″ low-profile ("Picco") chain, or 11/64″ (4.5 mm) for the thinner .043″ low-profile chain.' },
   { q: 'Does gauge change the file size?', a: 'No. File size follows pitch (cutter size); gauge is the drive-link thickness and does not change which file you use.' },
-  { q: 'Is the file size on my saw page?', a: 'Yes — each verified model page lists the round-file size for the chain fitted to that bar.' },
+  { q: 'Is the file size on my saw page?', a: 'Yes. Each verified model page lists the round-file size for the chain fitted to that bar.' },
 ];
 const jsonld = [webPageLd('Chainsaw chain file size by pitch', path, desc, SITE.dataDate), faqLd(faqs)];
 import ShopBlock from '../../components/ShopBlock.astro';
@@ -26,7 +25,6 @@ const shop = guideShop('chainsaw-chain-file-size');
       <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Chain file size' }]} />
       <h1>Chainsaw chain file size</h1>
       <p class="lede">The round file you sharpen with is set by the chain's pitch. Use the wrong size and you either skip the cutter edge or remove too much metal.</p>
-      <Byline label="Last updated" />
     </div>
     <div class="tblwrap"><table>
       <caption class="sr-only">Round file size by chain pitch</caption>

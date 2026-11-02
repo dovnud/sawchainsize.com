@@ -25,7 +25,7 @@ export const webPageLd = (name: string, path: string, description: string, modif
   ...(modified ? { dateModified: isoDate(modified) } : {}), inLanguage: 'en-US',
 });
 
-/** Editorial guide. No prices, offers, or ratings — those are not known and are not invented. */
+/** Editorial guide. No prices, offers, or ratings. Those are not known and are not invented. */
 export const articleLd = (headline: string, path: string, description: string, modified?: string) => ({
   '@context': 'https://schema.org', '@type': 'Article', headline, name: headline, description,
   url: SITE.url + path, mainEntityOfPage: SITE.url + path,
@@ -59,7 +59,7 @@ export const modelLd = (m: Model, path: string) => specItemLd(
     model: m.data.model, description: m.data.blurb,
     ...(m.data.aliases.length ? { alternateName: m.data.aliases } : {}),
     additionalProperty: m.data.bars.filter((b) => b.status === 'ok').map((b) => ({
-      '@type': 'PropertyValue', name: `Verified chain spec — ${barLabel(b)} bar`,
+      '@type': 'PropertyValue', name: `Verified chain spec: ${barLabel(b)} bar`,
       value: `${pitchLabel(b.pitch)} pitch, ${gaugeLabel(b.gauge)} gauge, ${b.drive_links} drive links`,
     })),
   },
