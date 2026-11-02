@@ -1,12 +1,12 @@
 /**
- * AFFILIATE CONFIG — the ONE place the Amazon Associates tracking ID lives.
+ * AFFILIATE CONFIG: the ONE place the Amazon Associates tracking ID lives.
  *
  * >>> SWAP POINT: change AMAZON_TAG below and every Amazon link on the site changes with it. <<<
  *
  * Rules (do not break these):
  *  - This ID belongs to sawchainsize.com ONLY. Never reuse it on another site.
  *  - Amazon is the only affiliate program used on this site. No other program IDs belong here.
- *  - Never type the tag into a page, component, markdown file or script — always build links with
+ *  - Never type the tag into a page, component, markdown file or script. Always build links with
  *    amazonSearchUrl() / amazonProductUrl() below (src/lib/shop.ts does this for every page).
  *  - Never show or hard-code prices. Amazon prices change; the checkout price is the real one.
  *  - /dp/<ASIN> links are only allowed for ASINs listed in ASINS below, each of which was verified by
@@ -17,7 +17,7 @@ export const AMAZON_TAG = 'sawchainsize-20';
 
 export const AMAZON_DOMAIN = 'www.amazon.com';
 
-/** Required Associates Program disclosure — shown next to every block of Amazon links. */
+/** Required Associates Program disclosure, shown next to every block of Amazon links. */
 export const AMAZON_DISCLOSURE = 'As an Amazon Associate I earn from qualifying purchases.';
 
 /** rel / target applied to every Amazon link. */

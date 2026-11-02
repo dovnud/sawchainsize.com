@@ -1,19 +1,31 @@
 ---
 import Base from '../../layouts/Base.astro';
-import Byline from '../../components/Byline.astro';
 import Crumbs from '../../components/Crumbs.astro';
-import { chainGroups, chainUrl, SPEC, codesFor, groupFile, pitchLabel, gaugeLabel, SITE } from '../../lib/data';
+import { chainGroups, chainUrl, modelUrl, SPEC, codesFor, groupFile, pitchLabel, gaugeLabel, pitchShort, gaugeShort, SITE } from '../../lib/data';
 import { webPageLd } from '../../lib/ld';
+
 const groups = await chainGroups();
-const desc = 'Chainsaw chain specs by pitch and gauge: 3/8″ low profile, .325″ and 3/8″ chain in .043″ to .063″ gauges — chain codes (Oregon, Stihl, Husqvarna, Carlton), file sizes and the saws that use each.';
+const pitches = [...new Set(groups.map((g) => g.pitch))];
+const pitchNotes = pitches.flatMap((pitch) => {
+  const info = (SPEC.pitches as Record<string, { used_on?: string; file?: string; gauges?: string }>)[pitch];
+  if (!info || !info.used_on || info.used_on === 'n/a') return [];
+  return [{ pitch, used: info.used_on, gauges: info.gauges ?? '', file: info.file ?? '' }];
+});
+const desc = 'Chainsaw chain specs by pitch and gauge: chain codes, file size, and the saws that use each pair. Drive-link count still depends on the bar.';
 ---
-<Base title="Chainsaw Chain Specs by Pitch & Gauge" description={desc} path="/chain/" nav="chart" crumbs={[{ name: 'Chain specs', path: '/chain/' }]} jsonld={[webPageLd('Chainsaw chain specs by pitch and gauge', '/chain/', desc, SITE.dataDate, 'CollectionPage')]} modified={SITE.dataDate}>
+<Base title="Chainsaw Chain Specs by Pitch and Gauge" description={desc} path="/chain/" nav="chart" crumbs={[{ name: 'Chain specs', path: '/chain/' }]} jsonld={[webPageLd('Chainsaw chain specs by pitch and gauge', '/chain/', desc, SITE.dataDate, 'CollectionPage')]} modified={SITE.dataDate}>
   <div class="wrap">
     <div class="pagehead">
       <Crumbs crumbs={[{ name: 'Chain specs' }]} />
-      <h1>Chain specs by pitch &amp; gauge</h1>
-      <p class="lede">A chain is defined by pitch, gauge and drive links. These pages cover each pitch × gauge combination we have verified on real saws: the chain codes sold under that spec, the file size, and every saw that uses it. For one drive-link count, <a href="/tools/find-my-chain/">Find my chain</a> lists the part numbers. To compare a box with a bar, use the <a href="/tools/chain-compatibility/">compatibility checker</a>.</p>
-      <Byline label="Last updated" />
+      <h1>Chain specs by pitch and gauge</h1>
+      <p class="lede">A chain is specified by pitch, gauge, and drive links. These pages are the pitch and gauge pairs that appear on a saw in this dataset, with the chain codes, the file size, and the saws.</p>
+    </div>
+    <div class="prose">
+      <p>Pitch is the distance between any three consecutive rivets, divided by two. It has to match the drive sprocket and the bar nose. Gauge is the thickness of the drive links where they ride in the bar groove. Drive links are those tangs. Their count sets the loop length for a given bar, so two saws on the same pitch and gauge still need different loops when the bars differ. For one drive-link count, <a href="/tools/find-my-chain/">Find my chain</a> lists the part numbers. To compare a box with a bar, use the <a href="/tools/chain-compatibility/">compatibility checker</a>.</p>
+      <p>The code table below is only the pairs we have tied to a saw. The <a href="/guides/chain-size-chart/">chain identification chart</a> is the wider cross-reference, including specs that do not have a saw page yet. File size follows the cutter. The pitch notes here are the same ones stored with the chain-spec data.</p>
+      {pitchNotes.map((info) => (
+        <p><strong>{pitchLabel(info.pitch)}</strong> is used on {info.used.toLowerCase()}. Gauges in the reference data: {info.gauges}. Round file: {info.file}.</p>
+      ))}
     </div>
     <div class="tblwrap"><table>
       <caption class="sr-only">Chain specs we cover, with Oregon, Stihl, Husqvarna codes and file size</caption>
@@ -25,7 +37,19 @@ const desc = 'Chainsaw chain specs by pitch and gauge: 3/8″ low profile, .325�
             <td class="num">{c.oregon}</td><td class="num">{c.stihl}</td><td class="num">{c.husqvarna}</td>
             <td class="num">{groupFile(g)}</td><td class="num">{new Set(g.items.map((i) => i.model.id)).size}</td>
           </tr>); })}
-      </tbody></table></div>
-    <p class="src">Full cross-reference, including specs without a verified saw yet, on the <a href="/guides/chain-size-chart/">chain identification chart</a>.</p>
+      </tbody>
+    </table></div>
+    <p class="src">n/a means that brand’s code is not verified here for that pitch and gauge. Match on pitch, gauge, and drive links instead.</p>
+    <h2>Saws on each spec</h2>
+    {groups.map((g) => {
+      const saws = [...new Map(g.items.map((i) => [i.model.id, i.model])).values()];
+      const counts = [...new Set(g.items.flatMap((i) => (i.bar.drive_links ? [i.bar.drive_links] : [])))].sort((a, b) => a - b);
+      return (
+        <p>
+          <a href={chainUrl(g.key)}>{pitchShort(g.pitch)} · {gaugeShort(g.gauge)}</a>
+          {counts.length ? ` (${counts.join(', ')} drive links on verified rows)` : ''}: {saws.map((m, i) => <>{i > 0 && ', '}<a href={modelUrl(m)}>{m.data.name}</a></>)}.
+        </p>
+      );
+    })}
   </div>
 </Base>

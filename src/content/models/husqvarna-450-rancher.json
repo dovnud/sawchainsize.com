@@ -9,8 +9,8 @@
   "type": "gas",
   "displacement_cc": 50.2,
   "popular": true,
-  "blurb": "50.2 cc ranch saw. Stock 18″ setup: .325″ pitch, .050″ gauge, 72 drive links — Husqvarna H30 / X-CUT SP33G.",
-  "intro": "The 450 Rancher is a 50.2 cc X-Torq ranch saw, most commonly sold in North America with an 18″ narrow-kerf bar. Its factory chain — Husqvarna H30, now also sold as X-CUT SP33G — is a .325″ pitch, .050″ gauge loop with 72 drive links at 18″, sharpened with a 3/16″ file. An owner's actual bar for this saw, stamped “18″ · .325 · 050 · 72”, is the worked example in our verification guide.",
+  "blurb": "50.2 cc ranch saw. Stock 18″ setup: .325″ pitch, .050″ gauge, 72 drive links: Husqvarna H30 / X-CUT SP33G.",
+  "intro": "The 450 Rancher is a 50.2 cc X-Torq ranch saw, most commonly sold in North America with an 18″ narrow-kerf bar. Its factory chain (Husqvarna H30, now also sold as X-CUT SP33G) is a .325″ pitch, .050″ gauge loop with 72 drive links at 18″, sharpened with a 3/16″ file. An owner's actual bar for this saw, stamped “18″ · .325 · 050 · 72”, is the worked example in our verification guide.",
   "sources": [
     {
       "id": "husqvarna-h30-data",
@@ -41,7 +41,7 @@
       "retrieved": "2026-10-23"
     }
   ],
-  "sources_note": "Husqvarna H-30 chain specifications (18″, .050″ gauge, .325″ pitch, 72 drive links, 3/16″ file) from the chain's manual record; Husqvarna X-Force bar listing for the 450 Rancher (18″, .325″, .050″, 72 DL, 3/16″ file); owner bar-stamp report — checked Oct 2026.",
+  "sources_note": "Husqvarna H-30 chain specifications (18″, .050″ gauge, .325″ pitch, 72 drive links, 3/16″ file) from the chain's manual record; Husqvarna X-Force bar listing for the 450 Rancher (18″, .325″, .050″, 72 DL, 3/16″ file); owner bar-stamp report, checked Oct 2026.",
   "bars": [
     {
       "lengths_in": [
@@ -105,7 +105,7 @@
       "source_ids": [
         "husqvarna-fitment-listings"
       ],
-      "note": "Listed for the 435/440/445/450 family in Husqvarna chain fitment listings. If your 450 wears a 16″ bar, expect 66 — then confirm on the stamp."
+      "note": "Listed for the 435/440/445/450 family in Husqvarna chain fitment listings. If your 450 wears a 16″ bar, expect 66. Then confirm on the stamp."
     }
   ],
   "last_verified": "2026-10-23"

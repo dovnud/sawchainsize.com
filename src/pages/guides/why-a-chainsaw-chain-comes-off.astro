@@ -1,5 +1,4 @@
 ---
-import Byline from '../../components/Byline.astro';
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import FaqList from '../../components/FaqList.astro';
@@ -15,7 +14,7 @@ const ORE = 'https://apps.oregonproducts.com/pdfs/OregonMMANUAL_EN_A106971ab.pdf
 const faqs = [
   { q: 'Why does a chainsaw chain keep falling off?', a: 'Oregon’s troubleshooting list names the mechanical causes: drive-link tangs worn straight or concave because the bar groove is too shallow, which creates a tendency to throw the chain; a loose chain jumping the groove and being hit by the sprocket; rails spread or worn down so the chain can lean out; and a worn sprocket that no longer holds the drive links. Wrong gauge does the same thing from the start: a thin drive link in a wide groove has the clearance a worn rail eventually creates.' },
   { q: 'Can tension alone stop a chain coming off?', a: 'Only if tension was the cause. Oregon says loose tension lets the chain climb out of a spur sprocket. The fix is the cold-chain adjustment: snug on the underside, still movable by hand, nose held up while the nuts are tightened. If the groove is shallow, the sprocket is hooked, or the gauge is wrong, a tighter screw loads damaged parts and the chain still leaves.' },
-  { q: 'Does a new chain come off if the sprocket is old?', a: 'It is the combination Oregon tells you not to run. A worn sprocket peens drive links, turns tangs up, and batters the bottoms of the links until they no longer fit the groove or clean it. Replace the sprocket with the chain — every two chains, or sooner if it is already worn — rather than tensioning the new loop onto the old teeth.' },
+  { q: 'Does a new chain come off if the sprocket is old?', a: 'It is the combination Oregon tells you not to run. A worn sprocket peens drive links, turns tangs up, and batters the bottoms of the links until they no longer fit the groove or clean it. Replace the sprocket with the chain (every two chains, or sooner if it is already worn) rather than tensioning the new loop onto the old teeth.' },
   { q: 'Will the wrong gauge throw the chain?', a: 'A drive link that is thicker than the groove will not go in, so the chain never really “comes off”; it never seats. A drive link that is thinner than the groove can run and then derail, because it can tilt. Oregon 72 (.050″) in a bar made for Oregon 73 (.058″) is the usual version of that second case. Match the gauge stamped on the bar.' },
   { q: 'What do I check first?', a: 'Engine off, gloves on. Look at tension on a cool chain. Look at whether every drive link sits in the groove. Sight the rails for a flare or a low side. Look at the sprocket teeth for hooks and at the drive links for peening. Read the gauge and pitch on the bar stamp and compare them to the chain. Then oil: a dry bar wears the groove into the shallow shape that throws the chain.' },
 ];
@@ -29,7 +28,6 @@ const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Why a chain comes
       <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Why a chain comes off' }]} />
       <h1>Why a chainsaw chain comes off the bar</h1>
       <p class="lede">A chain leaves the bar when the drive links are no longer held in the groove. Oregon’s troubleshooting list points at four conditions that produce that: a shallow groove, a worn sprocket, rails that have opened up, and tension loose enough to let the chain climb. The wrong gauge arrives at the same place without any of those parts being worn.</p>
-      <Byline label="Last updated" />
     </div>
 
     <section class="block">
@@ -49,7 +47,7 @@ const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Why a chain comes
 
     <section class="block">
       <h2>Spread rails and a worn sprocket</h2>
-      <p style="max-width:72ch">Oregon describes rails that have spread, or one rail worn lower than the other, as letting the chain lean out of the groove. The drive-link sides wear round or thin, rail wear accelerates, and the chain is no longer guided. The remedy is to service the rails — dress them square, from the tip toward the mount — or to replace the bar if the spread is past dressing. A chain whose tie-strap bottoms are worn out of square has been running on those rails. Minor chain wear can be filed square. Extensive wear means a new chain, on rails that have been corrected. A new chain on a still-spread bar learns the same lean.</p>
+      <p style="max-width:72ch">Oregon describes rails that have spread, or one rail worn lower than the other, as letting the chain lean out of the groove. The drive-link sides wear round or thin, rail wear accelerates, and the chain is no longer guided. The remedy is to service the rails (dress them square, from the tip toward the mount) or to replace the bar if the spread is past dressing. A chain whose tie-strap bottoms are worn out of square has been running on those rails. Minor chain wear can be filed square. Extensive wear means a new chain, on rails that have been corrected. A new chain on a still-spread bar learns the same lean.</p>
       <p style="max-width:72ch">The sprocket throws the chain by damaging the part that should hold it. Peened drive links change shape, joints tighten, the chain stretches, and the tangs can turn up until they hit the bottom of the groove instead of riding in it. Oregon’s interval is every two chains, or sooner, and the break-in rule is never to run a new chain on a worn rim or spur. If the chain you just picked up off the ground has battered drive-link bottoms, look at the sprocket before you put the chain back on and add tension. The replacement rule is <a href="/guides/chainsaw-drive-sprocket/">drive sprocket and pitch</a>. Pitch still has to match. A sprocket in a different pitch will throw a chain that is otherwise new, correctly gauged, and properly tensioned, because the teeth and the rivet spacing do not agree.</p>
     </section>
 
@@ -68,7 +66,7 @@ const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Why a chain comes
         <li><strong>Look at the bar and the sprocket.</strong> Groove cleaned, oil hole open, rails not flared or uneven, nose clearance still there (Oregon’s sprocket-nose figure is 1/32″ before the chain contacts the chassis). Sprocket teeth not hooked. Drive links not peened. If they are, replace the damaged part rather than adding tension.</li>
         <li><strong>Oil, then a short cut, then look again.</strong> A chain that stays on for ten seconds and leaves on the first plunge is often dry, loose after the first heat cycle, or both. Fill bar oil, confirm a spray at the tip, make a light cut, let it cool, and reset tension. Repeat derailment after that is a bar, a sprocket, or a spec problem, not a screw that needs one more turn.</li>
       </ol>
-      <p style="max-width:72ch">Kickback is a different event — the nose throwing the saw — but a chain that is off the bar is already out of control. Keep the brake maintained and both hands on the saw as <a href="/guides/chainsaw-kickback/">the kickback guide</a> describes. A chain on the ground with the engine running is the situation the chaps are built for, and it is also the situation you stop by releasing the throttle and setting the brake before you pick anything up.</p>
+      <p style="max-width:72ch">Kickback is a different event (the nose throwing the saw) but a chain that is off the bar is already out of control. Keep the brake maintained and both hands on the saw as <a href="/guides/chainsaw-kickback/">the kickback guide</a> describes. A chain on the ground with the engine running is the situation the chaps are built for, and it is also the situation you stop by releasing the throttle and setting the brake before you pick anything up.</p>
     </section>
 
     <div class="callout"><b>⚠ Tightening a chain that does not match the stamp</b><p>More tension will not make a .050″ chain behave in a .058″ groove, and it will not make a worn sprocket hold a new loop. Match gauge and pitch, replace the part Oregon’s table says to replace, then set tension on a cool chain.</p></div>

@@ -9,7 +9,7 @@
   ],
   "type": "gas",
   "popular": true,
-  "blurb": "16″, 18″, 20″, 24″, 28″ and 32″ bar setups on 3/8″ chain, .050″ / .058″ / .063″ gauge, 60–105 drive links — straight from Husqvarna's 2026 fit-up guide.",
+  "blurb": "16″, 18″, 20″, 24″, 28″ and 32″ bar setups on 3/8″ chain, .050″ / .058″ / .063″ gauge, 60–105 drive links, straight from Husqvarna's 2026 fit-up guide.",
   "intro": "The Husqvarna 372 XP is a rear-handle gas saw. Husqvarna's own 2026 Bar & Chain Fit-up Guide (effective 1 January 2026) lists 6 approved bar lengths for it (16″, 18″, 20″, 24″, 28″ and 32″), running 3/8″ pitch chain in .050″ / .058″ / .063″ gauge.",
   "bars": [
     {
@@ -341,7 +341,7 @@
       "id": "husqvarna-fitup-2026",
       "type": "fitup-chart",
       "publisher": "Husqvarna",
-      "title": "Bar & Chain Fit-up Guide 2026 (effective 1 January 2026) — certified/approved bar and chain combinations per saw",
+      "title": "Bar & Chain Fit-up Guide 2026 (effective 1 January 2026): certified/approved bar and chain combinations per saw",
       "url": "https://media.husqvarnagroup.com/original/DI-328359.pdf",
       "retrieved": "2026-10-24"
     }

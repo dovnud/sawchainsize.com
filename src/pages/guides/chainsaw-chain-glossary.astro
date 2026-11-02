@@ -1,5 +1,4 @@
 ---
-import Byline from '../../components/Byline.astro';
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import { SITE } from '../../lib/data';
@@ -74,7 +73,6 @@ const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Chain glossary', 
       <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Chain glossary' }]} />
       <h1>Chainsaw chain and bar glossary</h1>
       <p class="lede">Three numbers decide whether a chain fits: pitch (the rivet spacing), gauge (the drive-link thickness) and the drive-link count. Everything else here describes how the chain cuts or how the brands name it. Each term links to the guide that goes deeper.</p>
-      <Byline label="Last updated" />
     </div>
     <nav class="block" aria-label="Glossary sections"><p>{groups.map((g, i) => <>{i > 0 && ' · '}<a href={`#${g.title.toLowerCase().replace(/[^a-z]+/g, '-')}`}>{g.title}</a></>)}</p></nav>
     {groups.map((g) => (

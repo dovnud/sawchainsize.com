@@ -20,7 +20,7 @@ export const USPS_CONTIGUOUS = [
 ] as const;
 
 export const GIFT_TIERS = [
-  { name: 'Tier 1 — used up this season', description: 'Bar-and-chain oil, a file kit that matches the chain’s pitch, and gloves. The smallest useful gift. A single file size is right only when the pitch is already known.' },
-  { name: 'Tier 2 — a spare chain that matches the stamp', description: 'One loop in the pitch, gauge and drive-link count stamped on the bar. The gift that fails if it is chosen from the saw model or the bar length alone.' },
-  { name: 'Tier 3 — gear that stays with the saw', description: 'Chainsaw chaps long enough to overlap the boots, a forestry helmet with face and hearing protection, and a bar cover sized to the bar. These outlast a season. They are not a substitute for a chain that fits.' },
+  { name: 'Tier 1, used up this season', description: 'Bar-and-chain oil, a file kit that matches the chain’s pitch, and gloves. The smallest useful gift. A single file size is right only when the pitch is already known.' },
+  { name: 'Tier 2, a spare chain that matches the stamp', description: 'One loop in the pitch, gauge and drive-link count stamped on the bar. The gift that fails if it is chosen from the saw model or the bar length alone.' },
+  { name: 'Tier 3, gear that stays with the saw', description: 'Chainsaw chaps long enough to overlap the boots, a forestry helmet with face and hearing protection, and a bar cover sized to the bar. These outlast a season. They are not a substitute for a chain that fits.' },
 ] as const;

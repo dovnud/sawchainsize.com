@@ -40,9 +40,9 @@
       "label": "1/4″",
       "short": "1/4″",
       "chart_label": "1/4″",
-      "used_on": "—",
-      "gauges": "—",
-      "file": "—",
+      "used_on": "n/a",
+      "gauges": "n/a",
+      "file": "n/a",
       "slug": "1-4"
     }
   },
@@ -90,39 +90,39 @@
       "oregon": "91PX / 91VXL",
       "stihl": "63 PM3",
       "husqvarna": "H37 · S93G X-Cut",
-      "carlton": "—"
+      "carlton": "n/a"
     },
     {
       "pitch": "325",
       "gauge": 0.043,
-      "oregon": "—",
-      "stihl": "—",
+      "oregon": "n/a",
+      "stihl": "n/a",
       "husqvarna": "SP21G X-Cut",
-      "carlton": "—"
+      "carlton": "n/a"
     },
     {
       "pitch": "325",
       "gauge": 0.05,
       "oregon": "95TXL (SpeedCut) · 20BPX",
-      "stihl": "—",
+      "stihl": "n/a",
       "husqvarna": "H30 · SP33G X-Cut · C33 X-Cut",
-      "carlton": "—"
+      "carlton": "n/a"
     },
     {
       "pitch": "325",
       "gauge": 0.058,
-      "oregon": "—",
-      "stihl": "—",
+      "oregon": "n/a",
+      "stihl": "n/a",
       "husqvarna": "S35G X-Cut · C35 X-Cut",
-      "carlton": "—"
+      "carlton": "n/a"
     },
     {
       "pitch": "325",
       "gauge": 0.063,
-      "oregon": "—",
+      "oregon": "n/a",
       "stihl": "26 RM3",
-      "husqvarna": "—",
-      "carlton": "—"
+      "husqvarna": "n/a",
+      "carlton": "n/a"
     },
     {
       "pitch": "3/8",
@@ -130,15 +130,15 @@
       "oregon": "72 (72LPX / 72EXL)",
       "stihl": "33 RS3",
       "husqvarna": "H80 · S83G X-Cut · C83 X-Cut",
-      "carlton": "—"
+      "carlton": "n/a"
     },
     {
       "pitch": "3/8",
       "gauge": 0.058,
       "oregon": "73 (73LPX)",
-      "stihl": "—",
+      "stihl": "n/a",
       "husqvarna": "H81 · C85 X-Cut",
-      "carlton": "—"
+      "carlton": "n/a"
     },
     {
       "pitch": "3/8",
@@ -146,15 +146,15 @@
       "oregon": "75 (75LPX)",
       "stihl": "36 RS3",
       "husqvarna": "H83",
-      "carlton": "—"
+      "carlton": "n/a"
     },
     {
       "pitch": "404",
       "gauge": 0.063,
-      "oregon": "—",
+      "oregon": "n/a",
       "stihl": "46 RS",
       "husqvarna": "H64S · H57S",
-      "carlton": "—"
+      "carlton": "n/a"
     }
   ]
 }

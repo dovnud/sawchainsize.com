@@ -1,7 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
-import Byline from '../../components/Byline.astro';
 import Email from '../../components/Email.astro';
 import { SITE, getBrands } from '../../lib/data';
 import { webPageLd, datasetLd } from '../../lib/ld';
@@ -11,7 +10,7 @@ const meta = await datasetMeta();
 const brands = await getBrands();
 const perBrand = brands.map((b) => ({ name: b.data.name, rows: meta.recs.filter((r) => r.brand === b.id).length, saws: new Set(meta.recs.filter((r) => r.brand === b.id).map((r) => r.model_id)).size }));
 const sample = meta.recs.filter((r) => r.status === 'ok').slice(0, 10);
-const title = 'Chainsaw chain size dataset — pitch, gauge & drive links (CSV + JSON)';
+const title = 'Chainsaw chain size dataset: pitch, gauge and drive links';
 const desc = `Open dataset of chainsaw chain pitch, gauge, drive-link count and file size by saw model and guide-bar length: ${meta.rows} rows for ${meta.models} saws, as CSV and JSON. Data last verified ${meta.dateModified}.`;
 const jsonld = [
   webPageLd('Chainsaw chain size dataset', DATASET_PATH, desc, meta.dateModified, 'CollectionPage'),
@@ -23,24 +22,19 @@ const jsonld = [
   }),
 ];
 ---
-<Base title={title} description={desc} path={DATASET_PATH} og="/og/page-data.png" ogAlt="Chain size dataset — CSV and JSON" nav="verify" crumbs={[{ name: 'Dataset', path: DATASET_PATH }]} jsonld={jsonld} modified={meta.dateModified}>
+<Base title={title} description={desc} path={DATASET_PATH} og="/og/page-data.png" ogAlt="Chain size dataset: CSV and JSON" nav="verify" crumbs={[{ name: 'Dataset', path: DATASET_PATH }]} jsonld={jsonld} modified={meta.dateModified}>
   <div class="wrap">
     <div class="pagehead">
       <Crumbs crumbs={[{ name: 'Dataset' }]} />
       <h1>Chainsaw chain size dataset</h1>
       <p class="lede">The records behind this site, as open files: chain pitch, gauge, drive-link count, file size and part numbers for each saw and guide-bar length, with a verification status and sources on every row.</p>
-      <Byline label="Last verified" />
     </div>
     <section class="block" style="padding-top:10px">
-      <div class="spec-strip" style="grid-template-columns:repeat(3,1fr)">
-        <div class="spec-cell"><span>Saw models</span><b>{meta.models}</b></div>
-        <div class="spec-cell"><span>Rows ({meta.verifiedRows} verified)</span><b>{meta.rows}</b></div>
-        <div class="spec-cell"><span>Last verified</span><b style="font-size:1rem">{meta.dateModified}</b></div>
-      </div>
+      <p>{meta.models} saw models and {meta.rows} rows ({meta.verifiedRows} with a source that states the spec). Last verified {meta.dateModified}.</p>
       <h2 style="margin-top:20px">Download</h2>
       <ul class="plain">
-        <li><a href={CSV_PATH} download>sawchainsize-chain-sizes.csv</a> — UTF-8, one row per saw, bar setup and bar length; opens in Excel, Sheets, pandas.</li>
-        <li><a href={JSON_PATH} download>sawchainsize-chain-sizes.json</a> — the same rows plus the column dictionary and chain part numbers as arrays.</li>
+        <li><a href={CSV_PATH} download>sawchainsize-chain-sizes.csv</a>: UTF-8, one row per saw, bar setup and bar length; opens in Excel, Sheets, pandas.</li>
+        <li><a href={JSON_PATH} download>sawchainsize-chain-sizes.json</a>, the same rows plus the column dictionary and chain part numbers as arrays.</li>
       </ul>
       <p class="small muted">Both files are generated from the same content files as the site pages every time the site is built, so they always match what the pages say.</p>
 

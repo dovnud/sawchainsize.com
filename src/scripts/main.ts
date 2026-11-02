@@ -133,13 +133,13 @@ syncToggle();
     fResult.replaceChildren();
     if (!fBrand.value || !fModel.value || fBar.value === '') {
       const d = el('div', 'callout'); d.append(el('b', undefined, 'Almost there'));
-      d.append(el('p', undefined, 'Pick a brand, a model, and the bar length that is actually on your saw — all three are needed, because the bar is what decides the chain.'));
+      d.append(el('p', undefined, 'Pick a brand, a model, and the bar length on your saw. All three are needed, because the bar decides the chain.'));
       fResult.append(d); return;
     }
     const m = DB[fBrand.value].models[fModel.value];
     const b = m.bars[parseInt(fBar.value, 10)];
     if (b.status === 'conflict') {
-      const d = el('div', 'callout'); d.append(el('b', undefined, 'Sources disagree — read the stamp'));
+      const d = el('div', 'callout'); d.append(el('b', undefined, 'Sources disagree. Read the stamp'));
       const p = el('p', undefined, `Published sources give different specs for the ${m.name}. The numbers below are what is reported; the stamp on your bar tail is the version that fits your saw. `);
       const a = el('a', undefined, 'How to read it →'); a.setAttribute('href', '/guides/how-to-verify-chain-size/'); p.append(a); d.append(p); fResult.append(d);
     }
@@ -182,7 +182,7 @@ document.querySelectorAll('form.stamp-search').forEach((form) => {
   f.addEventListener('submit', (e) => {
     e.preventDefault();
     const v = (id: string) => (document.getElementById(id) as HTMLInputElement | null)?.value ?? '';
-    const body = `${v('cMsg')}\n\n— ${v('cName')}${v('cEmail') ? ` <${v('cEmail')}>` : ''}`;
+    const body = `${v('cMsg')}\n\n${v('cName')}${v('cEmail') ? ` <${v('cEmail')}>` : ''}`;
     location.href = `mailto:contact@sawchainsize.com?subject=${encodeURIComponent(v('cTopic'))}&body=${encodeURIComponent(body)}`;
   });
 })();

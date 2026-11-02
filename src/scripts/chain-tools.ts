@@ -138,7 +138,7 @@ function codesPara(spec: ToolSpec) {
   const p = el('p');
   p.append(`Family codes for this pitch and gauge only, not a counted loop: Oregon ${spec.codes.oregon}; Stihl ${spec.codes.stihl}; Husqvarna ${spec.codes.husqvarna}; Carlton ${spec.codes.carlton}. `);
   if (spec.chainUrl) p.append(link(spec.chainUrl, 'Pitch and gauge page'), document.createTextNode('. '));
-  p.append('A dash means this site has not verified that brand’s code for this pitch and gauge.');
+  p.append('n/a means this site has not verified that brand’s code for this pitch and gauge.');
   return p;
 }
 
@@ -231,7 +231,7 @@ function renderSaw(data: ToolData, model: ToolModel, host: HTMLElement, rel: str
   model.bars.forEach((bar, i) => {
     if (bar.status === 'ok' && bar.pitch && bar.gauge != null && bar.dl) return;
     const title = bar.status === 'conflict' ? 'Sources conflict' : 'Verify on the bar stamp';
-    const box = callout(host, `${bar.label} bar — ${title}`, bar.note);
+    const box = callout(host, `${bar.label} bar: ${title}`, bar.note);
     if (bar.reported.length) {
       const list = el('ul', 'plain');
       for (const r of bar.reported) {

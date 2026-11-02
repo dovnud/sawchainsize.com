@@ -1,5 +1,4 @@
 ---
-import Byline from '../../components/Byline.astro';
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import SpecTable from '../../components/SpecTable.astro';
@@ -25,23 +24,22 @@ const okCount = d.bars.filter((b) => b.status === 'ok').length;
 const chainKeys = [...new Map(d.bars.map((b) => [barChainKey(b), b]).filter(([k]) => k) as [string, any][]).entries()];
 const barPages = new Set((await barGroups()).map((g) => g.length));
 const lengths = [...new Set(d.bars.flatMap((b) => b.lengths_in))].sort((a, b) => a - b);
-const desc = `${d.name} chain size: ${conflict ? 'published specs conflict — each reported variant side by side, plus the bar-stamp check' : 'pitch, gauge, drive links and file size by fitted bar'}. ${okCount ? `${okCount} verified bar ${okCount > 1 ? 'setups' : 'setup'}. ` : ''}Last verified ${SITE.dataDateLabel}.`;
+const desc = `${d.name} chain size: ${conflict ? 'published specs conflict. Each reported variant side by side, plus the bar-stamp check' : 'pitch, gauge, drive links and file size by fitted bar'}. ${okCount ? `${okCount} verified bar ${okCount > 1 ? 'setups' : 'setup'}. ` : ''}Last verified ${SITE.dataDateLabel}.`;
 const related = await relatedModels(model);
 const facts = glanceFacts(model);
 const compares = related.slice(0, 3).map((m) => ({ m, text: compareText(model, m) })).filter((c) => c.text);
 const jsonld = [modelLd(model, path), faqLd(faqs)];
 const ogName = `/og/${model.id}.png`;
 ---
-<Base title={`${d.name} Chain Size — Pitch, Gauge & Drive Links`} description={desc} path={path} og={ogName} ogAlt={`${d.name} chain size`} nav="models"
+<Base title={`${d.name} Chain Size: Pitch, Gauge & Drive Links`} description={desc} path={path} og={ogName} ogAlt={`${d.name} chain size`} nav="models"
   crumbs={[{ name: 'Models', path: '/saws/' }, { name: brand.data.name, path: brandUrl(brand.id) }, { name: d.name, path }]} jsonld={jsonld} modified={d.last_verified}>
   <div class="wrap">
     <div class="pagehead">
       <Crumbs crumbs={[{ name: 'Models', path: '/saws/' }, { name: brand.data.name, path: brandUrl(brand.id) }, { name: d.name }]} />
       <h1>{d.name} chain size</h1>
       <p class="lede">{d.blurb}</p>
-      <p class="meta-line">LAST VERIFIED {d.last_verified} · {d.bars.length} BAR SETUP{d.bars.length > 1 ? 'S' : ''} · {okCount} VERIFIED</p>
+      <p class="small muted">Last verified <time datetime={d.last_verified}>{d.last_verified}</time>.</p>
       <p class="shop-jump"><a href="#shop">{okCount ? 'Shop this spec' : 'Search from your stamp'}</a></p>
-      <Byline label="Last verified" />
     </div>
     <section class="block" style="padding-top:10px">
       <div class="prose"><p>{d.intro}</p></div>
@@ -49,7 +47,7 @@ const ogName = `/og/${model.id}.png`;
       <dl class="glance">{facts.map((f) => <><dt>{f.k}</dt><dd>{f.v}</dd></>)}</dl>
       {conflict && (
         <div class="callout"><b>⚠ Read this before ordering</b>
-          <p>For this saw, the sources a normal search turns up <strong>contradict each other</strong> on the chain spec. The table below prints what each reports. The stamp on your bar tail — pitch, gauge, drive links — is the tiebreaker, and it takes a minute to check: <a href="/guides/how-to-verify-chain-size/">verification guide</a>.</p></div>
+          <p>For this saw, the sources a normal search turns up <strong>contradict each other</strong> on the chain spec. The table below prints what each reports. The stamp on your bar tail (pitch, gauge, drive links) is the tiebreaker, and it takes a minute to check: <a href="/guides/how-to-verify-chain-size/">verification guide</a>.</p></div>
       )}
       <h2 style="margin-top:20px">Chain specifications by fitted bar</h2>
       <SpecTable model={model} />
@@ -62,14 +60,14 @@ const ogName = `/og/${model.id}.png`;
             <tbody>
               {d.bars.filter((b) => b.reported).flatMap((b) => b.reported!.map((r) => {
                 const s = d.sources.find((x) => x.id === r.source_id)!;
-                return <tr><td class="num">{b.lengths_in.join(' / ')}″</td><td>{s.publisher} <small class="muted">({SOURCE_TYPE_LABEL[s.type]})</small></td><td class="num">{r.pitch ? pitchShort(r.pitch) : '—'}</td><td class="num">{r.gauge ? gaugeShort(r.gauge) : '—'}</td><td class="num">{r.drive_links ?? '—'}</td></tr>;
+                return <tr><td class="num">{b.lengths_in.join(' / ')}″</td><td>{s.publisher} <small class="muted">({SOURCE_TYPE_LABEL[s.type]})</small></td><td class="num">{r.pitch ? pitchShort(r.pitch) : 'n/a'}</td><td class="num">{r.gauge ? gaugeShort(r.gauge) : 'n/a'}</td><td class="num">{r.drive_links ?? 'n/a'}</td></tr>;
               }))}
             </tbody></table></div>
         </>
       )}
       <p class="src">Sources: {d.sources_note}</p>
       <details class="faq" style="margin-top:12px"><summary>Source list ({d.sources.length})</summary>
-        <div class="a"><ul class="plain">{d.sources.map((s) => <li><strong>{s.publisher}</strong> — {s.title} <span class="mono small">[{SOURCE_TYPE_LABEL[s.type]} · retrieved {s.retrieved}]</span></li>)}</ul></div>
+        <div class="a"><ul class="plain">{d.sources.map((s) => <li><strong>{s.publisher}</strong>: {s.title} <span class="mono small">[{SOURCE_TYPE_LABEL[s.type]} · retrieved {s.retrieved}]</span></li>)}</ul></div>
       </details>
     </section>
 

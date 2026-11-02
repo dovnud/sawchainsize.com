@@ -9,13 +9,13 @@
   "displacement_cc": 45.4,
   "popular": true,
   "blurb": "Two factory chain families per STIHL's charts: 3/8″ PICCO™ .050″ (12–18″, 44–61 drive links) or .325″ .063″ (16″ 62, 18″ 68). Read the bar stamp to know which one you have.",
-  "intro": "The MS 250 is a 45.4 cc homeowner and firewood saw sold in large numbers across the US and Canada, most often with a 16″ or 18″ bar. STIHL's own Saw Chain Selection and Identification charts — the 1 October 2017 chart and the 2025 Full Line catalog — agree that it was fitted with two different chain families: 3/8″ PICCO™ (low-profile) at .050″ gauge on 12″ to 18″ bars, and .325″ at .063″ gauge on 16″ and 18″ bars. A 16″ MS 250 can therefore take 55 or 62 drive links depending on which bar is on it, which is why web listings for this saw seem to disagree. The bar stamp tells you which family yours is.",
+  "intro": "The MS 250 is a 45.4 cc homeowner and firewood saw sold in large numbers across the US and Canada, most often with a 16″ or 18″ bar. STIHL's own Saw Chain Selection and Identification charts (the 1 October 2017 chart and the 2025 Full Line catalog) agree that it was fitted with two different chain families: 3/8″ PICCO™ (low-profile) at .050″ gauge on 12″ to 18″ bars, and .325″ at .063″ gauge on 16″ and 18″ bars. A 16″ MS 250 can therefore take 55 or 62 drive links depending on which bar is on it, which is why web listings for this saw seem to disagree. The bar stamp tells you which family yours is.",
   "sources": [
     {
       "id": "stihl-chain-chart-2025",
       "type": "fitup-chart",
       "publisher": "STIHL",
-      "title": "STIHL 2025 Full Line catalog — Saw Chain Selection and Identification chart (catalog pages 166–167), chainsaw spec tables, saw chain and file pages",
+      "title": "STIHL 2025 Full Line catalog: Saw Chain Selection and Identification chart (catalog pages 166–167), chainsaw spec tables, saw chain and file pages",
       "url": "https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf",
       "retrieved": "2026-11-02"
     },
@@ -23,7 +23,7 @@
       "id": "stihl-chain-chart-2017",
       "type": "fitup-chart",
       "publisher": "STIHL",
-      "title": "Saw Chain Selection and Identification (STIHL USA catalog page 173; specifications as of 1 October 2017) — recommended chain loop and guide bar per saw model",
+      "title": "Saw Chain Selection and Identification (STIHL USA catalog page 173; specifications as of 1 October 2017): recommended chain loop and guide bar per saw model",
       "url": "https://assets.unilogcorp.com/187/ITEM/DOC/Stihl_102205325_Catalog.pdf",
       "retrieved": "2026-11-02"
     }

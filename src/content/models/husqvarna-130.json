@@ -50,7 +50,7 @@
       "source_ids": [
         "husqvarna-fitup-2026"
       ],
-      "note": "Husqvarna's 2026 guide is internally inconsistent for this row: the drive-link column prints 66, but the bar (596009756) and chain (585422156) part numbers it lists are the 56-link parts used for the 120 Mark II, 135 Mark II and 240 at 16″. We don't print a single number for it — count the drive links on your bar stamp.",
+      "note": "Husqvarna's 2026 guide is internally inconsistent for this row: the drive-link column prints 66, but the bar (596009756) and chain (585422156) part numbers it lists are the 56-link parts used for the 120 Mark II, 135 Mark II and 240 at 16″. We don't print a single number for it. Count the drive links on your bar stamp.",
       "drive_links_range": [
         56,
         66
@@ -62,7 +62,7 @@
       "id": "husqvarna-fitup-2026",
       "type": "fitup-chart",
       "publisher": "Husqvarna",
-      "title": "Bar & Chain Fit-up Guide 2026 (effective 1 January 2026) — certified/approved bar and chain combinations per saw",
+      "title": "Bar & Chain Fit-up Guide 2026 (effective 1 January 2026): certified/approved bar and chain combinations per saw",
       "url": "https://media.husqvarnagroup.com/original/DI-328359.pdf",
       "retrieved": "2026-10-24"
     }

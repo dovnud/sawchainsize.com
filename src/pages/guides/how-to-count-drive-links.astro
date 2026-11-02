@@ -1,5 +1,4 @@
 ---
-import Byline from '../../components/Byline.astro';
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import FaqList from '../../components/FaqList.astro';
@@ -9,7 +8,7 @@ const desc = 'How to count the drive links on a chainsaw chain: mark one link, c
 const path = '/guides/how-to-count-drive-links/';
 const faqs = [
   { q: 'What are drive links on a chainsaw chain?', a: 'Drive links are the tang-shaped links on the underside of the chain. They ride inside the bar groove and engage the drive sprocket. Cutters and tie straps on top are not drive links and are not counted.' },
-  { q: 'Do I count cutters or drive links?', a: 'Count drive links only — the tangs that drop into the bar groove. Cutters (the teeth) are a different number and are not what the chain box or bar stamp quotes.' },
+  { q: 'Do I count cutters or drive links?', a: 'Count drive links only, the tangs that drop into the bar groove. Cutters (the teeth) are a different number and are not what the chain box or bar stamp quotes.' },
   { q: 'Is the drive-link count enough to buy a chain?', a: 'No. The count must be combined with pitch and gauge. Two chains with the same count but different pitch or gauge are not interchangeable. Read the stamp on your bar tail and match all three numbers.' },
 ];
 const howto = {
@@ -35,12 +34,11 @@ const shop = guideShop('how-to-count-drive-links');
       <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'How to count drive links' }]} />
       <h1>How to count drive links</h1>
       <p class="lede">The drive-link count is the third number you need, after pitch and gauge. It takes a minute with a piece of chalk.</p>
-      <Byline label="Last updated" />
     </div>
     <section class="block" style="padding-top:10px">
         <div class="grid2">
           <div>
-            <p>Drive links are the tang-shaped links on the underside of the chain — the ones that ride inside the bar groove and engage the sprocket. Cutters and tie straps on top do not count.</p>
+            <p>Drive links are the tang-shaped links on the underside of the chain, the ones that ride inside the bar groove and engage the sprocket. Cutters and tie straps on top do not count.</p>
             <ol class="steps">
               <li>Lay the loop flat, or keep it on the bar with the cover off.</li>
               <li>Mark one drive link with chalk or a marker.</li>
@@ -64,8 +62,8 @@ const shop = guideShop('how-to-count-drive-links');
                 <path d="M186 60 v26 l8 12 l8 -12 v-26"/>
                 <path d="M246 60 v26 l8 12 l8 -12 v-26"/>
               </g>
-              <text x="30" y="30" class="svg-lbl">Cutters (top) — do not count</text>
-              <text x="66" y="128" class="svg-lbl">Drive links (underside) — count these,</text>
+              <text x="30" y="30" class="svg-lbl">Cutters (top). Do not count</text>
+              <text x="66" y="128" class="svg-lbl">Drive links (underside). Count these,</text>
               <text x="66" y="148" class="svg-lbl">all the way around the loop</text>
               <text x="66" y="176" class="svg-lbl">Mark one, count to it, stop.</text>
             </svg>
@@ -76,7 +74,7 @@ const shop = guideShop('how-to-count-drive-links');
     <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
     <ShopBlock groups={shop.groups} compact />
 
-    <div class="callout"><b>⚠ Count alone is not a chain spec</b><p>Always confirm pitch and gauge as well — see <a href="/guides/how-to-verify-chain-size/">how to verify your chain size</a> and the <a href="/guides/chain-size-chart/">identification chart</a>. The count is what you match after <a href="/guides/how-to-install-chainsaw-chain/">installing a chain</a>, and it is the number that changes when you fit a <a href="/guides/longer-bar-on-chainsaw/">longer bar</a>.</p></div>
+    <div class="callout"><b>⚠ Count alone is not a chain spec</b><p>Always confirm pitch and gauge as well. See <a href="/guides/how-to-verify-chain-size/">how to verify your chain size</a> and the <a href="/guides/chain-size-chart/">identification chart</a>. The count is what you match after <a href="/guides/how-to-install-chainsaw-chain/">installing a chain</a>, and it is the number that changes when you fit a <a href="/guides/longer-bar-on-chainsaw/">longer bar</a>.</p></div>
     <ShopBlock groups={shop.groups} title="Tools &amp; parts mentioned (Amazon)" lead="Verify pitch, gauge and drive links against your bar stamp before buying any chain or bar." />
   </div>
 </Base>

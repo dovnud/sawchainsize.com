@@ -1,5 +1,4 @@
 ---
-import Byline from '../../components/Byline.astro';
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import FaqList from '../../components/FaqList.astro';
@@ -85,7 +84,6 @@ const liveKeys = new Set(models.flatMap((m) => m.data.bars.flatMap((b) => (b.pit
       <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'STIHL chain order numbers' }]} />
       <h1>STIHL chain order numbers</h1>
       <p class="lede">A STIHL chain’s 11-digit order number is three blocks: a 4-digit code for the chain type, pitch and gauge, then 005, then the drive-link count padded to four digits. So the loop STIHL calls 33 RS3 72 is ordered as 3624 005 0072. The code table and the order number for every STIHL loop on this site are below.</p>
-      <Byline label="Last updated" />
     </div>
     <section class="block">
       <h2>The rule, from STIHL’s catalog</h2>

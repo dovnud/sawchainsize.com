@@ -22,7 +22,7 @@ function fileFor(pitch: string, files: (string | null)[]): string {
   const labels = [...new Set(files.filter(Boolean).map((f) => fileLabel(f as string)))];
   if (labels.length) return labels.join(' / ');
   const fallback = (SPEC.pitches as Record<string, { file?: string }>)[pitch]?.file;
-  return fallback && fallback !== '—' ? fallback : 'Not stated on the verified rows';
+  return fallback && fallback !== 'n/a' ? fallback : 'Not stated on the verified rows';
 }
 
 function toBar(model: Model, bar: Bar): ToolBar {
@@ -119,7 +119,7 @@ export async function toolDataset(): Promise<ToolData> {
       }))
       .sort((a, b) => brandRank(a.brand) - brandRank(b.brand) || (a.role === b.role ? 0 : a.role === 'oem' ? -1 : 1) || a.partNo.localeCompare(b.partNo));
     const codes = codesFor(bucket.pitch, bucket.gauge);
-    const hasCode = [codes.oregon, codes.stihl, codes.husqvarna, codes.carlton].some((c) => c && c !== '—');
+    const hasCode = [codes.oregon, codes.stihl, codes.husqvarna, codes.carlton].some((c) => c && c !== 'n/a');
     const pageKey = chainKey(bucket.pitch, bucket.gauge);
     const link = chainLink({ pitch: bucket.pitch, gauge: bucket.gauge, dl: bucket.dl });
     return {

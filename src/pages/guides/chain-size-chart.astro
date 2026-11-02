@@ -1,8 +1,6 @@
 ---
-import Byline from '../../components/Byline.astro';
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
-import Email from '../../components/Email.astro';
 import { SITE, chainGroups, chainUrl, pitchShort, gaugeShort } from '../../lib/data';
 import { webPageLd } from '../../lib/ld';
 
@@ -17,8 +15,7 @@ const shop = guideShop('chain-size-chart');
   <div class="pagehead">
     <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Chain identification chart', path: '/guides/chain-size-chart/' }]} />
     <h1>Chainsaw chain identification chart</h1>
-    <p class="lede">Every saw chain is described by three numbers — pitch, gauge and drive-link count — plus a file size for sharpening. This chart ties them together and cross-references the chain codes used by Oregon, Stihl, Husqvarna and Carlton, so a loop sold under any brand's numbering can be matched to your bar.</p>
-    <Byline label="Last updated" />
+    <p class="lede">Every saw chain is described by three numbers (pitch, gauge and drive-link count) plus a file size for sharpening. This chart ties them together and cross-references the chain codes used by Oregon, Stihl, Husqvarna and Carlton, so a loop sold under any brand's numbering can be matched to your bar.</p>
   </div>
 
   <section class="block">
@@ -37,24 +34,24 @@ const shop = guideShop('chain-size-chart');
     <ShopBlock groups={shop.groups} compact />
 
     <p class="src">File sizes per Oregon and Husqvarna chain data (e.g. Oregon 91-series 3/8″ LP chain is specified with a 5/32″ file; Husqvarna's H30 .325″ chain with a 3/16″ file). Always confirm against your chain maker's sharpening data.</p>
-    <p><strong>Pitch</strong> is the distance between any three consecutive rivets, divided by two — it must match your drive sprocket and bar nose sprocket. <strong>Gauge</strong> is the thickness of the drive links where they ride in the bar groove. <strong>Drive links</strong> are the tang-shaped links that sit in the groove; their count sets the loop length for a given bar.</p>
+    <p><strong>Pitch</strong> is the distance between any three consecutive rivets, divided by two. It must match your drive sprocket and bar nose sprocket. <strong>Gauge</strong> is the thickness of the drive links where they ride in the bar groove. <strong>Drive links</strong> are the tang-shaped links that sit in the groove; their count sets the loop length for a given bar.</p>
   </section>
 
   <hr class="rule" />
 
   <section class="block">
     <h2>Chain code cross-reference</h2>
-    <p style="max-width:72ch">Chain makers print a short code on the box and on the drive links. The same physical chain is sold under different codes by different brands. Codes below are the ones confirmed in manufacturer and dealer data we checked; a dash means we have not verified that brand's code for that spec — match on pitch, gauge and drive links instead.</p>
+    <p style="max-width:72ch">Chain makers print a short code on the box and on the drive links. The same physical chain is sold under different codes by different brands. Codes below are the ones confirmed in manufacturer and dealer data we checked; n/a means we have not verified that brand's code for that spec. Match on pitch, gauge and drive links instead.</p>
     <div class="tblwrap">
       <table>
         <thead><tr><th>Spec (pitch · gauge)</th><th>Oregon</th><th>Stihl</th><th>Husqvarna</th><th>Carlton</th></tr></thead>
         <tbody>
           <tr><td class="num">3/8″ LP · .043″</td><td class="num">90PX</td><td class="num">61 PMM3 (Picco Micro Mini 3)</td><td class="num">H38</td><td class="num">N4C</td></tr>
-          <tr><td class="num">3/8″ LP · .050″</td><td class="num">91PX / 91VXL</td><td class="num">63 PM3</td><td class="num">H37</td><td class="num">—</td></tr>
-          <tr><td class="num">.325″ · .050″</td><td class="num">95TXL (SpeedCut) · 20BPX</td><td class="num">—</td><td class="num">H30 · X-CUT SP33G</td><td class="num">—</td></tr>
-          <tr><td class="num">3/8″ · .050″</td><td class="num">72 (72LPX / 72EXL)</td><td class="num">—</td><td class="num">H80</td><td class="num">—</td></tr>
-          <tr><td class="num">3/8″ · .058″</td><td class="num">73 (73LPX)</td><td class="num">—</td><td class="num">H81</td><td class="num">—</td></tr>
-          <tr><td class="num">3/8″ · .063″</td><td class="num">75 (75LPX)</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>
+          <tr><td class="num">3/8″ LP · .050″</td><td class="num">91PX / 91VXL</td><td class="num">63 PM3</td><td class="num">H37</td><td class="num">n/a</td></tr>
+          <tr><td class="num">.325″ · .050″</td><td class="num">95TXL (SpeedCut) · 20BPX</td><td class="num">n/a</td><td class="num">H30 · X-CUT SP33G</td><td class="num">n/a</td></tr>
+          <tr><td class="num">3/8″ · .050″</td><td class="num">72 (72LPX / 72EXL)</td><td class="num">n/a</td><td class="num">H80</td><td class="num">n/a</td></tr>
+          <tr><td class="num">3/8″ · .058″</td><td class="num">73 (73LPX)</td><td class="num">n/a</td><td class="num">H81</td><td class="num">n/a</td></tr>
+          <tr><td class="num">3/8″ · .063″</td><td class="num">75 (75LPX)</td><td class="num">n/a</td><td class="num">n/a</td><td class="num">n/a</td></tr>
         </tbody>
       </table>
     </div>
@@ -63,14 +60,14 @@ const shop = guideShop('chain-size-chart');
 
   <div class="callout">
     <b>⚠ The classic wrong buy: Oregon 72 vs 73</b>
-    <p>72 and 73 chain are both 3/8″ pitch and the boxes look near-identical — but 72 is <strong>.050″ gauge</strong> and 73 is <strong>.058″ gauge</strong>. Fit a 73 loop to a bar with a .050″ groove and the drive links will not seat in the groove at all; run a 72 in a .058″ groove and the chain slops side-to-side, wears the bar rails and can derail under load. The same trap exists at .325″ (.050 / .058 / .063) and in Stihl's Picco line (.043 vs .050). Read the gauge off your bar stamp — never guess it from the pitch.</p>
+    <p>72 and 73 chain are both 3/8″ pitch and the boxes look near-identical, but 72 is <strong>.050″ gauge</strong> and 73 is <strong>.058″ gauge</strong>. Fit a 73 loop to a bar with a .050″ groove and the drive links will not seat in the groove at all; run a 72 in a .058″ groove and the chain slops side-to-side, wears the bar rails and can derail under load. The same trap exists at .325″ (.050 / .058 / .063) and in Stihl's Picco line (.043 vs .050). Read the gauge off your bar stamp. Never guess it from the pitch.</p>
   </div>
 
   <section class="block">
     <h2>Counting drive links</h2>
     <div class="grid2">
       <div>
-        <p>Drive links are the tang-shaped links on the underside of the chain — the ones that ride inside the bar groove and engage the sprocket. Cutters and tie straps on top do not count.</p>
+        <p>Drive links are the tang-shaped links on the underside of the chain, the ones that ride inside the bar groove and engage the sprocket. Cutters and tie straps on top do not count.</p>
         <ol class="steps">
           <li>Lay the loop flat, or keep it on the bar with the cover off.</li>
           <li>Mark one drive link with chalk or a marker.</li>
@@ -94,8 +91,8 @@ const shop = guideShop('chain-size-chart');
             <path d="M186 60 v26 l8 12 l8 -12 v-26"/>
             <path d="M246 60 v26 l8 12 l8 -12 v-26"/>
           </g>
-          <text x="30" y="30" class="svg-lbl">Cutters (top) — do not count</text>
-          <text x="66" y="128" class="svg-lbl">Drive links (underside) — count these,</text>
+          <text x="30" y="30" class="svg-lbl">Cutters (top). Do not count</text>
+          <text x="66" y="128" class="svg-lbl">Drive links (underside). Count these,</text>
           <text x="66" y="148" class="svg-lbl">all the way around the loop</text>
           <text x="66" y="176" class="svg-lbl">Mark one, count to it, stop.</text>
         </svg>

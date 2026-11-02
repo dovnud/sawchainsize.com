@@ -13,7 +13,7 @@ export async function llmsTxt() {
   const models = await getModels(); const brands = await getBrands(); const chains = await chainGroups(); const bars = await barGroups();
   const L: string[] = [];
   L.push('# SawChainSize.com', '');
-  L.push('> Chainsaw chain size lookup by saw model and fitted bar length. For each saw we publish pitch, gauge, drive-link count, file size and chain part numbers, marked VERIFIED, VERIFY ON BAR STAMP or SOURCES CONFLICT, with the sources behind every figure and a last-verified date. The bar is what decides the chain: always match pitch, gauge and drive links against the stamp on your guide-bar tail.', '');
+  L.push('> Chainsaw chain size lookup by saw model and fitted bar length. For each saw we publish pitch, gauge, drive-link count, file size and chain part numbers, marked Verified, Verify on bar stamp, or Sources conflict, with the sources behind every figure and a last-verified date. The bar decides the chain: match pitch, gauge and drive links against the stamp on the guide-bar tail.', '');
   L.push('Contact: ' + SITE.email, 'Full content for LLMs: ' + abs('/llms-full.txt'), 'Sitemap: ' + abs('/sitemap-index.xml'), 'Data last verified: ' + SITE.dataDateLabel, '');
   L.push('## Saw models', '');
   for (const m of models) L.push(`- [${m.data.name} chain size](${abs(modelUrl(m))}): ${m.data.blurb}`);
@@ -37,14 +37,14 @@ export async function llmsTxt() {
 export async function llmsFull() {
   const models = await getModels();
   const L: string[] = [];
-  L.push('# SawChainSize.com — full reference data', '');
+  L.push('# SawChainSize.com: full reference data', '');
   L.push(`Generated from the site's content files. Data last verified ${SITE.dataDateLabel}. Canonical site: ${SITE.url}/. Contact: ${SITE.email}. Publisher: Saw Chain Size. Open dataset: ${SITE.url}/data/.`, '');
   L.push('Rules: pitch, gauge and drive links must all match the guide bar stamped spec. Never order by saw model or bar length alone. Where sources conflict, the conflicting values are listed and no single value is asserted. Amazon links on the site are affiliate links (Amazon Associates; the site earns from qualifying purchases) and always sit next to that disclosure; they are either a verified product page or an Amazon search by pitch, gauge and drive links. No prices are shown. No other affiliate programs are used.', '');
   for (const m of models) {
     const d = m.data;
     L.push(`## ${d.name}`, '', `URL: ${abs(modelUrl(m))}`, `Type: ${d.type}${d.displacement_cc ? `, ${d.displacement_cc} cc` : ''}`, `Last verified: ${d.last_verified}`, '', d.intro, '');
     for (const b of d.bars) {
-      L.push(`### ${barLabel(b)} bar — ${statusLabel(b.status)}`, '');
+      L.push(`### ${barLabel(b)} bar: ${statusLabel(b.status)}`, '');
       L.push(`- Pitch: ${pitchText(b)}`, `- Gauge: ${gaugeText(b)}`, `- Drive links: ${dlText(b, m)}`, `- File size: ${fileText(b)}`);
       if (b.chains.length) L.push(`- Chain part numbers: ${b.chains.map((c) => `${partText(c)} (${c.role})`).join('; ')}`);
       if (b.reported?.length) L.push('- Reported by sources: ' + b.reported.map((r) => [r.pitch && `pitch ${r.pitch}`, r.gauge && `gauge ${r.gauge}`, r.drive_links && `${r.drive_links} DL`, r.source_id].filter(Boolean).join(' / ')).join(' | '));

@@ -1,7 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
-import Byline from '../../components/Byline.astro';
 import { webPageLd } from '../../lib/ld';
 import { GUIDE_GROUPS, guidesIn } from '../../data/guides';
 import { BF_PATH, GIFT_PATH } from '../../data/holiday-2026';
@@ -18,14 +17,12 @@ const crumbs = [{ name: 'Guides', path: '/guides/' }];
     <div class="pagehead">
       <Crumbs crumbs={[{ name: 'Guides' }]} />
       <h1>Chainsaw chain guides</h1>
-      <p class="lede">The lookup tells you the pitch, gauge and drive links for a saw and a bar we have sourced. These guides are the work around that number: how to read it off your own bar, how to put the loop on, how to keep it cutting, and what the safety standards actually require while it is moving.</p>
-      <Byline label="Last updated" />
+      <p class="lede">The lookup tells you the pitch, gauge and drive links for a saw and a bar we have sourced. These guides are the work around that number: how to read it off your own bar, how to put the loop on, how to keep it cutting, and what the safety standards require while it is moving.</p>
     </div>
 
     <section class="block">
-      <p class="kicker">Holiday 2026</p>
       <h2>Gifts and Black Friday</h2>
-      <p style="max-width:72ch">Black Friday is Friday, November 27, 2026, and Cyber Monday is Monday, November 30. The <a href={GIFT_PATH}>gift guide</a> is three tiers — oil and files, a spare chain matched to the bar stamp, and safety gear — with no prices. The <a href={BF_PATH}>Black Friday page</a> is how to buy a chain during a sale without buying the wrong loop, plus the USPS, UPS and FedEx send-by dates those carriers published. Neither page runs a countdown or a stock claim.</p>
+      <p style="max-width:72ch">Black Friday is Friday, November 27, 2026, and Cyber Monday is Monday, November 30. The <a href={GIFT_PATH}>gift guide</a> is three tiers (oil and files, a spare chain matched to the bar stamp, and safety gear) with no prices. The <a href={BF_PATH}>Black Friday page</a> is how to buy a chain during a sale without buying the wrong loop, plus the USPS, UPS and FedEx send-by dates those carriers published. Neither page runs a countdown or a stock claim.</p>
       <div class="grid2">{guidesIn('holiday').map((item) => <a class="card" href={item.href}><h3>{item.title}</h3><p class="small">{item.card}</p><span class="go">Read →</span></a>)}</div>
     </section>
 
@@ -39,7 +36,6 @@ const crumbs = [{ name: 'Guides', path: '/guides/' }];
 
     {GUIDE_GROUPS.filter((g) => g.id === 'identify').map((g) => (
       <section class="block">
-        <p class="kicker">{g.kicker}</p>
         <h2>{g.title}</h2>
         <div class="grid2">{guidesIn(g.id).map((item) => <a class="card" href={item.href}><h3>{item.title}</h3><p class="small">{item.card}</p><span class="go">See the spec</span></a>)}</div>
       </section>
@@ -54,7 +50,6 @@ const crumbs = [{ name: 'Guides', path: '/guides/' }];
 
     {GUIDE_GROUPS.filter((g) => g.id === 'fit').map((g) => (
       <section class="block">
-        <p class="kicker">{g.kicker}</p>
         <h2>{g.title}</h2>
         <div class="grid2">{guidesIn(g.id).map((item) => <a class="card" href={item.href}><h3>{item.title}</h3><p class="small">{item.card}</p><span class="go">See the spec</span></a>)}</div>
       </section>
@@ -69,7 +64,6 @@ const crumbs = [{ name: 'Guides', path: '/guides/' }];
 
     {GUIDE_GROUPS.filter((g) => g.id === 'maintain').map((g) => (
       <section class="block">
-        <p class="kicker">{g.kicker}</p>
         <h2>{g.title}</h2>
         <div class="grid2">{guidesIn(g.id).map((item) => <a class="card" href={item.href}><h3>{item.title}</h3><p class="small">{item.card}</p><span class="go">See the spec</span></a>)}</div>
       </section>
@@ -77,14 +71,13 @@ const crumbs = [{ name: 'Guides', path: '/guides/' }];
 
     <section class="block">
       <h2>Kickback and the gear around it</h2>
-      <p style="max-width:72ch">Kickback is the upper quadrant of the bar nose hitting wood and throwing the saw back in the cutting plane. Husqvarna’s manuals say a smaller tip radius reduces the force, a low-kickback chain reduces the effect, and no chain fully prevents it. A chain brake reduces injury if it trips in time. STIHL’s warning says it does not prevent the kickback itself. OSHA’s logging standard incorporates ANSI B175.1-1991, requires a chain brake on saws placed in service after that rule, and forbids removing the device. The consumer-saw split those manuals restate — under 3.8 cubic inches (62 cc) versus at and above that displacement — is explained in <a href="/guides/chainsaw-kickback/">kickback</a>, including STIHL’s warning that the computed angle is a lab figure, not a promise about a real cut.</p>
+      <p style="max-width:72ch">Kickback is the upper quadrant of the bar nose hitting wood and throwing the saw back in the cutting plane. Husqvarna’s manuals say a smaller tip radius reduces the force, a low-kickback chain reduces the effect, and no chain fully prevents it. A chain brake reduces injury if it trips in time. STIHL’s warning says it does not prevent the kickback itself. OSHA’s logging standard incorporates ANSI B175.1-1991, requires a chain brake on saws placed in service after that rule, and forbids removing the device. The consumer-saw split those manuals restate (under 3.8 cubic inches (62 cc) versus at and above that displacement) is explained in <a href="/guides/chainsaw-kickback/">kickback</a>, including STIHL’s warning that the computed angle is a lab figure, not a promise about a real cut.</p>
       <p style="max-width:72ch">Leg protection, cut-resistant boots, a hard hat, eye or mesh face protection, hearing protection on a gas saw, and gloves are the kit in OSHA’s logging PPE paragraphs and on the Forest Service chain-saw chart. The OSHA text binds employers on logging operations. It does not cite a homeowner. The garments are the same ones the chain makers describe, and chaps are specified to ASTM F1897, long enough to overlap the boots. They are not cut-proof. Oregon describes them as fibers that tangle a moving chain. Fit and the legal scope are in <a href="/guides/chainsaw-safety-gear/">safety gear</a>.</p>
       <p style="max-width:72ch">Figures on the saw pages are traced to a manual, a fit-up chart, or chain-maker data, and a conflict is printed instead of averaged. That policy is <a href="/how-we-verify/">how we verify specs</a>. A correction, with a photo of the bar stamp if you have one, goes to <a href="/contact/">contact@sawchainsize.com</a>. Amazon links on the guides are optional and labeled, use only this site’s Associates tag, and sit next to the Associates disclosure. They do not decide a specification. The <a href="/affiliate-disclosure/">affiliate disclosure</a> is the full version.</p>
     </section>
 
     {GUIDE_GROUPS.filter((g) => g.id === 'safety' || g.id === 'editorial').map((g) => (
       <section class="block">
-        <p class="kicker">{g.kicker}</p>
         <h2>{g.title}</h2>
         <div class="grid2">{guidesIn(g.id).map((item) => <a class="card" href={item.href}><h3>{item.title}</h3><p class="small">{item.card}</p><span class="go">See the spec</span></a>)}</div>
       </section>

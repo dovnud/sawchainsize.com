@@ -1,5 +1,4 @@
 ---
-import Byline from '../../components/Byline.astro';
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
 import FaqList from '../../components/FaqList.astro';
@@ -29,7 +28,6 @@ const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: '3/8″ low profil
       <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: '3/8″ low profile vs standard' }]} />
       <h1>3/8″ low profile vs standard 3/8″ chain</h1>
       <p class="lede">Both names contain “3/8.” Oregon’s chart does not treat them as one chain. Low profile is the 90 and 91 families. Standard 3/8″ is 72, 73 and 75. The sprocket, the file and the cutter are different, even when the gauge number on the box is the same .050″.</p>
-      <Byline label="Last updated" />
     </div>
 
     <section class="block">
@@ -40,14 +38,14 @@ const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: '3/8″ low profil
           <caption class="sr-only">Oregon chain families for 3/8 low profile and standard 3/8</caption>
           <thead><tr><th scope="col">Oregon pitch row</th><th scope="col">.043″</th><th scope="col">.050″</th><th scope="col">.058″</th><th scope="col">.063″</th><th scope="col">Round file</th></tr></thead>
           <tbody>
-            <tr><td>3/8″ Low Profile</td><td class="num"><a href="/chain/3-8-lp-043/">90</a></td><td class="num"><a href="/chain/3-8-lp-050/">91</a></td><td class="num">—</td><td class="num">—</td><td class="num">4.5 mm at .043″; 5/32″ at .050″</td></tr>
-            <tr><td>3/8″ (standard)</td><td class="num">—</td><td class="num"><a href="/chain/3-8-050/">72</a></td><td class="num"><a href="/chain/3-8-058/">73</a></td><td class="num"><a href="/chain/3-8-063/">75</a></td><td class="num">7/32″ (5.5 mm)</td></tr>
+            <tr><td>3/8″ Low Profile</td><td class="num"><a href="/chain/3-8-lp-043/">90</a></td><td class="num"><a href="/chain/3-8-lp-050/">91</a></td><td class="num">n/a</td><td class="num">n/a</td><td class="num">4.5 mm at .043″; 5/32″ at .050″</td></tr>
+            <tr><td>3/8″ (standard)</td><td class="num">n/a</td><td class="num"><a href="/chain/3-8-050/">72</a></td><td class="num"><a href="/chain/3-8-058/">73</a></td><td class="num"><a href="/chain/3-8-063/">75</a></td><td class="num">7/32″ (5.5 mm)</td></tr>
           </tbody>
         </table>
       </div>
     <ShopBlock groups={shop.groups} compact />
 
-      <p class="src">Type numbers by gauge: Oregon, <a href={ORE} rel="nofollow">Finding the Right Saw Chain</a>, saw-chain family chart. File sizes: Oregon filing chart, restated on our <a href="/guides/chainsaw-chain-file-size/">file-size guide</a> and <a href="/guides/chainsaw-sharpening-angles/">angles guide</a>. A dash means that family is not in Oregon’s row for that gauge.</p>
+      <p class="src">Type numbers by gauge: Oregon, <a href={ORE} rel="nofollow">Finding the Right Saw Chain</a>, saw-chain family chart. File sizes: Oregon filing chart, restated on our <a href="/guides/chainsaw-chain-file-size/">file-size guide</a> and <a href="/guides/chainsaw-sharpening-angles/">angles guide</a>. n/a means that family is not in Oregon’s row for that gauge.</p>
       <p style="max-width:72ch">The type number is stamped on the drive link. Oregon’s instructions for identifying a chain say to order by that stamp, because a worn chain is hard to measure for gauge. If the stamp reads 91, you are in the low-profile .050″ family (91PX, 91PXL, 91VXL and the rest of that row). If it reads 72, you are in standard 3/8″ .050″. The boxes can both say 3/8″ and .050″. The stamp is what keeps them apart. <a href="/guides/chain-part-numbers/">Part numbers</a> shows how the same split appears in STIHL and Husqvarna codes.</p>
     </section>
 
@@ -67,7 +65,7 @@ const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: '3/8″ low profil
     <section class="block">
       <h2>A saw that is approved for both</h2>
       <p style="max-width:72ch">The 540 XP Mark III is the example to keep, because the bar length does not decide the chain. Husqvarna’s 2026 fit-up guide lists two systems at 14″ and at 16″. On an X-Precision bar the chain is .325″ Mini Pixel, .043″ gauge, SP21G, with 59 drive links at 14″ and 64 at 16″. On an X-Force bar the chain is 3/8″ Mini, .050″ gauge, S93G, with 52 drive links at 14″ and 56 at 16″. Both use a 5/32″ file. The .325″ rows share part numbers with the top-handle T540 XP Mark III. The 3/8″ Mini chains are the S93G low-profile loops, not 72-series chain.</p>
-      <p style="max-width:72ch">Ordering “a 16″ chain for a 540 XP” can therefore land on 64 drive links of .325″ .043″ or on 56 drive links of 3/8″ low-profile .050″. Both are real approved setups. Only the stamp on the bar that is actually mounted is the order. The <a href="/saws/husqvarna-540-xp-mark-iii/">540 XP Mark III page</a> prints each row. The <a href="/saws/husqvarna-t540-xp-mark-iii/">T540 XP Mark III</a> is the top-handle cousin for the .325″ side. This is also why a low-profile loop from a homeowner saw will not “just go on” a ranch saw that left the factory with 72LPX. The drive-link count might even be coaxed into a similar length. The sprocket and the cutter will not be the chain that bar was made for.</p>
+      <p style="max-width:72ch">Ordering “a 16″ chain for a 540 XP” can therefore land on 64 drive links of .325″ .043″ or on 56 drive links of 3/8″ low-profile .050″. Both are real approved setups. Only the stamp on the bar that is mounted is the order. The <a href="/saws/husqvarna-540-xp-mark-iii/">540 XP Mark III page</a> prints each row. The <a href="/saws/husqvarna-t540-xp-mark-iii/">T540 XP Mark III</a> is the top-handle cousin for the .325″ side. This is also why a low-profile loop from a homeowner saw will not “just go on” a ranch saw that left the factory with 72LPX. The drive-link count might even be coaxed into a similar length. The sprocket and the cutter will not be the chain that bar was made for.</p>
     </section>
 
     <section class="block">
@@ -77,7 +75,7 @@ const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: '3/8″ low profil
       <p style="max-width:72ch">The order of operations is the same as every other page here. Read the bar stamp for length, pitch, gauge and drive links. Read the drive-link stamp for the family if the bar’s pitch line only says 3/8. Count the drive links if you still have the old chain and it was the right one. Then buy that loop, not the neighboring box. <a href="/guides/how-to-verify-chain-size/">How to verify your chain size</a> is the stamp procedure. <a href="/chain/3-8-lp-050/">3/8″ LP .050″</a> and <a href="/chain/3-8-050/">3/8″ .050″</a> list the saws on this site that we have in each family.</p>
     </section>
 
-    <div class="callout"><b>⚠ .050″ on the box is not the family</b><p>91 and 72 are both sold in .050″ gauge. One is low profile and takes a 5/32″ file. The other is standard 3/8″ and takes a 7/32″ file. The drive-link stamp, or the saw page that matches your bar, is the tie-breaker. Gauge still has to match the groove — see <a href="/guides/oregon-72-vs-73-chain/">72 vs 73</a> for the standard-family version of that mistake.</p></div>
+    <div class="callout"><b>⚠ .050″ on the box is not the family</b><p>91 and 72 are both sold in .050″ gauge. One is low profile and takes a 5/32″ file. The other is standard 3/8″ and takes a 7/32″ file. The drive-link stamp, or the saw page that matches your bar, is the tie-breaker. Gauge still has to match the groove. See <a href="/guides/oregon-72-vs-73-chain/">72 vs 73</a> for the standard-family version of that mistake.</p></div>
 
     <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
     <p><a href="/guides/chain-size-chart/">Identification chart</a> · <a href="/guides/chain-part-numbers/">Part numbers</a> · <a href="/guides/chainsaw-chain-gauge/">Gauge</a> · <a href="/guides/chainsaw-drive-sprocket/">Drive sprocket</a></p>
