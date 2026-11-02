@@ -1,0 +1,101 @@
+---
+import Byline from '../../components/Byline.astro';
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import { SITE } from '../../lib/data';
+import { webPageLd } from '../../lib/ld';
+import dates from '../../data/page-dates.json';
+const path = '/guides/chainsaw-chain-glossary/';
+const modified = (dates as Record<string, string>)[path];
+const desc = 'Chainsaw chain and guide bar terms in plain English: pitch, gauge, drive links, depth gauge, low profile, skip chain, sprocket nose and the STIHL, Husqvarna and Oregon names for them.';
+const ORE_MANUAL = 'https://apps.oregonproducts.com/pdfs/OregonMMANUAL_EN_A106971ab.pdf';
+const STIHL_CAT = 'https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf';
+const HUSQ = 'https://media.husqvarnagroup.com/original/DI-328359.pdf';
+type T = { term: string; id: string; def: string; also?: string };
+type Group = { title: string; terms: T[] };
+const groups: Group[] = [
+  { title: 'Sizing the chain', terms: [
+    { term: 'Pitch', id: 'pitch', def: 'The distance between any three consecutive rivets, divided by two. Common pitches are 1/4″, 3/8″ low profile, .325″, 3/8″ and .404″. The chain, the drive sprocket and the bar’s nose sprocket all have to share it.', also: '<a href="/guides/chainsaw-drive-sprocket/">Drive sprocket and pitch</a>' },
+    { term: 'Gauge', id: 'gauge', def: 'The thickness of the drive link where it rides in the bar groove. The standard gauges are .043″ (1.1 mm), .050″ (1.3 mm), .058″ (1.5 mm) and .063″ (1.6 mm). It must match the groove width stamped on the bar.', also: '<a href="/guides/chainsaw-chain-gauge/">Chain gauge guide</a>' },
+    { term: 'Drive-link count', id: 'drive-link-count', def: 'How many drive links make up the loop. It sets the loop length, and it is the number that differs between two chains for the same bar length. ECHO’s 12″ pole saw loop has 44 links while its 12″ chainsaw loop has 45.', also: '<a href="/guides/how-to-count-drive-links/">How to count drive links</a>' },
+    { term: 'Loop', id: 'loop', def: 'A complete chain joined end to end, sold for one pitch, gauge and drive-link count. Chain is also sold on reels and cut to length, but a loop is what most owners buy.' },
+    { term: 'Low profile', id: 'low-profile', def: 'A smaller, lower-cutter version of a pitch, made for small saws. 3/8″ low-profile chain does not fit a standard 3/8″ sprocket or bar. Oregon calls it “3/8″ Low Profile” (its 90 and 91 chains), Husqvarna calls it “3/8 Mini”, and STIHL calls it “3/8″ PICCO”.', also: '<a href="/guides/3-8-low-profile-vs-standard-chain/">3/8″ low profile vs standard</a>' },
+    { term: 'Narrow kerf', id: 'narrow-kerf', def: 'Chain that cuts a thinner slot, which ECHO says eases cutting and saves weight. ECHO sells its pole saw bars in a regular .050″ version and a narrow-kerf .043″ version, and its narrow-kerf 90PX chain is .043″. Husqvarna’s fit-up guide uses its own names for its small chains: “.325 Pixel” (.050″), and “.325 Mini Pixel” and “3/8 Mini Pixel” (both .043″).' },
+    { term: 'Kerf', id: 'kerf', def: 'The slot the chain cuts in the wood. Its width comes from the cutters, not the gauge.' },
+    { term: 'Bar stamp', id: 'bar-stamp', def: 'The markings near the bar’s tail that give its length, gauge, pitch and often the drive-link count or part number. It is the most reliable place to read the chain size.', also: '<a href="/guides/how-to-verify-chain-size/">Verify your chain size</a>' },
+  ]},
+  { title: 'Parts of the chain', terms: [
+    { term: 'Drive link', id: 'drive-link', def: 'The links with a tang underneath that rides in the bar groove and is pushed by the drive sprocket. The chain maker’s number is usually stamped on them, for example Oregon’s 72 or 91, which identifies pitch and gauge.' },
+    { term: 'Tie strap', id: 'tie-strap', def: 'The plain side links that join drive links and cutters with rivets. In the STIHL code, a “3” in the special-feature position means a single-humped drive link and “1” or “2” mean a triple-humped tie strap.' },
+    { term: 'Rivet', id: 'rivet', def: 'The pins that hold the links together. Pitch is measured across them.' },
+    { term: 'Cutter', id: 'cutter', def: 'The links that do the cutting. Left-hand and right-hand cutters alternate around the loop.' },
+    { term: 'Top plate', id: 'top-plate', def: 'The flat top of the cutter. Its leading edge chisels out the severed wood fibres. The top-plate angle is the angle you file it at, usually 25° or 30°.', also: '<a href="/guides/chainsaw-sharpening-angles/">Sharpening angles</a>' },
+    { term: 'Side plate', id: 'side-plate', def: 'The upright face of the cutter. With the working corner, it severs the wood fibres across the grain.' },
+    { term: 'Working corner', id: 'working-corner', def: 'Where the top plate and side plate meet: the point of the cutter that bites first and does the hardest work.' },
+    { term: 'Gullet', id: 'gullet', def: 'The gap in front of the cutter that carries chips out of the cut.' },
+    { term: 'Depth gauge (raker)', id: 'depth-gauge', def: 'The hump in front of each cutter. It rides on the wood and limits how deep the cutter bites. Its height below the top plate is the depth-gauge setting, typically .025″ (.030″ on some .404″ chain), and Oregon stamps it on most of its chains.', also: '<a href="/guides/chainsaw-sharpening-angles/">Depth-gauge settings</a>' },
+  ]},
+  { title: 'Cutter shape and sequence', terms: [
+    { term: 'Full chisel', id: 'full-chisel', def: 'Square-cornered cutters that cut fast in clean wood but dull faster in dirty wood. In STIHL’s code “S” (Super) and “H” (HEXA) are full chisel.' },
+    { term: 'Semi-chisel', id: 'semi-chisel', def: 'Cutters with a rounded working corner that hold an edge longer in dirty or frozen wood. In STIHL’s code “M” (Micro) is semi-chisel, and ECHO describes its 91VXL chain as semi-chisel.' },
+    { term: 'Chamfer chisel', id: 'chamfer-chisel', def: 'ECHO’s term for the cutter on its 90PX and 91PX chain, which it describes as having twin cutting corners.' },
+    { term: 'Standard, semi-skip and skip sequence', id: 'skip-chain', def: 'How closely the cutters are spaced. Standard chain has the most cutters. Skip chain leaves some out: STIHL describes its full-skip RMF chain as having two tie straps between every two cutters, for better chip clearance and higher chain speed. Semi-skip sits in between. In the special-feature position of STIHL’s code, “F” means full skip and “H” means semi-skip.' },
+  ]},
+  { title: 'Kickback features', terms: [
+    { term: 'Low-kickback chain', id: 'low-kickback', def: 'Chain designed to reduce the kickback energy at the bar nose. Oregon names three features that do it: bumper drive links, ramped depth gauges and wide-track depth gauges. Oregon says not to file or remove them.', also: '<a href="/guides/chainsaw-kickback/">Chainsaw kickback</a>' },
+    { term: 'Green and yellow labels (STIHL)', id: 'green-yellow-label', def: 'STIHL’s color code. Green marks bars and chains designed to reduce the risk of kickback injury and meet the ANSI B175.1 kickback standard. Yellow marks products with a higher kickback risk, meant for users with special cutting needs and the training to handle kickback.' },
+  ]},
+  { title: 'The guide bar', terms: [
+    { term: 'Rails and groove', id: 'rails-groove', def: 'The two edges of the bar the chain rides on, and the slot between them that the drive-link tangs run in. The groove width is the gauge. Worn or uneven rails make the chain lean in the cut.', also: '<a href="/guides/chainsaw-bar-maintenance/">Bar maintenance</a>' },
+    { term: 'Tail', id: 'tail', def: 'The end of the bar that mounts on the saw. It carries the adjustment hole for the chain tensioner, the oil hole and usually the stamp.' },
+    { term: 'Sprocket nose', id: 'sprocket-nose', def: 'A bar tip with a small toothed wheel that carries the chain around the nose. It has to match the chain pitch, and Oregon’s bar diagram shows a grease hole for it. A solid-nose bar has no sprocket. Oregon says a sprocket-nose bar needs tighter tension than a solid-nose bar.', also: '<a href="/guides/chainsaw-chain-tension/">Chain tension</a>' },
+    { term: 'Laminated bar', id: 'laminated-bar', def: 'A bar built from bonded layers rather than one solid piece of steel. Husqvarna’s fit-up guide lists laminated bars for all of its pole saws.' },
+    { term: 'Listed bar length', id: 'listed-length', def: 'The nominal length printed on the bar and in charts. STIHL notes that the effective cutting length can be shorter, depending on the powerhead or gear head.', also: '<a href="/guides/longer-bar-on-chainsaw/">Longer bar on your saw?</a>' },
+    { term: 'Drive sprocket', id: 'drive-sprocket', def: 'The toothed wheel behind the clutch that drives the chain. It must match the chain pitch. Oregon’s rule is to replace it after every two chains, or sooner.', also: '<a href="/guides/chainsaw-drive-sprocket/">Drive sprocket guide</a>' },
+  ]},
+  { title: 'Part numbers', terms: [
+    { term: 'STIHL marketing number', id: 'stihl-marketing-number', def: 'STIHL’s chain name, for example 33 RS3 84: pitch digit, gauge digit, chain type, then the drive-link count.', also: '<a href="/guides/chain-part-numbers/">Chain part numbers decoded</a>' },
+    { term: 'STIHL order number', id: 'stihl-order-number', def: 'The 11-digit number STIHL uses for ordering, such as 3610 005 0055. The first four digits are the chain type and size, and the last digits are the drive-link count.', also: '<a href="/guides/stihl-chain-order-numbers/">STIHL order numbers</a>' },
+    { term: 'Oregon chain number', id: 'oregon-number', def: 'The number stamped on Oregon drive links (72, 73, 91 and so on) gives pitch and gauge: 72 is 3/8″ .050″, 73 is 3/8″ .058″, 91 is 3/8″ low profile .050″. The one to three letters after it identify the chain type, for example 72LPX or 91PX.', also: '<a href="/guides/oregon-72-vs-73-chain/">Oregon 72 vs 73</a>' },
+  ]},
+];
+const all = groups.flatMap((g) => g.terms);
+const strip = (h: string) => h.replace(/<[^>]+>/g, '');
+const termSet = {
+  '@context': 'https://schema.org', '@type': 'DefinedTermSet', '@id': `${SITE.url}${path}#terms`, name: 'Chainsaw chain and guide bar glossary', url: `${SITE.url}${path}`,
+  hasDefinedTerm: all.map((t) => ({ '@type': 'DefinedTerm', name: t.term, description: strip(t.def), url: `${SITE.url}${path}#${t.id}` })),
+};
+const jsonld = [webPageLd('Chainsaw chain and bar glossary', path, desc, modified), termSet];
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Chain glossary', path }];
+---
+<Base title="Chainsaw Chain & Bar Glossary: Pitch, Gauge, Drive Links" description={desc} path={path} nav="chart" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Chain glossary' }]} />
+      <h1>Chainsaw chain and bar glossary</h1>
+      <p class="lede">Three numbers decide whether a chain fits: pitch (the rivet spacing), gauge (the drive-link thickness) and the drive-link count. Everything else here describes how the chain cuts or how the brands name it. Each term links to the guide that goes deeper.</p>
+      <Byline label="Last updated" />
+    </div>
+    <nav class="block" aria-label="Glossary sections"><p>{groups.map((g, i) => <>{i > 0 && ' · '}<a href={`#${g.title.toLowerCase().replace(/[^a-z]+/g, '-')}`}>{g.title}</a></>)}</p></nav>
+    {groups.map((g) => (
+      <section class="block" id={g.title.toLowerCase().replace(/[^a-z]+/g, '-')}>
+        <h2>{g.title}</h2>
+        <dl class="glossary">
+          {g.terms.map((t) => (
+            <>
+              <dt id={t.id}>{t.term}</dt>
+              <dd><Fragment set:html={t.def} />{t.also && <> <span class="muted">See: <Fragment set:html={t.also} />.</span></>}</dd>
+            </>
+          ))}
+        </dl>
+      </section>
+    ))}
+    <p class="src">Sources: the parts-of-a-chain, cutter, kickback-feature and guide-bar terms follow the <a href={ORE_MANUAL} rel="nofollow">Oregon Maintenance and Safety Manual</a> (“Saw Chain Terms”, “Cutter Maintenance Terminology”, “Guide Bar Terms”, and the chain identification and tensioning pages). STIHL’s code letters, green and yellow labels and the listed-length note come from the <a href={STIHL_CAT} rel="nofollow">STIHL 2025 Full Line catalog</a> (Saw Chain Selection and Identification chart). Husqvarna’s chain family names are from its <a href={HUSQ} rel="nofollow">2026 Bar &amp; Chain Fit-up Guide</a>. ECHO’s terms are from its chain product pages.</p>
+    <p><a href="/guides/chain-size-chart/">Chain identification chart</a> · <a href="/guides/how-to-verify-chain-size/">Verify your chain size</a> · <a href="/guides/pole-saw-chain-size/">Pole saw chain size</a> · <a href="/tools/find-my-chain/">Find my chain</a></p>
+  </div>
+</Base>
+<style>
+  .glossary { max-width: 76ch; margin: 0; }
+  .glossary dt { font-weight: 700; margin-top: 1rem; }
+  .glossary dd { margin: .25rem 0 0; }
+</style>

@@ -1,0 +1,146 @@
+---
+import Byline from '../../components/Byline.astro';
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { chainUrl } from '../../lib/data';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+const path = '/guides/pole-saw-chain-size/';
+const modified = (dates as Record<string, string>)[path];
+const desc = 'Pole saw chain sizes from Husqvarna’s 2026 fit-up guide, ECHO’s Power Pruner bar and chain table and STIHL’s 2025 catalog: 10″ bars take 39 or 40 drive links, 12″ bars 44 or 45.';
+const HUSQ = 'https://media.husqvarnagroup.com/original/DI-328359.pdf';
+const ECHO_OM = 'https://www.echo-usa.com/getattachment/3d34b600-21d5-4807-ad54-8b816eabbdb8/PPT266-266H-266Ss1112_021511-pdf';
+const ECHO_PARTS = 'https://www.echo-usa.com/getattachment/dc09f116-394f-4bd2-ae1f-5af93dbd85af/filev2_';
+const ECHO_10 = 'https://www.echo-usa.com/power-pruner-accessories/10-chain%E2%80%9391vxl-series';
+const ECHO_12 = 'https://www.echo-usa.com/power-pruner-accessories/12-chain-91vxl-series';
+const ECHO_12N = 'https://www.echo-usa.com/power-pruner-accessories/12-chain-90px-series';
+const ECHO_91PX = 'https://www.echo-usa.com/chainsaw-accessories/91px-style-chain';
+const STIHL_CAT = 'https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf';
+const STIHL_KIT = 'https://www.stihlusa.com/en/ap/2plus1-cut-kit-12-14-guide-bar-saw-chains-1039053';
+const STIHL_CHAINS = 'https://www.stihlusa.com/en/ac/product-accessories-1028138/saw-chains-1028159';
+
+// Husqvarna Bar & Chain Fit-up Guide 2026, pole-saw rows. "3/8 Mini" is Husqvarna's name for 3/8″ low profile.
+// [models, type, bar, gauge, DL, file, bar part, chain]
+type HRow = [string, string, string, string, number, string, string, string];
+const husq: HRow[] = [
+  ['115iPT4', 'Battery pole saw', '10″', '.050″', 40, '5/32″', '596298540', 'H37 · 591106040'],
+  ['530iP4, 530iPT5', 'Battery pole saw', '10″', '.050″', 40, '5/32″', '596298540', 'H37 · 591106040'],
+  ['PA310', 'Pole saw attachment', '10″', '.050″', 40, '5/32″', '596298540', 'H37 · 591106040'],
+  ['PA1100', 'Pole saw attachment', '12″', '.050″', 44, '5/32″', '596298544', 'S93G X-Cut · 585422144'],
+  ['525PT5S, 525DEPS MADSAW', 'Gas pole saw', '12″', '.050″', 44, '5/32″', '596298544', 'S93G X-Cut · 585422144'],
+  ['525P4S, 525P5S', 'Gas pole saw', '12″', '.050″', 45, '5/32″', '596009745', 'S93G X-Cut · 585422145'],
+];
+// ECHO Power Pruner bar and chain combinations (PPT-266/266H operator's manual; PPF-225 parts catalog; echo-usa.com chain pages).
+// [bar, gauge, bar part, chain, DL, file]
+type ERow = [string, string, string, string, number, string];
+const echo: ERow[] = [
+  ['10″', '.050″', '10A0CD3739C', '91VXL39CQ', 39, '5/32″'],
+  ['10″', '.043″', '10A4CD3739C', '90PX39CQ', 39, '4.5 mm'],
+  ['12″', '.050″', '12A0CD3744C', '91VXL44CQ', 44, '5/32″'],
+  ['12″', '.043″', '12A4CD3744C', '90PX44CQ', 44, '4.5 mm'],
+];
+// STIHL 2025 Full Line catalog, pole pruner spec table (specs as of 1 Oct 2024): listed bar, pitch, chain type.
+// [model, power, bar, chain, gauge, DL or null]
+type SRow = [string, string, string, string, string, string | null];
+const stihl: SRow[] = [
+  ['HTA 50', 'Battery', '10″', '1/4″ PICCO, PM3 (71 PM3)', '.043″', null],
+  ['HTA 66', 'Battery', '10″', '1/4″ PICCO, PM3 (71 PM3)', '.043″', null],
+  ['HTA 86', 'Battery', '10″', '1/4″ PICCO, PM3 (71 PM3)', '.043″', null],
+  ['HT 56 C-E', 'Gas', '10″', '1/4″ PICCO, PM3 (71 PM3)', '.043″', null],
+  ['HT 105', 'Gas', '12″', '1/4″ PICCO, PM3 (71 PM3)', '.043″', null],
+  ['HTA 135, HTA 150, HTA 160', 'Battery', '10″', '3/8″ PICCO, PMM3 (61 PMM3)', '.043″', null],
+  ['HT 134, HT 135, HT 250', 'Gas', '14″', '3/8″ PICCO, PMM3 (61 PMM3)', '.043″', '50 (61 PMM3 50)'],
+];
+const faqs = [
+  { q: 'What size chain does a pole saw take?', a: 'Most pole saws run small, narrow chain on a 10″ or 12″ bar. Husqvarna and ECHO pole saws use 3/8″ low-profile chain: 39 or 40 drive links on a 10″ bar and 44 or 45 on a 12″ bar, depending on the bar. STIHL pole pruners use STIHL’s own 1/4″ PICCO or 3/8″ PICCO chain in .043″ gauge. The exact count is on the bar or the old chain’s box.' },
+  { q: 'Is pole saw chain the same as chainsaw chain?', a: 'It is the same kind of chain, but the loop is often a different length. ECHO’s 12″ Power Pruner bar takes a 44-link loop (91VXL44CQ), while ECHO’s 12″ chainsaw bars take 45 links (91PX45CQ). A loop sold for a 12″ chainsaw can be one link too long for a 12″ pole saw bar.' },
+  { q: 'Why do two 12-inch Husqvarna pole saws take different chains?', a: 'They use different bars. In Husqvarna’s 2026 fit-up guide the 525P4S and 525P5S use bar 596009745 with a 45-link chain, while the 525PT5S, 525DEPS and PA1100 use bar 596298544 with a 44-link chain. Read the part number on your bar, then buy the matching loop.' },
+  { q: 'How many drive links is a STIHL pole pruner chain?', a: 'STIHL lists 61 PMM3 50 (50 drive links) for the 14″ bar on the HT 131, HT 134, HT 135 and HT 250. For the 10″ and 12″ 1/4″ PICCO models, STIHL’s catalog gives the bar length and chain type but no count, so count the drive links on the old loop or read the bar.' },
+  { q: 'Can I put .043″ chain on an ECHO pole saw?', a: 'Only on the narrow-kerf bar. ECHO lists .043″ 90PX chain for its 10A4 and 12A4 narrow bars and .050″ 91VXL chain for its 10A0 and 12A0 regular bars. ECHO’s manual says the chain gauge and bar gauge must be identical.' },
+];
+const jsonld = [webPageLd('Pole saw chain size: Husqvarna, ECHO and STIHL', path, desc, modified), faqLd(faqs)];
+const shop = guideShop('pole-saw-chain-size');
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Pole saw chain size', path }];
+---
+<Base title="Pole Saw Chain Size: Husqvarna, ECHO & STIHL Charts" description={desc} path={path} nav="chart" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Pole saw chain size' }]} />
+      <h1>Pole saw chain size</h1>
+      <p class="lede">Husqvarna and ECHO pole saws run 3/8″ low-profile chain on a 10″ or 12″ bar: 39 or 40 drive links at 10″, and 44 or 45 at 12″. STIHL pole pruners use STIHL’s own 1/4″ or 3/8″ PICCO chain in .043″ gauge. Which count is yours depends on the bar, not the pole, and a pole saw loop is often one link shorter than a chainsaw loop of the same length.</p>
+      <Byline label="Last updated" />
+    </div>
+
+    <section class="block">
+      <h2>Husqvarna pole saws</h2>
+      <p style="max-width:72ch">From Husqvarna’s 2026 bar and chain fit-up guide. Husqvarna calls this pitch “3/8 Mini”. It is 3/8″ low profile, the same family as Oregon 91 chain (<a href={chainUrl('3-8-lp-050')}>3/8″ LP .050″</a>).</p>
+      <div class="tblwrap">
+        <table>
+          <thead><tr><th>Model</th><th>Type</th><th>Bar</th><th>Gauge</th><th>Drive links</th><th>File</th><th>Bar part</th><th>Chain</th></tr></thead>
+          <tbody>
+            {husq.map(([m, t, b, g, dl, f, bp, c]) => (
+              <tr><td>{m}</td><td>{t}</td><td class="num">{b}</td><td class="num">{g}</td><td class="num"><b>{dl}</b></td><td class="num">{f}</td><td class="num">{bp}</td><td class="num">{c}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="src">Source: <a href={HUSQ} rel="nofollow">Husqvarna Bar &amp; Chain Fit-up Guide 2026</a>, pole saw and pole saw attachment rows. Every row is 3/8″ low profile on a laminated bar. The T525 top-handle saw uses the same 12″ bar and 45-link chain as the 525P4S.</p>
+    </section>
+
+    <hr class="rule" />
+
+    <section class="block">
+      <h2>ECHO Power Pruner pole saws</h2>
+      <p style="max-width:72ch">ECHO publishes one bar and chain table for its Power Pruner line, in two gauges. Regular bars (part numbers starting 10A0 and 12A0) take .050″ 91VXL chain. Narrow-kerf bars (10A4 and 12A4) take .043″ 90PX chain. The drive-link count is the same in both gauges.</p>
+      <div class="tblwrap">
+        <table>
+          <thead><tr><th>Bar</th><th>Gauge</th><th>Bar part</th><th>Chain</th><th>Drive links</th><th>File</th></tr></thead>
+          <tbody>
+            {echo.map(([b, g, bp, c, dl, f]) => (
+              <tr><td class="num">{b}</td><td class="num"><a href={chainUrl(g === '.050″' ? '3-8-lp-050' : '3-8-lp-043')}>{g}</a></td><td class="num">{bp}</td><td class="num">{c}</td><td class="num"><b>{dl}</b></td><td class="num">{f}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="src">Sources: ECHO <a href={ECHO_OM} rel="nofollow">PPT-266 / PPT-266H operator’s manual</a> (“Power Pruner B&amp;C Combinations”), ECHO <a href={ECHO_PARTS} rel="nofollow">PPF-225 parts catalog</a> (guide bars and chains), and ECHO’s chain pages for <a href={ECHO_10} rel="nofollow">91VXL39CQ</a>, <a href={ECHO_12} rel="nofollow">91VXL44CQ</a> and <a href={ECHO_12N} rel="nofollow">90PX44CQ</a>. ECHO lists these chains for the PPF-210, PPF-225, PPF-280, PPF-2620, PPT-260, PPT-266, PPT-266H, PPT-280, PPT-2620 and PPT-2620H. The PPT-260 and PPF-210 use differently numbered bars (10G0ZD3739C, 12G0ZD3744C, 12G4CD3744C) with the same chains. File sizes are from ECHO’s chain pages.</p>
+    </section>
+
+    <hr class="rule" />
+
+    <section class="block">
+      <h2>STIHL pole pruners</h2>
+      <p style="max-width:72ch">STIHL’s catalog lists each pole pruner’s bar length, pitch and chain type, but not a drive-link count. STIHL’s 2025 saw chain pages offer PM3 in 1/4″ PICCO only in .043″, and PMM3 in 3/8″ PICCO only in .043″, so both chains are .043″ gauge. STIHL says its 1/4″ PICCO chain is exclusive to STIHL, so other brands’ 1/4″ chain is not a substitute.</p>
+      <div class="tblwrap">
+        <table>
+          <thead><tr><th>Model</th><th>Power</th><th>Listed bar</th><th>Chain</th><th>Gauge</th><th>Drive links</th></tr></thead>
+          <tbody>
+            {stihl.map(([m, p, b, c, g, dl]) => (
+              <tr><td>{m}</td><td>{p}</td><td class="num">{b}</td><td class="num">{c}</td><td class="num">{g}</td><td class="num">{dl ? <b>{dl}</b> : 'Not listed: count the old loop'}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="src">Sources: STIHL <a href={STIHL_CAT} rel="nofollow">2025 Full Line catalog</a>, pole pruner spec table (specs as of 1 October 2024; bar length, pitch and chain type) and saw chain pages (gauges and the 3670 and 3610 chain codes); STIHL USA’s <a href={STIHL_KIT} rel="nofollow">2+1 Cut Kit 14″</a>, a 14″ bar with two 61 PMM3 50 loops that STIHL lists for the HT 131, HT 134, HT 135, HT 250 and the MS 194; and STIHL USA’s <a href={STIHL_CHAINS} rel="nofollow">saw chain page</a> (“Exclusive to STIHL” on PM3 1/4″). STIHL notes that a pole pruner’s listed bar length can differ from its effective cutting length because of the gear head.</p>
+    </section>
+
+    <div class="callout"><b>⚠ The 12-inch trap</b><p>A “12-inch” chain is not one size. ECHO’s 12″ Power Pruner bar takes 44 links, but ECHO’s own 12″ chainsaw bars take 45 (<a href={ECHO_91PX} rel="nofollow">91PX45CQ</a>, which ECHO lists for the CS-271T, CS-303T, CS-310, CS-352 and CS-355T). Husqvarna splits the same way inside its pole saw line: 44 links on bar 596298544, 45 on bar 596009745. Buy by the drive-link count on the bar or the old box, not by bar length.</p></div>
+
+    <section class="block">
+      <h2>How to confirm yours</h2>
+      <ol class="steps">
+        <li>Read the bar part number near the tail and find it in the tables above. ECHO and Husqvarna print it on the bar.</li>
+        <li>Check the gauge on the bar stamp or the drive links. ECHO sells the same lengths in .050″ and .043″, and the two do not swap.</li>
+        <li><a href="/guides/how-to-count-drive-links/">Count the drive links</a> on the old loop if the stamp is worn. This is the only way to get a count for the STIHL 1/4″ models.</li>
+        <li>Still unsure? Work through <a href="/guides/how-to-verify-chain-size/">verifying chain size from the bar stamp</a>.</li>
+      </ol>
+      <p>File size follows the chain: 5/32″ for 3/8″ low-profile .050″ chain, and ECHO lists 4.5 mm for its .043″ 90PX. See the <a href="/guides/chainsaw-chain-file-size/">file size guide</a> and the <a href="/guides/chainsaw-sharpening-angles/">sharpening angles</a> for 90- and 91-series chain, which is filed level with a 0° down angle.</p>
+    </section>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/3-8-low-profile-vs-standard-chain/">3/8″ low profile vs standard</a> · <a href="/guides/chainsaw-chain-gauge/">Chain gauge</a> · <a href="/guides/chain-part-numbers/">Chain part numbers</a> · <a href="/guides/stihl-chain-order-numbers/">STIHL order numbers</a> · <a href="/tools/find-my-chain/">Find my chain</a></p>
+    <ShopBlock groups={shop.groups} title="Pole saw chain (Amazon)" lead="Pick the loop that matches the drive-link count and gauge on your bar." />
+  </div>
+</Base>

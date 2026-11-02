@@ -26,6 +26,8 @@ const pages = [
   ['guides-chainsaw-sharpening-angles', 'GUIDE', 'Chain sharpening angles', 'Top plate · down angle · depth gauge'],
   ['guides-chain-part-numbers', 'GUIDE', 'Chain part numbers decoded', 'STIHL · Husqvarna · Echo codes'],
   ['guides-stihl-chain-order-numbers', 'GUIDE', 'STIHL chain order numbers', '33 RS3 72 = 3624 005 0072'],
+  ['guides-pole-saw-chain-size', 'GUIDE', 'Pole saw chain size', '10″ = 39–40 DL · 12″ = 44–45 DL'],
+  ['guides-chainsaw-chain-glossary', 'GUIDE', 'Chain & bar glossary', 'Pitch · gauge · drive links · rakers'],
   ['guides-longer-bar-on-chainsaw', 'GUIDE', 'Longer bar on your saw?', 'Listed bar range for every saw'],
   ['about', 'ABOUT', 'About Saw Chain Size', 'Method · sources · last-verified policy'],
   ['how-we-verify', 'EDITORIAL POLICY', 'How we verify specs', 'Source hierarchy and conflict handling'],

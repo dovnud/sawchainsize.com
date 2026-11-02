@@ -262,6 +262,13 @@ export function guideShop(slug: string): { groups: ShopGroup[]; count: number } 
     case 'chainsaw-drive-sprocket':
       add('Sprocket, matched to the chain pitch', [LOOKUP(), SPROCKET(), barOilLink()]);
       break;
+    case 'pole-saw-chain-size': {
+      const lp = (gauge: number, dl: number) => ({ pitch: '3/8-lp', gauge, dl });
+      add('3/8″ low-profile pole saw loops — match the count on your bar', [
+        chainLink(lp(0.05, 39), '10″ ECHO · '), chainLink(lp(0.05, 40), '10″ Husqvarna · '), chainLink(lp(0.05, 44), '12″ · '), chainLink(lp(0.05, 45), '12″ · '), chainLink(lp(0.043, 44), '12″ narrow kerf · '), product('kit-5-32'),
+      ], true);
+      break;
+    }
     case 'chainsaw-chain-gauge':
       add('Measure, then match the stamp', [CALIPER(), PITCH_GAUGE_TOOL(), CHAIN_90(), CHAIN_91(), CHAIN_72(), CHAIN_73()], true);
       break;
