@@ -40,6 +40,8 @@ export const GUIDES: Guide[] = [
   { href: '/guides/why-a-chainsaw-chain-comes-off/', title: 'Why a chainsaw chain comes off the bar', card: 'Loose tension, a worn sprocket, a shallow groove and the wrong gauge, from Oregon’s troubleshooting list.', group: 'fit' },
   { href: '/guides/chainsaw-chain-file-size/', title: 'Chainsaw chain file size', card: 'Which round file sharpens which pitch.', group: 'maintain' },
   { href: '/guides/chainsaw-sharpening-angles/', title: 'Chainsaw sharpening angles', card: 'Top-plate angle, down angle and depth-gauge setting for each Oregon chain type.', group: 'maintain' },
+  { href: '/guides/stihl-chain-file-size/', title: 'STIHL chain file size', card: 'STIHL’s 2025 file table with part numbers: 13/64″ for 3/8″, two sizes for .325″, and the STIHL loops on this site matched to a file.', group: 'maintain' },
+  { href: '/guides/chainsaw-chain-grinding-angles/', title: 'Chainsaw chain grinding angles', card: 'Oregon’s grinder settings: 1/8″ or 3/16″ wheel, top-plate and down angles, the 55° ground side plate, and grinder faults.', group: 'maintain' },
   { href: '/guides/when-to-replace-chainsaw-chain/', title: 'When to replace a chainsaw chain', card: 'Chips versus dust, chrome worn through, depth gauges, and the sprocket that has to retire with the chain.', group: 'maintain' },
   { href: '/guides/chainsaw-bar-maintenance/', title: 'Chainsaw bar maintenance', card: 'Clean the groove and oil hole, flip a symmetrical bar, dress the rails, and when a sprocket nose is done.', group: 'maintain' },
   { href: '/guides/chainsaw-bar-and-chain-oil/', title: 'Chainsaw bar and chain oil', card: 'Why the oil tank is filled with the gas tank, and why used motor oil does not belong in it.', group: 'maintain' },

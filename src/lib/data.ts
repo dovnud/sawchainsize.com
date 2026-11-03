@@ -72,8 +72,22 @@ export function gaugeText(b: Bar): string {
   const gs = [...new Set((b.reported ?? []).map((r) => r.gauge).filter(Boolean))] as number[];
   return gs.length ? `Reported ${gs.sort().map(gaugeShort).join(' and ')}` : 'Verify on your bar stamp';
 }
-export function fileText(b: Bar): string {
+/** Publisher of a file-size source, for conflict labels ("STIHL", "Oregon"). */
+const filePub = (m: Model | undefined, id: string) => m?.data.sources.find((s) => s.id === id)?.publisher ?? id;
+/** File sizes on a row: one size, or each source's size when sources differ. */
+export function barFiles(b: Bar, m?: Model): { size: string; label: string; by?: string }[] {
+  if (b.file_size) return [{ size: b.file_size, label: fileLabel(b.file_size) }];
+  return (b.file_conflict ?? []).map((f) => ({ size: f.size, label: fileLabel(f.size), by: filePub(m, f.source_id) }));
+}
+/** Short text for a list of file entries, e.g. "13/64″ (5.2 mm) per STIHL or 7/32″ (5.5 mm) per Oregon". */
+export function filesText(fs: { label: string; by?: string }[]): string {
+  const seen = new Set<string>();
+  return fs.map((f) => `${f.label}${f.by ? ` per ${f.by}` : ''}`).filter((t) => (seen.has(t) ? false : (seen.add(t), true))).join(' or ');
+}
+export const hasFileConflict = (b: Bar) => !!b.file_conflict?.length;
+export function fileText(b: Bar, m?: Model): string {
   if (b.file_size) return fileLabel(b.file_size);
+  if (hasFileConflict(b)) return `Sources differ: ${barFiles(b, m).map((f) => `${f.label} (${f.by})`).join(' · ')}`;
   return 'Not stated in the source. See the chain box';
 }
 export const oemParts = (b: Bar) => b.chains.filter((c) => c.role === 'oem');
@@ -123,6 +137,14 @@ export function codesFor(pitch: string, gauge: number) {
 /** File size(s) seen in the data for one chain-spec group, falling back to the pitch default. */
 export function groupFile(g: { pitch: string; items: { bar: Bar }[] }): string {
   const fs = [...new Set(g.items.map((i) => i.bar.file_size).filter(Boolean))] as string[];
+  const differ = g.items.some((i) => hasFileConflict(i.bar));
+  if (differ) {
+    const pairs = new Map<string, string>();
+    for (const i of g.items) for (const f of barFiles(i.bar, (i as { model?: Model }).model)) if (f.by) pairs.set(f.label, f.by);
+    const conflictTxt = [...pairs].map(([l, by]) => `${l} (${by})`).join(' vs ');
+    const plain = fs.filter((f) => !pairs.has(fileLabel(f))).map((f) => fileLabel(f));
+    return [...plain, `sources differ: ${conflictTxt}`].join(' / ');
+  }
   return fs.length ? fs.map((f) => fileLabel(f)).join(' / ') : (spec.pitches as any)[g.pitch].file;
 }
 
@@ -165,6 +187,12 @@ export function modelFaqs(m: Model): Faq[] {
   const lens = [...new Set(d.bars.flatMap((b) => b.lengths_in))].sort((a, b) => a - b);
   faqs.push({ q: `Which bar lengths does the ${d.name} come with, and does the drive-link count change?`, a: `${lenList(lens)} bars are on file for the ${d.name}. ${okBars.length ? (okBars.length <= 4 ? `Drive links by bar: ${okBars.map((b) => `${barLabel(b)} → ${b.drive_links}`).join(', ')}.` : `Verified drive-link counts run from ${Math.min(...okBars.map((b) => b.drive_links!))} to ${Math.max(...okBars.map((b) => b.drive_links!))} across ${okBars.length} setups; the table gives each bar's count.`) : 'We have no source-confirmed drive-link count for it, so the stamp on the bar tail is the only reliable number.'} ${d.bars.some((b) => b.status !== 'ok') ? 'Setups flagged conflict or verify in the table are not asserted here.' : ''}`.trim() });
   const files = [...new Set(d.bars.map((b) => b.file_size).filter(Boolean))].map((f) => fileLabel(f as string));
+  const fileDiff = d.bars.filter(hasFileConflict);
+  if (fileDiff.length) {
+    const diffPitches = [...new Set(fileDiff.map((b) => (b.pitch ? pitchShort(b.pitch) : null)).filter(Boolean))].join(' / ');
+    const plainPitches = [...new Set(d.bars.filter((b) => b.file_size).map((b) => `The ${pitchShort(b.pitch)} chain takes ${fileLabel(b.file_size)}`))];
+    faqs.push({ q: `What file size sharpens the ${d.name} chain?`, a: `For the ${diffPitches} chain the sources differ: ${filesText(barFiles(fileDiff[0], m))}. The sources do not agree on this pitch, so the table shows both. Use the size printed on your chain’s box, or the size the chain maker gives for that loop.${plainPitches.length ? ` ${plainPitches.join('; ')}.` : ''}` });
+  } else
   if (files.length) faqs.push({ q: `What file size sharpens the ${d.name} chain?`, a: `${files.join(' or ')} round file for the chain fitted to the ${d.name} (${[...new Set(d.bars.map((b) => (b.pitch ? pitchShort(b.pitch) : null)).filter(Boolean))].join(' / ')} pitch).` });
   return faqs;
 }
@@ -175,7 +203,7 @@ export const HOME_FAQS: Faq[] = [
   { q: 'Oregon 72 vs 73 chain (what is the difference?', a: 'Same pitch (3/8″), different gauge: 72 is .050″ and 73 is .058″. This is the classic wrong buy in this category) the boxes look identical. A .058″ chain will not seat in a .050″ bar groove, and a .050″ chain in a .058″ groove runs sloppy and can derail. Check the gauge number on your bar stamp before you order. Full code table on the identification chart.' },
   { q: 'How many drive links do I need?', a: 'As many as the bar fitted to your saw was built for, the count is stamped on the bar tail on most bars, and it changes with bar length even on the same saw. A 20″ Husqvarna 455 Rancher bar takes 72 drive links; the same saw on a shorter .325″ setup can take anywhere from 56 to 78 depending on the exact bar. Never order by model name alone.' },
   { q: 'Can I run a different-gauge chain if the pitch matches?', a: 'No. Gauge is the thickness of the drive links, and it must match the width of the groove in your guide bar. A thicker chain will not seat; a thinner one wobbles in the groove, wears the bar rails unevenly and can jump off. Pitch, gauge and drive links all have to match.' },
-  { q: 'What file size do I need to sharpen my chain?', a: 'File size follows pitch: 3/8″ low-profile → 5/32″ (4.0 mm), or 11/64″ (4.5 mm) for .043″ gauge; .325″ → 3/16″ (4.8 mm); standard 3/8″ and .404″ → 7/32″ (5.5 mm). Every model page on this site lists the file size next to the chain spec, and the identification chart has the full table.' },
+  { q: 'What file size do I need to sharpen my chain?', a: 'File size follows pitch: 3/8″ low-profile → 5/32″ (4.0 mm), or 11/64″ (4.5 mm) for .043″ gauge; .325″ → 3/16″ (4.8 mm); standard 3/8″ and .404″ → 7/32″ (5.5 mm), though STIHL lists 13/64″ (5.2 mm) for its own standard 3/8″ chain. Every model page on this site lists the file size next to the chain spec, and the identification chart has the full table.' },
 ];
 
 export const ldEscape = (o: unknown) => JSON.stringify(o).replace(/</g, '\\u003c');
@@ -232,8 +260,20 @@ export function glanceFacts(m: Model): { k: string; v: string }[] {
   const dls = d.bars.filter((b) => b.drive_links).map((b) => `${b.lengths_in[0]}″ → ${b.drive_links}`);
   if (dls.length && dls.length <= 8) out.push({ k: 'Drive links by bar', v: dls.join(' · ') });
   else if (dls.length) { const n = d.bars.filter((b) => b.drive_links).map((b) => b.drive_links!); out.push({ k: 'Drive links', v: `${Math.min(...n)}–${Math.max(...n)} across ${dls.length} verified setups` }); }
-  const files = [...new Set(d.bars.map((b) => b.file_size).filter(Boolean))].map((f) => fileLabel(f as string));
-  if (files.length) out.push({ k: 'Round file', v: files.join(' / ') });
+  if (d.bars.some(hasFileConflict)) {
+    const byPitch = new Map<string, string>();
+    for (const b of d.bars) {
+      const fs = barFiles(b, m);
+      if (!fs.length || !b.pitch) continue;
+      const t = hasFileConflict(b) ? `sources differ, ${filesText(fs)}` : fs.map((f) => f.label).join(' / ');
+      const k = pitchShort(b.pitch);
+      if (!byPitch.has(k)) byPitch.set(k, t);
+    }
+    if (byPitch.size) out.push({ k: 'Round file', v: [...byPitch].map(([k, t]) => `${k}: ${t}`).join(' · ') });
+  } else {
+    const files = [...new Set(d.bars.map((b) => b.file_size).filter(Boolean))].map((f) => fileLabel(f as string));
+    if (files.length) out.push({ k: 'Round file', v: files.join(' / ') });
+  }
   const alias = d.aliases.filter((a) => a.toLowerCase() !== d.model.toLowerCase());
   if (alias.length) out.push({ k: 'Also listed as', v: alias.join(', ') });
   const src = d.sources.map((s) => s.publisher + ' ' + SOURCE_TYPE_LABEL[s.type]).filter((v, i, a) => a.indexOf(v) === i);

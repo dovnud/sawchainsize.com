@@ -1,5 +1,5 @@
 import { AFFILIATE_REL, AFFILIATE_TARGET } from '../config/affiliate';
-import { SPEC, SOURCE_TYPE_LABEL, barLabel, chainKey, chainUrl, codesFor, fileLabel, gaugeLabel, getBrands, getModels, modelUrl, pitchLabel, type Bar, type Model } from './data';
+import { SPEC, SOURCE_TYPE_LABEL, barLabel, chainKey, chainUrl, codesFor, fileLabel, barFiles, gaugeLabel, getBrands, getModels, modelUrl, pitchLabel, type Bar, type Model } from './data';
 import { specKey } from './fit-explain';
 import { chainLink } from './shop';
 import type { ToolBar, ToolData, ToolModel, ToolPart, ToolSpec, ToolSpecSaw } from './tool-types';
@@ -19,7 +19,7 @@ function brandRank(brand: string) {
 }
 
 function fileFor(pitch: string, files: (string | null)[]): string {
-  const labels = [...new Set(files.filter(Boolean).map((f) => fileLabel(f as string)))];
+  const labels = [...new Set(files.filter(Boolean) as string[])];
   if (labels.length) return labels.join(' / ');
   const fallback = (SPEC.pitches as Record<string, { file?: string }>)[pitch]?.file;
   return fallback && fallback !== 'n/a' ? fallback : 'Not stated on the verified rows';
@@ -88,7 +88,8 @@ export async function toolDataset(): Promise<ToolData> {
       const key = specKey(bar.pitch, bar.gauge, bar.drive_links);
       if (!bySpec.has(key)) bySpec.set(key, { pitch: bar.pitch, gauge: bar.gauge, dl: bar.drive_links, files: [], parts: new Map(), saws: new Map() });
       const bucket = bySpec.get(key)!;
-      bucket.files.push(bar.file_size);
+      if (bar.file_size) bucket.files.push(fileLabel(bar.file_size));
+      else for (const f of barFiles(bar, m)) bucket.files.push(`${f.label} (${f.by}; sources differ)`);
       const saw = bucket.saws.get(m.id) ?? { id: m.id, name: m.data.name, url: modelUrl(m), lengths: [], labels: [] };
       const label = barLabel(bar);
       if (!saw.labels.includes(label)) saw.labels.push(label);

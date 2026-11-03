@@ -4,22 +4,25 @@ import Crumbs from '../../components/Crumbs.astro';
 import FaqList from '../../components/FaqList.astro';
 import { SITE, SPEC, chainUrl } from '../../lib/data';
 import { webPageLd, faqLd } from '../../lib/ld';
+import dates from '../../data/page-dates.json';
 const path = '/guides/chainsaw-chain-file-size/';
-const desc = 'Chainsaw chain file size by pitch: 5/32″ for 3/8″ low-profile, 3/16″ for .325″, 7/32″ for 3/8″ and .404″ chain. Use the right round file to sharpen.';
+const modified = (dates as Record<string, string>)[path];
+const desc = 'Chainsaw chain file size by pitch: 5/32″ for 3/8″ low-profile, 3/16″ for .325″, 7/32″ for 3/8″ (STIHL lists 13/64″) and .404″ chain. Use the right round file.';
 const rows = ['3/8-lp', '325', '3/8', '404'].map((k) => ({ k, ...(SPEC.pitches as any)[k] }));
 const faqs = [
   { q: 'What size file do I need for .325 chain?', a: '3/16″ (4.8 mm) round file.' },
-  { q: 'What size file for 3/8 chain?', a: '7/32″ (5.5 mm) round file for standard 3/8″ pitch; 5/32″ (4.0 mm) for 3/8″ low-profile ("Picco") chain, or 11/64″ (4.5 mm) for the thinner .043″ low-profile chain.' },
+  { q: 'What size file for 3/8 chain?', a: 'For standard 3/8″ pitch the two big sources disagree. Oregon’s filing chart gives 7/32″ (5.5 mm) for its 72, 73 and 75 chain. STIHL’s 2025 catalog file table lists 13/64″ (5.2 mm) for STIHL 3/8″ chain such as 33 RS3 and 36 RS3. Use the size on your chain’s box. For 3/8″ low-profile ("Picco") chain it is 5/32″ (4.0 mm), or 11/64″ (4.5 mm) for Oregon’s thinner .043″ low-profile chain.' },
+  { q: 'Is 13/64 or 7/32 right for a STIHL 3/8 chain?', a: 'STIHL lists 13/64″ (5.2 mm) for its own 3/8″ chain, in the file table and on its 2-in-1 filing guide for 3/8″ (5605 750 4305). Oregon lists 7/32″ (5.5 mm) for its 3/8″ chain. The saw pages for the MS 311/391, MS 362, MS 661 and MS 880 show both sizes and flag the difference.' },
   { q: 'Does gauge change the file size?', a: 'No. File size follows pitch (cutter size); gauge is the drive-link thickness and does not change which file you use.' },
   { q: 'Is the file size on my saw page?', a: 'Yes. Each verified model page lists the round-file size for the chain fitted to that bar.' },
 ];
-const jsonld = [webPageLd('Chainsaw chain file size by pitch', path, desc, SITE.dataDate), faqLd(faqs)];
+const jsonld = [webPageLd('Chainsaw chain file size by pitch', path, desc, modified), faqLd(faqs)];
 import ShopBlock from '../../components/ShopBlock.astro';
 import { guideShop } from '../../lib/shop';
 const shop = guideShop('chainsaw-chain-file-size');
 ---
 <Base title="Chainsaw Chain File Size by Pitch" description={desc} path={path} nav="chart"
-  crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Chain file size', path }]} jsonld={jsonld} modified={SITE.dataDate}>
+  crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Chain file size', path }]} jsonld={jsonld} modified={modified}>
   <div class="wrap">
     <div class="pagehead">
       <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Chain file size' }]} />
@@ -33,7 +36,8 @@ const shop = guideShop('chainsaw-chain-file-size');
     </table></div>
     <ShopBlock groups={shop.groups} compact />
 
-    <p class="src">Gauge does not change the file size. Specific chains: <a href={chainUrl('3-8-lp-043')}>3/8″ LP .043″</a>, <a href={chainUrl('325-050')}>.325″ .050″</a>, <a href={chainUrl('3-8-050')}>3/8″ .050″</a>.</p>
+    <div class="callout"><b>⚠ Standard 3/8″: STIHL and Oregon list different files</b><p>Oregon’s <em>Filing Angles</em> chart gives a 7/32″ (5.5 mm) file for its standard 3/8″ chain (72, 73, 75). STIHL’s 2025 Full Line catalog lists a 5.2 mm (13/64″) file for 3/8″ chain (part 7010 871 0404), and its 2-in-1 filing guide for 3/8″ is sold in 13/64″. Neither source says the other size is wrong. On STIHL 3/8″ loops (33 RS3, 36 RS3) the saw pages show both sizes with a “File sizes differ” flag. Use the size printed on your chain’s box. STIHL also sells two files for .325″ chain, 4.5 mm (11/64″) and 4.8 mm (3/16″), and its table does not say which loop takes which. The <a href="/guides/stihl-chain-file-size/">STIHL file size chart</a> has every row.</p></div>
+    <p class="src">Sources: Oregon, Saw Chain Filing Angles chart (2020); STIHL 2025 Full Line catalog, file and filing-guide tables (catalog p. 167). Gauge does not change the file size. Specific chains: <a href={chainUrl('3-8-lp-043')}>3/8″ LP .043″</a>, <a href={chainUrl('325-050')}>.325″ .050″</a>, <a href={chainUrl('3-8-050')}>3/8″ .050″</a>.</p>
     <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
     <p><a href="/guides/chainsaw-sharpening-angles/">Sharpening angles &amp; depth gauges</a> · <a href="/guides/when-to-replace-chainsaw-chain/">When to replace a chain</a> · <a href="/guides/3-8-low-profile-vs-standard-chain/">3/8″ low profile vs standard</a> · <a href="/guides/chain-size-chart/">Identification chart</a> · <a href="/guides/how-to-verify-chain-size/">Verify your chain size</a></p>
     <ShopBlock groups={shop.groups} title="Tools &amp; parts mentioned (Amazon)" lead="Verify pitch, gauge and drive links against your bar stamp before buying any chain or bar." />

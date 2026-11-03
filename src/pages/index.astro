@@ -25,7 +25,7 @@ const finderDb = Object.fromEntries(
             bars: m.data.bars.map((x) => {
               const spec = okSpec(x);
               const link = spec ? chainLink(spec) : null;
-              return { label: barLabel(x), pitch: pitchText(x), gauge: gaugeText(x), dl: dlText(x, m), file: fileText(x), oregon: oregonType(x), note: x.note, status: x.status, shop: link ? { href: link.href, kind: link.kind } : null };
+              return { label: barLabel(x), pitch: pitchText(x), gauge: gaugeText(x), dl: dlText(x, m), file: fileText(x, m), oregon: oregonType(x), note: x.note, status: x.status, shop: link ? { href: link.href, kind: link.kind } : null };
             }),
           },
         ]),

@@ -208,7 +208,7 @@ const PITCH_GAUGE_TOOL = () => search('chainsaw chain pitch gauge measuring tool
 const SCRENCH = () => search('chainsaw scrench combination wrench bar nut', 'Scrench / combination wrench for bar nuts and spark plug');
 const DEPTH_TOOL = () => search('chainsaw depth gauge tool raker file guide', 'Depth-gauge (raker) filing tool');
 
-const FILE_732 = () => search('7/32 chainsaw round file 5.5mm', '7/32″ round files (3/8″ standard and .404″ chain)');
+const FILE_732 = () => search('7/32 chainsaw round file 5.5mm', '7/32″ round files (Oregon 3/8″ standard and .404″ chain)');
 const FILE_1164 = () => search('11/64 chainsaw round file 4.5mm', '11/64″ round files (3/8″ LP .043″ chain)');
 const SPROCKET = () => search('chainsaw rim drive sprocket replacement', 'Replacement drive sprocket. Match the pitch and tooth count to the chain and clutch');
 const BAR_DRESS = () => search('chainsaw bar rail dresser groove cleaner', 'Bar-rail dresser and groove cleaner');
@@ -229,6 +229,8 @@ export function guideShop(slug: string): { groups: ShopGroup[]; count: number } 
   switch (slug) {
     case 'chain-size-chart': add('Tools mentioned in this guide', [CALIPER(), PITCH_GAUGE_TOOL(), product('kit-field'), barOilLink()]); break;
     case 'chainsaw-chain-file-size': add('Files and sharpening kits by size', [product('kit-5-32'), product('kit-3-16'), product('kit-field'), FILE_732(), FILE_1164(), DEPTH_TOOL()]); break;
+    case 'stihl-chain-file-size': add('Files by size for STIHL chain', [product('kit-5-32'), product('kit-3-16'), search('13/64 chainsaw round file 5.2mm', '13/64″ (5.2 mm) round files (STIHL 3/8″ chain)'), FILE_732()]); break;
+    case 'chainsaw-chain-grinding-angles': add('Grinder wheels and depth-gauge tools', [search('chainsaw chain grinder wheel 1/8 inch', '1/8″ grinding wheels (1/4″ and low-profile chain)'), search('chainsaw chain grinder wheel 3/16 inch', '3/16″ grinding wheels (.325″, 3/8″ and .404″ chain)'), DEPTH_TOOL()]); break;
     case 'chainsaw-sharpening-angles': add('Files and depth-gauge tools', [product('kit-5-32'), product('kit-3-16'), product('kit-field'), FILE_732(), DEPTH_TOOL(), search('chainsaw depth gauge flat file', 'Flat file for lowering depth gauges')]); break;
     case 'how-to-count-drive-links': add('Tools mentioned in this guide', [CALIPER(), PITCH_GAUGE_TOOL()]); break;
     case 'chain-part-numbers': add('Tools mentioned in this guide', [CALIPER(), PITCH_GAUGE_TOOL()]); break;

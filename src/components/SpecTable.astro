@@ -1,5 +1,5 @@
 ---
-import { type Model, compactNote, barLabel, pitchText, gaugeText, dlText, fileText, oemParts, equivParts, partText, statusLabel } from '../lib/data';
+import { type Model, compactNote, barLabel, pitchText, gaugeText, dlText, fileText, barFiles, hasFileConflict, oemParts, equivParts, partText, statusLabel } from '../lib/data';
 const { model } = Astro.props as { model: Model };
 ---
 <div class="tblwrap stackwrap">
@@ -14,7 +14,7 @@ const { model } = Astro.props as { model: Model };
             <td class="num" data-label="Pitch">{pitchText(b)}</td>
             <td class="num" data-label="Gauge">{gaugeText(b)}</td>
             <td class="num" data-label="Drive links">{dlText(b, model)}</td>
-            <td class="num" data-label="File">{fileText(b)}</td>
+            <td class="num" data-label="File">{hasFileConflict(b) ? <><span class="tag verify">File sizes differ</span><br />{barFiles(b, model).map((f, i) => <>{i > 0 && <br />}{f.label} ({f.by})</>)}</> : fileText(b, model)}</td>
             <td data-label="OEM chain">{oemParts(b).length ? oemParts(b).map((c, i) => <>{i > 0 && <br />}{partText(c)}</>) : 'n/a'}</td>
             <td data-label="Equivalent chains">{equivParts(b).length ? equivParts(b).map((c, i) => <>{i > 0 && <br />}{partText(c)}</>) : 'n/a'}</td>
           </tr>

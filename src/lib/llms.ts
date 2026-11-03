@@ -45,7 +45,7 @@ export async function llmsFull() {
     L.push(`## ${d.name}`, '', `URL: ${abs(modelUrl(m))}`, `Type: ${d.type}${d.displacement_cc ? `, ${d.displacement_cc} cc` : ''}`, `Last verified: ${d.last_verified}`, '', d.intro, '');
     for (const b of d.bars) {
       L.push(`### ${barLabel(b)} bar: ${statusLabel(b.status)}`, '');
-      L.push(`- Pitch: ${pitchText(b)}`, `- Gauge: ${gaugeText(b)}`, `- Drive links: ${dlText(b, m)}`, `- File size: ${fileText(b)}`);
+      L.push(`- Pitch: ${pitchText(b)}`, `- Gauge: ${gaugeText(b)}`, `- Drive links: ${dlText(b, m)}`, `- File size: ${fileText(b, m)}`);
       if (b.chains.length) L.push(`- Chain part numbers: ${b.chains.map((c) => `${partText(c)} (${c.role})`).join('; ')}`);
       if (b.reported?.length) L.push('- Reported by sources: ' + b.reported.map((r) => [r.pitch && `pitch ${r.pitch}`, r.gauge && `gauge ${r.gauge}`, r.drive_links && `${r.drive_links} DL`, r.source_id].filter(Boolean).join(' / ')).join(' | '));
       L.push(`- Note: ${b.note}`, '');
@@ -54,7 +54,7 @@ export async function llmsFull() {
   }
   L.push('## Tools', '', `Find my chain: ${abs('/tools/find-my-chain/')}`, `Bar and chain compatibility: ${abs('/tools/chain-compatibility/')}`, 'Both use verified rows only. A conflict or verify row is not turned into a matched part number. The tools do not show prices. Amazon links, when a verified spec has one, use the site Associates tag and sit next to the disclosure. The email hook points at the existing saw-page form, which stores a request and does not send mail.', '');
   L.push('## Holiday 2026', '', `Gifts for chainsaw owners and woodcutters: ${abs(GIFT_PATH)}`, `Black Friday chainsaw chain and accessories: ${abs(BF_PATH)}`, 'Black Friday 2026 is November 27. Cyber Monday 2026 is November 30. The site prints no prices, no countdown and no stock claims. Shipping dates are the ones USPS, UPS, FedEx and Amazon published, and each is linked from the Black Friday page.', '');
-  L.push('## File size by pitch', '', '- 3/8" low-profile: 5/32" (4.0 mm) at .050" gauge; 11/64" (4.5 mm) at .043" gauge', '- .325": 3/16" (4.8 mm)', '- 3/8": 7/32" (5.5 mm)', '- .404": 7/32" (5.5 mm)', '');
+  L.push('## File size by pitch', '', '- 3/8" low-profile: 5/32" (4.0 mm) at .050" gauge; 11/64" (4.5 mm) at .043" gauge', '- .325": 3/16" (4.8 mm)', '- 3/8": 7/32" (5.5 mm) per Oregon; 13/64" (5.2 mm) per STIHL\'s 2025 catalog file table. Sources differ, so STIHL 3/8" rows list both', '- .404": 7/32" (5.5 mm)', '');
   L.push('## Oregon 72 vs 73', '', 'Both 3/8" pitch. Oregon 72 is .050" gauge; Oregon 73 is .058" gauge. Gauge must match the guide-bar groove.', '');
   return L.join('\n');
 }

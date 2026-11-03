@@ -24,6 +24,8 @@ const pages = [
   ['guides-gifts-for-chainsaw-owners-2026', 'GUIDE', 'Gifts for chainsaw owners, 2026', 'Oil · a matched chain · safety gear'],
   ['guides-black-friday-chainsaw-chain', 'GUIDE', 'Black Friday chain and accessories', 'November 27 · fit still comes first'],
   ['guides-chainsaw-sharpening-angles', 'GUIDE', 'Chain sharpening angles', 'Top plate · down angle · depth gauge'],
+  ['guides-stihl-chain-file-size', 'GUIDE', 'STIHL chain file size', '1/8″ · 5/32″ · 3/16″ · 13/64″ · 7/32″'],
+  ['guides-chainsaw-chain-grinding-angles', 'GUIDE', 'Chain grinding angles', 'Wheel · top plate · down · side plate'],
   ['guides-chain-part-numbers', 'GUIDE', 'Chain part numbers decoded', 'STIHL · Husqvarna · Echo codes'],
   ['guides-stihl-chain-order-numbers', 'GUIDE', 'STIHL chain order numbers', '33 RS3 72 = 3624 005 0072'],
   ['guides-pole-saw-chain-size', 'GUIDE', 'Pole saw chain size', '10″ = 39–40 DL · 12″ = 44–45 DL'],

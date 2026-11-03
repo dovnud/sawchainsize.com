@@ -4,6 +4,8 @@ import { glob } from 'astro/loaders';
 /** Allowed enums. A build fails on anything else. */
 export const PITCHES = ['1/4', '3/8-lp', '325', '3/8', '404'] as const;
 export const GAUGES = [0.043, 0.05, 0.058, 0.063] as const;
+/** Round-file sizes. 13/64 is STIHL's size for standard 3/8″ chain (2025 catalog file table). */
+export const FILES = ['1/8', '5/32', '11/64', '3/16', '13/64', '7/32'] as const;
 export const STATUSES = ['ok', 'verify', 'conflict'] as const;
 export const SOURCE_TYPES = ['manual', 'fitup-chart', 'chain-maker', 'dealer', 'roundup', 'marketplace', 'blog', 'forum'] as const;
 /** A bar may only be "ok" when at least one of its sources is one of these. */
@@ -42,7 +44,9 @@ const bar = z.object({
   drive_links: z.number().int().min(20).max(200).nullable(),
   drive_links_range: z.tuple([z.number().int(), z.number().int()]).optional(),
   gauge_note: z.string().optional(),
-  file_size: z.enum(['1/8', '5/32', '11/64', '3/16', '7/32']).nullable(),
+  file_size: z.enum(FILES).nullable(),
+  /** Sources name different file sizes for this row: each size with the source that states it. Then file_size must be null. */
+  file_conflict: z.array(z.object({ size: z.enum(FILES), source_id: z.string() })).optional(),
   status: z.enum(STATUSES),
   chains: z.array(chainPart),
   reported: z.array(reported).optional(),
@@ -86,6 +90,12 @@ const models = defineCollection({
           const sources = new Set((b.reported ?? []).map((r) => r.source_id));
           if (vals.size < 2 || sources.size < 2)
             ctx.addIssue({ code: 'custom', path: at, message: 'status "conflict" needs ≥2 distinct reported values from ≥2 sources' });
+        }
+        if (b.file_conflict) {
+          for (const f of b.file_conflict) if (!byId.has(f.source_id)) ctx.addIssue({ code: 'custom', path: at, message: `unknown file source id ${f.source_id}` });
+          if (new Set(b.file_conflict.map((f) => f.size)).size < 2 || new Set(b.file_conflict.map((f) => f.source_id)).size < 2)
+            ctx.addIssue({ code: 'custom', path: at, message: 'file_conflict needs ≥2 distinct sizes from ≥2 sources' });
+          if (b.file_size) ctx.addIssue({ code: 'custom', path: at, message: 'file_conflict rows must leave file_size null' });
         }
         if (b.status === 'verify' && b.drive_links && !b.drive_links_range)
           ctx.addIssue({ code: 'custom', path: at, message: 'status "verify" must not print a single drive-link count' });
