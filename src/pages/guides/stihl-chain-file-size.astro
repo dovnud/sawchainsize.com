@@ -1,0 +1,120 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { getModels, modelUrl, chainUrl, barChainKey, pitchShort, gaugeShort, oemParts } from '../../lib/data';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+const path = '/guides/stihl-chain-file-size/';
+const modified = (dates as Record<string, string>)[path];
+const desc = 'STIHL chain file sizes from the 2025 STIHL catalog: 1/8″ for 1/4″ PICCO, 5/32″ for 3/8″ PICCO, 11/64″ or 3/16″ for .325″, 13/64″ for 3/8″ and 7/32″ for .404″ chain.';
+const STIHL_CAT = 'https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf';
+const ORE_CHART = 'https://oregonproducts.com/medias/2020-FilingGrindingAngles.pdf?attachment=true&context=bWFzdGVyfHJvb3R8NDA2MDY0fGFwcGxpY2F0aW9uL3BkZnxoNjUvaGJmLzg4NTMxOTkzODg3MDIucGRmfGQ4MmNmZWZjZDA5MWQ3MmM0NmY0OTM4ZmFhN2MxZWUwMDA2MzgzM2Q4Y2U1MzgyYjQwMzZmYzZhZmY3ZWMzNjQ';
+
+// STIHL 2025 Full Line catalog, Accessories, catalog p. 167: "FILES" and "STIHL FILE GUIDES AND HOLDERS" tables.
+// [chain as STIHL labels it, file, file part no. (pkg. of 12), 2-in-1 filing guide size, 2-in-1 guide part no.]
+type FRow = [string, string, string, string, string];
+const files: FRow[] = [
+  ['1/4″ STIHL PICCO', '3.2 mm (1/8″)', '7010 871 0400', '1/8″', '5605 750 4306'],
+  ['3/8″ STIHL PICCO', '4.0 mm (5/32″)', '7010 871 0401', '5/32″', '5605 750 4303'],
+  ['.325″', '4.5 mm (11/64″)', '7010 871 0402', 'n/a', ''],
+  ['.325″', '4.8 mm (3/16″)', '7010 871 0403', '3/16″', '5605 750 4304'],
+  ['3/8″', '5.2 mm (13/64″)', '7010 871 0404', '13/64″', '5605 750 4305'],
+  ['.404″ (printed “.404″ STIHL PICCO”)', '5.5 mm (7/32″)', '7010 871 0405', 'no size printed', '0000 750 4300'],
+];
+
+// File per pitch as each maker publishes it. STIHL: catalog p. 167. Oregon: 2020 Filing Angles chart (gauge-specific for low profile).
+const STIHL_FILE: Record<string, string> = { '3/8-lp': '5/32″ (4.0 mm)', '325': '11/64″ (4.5 mm) or 3/16″ (4.8 mm)', '3/8': '13/64″ (5.2 mm)', '404': '7/32″ (5.5 mm)' };
+const oregonFile = (pitch: string, gauge: number) =>
+  pitch === '3/8-lp' ? (gauge === 0.043 ? '4.5 mm (90PX)' : '5/32″ (91 series)') : pitch === '325' ? '3/16″ (95, 20, 21, 22)' : pitch === '3/8' ? '7/32″ (72, 73, 75)' : pitch === '404' ? '7/32″ (27, 58, 59, 68)' : '';
+
+// STIHL loops on this site, grouped by STIHL chain series (part number without the drive-link count).
+const models = (await getModels()).filter((m) => m.data.brand === 'stihl');
+type Loop = { series: string; pitch: string; gauge: number; key: string | null; saws: Map<string, string> };
+const loops = new Map<string, Loop>();
+for (const m of models) for (const b of m.data.bars) {
+  if (!b.pitch || !b.gauge) continue;
+  for (const c of oemParts(b)) {
+    if (!/^stihl$/i.test(c.brand)) continue;
+    const mm = c.part_no.match(/^(\d{2}\s*[A-Z]+\d?)\b/);
+    if (!mm) continue;
+    const series = mm[1].replace(/\s+/, ' ');
+    const l = loops.get(series) ?? loops.set(series, { series, pitch: b.pitch, gauge: b.gauge, key: barChainKey(b), saws: new Map() }).get(series)!;
+    l.saws.set(m.id, m.data.name);
+  }
+}
+const order = ['3/8-lp', '325', '3/8', '404'];
+const loopRows = [...loops.values()].sort((a, b) => order.indexOf(a.pitch) - order.indexOf(b.pitch) || a.gauge - b.gauge || a.series.localeCompare(b.series));
+
+const faqs = [
+  { q: 'What size file for a STIHL chainsaw chain?', a: 'It depends on the chain’s pitch. STIHL’s 2025 catalog lists 3.2 mm (1/8″) for 1/4″ STIHL PICCO, 4.0 mm (5/32″) for 3/8″ STIHL PICCO, 4.5 mm (11/64″) and 4.8 mm (3/16″) for .325″, 5.2 mm (13/64″) for 3/8″, and 5.5 mm (7/32″) for .404″. The first digit of the STIHL chain number tells you the pitch: 6 is 3/8″ PICCO, 2 is .325″, 3 is 3/8″, 4 is .404″, 7 is 1/4″ PICCO.' },
+  { q: 'What file for STIHL 33 RS3 or 36 RS3 chain?', a: 'STIHL lists a 5.2 mm (13/64″) round file for its 3/8″ chain, part 7010 871 0404, and sells its 2-in-1 filing guide for 3/8″ in 13/64″. Oregon’s chart gives 7/32″ (5.5 mm) for its own 3/8″ chain (72, 73, 75), so the two makers do not agree on this pitch. Our saw pages for STIHL 3/8″ loops show both sizes.' },
+  { q: 'What file for STIHL 26 RM3 or other .325″ chain?', a: 'STIHL’s file table lists two files for .325″, 4.5 mm (11/64″) and 4.8 mm (3/16″), without saying which chain takes which. Its 2-in-1 filing guide for .325″ is sold in 3/16″, and Oregon gives 3/16″ for its .325″ chain. If the box or the manual for your chain names a size, use that.' },
+  { q: 'What file for STIHL 63 PM3, 63 PS3 or 61 PMM3 chain?', a: 'These are 3/8″ STIHL PICCO chains. STIHL lists one file for them, 4.0 mm (5/32″), part 7010 871 0401, and a 2-in-1 filing guide in 5/32″. Oregon lists a larger 4.5 mm file for its own .043″ low-profile chain (90PX), so STIHL’s single PICCO file and Oregon’s gauge split are not the same rule.' },
+  { q: 'Is a 13/64 file the same as 7/32?', a: 'No. 13/64″ is 5.2 mm and 7/32″ is 5.5 mm, about 0.3 mm apart. Oregon’s troubleshooting list ties a file that is too large to too little top-plate cutting angle and backslope on the side plate, and a file that is too small to too much hook.' },
+];
+const jsonld = [webPageLd('STIHL chain file size chart', path, desc, modified), faqLd(faqs)];
+const shop = guideShop('stihl-chain-file-size');
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'STIHL file size', path }];
+---
+<Base title="STIHL Chain File Size Chart (2025 Catalog)" description={desc} path={path} nav="chart" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'STIHL file size' }]} />
+      <h1>STIHL chain file size chart</h1>
+      <p class="lede">STIHL’s 2025 catalog lists one round file per pitch, except .325″, which gets two: <strong>1/8″ (3.2 mm)</strong> for 1/4″ PICCO, <strong>5/32″ (4.0 mm)</strong> for 3/8″ PICCO, <strong>11/64″ (4.5 mm) or 3/16″ (4.8 mm)</strong> for .325″, <strong>13/64″ (5.2 mm)</strong> for 3/8″ and <strong>7/32″ (5.5 mm)</strong> for .404″. STIHL’s 3/8″ file is smaller than the 7/32″ that Oregon lists for its 3/8″ chain.</p>
+    </div>
+
+    <section class="block">
+      <h2>STIHL files and 2-in-1 filing guides</h2>
+      <p style="max-width:72ch">Restated from the files table and the file-guides table in STIHL’s 2025 Full Line catalog. The chain names are STIHL’s. Files are sold in packs of 12.</p>
+      <div class="tblwrap">
+        <table>
+          <thead><tr><th>Chain (STIHL’s label)</th><th>Round file</th><th>File part no.</th><th>2-in-1 filing guide</th><th>Guide part no.</th></tr></thead>
+          <tbody>
+            {files.map(([c, f, p, g, gp]) => (
+              <tr><td>{c}</td><td class="num">{f}</td><td class="num">{p}</td><td class="num">{g}</td><td class="num">{gp || 'n/a'}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="src">Source: STIHL, <a href={STIHL_CAT} rel="nofollow">2025 Full Line catalog</a>, Accessories, p. 167, read 3 Nov 2026. The .404″ file row is printed as “.404″ STIHL PICCO”. It is the only .404″ file in the table, and STIHL’s .404″ chain on the saws we list is 46 RS. The same page lists a STIHL special file for square-ground chisel chain (7010 871 0282) and a flat file for depth gauges (7010 871 0043).</p>
+    </section>
+
+    <section class="block">
+      <h2>Which file for the STIHL chain on your saw</h2>
+      <p style="max-width:72ch">Each STIHL loop number starts with the chain series. The table groups the STIHL loops on our saw pages by series and puts STIHL’s file next to Oregon’s file for the same pitch and gauge. They differ for 3/8″ and for .043″ PICCO, where Oregon’s chart goes up a size. For .325″, STIHL lists two sizes and one of them matches Oregon’s 3/16″.</p>
+      <div class="tblwrap">
+        <table>
+          <thead><tr><th>STIHL chain</th><th>Pitch · gauge</th><th>STIHL file</th><th>Oregon file, same spec</th><th>Saws on this site</th></tr></thead>
+          <tbody>
+            {loopRows.map((l) => (
+              <tr>
+                <td class="num">{l.series}</td>
+                <td class="num">{l.key ? <a href={chainUrl(l.key)}>{pitchShort(l.pitch)} · {gaugeShort(l.gauge)}</a> : `${pitchShort(l.pitch)} · ${gaugeShort(l.gauge)}`}</td>
+                <td class="num">{STIHL_FILE[l.pitch]}</td>
+                <td class="num">{oregonFile(l.pitch, l.gauge)}</td>
+                <td>{[...l.saws].map(([id, name], i) => <>{i > 0 && ', '}<a href={modelUrl(id)}>{name}</a></>)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="src">STIHL loops from the STIHL fit-up data on each saw page. STIHL file sizes from the 2025 Full Line catalog, p. 167. Oregon file sizes from Oregon’s <a href={ORE_CHART} rel="nofollow">Saw Chain Filing Angles chart</a> (2020).</p>
+    </section>
+
+    <div class="callout"><b>⚠ Where STIHL and Oregon disagree</b><p><strong>3/8″:</strong> STIHL lists 13/64″ (5.2 mm) and sells its 3/8″ 2-in-1 guide in that size. Oregon lists 7/32″ (5.5 mm) for 72, 73 and 75. Neither source says the other is wrong, so the STIHL 3/8″ rows on our saw pages show both, flagged “File sizes differ”. <strong>.325″:</strong> STIHL lists two files and does not say which chain takes which. <strong>3/8″ PICCO at .043″:</strong> STIHL lists one 4.0 mm file for all 3/8″ PICCO chain, while Oregon gives 4.5 mm for its .043″ 90PX. In every case, the size printed on the chain’s box, or in the chain maker’s instructions, is the one to use.</p></div>
+
+    <section class="block">
+      <h2>Reading the STIHL chain number</h2>
+      <p style="max-width:72ch">STIHL’s marketing number puts pitch and gauge first. In <strong>33 RS3</strong>, the first 3 is the pitch (3/8″) and the second 3 is the gauge (.050″). STIHL’s pitch digits are 1 = 1/4″, 2 = .325″, 3 = 3/8″, 4 = .404″, 6 = 3/8″ STIHL PICCO and 7 = 1/4″ STIHL PICCO. Gauge digits are 1 = .043″, 3 = .050″, 5 = .058″ and 6 = .063″. So 26 RM3 is .325″ at .063″, 36 RS3 is 3/8″ at .063″, and 63 PM3 is 3/8″ PICCO at .050″. Match the first digit to the files table above. The full decoding, including order numbers, is in <a href="/guides/stihl-chain-order-numbers/">STIHL chain order numbers</a>.</p>
+      <p class="src">STIHL, 2025 Full Line catalog, “Identifying STIHL Saw Chain”, p. 166.</p>
+    </section>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/chainsaw-chain-file-size/">File size by pitch (all brands)</a> · <a href="/guides/chainsaw-sharpening-angles/">Sharpening angles</a> · <a href="/guides/chainsaw-chain-grinding-angles/">Grinding angles</a> · <a href="/brands/stihl/">STIHL saws</a> · <a href="/guides/chain-part-numbers/">Chain part numbers</a></p>
+    <ShopBlock groups={shop.groups} title="Files for STIHL chain (Amazon)" lead="Buy the file size for your chain’s pitch. For STIHL 3/8″ chain, check the size printed on the chain box first." />
+  </div>
+</Base>

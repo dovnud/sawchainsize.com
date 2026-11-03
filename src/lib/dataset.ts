@@ -1,4 +1,4 @@
-import { getModels, modelUrl, SITE, pitchLabel, gaugeLabel, fileLabel, partText, oemParts, equivParts, barPart, SOURCE_TYPE_LABEL, type Model } from './data';
+import { getModels, modelUrl, SITE, pitchLabel, gaugeLabel, fileLabel, barFiles, partText, oemParts, equivParts, barPart, SOURCE_TYPE_LABEL, type Model } from './data';
 
 export const DATASET_PATH = '/data/';
 export const CSV_PATH = '/data/sawchainsize-chain-sizes.csv';
@@ -14,7 +14,7 @@ export const COLUMNS: [string, string][] = [
   ['pitch', 'Chain pitch in inches, e.g. 3/8 or .325; blank where sources conflict or none is verified'],
   ['gauge_in', 'Drive-link gauge in inches, e.g. 0.050; blank where sources conflict or none is verified'],
   ['drive_links', 'Drive-link count for that bar length; blank unless a source states it'],
-  ['file_size', 'Round file size for that pitch'],
+  ['file_size', 'Round file size for that pitch; where sources differ, each size with its source, e.g. 13/64″ (5.2 mm) [STIHL] | 7/32″ (5.5 mm) [Oregon]'],
   ['status', 'ok = a manufacturer, fit-up chart or chain-maker source states it; verify = not traced to an authoritative source; conflict = credible sources disagree'],
   ['oem_chain_parts', 'Manufacturer chain part numbers named by a source'],
   ['equivalent_chain_parts', 'Equivalent (aftermarket or chain-maker) chain part numbers named by a source'],
@@ -41,7 +41,7 @@ export async function datasetRecords(): Promise<Rec[]> {
         pitch: b.pitch ? pitchLabel(b.pitch).replace('″', '') : null,
         gauge_in: b.gauge ? Number(b.gauge).toFixed(3) : null,
         drive_links: b.drive_links ?? null,
-        file_size: b.file_size ? fileLabel(b.file_size) : null,
+        file_size: b.file_size ? fileLabel(b.file_size) : b.file_conflict?.length ? barFiles(b, m).map((f) => `${f.label} [${f.by}]`).join(' | ') : null,
         status: b.status,
         oem_chain_parts: oemParts(b).map(partText).join(' | ') || null,
         equivalent_chain_parts: equivParts(b).map(partText).join(' | ') || null,

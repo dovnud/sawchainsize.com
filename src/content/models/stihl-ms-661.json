@@ -10,7 +10,7 @@
   "type": "gas",
   "popular": false,
   "blurb": "20″ to 36″ bars on 3/8″ chain in .050″ or .063″ gauge (72–115 drive links), plus .404″ on 32″ and 36″, per STIHL's chain-selection chart.",
-  "intro": "The MS 661 C-M is the biggest STIHL on this site, and the one with the most ways to buy the wrong loop. STIHL's selection chart gives it its own block: 3/8″ Rapid Super chain in two gauges, .050″ (33 RS3) and .063″ (36 RS3), on bars from 20″ to 36″, plus .404″ (46 RS) chain on 32″ and 36″ bars. Bar length alone does not settle it. Two different 28″ .050″ bars take 91 or 92 links, and two 36″ .063″ bars take 114 or 115, depending on the bar's nose sprocket. Get pitch and gauge from the stamp on the bar tail and the drive-link count from the same stamp, or by counting the old loop. Most of the longer bars in this block are yellow-labeled, meaning STIHL does not offer a reduced-kickback version at that length (each row says so). The chart is dated 1 October 2017, so check your bar stamp before you order chain for a newer saw or a non-STIHL bar.",
+  "intro": "The MS 661 C-M is the biggest STIHL on this site, and the one with the most ways to buy the wrong loop. STIHL's selection chart gives it its own block: 3/8″ Rapid Super chain in two gauges, .050″ (33 RS3) and .063″ (36 RS3), on bars from 20″ to 36″, plus .404″ (46 RS) chain on 32″ and 36″ bars. Bar length alone does not settle it. Two different 28″ .050″ bars take 91 or 92 links, and two 36″ .063″ bars take 114 or 115, depending on the bar's nose sprocket. Get pitch and gauge from the stamp on the bar tail and the drive-link count from the same stamp, or by counting the old loop. Most of the longer bars in this block are yellow-labeled, meaning STIHL does not offer a reduced-kickback version at that length (each row says so). The chart is dated 1 October 2017, so check your bar stamp before you order chain for a newer saw or a non-STIHL bar. File size is where STIHL and Oregon disagree: STIHL’s 2025 catalog file table lists a 13/64″ (5.2 mm) round file for 3/8″ chain, while Oregon’s filing chart gives 7/32″ (5.5 mm) for its standard 3/8″ chain (72, 73, 75), so the table shows both.",
   "bars": [
     {
       "lengths_in": [
@@ -20,6 +20,16 @@
       "gauge": 0.05,
       "drive_links": 72,
       "file_size": null,
+      "file_conflict": [
+        {
+          "size": "13/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "7/32",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
       "status": "ok",
       "chains": [
         {
@@ -41,6 +51,16 @@
       "gauge": 0.05,
       "drive_links": 84,
       "file_size": null,
+      "file_conflict": [
+        {
+          "size": "13/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "7/32",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
       "status": "ok",
       "chains": [
         {
@@ -62,6 +82,16 @@
       "gauge": 0.05,
       "drive_links": 91,
       "file_size": null,
+      "file_conflict": [
+        {
+          "size": "13/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "7/32",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
       "status": "ok",
       "chains": [
         {
@@ -84,6 +114,16 @@
       "gauge": 0.05,
       "drive_links": 92,
       "file_size": null,
+      "file_conflict": [
+        {
+          "size": "13/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "7/32",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
       "status": "ok",
       "chains": [
         {
@@ -106,6 +146,16 @@
       "gauge": 0.05,
       "drive_links": 105,
       "file_size": null,
+      "file_conflict": [
+        {
+          "size": "13/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "7/32",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
       "status": "ok",
       "chains": [
         {
@@ -127,6 +177,16 @@
       "gauge": 0.05,
       "drive_links": 114,
       "file_size": null,
+      "file_conflict": [
+        {
+          "size": "13/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "7/32",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
       "status": "ok",
       "chains": [
         {
@@ -148,6 +208,16 @@
       "gauge": 0.063,
       "drive_links": 72,
       "file_size": null,
+      "file_conflict": [
+        {
+          "size": "13/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "7/32",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
       "status": "ok",
       "chains": [
         {
@@ -169,6 +239,16 @@
       "gauge": 0.063,
       "drive_links": 76,
       "file_size": null,
+      "file_conflict": [
+        {
+          "size": "13/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "7/32",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
       "status": "ok",
       "chains": [
         {
@@ -190,6 +270,16 @@
       "gauge": 0.063,
       "drive_links": 84,
       "file_size": null,
+      "file_conflict": [
+        {
+          "size": "13/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "7/32",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
       "status": "ok",
       "chains": [
         {
@@ -211,6 +301,16 @@
       "gauge": 0.063,
       "drive_links": 91,
       "file_size": null,
+      "file_conflict": [
+        {
+          "size": "13/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "7/32",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
       "status": "ok",
       "chains": [
         {
@@ -232,6 +332,16 @@
       "gauge": 0.063,
       "drive_links": 97,
       "file_size": null,
+      "file_conflict": [
+        {
+          "size": "13/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "7/32",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
       "status": "ok",
       "chains": [
         {
@@ -253,6 +363,16 @@
       "gauge": 0.063,
       "drive_links": 105,
       "file_size": null,
+      "file_conflict": [
+        {
+          "size": "13/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "7/32",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
       "status": "ok",
       "chains": [
         {
@@ -274,6 +394,16 @@
       "gauge": 0.063,
       "drive_links": 114,
       "file_size": null,
+      "file_conflict": [
+        {
+          "size": "13/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "7/32",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
       "status": "ok",
       "chains": [
         {
@@ -296,6 +426,16 @@
       "gauge": 0.063,
       "drive_links": 115,
       "file_size": null,
+      "file_conflict": [
+        {
+          "size": "13/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "7/32",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
       "status": "ok",
       "chains": [
         {
@@ -371,8 +511,16 @@
       "title": "STIHL 2025 Full Line catalog: Saw Chain Selection and Identification chart (catalog pages 166–167), chainsaw spec tables, saw chain and file pages",
       "url": "https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf",
       "retrieved": "2026-11-02"
+    },
+    {
+      "id": "oregon-filing-2020",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Saw Chain Filing Angles / Grinding Angles chart (2020): 7/32″ round file for standard 3/8″ chain (types 72, 73, 75)",
+      "url": "https://oregonproducts.com/medias/2020-FilingGrindingAngles.pdf?attachment=true&context=bWFzdGVyfHJvb3R8NDA2MDY0fGFwcGxpY2F0aW9uL3BkZnxoNjUvaGJmLzg4NTMxOTkzODg3MDIucGRmfGQ4MmNmZWZjZDA5MWQ3MmM0NmY0OTM4ZmFhN2MxZWUwMDA2MzgzM2Q4Y2U1MzgyYjQwMzZmYzZhZmY3ZWMzNjQ",
+      "retrieved": "2026-11-03"
     }
   ],
-  "sources_note": "STIHL USA “Saw Chain Selection and Identification” chart (catalog page 173, specifications as of 1 October 2017), MS 661 C-M / MS 661 R C-M block, re-read from the PDF on 26 Oct 2026. File size for .404″ rows from the STIHL 2025 Full Line catalog file table, read 2 Nov 2026.",
+  "sources_note": "STIHL USA “Saw Chain Selection and Identification” chart (catalog page 173, specifications as of 1 October 2017), MS 661 C-M / MS 661 R C-M block, re-read from the PDF on 26 Oct 2026. File size for .404″ rows from the STIHL 2025 Full Line catalog file table, read 2 Nov 2026. File sizes for 3/8″ rows: STIHL 2025 Full Line catalog file table (catalog p. 167: 5.2 mm / 13/64″ file for 3/8″) and Oregon Saw Chain Filing Angles chart (2020: 7/32″ for 72, 73, 75), both read 3 Nov 2026.",
   "last_verified": "2026-11-02"
 }

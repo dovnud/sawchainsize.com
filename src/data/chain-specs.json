@@ -24,7 +24,7 @@
       "chart_label": "3/8″ (standard)",
       "used_on": "Large homeowner, ranch & professional saws (55 cc +)",
       "gauges": ".050″ (1.3 mm) · .058″ (1.5 mm) · .063″ (1.6 mm)",
-      "file": "7/32″ (5.5 mm)",
+      "file": "7/32″ (5.5 mm) per Oregon · 13/64″ (5.2 mm) per STIHL",
       "slug": "3-8"
     },
     "404": {
@@ -73,6 +73,7 @@
     "5/32": "5/32″ (4.0 mm)",
     "11/64": "11/64″ (4.5 mm)",
     "3/16": "3/16″ (4.8 mm)",
+    "13/64": "13/64″ (5.2 mm)",
     "7/32": "7/32″ (5.5 mm)"
   },
   "codes": [

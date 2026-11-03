@@ -11,7 +11,7 @@
   "type": "gas",
   "popular": false,
   "blurb": "Every bar is .063″ gauge: one 21″ bar on 3/8″ chain (75 links), and .404″ chain from 25″ to 59″ (80–173 links), per STIHL's chain-selection chart.",
-  "intro": "The MS 880 (and the MS 880 R) runs .063″ gauge on every bar STIHL lists for it, but two pitches. STIHL's selection chart gives the saw one 3/8″ setup, a 21″ bar on 36 RS3 chain with 75 drive links, and eight .404″ setups on 46 RS chain, from a 25″ bar (80 links) to a 59″ bar (173 links). Two bar lengths come in two versions: at 36″ the exchangeable-nose (RS) bar takes 108 links and the DUROMATIC bar takes 104, while at 41″ both take 123. So read the drive-link count off your own bar stamp, or count the old loop, rather than going by length. A move between 3/8″ and .404″ also needs the matching drive sprocket on the saw. STIHL offers no green-labeled low-kickback chain in .404″, and nearly every bar in this block is yellow-labeled, so STIHL's chart recommends 3/8″ sprockets with green-labeled chain and bars wherever possible. The current MS 881 is not on this 2017 chart, so this page does not cover it.",
+  "intro": "The MS 880 (and the MS 880 R) runs .063″ gauge on every bar STIHL lists for it, but two pitches. STIHL's selection chart gives the saw one 3/8″ setup, a 21″ bar on 36 RS3 chain with 75 drive links, and eight .404″ setups on 46 RS chain, from a 25″ bar (80 links) to a 59″ bar (173 links). Two bar lengths come in two versions: at 36″ the exchangeable-nose (RS) bar takes 108 links and the DUROMATIC bar takes 104, while at 41″ both take 123. So read the drive-link count off your own bar stamp, or count the old loop, rather than going by length. A move between 3/8″ and .404″ also needs the matching drive sprocket on the saw. STIHL offers no green-labeled low-kickback chain in .404″, and nearly every bar in this block is yellow-labeled, so STIHL's chart recommends 3/8″ sprockets with green-labeled chain and bars wherever possible. The current MS 881 is not on this 2017 chart, so this page does not cover it. File size is where STIHL and Oregon disagree: STIHL’s 2025 catalog file table lists a 13/64″ (5.2 mm) round file for 3/8″ chain, while Oregon’s filing chart gives 7/32″ (5.5 mm) for its standard 3/8″ chain (72, 73, 75), so the table shows both.",
   "bars": [
     {
       "lengths_in": [
@@ -21,6 +21,16 @@
       "gauge": 0.063,
       "drive_links": 75,
       "file_size": null,
+      "file_conflict": [
+        {
+          "size": "13/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "7/32",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
       "status": "ok",
       "chains": [
         {
@@ -231,8 +241,16 @@
       "title": "STIHL 2025 Full Line catalog: Saw Chain Selection and Identification chart (catalog pages 166–167), chainsaw spec tables, saw chain and file pages",
       "url": "https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf",
       "retrieved": "2026-11-02"
+    },
+    {
+      "id": "oregon-filing-2020",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Saw Chain Filing Angles / Grinding Angles chart (2020): 7/32″ round file for standard 3/8″ chain (types 72, 73, 75)",
+      "url": "https://oregonproducts.com/medias/2020-FilingGrindingAngles.pdf?attachment=true&context=bWFzdGVyfHJvb3R8NDA2MDY0fGFwcGxpY2F0aW9uL3BkZnxoNjUvaGJmLzg4NTMxOTkzODg3MDIucGRmfGQ4MmNmZWZjZDA5MWQ3MmM0NmY0OTM4ZmFhN2MxZWUwMDA2MzgzM2Q4Y2U1MzgyYjQwMzZmYzZhZmY3ZWMzNjQ",
+      "retrieved": "2026-11-03"
     }
   ],
-  "sources_note": "STIHL USA “Saw Chain Selection and Identification” chart (catalog page 173, specifications as of 1 October 2017), MS 880 / MS 880 R block and its footnotes, read from the PDF on 27 Oct 2026. File size for .404″ rows from the STIHL 2025 Full Line catalog file table, read 2 Nov 2026.",
+  "sources_note": "STIHL USA “Saw Chain Selection and Identification” chart (catalog page 173, specifications as of 1 October 2017), MS 880 / MS 880 R block and its footnotes, read from the PDF on 27 Oct 2026. File size for .404″ rows from the STIHL 2025 Full Line catalog file table, read 2 Nov 2026. File sizes for 3/8″ rows: STIHL 2025 Full Line catalog file table (catalog p. 167: 5.2 mm / 13/64″ file for 3/8″) and Oregon Saw Chain Filing Angles chart (2020: 7/32″ for 72, 73, 75), both read 3 Nov 2026.",
   "last_verified": "2026-11-02"
 }

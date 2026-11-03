@@ -1,0 +1,95 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { chainUrl } from '../../lib/data';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+const path = '/guides/chainsaw-chain-grinding-angles/';
+const modified = (dates as Record<string, string>)[path];
+const desc = 'Chainsaw chain grinding angles and wheel thickness by Oregon chain type: 1/8″ or 3/16″ wheel, 25° or 30° top plate, 0° or 10° down, 55° side plate on most chain.';
+const ORE_CHART = 'https://oregonproducts.com/medias/2020-FilingGrindingAngles.pdf?attachment=true&context=bWFzdGVyfHJvb3R8NDA2MDY0fGFwcGxpY2F0aW9uL3BkZnxoNjUvaGJmLzg4NTMxOTkzODg3MDIucGRmfGQ4MmNmZWZjZDA5MWQ3MmM0NmY0OTM4ZmFhN2MxZWUwMDA2MzgzM2Q4Y2U1MzgyYjQwMzZmYzZhZmY3ZWMzNjQ';
+const ORE_MANUAL = 'https://apps.oregonproducts.com/pdfs/OregonMMANUAL_EN_A106971ab.pdf';
+// Oregon "Grinding Angles" chart (2020 sheet; same values as the Safety & Maintenance Manual p. 32 and the Quick Reference p. 147).
+// [pitch, chain types, wheel thickness, top-plate A, down B, side-plate C, depth gauge D, filing side plate (same chart), site chain-spec key or null]
+type Row = [string, string, string, string, string, string, string, string, string | null];
+const rows: Row[] = [
+  ['1/4″', '25AP', '1/8″', '30°', '10°', '55°', '.025″', '85°', null],
+  ['.325″ Low Profile', '80TXL', '1/8″', '25°', '10°', '70°', '.025″', '70°', null],
+  ['3/8″ Low Profile', '90PX, 90SG', '1/8″', '30°', '0°', '55°', '.025″', '75°', '3-8-lp-043'],
+  ['3/8″ Low Profile', '91P, 91PX, 91PXL', '1/8″', '30°', '0°', '55°', '.025″', '80°', '3-8-lp-050'],
+  ['3/8″ Low Profile', '91VXL, M91VXL', '1/8″', '30°', '0°', '55°', '.025″', '80°', '3-8-lp-050'],
+  ['.325″', '95VPX', '3/16″', '30°', '10°', '55°', '.025″', '70°', null],
+  ['.325″', '20, 21, 22BPX, M20, M21, M22BPX', '3/16″', '30°', '10°', '55°', '.025″', '70°', null],
+  ['.325″', '95TXL', '3/16″', '30°', '10°', '55°', '.025″', '70°', '325-050'],
+  ['.325″', '20, 21, 22LPX, LGX, M20, M21, M22LPX', '3/16″', '25°', '10°', '55°', '.025″', '60°', null],
+  ['3/8″', '72, 73, 75V', '3/16″', '25°', '10°', '55°', '.025″', '60°', null],
+  ['3/8″', '72, 75CJ, CK, CL (square ground)', 'n/a', '15°', '45°', 'n/a', '.025″', '90°', null],
+  ['3/8″', '72APX, 72, 73, 75DPX, M72, M73, M75DPX', '3/16″', '30°', '10°', '55°', '.025″', '80°', null],
+  ['3/8″', '72, 73, 75EXL, EXJ, LGX, JGX, LPX, JPX', '3/16″', '25°', '10°', '55°', '.025″', '60°', null],
+  ['3/8″', 'M72, M73, M75LPX', '3/16″', '25°', '10°', '55°', '.025″', '60°', null],
+  ['3/8″', '72, 73, 75RD', '3/16″', '10°', '10°', '50°', '.025″', '75°', null],
+  ['.404″', '27X, 27AX', '3/16″', '30°', '10°', '55°', '.030″', '65°', null],
+  ['.404″', '27R, RX, RA', '3/16″', '10°', '10°', '50°', '.030″', '75°', null],
+  ['.404″', '58CJ, CL, 59CJ, CK, CL (square ground)', 'n/a', '15°', '45°', 'n/a', '.025″', '85°', null],
+  ['.404″', '58, 59J, L', '3/16″', '25°', '10°', '55°', '.025″', '60°', null],
+  ['.404″', '68LX, JX', '3/16″', '25°', '10°', '55°', '.030″', '60°', null],
+  ['.404″', '68CJ, CL (square ground)', 'n/a', '15°', '45°', 'n/a', '.030″', 'n/a', null],
+];
+const faqs = [
+  { q: 'What angle do you grind a chainsaw chain at?', a: 'On Oregon’s chart the grinder top-plate angle is the same as the filing angle for every round-ground type: 30° or 25° for most chain, 10° for ripping chain (RD, 27R). The down angle is 10°, or 0° on 3/8″ low-profile chain (90PX, 91PX, 91VXL). What changes is the side-plate angle, which comes out at 55° on most types when ground, against 60° to 85° when filed.' },
+  { q: 'What grinding wheel thickness do I need?', a: 'Oregon lists a 1/8″ wheel for 1/4″ (25AP), .325″ low-profile (80TXL) and 3/8″ low-profile (90 and 91 series) chain, and a 3/16″ wheel for .325″, standard 3/8″ and .404″ chain. Square-ground chain has no round wheel size in the chart.' },
+  { q: 'Why is the grinding side-plate angle different from filing?', a: 'Oregon’s chart lists separate side-plate values for filing and for grinding, and does not give a reason. The side-plate angle is a result of the setup, not something you dial in directly. Oregon’s manual shows the same four terms (top-plate angle, down angle, side-plate angle and depth-gauge setting) for both methods.' },
+  { q: 'What goes wrong if the grinder is set up wrong?', a: 'Oregon’s troubleshooting section gives grinder causes for four faults. The wrong top-plate angle or a wrongly sized wheel can leave too much or too little top-plate cutting angle. A wheel that is too small or grinds too deep leaves too much hook in the side plate. A wheel that is too large or does not grind deep enough leaves backslope on the side plate.' },
+  { q: 'Do I still need to file the depth gauges after grinding?', a: 'Yes. The depth-gauge setting in the grinding chart is the same as in the filing chart: .025″ on most types, .030″ on some .404″ chain (27X, 27AX, 27R, 68LX/JX, 68CJ/CL). Oregon sells a separate flat file, part 12211, for its depth-gauge tools.' },
+];
+const jsonld = [webPageLd('Chainsaw chain grinding angles and wheel thickness', path, desc, modified), faqLd(faqs)];
+const shop = guideShop('chainsaw-chain-grinding-angles');
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Grinding angles', path }];
+---
+<Base title="Chainsaw Chain Grinding Angles & Wheel Thickness Chart" description={desc} path={path} nav="chart" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Grinding angles' }]} />
+      <h1>Chainsaw chain grinding angles</h1>
+      <p class="lede">On a bench grinder, Oregon’s chart uses a <strong>1/8″ wheel</strong> for 1/4″ and low-profile chain and a <strong>3/16″ wheel</strong> for .325″, 3/8″ and .404″ chain. Top-plate and down angles are the same as for filing (30° or 25°, tilted 10°, or 0° on 3/8″ low profile). The ground side plate comes out at <strong>55°</strong> on most types. Square-ground chain is set at 15° and 45°.</p>
+    </div>
+
+    <section class="block">
+      <h2>Grinding angles by chain type (Oregon)</h2>
+      <p style="max-width:72ch">Restated from Oregon’s <em>Grinding Angles</em> chart. <strong>Wheel</strong> is the grinding wheel thickness. <strong>Top plate</strong> is the swing angle across the chain. <strong>Down</strong> is the tilt below horizontal. <strong>Side plate</strong> is the angle the cutter’s side face ends up with, a check value. <strong>Depth gauge</strong> is how far the raker sits below the top plate. The last column is the filed side-plate angle from the same chart, for comparison.</p>
+      <div class="tblwrap">
+        <table>
+          <thead><tr><th>Pitch</th><th>Oregon chain type</th><th>Wheel</th><th>Top plate</th><th>Down</th><th>Side plate (ground)</th><th>Depth gauge</th><th>Side plate (filed)</th></tr></thead>
+          <tbody>
+            {rows.map(([p, t, w, a, b, c, d, f, key]) => (
+              <tr><td class="num">{key ? <a href={chainUrl(key)}>{p}</a> : p}</td><td class="num">{t}</td><td class="num">{w}</td><td class="num">{a}</td><td class="num">{b}</td><td class="num">{c}</td><td class="num">{d}</td><td class="num">{f}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="src">Source: Oregon, <a href={ORE_CHART} rel="nofollow">Saw Chain Filing Angles / Grinding Angles chart</a> (2020), read 3 Nov 2026. The same grinding values are in the <a href={ORE_MANUAL} rel="nofollow">Oregon Safety &amp; Maintenance Manual</a>, “Grinding Angles” (p. 32) and the Quick Reference (p. 147), which gives the depth gauges in metric too: .025″ = 0.65 mm, .030″ = 0.75 mm. Linked pitches open our chain-spec pages.</p>
+    </section>
+
+    <section class="block">
+      <h2>What changes between filing and grinding</h2>
+      <ul style="max-width:72ch">
+        <li><strong>Top-plate and down angles stay the same</strong> on every round-ground type. A 72LPX is 25° and 10° whether you file it or grind it.</li>
+        <li><strong>The side plate changes.</strong> Filed, Oregon lists 60° to 85° depending on type. Ground, it is 55° on most types, 70° on 80TXL (the same as filed) and 50° on ripping chain (72, 73, 75RD and 27R, RX, RA).</li>
+        <li><strong>Square-ground chain is set differently.</strong> Filing square-ground chain (CJ, CK, CL) is 45° top plate and 45° down, which Oregon says gives a 15° cutting edge. The grinding chart lists those types at 15° top plate and 45° down, with no wheel size.</li>
+        <li><strong>The wheel tracks pitch, not the file.</strong> One 3/16″ wheel covers .325″, 3/8″ and .404″ chain, which take three different files. One 1/8″ wheel covers 1/4″ and both low-profile families. File sizes are in the <a href="/guides/chainsaw-chain-file-size/">file size guide</a>.</li>
+        <li><strong>Depth gauges do not change.</strong> .025″ on most chain, .030″ on some .404″ types, as in the filing chart.</li>
+      </ul>
+      <p class="src">Compared within Oregon’s 2020 chart, filing and grinding sections. Terms as defined in Oregon’s manual, “Cutter Maintenance Terminology” (p. 18).</p>
+    </section>
+
+    <div class="callout"><b>⚠ Grinder faults Oregon lists</b><p>Oregon’s troubleshooting section names a grinder cause for four of its cutter faults. <strong>Too much or too little top-plate cutting angle:</strong> ground at the wrong top-plate angle, or with an incorrectly sized wheel. <strong>Too much hook in the side plate:</strong> wrong top-plate angle, a wheel that is too small, or grinding too deep into the cutter. <strong>Backslope on the side plate:</strong> wrong top-plate angle, a wheel that is too large, or not grinding deep enough. The remedy in each case is to resharpen at the correct setup. Low depth gauges are different: Oregon says the cutters usually cannot be taken back far enough, so the chain is replaced.</p></div>
+    <p class="src">Oregon Safety &amp; Maintenance Manual, “Saw Chain Troubleshooting”, items 5 to 9 (pp. 40–41).</p>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/chainsaw-sharpening-angles/">Filing angles</a> · <a href="/guides/chainsaw-chain-file-size/">File size by pitch</a> · <a href="/guides/stihl-chain-file-size/">STIHL file sizes</a> · <a href="/guides/when-to-replace-chainsaw-chain/">When to replace a chain</a> · <a href="/guides/chain-size-chart/">Chain identification chart</a></p>
+    <ShopBlock groups={shop.groups} title="Grinder wheels &amp; depth-gauge tools (Amazon)" lead="Match the wheel thickness to your chain type in the table above." />
+  </div>
+</Base>
