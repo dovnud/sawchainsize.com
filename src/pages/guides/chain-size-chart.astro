@@ -24,8 +24,8 @@ const shop = guideShop('chain-size-chart');
       <table>
         <thead><tr><th>Pitch</th><th>Used on</th><th>Common gauges</th><th>Round file size</th></tr></thead>
         <tbody>
-          <tr><td class="num">3/8″ Low Profile (“Picco”)</td><td>Small homeowner &amp; electric/battery saws, pole pruners</td><td class="num">.043″ (1.1 mm) · .050″ (1.3 mm)</td><td class="num">5/32″ (4.0 mm)</td></tr>
-          <tr><td class="num">.325″</td><td>Mid-size homeowner &amp; ranch saws (40–60 cc)</td><td class="num">.050″ (1.3 mm) · .058″ (1.5 mm) · .063″ (1.6 mm)</td><td class="num">3/16″ (4.8 mm)</td></tr>
+          <tr><td class="num">3/8″ Low Profile (“Picco”)</td><td>Small homeowner &amp; electric/battery saws, pole pruners</td><td class="num">.043″ (1.1 mm) · .050″ (1.3 mm)</td><td class="num">5/32″ (4.0 mm) at .050″ · 11/64″ (4.5 mm) at .043″ per Oregon; STIHL PICCO is 5/32″ at both</td></tr>
+          <tr><td class="num">.325″</td><td>Mid-size homeowner &amp; ranch saws (40–60 cc)</td><td class="num">.050″ (1.3 mm) · .058″ (1.5 mm) · .063″ (1.6 mm)</td><td class="num">3/16″ (4.8 mm) per Oregon · 11/64″ (4.5 mm) or 3/16″ (4.8 mm) per STIHL</td></tr>
           <tr><td class="num">3/8″ (standard)</td><td>Large homeowner, ranch &amp; professional saws (55 cc +)</td><td class="num">.050″ (1.3 mm) · .058″ (1.5 mm) · .063″ (1.6 mm)</td><td class="num">7/32″ (5.5 mm) per Oregon · 13/64″ (5.2 mm) per STIHL</td></tr>
           <tr><td class="num">.404″</td><td>Large professional &amp; harvester saws</td><td class="num">.058″ (1.5 mm) · .063″ (1.6 mm)</td><td class="num">7/32″ (5.5 mm)</td></tr>
         </tbody>
@@ -33,7 +33,7 @@ const shop = guideShop('chain-size-chart');
     </div>
     <ShopBlock groups={shop.groups} compact />
 
-    <p class="src">File sizes per Oregon and Husqvarna chain data (e.g. Oregon 91-series 3/8″ LP chain is specified with a 5/32″ file; Husqvarna's H30 .325″ chain with a 3/16″ file). Always confirm against your chain maker's sharpening data.</p>
+    <p class="src">File sizes per Oregon and Husqvarna chain data (e.g. Oregon 91-series 3/8″ LP chain is specified with a 5/32″ file; Husqvarna's H30 .325″ chain with a 3/16″ file) and STIHL’s 2025 catalog file table, which lists both .325″ files and one 5/32″ file for all 3/8″ PICCO. Always confirm against your chain maker's sharpening data.</p>
     <p><strong>Pitch</strong> is the distance between any three consecutive rivets, divided by two. It must match your drive sprocket and bar nose sprocket. <strong>Gauge</strong> is the thickness of the drive links where they ride in the bar groove. <strong>Drive links</strong> are the tang-shaped links that sit in the groove; their count sets the loop length for a given bar.</p>
   </section>
 
