@@ -4,7 +4,7 @@ import { glob } from 'astro/loaders';
 /** Allowed enums. A build fails on anything else. */
 export const PITCHES = ['1/4', '3/8-lp', '325', '3/8', '404'] as const;
 export const GAUGES = [0.043, 0.05, 0.058, 0.063] as const;
-/** Round-file sizes. 13/64 is STIHL's size for standard 3/8″ chain (2025 catalog file table). */
+/** Round-file sizes. 11/64 is Oregon's file for .043″ low profile (90PX, 4.5 mm) and one of STIHL's two .325″ files. 13/64 is STIHL's size for standard 3/8″ chain (2025 catalog file table). */
 export const FILES = ['1/8', '5/32', '11/64', '3/16', '13/64', '7/32'] as const;
 export const STATUSES = ['ok', 'verify', 'conflict'] as const;
 export const SOURCE_TYPES = ['manual', 'fitup-chart', 'chain-maker', 'dealer', 'roundup', 'marketplace', 'blog', 'forum'] as const;
@@ -67,6 +67,8 @@ const models = defineCollection({
       popular: z.boolean().default(false),
       blurb: z.string(),
       intro: z.string(),
+      /** Visible caveat above the spec table, for a limit the row data does not already flag. */
+      notice: z.string().optional(),
       bars: z.array(bar).min(1),
       sources: z.array(source).min(1),
       sources_note: z.string(),
