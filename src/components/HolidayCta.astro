@@ -1,8 +1,9 @@
 ---
 import ProductCard from './ProductCard.astro';
 import { AMAZON_DISCLOSURE } from '../config/affiliate';
-import { BF_PATH, GIFT_PATH } from '../data/holiday-2026';
+import { BF_PATH, GIFT_PATH, giftWindowOpen } from '../data/holiday-2026';
 import { holidayChain } from '../lib/shop';
+import { MATCHER_PATH } from '../lib/tool-types';
 import type { Model } from '../lib/data';
 
 interface Props { model: Model }
@@ -22,5 +23,6 @@ const link = holidayChain(model);
       <p>Published specs for the {model.data.name} conflict or are not verified to a single loop, so this page does not point at a chain. Read the stamp (pitch, gauge and drive links) and order those three numbers. The <a href="/guides/how-to-verify-chain-size/">verification guide</a> is the check.</p>
     )}
     <p class="small">Carrier send-by dates, and what a sale does not change about fit, are on the <a href={BF_PATH}>Black Friday chainsaw chain and accessories</a> page. Gift tiers, still with no dollar amounts, are in <a href={GIFT_PATH}>gifts for chainsaw owners and woodcutters, 2026</a>.</p>
+    {giftWindowOpen() && <p class="small">Through December 24, 2026, the three useful gifts are a spare chain, a file kit and bar oil. The spare chain still has to match the bar. <a href={`${MATCHER_PATH}?saw=${model.id}`}>Replacement chain and bar matcher</a>.</p>}
   </div>
 </aside>

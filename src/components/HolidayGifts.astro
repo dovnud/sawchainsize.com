@@ -1,0 +1,50 @@
+---
+import ProductCard from './ProductCard.astro';
+import { AMAZON_DISCLOSURE } from '../config/affiliate';
+import {
+  BF_PATH,
+  FEDEX_PDF,
+  FEDEX_SCHEDULE,
+  GIFT_PATH,
+  GIFT_THROUGH,
+  GIFT_THROUGH_EXCLUSIVE_ISO,
+  UPS_SCHEDULE,
+  USPS_CONTIGUOUS,
+  USPS_DATES,
+  USPS_NEWS,
+  giftWindowOpen,
+} from '../data/holiday-2026';
+import { MATCHER_PATH } from '../lib/tool-types';
+import { barOilLink, kitLink } from '../lib/shop';
+
+interface Props { spareHref?: string }
+const { spareHref = MATCHER_PATH } = Astro.props;
+const oil = { ...barOilLink(), why: 'Oregon bar-and-chain oil, 1 gallon, from a product page whose title matched that bottle when it was checked. It goes in the oil tank, not the fuel tank.' };
+const kit = { ...kitLink(null), why: 'Oregon field kit whose title listed 5/32″, 3/16″ and 7/32″ round files when it was checked. A single file size still needs the pitch.' };
+const usps = USPS_CONTIGUOUS.map((row) => `${row.service}, ${row.sendBy}`).join('; ');
+---
+{giftWindowOpen() && (
+<aside class="buy" data-holiday-until={GIFT_THROUGH} aria-label="Holiday gifts through December 24, 2026">
+  <div class="buy-head">Holiday gifts through December 24, 2026</div>
+  <div class="buy-body">
+    <p>Three gifts for someone who already owns a chainsaw: a spare chain, a file kit, and bar oil. This note stays up through December 24, 2026. It is not a sale, a countdown, or a price.</p>
+    <ul>
+      <li><strong>Spare chain.</strong> Pitch, gauge and drive links have to match the bar that is mounted. The <a href={spareHref}>replacement chain and bar matcher</a> returns those numbers from a verified row, plus the bar part number and any cross-brand part number that row stores. A model name is not enough.</li>
+      <li><strong>File kit.</strong> The field kit below holds 5/32″, 3/16″ and 7/32″ round files, so it covers the common pitches when the pitch is not known. A single file size is right only when the matcher (or the bar) has already named the pitch.</li>
+      <li><strong>Bar oil.</strong> It goes in the oil tank. It is not two-stroke fuel mix, and used motor oil does not go in that tank. The <a href="/guides/chainsaw-bar-and-chain-oil/">bar and chain oil</a> guide is that distinction.</li>
+    </ul>
+    <div class="product-cards">
+      <ProductCard link={kit} />
+      <ProductCard link={oil} />
+    </div>
+    <p class="shop-disclosure"><strong>{AMAZON_DISCLOSURE}</strong> <span class="muted">The buttons open Amazon. <a href="/affiliate-disclosure/">How that works</a>. No price is printed here. The spare chain is not one of these buttons, because the loop depends on the bar.</span></p>
+    <p>For a package you mail yourself, for expected delivery before December 25, 2026, in the contiguous United States, USPS recommends: {usps}. USPS says the actual day depends on origin, destination and when the Post Office accepts the piece. <a href={UPS_SCHEDULE} rel="nofollow">UPS</a> does not publish one last ship day for Christmas. Its schedule says December 24, 2026 has no UPS Ground pickup, and Air pickup that day only if it was prearranged by December 18, 2026. <a href={FEDEX_PDF} rel="nofollow">FedEx’s 2026 chart</a> is written so packages are scheduled to arrive by December 24, 2026. Domestic Ground and Home Delivery on that chart depend on the ZIP pair, so this note does not turn them into one nationwide day. FedEx’s <a href={FEDEX_SCHEDULE} rel="nofollow">holiday schedule</a> shows modified service on December 24 and no service on December 25.</p>
+    <p class="src">Sources: <a href={USPS_DATES} rel="nofollow">USPS 2026 holiday shipping dates</a>; <a href={USPS_NEWS} rel="nofollow">USPS newsroom, September 22, 2026</a>; <a href={UPS_SCHEDULE} rel="nofollow">UPS 2026 holiday schedule</a>; <a href={FEDEX_PDF} rel="nofollow">FedEx 2026 last day to ship (PDF)</a>; <a href={FEDEX_SCHEDULE} rel="nofollow">FedEx holiday schedule</a>. The same dates, including Alaska, Hawaii and military mail, are on the <a href={BF_PATH}>Black Friday page</a>. Gift tiers without dollar amounts are in <a href={GIFT_PATH}>gifts for chainsaw owners, 2026</a>.</p>
+  </div>
+</aside>
+)}
+<script define:vars={{ end: GIFT_THROUGH_EXCLUSIVE_ISO }}>
+  if (Date.now() >= Date.parse(end)) {
+    document.querySelectorAll('[data-holiday-until]').forEach((node) => node.remove());
+  }
+</script>

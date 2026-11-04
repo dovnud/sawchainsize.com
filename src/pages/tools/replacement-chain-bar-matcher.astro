@@ -1,0 +1,205 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import HolidayGifts from '../../components/HolidayGifts.astro';
+import { AMAZON_DISCLOSURE, AMAZON_TAG } from '../../config/affiliate';
+import { SPEC, gaugeLabel, pitchLabel } from '../../lib/data';
+import { OREGON_FAQ, OREGON_FINDING, OREGON_MANUAL } from '../../lib/fit-explain';
+import { faqLd, webPageLd } from '../../lib/ld';
+import { AFFILIATE_REL, AFFILIATE_TARGET, toolDataset } from '../../lib/tool-data';
+import { MATCHER_PATH, type ToolBar } from '../../lib/tool-types';
+import { BF_PATH, FEDEX_PDF, FEDEX_SCHEDULE, GIFT_PATH, UPS_SCHEDULE, USPS_DATES, USPS_NEWS, giftWindowOpen } from '../../data/holiday-2026';
+import dates from '../../data/page-dates.json';
+
+const path = MATCHER_PATH;
+const modified = (dates as Record<string, string>)[path];
+const data = await toolDataset();
+
+if (!giftWindowOpen(new Date('2026-11-04T18:00:00Z'))) throw new Error('Gift note should be open on 4 Nov 2026');
+if (!giftWindowOpen(new Date('2026-12-25T07:59:59.000Z'))) throw new Error('Gift note should stay open through 24 Dec 2026, Pacific time');
+if (giftWindowOpen(new Date(Date.parse('2026-12-25T08:00:00.000Z')))) throw new Error('Gift note should close at the start of 25 Dec 2026, Pacific time');
+
+for (const model of Object.values(data.models)) {
+  for (const bar of model.bars) {
+    const verified = bar.status === 'ok' && bar.pitch && bar.gauge != null && bar.dl;
+    if (!verified) {
+      if (bar.shops.length) throw new Error(`${model.id} ${bar.label} is not a verified loop and still has a shop link`);
+      continue;
+    }
+    if (!bar.shops.length || bar.shops.length !== bar.lengths.length) throw new Error(`${model.id} ${bar.label} shop links do not match its lengths`);
+    for (const shop of bar.shops) {
+      for (const link of [shop.chain, shop.bar]) {
+        if (!link.href.startsWith('https://www.amazon.com/')) throw new Error(`Bad Amazon host on ${model.id}`);
+        if (!link.href.includes(`tag=${AMAZON_TAG}`)) throw new Error(`Untagged Amazon URL on ${model.id}`);
+      }
+    }
+  }
+}
+
+const h130 = data.models['husqvarna-130'];
+const rancher = data.models['husqvarna-455-rancher'];
+const cs400 = data.models['echo-cs-400'];
+if (!h130 || !rancher || !cs400) throw new Error('Matcher examples are missing from the dataset');
+const bar14 = h130.bars.find((b) => b.status === 'ok' && b.lengths.length === 1 && b.lengths[0] === 14);
+const chart = bar14?.sources.find((s) => s.url?.includes('DI-328359.pdf'));
+if (!bar14 || bar14.barPart !== 'Laminate 596009752') throw new Error('Husqvarna 130 14″ bar part drifted');
+if (!bar14.chains.some((c) => c.role === 'oem' && c.partNo === 'S93G X-Cut 585422152')) throw new Error('Husqvarna 130 14″ chain drifted');
+if (bar14.chains.some((c) => c.role === 'equivalent')) throw new Error('Husqvarna 130 14″ should not grow an equivalent without a new source');
+if (!chart) throw new Error('Husqvarna 130 14″ is missing the 2026 fit-up guide URL');
+
+const bar20 = rancher.bars.find((b) => b.status === 'ok' && b.pitch === '3/8' && b.gauge === 0.05 && b.dl === 72 && b.lengths.includes(20));
+if (!bar20 || bar20.barPart) throw new Error('455 Rancher .050″ 20″ row should not store a parsed bar part');
+if (!bar20.chains.some((c) => c.role === 'oem' && c.partNo === 'H80-72')) throw new Error('455 Rancher H80-72 drifted');
+if (!bar20.chains.some((c) => c.role === 'equivalent' && c.brand === 'Oregon' && c.partNo === '72LPX072')) throw new Error('455 Rancher Oregon 72LPX072 drifted');
+if (!bar20.sources.some((s) => s.publisher === 'Husqvarna' && s.typeLabel === 'manufacturer manual')) throw new Error('455 Rancher manual citation drifted');
+
+if (!cs400.bars.some((b) => b.status === 'conflict' && b.shops.length === 0)) throw new Error('Echo CS-400 conflict must not grow a shop link');
+
+const pitches = Object.entries(SPEC.pitches).map(([id, p]) => ({ id, label: (p as { label: string }).label }));
+const gauges = Object.entries(SPEC.gauges).map(([id, g]) => ({ id, label: (g as { label: string }).label }));
+const desc = 'Match a replacement chainsaw chain and guide bar by saw model or by bar length, pitch, gauge and drive links. Part numbers and sources come from the verified rows, including manufacturer fit-up charts.';
+const faqs = [
+  { q: 'What does the replacement chain and bar matcher return?', a: 'For a verified row, it returns the bar length, pitch, gauge and drive-link count, the file size, the bar part number when that row stores one, and the chain part numbers stored on the row, marked OEM or equivalent. Each row cites the manual, fit-up chart, chain-maker page or dealer listing it was transcribed from. A row marked conflict or verify is not turned into a replacement. Husqvarna’s Bar & Chain Fit-up Guide 2026 (https://media.husqvarnagroup.com/original/DI-328359.pdf) is one of those charts: it pairs the Husqvarna 130’s 14 inch bar with bar Laminate 596009752 and chain S93G X-Cut 585422152.' },
+  { q: 'Does the bar length pick the chain?', a: 'No. The length is one fact. Pitch, gauge and drive links still have to match. Oregon’s Finding the Right Saw Chain page (https://www.oregonproducts.com/en/product-support/chainsaw/finding-the-right-saw-chain/c/finding-the-right-saw-chain-s) says the drive sprocket must be the same pitch as the chain, the bar-nose sprocket must match when the bar has one, and the chain gauge must match the guide-bar groove. The same length is published with more than one gauge on some saws. The Husqvarna 455 Rancher operator-manual table lists a 20 inch, 3/8 inch, 72-drive-link bar in both .050 inch (H80) and .058 inch (H81).' },
+  { q: 'Where do the cross-brand part numbers come from?', a: 'Only from the part numbers already stored on a verified row. Equivalent means that row lists the number beside the OEM number. The citation is the source on the row. A manufacturer manual or fit-up chart is labeled as one. A dealer listing is labeled as a dealer listing and is not renamed into an official chart. Family codes such as Oregon 72 are pitch and gauge, not a counted loop. Oregon’s Maintenance and Safety Manual (https://apps.oregonproducts.com/pdfs/OregonMMANUAL_EN_A106971ab.pdf) and Oregon’s FAQ (https://www.oregonproducts.com/en_gb/faq) are the pitch and gauge rules. STIHL’s saw-chain chart is the 2025 Full Line catalog (https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf). If a row stores no equivalent, the matcher says so.' },
+  { q: 'What if the published sources disagree?', a: 'The matcher does not pick a winner and does not offer a buying link. It repeats what each stored source reported. The stamp on the bar tail is the tiebreaker, which is the same rule as the saw page. Oregon’s Finding the Right Saw Chain page is the definition of pitch and gauge used to read that stamp (https://www.oregonproducts.com/en/product-support/chainsaw/finding-the-right-saw-chain/c/finding-the-right-saw-chain-s).' },
+  { q: 'What are honest chainsaw-owner gifts through December 24, 2026?', a: 'A spare chain only when the matcher, or the bar stamp, has pitch, gauge and drive links. A file kit that includes 5/32, 3/16 and 7/32 inch files when the pitch is unknown. Bar-and-chain oil, which is not two-stroke fuel. The note is valid through December 24, 2026. It is not a discount. For mail you send yourself, USPS’s holiday page (https://www.usps.com/holiday/holiday-shipping-dates.htm) and its September 22, 2026 newsroom release (https://about.usps.com/newsroom/national-releases/2026/0922-usps-recommends-2026-holiday-mailing-shipping-dates.htm) recommend, for the contiguous United States, December 17 for Ground Advantage and First-Class Mail, December 18 for Priority Mail, and December 19 for Priority Mail Express, for expected delivery before December 25. UPS’s 2026 holiday schedule (https://www.ups.com/us/en/support/shipping-support/shipping-services/holiday-shipping-schedule) does not publish one Christmas ship day and says December 24 has no Ground pickup. FedEx’s 2026 last-day-to-ship chart (https://www.fedex.com/content/dam/fedex/us-united-states/services/2026_Peak_Last_Day_to_ship.pdf) schedules arrival by December 24 and makes domestic Ground depend on the ZIP pair, so this site does not collapse that chart into one day.' },
+];
+const crumbs = [{ name: 'Tools', path: '/tools/' }, { name: 'Chain and bar matcher', path }];
+const jsonld = [
+  webPageLd('Replacement chainsaw chain and bar matcher', path, desc, modified),
+  faqLd(faqs),
+  {
+    '@context': 'https://schema.org', '@type': 'WebApplication', name: 'Replacement chain and bar matcher',
+    applicationCategory: 'ReferenceApplication', operatingSystem: 'Any', url: 'https://sawchainsize.com' + path,
+    isAccessibleForFree: true,
+    description: 'Look up a replacement chainsaw chain and guide bar from verified manufacturer and chain-maker rows, with the source cited on each row.',
+  },
+];
+const ext = (href: string) => (href.startsWith('http') ? { target: '_blank' as const, rel: 'nofollow noopener' } : {});
+const specBits = (bar: ToolBar) => `${bar.lengths.map((n) => `${n}″`).join(' / ')} bar, ${pitchLabel(bar.pitch)}, ${gaugeLabel(bar.gauge)}, ${bar.dl} drive links`;
+---
+<Base title="Replacement Chain and Bar Matcher" description={desc} path={path} crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Tools', path: '/tools/' }, { name: 'Chain and bar matcher' }]} />
+      <h1>Replacement chain and bar matcher</h1>
+      <p class="lede">Pick the saw and the bar that is on it, or enter the bar length plus pitch, gauge and drive links. The result is the chain spec and the bar spec on a verified row, the part numbers that row stores, and the manual or fit-up chart those numbers were copied from.</p>
+    </div>
+
+    <section class="block">
+      <h2>What a match is</h2>
+      <p style="max-width:72ch">A replacement chain has to match the bar in the saw today: pitch, gauge and drive-link count. A replacement bar has to carry that same pitch and gauge, and the loop has to have the drive-link count that bar was published with. Bar length is how you tell the rows apart. It is not, by itself, a chain size. Oregon says the drive sprocket must be the same pitch as the chain, the bar-nose sprocket must match when the bar has one, and the chain gauge has to match the groove.</p>
+      <p style="max-width:72ch">The matcher reads the same rows as the saw pages. A row marked conflict or verify is shown as a conflict or a gap. It is not completed with a guess, and it does not get a buying link. Cross-brand part numbers appear only when the row stores them. If the row’s source is a dealer listing, it stays labeled as a dealer listing.</p>
+      <p class="src">Pitch, gauge, the sprocket rule and the groove rule: Oregon, <a href={OREGON_FINDING} {...ext(OREGON_FINDING)}>Finding the Right Saw Chain</a>; <a href={OREGON_MANUAL} {...ext(OREGON_MANUAL)}>Maintenance and Safety Manual</a>; <a href={OREGON_FAQ} {...ext(OREGON_FAQ)}>FAQ</a>. How a row earns the word verified: <a href="/how-we-verify/">how we verify specs</a>.</p>
+    </section>
+
+    <section class="block">
+      <h2>Worked example: a fit-up chart that names the bar and the chain</h2>
+      <p style="max-width:72ch">Husqvarna’s 2026 Bar &amp; Chain Fit-up Guide pairs one 14″ setup on the Husqvarna 130 with a bar part and a chain part. The guide does not store an Oregon, STIHL or Carlton equivalent on this row, so the matcher does not add one. The 16″ row in the same guide contradicts itself, and it is not in this example.</p>
+      <div class="tblwrap"><table>
+        <caption class="sr-only">Husqvarna 130, 14 inch, from the 2026 fit-up guide</caption>
+        <thead><tr><th scope="col">Spec</th><th scope="col">Value on the row</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Saw</th><td><a href={h130.url}>{h130.name}</a></td></tr>
+          <tr><th scope="row">Bar</th><td class="num">{specBits(bar14)}</td></tr>
+          <tr><th scope="row">Bar part</th><td class="num">{bar14.barPart}</td></tr>
+          <tr><th scope="row">Chain</th><td class="num">{bar14.chains.map((c) => `${c.brand} ${c.partNo} (${c.role === 'oem' ? 'OEM' : 'Equivalent'})`).join('; ')}</td></tr>
+          <tr><th scope="row">File</th><td>{bar14.fileText}</td></tr>
+        </tbody>
+      </table></div>
+      <p class="src">Source: {bar14.sources.map((s, i) => <>{i > 0 && ' · '}{s.url ? <a href={s.url} {...ext(s.url)}>{s.publisher}: {s.title}</a> : `${s.publisher}: ${s.title}`} ({s.typeLabel}, retrieved {s.retrieved})</>)}.</p>
+    </section>
+
+    <section class="block">
+      <h2>Worked example: cross-brand chain numbers, and no bar part</h2>
+      <p style="max-width:72ch">The Husqvarna 455 Rancher operator-manual table lists a 20″ bar in standard 3/8″ pitch with 72 drive links at .050″, and it names Husqvarna H80-72 plus Oregon 72LPX072 and 72EXL072. The same table lists a .058″ version of that length. The .050″ row does not store a bar part number in the note this site parsed, so the matcher does not invent one. Order the bar to the length and the three numbers, and read the stamp.</p>
+      <div class="tblwrap"><table>
+        <caption class="sr-only">Husqvarna 455 Rancher, 20 inch, .050 inch gauge</caption>
+        <thead><tr><th scope="col">Part number</th><th scope="col">Brand</th><th scope="col">On the row</th></tr></thead>
+        <tbody>
+          {bar20.chains.map((c) => <tr><td class="num">{c.partNo}</td><td>{c.brand}</td><td>{c.role === 'oem' ? 'OEM' : 'Equivalent'}</td></tr>)}
+        </tbody>
+      </table></div>
+      <p>Bar spec on this row: {specBits(bar20)}. File: {bar20.fileText}. Bar part number: not stored.</p>
+      <p class="src">Source: {bar20.sources.map((s, i) => <>{i > 0 && ' · '}{s.publisher}: {s.title} ({s.typeLabel}, retrieved {s.retrieved})</>)}. The manual record does not include a URL. The .058″ 20″ row is a different chain (H81-72, Oregon 73LPX072) and is not this table.</p>
+    </section>
+
+    <div class="finder" id="matcher" data-rel={AFFILIATE_REL} data-target={AFFILIATE_TARGET}>
+      <div class="finder-head">Chain and bar matcher <span>VERIFIED ROWS ONLY</span></div>
+      <div class="finder-body">
+        <form id="rm-saw-form">
+          <h2>From the saw</h2>
+          <div class="f-grid">
+            <div>
+              <label for="rm-brand">Brand</label>
+              <select id="rm-brand">
+                <option value="">Choose a brand…</option>
+                {data.brands.map((b) => <option value={b.id}>{b.label}</option>)}
+              </select>
+            </div>
+            <div>
+              <label for="rm-model">Model</label>
+              <select id="rm-model" disabled><option value="">Pick a brand first</option></select>
+            </div>
+            <div>
+              <label for="rm-bar">Bar on the saw</label>
+              <select id="rm-bar" disabled><option value="">Pick a model first</option></select>
+            </div>
+          </div>
+          <button class="f-btn" type="submit">Show the chain and bar for this saw</button>
+        </form>
+        <form id="rm-spec-form">
+          <h2 style="margin-top:22px">Or from the bar stamp</h2>
+          <div class="stamp-grid">
+            <label>Bar length
+              <input id="rm-len" name="len" type="number" inputmode="numeric" min="8" max="72" placeholder="18" required />
+            </label>
+            <label>Pitch
+              <select id="rm-pitch" name="pitch" required>
+                <option value="">Choose</option>
+                {pitches.map((p) => <option value={p.id}>{p.label}</option>)}
+              </select>
+            </label>
+            <label>Gauge
+              <select id="rm-gauge" name="gauge" required>
+                <option value="">Choose</option>
+                {gauges.map((g) => <option value={g.id}>{g.label}</option>)}
+              </select>
+            </label>
+            <label>Drive links
+              <input id="rm-dl" name="dl" type="number" inputmode="numeric" min="20" max="200" placeholder="72" required />
+            </label>
+          </div>
+          <button class="f-btn" type="submit">Show chains and bars with these numbers</button>
+        </form>
+        <div class="f-result" id="rm-result" aria-live="polite"></div>
+        <noscript><p class="small">The lookup needs JavaScript. Without it, use the two worked examples above or the <a href="/saws/">saw pages</a>. Each page lists the bar, the chain and the sources.</p></noscript>
+      </div>
+    </div>
+    <script type="application/json" id="tool-data" set:html={JSON.stringify(data).replace(/</g, '\\u003c')} />
+    <template id="shop-disclosure-tpl">
+      <p class="shop-disclosure"><strong>{AMAZON_DISCLOSURE}</strong> <span class="muted">The button opens Amazon. <a href="/affiliate-disclosure/">How that works</a>. No price is printed here. A row that is not a single verified loop does not get a button.</span></p>
+    </template>
+
+    <section class="block" id="email-specs">
+      <h2>Email me my chain specs</h2>
+      <p style="max-width:72ch" id="email-hook">Pick a saw in the matcher and the link here opens that saw’s form. The form stores a request. It does not send email.</p>
+      <p class="small">The form is the one already on the saw page. It is not a newsletter and it does not sign you up for updates. Nothing on this matcher is mailed.</p>
+    </section>
+
+    <HolidayGifts spareHref="#matcher" />
+
+    <section class="block">
+      <h2>Questions</h2>
+      <FaqList faqs={faqs} />
+      <p class="src">Primary sources named in the answers: <a href={OREGON_FINDING} {...ext(OREGON_FINDING)}>Oregon, Finding the Right Saw Chain</a>; <a href={OREGON_MANUAL} {...ext(OREGON_MANUAL)}>Oregon Maintenance and Safety Manual</a>; <a href={OREGON_FAQ} {...ext(OREGON_FAQ)}>Oregon FAQ</a>; <a href="https://media.husqvarnagroup.com/original/DI-328359.pdf" {...ext('https://media.husqvarnagroup.com/original/DI-328359.pdf')}>Husqvarna Bar &amp; Chain Fit-up Guide 2026</a>; <a href="https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf" {...ext('https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf')}>STIHL 2025 Full Line catalog</a>; <a href={USPS_DATES} {...ext(USPS_DATES)}>USPS holiday shipping dates</a>; <a href={USPS_NEWS} {...ext(USPS_NEWS)}>USPS newsroom, September 22, 2026</a>; <a href={UPS_SCHEDULE} {...ext(UPS_SCHEDULE)}>UPS 2026 holiday schedule</a>; <a href={FEDEX_PDF} {...ext(FEDEX_PDF)}>FedEx 2026 last day to ship</a>; <a href={FEDEX_SCHEDULE} {...ext(FEDEX_SCHEDULE)}>FedEx holiday schedule</a>.</p>
+      <p style="margin-top:14px"><a href="/tools/find-my-chain/">Find my chain</a> · <a href="/tools/chain-compatibility/">Compatibility checker</a> · <a href="/guides/how-to-verify-chain-size/">Read the bar stamp</a> · <a href="/guides/chain-part-numbers/">How part numbers are decoded</a> · <a href={GIFT_PATH}>Gifts for 2026</a> · <a href={BF_PATH}>Carrier shipping dates</a> · <a href="/saws/">All saws</a></p>
+    </section>
+  </div>
+</Base>
+<script>
+  import { mountMatch } from '../../scripts/chain-tools';
+  mountMatch();
+</script>

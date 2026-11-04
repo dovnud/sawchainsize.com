@@ -1,8 +1,8 @@
 import { AFFILIATE_REL, AFFILIATE_TARGET } from '../config/affiliate';
-import { SPEC, SOURCE_TYPE_LABEL, barLabel, chainKey, chainUrl, codesFor, fileLabel, barFiles, gaugeLabel, getBrands, getModels, modelUrl, pitchLabel, type Bar, type Model } from './data';
+import { SPEC, SOURCE_TYPE_LABEL, barLabel, barPart, chainKey, chainUrl, codesFor, fileLabel, barFiles, fileText, gaugeLabel, getBrands, getModels, modelUrl, pitchLabel, type Bar, type Model } from './data';
 import { specKey } from './fit-explain';
-import { chainLink } from './shop';
-import type { ToolBar, ToolData, ToolModel, ToolPart, ToolSpec, ToolSpecSaw } from './tool-types';
+import { barLink, chainLink, type ShopLink } from './shop';
+import type { ToolBar, ToolData, ToolModel, ToolPart, ToolShop, ToolSpec, ToolSpecSaw } from './tool-types';
 
 export { AFFILIATE_REL, AFFILIATE_TARGET };
 
@@ -10,6 +10,20 @@ const SHOP_WHY = {
   product: 'Product page whose title matched this spec when it was checked. Confirm the listing still shows the same pitch, gauge and drive links.',
   search: 'Amazon search for this description, not one listing. Match the result to your bar stamp before you buy.',
 };
+const BAR_SHOP_WHY = 'Amazon search for this bar length with the pitch, gauge and drive-link count on the row. Match the listing to the bar part number when the row stores one, and to the stamp. This is not a claim that the first result is the factory bar.';
+
+function toShop(link: ShopLink, why: string): ToolShop {
+  if (link.kind === 'page') throw new Error('A matcher shop link has to be an Amazon URL');
+  return { href: link.href, kind: link.kind, label: link.label, why };
+}
+
+function shopsFor(bar: Bar): ToolBar['shops'] {
+  if (bar.status !== 'ok' || !bar.pitch || bar.gauge == null || !bar.drive_links) return [];
+  const spec = { pitch: bar.pitch, gauge: bar.gauge, dl: bar.drive_links };
+  const chain = chainLink(spec);
+  const chainShop = toShop(chain, SHOP_WHY[chain.kind === 'search' ? 'search' : 'product']);
+  return bar.lengths_in.map((length) => ({ length, chain: chainShop, bar: toShop(barLink(length, spec), BAR_SHOP_WHY) }));
+}
 
 const BRAND_ORDER = ['Oregon', 'STIHL', 'Stihl', 'Husqvarna', 'Echo', 'Makita', 'Poulan', 'Carlton', 'Ryobi'];
 
@@ -42,6 +56,8 @@ function toBar(model: Model, bar: Bar): ToolBar {
     dl: bar.drive_links,
     status: bar.status,
     file: bar.file_size,
+    fileText: fileText(bar, model),
+    barPart: barPart(bar.note),
     note: bar.note,
     ...(bar.gauge_note ? { gaugeNote: bar.gauge_note } : {}),
     dlRange: bar.drive_links_range ?? null,
@@ -57,6 +73,7 @@ function toBar(model: Model, bar: Bar): ToolBar {
       };
     }),
     sources,
+    shops: shopsFor(bar),
   };
 }
 
