@@ -1,13 +1,15 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Crumbs from '../../components/Crumbs.astro';
+import HolidayGifts from '../../components/HolidayGifts.astro';
 import ToolHoliday from '../../components/ToolHoliday.astro';
 import { webPageLd } from '../../lib/ld';
+import { MATCHER_PATH } from '../../lib/tool-types';
 import dates from '../../data/page-dates.json';
 
 const path = '/tools/';
 const modified = (dates as Record<string, string>)[path];
-const desc = 'Two chainsaw tools: part numbers for a pitch, gauge and drive-link count, and a checker for whether a chain matches a published bar. Verified rows only.';
+const desc = 'Chainsaw tools: a replacement chain and bar matcher, part numbers for a pitch, gauge and drive-link count, and a checker for whether a chain matches a published bar. Verified rows only.';
 const crumbs = [{ name: 'Tools', path }];
 ---
 <Base title="Chainsaw Chain Lookup Tools" description={desc} path={path} nav="" crumbs={crumbs}
@@ -16,10 +18,15 @@ const crumbs = [{ name: 'Tools', path }];
     <div class="pagehead">
       <Crumbs crumbs={[{ name: 'Tools' }]} />
       <h1>Chain tools</h1>
-      <p class="lede">Two lookups for the moment you are buying a loop. Both read the same verified rows as the saw pages. Neither one replaces the bar stamp, and neither one is the homepage Chain Finder, which shows the spec for a single saw and bar.</p>
+      <p class="lede">Three lookups for the moment you are buying a loop or a bar. All three read the same verified rows as the saw pages. None of them replaces the bar stamp, and none of them is the homepage Chain Finder, which shows the spec for a single saw and bar.</p>
     </div>
     <section class="block">
-      <div class="grid2">
+      <div class="grid3">
+        <a class="card" href={MATCHER_PATH}>
+          <h3>Replacement chain and bar</h3>
+          <p class="small">Pick a saw and the bar on it, or enter bar length plus pitch, gauge and drive links. The page returns the chain spec, the bar spec, and the cross-brand part numbers stored on that verified row, each with its source.</p>
+          <span class="go">Open the matcher →</span>
+        </a>
         <a class="card" href="/tools/find-my-chain/">
           <h3>Find my chain</h3>
           <p class="small">Pick a saw, or enter bar length plus pitch, gauge and drive links. The page lists the part numbers on verified rows that share those three numbers, across the brands stored in the dataset, each linked to its saw page.</p>
@@ -36,6 +43,7 @@ const crumbs = [{ name: 'Tools', path }];
       <h2>Email me my chain specs</h2>
       <p style="max-width:72ch">That form already lives on each <a href="/saws/">saw page</a>. It stores a request for the saw and a bar length. It does not send email, and it is not a newsletter. The tools link to the form after you pick a saw. They do not add a second one.</p>
     </section>
+    <HolidayGifts />
     <ToolHoliday />
   </div>
 </Base>

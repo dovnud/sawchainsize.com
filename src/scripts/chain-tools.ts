@@ -1,5 +1,5 @@
 import { explainFit, gaugeName, pitchName, specKey, type BarSide, type ChainSide, type FitResult } from '../lib/fit-explain';
-import type { ToolBar, ToolData, ToolModel, ToolPart, ToolSpec } from '../lib/tool-types';
+import { MATCHER_PATH, type ToolBar, type ToolChain, type ToolData, type ToolModel, type ToolPart, type ToolShop, type ToolSource, type ToolSpec } from '../lib/tool-types';
 
 const el = (tag: string, cls?: string, text?: string) => {
   const node = document.createElement(tag);
@@ -108,13 +108,10 @@ function partTable(parts: ToolPart[], highlight?: string) {
   return wrap;
 }
 
-function shopCard(spec: ToolSpec, host: HTMLElement, rel: string, target: string) {
-  const shop = spec.shop;
-  if (!shop) return;
+function oneCard(shop: ToolShop, rel: string, target: string): HTMLElement | null {
   let url: URL;
-  try { url = new URL(shop.href); } catch { return; }
-  if (url.protocol !== 'https:' || url.hostname !== 'www.amazon.com') return;
-  const cards = el('div', 'product-cards');
+  try { url = new URL(shop.href); } catch { return null; }
+  if (url.protocol !== 'https:' || url.hostname !== 'www.amazon.com' || !url.searchParams.get('tag')) return null;
   const card = el('article', 'product-card');
   card.append(
     el('p', 'product-card-name', shop.label),
@@ -127,10 +124,37 @@ function shopCard(spec: ToolSpec, host: HTMLElement, rel: string, target: string
   btn.rel = rel;
   btn.append(el('span', 'sr-only', ' (opens in a new tab)'));
   card.append(btn);
-  cards.append(card);
-  host.append(cards);
+  return card;
+}
+
+function disclose(host: HTMLElement) {
   const tpl = document.getElementById('shop-disclosure-tpl');
   if (tpl instanceof HTMLTemplateElement) host.append(tpl.content.cloneNode(true));
+}
+
+function shopCard(spec: ToolSpec, host: HTMLElement, rel: string, target: string) {
+  if (!spec.shop) return;
+  const card = oneCard(spec.shop, rel, target);
+  if (!card) return;
+  const cards = el('div', 'product-cards');
+  cards.append(card);
+  host.append(cards);
+  disclose(host);
+}
+
+function shopLinks(shops: ToolShop[], host: HTMLElement, rel: string, target: string) {
+  const cards = el('div', 'product-cards');
+  const seen = new Set<string>();
+  for (const shop of shops) {
+    if (seen.has(shop.href)) continue;
+    const card = oneCard(shop, rel, target);
+    if (!card) continue;
+    seen.add(shop.href);
+    cards.append(card);
+  }
+  if (!cards.childElementCount) return;
+  host.append(cards);
+  disclose(host);
 }
 
 function codesPara(spec: ToolSpec) {
@@ -538,4 +562,256 @@ export function mountCheck() {
   const readyStamp = mode.value === 'stamp' && q.get('bp') && q.get('bg') && bd && q.get('cp') && q.get('cg') && cd;
   const readySaw = mode.value === 'saw' && sawId && barSel.value !== '';
   if ((readyStamp || readySaw) && q.get('cp') && cd) form.requestSubmit();
+}
+
+function sourceList(sources: ToolSource[], host: HTMLElement) {
+  if (!sources.length) return;
+  const p = el('p', 'src');
+  p.append(document.createTextNode('Sources for this row: '));
+  sources.forEach((s, i) => {
+    if (i) p.append(document.createTextNode(' · '));
+    const label = `${s.publisher}: ${s.title} (${s.typeLabel}, retrieved ${s.retrieved})`;
+    if (s.url) {
+      const a = link(s.url, label);
+      a.target = '_blank';
+      a.rel = 'nofollow noopener';
+      p.append(a);
+    } else p.append(document.createTextNode(label));
+  });
+  host.append(p);
+}
+
+function chainTable(chains: ToolChain[]) {
+  const wrap = el('div', 'tblwrap');
+  const table = document.createElement('table');
+  const head = document.createElement('thead');
+  const hr = document.createElement('tr');
+  for (const label of ['Part number', 'Brand', 'On the row']) hr.append(el('th', undefined, label));
+  head.append(hr);
+  const body = document.createElement('tbody');
+  for (const part of chains) {
+    const tr = document.createElement('tr');
+    tr.append(el('td', 'num', part.partNo), el('td', undefined, part.brand), el('td', undefined, part.role === 'oem' ? 'OEM' : 'Equivalent'));
+    body.append(tr);
+  }
+  table.append(head, body);
+  wrap.append(table);
+  return wrap;
+}
+
+function barChoiceLabel(bar: ToolBar): string {
+  const spec = bar.status === 'ok' && bar.pitch && bar.gauge != null && bar.dl
+    ? `${pitchName(bar.pitch)}, ${gaugeName(bar.gauge)}, ${bar.dl} drive links`
+    : bar.status === 'conflict' ? 'sources conflict' : 'verify on the stamp';
+  return `${bar.label} bar, ${spec}`;
+}
+
+function renderMatchedBar(data: ToolData, model: ToolModel, bar: ToolBar, host: HTMLElement, rel: string, target: string, length: number | null) {
+  host.append(el('h3', undefined, `${model.name}, ${bar.label} bar`));
+  host.append(el('p', 'meta-line', `LAST VERIFIED ${model.lastVerified}`));
+  if (bar.status !== 'ok' || !bar.pitch || bar.gauge == null || !bar.dl) {
+    const title = bar.status === 'conflict' ? 'Sources conflict on this bar' : 'This bar is not a single verified loop';
+    const box = callout(host, title, `${bar.note} The matcher does not turn this row into a replacement chain or bar.`);
+    if (bar.reported.length) {
+      const list = el('ul', 'plain');
+      for (const r of bar.reported) {
+        const bits = [r.pitch ? `${pitchName(r.pitch)} pitch` : '', r.gauge != null ? `${gaugeName(r.gauge)} gauge` : '', r.dl != null ? `${r.dl} drive links` : ''].filter(Boolean);
+        list.append(el('li', undefined, `${r.publisher} (${r.typeLabel}): ${bits.join(', ') || 'no pitch, gauge or drive links stored'}`));
+      }
+      box.append(list);
+    }
+    sourceList(bar.sources, host);
+    const back = el('p');
+    back.append(link(model.url, `${model.name} chain size`));
+    host.append(back);
+    return;
+  }
+
+  const lengthText = length != null ? `${length}″` : bar.lengths.map((n) => `${n}″`).join(' / ');
+  host.append(strip([
+    ['Bar length', lengthText],
+    ['Pitch', pitchName(bar.pitch)],
+    ['Gauge', gaugeName(bar.gauge)],
+    ['Drive links', String(bar.dl)],
+  ]));
+  host.append(el('p', undefined, `File: ${bar.fileText}.`));
+  host.append(el('p', undefined, bar.barPart
+    ? `Bar part number stored on this row: ${bar.barPart}.`
+    : 'This row does not store a bar part number. The bar spec is the length, pitch, gauge and drive-link count above.'));
+  if (bar.note) host.append(el('p', undefined, bar.note));
+
+  host.append(el('h3', undefined, 'Chain part numbers on this row'));
+  if (bar.chains.length) host.append(chainTable(bar.chains));
+  else host.append(el('p', undefined, 'This verified row does not store a chain part number. The three numbers above are still the spec.'));
+  if (!bar.chains.some((c) => c.role === 'equivalent')) {
+    host.append(el('p', undefined, 'No cross-brand equivalent part number is stored on this row.'));
+  }
+  sourceList(bar.sources, host);
+
+  const spec = specIndex(data).get(specKey(bar.pitch, bar.gauge, bar.dl));
+  const shown = new Set(bar.chains.map((c) => `${c.brand}|${c.partNo}`));
+  const extra = (spec?.parts ?? []).filter((p) => !shown.has(`${p.brand}|${p.partNo}`));
+  if (extra.length) {
+    host.append(el('h3', undefined, 'Same three numbers on another verified row'));
+    host.append(el('p', undefined, 'These part numbers were transcribed for other saws that share this pitch, gauge and drive-link count. They match this bar only when the stamp shows those three numbers.'));
+    host.append(partTable(extra, model.id));
+  }
+  const codes = spec ? codesPara(spec) : null;
+  if (codes) host.append(codes);
+
+  const shops = bar.shops.filter((s) => length == null || s.length === length);
+  const links: ToolShop[] = [];
+  if (shops[0]) links.push(shops[0].chain, ...shops.map((s) => s.bar));
+  if (links.length) {
+    host.append(el('h3', undefined, 'Look up this chain and this bar'));
+    shopLinks(links, host, rel, target);
+  }
+  const back = el('p');
+  back.append(link(model.url, `${model.name} chain size`), document.createTextNode(' · '), link(model.emailUrl, 'Email me my chain specs'));
+  host.append(back);
+}
+
+function renderSawMatch(data: ToolData, model: ToolModel, host: HTMLElement, rel: string, target: string, only: number | null) {
+  host.append(el('h2', undefined, model.name));
+  const bars = only != null && model.bars[only] ? [model.bars[only]] : model.bars;
+  bars.forEach((bar) => renderMatchedBar(data, model, bar, host, rel, target, null));
+  if (model.bars.length > 1 && only == null) {
+    host.append(el('p', undefined, 'This saw has more than one published bar. A replacement has to match the bar that is mounted, not the model name.'));
+  }
+  setEmail([{ name: model.name, emailUrl: model.emailUrl }]);
+}
+
+function renderNumberMatch(data: ToolData, host: HTMLElement, pitch: string, gauge: number, dl: number, length: number, rel: string, target: string) {
+  host.append(el('h2', undefined, `${length}″ bar, ${pitchName(pitch)}, ${gaugeName(gauge)}, ${dl} drive links`));
+  const hits: { model: ToolModel; bar: ToolBar }[] = [];
+  for (const model of Object.values(data.models)) {
+    for (const bar of model.bars) {
+      if (bar.status === 'ok' && bar.pitch === pitch && bar.gauge === gauge && bar.dl === dl && bar.lengths.includes(length)) hits.push({ model, bar });
+    }
+  }
+  hits.sort((a, b) => a.model.name.localeCompare(b.model.name) || a.bar.label.localeCompare(b.bar.label));
+  if (hits.length) {
+    host.append(el('p', undefined, hits.length === 1
+      ? 'One verified row has this bar length and these three numbers.'
+      : `${hits.length} verified rows have this bar length and these three numbers. Each citation stays with its row.`));
+    for (const hit of hits) renderMatchedBar(data, hit.model, hit.bar, host, rel, target, length);
+    setEmail(hits.map((h) => ({ name: h.model.name, emailUrl: h.model.emailUrl })));
+    return;
+  }
+  const spec = specIndex(data).get(specKey(pitch, gauge, dl));
+  if (!spec) {
+    missingSpec(data, host, pitch, gauge, dl);
+    const note = el('p');
+    note.append('Bar length was part of the question. With no verified loop at those three numbers, there is no replacement bar to name either.');
+    host.append(note);
+    setEmail([]);
+    return;
+  }
+  callout(host, 'Those three numbers are verified, and not on this bar length', `Nothing in the verified rows is a ${length}″ bar at ${pitchName(pitch)} pitch, ${gaugeName(gauge)} gauge and ${dl} drive links. The matcher does not invent a bar for that length.`);
+  const lengths = [...new Set(spec.saws.flatMap((s) => s.lengths))].sort((a, b) => a - b);
+  const p = el('p');
+  p.append('Verified lengths for this pitch, gauge and drive-link count: ');
+  lengths.forEach((n, i) => {
+    if (i) p.append(document.createTextNode(', '));
+    const params = new URLSearchParams({ pitch, gauge: String(gauge), dl: String(dl), len: String(n) });
+    p.append(link(`${MATCHER_PATH}?${params}`, `${n}″`));
+  });
+  p.append('. ');
+  const find = new URLSearchParams({ pitch, gauge: String(gauge), dl: String(dl) });
+  p.append(link(`/tools/find-my-chain/?${find}`, 'Part numbers for these three numbers'));
+  host.append(p);
+  setEmail(spec.saws.map((s) => ({ name: s.name, emailUrl: `${s.url}#email-specs` })));
+}
+
+export function mountMatch() {
+  const data = readData();
+  const brandSel = document.getElementById('rm-brand') as HTMLSelectElement | null;
+  const modelSel = document.getElementById('rm-model') as HTMLSelectElement | null;
+  const barSel = document.getElementById('rm-bar') as HTMLSelectElement | null;
+  const sawForm = document.getElementById('rm-saw-form') as HTMLFormElement | null;
+  const specForm = document.getElementById('rm-spec-form') as HTMLFormElement | null;
+  const result = document.getElementById('rm-result');
+  const root = document.getElementById('matcher');
+  if (!data || !brandSel || !modelSel || !barSel || !sawForm || !specForm || !result || !root) return;
+  const rel = root.dataset.rel || 'sponsored nofollow noopener';
+  const target = root.dataset.target || '_blank';
+
+  const fillModels = (brandId: string) => {
+    const brand = data.brands.find((b) => b.id === brandId);
+    modelSel.replaceChildren(opt('', brand ? 'Choose a model…' : 'Pick a brand first'));
+    modelSel.disabled = !brand;
+    if (!brand) return;
+    for (const id of brand.models) modelSel.append(opt(id, data.models[id].name));
+  };
+  const fillBars = (model: ToolModel | undefined, prefer?: string) => {
+    barSel.replaceChildren(opt('', model ? 'Choose the bar…' : 'Pick a model first'));
+    barSel.disabled = !model;
+    if (!model) return;
+    model.bars.forEach((bar, i) => barSel.append(opt(String(i), barChoiceLabel(bar))));
+    if (prefer && model.bars[Number(prefer)]) barSel.value = prefer;
+    else if (model.bars.length === 1) barSel.value = '0';
+  };
+  brandSel.addEventListener('change', () => { fillModels(brandSel.value); fillBars(undefined); });
+  modelSel.addEventListener('change', () => fillBars(data.models[modelSel.value]));
+
+  sawForm.addEventListener('submit', (ev) => {
+    ev.preventDefault();
+    show(result);
+    const model = data.models[modelSel.value];
+    const index = Number(barSel.value);
+    const bar = model?.bars[index];
+    if (!model || !bar || !Number.isInteger(index)) {
+      callout(result, 'Pick the saw and the bar', 'Choose a brand, a model, and the bar length that is on the saw. The result is that published row, with the sources stored on it.');
+      setEmail([]);
+      return;
+    }
+    renderSawMatch(data, model, result, rel, target, index);
+  });
+
+  specForm.addEventListener('submit', (ev) => {
+    ev.preventDefault();
+    show(result);
+    const pitch = (document.getElementById('rm-pitch') as HTMLSelectElement).value;
+    const gaugeRaw = (document.getElementById('rm-gauge') as HTMLSelectElement).value;
+    const dl = intIn((document.getElementById('rm-dl') as HTMLInputElement).value, 20, 200);
+    const length = intIn((document.getElementById('rm-len') as HTMLInputElement).value, 8, 72);
+    if (!pitch || !gaugeRaw || dl == null || length == null) {
+      callout(result, 'Need the bar length and the three numbers', 'Enter a bar length from 8 to 72, choose pitch and gauge, and enter a drive-link count from 20 to 200.');
+      setEmail([]);
+      return;
+    }
+    renderNumberMatch(data, result, pitch, Number(gaugeRaw), dl, length, rel, target);
+  });
+
+  const q = new URLSearchParams(location.search);
+  const sawId = q.get('saw') || '';
+  if (sawId && data.models[sawId]) {
+    brandSel.value = data.models[sawId].brand;
+    fillModels(brandSel.value);
+    modelSel.value = sawId;
+    const prefer = q.get('bar');
+    fillBars(data.models[sawId], prefer && data.models[sawId].bars[Number(prefer)] ? prefer : undefined);
+    show(result);
+    const only = prefer && data.models[sawId].bars[Number(prefer)] ? Number(prefer) : null;
+    renderSawMatch(data, data.models[sawId], result, rel, target, only);
+    return;
+  }
+  const pitch = q.get('pitch') || '';
+  const gauge = q.get('gauge') || '';
+  const pitchSel = document.getElementById('rm-pitch') as HTMLSelectElement;
+  const gaugeSel = document.getElementById('rm-gauge') as HTMLSelectElement;
+  if (pitch && allowed(pitchSel, pitch)) pitchSel.value = pitch;
+  if (gauge && allowed(gaugeSel, gauge)) gaugeSel.value = gauge;
+  const dl = q.get('dl');
+  const len = q.get('len');
+  if (dl) (document.getElementById('rm-dl') as HTMLInputElement).value = dl;
+  if (len) (document.getElementById('rm-len') as HTMLInputElement).value = len;
+  if (pitch && gauge && dl && len && allowed(pitchSel, pitch) && allowed(gaugeSel, gauge)) {
+    const count = intIn(dl, 20, 200);
+    const length = intIn(len, 8, 72);
+    if (count != null && length != null) {
+      show(result);
+      renderNumberMatch(data, result, pitch, Number(gauge), count, length, rel, target);
+    }
+  }
 }

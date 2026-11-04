@@ -8,6 +8,7 @@ import RequestCapture from '../../components/RequestCapture.astro';
 import FaqList from '../../components/FaqList.astro';
 import { getModels, getBrands, modelUrl, brandUrl, barUrl, chainUrl, barChainKey, barGroups, hasConflict, relatedModels, modelFaqs, glanceFacts, compareText, pitchShort, gaugeShort, SOURCE_TYPE_LABEL, SITE } from '../../lib/data';
 import { faqLd, modelLd } from '../../lib/ld';
+import { MATCHER_PATH } from '../../lib/tool-types';
 
 export async function getStaticPaths() {
   const models = await getModels();
@@ -76,7 +77,7 @@ const ogName = `/og/${model.id}.png`;
 
     <hr class="rule" />
     <section class="block">
-      <p>Before you order, confirm the bar-tail stamp (length, pitch, gauge, drive links) matches a row above; if it does not, order to the stamp and <a href="/contact/">tell us</a>. Method: <a href="/guides/how-to-verify-chain-size/">how to verify your chain size</a>. Part numbers on other saws that share a verified row: <a href={`/tools/find-my-chain/?saw=${model.id}`}>Find my chain</a>. Compare a box with this saw: <a href={`/tools/chain-compatibility/?saw=${model.id}`}>compatibility checker</a>.</p>
+      <p>Before you order, confirm the bar-tail stamp (length, pitch, gauge, drive links) matches a row above; if it does not, order to the stamp and <a href="/contact/">tell us</a>. Method: <a href="/guides/how-to-verify-chain-size/">how to verify your chain size</a>. Replacement chain and bar for one of the rows above, with that row’s sources: <a href={`${MATCHER_PATH}?saw=${model.id}`}>chain and bar matcher</a>. Part numbers on other saws that share a verified row: <a href={`/tools/find-my-chain/?saw=${model.id}`}>Find my chain</a>. Compare a box with this saw: <a href={`/tools/chain-compatibility/?saw=${model.id}`}>compatibility checker</a>.</p>
     </section>
 
     <RequestCapture sawName={d.name} sawId={model.id} lengths={lengths} pagePath={path} />
@@ -102,6 +103,7 @@ const ogName = `/og/${model.id}.png`;
         <li><a href={brandUrl(brand.id)}>All {brand.data.name} saws</a></li>
         {chainKeys.map(([k, b]) => <li><a class="mono" href={chainUrl(k)}>{pitchShort(b.pitch)} · {gaugeShort(b.gauge)} chain</a></li>)}
         {lengths.filter((l) => barPages.has(l)).map((l) => <li><a class="mono" href={barUrl(l)}>{l}″ bar sizes</a></li>)}
+        <li><a href={`${MATCHER_PATH}?saw=${model.id}`}>Chain and bar matcher</a></li>
         <li><a href="/guides/how-to-verify-chain-size/">Verify the chain</a></li>
         <li><a href="/guides/how-to-install-chainsaw-chain/">Install a chain</a></li>
         <li><a href="/guides/chainsaw-chain-tension/">Tension</a></li>

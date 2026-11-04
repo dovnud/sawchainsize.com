@@ -1,6 +1,7 @@
 import { getModels, getBrands, chainGroups, barGroups, modelUrl, brandUrl, barUrl, chainUrl, barLabel, pitchLabel, gaugeLabel, dlText, pitchText, gaugeText, fileText, partText, statusLabel, SITE } from './data';
 import { GUIDES } from '../data/guides';
 import { BF_PATH, GIFT_PATH } from '../data/holiday-2026';
+import { MATCHER_PATH } from './tool-types';
 
 const abs = (p: string) => SITE.url + p;
 
@@ -24,7 +25,8 @@ export async function llmsTxt() {
   L.push('', '## Bar lengths', '');
   for (const g of bars) L.push(`- [${g.length}-inch bar](${abs(barUrl(g.length))})`);
   L.push('', '## Tools', '');
-  L.push(`- [Chain tools](${abs('/tools/')}): Find my chain and the bar/chain compatibility checker. Both read the same verified rows as the saw pages.`);
+  L.push(`- [Chain tools](${abs('/tools/')}): replacement chain and bar matcher, Find my chain, and the bar/chain compatibility checker. All three read the same verified rows as the saw pages.`);
+  L.push(`- [Replacement chain and bar matcher](${abs(MATCHER_PATH)}): bar length, pitch, gauge, drive links, file size, bar part number when the row stores one, and OEM plus cross-brand chain part numbers. Each row cites its manual, fit-up chart, chain-maker page or dealer listing. Conflict and verify rows are not turned into a match.`);
   L.push(`- [Find my chain](${abs('/tools/find-my-chain/')}): part numbers from verified rows that share a pitch, gauge and drive-link count, across the chain brands stored on those rows, each linked to its saw page. Not the homepage Chain Finder.`);
   L.push(`- [Bar and chain compatibility checker](${abs('/tools/chain-compatibility/')}): says whether a chain’s pitch, gauge and drive links match a published bar or the numbers on a stamp, citing Oregon’s fit rules. Does not call a fit when sources conflict.`);
   L.push('', '## Guides', '');
@@ -52,7 +54,7 @@ export async function llmsFull() {
     }
     L.push('Sources: ' + d.sources.map((s) => `${s.publisher} (${s.type}, retrieved ${s.retrieved})`).join('; '), '');
   }
-  L.push('## Tools', '', `Find my chain: ${abs('/tools/find-my-chain/')}`, `Bar and chain compatibility: ${abs('/tools/chain-compatibility/')}`, 'Both use verified rows only. A conflict or verify row is not turned into a matched part number. The tools do not show prices. Amazon links, when a verified spec has one, use the site Associates tag and sit next to the disclosure. The email hook points at the existing saw-page form, which stores a request and does not send mail.', '');
+  L.push('## Tools', '', `Replacement chain and bar matcher: ${abs(MATCHER_PATH)}`, `Find my chain: ${abs('/tools/find-my-chain/')}`, `Bar and chain compatibility: ${abs('/tools/chain-compatibility/')}`, 'All three use verified rows only. A conflict or verify row is not turned into a matched part number. The matcher cites the source stored on the row and does not invent a cross-brand part number. The tools do not show prices. Amazon links, when a verified spec has one, use the site Associates tag and sit next to the disclosure. The email hook points at the existing saw-page form, which stores a request and does not send mail.', '');
   L.push('## Holiday 2026', '', `Gifts for chainsaw owners and woodcutters: ${abs(GIFT_PATH)}`, `Black Friday chainsaw chain and accessories: ${abs(BF_PATH)}`, 'Black Friday 2026 is November 27. Cyber Monday 2026 is November 30. The site prints no prices, no countdown and no stock claims. Shipping dates are the ones USPS, UPS, FedEx and Amazon published, and each is linked from the Black Friday page.', '');
   L.push('## File size by pitch', '', '- 3/8" low-profile: 5/32" (4.0 mm) at .050" gauge; 11/64" (4.5 mm) at .043" gauge', '- .325": 3/16" (4.8 mm)', '- 3/8": 7/32" (5.5 mm) per Oregon; 13/64" (5.2 mm) per STIHL\'s 2025 catalog file table. Sources differ, so STIHL 3/8" rows list both', '- .404": 7/32" (5.5 mm)', '');
   L.push('## Oregon 72 vs 73', '', 'Both 3/8" pitch. Oregon 72 is .050" gauge; Oregon 73 is .058" gauge. Gauge must match the guide-bar groove.', '');

@@ -1,5 +1,17 @@
 /** Calendar facts and carrier cutoffs cited on the holiday pages. No prices, no countdown, no stock claims. */
 
+/** Last calendar day the 2026 gift note is shown. */
+export const GIFT_THROUGH = '2026-12-24';
+/**
+ * First instant the gift note is hidden: 2026-12-25 00:00 in America/Los_Angeles.
+ * December is Pacific Standard Time (UTC−8), so that instant is 08:00 UTC.
+ */
+export const GIFT_THROUGH_EXCLUSIVE_ISO = '2026-12-25T08:00:00.000Z';
+
+export function giftWindowOpen(now = new Date()): boolean {
+  return now.getTime() < Date.parse(GIFT_THROUGH_EXCLUSIVE_ISO);
+}
+
 export const GIFT_PATH = '/guides/gifts-for-chainsaw-owners-2026/';
 export const BF_PATH = '/guides/black-friday-chainsaw-chain/';
 

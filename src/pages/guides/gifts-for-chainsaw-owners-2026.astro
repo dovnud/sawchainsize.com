@@ -5,7 +5,9 @@ import FaqList from '../../components/FaqList.astro';
 import ShopBlock from '../../components/ShopBlock.astro';
 import { articleLd, faqLd, itemListLd } from '../../lib/ld';
 import { guideShop } from '../../lib/shop';
+import HolidayGifts from '../../components/HolidayGifts.astro';
 import { BF_PATH, GIFT_PATH, GIFT_TIERS } from '../../data/holiday-2026';
+import { MATCHER_PATH } from '../../lib/tool-types';
 import dates from '../../data/page-dates.json';
 
 const path = GIFT_PATH;
@@ -58,6 +60,7 @@ const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Gifts 2026', path
       <h2>Tier 2. One spare chain, matched to the stamp</h2>
       <p style="max-width:72ch">This is the gift people want to buy, and the one that gets returned. The chain follows the bar, not the model name. Pitch, gauge and the count of drive links all have to match the stamp on the bar tail. “18-inch chain” is not a specification. The <a href="/guides/how-to-verify-chain-size/">verification guide</a> is how to read the stamp, and <a href="/guides/how-to-count-drive-links/">counting drive links</a> is the check when the stamp is worn: mark one tang and lap the loop.</p>
       <p style="max-width:72ch">Two confusions account for most wrong boxes, and both show up as holiday orders. Oregon 72 and Oregon 73 are both standard 3/8″ pitch; 72 is .050″ gauge and 73 is .058″. The <a href="/guides/oregon-72-vs-73-chain/">72 vs 73 guide</a> is that trap. The other is the word “3/8” itself. Low-profile 3/8″ (Oregon 90 and 91, STIHL Picco) does not substitute for standard 3/8″ (Oregon 72, 73, 75). The <a href="/guides/3-8-low-profile-vs-standard-chain/">low-profile versus standard guide</a> keeps them apart. Gauge, including .043″ against .050″ on the same low-profile pitch, is the <a href="/guides/chainsaw-chain-gauge/">gauge guide</a>.</p>
+      <p style="max-width:72ch">The <a href={MATCHER_PATH}>replacement chain and bar matcher</a> is the lookup for this tier. It takes the saw and the bar, or the bar length plus pitch, gauge and drive links, and it returns the part numbers stored on a verified row, with the chart or manual those numbers came from. Where that row has no cross-brand equivalent, the matcher says so.</p>
       <p style="max-width:72ch">If you are buying for a saw this site covers, start at that saw’s page, not at a generic “chainsaw chain” search. The <a href="/saws/stihl-ms-170-180/">Stihl MS 170 / MS 180</a> stock 16″ loop is 3/8″ low profile, .043″, 55 drive links, not the .050″ loop a lot of gift lists assume. The <a href="/saws/husqvarna-455-rancher/">Husqvarna 455 Rancher</a> 20″ bar is 3/8″ and 72 drive links in both .050″ and .058″, so two owners of “the same saw” need different chains. The <a href="/saws/stihl-ms-250/">Stihl MS 250</a> 16″ bar takes either 55 or 62 drive links depending on which STIHL bar is fitted, and the <a href="/saws/echo-cs-400/">Echo CS-400</a> 16″ count is disputed between Oregon and Echo. The <a href="/saws/">full model list</a> is the rest. Where a page is marked conflict or verify, do not guess a chain as a gift.</p>
       <p style="max-width:72ch">The product cards lower on this page are examples of three common specs, each tied to a pitch, a gauge and a drive-link count. They are not “the chainsaw chain.” A 56-drive-link low-profile loop does not fit a 62-link bar. When the stamp does not match the card, use the saw page or do not buy the chain.</p>
     </section>
@@ -69,7 +72,8 @@ const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Gifts 2026', path
       <p style="max-width:72ch"><a href="/guides/chainsaw-kickback/">Kickback</a> is the reason the safety tier exists at all. A new chain, a sharp chain, and chaps are three different problems. Replacing a dull loop is the <a href="/guides/when-to-replace-chainsaw-chain/">replacement guide</a>: chips versus dust, chrome worn through, and the sprocket Oregon retires every two chains. A gift chain on a worn sprocket is a short-lived gift.</p>
     </section>
 
-    <div class="callout"><b>Do not buy the chain from the model name</b><p>If the only fact you have is “Husqvarna” or “a Stihl,” stay on tier 1 or tier 3. Tier 2 starts when someone has read the bar, or when the old chain is on the bench and the drive links have been counted.</p></div>
+    <div class="callout"><b>Do not buy the chain from the model name</b><p>If the only fact you have is “Husqvarna” or “a Stihl,” stay on tier 1 or tier 3. Tier 2 starts when someone has read the bar, or when the old chain is on the bench and the drive links have been counted. The <a href={MATCHER_PATH}>matcher</a> is that check.</p></div>
+    <HolidayGifts />
 
     <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
     <p><a href={BF_PATH}>Black Friday chain and accessories</a> · <a href="/guides/chainsaw-safety-gear/">Safety gear</a> · <a href="/guides/how-to-verify-chain-size/">Verify the chain</a> · <a href="/guides/chainsaw-chain-file-size/">File size</a> · <a href="/guides/">All guides</a></p>
