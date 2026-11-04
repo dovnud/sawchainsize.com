@@ -10,7 +10,7 @@
   "type": "gas",
   "popular": true,
   "blurb": "16″, 18″ and 20″ bars on .325″ chain, .063″ gauge, 67–81 drive links, per STIHL's chain-selection chart.",
-  "intro": "The STIHL MS 261 appears in STIHL's saw-chain selection chart with 16″, 18″ and 20″ guide bars: .325″ pitch with .063″ gauge. The gauge is the part to watch, because .325″ chain is also made in .050″ and .058″ and the loops are not interchangeable.",
+  "intro": "The STIHL MS 261 appears in STIHL's saw-chain selection chart with 16″, 18″ and 20″ guide bars: .325″ pitch with .063″ gauge. The gauge is the part to watch, because .325″ chain is also made in .050″ and .058″ and the loops are not interchangeable. For the file, STIHL’s 2025 catalog lists both an 11/64″ (4.5 mm) and a 3/16″ (4.8 mm) round file for .325″ and does not assign one to 26 RM3. Oregon’s filing chart gives 3/16″ for its own .325″ chain. The table shows each of those.",
   "bars": [
     {
       "lengths_in": [
@@ -19,7 +19,21 @@
       "pitch": "325",
       "gauge": 0.063,
       "drive_links": 67,
-      "file_size": "3/16",
+      "file_size": null,
+      "file_conflict": [
+        {
+          "size": "11/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "3/16",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "3/16",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
       "status": "ok",
       "chains": [
         {
@@ -40,7 +54,21 @@
       "pitch": "325",
       "gauge": 0.063,
       "drive_links": 74,
-      "file_size": "3/16",
+      "file_size": null,
+      "file_conflict": [
+        {
+          "size": "11/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "3/16",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "3/16",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
       "status": "ok",
       "chains": [
         {
@@ -61,7 +89,21 @@
       "pitch": "325",
       "gauge": 0.063,
       "drive_links": 81,
-      "file_size": "3/16",
+      "file_size": null,
+      "file_conflict": [
+        {
+          "size": "11/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "3/16",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "3/16",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
       "status": "ok",
       "chains": [
         {
@@ -84,8 +126,24 @@
       "title": "Saw Chain Selection and Identification (STIHL USA catalog page 173; specifications as of 1 October 2017): recommended chain loop and guide bar per saw model",
       "url": "https://assets.unilogcorp.com/187/ITEM/DOC/Stihl_102205325_Catalog.pdf",
       "retrieved": "2026-10-24"
+    },
+    {
+      "id": "stihl-chain-chart-2025",
+      "type": "fitup-chart",
+      "publisher": "STIHL",
+      "title": "STIHL 2025 Full Line catalog, file table (catalog p. 167): .325″ round files in 4.5 mm (11/64″, part 7010 871 0402) and 4.8 mm (3/16″, part 7010 871 0403). The table does not assign one size to a loop.",
+      "url": "https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf",
+      "retrieved": "2026-11-03"
+    },
+    {
+      "id": "oregon-filing-2020",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Saw Chain Filing Angles chart (2020): 3/16″ round file for .325″ chain (types 95VPX, 95TXL, and 20, 21, 22 BPX and LPX)",
+      "url": "https://oregonproducts.com/medias/2020-FilingGrindingAngles.pdf?attachment=true&context=bWFzdGVyfHJvb3R8NDA2MDY0fGFwcGxpY2F0aW9uL3BkZnxoNjUvaGJmLzg4NTMxOTkzODg3MDIucGRmfGQ4MmNmZWZjZDA5MWQ3MmM0NmY0OTM4ZmFhN2MxZWUwMDA2MzgzM2Q4Y2U1MzgyYjQwMzZmYzZhZmY3ZWMzNjQ",
+      "retrieved": "2026-11-03"
     }
   ],
-  "sources_note": "STIHL USA “Saw Chain Selection and Identification” chart (catalog page 173, specifications as of 1 October 2017), read on 24 Oct 2026.",
-  "last_verified": "2026-10-24"
+  "sources_note": "STIHL USA “Saw Chain Selection and Identification” chart (catalog page 173, specifications as of 1 October 2017), read on 24 Oct 2026. The 16″, 18″ and 20″ counts are that 2017 block and were not replaced from the 2025 selection chart. Round files added from the STIHL 2025 Full Line catalog file table (catalog p. 167: both 4.5 mm / 11/64″ and 4.8 mm / 3/16″ for .325″, no loop assigned) and the Oregon Saw Chain Filing Angles chart (2020: 3/16″ for .325″ types 95, 20, 21 and 22), both read 3 Nov 2026.",
+  "last_verified": "2026-11-04"
 }

@@ -42,6 +42,9 @@ const ogName = `/og/${model.id}.png`;
       <p class="shop-jump"><a href="#shop">{okCount ? 'Shop this spec' : 'Search from your stamp'}</a></p>
     </div>
     <section class="block" style="padding-top:10px">
+      {d.notice && (
+        <div class="callout"><b>⚠ Check your bar stamp</b><p>{d.notice}</p></div>
+      )}
       <div class="prose"><p>{d.intro}</p></div>
       <h2 style="margin-top:20px">{d.name} at a glance</h2>
       <dl class="glance">{facts.map((f) => <><dt>{f.k}</dt><dd>{f.v}</dd></>)}</dl>

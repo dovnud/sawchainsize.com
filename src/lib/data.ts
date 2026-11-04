@@ -79,10 +79,16 @@ export function barFiles(b: Bar, m?: Model): { size: string; label: string; by?:
   if (b.file_size) return [{ size: b.file_size, label: fileLabel(b.file_size) }];
   return (b.file_conflict ?? []).map((f) => ({ size: f.size, label: fileLabel(f.size), by: filePub(m, f.source_id) }));
 }
-/** Short text for a list of file entries, e.g. "13/64″ (5.2 mm) per STIHL or 7/32″ (5.5 mm) per Oregon". */
+/** Short text for a list of file entries, e.g. "13/64″ (5.2 mm) per STIHL or 7/32″ (5.5 mm) per Oregon". Publishers of one size are grouped. */
 export function filesText(fs: { label: string; by?: string }[]): string {
-  const seen = new Set<string>();
-  return fs.map((f) => `${f.label}${f.by ? ` per ${f.by}` : ''}`).filter((t) => (seen.has(t) ? false : (seen.add(t), true))).join(' or ');
+  const order: string[] = [];
+  const pubs = new Map<string, string[]>();
+  for (const f of fs) {
+    if (!pubs.has(f.label)) { pubs.set(f.label, []); order.push(f.label); }
+    const list = pubs.get(f.label)!;
+    if (f.by && !list.includes(f.by)) list.push(f.by);
+  }
+  return order.map((label) => { const by = pubs.get(label)!; return by.length ? `${label} per ${by.join(' or ')}` : label; }).join(' or ');
 }
 export const hasFileConflict = (b: Bar) => !!b.file_conflict?.length;
 export function fileText(b: Bar, m?: Model): string {
@@ -139,9 +145,13 @@ export function groupFile(g: { pitch: string; items: { bar: Bar }[] }): string {
   const fs = [...new Set(g.items.map((i) => i.bar.file_size).filter(Boolean))] as string[];
   const differ = g.items.some((i) => hasFileConflict(i.bar));
   if (differ) {
-    const pairs = new Map<string, string>();
-    for (const i of g.items) for (const f of barFiles(i.bar, (i as { model?: Model }).model)) if (f.by) pairs.set(f.label, f.by);
-    const conflictTxt = [...pairs].map(([l, by]) => `${l} (${by})`).join(' vs ');
+    const pairs = new Map<string, string[]>();
+    for (const i of g.items) for (const f of barFiles(i.bar, (i as { model?: Model }).model)) if (f.by) {
+      const pubs = pairs.get(f.label) ?? [];
+      if (!pubs.includes(f.by)) pubs.push(f.by);
+      pairs.set(f.label, pubs);
+    }
+    const conflictTxt = [...pairs].map(([l, by]) => `${l} (${by.join(', ')})`).join(' vs ');
     const plain = fs.filter((f) => !pairs.has(fileLabel(f))).map((f) => fileLabel(f));
     return [...plain, `sources differ: ${conflictTxt}`].join(' / ');
   }
@@ -203,7 +213,7 @@ export const HOME_FAQS: Faq[] = [
   { q: 'Oregon 72 vs 73 chain (what is the difference?', a: 'Same pitch (3/8″), different gauge: 72 is .050″ and 73 is .058″. This is the classic wrong buy in this category) the boxes look identical. A .058″ chain will not seat in a .050″ bar groove, and a .050″ chain in a .058″ groove runs sloppy and can derail. Check the gauge number on your bar stamp before you order. Full code table on the identification chart.' },
   { q: 'How many drive links do I need?', a: 'As many as the bar fitted to your saw was built for, the count is stamped on the bar tail on most bars, and it changes with bar length even on the same saw. A 20″ Husqvarna 455 Rancher bar takes 72 drive links; the same saw on a shorter .325″ setup can take anywhere from 56 to 78 depending on the exact bar. Never order by model name alone.' },
   { q: 'Can I run a different-gauge chain if the pitch matches?', a: 'No. Gauge is the thickness of the drive links, and it must match the width of the groove in your guide bar. A thicker chain will not seat; a thinner one wobbles in the groove, wears the bar rails unevenly and can jump off. Pitch, gauge and drive links all have to match.' },
-  { q: 'What file size do I need to sharpen my chain?', a: 'File size follows pitch: 3/8″ low-profile → 5/32″ (4.0 mm), or 11/64″ (4.5 mm) for .043″ gauge; .325″ → 3/16″ (4.8 mm); standard 3/8″ and .404″ → 7/32″ (5.5 mm), though STIHL lists 13/64″ (5.2 mm) for its own standard 3/8″ chain. Every model page on this site lists the file size next to the chain spec, and the identification chart has the full table.' },
+  { q: 'What file size do I need to sharpen my chain?', a: 'File size follows pitch. Oregon’s chart: 3/8″ low-profile → 5/32″ (4.0 mm), or 11/64″ (4.5 mm) for .043″ gauge; .325″ → 3/16″ (4.8 mm); standard 3/8″ and .404″ → 7/32″ (5.5 mm). STIHL’s 2025 file table lists 5/32″ for all 3/8″ PICCO (including .043″), 11/64″ or 3/16″ for .325″, and 13/64″ (5.2 mm) for standard 3/8″. Saw pages flag a file when those sources differ. The identification chart has the full table.' },
 ];
 
 export const ldEscape = (o: unknown) => JSON.stringify(o).replace(/</g, '\\u003c');
