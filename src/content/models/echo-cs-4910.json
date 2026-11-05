@@ -1,0 +1,90 @@
+{
+  "brand": "echo",
+  "model": "CS-4910",
+  "name": "Echo CS-4910",
+  "aliases": [
+    "CS-4910",
+    "CS4910"
+  ],
+  "type": "gas",
+  "popular": false,
+  "blurb": ".325″ pitch, .050″ gauge, 3/16″ file: 66 drive links on 16″, 72 on 18″, 78 on 20″ (20BPX), per Echo's bars chart.",
+  "intro": "The CS-4910 has its own rows in Echo's Bars and Chains chart, separate from the CS-4920. All three are .325″ pitch, .050″ gauge, 20BPX chain, 3/16″ file: 66 drive links on 16″ (bar 16F0AD3366C), 72 on 18″ (bar 18F0AD3372C) and 78 on 20″ (bar 20F0AD3378C). Echo's specification table in this catalog does not print a displacement for the CS-4910, so none is stated here.",
+  "bars": [
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "325",
+      "gauge": 0.05,
+      "drive_links": 66,
+      "file_size": "3/16",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "20BPX66CQ",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "echo-catalog-2023"
+      ],
+      "note": "Echo bar 16F0AD3366C; chain 20BPX66CQ. Non-replaceable-nose bar. .325″ pitch, .050″ gauge, 3/16″ file."
+    },
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "325",
+      "gauge": 0.05,
+      "drive_links": 72,
+      "file_size": "3/16",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "20BPX72CQ",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "echo-catalog-2023"
+      ],
+      "note": "Echo bar 18F0AD3372C; chain 20BPX72CQ. Non-replaceable-nose bar. .325″ pitch, .050″ gauge, 3/16″ file."
+    },
+    {
+      "lengths_in": [
+        20
+      ],
+      "pitch": "325",
+      "gauge": 0.05,
+      "drive_links": 78,
+      "file_size": "3/16",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "20BPX78CQ",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "echo-catalog-2023"
+      ],
+      "note": "Echo bar 20F0AD3378C; chain 20BPX78CQ. Non-replaceable-nose bar. .325″ pitch, .050″ gauge, 3/16″ file."
+    }
+  ],
+  "sources": [
+    {
+      "id": "echo-catalog-2023",
+      "type": "fitup-chart",
+      "publisher": "Echo",
+      "title": "ECHO chainsaws catalog: Bars and Chains chart (bar part, drive-link count, gauge, pitch, chain part, file size) and saw specification tables",
+      "url": "https://www.echo-usa.com/getmedia/f0410e25-c7f5-4247-a9cb-8045d8e57b63/ECHO_chainsaws.pdf",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "sources_note": "Echo chainsaws catalog Bars and Chains chart and specification tables, PDF read 5 Nov 2026.",
+  "last_verified": "2026-11-05"
+}

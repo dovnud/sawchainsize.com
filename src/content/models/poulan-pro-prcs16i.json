@@ -1,0 +1,48 @@
+{
+  "brand": "poulan",
+  "model": "PRCS16i",
+  "name": "Poulan Pro PRCS16i",
+  "aliases": [
+    "PRCS16i",
+    "PRCS16I"
+  ],
+  "type": "battery",
+  "popular": false,
+  "blurb": "Oregon's fit guide, one row under PRCS16I: 16″ bar, 3/8″ low profile, .043″ gauge, 56 drive links (Oregon R56).",
+  "intro": "The Poulan Pro PRCS16i is the model Oregon prints as PRCS16I. In Oregon's saw-chain selection guide that name sits on its own line, followed by one chain: R56, 16″ bar, 56 drive links, .043″ gauge, 3/8″ low profile. The guide does not print a file size.",
+  "bars": [
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.043,
+      "drive_links": 56,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "R56",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-tsc-fit-guide"
+      ],
+      "note": "Oregon's saw-chain selection guide prints R56 directly under PRCS16i: 16″ bar, 56 drive links, .043″ gauge, 3/8″ low profile. The guide does not print a file size or a Poulan part number for this row."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide, Poulan / Poulan Pro section: one chain row printed directly under the model",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "sources_note": "Oregon Saw Chain Selection Guide (apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf), Poulan / Poulan Pro section, read 5 Nov 2026. Only models with a single chain row printed directly under the model name are listed. Models that share a block of several chain lengths are not given a page here.",
+  "last_verified": "2026-11-05"
+}

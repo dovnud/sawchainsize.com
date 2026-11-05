@@ -1,0 +1,221 @@
+{
+  "brand": "makita",
+  "model": "XCU08 / XCU09",
+  "name": "Makita XCU08 / XCU09",
+  "aliases": [
+    "XCU08",
+    "XCU09",
+    "XCU08Z",
+    "XCU09Z"
+  ],
+  "type": "battery",
+  "popular": true,
+  "blurb": "36 V cordless saws. XCU08 ships with 14″, XCU09 with 16″. The manual approves 10″–16″ in 90PX (.043″, 40/46/52/56 drive links) or 91PX (.050″, the same counts).",
+  "intro": "Makita's XCU08 and XCU09 share one manual and one chain table. The manual's standard bar is 14″ on the XCU08 and 16″ on the XCU09, and the approved bars run 10″, 12″, 14″ and 16″ in two chain types: 90PX at 1.1 mm (.043″) and 91PX at 1.3 mm (.050″). Drive links are 40, 46, 52 and 56 for those four lengths, the same counts in both gauges. The bar part numbers are not the same. Makita prints the pitch as 3/8″; Echo's chain chart, which defines the 90PX and 91PX codes, classes both as 3/8″ low profile. Makita prints the 90PX file as 4.5 mm (3/16″). 4.5 mm is 11/64″, so that is the file size on the 90PX rows. The 91PX file is 4.0 mm (5/32″).",
+  "bars": [
+    {
+      "lengths_in": [
+        10
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.043,
+      "drive_links": 40,
+      "file_size": "11/64",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Makita",
+          "part_no": "90PX-type chain, 40 DL",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "makita-xcu08-manual",
+        "echo-catalog-2023"
+      ],
+      "label": "10″ (90PX)",
+      "note": "Makita's XCU08/XCU09 manual: chain type 90PX, 40 drive links, bar part 161846-0, 3/8″ pitch, gauge 1.1 mm (0.043″), sprocket-nose bar. Echo's chart classes 90PX as 3/8″ low profile. Makita prints the 90PX round file as 4.5 mm (3/16″). 4.5 mm is 11/64″, which is the file size stored here."
+    },
+    {
+      "lengths_in": [
+        10
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 40,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Makita",
+          "part_no": "91PX-type chain, 40 DL",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "makita-xcu08-manual",
+        "echo-catalog-2023"
+      ],
+      "label": "10″ (91PX)",
+      "note": "Makita's XCU08/XCU09 manual: chain type 91PX, 40 drive links, bar part 168408-5, 3/8″ pitch, gauge 1.3 mm (0.050″), sprocket-nose bar. Echo's chart classes 91PX as 3/8″ low profile. Makita prints the 91PX round file as 4.0 mm (5/32″)."
+    },
+    {
+      "lengths_in": [
+        12
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.043,
+      "drive_links": 46,
+      "file_size": "11/64",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Makita",
+          "part_no": "90PX-type chain, 46 DL",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "makita-xcu08-manual",
+        "echo-catalog-2023"
+      ],
+      "label": "12″ (90PX)",
+      "note": "Makita's XCU08/XCU09 manual: chain type 90PX, 46 drive links, bar part 165245-8, 3/8″ pitch, gauge 1.1 mm (0.043″), sprocket-nose bar. Echo's chart classes 90PX as 3/8″ low profile. Makita prints the 90PX round file as 4.5 mm (3/16″). 4.5 mm is 11/64″, which is the file size stored here."
+    },
+    {
+      "lengths_in": [
+        12
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 46,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Makita",
+          "part_no": "91PX-type chain, 46 DL",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "makita-xcu08-manual",
+        "echo-catalog-2023"
+      ],
+      "label": "12″ (91PX)",
+      "note": "Makita's XCU08/XCU09 manual: chain type 91PX, 46 drive links, bar part 165200-0, 3/8″ pitch, gauge 1.3 mm (0.050″), sprocket-nose bar. Echo's chart classes 91PX as 3/8″ low profile. Makita prints the 91PX round file as 4.0 mm (5/32″)."
+    },
+    {
+      "lengths_in": [
+        14
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.043,
+      "drive_links": 52,
+      "file_size": "11/64",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Makita",
+          "part_no": "90PX-type chain, 52 DL",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "makita-xcu08-manual",
+        "echo-catalog-2023"
+      ],
+      "label": "14″ (90PX)",
+      "note": "Makita's XCU08/XCU09 manual: chain type 90PX, 52 drive links, bar part 165246-6, 3/8″ pitch, gauge 1.1 mm (0.043″), sprocket-nose bar. Echo's chart classes 90PX as 3/8″ low profile. Makita prints the 90PX round file as 4.5 mm (3/16″). 4.5 mm is 11/64″, which is the file size stored here."
+    },
+    {
+      "lengths_in": [
+        14
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 52,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Makita",
+          "part_no": "91PX-type chain, 52 DL",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "makita-xcu08-manual",
+        "echo-catalog-2023"
+      ],
+      "label": "14″ (91PX)",
+      "note": "Makita's XCU08/XCU09 manual: chain type 91PX, 52 drive links, bar part 165201-8, 3/8″ pitch, gauge 1.3 mm (0.050″), sprocket-nose bar. Echo's chart classes 91PX as 3/8″ low profile. Makita prints the 91PX round file as 4.0 mm (5/32″)."
+    },
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.043,
+      "drive_links": 56,
+      "file_size": "11/64",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Makita",
+          "part_no": "90PX-type chain, 56 DL",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "makita-xcu08-manual",
+        "echo-catalog-2023"
+      ],
+      "label": "16″ (90PX)",
+      "note": "Makita's XCU08/XCU09 manual: chain type 90PX, 56 drive links, bar part 165247-4, 3/8″ pitch, gauge 1.1 mm (0.043″), sprocket-nose bar. Echo's chart classes 90PX as 3/8″ low profile. Makita prints the 90PX round file as 4.5 mm (3/16″). 4.5 mm is 11/64″, which is the file size stored here."
+    },
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 56,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Makita",
+          "part_no": "91PX-type chain, 56 DL",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "makita-xcu08-manual",
+        "echo-catalog-2023"
+      ],
+      "label": "16″ (91PX)",
+      "note": "Makita's XCU08/XCU09 manual: chain type 91PX, 56 drive links, bar part 165202-6, 3/8″ pitch, gauge 1.3 mm (0.050″), sprocket-nose bar. Echo's chart classes 91PX as 3/8″ low profile. Makita prints the 91PX round file as 4.0 mm (5/32″)."
+    }
+  ],
+  "sources": [
+    {
+      "id": "makita-xcu08-manual",
+      "type": "manual",
+      "publisher": "Makita",
+      "title": "XCU08 / XCU09 cordless chain saw instruction manual: saw chain, guide bar and sprocket combination table (90PX and 91PX; 10, 12, 14, 16 in.)",
+      "url": "https://cdn.makitatools.com/apps/cms/doc/prod/XCU/3f5835b8-e4fc-4f28-91e3-5c2db89a1727_XCU08XCU09_IM_885722-948.pdf",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "id": "echo-catalog-2023",
+      "type": "fitup-chart",
+      "publisher": "Echo",
+      "title": "ECHO chainsaws catalog (bars chart): 90PX is 3/8″ low profile .043″ and 91PX is 3/8″ low profile .050″",
+      "url": "https://www.echo-usa.com/getmedia/f0410e25-c7f5-4247-a9cb-8045d8e57b63/ECHO_chainsaws.pdf",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "sources_note": "Makita XCU08/XCU09 instruction manual combination table (document 885722-948), read 5 Nov 2026, and Echo's bars chart for the 90PX / 91PX pitch class.",
+  "last_verified": "2026-11-05"
+}

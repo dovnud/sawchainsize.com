@@ -1,0 +1,48 @@
+{
+  "brand": "stihl",
+  "model": "MSA 161 T",
+  "name": "STIHL MSA 161 T",
+  "aliases": [
+    "MSA 161 T",
+    "MSA161T"
+  ],
+  "type": "battery",
+  "popular": false,
+  "blurb": "Battery top-handle. One 2025-chart row: 12″ bar, 1/4″ PICCO, .043″ gauge, 65 drive links (71 PM3 65).",
+  "intro": "The MSA 161 T is a battery top-handle saw. STIHL's 2025 battery chart lists one combination: a 12″ bar, 71 PM3 65, which is 1/4″ PICCO at .043″ gauge with 65 drive links. The gauge and pitch come from the marketing number as defined on the identifying panel printed in the same catalog.",
+  "bars": [
+    {
+      "lengths_in": [
+        12
+      ],
+      "pitch": "1/4",
+      "gauge": 0.043,
+      "drive_links": 65,
+      "file_size": "1/8",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "71 PM3 65",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2025"
+      ],
+      "note": "STIHL's chart lists chain 71 PM3 65 with recommended bar 3005 008 3405. 1/4″ PICCO, .043″ gauge. The marketing number starts with 71: the Identifying STIHL Saw Chain panel on the same catalog pages defines 7 as 1/4″ PICCO and 1 as .043″. STIHL's 2025 file table lists a 3.2 mm (1/8″) file for 1/4″ PICCO."
+    }
+  ],
+  "sources": [
+    {
+      "id": "stihl-chain-chart-2025",
+      "type": "fitup-chart",
+      "publisher": "STIHL",
+      "title": "STIHL 2025 Full Line catalog: Saw Chain Selection and Identification (catalog pages 166–167), including the file table and the Identifying STIHL Saw Chain panel",
+      "url": "https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "sources_note": "STIHL 2025 Full Line catalog, battery-saw chain chart and Identifying STIHL Saw Chain panel (catalog pp. 166–167), read 5 Nov 2026.",
+  "last_verified": "2026-11-05"
+}

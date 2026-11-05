@@ -1,0 +1,47 @@
+{
+  "brand": "husqvarna",
+  "model": "435i",
+  "name": "Husqvarna 435i",
+  "aliases": [
+    "435i"
+  ],
+  "type": "battery",
+  "popular": false,
+  "blurb": "16″ bar on .325″ chain, .043″ gauge, 64 drive links, from Husqvarna's 2027 bar and chain fit-up guide.",
+  "intro": "The 435i is the battery saw in this number. The gas 435 / 440 is a different page. Husqvarna's Bar & Chain Fit-up Guide (cover year 2027) lists 1 bar and chain combinations for the 435i: 16″. Pitch on those rows: .325″. Gauge: .043″. Match pitch, gauge and drive links to the bar-tail stamp before you order.",
+  "bars": [
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "325",
+      "gauge": 0.043,
+      "drive_links": 64,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "SP21G X-Cut 596553364",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 16″ setup with bar X-Precision 596553664 and chain SP21G X-Cut 596553364."
+    }
+  ],
+  "sources": [
+    {
+      "id": "husqvarna-fitup-2027",
+      "type": "fitup-chart",
+      "publisher": "Husqvarna",
+      "title": "Bar & Chain Fit-up Guide (cover year 2027): certified/approved bar and chain combinations, with bar length, pitch, gauge, drive links, file size, bar part and chain part",
+      "url": "https://media.husqvarnagroup.com/original/DI-328359.pdf",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "sources_note": "Husqvarna Bar & Chain Fit-up Guide, cover dated 2027, PDF read 5 Nov 2026 (https://media.husqvarnagroup.com/original/DI-328359.pdf). Every row restates that saw's entry in the guide.",
+  "last_verified": "2026-11-05"
+}

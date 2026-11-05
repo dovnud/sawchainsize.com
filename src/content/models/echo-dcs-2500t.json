@@ -1,0 +1,48 @@
+{
+  "brand": "echo",
+  "model": "DCS-2500T",
+  "name": "Echo DCS-2500T",
+  "aliases": [
+    "DCS-2500T",
+    "DCS2500T"
+  ],
+  "type": "battery",
+  "popular": false,
+  "blurb": "Battery top-handle. Echo's chart: 12″ bar, 3/8″ low profile, .050″ gauge, 45 drive links (91PXL45CQ).",
+  "intro": "The DCS-2500T is a battery top-handle saw. Echo's Bars and Chains chart lists one row: bar 12A0CD3745C, 45 drive links, .050″ gauge, 3/8″ low profile, chain 91PXL45CQ, 5/32″ file. The catalog does not print a displacement for it.",
+  "bars": [
+    {
+      "lengths_in": [
+        12
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 45,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "91PXL45CQ",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "echo-catalog-2023"
+      ],
+      "note": "Echo bar 12A0CD3745C; chain 91PXL45CQ. Non-replaceable-nose bar. The only DCS-2500T row in Echo's bars chart."
+    }
+  ],
+  "sources": [
+    {
+      "id": "echo-catalog-2023",
+      "type": "fitup-chart",
+      "publisher": "Echo",
+      "title": "ECHO chainsaws catalog: Bars and Chains chart (bar part, drive-link count, gauge, pitch, chain part, file size) and saw specification tables",
+      "url": "https://www.echo-usa.com/getmedia/f0410e25-c7f5-4247-a9cb-8045d8e57b63/ECHO_chainsaws.pdf",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "sources_note": "Echo chainsaws catalog Bars and Chains chart and specification tables, PDF read 5 Nov 2026.",
+  "last_verified": "2026-11-05"
+}

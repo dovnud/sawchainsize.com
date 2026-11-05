@@ -1,0 +1,71 @@
+{
+  "brand": "oregon",
+  "model": "CS300",
+  "name": "Oregon CS300",
+  "aliases": [
+    "CS300",
+    "CS300-E6"
+  ],
+  "type": "battery",
+  "popular": true,
+  "blurb": "Cordless saw. Oregon's manual: 3/8″ low profile (91), .050″ gauge, 52 drive links on the 14″ bar and 56 on the 16″ bar.",
+  "intro": "The CS300 is Oregon's cordless saw. The operator manual's replacement-component table lists two cutting attachments and states the drive-link count on each: 14″ bar 140SDEA041 with a 52-drive-link PowerSharp chain, part 560507, and 16″ bar 160SDEA041 with a 56-drive-link PowerSharp chain, part 560510. Specifications in the same manual: chain pitch 3/8″ low profile (91), chain gauge .050″, maximum bar length 16″, 6-tooth sprocket. The manual does not print a round-file diameter. Sharpening is the PowerSharp system, and the chain rows include the sharpening stone.",
+  "bars": [
+    {
+      "lengths_in": [
+        14
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 52,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "560507 (52 drive links, with stone)",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "oregon-cs300-manual"
+      ],
+      "label": "14″",
+      "note": "Manual replacement table: 14 inch (35 cm) bar 140SDEA041; 14 inch, 52 drive link, saw chain and stone 560507. Pitch 3/8″ low profile (91), gauge .050″."
+    },
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 56,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "560510 (56 drive links, with stone)",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "oregon-cs300-manual"
+      ],
+      "label": "16″",
+      "note": "Manual replacement table: 16 inch (40 cm) bar 160SDEA041; 16 inch, 56 drive link, saw chain and stone 560510. Pitch 3/8″ low profile (91), gauge .050″. Maximum bar length in the specifications is 16″."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-cs300-manual",
+      "type": "manual",
+      "publisher": "Oregon",
+      "title": "CS300 operator manual, specifications and replacement components (14″/52 drive links part 560507; 16″/56 drive links part 560510; 3/8″ low profile, .050″)",
+      "url": "https://www.oregonproducts.com/medias/CS300-573259ab-NA-OM.pdf?attachment=true&context=bWFzdGVyfHJvb3R8MTkyMjc2MTd8YXBwbGljYXRpb24vcGRmfGg1YS9oNzgvODgwODEyMzAwNzAwNi5wZGZ8MWJlOGQ4MGM0OTMxNDY1MjQ4OWM3N2RhYWI4NzBiY2M4NDVkMjA1NTI5OGJmZjg3ZGY3Zjg1YzM1M2I4NGNlMg",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "sources_note": "Oregon CS300 operator manual, English specifications and replacement-component table, read 5 Nov 2026.",
+  "last_verified": "2026-11-05"
+}

@@ -1,0 +1,58 @@
+{
+  "brand": "oregon",
+  "model": "CS1500",
+  "name": "Oregon CS1500",
+  "aliases": [
+    "CS1500",
+    "CS1500-093"
+  ],
+  "type": "electric",
+  "popular": true,
+  "blurb": "Corded saw. Oregon's manual: 18″ max bar, 3/8″ low profile, .050″ gauge, replacement chain 91PS062X (part 571037). Oregon's listing for that part states 62 drive links.",
+  "intro": "The CS1500 is Oregon's corded saw with the PowerSharp sharpener. The operator manual (the 230 V edition, which is the manual Oregon publishes for model CS1500) specifies chain pitch 3/8″ low profile, gauge .050″, maximum bar length 18″ (effective cutting length 17″), and the replacement chain as 91PS062X with sharpening stone, part 571037, on guide bar 180SDEA041. That manual does not print the words “62 drive links.” Oregon's own product page for part 571037 does: it describes a 3/8″ low-profile .050″ chain with 62 drive links for an 18″ bar, for the CS1500. The two Oregon documents together are the row below. PowerSharp chain is sharpened on the saw. The manual does not print a round-file diameter.",
+  "bars": [
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 62,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "91PS062X (571037)",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "oregon-cs1500-manual",
+        "oregon-571037"
+      ],
+      "label": "18″",
+      "note": "Manual: bar 180SDEA041, chain 91PS062X part 571037, pitch 3/8″ low profile, gauge .050″, 18″ maximum bar. Oregon part 571037 listing: 62 drive links, 18″ bar, 3/8″ low profile, .050″ gauge, for the CS1500. No round-file diameter is printed; sharpening is the PowerSharp system."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-cs1500-manual",
+      "type": "manual",
+      "publisher": "Oregon",
+      "title": "CS1500-093 chainsaw manual, specifications and replacement components (91PS062X / 571037, 3/8″ low profile, .050″, 18″ bar)",
+      "url": "https://www.oregonproducts.com/medias/CS1500-Chainsaw-Manual.pdf?attachment=true&context=bWFzdGVyfHJvb3R8NDQ3ODYzNnxhcHBsaWNhdGlvbi9wZGZ8aDZlL2g4Ny84ODA4OTM4MzA3NjE0LnBkZnw5YmQ1MmI5M2FjMDc0MTk2ODNlZjVkNmFkMzljYjg4Y2I0YWNmYTVjNmRjYjVlMzc2NjgyN2NlNmIzN2Q1MzIw",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "id": "oregon-571037",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Part 571037 product page: PowerSharp chain for the CS1500, 18″ bar, 3/8″ low profile, .050″ gauge, 62 drive links",
+      "url": "https://www.oregonproducts.com/en/p/571037",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "sources_note": "Oregon CS1500 operator manual (replacement-component table and specifications) and Oregon's product page for part 571037, both read 5 Nov 2026. The drive-link count is the product page's; the manual names the part, the pitch, the gauge and the 18″ bar.",
+  "last_verified": "2026-11-05"
+}
