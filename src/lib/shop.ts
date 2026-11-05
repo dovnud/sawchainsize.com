@@ -61,6 +61,13 @@ export function scabbardLink(len: number): ShopLink {
 
 /** Per-page Amazon link caps for pages added after the bulk link pass (reference pages: 0-3 links).
  *  Existing pages are not listed and keep their links. Key: 'model:<id>', 'chain:<pitch-gauge key>' or 'bar:<inches>'. */
+/** Caps for guide Amazon blocks added after the bulk link pass. Existing guides are not listed. */
+const GUIDE_LINK_CAP: Record<string, number> = {
+  'stihl-green-vs-yellow-chain': 4,
+  'how-to-measure-chainsaw-bar': 3,
+  'chainsaw-depth-gauge': 6,
+  'husqvarna-pixel-chain': 3,
+};
 const LINK_CAP: Record<string, number> = {
   'model:husqvarna-t540-xp-mark-iii': 3,
   'model:stihl-ms-661': 3,
@@ -232,6 +239,7 @@ export function guideShop(slug: string): { groups: ShopGroup[]; count: number } 
     case 'stihl-chain-file-size': add('Files by size for STIHL chain', [product('kit-5-32'), product('kit-3-16'), search('13/64 chainsaw round file 5.2mm', '13/64″ (5.2 mm) round files (STIHL 3/8″ chain)'), FILE_732()]); break;
     case 'chainsaw-chain-grinding-angles': add('Grinder wheels and depth-gauge tools', [search('chainsaw chain grinder wheel 1/8 inch', '1/8″ grinding wheels (1/4″ and low-profile chain)'), search('chainsaw chain grinder wheel 3/16 inch', '3/16″ grinding wheels (.325″, 3/8″ and .404″ chain)'), DEPTH_TOOL()]); break;
     case 'chainsaw-sharpening-angles': add('Files and depth-gauge tools', [product('kit-5-32'), product('kit-3-16'), product('kit-field'), FILE_732(), DEPTH_TOOL(), search('chainsaw depth gauge flat file', 'Flat file for lowering depth gauges')]); break;
+    case 'chainsaw-depth-gauge': add('Depth-gauge tool and flat file', [DEPTH_TOOL(), search('chainsaw depth gauge flat file', 'Flat file for lowering depth gauges'), product('kit-field', 'Oregon field kit (includes a flat file)')]); break;
     case 'how-to-count-drive-links': add('Tools mentioned in this guide', [CALIPER(), PITCH_GAUGE_TOOL()]); break;
     case 'chain-part-numbers': add('Tools mentioned in this guide', [CALIPER(), PITCH_GAUGE_TOOL()]); break;
     case 'how-to-verify-chain-size': add('Tools mentioned in this guide', [CALIPER(), PITCH_GAUGE_TOOL(), SCRENCH()]); break;
@@ -329,5 +337,6 @@ export function guideShop(slug: string): { groups: ShopGroup[]; count: number } 
   if (slug === 'gifts-for-chainsaw-owners-2026' || slug === 'black-friday-chainsaw-chain') {
     for (const g of groups) { g.feature = true; g.allButtons = true; }
   }
-  return { groups, count: groups.reduce((n, g) => n + g.links.length, 0) };
+  const capped = capGroups(groups, GUIDE_LINK_CAP[slug]);
+  return { groups: capped, count: capped.reduce((n, g) => n + g.links.length, 0) };
 }

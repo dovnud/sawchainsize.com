@@ -6,8 +6,8 @@ export const SITE = {
   name: 'SawChainSize.com',
   tagline: 'Chainsaw Chain Size Lookup by Saw Model & Bar',
   email: 'contact@sawchainsize.com',
-  dataDate: '2026-10-24',
-  dataDateLabel: '24 October 2026',
+  dataDate: '2026-11-05',
+  dataDateLabel: '5 November 2026',
   defaultOg: '/og/default.png',
 };
 
