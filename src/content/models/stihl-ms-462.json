@@ -1,0 +1,137 @@
+{
+  "brand": "stihl",
+  "model": "MS 462",
+  "name": "STIHL MS 462",
+  "aliases": [
+    "MS 462",
+    "MS 462 C-M",
+    "MS 462 R",
+    "MS462"
+  ],
+  "type": "gas",
+  "popular": true,
+  "blurb": "3/8″ .050″ chain: 91 drive links on 28″, 105 on 32″, 114 on 36″, per STIHL's 2025 chart. The 36″ loop is 33 RS, not 33 RS3.",
+  "intro": "STIHL's 2025 chain chart lists the MS 462, MS 462 R, MS 462 C-M and MS 462 R C-M together. The .050″ rows that match their own marketing numbers are 33 RS3 91 on a 28″ bar, 33 RS3 105 on a 32″ bar, and 33 RS 114 on a 36″ bar. 33 RS is Rapid Super without the low-kickback “3”. All three bars are asterisk-marked (yellow-labeled).",
+  "bars": [
+    {
+      "lengths_in": [
+        28
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 91,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "33 RS3 91",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2025",
+        "oregon-filing-2020"
+      ],
+      "note": "STIHL's chart lists chain 33 RS3 91 with recommended bar 3003 000 8838. STIHL's 2025 file table lists a 5.2 mm (13/64″) file for 3/8″ chain. Oregon's 2020 filing chart gives 7/32″ for standard 3/8″ chain (types 72, 73, 75). The chart marks this bar with an asterisk: a reduced-kickback bar is not listed at this length.",
+      "file_conflict": [
+        {
+          "size": "13/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "7/32",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
+      "label": "28″ (.050″)"
+    },
+    {
+      "lengths_in": [
+        32
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 105,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "33 RS3 105",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2025",
+        "oregon-filing-2020"
+      ],
+      "note": "STIHL's chart lists chain 33 RS3 105 with recommended bar 3003 000 2246. STIHL's 2025 file table lists a 5.2 mm (13/64″) file for 3/8″ chain. Oregon's 2020 filing chart gives 7/32″ for standard 3/8″ chain (types 72, 73, 75). The chart marks this bar with an asterisk: a reduced-kickback bar is not listed at this length.",
+      "file_conflict": [
+        {
+          "size": "13/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "7/32",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
+      "label": "32″ (.050″)"
+    },
+    {
+      "lengths_in": [
+        36
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 114,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "33 RS 114",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2025",
+        "oregon-filing-2020"
+      ],
+      "note": "STIHL's chart lists chain 33 RS 114 with recommended bar 3003 000 2253. STIHL's 2025 file table lists a 5.2 mm (13/64″) file for 3/8″ chain. Oregon's 2020 filing chart gives 7/32″ for standard 3/8″ chain (types 72, 73, 75). The chart marks this bar with an asterisk: a reduced-kickback bar is not listed at this length.",
+      "file_conflict": [
+        {
+          "size": "13/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "7/32",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
+      "label": "36″ (.050″)"
+    }
+  ],
+  "sources": [
+    {
+      "id": "stihl-chain-chart-2025",
+      "type": "fitup-chart",
+      "publisher": "STIHL",
+      "title": "STIHL 2025 Full Line catalog: Saw Chain Selection and Identification (catalog pages 166–167), including the file table and the Identifying STIHL Saw Chain panel",
+      "url": "https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "id": "oregon-filing-2020",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Saw Chain Filing Angles / Grinding Angles chart (2020): 7/32″ round file for standard 3/8″ chain (types 72, 73, 75)",
+      "url": "https://oregonproducts.com/medias/2020-FilingGrindingAngles.pdf?attachment=true&context=bWFzdGVyfHJvb3R8NDA2MDY0fGFwcGxpY2F0aW9uL3BkZnxoNjUvaGJmLzg4NTMxOTkzODg3MDIucGRmfGQ4MmNmZWZjZDA5MWQ3MmM0NmY0OTM4ZmFhN2MxZWUwMDA2MzgzM2Q4Y2U1MzgyYjQwMzZmYzZhZmY3ZWMzNjQ",
+      "retrieved": "2026-11-03"
+    }
+  ],
+  "sources_note": "STIHL 2025 Full Line catalog chain chart (catalog pp. 166–167), read 5 Nov 2026. File size: STIHL 2025 file table (13/64″ for 3/8″) and Oregon's 2020 filing chart (7/32″ for standard 3/8″ chain).",
+  "last_verified": "2026-11-05",
+  "notice": "STIHL's 2025 chart also prints a .063″ section in this model block. In that section the chain marketing numbers do not line up with the drive-link column (a count is printed next to a loop whose marketing number is a different count, or a .050″ loop is printed on a .063″ row). Those combinations are not listed. If your bar is stamped .063″, use the stamp."
+}

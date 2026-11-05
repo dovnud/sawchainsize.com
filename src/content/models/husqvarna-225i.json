@@ -1,0 +1,47 @@
+{
+  "brand": "husqvarna",
+  "model": "225i",
+  "name": "Husqvarna 225i",
+  "aliases": [
+    "225i"
+  ],
+  "type": "battery",
+  "popular": false,
+  "blurb": "14″ bar on 3/8″ low profile chain, .043″ gauge, 52 drive links, from Husqvarna's 2027 bar and chain fit-up guide.",
+  "intro": "The 225i is a battery rear-handle saw. Husqvarna's Bar & Chain Fit-up Guide (cover year 2027) lists 1 bar and chain combinations for the 225i: 14″. Pitch on those rows: 3/8″ low profile. Gauge: .043″. Match pitch, gauge and drive links to the bar-tail stamp before you order.",
+  "bars": [
+    {
+      "lengths_in": [
+        14
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.043,
+      "drive_links": 52,
+      "file_size": "11/64",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "H38 591105052",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 14″ setup with bar Laminate 595970752 and chain H38 591105052."
+    }
+  ],
+  "sources": [
+    {
+      "id": "husqvarna-fitup-2027",
+      "type": "fitup-chart",
+      "publisher": "Husqvarna",
+      "title": "Bar & Chain Fit-up Guide (cover year 2027): certified/approved bar and chain combinations, with bar length, pitch, gauge, drive links, file size, bar part and chain part",
+      "url": "https://media.husqvarnagroup.com/original/DI-328359.pdf",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "sources_note": "Husqvarna Bar & Chain Fit-up Guide, cover dated 2027, PDF read 5 Nov 2026 (https://media.husqvarnagroup.com/original/DI-328359.pdf). Every row restates that saw's entry in the guide.",
+  "last_verified": "2026-11-05"
+}

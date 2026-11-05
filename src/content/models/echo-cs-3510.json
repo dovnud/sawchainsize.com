@@ -1,0 +1,70 @@
+{
+  "brand": "echo",
+  "model": "CS-3510",
+  "name": "Echo CS-3510",
+  "aliases": [
+    "CS-3510",
+    "CS3510"
+  ],
+  "type": "gas",
+  "popular": true,
+  "blurb": "34.4 cc saw. Echo's bars chart: 14″ and 16″, 3/8″ low profile, .050″, 52 and 57 drive links (91PX). The spec table's listed bar is 16″.",
+  "intro": "The CS-3510 is a 34.4 cc rear-handle saw. Echo's specification table lists a 16″ bar. The Bars and Chains chart prints two CS-3510 rows, both 91PX, 3/8″ low profile, .050″ gauge, 5/32″ file: 52 drive links on 14″ (bar 14A0CD3752C) and 57 on 16″ (bar 16A0CD3757C). Both are on this page because the bars chart names the CS-3510 on each of them. The 16″ row is the one the specification table lists.",
+  "bars": [
+    {
+      "lengths_in": [
+        14
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 52,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "91PX52CQ",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "echo-catalog-2023"
+      ],
+      "note": "Echo bar 14A0CD3752C; chain 91PX52CQ. Non-replaceable-nose bar. On the CS-3510 bars-chart row. Echo's specification table lists the bar length as 16″."
+    },
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 57,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "91PX57CQ",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "echo-catalog-2023"
+      ],
+      "note": "Echo bar 16A0CD3757C; chain 91PX57CQ. Non-replaceable-nose bar. This is the bar length in Echo's specification table for the CS-3510."
+    }
+  ],
+  "sources": [
+    {
+      "id": "echo-catalog-2023",
+      "type": "fitup-chart",
+      "publisher": "Echo",
+      "title": "ECHO chainsaws catalog: Bars and Chains chart (bar part, drive-link count, gauge, pitch, chain part, file size) and saw specification tables",
+      "url": "https://www.echo-usa.com/getmedia/f0410e25-c7f5-4247-a9cb-8045d8e57b63/ECHO_chainsaws.pdf",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "sources_note": "Echo chainsaws catalog Bars and Chains chart and specification tables, PDF read 5 Nov 2026.",
+  "last_verified": "2026-11-05",
+  "displacement_cc": 34.4
+}

@@ -1,0 +1,48 @@
+{
+  "brand": "poulan",
+  "model": "PP4818AVX",
+  "name": "Poulan Pro PP4818AVX",
+  "aliases": [
+    "PP4818AVX",
+    "PP4818"
+  ],
+  "type": "gas",
+  "popular": false,
+  "blurb": "Oregon's fit guide, one row under PP4818AVX: 18″ bar, standard 3/8″ pitch, .050″ gauge, 66 drive links (Oregon D66). Not the low-profile 18″ loop.",
+  "intro": "Oregon's saw-chain selection guide prints PP4818AVX on its own line with one chain under it: D66, 18″, 66 drive links, .050″ gauge, 3/8″ pitch. In this guide the low-profile chains are marked “Low Profile”; this row is not. It is standard 3/8″, the same pitch family as Oregon's D-series, not the 3/8″ low-profile S62 loop used on many 18″ Poulan saws. The guide does not print a file size.",
+  "bars": [
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 66,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "D66",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-tsc-fit-guide"
+      ],
+      "note": "Oregon's saw-chain selection guide prints D66 directly under PP4818AVX: 18″ bar, 66 drive links, .050″ gauge, 3/8″. The guide does not print a file size or a Poulan part number for this row."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide, Poulan / Poulan Pro section: one chain row printed directly under the model",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "sources_note": "Oregon Saw Chain Selection Guide (apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf), Poulan / Poulan Pro section, read 5 Nov 2026. Only models with a single chain row printed directly under the model name are listed. Models that share a block of several chain lengths are not given a page here.",
+  "last_verified": "2026-11-05"
+}

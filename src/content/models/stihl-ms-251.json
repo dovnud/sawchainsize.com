@@ -1,0 +1,310 @@
+{
+  "brand": "stihl",
+  "model": "MS 251 Wood Boss / MS 251 C-BE",
+  "name": "STIHL MS 251 Wood Boss",
+  "aliases": [
+    "MS 251",
+    "MS 251 C-BE",
+    "MS251",
+    "Wood Boss"
+  ],
+  "type": "gas",
+  "popular": true,
+  "blurb": "Wood Boss. STIHL's 2025 chart groups it with the MS 250: 3/8″ PICCO .050″ (44–61 drive links, 12″–18″) or .325″ (62 or 68 drive links).",
+  "intro": "The MS 251 Wood Boss and MS 251 C-BE are named in the same 2025 chain-chart block as the MS 250 and MS 241 C-M. The MS 250 has its own page. This one is the Wood Boss query. STIHL's 2025 chart gives this model block two chain families. 3/8″ PICCO at .050″ gauge runs 44, 50, 55 and 61 drive links on 12″, 14″, 16″ and 18″ bars (63 PM3). .325″ chain is listed at .063″ gauge (26 RM3: 62 links on 16″, 68 on 18″, and the 18″ length has two bar part numbers) and at .050″ gauge on 18″ (23 RM3 68, two bar part numbers). A 16″ saw in this block can be 55 or 62 drive links depending on which bar is fitted. Read the stamp.",
+  "bars": [
+    {
+      "lengths_in": [
+        12
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 44,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "63 PM3 44",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2025"
+      ],
+      "note": "STIHL's chart lists chain 63 PM3 44 with recommended bar 3005 000 4805. 3/8″ PICCO, .050″ gauge. STIHL's 2025 file table lists a 4.0 mm (5/32″) file for 3/8″ PICCO.",
+      "label": "12″ (3/8″ PICCO)"
+    },
+    {
+      "lengths_in": [
+        14
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 50,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "63 PM3 50",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2025"
+      ],
+      "note": "STIHL's chart lists chain 63 PM3 50 with recommended bar 3005 000 4809. 3/8″ PICCO, .050″ gauge. STIHL's 2025 file table lists a 4.0 mm (5/32″) file for 3/8″ PICCO.",
+      "label": "14″ (3/8″ PICCO)"
+    },
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 55,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "63 PM3 55",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2025"
+      ],
+      "note": "STIHL's chart lists chain 63 PM3 55 with recommended bar 3005 008 4813. 3/8″ PICCO, .050″ gauge. STIHL's 2025 file table lists a 4.0 mm (5/32″) file for 3/8″ PICCO.",
+      "label": "16″ (3/8″ PICCO)"
+    },
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 61,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "63 PM3 61",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2025"
+      ],
+      "note": "STIHL's chart lists chain 63 PM3 61 with recommended bar 3005 008 4817. 3/8″ PICCO, .050″ gauge. STIHL's 2025 file table lists a 4.0 mm (5/32″) file for 3/8″ PICCO.",
+      "label": "18″ (3/8″ PICCO)"
+    },
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "325",
+      "gauge": 0.063,
+      "drive_links": 62,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "26 RM3 62",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2025",
+        "oregon-filing-2020"
+      ],
+      "note": "STIHL's chart lists chain 26 RM3 62 with recommended bar 3005 000 4713. STIHL's 2025 file table lists both 4.5 mm (11/64″) and 4.8 mm (3/16″) for .325″ chain and does not tie one diameter to this loop. Oregon's 2020 filing chart gives 3/16″ for its .325″ chain.",
+      "file_conflict": [
+        {
+          "size": "11/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "3/16",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "3/16",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
+      "label": "16″ (.325″ .063″)"
+    },
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "325",
+      "gauge": 0.063,
+      "drive_links": 68,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "26 RM3 68",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2025",
+        "oregon-filing-2020"
+      ],
+      "note": "STIHL's chart lists chain 26 RM3 68 with recommended bar 3005 008 4717. STIHL's 2025 file table lists both 4.5 mm (11/64″) and 4.8 mm (3/16″) for .325″ chain and does not tie one diameter to this loop. Oregon's 2020 filing chart gives 3/16″ for its .325″ chain.",
+      "file_conflict": [
+        {
+          "size": "11/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "3/16",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "3/16",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
+      "label": "18″ (.325″ .063″, bar 3005 008 4717)"
+    },
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "325",
+      "gauge": 0.063,
+      "drive_links": 68,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "26 RM3 68",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2025",
+        "oregon-filing-2020"
+      ],
+      "note": "STIHL's chart lists chain 26 RM3 68 with recommended bar 3005 810 4717. STIHL's 2025 file table lists both 4.5 mm (11/64″) and 4.8 mm (3/16″) for .325″ chain and does not tie one diameter to this loop. Oregon's 2020 filing chart gives 3/16″ for its .325″ chain.",
+      "file_conflict": [
+        {
+          "size": "11/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "3/16",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "3/16",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
+      "label": "18″ (.325″ .063″, bar 3005 810 4717)"
+    },
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "325",
+      "gauge": 0.05,
+      "drive_links": 68,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "23 RM3 68",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2025",
+        "oregon-filing-2020"
+      ],
+      "note": "STIHL's chart lists chain 23 RM3 68 with recommended bar 3005 008 7017. STIHL's 2025 file table lists both 4.5 mm (11/64″) and 4.8 mm (3/16″) for .325″ chain and does not tie one diameter to this loop. Oregon's 2020 filing chart gives 3/16″ for its .325″ chain. This .050″ 18″ row is in the 2025 chart for this model block.",
+      "file_conflict": [
+        {
+          "size": "11/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "3/16",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "3/16",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
+      "label": "18″ (.325″ .050″, bar 3005 008 7017)"
+    },
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "325",
+      "gauge": 0.05,
+      "drive_links": 68,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "23 RM3 68",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2025",
+        "oregon-filing-2020"
+      ],
+      "note": "STIHL's chart lists chain 23 RM3 68 with recommended bar 3005 810 7017. STIHL's 2025 file table lists both 4.5 mm (11/64″) and 4.8 mm (3/16″) for .325″ chain and does not tie one diameter to this loop. Oregon's 2020 filing chart gives 3/16″ for its .325″ chain. This .050″ 18″ row is in the 2025 chart for this model block.",
+      "file_conflict": [
+        {
+          "size": "11/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "3/16",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "3/16",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
+      "label": "18″ (.325″ .050″, bar 3005 810 7017)"
+    }
+  ],
+  "sources": [
+    {
+      "id": "stihl-chain-chart-2025",
+      "type": "fitup-chart",
+      "publisher": "STIHL",
+      "title": "STIHL 2025 Full Line catalog: Saw Chain Selection and Identification (catalog pages 166–167), including the file table and the Identifying STIHL Saw Chain panel",
+      "url": "https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf",
+      "retrieved": "2026-11-05"
+    },
+    {
+      "id": "oregon-filing-2020",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Saw Chain Filing Angles chart (2020): 3/16″ round file for .325″ chain (types 95VPX, 95TXL, and 20, 21, 22 BPX and LPX)",
+      "url": "https://oregonproducts.com/medias/2020-FilingGrindingAngles.pdf?attachment=true&context=bWFzdGVyfHJvb3R8NDA2MDY0fGFwcGxpY2F0aW9uL3BkZnxoNjUvaGJmLzg4NTMxOTkzODg3MDIucGRmfGQ4MmNmZWZjZDA5MWQ3MmM0NmY0OTM4ZmFhN2MxZWUwMDA2MzgzM2Q4Y2U1MzgyYjQwMzZmYzZhZmY3ZWMzNjQ",
+      "retrieved": "2026-11-03"
+    }
+  ],
+  "sources_note": "STIHL 2025 Full Line catalog, Saw Chain Selection and Identification (catalog pp. 166–167), read 5 Nov 2026. The chart names the MS 241 C-M, MS 250, MS 251 Wood Boss and MS 251 C-BE as one block. File size on .325″ rows: STIHL's 2025 file table (both 11/64″ and 3/16″) and Oregon's 2020 filing chart (3/16″ for .325″ chain), the Oregon chart as already read for this site on 3 Nov 2026. PICCO rows use STIHL's 5/32″ file for 3/8″ PICCO.",
+  "last_verified": "2026-11-05"
+}

@@ -1,0 +1,511 @@
+{
+  "brand": "husqvarna",
+  "model": "564 XP",
+  "name": "Husqvarna 564 XP",
+  "aliases": [
+    "564 XP",
+    "564XP"
+  ],
+  "type": "gas",
+  "popular": false,
+  "blurb": "18″–28″ bars on 3/8″ chain, .050″ and .058″ and .063″ gauge, 68–93 drive links, from Husqvarna's 2027 bar and chain fit-up guide.",
+  "intro": "The 564 XP is a professional rear-handle saw. Husqvarna's Bar & Chain Fit-up Guide (cover year 2027) lists 22 bar and chain combinations for the 564 XP: 18″, 20″, 24″, 28″. Pitch on those rows: 3/8″. Gauge: .050″ and .058″ and .063″. More than one gauge is approved, so the groove stamped on the bar decides the chain. Where the file column reads Square, the chain is square-ground and the guide does not give a round-file diameter. Match pitch, gauge and drive links to the bar-tail stamp before you order.",
+  "bars": [
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 68,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C83 X-Cut 585550068",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 18″ setup with bar X-Tough 596687468 and chain C83 X-Cut 585550068.",
+      "label": "18″, .050″, C83 X-Cut"
+    },
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "3/8",
+      "gauge": 0.058,
+      "drive_links": 68,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C85 X-Cut 581626968",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 18″ setup with bar X-Tough 596689168 and chain C85 X-Cut 581626968.",
+      "label": "18″, .058″, C85 X-Cut"
+    },
+    {
+      "lengths_in": [
+        20
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 72,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C83 X-Cut 585550072",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 20″ setup with bar X-Tough 596687472 and chain C83 X-Cut 585550072.",
+      "label": "20″, .050″, C83 X-Cut"
+    },
+    {
+      "lengths_in": [
+        20
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 72,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C83S X-Cut 585551272",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 20″ setup with bar X-Tough 596687472 and chain C83S X-Cut 585551272.",
+      "label": "20″, .050″, C83S X-Cut"
+    },
+    {
+      "lengths_in": [
+        20
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 72,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C83SK X-Cut 585551472",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 20″ setup with bar X-Tough 596687472 and chain C83SK X-Cut 585551472. File-size column: Square (square-ground chain). The guide does not print a round-file diameter.",
+      "label": "20″, .050″, C83SK X-Cut, square-ground"
+    },
+    {
+      "lengths_in": [
+        20
+      ],
+      "pitch": "3/8",
+      "gauge": 0.058,
+      "drive_links": 72,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C85 X-Cut 581626972",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 20″ setup with bar X-Tough 596689172 and chain C85 X-Cut 581626972.",
+      "label": "20″, .058″, C85 X-Cut"
+    },
+    {
+      "lengths_in": [
+        20
+      ],
+      "pitch": "3/8",
+      "gauge": 0.058,
+      "drive_links": 72,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C85S X-Cut 585548972",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 20″ setup with bar X-Tough 596689172 and chain C85S X-Cut 585548972.",
+      "label": "20″, .058″, C85S X-Cut"
+    },
+    {
+      "lengths_in": [
+        24
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 84,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C83 X-Cut 585550084",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 24″ setup with bar X-Tough 596687484 and chain C83 X-Cut 585550084.",
+      "label": "24″, .050″, C83 X-Cut"
+    },
+    {
+      "lengths_in": [
+        24
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 84,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C83 X-Cut 585550084",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 24″ setup with bar X-Tough Light 599656784 and chain C83 X-Cut 585550084.",
+      "label": "24″, .050″, C83 X-Cut"
+    },
+    {
+      "lengths_in": [
+        24
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 84,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C83S X-Cut 585551284",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 24″ setup with bar X-Tough 596687484 and chain C83S X-Cut 585551284.",
+      "label": "24″, .050″, C83S X-Cut"
+    },
+    {
+      "lengths_in": [
+        24
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 84,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C83SK X-Cut 585551484",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 24″ setup with bar X-Tough 596687484 and chain C83SK X-Cut 585551484. File-size column: Square (square-ground chain). The guide does not print a round-file diameter.",
+      "label": "24″, .050″, C83SK X-Cut, square-ground"
+    },
+    {
+      "lengths_in": [
+        24
+      ],
+      "pitch": "3/8",
+      "gauge": 0.058,
+      "drive_links": 84,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C85 X-Cut 581626984",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 24″ setup with bar X-Tough Light 536592884 and chain C85 X-Cut 581626984.",
+      "label": "24″, .058″, C85 X-Cut"
+    },
+    {
+      "lengths_in": [
+        24
+      ],
+      "pitch": "3/8",
+      "gauge": 0.058,
+      "drive_links": 84,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C85 X-Cut 581626984",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 24″ setup with bar X-Tough 596689184 and chain C85 X-Cut 581626984.",
+      "label": "24″, .058″, C85 X-Cut"
+    },
+    {
+      "lengths_in": [
+        24
+      ],
+      "pitch": "3/8",
+      "gauge": 0.058,
+      "drive_links": 84,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C85S X-Cut 585548984",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 24″ setup with bar X-Tough 596689184 and chain C85S X-Cut 585548984.",
+      "label": "24″, .058″, C85S X-Cut"
+    },
+    {
+      "lengths_in": [
+        28
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 93,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C83 X-Cut 585550093",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 28″ setup with bar X-Tough 596687493 and chain C83 X-Cut 585550093.",
+      "label": "28″, .050″, C83 X-Cut"
+    },
+    {
+      "lengths_in": [
+        28
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 93,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C83 X-Cut 585550093",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 28″ setup with bar X-Tough Light 599656793 and chain C83 X-Cut 585550093.",
+      "label": "28″, .050″, C83 X-Cut"
+    },
+    {
+      "lengths_in": [
+        28
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 93,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C83S X-Cut 585551293",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 28″ setup with bar X-Tough 596687493 and chain C83S X-Cut 585551293.",
+      "label": "28″, .050″, C83S X-Cut"
+    },
+    {
+      "lengths_in": [
+        28
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 93,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C83SK X-Cut 585551493",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 28″ setup with bar X-Tough 596687493 and chain C83SK X-Cut 585551493. File-size column: Square (square-ground chain). The guide does not print a round-file diameter.",
+      "label": "28″, .050″, C83SK X-Cut, square-ground"
+    },
+    {
+      "lengths_in": [
+        28
+      ],
+      "pitch": "3/8",
+      "gauge": 0.058,
+      "drive_links": 93,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C85 X-Cut 581626993",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 28″ setup with bar X-Tough Light 536592893 and chain C85 X-Cut 581626993.",
+      "label": "28″, .058″, C85 X-Cut"
+    },
+    {
+      "lengths_in": [
+        28
+      ],
+      "pitch": "3/8",
+      "gauge": 0.058,
+      "drive_links": 93,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C85 X-Cut 581626993",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 28″ setup with bar X-Tough 596689193 and chain C85 X-Cut 581626993.",
+      "label": "28″, .058″, C85 X-Cut"
+    },
+    {
+      "lengths_in": [
+        28
+      ],
+      "pitch": "3/8",
+      "gauge": 0.058,
+      "drive_links": 93,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C85S X-Cut 585548993",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 28″ setup with bar X-Tough 596689193 and chain C85S X-Cut 585548993.",
+      "label": "28″, .058″, C85S X-Cut"
+    },
+    {
+      "lengths_in": [
+        28
+      ],
+      "pitch": "3/8",
+      "gauge": 0.063,
+      "drive_links": 93,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "H83 591164093",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 28″ setup with bar X-Tough 596689693 and chain H83 591164093. File-size column: Square (square-ground chain). The guide does not print a round-file diameter.",
+      "label": "28″, .063″, H83, square-ground"
+    }
+  ],
+  "sources": [
+    {
+      "id": "husqvarna-fitup-2027",
+      "type": "fitup-chart",
+      "publisher": "Husqvarna",
+      "title": "Bar & Chain Fit-up Guide (cover year 2027): certified/approved bar and chain combinations, with bar length, pitch, gauge, drive links, file size, bar part and chain part",
+      "url": "https://media.husqvarnagroup.com/original/DI-328359.pdf",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "sources_note": "Husqvarna Bar & Chain Fit-up Guide, cover dated 2027, PDF read 5 Nov 2026 (https://media.husqvarnagroup.com/original/DI-328359.pdf). Every row restates that saw's entry in the guide.",
+  "last_verified": "2026-11-05"
+}

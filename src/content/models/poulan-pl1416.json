@@ -1,0 +1,47 @@
+{
+  "brand": "poulan",
+  "model": "PL1416",
+  "name": "Poulan PL1416",
+  "aliases": [
+    "PL1416"
+  ],
+  "type": "gas",
+  "popular": false,
+  "blurb": "Oregon's fit guide, one row under PL1416: 16″ bar, 3/8″ low profile, .050″ gauge, 56 drive links (Oregon S56).",
+  "intro": "Oregon's saw-chain selection guide prints PL1416 on its own line with one chain under it: S56, 16″, 56 drive links, .050″ gauge, 3/8″ low profile. No file size is printed.",
+  "bars": [
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 56,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "S56",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-tsc-fit-guide"
+      ],
+      "note": "Oregon's saw-chain selection guide prints S56 directly under PL1416: 16″ bar, 56 drive links, .050″ gauge, 3/8″ low profile. The guide does not print a file size or a Poulan part number for this row."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide, Poulan / Poulan Pro section: one chain row printed directly under the model",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "sources_note": "Oregon Saw Chain Selection Guide (apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf), Poulan / Poulan Pro section, read 5 Nov 2026. Only models with a single chain row printed directly under the model name are listed. Models that share a block of several chain lengths are not given a page here.",
+  "last_verified": "2026-11-05"
+}

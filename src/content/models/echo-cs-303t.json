@@ -1,0 +1,70 @@
+{
+  "brand": "echo",
+  "model": "CS-303T",
+  "name": "Echo CS-303T",
+  "aliases": [
+    "CS-303T",
+    "CS303T"
+  ],
+  "type": "gas",
+  "popular": true,
+  "blurb": "30.1 cc top-handle. Echo's spec table: 12″ bar, 14″ in the U.S. Chart: 3/8″ low profile, .050″, 45 drive links at 12″ and 52 at 14″.",
+  "intro": "The CS-303T is a top-handle saw. Echo's specification table gives it 30.1 cc and a 12″ bar, with 14″ in the U.S. only. The Bars and Chains chart heads a block “CS-303T/310” that also includes a 16″ row used on the CS-310. This page lists the two lengths the specification table gives the CS-303T. Both are 91PX chain, 3/8″ low profile, .050″ gauge, 5/32″ file: 45 drive links on 12″ (bar 12A0CD3745C) and 52 on 14″ (bar 14A0CD3752C). For a 16″ bar, use the CS-310 page or the stamp.",
+  "bars": [
+    {
+      "lengths_in": [
+        12
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 45,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "91PX45CQ",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "echo-catalog-2023"
+      ],
+      "note": "Echo bar 12A0CD3745C; chain 91PX45CQ. Non-replaceable-nose bar. Listed on the CS-303T/310 chart block; the specification table gives the CS-303T a 12″ bar."
+    },
+    {
+      "lengths_in": [
+        14
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 52,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "91PX52CQ",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "echo-catalog-2023"
+      ],
+      "note": "Echo bar 14A0CD3752C; chain 91PX52CQ. Non-replaceable-nose bar. Echo's specification table says 14″ for the CS-303T in the U.S. only. The chart also sells this loop as 91PX52CQ-3."
+    }
+  ],
+  "sources": [
+    {
+      "id": "echo-catalog-2023",
+      "type": "fitup-chart",
+      "publisher": "Echo",
+      "title": "ECHO chainsaws catalog: Bars and Chains chart (bar part, drive-link count, gauge, pitch, chain part, file size) and saw specification tables",
+      "url": "https://www.echo-usa.com/getmedia/f0410e25-c7f5-4247-a9cb-8045d8e57b63/ECHO_chainsaws.pdf",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "sources_note": "Echo chainsaws catalog Bars and Chains chart and specification tables, PDF read 5 Nov 2026.",
+  "last_verified": "2026-11-05",
+  "displacement_cc": 30.1
+}

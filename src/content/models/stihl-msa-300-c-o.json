@@ -1,0 +1,70 @@
+{
+  "brand": "stihl",
+  "model": "MSA 300 C-O",
+  "name": "STIHL MSA 300 C-O",
+  "aliases": [
+    "MSA 300",
+    "MSA 300 C-O",
+    "MSA300"
+  ],
+  "type": "battery",
+  "popular": false,
+  "blurb": "Battery saw. 3/8″ PICCO Super 3, .050″ gauge: 50 drive links on 14″, 55 on 16″ (63 PS3), per STIHL's 2025 chart.",
+  "intro": "The MSA 300 C-O is a battery saw. STIHL's 2025 chart lists the same two loops it lists for the MSA 220 C-B: 63 PS3, 3/8″ PICCO, .050″ gauge, 50 drive links on a 14″ bar (3005 000 4809) and 55 on a 16″ bar (3005 008 4813). PS3 is the low-kickback PICCO Super chain. A 63 PM3 loop with the same count fits the same pitch, gauge and drive-link count, but the chart's recommended chain is PS3.",
+  "bars": [
+    {
+      "lengths_in": [
+        14
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 50,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "63 PS3 50",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2025"
+      ],
+      "note": "STIHL's chart lists chain 63 PS3 50 with recommended bar 3005 000 4809. 3/8″ PICCO, .050″ gauge. STIHL's 2025 file table lists a 4.0 mm (5/32″) file for 3/8″ PICCO Super 3 (63 PS3)."
+    },
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 55,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "63 PS3 55",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2025"
+      ],
+      "note": "STIHL's chart lists chain 63 PS3 55 with recommended bar 3005 008 4813. 3/8″ PICCO, .050″ gauge. STIHL's 2025 file table lists a 4.0 mm (5/32″) file for 3/8″ PICCO Super 3 (63 PS3)."
+    }
+  ],
+  "sources": [
+    {
+      "id": "stihl-chain-chart-2025",
+      "type": "fitup-chart",
+      "publisher": "STIHL",
+      "title": "STIHL 2025 Full Line catalog: Saw Chain Selection and Identification (catalog pages 166–167), including the file table and the Identifying STIHL Saw Chain panel",
+      "url": "https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "sources_note": "STIHL 2025 Full Line catalog, Saw Chain Selection and Identification (catalog pp. 166–167), read 5 Nov 2026. File size from that catalog's file table (4.0 mm / 5/32″ for 3/8″ PICCO).",
+  "last_verified": "2026-11-05"
+}

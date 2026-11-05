@@ -27,7 +27,7 @@ const sawLinks = (rs: Row[]) => uniq(rs.map((r) => r.m)).sort((a, b) => a.data.n
 
 // ---- STIHL: marketing number = pitch digit, gauge digit, cutter letters + specials, then drive links.
 // Legend restated from STIHL's "Identifying STIHL Saw Chain" panel on the chain-selection chart (2017).
-const ST_PITCH: Record<string, string> = { '1': '1/4', '2': '325', '3': '3/8', '4': '404', '6': '3/8-lp' };
+const ST_PITCH: Record<string, string> = { '1': '1/4', '2': '325', '3': '3/8', '4': '404', '6': '3/8-lp', '7': '1/4' };
 const ST_GAUGE: Record<string, number> = { '1': 0.043, '3': 0.05, '5': 0.058, '6': 0.063 };
 const ST_FAMILY: Record<string, string> = {
   RS3: 'RAPID (R) Super (S, chisel cutter), single-humped drive link (3)',

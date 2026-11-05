@@ -1,0 +1,70 @@
+{
+  "brand": "husqvarna",
+  "model": "135 Mark II",
+  "name": "Husqvarna 135 Mark II",
+  "aliases": [
+    "135 Mark II",
+    "135",
+    "135e"
+  ],
+  "type": "gas",
+  "popular": true,
+  "blurb": "14″–16″ bars on 3/8″ low profile chain, .050″ gauge, 52–56 drive links, from Husqvarna's 2027 bar and chain fit-up guide.",
+  "intro": "The Husqvarna 135 Mark II is the rear-handle homeowner saw Husqvarna lists next to the 120 Mark II. This page is only the 135 Mark II rows. Husqvarna's Bar & Chain Fit-up Guide (cover year 2027) lists 2 bar and chain combinations for the 135 Mark II: 14″, 16″. Pitch on those rows: 3/8″ low profile. Gauge: .050″. Match pitch, gauge and drive links to the bar-tail stamp before you order.",
+  "bars": [
+    {
+      "lengths_in": [
+        14
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 52,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "S93G X-Cut 585422152",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 14″ setup with bar Laminate 596009752 and chain S93G X-Cut 585422152."
+    },
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 56,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "S93G X-Cut 585422156",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 16″ setup with bar Laminate 596009756 and chain S93G X-Cut 585422156."
+    }
+  ],
+  "sources": [
+    {
+      "id": "husqvarna-fitup-2027",
+      "type": "fitup-chart",
+      "publisher": "Husqvarna",
+      "title": "Bar & Chain Fit-up Guide (cover year 2027): certified/approved bar and chain combinations, with bar length, pitch, gauge, drive links, file size, bar part and chain part",
+      "url": "https://media.husqvarnagroup.com/original/DI-328359.pdf",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "sources_note": "Husqvarna Bar & Chain Fit-up Guide, cover dated 2027, PDF read 5 Nov 2026 (https://media.husqvarnagroup.com/original/DI-328359.pdf). Every row restates that saw's entry in the guide.",
+  "last_verified": "2026-11-05"
+}

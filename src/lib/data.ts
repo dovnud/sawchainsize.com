@@ -234,7 +234,7 @@ export function barPart(note: string): string | null {
 /** Table-note text with the templated lead-in removed (the part numbers stay; the chain is in the OEM column). */
 export function compactNote(b: Bar): string {
   const n = b.note;
-  let m = n.match(/^Husqvarna's 2026 fit-up guide pairs this \d+″ setup with bars? (.+?) and chains? .+?\.(?: (.*))?$/);
+  let m = n.match(/^Husqvarna's 20(?:26|27) fit-up guide pairs this \d+″ setup with bars? (.+?) and chains? .+?\.(?: (.*))?$/);
   if (m) return `Bar part: ${m[1]}.${m[2] ? ' ' + m[2] : ''}`;
   m = n.match(/^STIHL's chart lists chain .+? with (recommended|lightweight) bar ([\d ]+?)\.(?: (.*))?$/);
   if (m) return `${m[1] === 'lightweight' ? 'Lightweight bar' : 'Bar'} part: ${m[2]}.${m[3] ? ' ' + m[3] : ''}`;

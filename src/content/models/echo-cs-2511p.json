@@ -1,0 +1,70 @@
+{
+  "brand": "echo",
+  "model": "CS-2511P",
+  "name": "Echo CS-2511P",
+  "aliases": [
+    "CS-2511P",
+    "CS2511P"
+  ],
+  "type": "gas",
+  "popular": true,
+  "blurb": "Rear-handle 25.0 cc saw. Echo's chart: 12″ and 14″ bars, 3/8″ low profile, .050″ gauge, 45 and 52 drive links (91PXL).",
+  "intro": "The CS-2511P is the rear-handle partner to the CS-2511T. Echo's specification table lists 12″ and 14″ bars and 25.0 cc. The Bars and Chains chart gives only the .050″ rows for the CS-2511P: 91PXL45CQ (45 drive links) on bar 12A0CD3745C, and 91PXL52CQ (52 drive links) on bar 14A0CD3752C, both 3/8″ low profile, filed with a 5/32″ file. The CS-2511T chart also has .043″ 90PX rows; the CS-2511P entry does not.",
+  "bars": [
+    {
+      "lengths_in": [
+        12
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 45,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "91PXL45CQ",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "echo-catalog-2023"
+      ],
+      "note": "Echo bar 12A0CD3745C; chain 91PXL45CQ. Non-replaceable-nose bar. 5/32″ file, per Echo's chart."
+    },
+    {
+      "lengths_in": [
+        14
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 52,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Echo",
+          "part_no": "91PXL52CQ",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "echo-catalog-2023"
+      ],
+      "note": "Echo bar 14A0CD3752C; chain 91PXL52CQ. Non-replaceable-nose bar. 5/32″ file, per Echo's chart."
+    }
+  ],
+  "sources": [
+    {
+      "id": "echo-catalog-2023",
+      "type": "fitup-chart",
+      "publisher": "Echo",
+      "title": "ECHO chainsaws catalog: Bars and Chains chart (bar part, drive-link count, gauge, pitch, chain part, file size) and saw specification tables",
+      "url": "https://www.echo-usa.com/getmedia/f0410e25-c7f5-4247-a9cb-8045d8e57b63/ECHO_chainsaws.pdf",
+      "retrieved": "2026-11-05"
+    }
+  ],
+  "sources_note": "Echo chainsaws catalog Bars and Chains chart and specification tables, PDF read 5 Nov 2026.",
+  "last_verified": "2026-11-05",
+  "displacement_cc": 25.0
+}
