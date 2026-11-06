@@ -1,0 +1,78 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+
+const path = '/guides/chainsaw-depth-gauge/';
+const modified = (dates as Record<string, string>)[path];
+const ORE = 'https://apps.oregonproducts.com/pdfs/OregonMMANUAL_EN_A106971ab.pdf';
+const ORE_CHART = 'https://oregonproducts.com/medias/2020-FilingGrindingAngles.pdf?attachment=true&context=bWFzdGVyfHJvb3R8NDA2MDY0fGFwcGxpY2F0aW9uL3BkZnxoNjUvaGJmLzg4NTMxOTkzODg3MDIucGRmfGQ4MmNmZWZjZDA5MWQ3MmM0NmY0OTM4ZmFhN2MxZWUwMDA2MzgzM2Q4Y2U1MzgyYjQwMzZmYzZhZmY3ZWMzNjQ';
+const shop = guideShop('chainsaw-depth-gauge');
+
+const desc = 'Chainsaw depth gauges (rakers): Oregon’s .025″ and .030″ settings, when to file them, and why a crooked cut is a cutter or rail fault rather than a raker fault.';
+const faqs = [
+  { q: 'What is a chainsaw depth gauge?', a: 'The depth gauge, also called the raker, is the hump in front of each cutter. It rides on the wood and limits how deep the cutter bites. Oregon’s setting is the gap between the top of that hump and the top plate of the cutter. On most Oregon chains the number is stamped on the depth gauge itself. The manual’s example is 025, meaning .025″ (0.64 mm).' },
+  { q: 'When do you file depth gauges?', a: 'Oregon’s cutting tips say to check and adjust depth gauges every three or four sharpenings, or more often as needed. The round-filing steps also say to recheck them after you file the cutters. Each sharpening lowers the top plate, so a depth gauge that was correct becomes relatively higher if you never touch it.' },
+  { q: 'Is the setting always .025″?', a: 'On Oregon’s filing chart, .025″ is the setting for the 1/4″, 3/8″ low-profile, .325″ and standard 3/8″ types, and for some .404″ types. Four .404″ rows are .030″: 27X and 27AX, 27R / RX / RA, 68LX and 68JX, and square-ground 68CJ / 68CL. A note beside the manual’s .025″ diagram says the setting for all square-ground chisel chain is .025″, which does not match that 68CJ / 68CL chart row. Use the number stamped on the depth gauge when a chain is one of those types.' },
+  { q: 'Do low depth gauges make a chainsaw cut crooked?', a: 'Oregon does not list depth gauges as the cause of a crooked cut. Low depth gauges (too much metal removed) make the chain cut rough and grab, and Oregon says to replace the chain because the cutters usually cannot be filed back far enough to fix it. High depth gauges (never lowered) make the chain cut slowly. A crooked cut, in the same troubleshooting chapter, is damage on one side of the chain or cutters filed to different lengths, or a bar rail that has let the chain lean.' },
+];
+const jsonld = [webPageLd('Chainsaw depth gauge setting', path, desc, modified), faqLd(faqs)];
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Depth gauge', path }];
+---
+<Base title="Chainsaw Depth Gauge Setting: .025″ and .030″" description={desc} path={path} nav="chart" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Depth gauge' }]} />
+      <h1>Chainsaw depth gauge setting</h1>
+      <p class="lede">File the depth gauges every three or four sharpenings, down to the setting for that chain: .025″ on almost every Oregon type, .030″ on a few .404″ types. A depth gauge that was never lowered makes the saw cut slowly. A depth gauge filed too low makes the chain grab, and Oregon’s remedy is a new chain. A crooked cut is a different fault: one side of the chain, or the bar rails.</p>
+    </div>
+
+    <section class="block">
+      <h2>Why the raker changes when you only file the cutter</h2>
+      <p style="max-width:72ch">The depth gauge does not get shorter when you sharpen the top plate. The cutter does. After a few filings the hump in front of the cutter is taller relative to the new edge, so the cutter takes a smaller bite. Oregon’s name for that fault is high depth gauges. The cause line is “depth gauge never lowered.” The symptoms are slow cutting and extra wear on the chain and the bar rails. The remedy is to file the depth gauges down to their correct height.</p>
+      <p style="max-width:72ch">The opposite fault is a low depth gauge: too much of the hump was filed away, or the hump was damaged in a cut. Oregon’s symptoms are rough cutting, a chain that grabs, wear on the heel of the cutters and the tie straps opposite them, wear on the bar rails, and top-plate breakage or chain stretch. The remedy is blunt. In most cases the cutters cannot be filed back far enough to restore a depth gauge that is already too low, so the chain is replaced. Filing the hump still lower to make a tired chain “bite” is the mistake that produces this row.</p>
+      <p style="max-width:72ch">The same troubleshooting chapter ties low depth-gauge settings to cracks under the rear rivet hole, together with forcing a dull chain, poor lubrication, loose tension and frozen wood. One of the preventives Oregon prints there is to reduce the amount of depth-gauge setting, which may require replacing the chain. The setting in the chart is a floor. Going past it is not a tune-up.</p>
+      <p class="src">Source: Oregon <a href={ORE} rel="nofollow">Maintenance and Safety Manual</a>, cutting tips (depth gauges every 3–4 sharpenings) and “Saw Chain Troubleshooting” items 9, 10 and 11, read 5 Nov 2026.</p>
+    </section>
+    <ShopBlock groups={shop.groups} compact />
+
+    <section class="block">
+      <h2>The settings, from Oregon’s chart</h2>
+      <p style="max-width:72ch">Column D of Oregon’s filing chart is the depth-gauge setting. The angles in the other columns are on the <a href="/guides/chainsaw-sharpening-angles/">sharpening-angles guide</a>. The grinder’s depth-gauge column matches these inch figures and is on the <a href="/guides/chainsaw-chain-grinding-angles/">grinding-angles guide</a>. What belongs here is which chains use which setting.</p>
+      <div class="tblwrap">
+        <table>
+          <thead><tr><th>Setting</th><th>Oregon types</th></tr></thead>
+          <tbody>
+            <tr><td class="num">.025″ (0.64 mm in the manual’s stamp example)</td><td>The chart’s 1/4″, .325″ low-profile, 3/8″ low-profile, .325″ and standard 3/8″ rows, including square-ground 72 / 75 CJ, CK and CL. Also .404″ square-ground 58CJ / CL and 59CJ / CK / CL, and .404″ 58 / 59 J and L. A note next to the manual’s .025″ diagram says every square-ground chisel chain is .025″.</td></tr>
+            <tr><td class="num">.030″</td><td>.404″ only: 27X and 27AX; 27R, RX and RA; 68LX and 68JX; square-ground 68CJ and 68CL. That last row is the one that disagrees with the “all square-ground chain is .025″” note. If the chain is 68CJ or 68CL, use the number stamped on the depth gauge.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="max-width:72ch">Most Oregon chains have the setting stamped on each depth gauge. The manual’s picture of that stamp is “025” for a .025″ (0.64 mm) setting. The tool you lay on the chain has to be the setting for that chain, not a single tool used on every loop in the shop. A .030″ chain checked with a .025″ tool will have its depth gauges filed too low. That is the low-depth-gauge failure above.</p>
+      <p class="src">Settings from Oregon’s <a href={ORE_CHART} rel="nofollow">Filing Angles chart</a> (2020) and the same table in the maintenance manual (pp. 30–31). The .025″ (0.64 mm) stamp example and the square-ground note are in “How to Set Depth Gauges” and the depth-gauge figure that follows it (pp. 25–29). Read 5 Nov 2026.</p>
+    </section>
+
+    <section class="block">
+      <h2>How far to file, and what to leave alone</h2>
+      <p style="max-width:72ch">Oregon’s procedure is a slot, not a measurement you invent. With the chain tensioned if it is still on the saw, lay the depth-gauge tool on the chain so one depth gauge sticks up through the slot. If it stands proud of the tool, a flat file takes it down level with the top of the tool. Stop there. The manual says never to file the depth gauge down enough to exceed the setting specified for that Oregon chain.</p>
+      <p style="max-width:72ch">After the hump is lowered, file the front corner back to the rounded or ramped shape it had. Oregon’s exception is a wide-track bent-over depth gauge: file that one from the top down only, and do not reshape it. On many chains it helps to stand the tool on end in front of the working corner so the flat file does not kiss the cutter. Bumper tie-straps and bumper drive links stay as they are. Oregon says not to file or alter their tops, because they are part of kickback reduction. The <a href="/guides/chainsaw-kickback/">kickback guide</a> is why those parts exist. STIHL’s 2025 catalog lists its own flat file for depth gauges, part 7010 871 0043, on the same accessories page as the round-file table. That part number is STIHL’s file, not a setting.</p>
+      <p class="src">Procedure from Oregon’s “How to Set Depth Gauges” (pp. 25–26). The STIHL flat-file part is the 2025 Full Line catalog, Accessories, catalog p. 167, the same page cited on the <a href="/guides/stihl-chain-file-size/">STIHL file-size guide</a>.</p>
+    </section>
+
+    <section class="block">
+      <h2>A crooked cut is not fixed by lowering the rakers</h2>
+      <p style="max-width:72ch">Oregon’s heading for a saw that cuts crooked, leans to one side or cuts unevenly has two causes, and neither is the depth gauge. One is damage to the cutters on one side, from the saw box or from dirt. The other is cutter top plates filed to different lengths. Both make the bar and chain bind, and both can leave the rails worn unevenly. The remedy is to file the damaged or long cutters back until the top plates match, and to square the rails if they are uneven. A separate row, about drive links worn thin on the sides, says the chain cuts crookedly when the bar rails have spread or one rail has worn low and the chain leans. That one is a bar repair or a new bar, and a new chain if the wear is already extensive.</p>
+      <p style="max-width:72ch">Depth gauges have their own pair of rows, and the symptoms are speed and grabbing, not lean. If the saw pulls to one side, check cutter length and the rails before you touch a raker. Unequal rakers are not the cause Oregon prints for that pull. The cutter work is the <a href="/guides/chainsaw-sharpening-angles/">sharpening guide</a>. The rails are <a href="/guides/chainsaw-bar-maintenance/">bar maintenance</a>. A chain that grabs because the depth gauges are already too low is at the end of <a href="/guides/when-to-replace-chainsaw-chain/">when to replace a chain</a>.</p>
+    </section>
+
+    <div class="callout"><b>⚠ The stamp on the depth gauge wins an argument</b><p>The filing chart and the square-ground note disagree on 68CJ / 68CL (.030″ in the chart, .025″ in the “all square-ground” note). Oregon also says most chains have the correct setting stamped on the depth gauge. File to that stamp. Do not average the two printed numbers.</p></div>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/chainsaw-sharpening-angles/">Sharpening angles</a> · <a href="/guides/chainsaw-chain-grinding-angles/">Grinding angles</a> · <a href="/guides/chainsaw-chain-file-size/">File size</a> · <a href="/guides/when-to-replace-chainsaw-chain/">When to replace a chain</a> · <a href="/guides/chainsaw-bar-maintenance/">Bar rails</a></p>
+    <ShopBlock groups={shop.groups} title="Depth-gauge tool and flat file (Amazon)" lead="The tool has to be the setting for your chain, .025″ or .030″. A flat file lowers the depth gauge. It does not sharpen the cutter." />
+  </div>
+</Base>

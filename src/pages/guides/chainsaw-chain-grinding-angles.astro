@@ -43,7 +43,7 @@ const faqs = [
   { q: 'What grinding wheel thickness do I need?', a: 'Oregon lists a 1/8″ wheel for 1/4″ (25AP), .325″ low-profile (80TXL) and 3/8″ low-profile (90 and 91 series) chain, and a 3/16″ wheel for .325″, standard 3/8″ and .404″ chain. Square-ground chain has no round wheel size in the chart.' },
   { q: 'Why is the grinding side-plate angle different from filing?', a: 'Oregon’s chart lists separate side-plate values for filing and for grinding, and does not give a reason. The side-plate angle is a result of the setup, not something you dial in directly. Oregon’s manual shows the same four terms (top-plate angle, down angle, side-plate angle and depth-gauge setting) for both methods.' },
   { q: 'What goes wrong if the grinder is set up wrong?', a: 'Oregon’s troubleshooting section gives grinder causes for four faults. The wrong top-plate angle or a wrongly sized wheel can leave too much or too little top-plate cutting angle. A wheel that is too small or grinds too deep leaves too much hook in the side plate. A wheel that is too large or does not grind deep enough leaves backslope on the side plate.' },
-  { q: 'Do I still need to file the depth gauges after grinding?', a: 'Yes. The depth-gauge setting in the grinding chart is the same as in the filing chart: .025″ on most types, .030″ on some .404″ chain (27X, 27AX, 27R, 68LX/JX, 68CJ/CL). Oregon sells a separate flat file, part 12211, for its depth-gauge tools.' },
+  { q: 'Do I still need to file the depth gauges after grinding?', a: 'Yes. The depth-gauge setting in the grinding chart is the same as in the filing chart: .025″ on most types, .030″ on some .404″ chain (27X, 27AX, 27R, 68LX/JX, 68CJ/CL). Oregon sells a separate flat file, part 12211, for its depth-gauge tools. When those gauges are too high or too low is the depth-gauge guide.' },
 ];
 const jsonld = [webPageLd('Chainsaw chain grinding angles and wheel thickness', path, desc, modified), faqLd(faqs)];
 const shop = guideShop('chainsaw-chain-grinding-angles');
@@ -89,7 +89,7 @@ const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Grinding angles',
     <p class="src">Oregon Safety &amp; Maintenance Manual, “Saw Chain Troubleshooting”, items 5 to 9 (pp. 40–41).</p>
 
     <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
-    <p><a href="/guides/chainsaw-sharpening-angles/">Filing angles</a> · <a href="/guides/chainsaw-chain-file-size/">File size by pitch</a> · <a href="/guides/stihl-chain-file-size/">STIHL file sizes</a> · <a href="/guides/when-to-replace-chainsaw-chain/">When to replace a chain</a> · <a href="/guides/chain-size-chart/">Chain identification chart</a></p>
+    <p><a href="/guides/chainsaw-sharpening-angles/">Filing angles</a> · <a href="/guides/chainsaw-depth-gauge/">Depth gauges</a> · <a href="/guides/chainsaw-chain-file-size/">File size by pitch</a> · <a href="/guides/stihl-chain-file-size/">STIHL file sizes</a> · <a href="/guides/when-to-replace-chainsaw-chain/">When to replace a chain</a> · <a href="/guides/chain-size-chart/">Chain identification chart</a></p>
     <ShopBlock groups={shop.groups} title="Grinder wheels &amp; depth-gauge tools (Amazon)" lead="Match the wheel thickness to your chain type in the table above." />
   </div>
 </Base>

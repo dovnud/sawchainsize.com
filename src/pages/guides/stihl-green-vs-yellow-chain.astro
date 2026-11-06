@@ -1,0 +1,121 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import { getModels, modelUrl, chainUrl, chainKey, pitchShort, gaugeShort, type Model } from '../../lib/data';
+import { webPageLd, faqLd } from '../../lib/ld';
+import dates from '../../data/page-dates.json';
+
+const path = '/guides/stihl-green-vs-yellow-chain/';
+const modified = (dates as Record<string, string>)[path];
+const CAT = 'https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf';
+const CHART17 = 'https://assets.unilogcorp.com/187/ITEM/DOC/Stihl_102205325_Catalog.pdf';
+
+const models = await getModels();
+type Mark = 'bar' | 'chain' | 'both' | 'triple';
+const barRe = /yellow-labeled bar|bar is also yellow|bars marked with an asterisk are yellow-labeled|yellow-labeled \.404″ chain and bar|yellow warning information supplied with the bars and chains/i;
+const chainRe = /yellow-labeled chain|double asterisk \(yellow|no green-labeled low-kickback chain|low-kickback \.404″ chain is not offered|\.404″ chain in this chart is yellow|yellow-labeled \.404″ chain and bar|yellow warning information supplied with the bars and chains/i;
+type Row = { m: Model; len: number; pitch: string; gauge: number; dl: number; loop: string; mark: Mark };
+const rows: Row[] = [];
+const held: { m: Model; len: number }[] = [];
+for (const m of models) {
+  if (m.data.brand !== 'stihl') continue;
+  for (const b of m.data.bars) {
+    if (!/yellow/i.test(b.note)) continue;
+    const bar = barRe.test(b.note);
+    const chain = chainRe.test(b.note);
+    if (!bar && !chain) throw new Error(`yellow note on ${m.id} matched neither bar nor chain: ${b.note.slice(0, 160)}`);
+    const mark: Mark = /triple-asterisk/i.test(b.note) ? 'triple' : bar && chain ? 'both' : bar ? 'bar' : 'chain';
+    const loop = b.chains.find((c) => c.role === 'oem')?.part_no ?? '';
+    if (b.status !== 'ok' || !b.pitch || !b.gauge || !b.drive_links) {
+      for (const len of b.lengths_in) held.push({ m, len });
+      continue;
+    }
+    if (!loop) throw new Error(`yellow row on ${m.id} has no OEM loop`);
+    for (const len of b.lengths_in) rows.push({ m, len, pitch: b.pitch, gauge: b.gauge, dl: b.drive_links, loop, mark });
+  }
+}
+rows.sort((a, b) => a.m.data.name.localeCompare(b.m.data.name) || a.len - b.len || a.dl - b.dl || a.pitch.localeCompare(b.pitch));
+if (rows.length < 20) throw new Error(`expected the yellow-label index to cover the MS 661 / MS 880 / MS 881 notes, got ${rows.length}`);
+const markText: Record<Mark, string> = {
+  bar: 'Yellow bar (asterisk)',
+  chain: 'Yellow chain',
+  both: 'Yellow bar and chain',
+  triple: 'Triple-asterisk yellow warning on the bars and chains',
+};
+const saws = [...new Set(rows.map((r) => r.m))];
+const dot404 = chainUrl(chainKey('404', 0.063));
+
+const desc = 'STIHL green labels mark low-kickback bars and chains. Yellow labels mark a higher kickback risk, including .404″ chain. Pitch, gauge and drive links still come from the bar.';
+const faqs = [
+  { q: 'What does a green STIHL chain label mean?', a: 'STIHL’s 2025 catalog says green marks bars and chains designed to reduce the risk of kickback injury and to comply with the ANSI B175.1 kickback standard. STIHL recommends green-labeled low-kickback chain for all users, and recommends 3/8″ sprockets with green-labeled chain and green-labeled reduced-kickback bars whenever possible.' },
+  { q: 'What does a yellow STIHL chain label mean?', a: 'Yellow marks products with an increased risk of kickback injury. STIHL says they are for people with extraordinary cutting needs and with experience and specialized training in dealing with kickback. The package carries a yellow warning. Read it. A yellow label does not change the pitch, gauge or drive-link count the bar takes.' },
+  { q: 'Why is .404″ chain yellow?', a: 'The 2025 chart’s double-asterisk note says recommended green-labeled low-kickback chains are not available in .404″ pitch, so the chart lists yellow-labeled chains. STIHL says those .404″ chains have reduced-kickback characteristics compared with other STIHL yellow-labeled chains, and still tells you to read the yellow warning. A .404″ bar also needs a .404″ drive sprocket.' },
+  { q: 'Does the label tell me which loop to buy?', a: 'No. The bar’s stamp still has to match pitch, gauge and drive links, and the drive sprocket has to match the pitch. On the MS 661, two different 28″ .050″ bars take 91 or 92 drive links. Both notes call the bar yellow. The color is the same and the loops are not.' },
+];
+const jsonld = [webPageLd('STIHL green vs yellow chain labels', path, desc, modified), faqLd(faqs)];
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'STIHL green vs yellow', path }];
+---
+<Base title="STIHL Green vs Yellow Chain Labels" description={desc} path={path} nav="chart" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'STIHL green vs yellow' }]} />
+      <h1>STIHL green vs yellow chain labels</h1>
+      <p class="lede">Green is STIHL’s low-kickback label. Yellow is the caution label for bars and chains with a higher kickback risk, and STIHL’s 2025 chart uses it for .404″ chain because a green low-kickback chain is not offered in that pitch. The label does not choose the loop. Pitch, gauge and drive links still come from the bar, and the drive sprocket has to match the pitch.</p>
+    </div>
+
+    <section class="block">
+      <h2>What the catalog’s color code says</h2>
+      <p style="max-width:72ch">On the Saw Chain Selection and Identification chart in the 2025 Full Line catalog, STIHL prints a color-code legend under the heading “ANSI/OPEI Chainsaw Kickback Standard.” Green (“go”) marks bars and chains designed to reduce the risk of kickback injury and to comply with the ANSI B175.1 kickback standard. STIHL says its low-kickback chain has a green tie strap that identifies each loop as low-kickback chain meeting that standard, and that those products are recommended for both experienced and inexperienced chainsaw users. The same catalog says, in more than one place, that STIHL recommends green-labeled low-kickback chains for all users.</p>
+      <p style="max-width:72ch">Yellow (“caution”) marks products with an increased risk of kickback injury. STIHL limits them to persons with extraordinary cutting needs and with experience and specialized training in dealing with kickback. That is a user restriction printed next to the color, not a performance grade you can ignore because the chain fits the bar.</p>
+      <p class="src">Source: STIHL, <a href={CAT} rel="nofollow">2025 Full Line catalog</a>, Saw Chain Selection and Identification chart (catalog pp. 166–167), “ANSI/OPEI Chainsaw Kickback Standard,” read 5 Nov 2026. The low-kickback symbol and the warning symbol on the saw-chain pages (catalog pp. 68–70) use the same green-label recommendation and the same “extraordinary cutting needs” warning.</p>
+    </section>
+
+    <section class="block">
+      <h2>The asterisk and the double asterisk</h2>
+      <p style="max-width:72ch">Two footnotes on that chart are why a long bar, or any .404″ loop, shows up yellow.</p>
+      <div class="tblwrap">
+        <table>
+          <thead><tr><th>Mark</th><th>What STIHL prints</th></tr></thead>
+          <tbody>
+            <tr><td class="num">*</td><td>Recommended green-labeled, reduced-kickback bars are not available in the lengths marked with an asterisk. For those bars, STIHL lists yellow-labeled bars. Read the yellow warning on the guide-bar package.</td></tr>
+            <tr><td class="num">**</td><td>Recommended green-labeled, low-kickback chains are not available in .404″ pitch. For .404″ chain, STIHL lists yellow-labeled chains which it says have reduced-kickback characteristics compared with other STIHL yellow-labeled chains. Read the yellow warning supplied with those chains. STIHL recommends 3/8″ sprockets with green-labeled low-kickback chain and green-labeled reduced-kickback bars whenever possible.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="max-width:72ch">A single asterisk is about the bar length: STIHL is not offering a green reduced-kickback bar in that length, so the chart lists a yellow bar. The chain on that bar can still be a low-kickback type. On the <a href="/saws/stihl-ms-661/">MS 661</a>, the long 3/8″ bars are asterisk yellow bars on 33 RS3 or 36 RS3 chain. RS3 carries STIHL’s low-kickback symbol on the saw-chain pages. The bar label and the chain symbol are answering different questions.</p>
+      <p style="max-width:72ch">A double asterisk is about the pitch. STIHL does not offer a green-labeled low-kickback chain in .404″. The loops in that column are 46 RS, which is Rapid Super without the low-kickback “3,” and the chart lists them yellow. The <a href={dot404}>.404″ · .063″</a> pages for the <a href="/saws/stihl-ms-661/">MS 661</a>, <a href="/saws/stihl-ms-880/">MS 880</a> and <a href="/saws/stihl-ms-881/">MS 881</a> are where those loops are written out. Moving a saw from 3/8″ to .404″ also means a .404″ drive sprocket. The <a href="/guides/chainsaw-drive-sprocket/">sprocket guide</a> is that rule, and <a href="/guides/chainsaw-kickback/">kickback</a> is what the ANSI standard is doing in the legend.</p>
+      <p class="src">Footnotes transcribed from the same 2025 chart (catalog pp. 166–167), read 5 Nov 2026. Drive-link counts on the MS 661 and MS 880 pages remain the counts from STIHL’s <a href={CHART17} rel="nofollow">2017 selection chart</a>, which uses the same asterisk language. The MS 881 counts are the 2025 chart.</p>
+    </section>
+
+    <hr class="rule" />
+
+    <section class="block">
+      <h2>Yellow rows already on this site</h2>
+      <p style="max-width:72ch">These are the verified STIHL rows whose notes record a yellow label. The wording in the last column is the note on that row, shortened to the mark it names. Open the saw page before you order: two bars of one length can take two drive-link counts, and a row that is not in this table was not marked yellow in our notes.</p>
+      <div class="tblwrap">
+        <table>
+          <thead><tr><th>Saw</th><th>Bar</th><th>Pitch · gauge</th><th>Loop</th><th>Drive links</th><th>What the note records</th></tr></thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr>
+                <td><a href={modelUrl(r.m)}>{r.m.data.name}</a></td>
+                <td class="num">{r.len}″</td>
+                <td class="num"><a href={chainUrl(chainKey(r.pitch, r.gauge))}>{pitchShort(r.pitch)} · {gaugeShort(r.gauge)}</a></td>
+                <td class="num">{r.loop}</td>
+                <td class="num">{r.dl}</td>
+                <td class="small">{markText[r.mark]}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="src">{rows.length} verified rows across {saws.map((m) => m.data.name).join(', ')}. Built from the notes on those saw pages. {held.length ? <>{held.map((h) => <>The {h.len}″ row on the <a href={modelUrl(h.m)}>{h.m.data.name}</a> is left out of the table because that row does not have a single verified drive-link count; its note still records a yellow label. </>)}</> : null}The <a href="/saws/stihl-ms-462/">MS 462</a> and <a href="/saws/stihl-ms-400/">MS 400</a> introductions also record asterisk-marked bars in the 2025 chart. Their lengths are on those pages, and their row notes do not repeat the word yellow, so they are not in this index.</p>
+    </section>
+
+    <div class="callout"><b>⚠ The color is not the fit</b><p>A green loop in the wrong pitch, the wrong gauge or the wrong drive-link count does not fit, and it is not a safer version of a yellow loop that does. Read the stamp, then use <a href="/guides/how-to-verify-chain-size/">how to verify chain size</a>. The type codes behind RS3 and RS are in <a href="/guides/stihl-chain-order-numbers/">STIHL order numbers</a>.</p></div>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/saws/stihl-ms-661/">MS 661</a> · <a href="/saws/stihl-ms-880/">MS 880</a> · <a href="/saws/stihl-ms-881/">MS 881</a> · <a href={dot404}>.404″ chain</a> · <a href="/guides/chainsaw-kickback/">Kickback</a> · <a href="/guides/chainsaw-drive-sprocket/">Drive sprocket</a> · <a href="/guides/stihl-chain-order-numbers/">STIHL order numbers</a> · <a href="/brands/stihl/">STIHL saws</a></p>
+  </div>
+</Base>

@@ -1,0 +1,130 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import { getModels, modelUrl, chainUrl, chainKey, pitchShort, gaugeShort, type Model } from '../../lib/data';
+import { webPageLd, faqLd } from '../../lib/ld';
+import dates from '../../data/page-dates.json';
+
+const path = '/guides/husqvarna-pixel-chain/';
+const modified = (dates as Record<string, string>)[path];
+const HUSQ = 'https://media.husqvarnagroup.com/original/DI-328359.pdf';
+
+// Pitch-column names in Husqvarna's fit-up guide, matched to the chain type printed on the same rows.
+const FAM = {
+  '325-mini-pixel': { pitch: '325', gauge: 0.043, file: '5/32', name: '.325″ Mini Pixel', chain: 'SP21G X-Cut', blurb: 'Narrow-kerf .325″ in .043″ gauge. The guide pairs these rows with X-Precision bars and a 5/32″ file.' },
+  '38-mini-pixel': { pitch: '3/8-lp', gauge: 0.043, file: '11/64', name: '3/8″ Mini Pixel', chain: 'H38', blurb: '3/8″ Mini in the narrow .043″ gauge. The guide’s name is “3/8 Mini Pixel,” on a laminate bar, with an 11/64″ file. H38 is not printed as X-Cut.' },
+  '38-mini': { pitch: '3/8-lp', gauge: 0.05, file: '5/32', name: '3/8″ Mini', chain: 'S93G X-Cut', blurb: 'Husqvarna’s low-profile 3/8″ in .050″ gauge. The pitch column says “3/8 Mini,” not Pixel. On the saws here the chain type is S93G X-Cut and the file is 5/32″.' },
+  '325-pixel': { pitch: '325', gauge: 0.05, file: '3/16', name: '.325″ Pixel', chain: 'SP33G X-Cut', blurb: 'Pixel, not Mini: .325″ in .050″ gauge. The guide prints SP33G X-Cut and a 3/16″ file. The same pitch and gauge also appear on the chart as plain “.325” with C33, which is not this row.' },
+} as const;
+type FamId = keyof typeof FAM;
+const famOf = (part: string): FamId | null => {
+  if (/\bSP21G\b/.test(part)) return '325-mini-pixel';
+  if (/\bH38\b/.test(part)) return '38-mini-pixel';
+  if (/\bS93G\b/.test(part)) return '38-mini';
+  if (/\bSP33G\b/.test(part)) return '325-pixel';
+  return null;
+};
+const models = await getModels();
+type Hit = { m: Model; len: number; dl: number };
+const hits = new Map<FamId, Hit[]>();
+for (const m of models) {
+  if (m.data.brand !== 'husqvarna') continue;
+  for (const b of m.data.bars) {
+    if (b.status !== 'ok' || !b.pitch || b.gauge == null || !b.drive_links || !b.file_size) continue;
+    const ids = [...new Set(b.chains.filter((c) => c.role === 'oem' && c.brand.toLowerCase() === 'husqvarna').map((c) => famOf(c.part_no)).filter((x): x is FamId => !!x))];
+    for (const id of ids) {
+      const spec = FAM[id];
+      if (b.pitch !== spec.pitch || b.gauge !== spec.gauge || b.file_size !== spec.file) throw new Error(`${m.id} ${b.lengths_in} ${id} drifted from the fit-up pitch/gauge/file`);
+      if (!hits.has(id)) hits.set(id, []);
+      for (const len of b.lengths_in) hits.get(id)!.push({ m, len, dl: b.drive_links });
+    }
+  }
+}
+const order: FamId[] = ['325-mini-pixel', '38-mini-pixel', '38-mini', '325-pixel'];
+for (const id of order) if (!hits.get(id)?.length) throw new Error(`no saws for ${id}`);
+const grouped = (id: FamId) => {
+  const by = new Map<string, { m: Model; pairs: { len: number; dl: number }[] }>();
+  for (const h of hits.get(id)!) {
+    if (!by.has(h.m.id)) by.set(h.m.id, { m: h.m, pairs: [] });
+    const g = by.get(h.m.id)!;
+    if (!g.pairs.some((p) => p.len === h.len && p.dl === h.dl)) g.pairs.push({ len: h.len, dl: h.dl });
+  }
+  return [...by.values()].map((g) => ({ ...g, pairs: g.pairs.sort((a, b) => a.len - b.len || a.dl - b.dl) })).sort((a, b) => a.m.data.name.localeCompare(b.m.data.name));
+};
+const tables = order.map((id) => ({ id, spec: FAM[id], rows: grouped(id) }));
+const both = tables.filter((t) => t.id === '325-mini-pixel' || t.id === '38-mini').flatMap((t) => t.rows.map((r) => r.m.id));
+const dual = [...new Set(both.filter((id, i) => both.indexOf(id) !== i))];
+if (!dual.includes('husqvarna-540-xp-mark-iii')) throw new Error('540 XP Mark III should be in both Mini Pixel .043 and 3/8 Mini .050');
+
+const desc = 'Husqvarna Pixel chain names from the Bar & Chain Fit-up Guide: .325″ Mini Pixel and 3/8″ Mini Pixel are .043″, .325″ Pixel and 3/8″ Mini are .050″, and which saws on this site use each.';
+const faqs = [
+  { q: 'What is Husqvarna Pixel chain?', a: 'In the Bar & Chain Fit-up Guide (cover year 2027), Pixel is a pitch-column name, not a separate pitch. “.325 Pixel” is .325″ pitch in .050″ gauge (SP33G X-Cut, 3/16″ file). “.325 Mini Pixel” and “3/8 Mini Pixel” are the narrow .043″ chains. The guide’s saw-chain legend calls Pixel narrow-kerf, low-kickback, LowVib.' },
+  { q: 'Is 3/8″ Mini the same as Mini Pixel?', a: 'No. The guide’s “3/8 Mini” rows are .050″ gauge, S93G X-Cut on the saws we list, with a 5/32″ file. “3/8 Mini Pixel” is .043″ gauge, H38, with an 11/64″ file. Same 3/8″ low-profile pitch family, different groove. A .050″ loop does not belong in a .043″ bar.' },
+  { q: 'What does X-Cut mean?', a: 'X-Cut is the chain-type name Husqvarna prints in front of SP21G, SP33G and S93G in the fit-up guide’s chain column. It is not a pitch and it is not a gauge. H38, the 3/8″ Mini Pixel chain, is listed without the word X-Cut.' },
+  { q: 'Can I put Mini Pixel chain on a 3/8″ Mini bar?', a: 'Not as a chain-only swap. On the 540 XP Mark III the fit-up guide approves both systems at 14″ and 16″, on different bars: X-Precision with .325″ Mini Pixel .043″, and X-Force with 3/8″ Mini .050″. Pitch and gauge both change, so the bar, the chain and the drive sprocket change together.' },
+];
+const jsonld = [webPageLd('Husqvarna Pixel and Mini Pixel chain', path, desc, modified), faqLd(faqs)];
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Husqvarna Pixel chain', path }];
+const Q = '″';
+---
+<Base title="Husqvarna Pixel Chain: Mini Pixel vs .050″ Mini" description={desc} path={path} nav="chart" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Husqvarna Pixel chain' }]} />
+      <h1>Husqvarna Pixel chain</h1>
+      <p class="lede">Husqvarna’s fit-up guide uses “Pixel” for three different pitch-column names. .325″ Mini Pixel and 3/8″ Mini Pixel are .043″ gauge. .325″ Pixel is .050″ gauge, and it is not the same chain as 3/8″ Mini, which is also .050″ but is not called Pixel. X-Cut is the chain-type name on SP21G, SP33G and S93G. Switching between Mini Pixel and 3/8″ Mini changes the bar, the chain and the sprocket.</p>
+    </div>
+
+    <section class="block">
+      <h2>The names in the fit-up guide</h2>
+      <p style="max-width:72ch">The Bar &amp; Chain Fit-up Guide, cover year 2027, is the chart already cited on the Husqvarna saw pages. Its pitch column is where Pixel, Mini Pixel and Mini are defined. The saw-chain legend beside the bar types prints three labels: “Mini (Low Profile), LowKickback, LowVib,” “PIXEL (narrow kerf, Low Kickback, LowVib,” and “Low Kickback, LowVib.” The pitch column is the part that ties a name to a gauge.</p>
+      <div class="tblwrap">
+        <table>
+          <thead><tr><th>Pitch column</th><th>Gauge</th><th>Chain type</th><th>File</th><th>What it is</th></tr></thead>
+          <tbody>
+            {tables.map((t) => (
+              <tr>
+                <td>{t.spec.name}</td>
+                <td class="num"><a href={chainUrl(chainKey(t.spec.pitch, t.spec.gauge))}>{gaugeShort(t.spec.gauge)}</a></td>
+                <td class="num">{t.spec.chain}</td>
+                <td class="num">{t.spec.file}{Q}</td>
+                <td class="small">{t.spec.blurb}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p style="max-width:72ch">Two neighbors are easy to buy by mistake. Plain “.325” in the same guide, without the word Pixel, is the C33 X-Cut (and sometimes S35G or C35 at .058″) on saws such as the <a href="/saws/husqvarna-545/">545</a>. C33 is .325″ and .050″, the same pitch and gauge as SP33G, so it is not a sprocket change. It is a different chain type on a bar the guide also lists for SP33G. And standard 3/8″, the full-size chain on a saw such as the <a href="/saws/husqvarna-460-rancher/">460 Rancher</a>, is not 3/8″ Mini. Mini is the low-profile family. <a href="/guides/3-8-low-profile-vs-standard-chain/">3/8″ low profile vs standard</a> is that split under Oregon’s numbers.</p>
+      <p class="src">Names, gauges, chain types and file sizes read from Husqvarna’s <a href={HUSQ} rel="nofollow">Bar &amp; Chain Fit-up Guide</a> (cover year 2027; the PDF at the URL the saw pages already cite), pitch column and chain column, read 5 Nov 2026. The guide’s header says the rows are certified / approved bar and chain combinations. Bar-type blurbs on the same page: Laminate is the standard laminated bar for medium to light duty; X-Precision is described as optimized for arborists; X-Force is a laminated bar with enhanced durability.</p>
+    </section>
+
+    <hr class="rule" />
+
+    {tables.map((t) => (
+      <section class="block">
+        <h2>{t.spec.name}</h2>
+        <p style="max-width:72ch">{t.spec.blurb} {pitchShort(t.spec.pitch)} · {gaugeShort(t.spec.gauge)}. The saws below are the verified rows on this site whose OEM chain is that type. A length that is flagged on the saw page is not in the list.</p>
+        <div class="tblwrap">
+          <table>
+            <thead><tr><th>Saw</th><th>Bars on this system</th></tr></thead>
+            <tbody>
+              {t.rows.map((r) => (
+                <tr>
+                  <td><a href={modelUrl(r.m)}>{r.m.data.name}</a></td>
+                  <td class="num">{r.pairs.map((p) => `${p.len}${Q} · ${p.dl} DL`).join(', ')}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    ))}
+    <p class="src">Tables are generated from verified Husqvarna rows. The build checks each chain type against the pitch, gauge and file in the fit-up guide. The 130’s 16″ row is not in the 3/8″ Mini table: that row is flagged on the <a href="/saws/husqvarna-130/">130 page</a> and does not have a single verified drive-link count. Pole-saw rows in the same guide, including some 3/8″ Mini loops, are on <a href="/guides/pole-saw-chain-size/">pole saw chain size</a>.</p>
+
+    <div class="callout"><b>⚠ The 540 XP Mark III is both systems</b><p>{dual.length ? <>The saw{dual.length > 1 ? 's' : ''} listed under both .325″ Mini Pixel and 3/8″ Mini: {dual.map((id, i) => <>{i ? ', ' : ''}<a href={`/saws/${id}/`}>{tables.flatMap((t) => t.rows).find((r) => r.m.id === id)!.m.data.name}</a></>)}.</> : null} On the 540 XP Mark III the guide approves an X-Precision bar with SP21G (.325″ Mini Pixel, .043″, 59 links at 14″ and 64 at 16″) and an X-Force bar with S93G (3/8″ Mini, .050″, 52 links at 14″ and 56 at 16″). The pitch has to match the drive sprocket and the gauge has to match the groove. Changing systems is a bar, a chain and a sprocket, not a chain swap. The <a href="/saws/husqvarna-t540-xp-mark-iii/">T540 XP Mark III</a> uses the same SP21G bars and chains for the Mini Pixel side, and does not list the 3/8″ Mini alternative.</p></div>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/saws/husqvarna-540-xp-mark-iii/">540 XP Mark III</a> · <a href="/saws/husqvarna-t540-xp-mark-iii/">T540 XP Mark III</a> · <a href="/chain/325-043/">.325″ · .043″</a> · <a href="/chain/3-8-lp-043/">3/8″ low profile · .043″</a> · <a href="/chain/3-8-lp-050/">3/8″ low profile · .050″</a> · <a href="/guides/chainsaw-chain-gauge/">Gauge</a> · <a href="/guides/chainsaw-drive-sprocket/">Drive sprocket</a> · <a href="/brands/husqvarna/">Husqvarna saws</a></p>
+  </div>
+</Base>

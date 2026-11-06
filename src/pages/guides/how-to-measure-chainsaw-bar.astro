@@ -1,0 +1,65 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import { webPageLd, faqLd } from '../../lib/ld';
+import dates from '../../data/page-dates.json';
+
+const path = '/guides/how-to-measure-chainsaw-bar/';
+const modified = (dates as Record<string, string>)[path];
+const ORE = 'https://apps.oregonproducts.com/pdfs/OregonMMANUAL_EN_A106971ab.pdf';
+const ORE_FAQ = 'https://www.oregonproducts.com/en_gb/faq';
+const CAT = 'https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf';
+
+const desc = 'How to measure a chainsaw bar: Oregon’s called cutting length versus the length of the steel, and STIHL’s note that listed length can differ from effective cutting length.';
+const faqs = [
+  { q: 'How do you measure a chainsaw bar?', a: 'Oregon measures the called length, also labeled cutting length, from the front of the chainsaw to the tip of the bar with the bar mounted. That is not the overall length of the steel. Oregon’s FAQ rounds the cutting length to the nearest inch and gives a 16-inch called bar whose overall length may be about 20 inches.' },
+  { q: 'Is the length on the box the cutting length?', a: 'STIHL says the actual listed guide-bar length can vary from the effective cutting length depending on which powerhead the bar is installed on. On pole pruners the same catalog ties that difference to the gear-head design. Order the chain from the drive-link count on the bar, not from the inch number alone.' },
+  { q: 'Where is the length stamped?', a: 'STIHL’s catalog calls the stamp the service field on the bar and lists four values there: bar length, chain pitch, number of drive links, and groove width. Length is the first of those four. If the stamp is worn off, the mounted measurement is the fallback, and the drive-link count still has to be counted or read from a legible stamp.' },
+  { q: 'Can I hold a tape on the bar and buy that many inches of chain?', a: 'No. A tape from tip to tail is Oregon’s overall length, which is longer than the called length. Even the called length does not pick the chain. Two bars with the same called length can need different drive-link counts, including two 28-inch bars on the STIHL MS 661.' },
+];
+const jsonld = [webPageLd('How to measure a chainsaw bar', path, desc, modified), faqLd(faqs)];
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Measure a chainsaw bar', path }];
+---
+<Base title="How to Measure a Chainsaw Bar" description={desc} path={path} nav="verify" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Measure a chainsaw bar' }]} />
+      <h1>How to measure a chainsaw bar</h1>
+      <p class="lede">Measure the called length with the bar mounted: from the front of the saw to the tip, which Oregon also calls the cutting length. A tape along the whole steel is the overall length, and Oregon says those two numbers are different. STIHL adds a third warning: the listed length can differ from the effective cutting length once the bar is on a particular powerhead. None of the three numbers replaces the drive-link count on the stamp.</p>
+    </div>
+
+    <section class="block">
+      <h2>Three lengths that get mixed up</h2>
+      <div class="tblwrap">
+        <table>
+          <thead><tr><th>Name</th><th>What it measures</th><th>Who defines it</th></tr></thead>
+          <tbody>
+            <tr><td>Called length, also cutting length</td><td>Bar mounted. From the front of the chainsaw to the tip of the guide bar. Oregon’s FAQ then rounds that distance to the nearest inch.</td><td>Oregon maintenance manual, “How to Order Replacement Saw Chain,” and the Oregon FAQ</td></tr>
+            <tr><td>Overall length</td><td>The steel itself, tail included. Longer than the called length. Oregon’s FAQ example is a 16-inch called bar whose overall length may be about 20 inches.</td><td>The same Oregon manual figure, and the FAQ example</td></tr>
+            <tr><td>Listed length vs effective cutting length</td><td>The inch STIHL prints for a bar can differ from the effective cutting length, depending on which powerhead it is installed on. On pole pruners, STIHL ties the same difference to the gear head.</td><td>STIHL 2025 Full Line catalog, chainsaw spec tables and the chain-selection chart; pole-pruner spec table for the gear head</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="max-width:72ch">Oregon’s ordering page draws the called length and the overall length on one picture and states the difference in a note: the called length is not the overall length. The called length is the distance from the front of the chainsaw to the tip. That is the inch a dealer asks for. It is also the inch on our <a href="/bars/">bar-length pages</a>. It is not a measurement you take off the bar while it is in the box, tip to tail, unless you are trying to learn the overall length on purpose.</p>
+      <p style="max-width:72ch">STIHL’s note is a different correction, and it shows up twice in the 2025 catalog. The chainsaw specification tables and the chain-selection chart both say the actual listed guide-bar length can vary from the effective cutting length based on which powerhead the bar is installed on. The pole-pruner table uses the same sentence with one change: the difference is based on the gear-head design. A 12″ or 14″ figure in a STIHL chart is the listed length. The wood you can actually cut with that bar on that saw or that pole head can be shorter. <a href="/guides/pole-saw-chain-size/">Pole saw chain size</a> is where the gear-head case is worked for the pole saws we list. <a href="/guides/chainsaw-bar-maintenance/">Bar maintenance</a> is where the same called-length idea sits next to rail wear.</p>
+      <p class="src">Sources: Oregon <a href={ORE} rel="nofollow">Maintenance and Safety Manual</a>, “How to Order Replacement Saw Chain” (the called-length / overall-length figure); Oregon <a href={ORE_FAQ} rel="nofollow">FAQ</a>, “How do I know what size guide bar I have?”, read 5 Nov 2026; STIHL <a href={CAT} rel="nofollow">2025 Full Line catalog</a>, the listed-length notes on the chainsaw spec tables, the chain chart (catalog pp. 166–167) and the pole-pruner spec table, read 5 Nov 2026.</p>
+    </section>
+
+    <section class="block">
+      <h2>Read the length off the stamp first</h2>
+      <p style="max-width:72ch">STIHL’s “Finding the right chain” page says the service field on the bar gives four values, in this order: bar length, chain pitch, the number of drive links, and groove width (the gauge). Length is item 01. If that stamp is readable, it is the length STIHL expects you to use, and it already sits next to the drive-link count for the loop. Cleaning the stamp and counting links when the numbers are faint is <a href="/guides/how-to-verify-chain-size/">how to verify chain size</a>. This page is only the length half of that stamp.</p>
+      <ol class="steps">
+        <li><strong>Use the stamp if you can read it.</strong> Bar length is the first figure in STIHL’s service field. Pitch, drive links and groove width are the other three. Match all four. A length by itself is not a chain.</li>
+        <li><strong>If you have to measure, mount the bar.</strong> Called length starts at the front of the saw body, not at the tail of the bar, and ends at the tip. Round to the nearest inch the way Oregon’s FAQ describes, and treat the result as the called length, not as a drive-link count.</li>
+        <li><strong>Do not measure tip to tail and call it the bar size.</strong> That tape is the overall length. Oregon’s own example puts it several inches past the called length.</li>
+        <li><strong>Then get the drive links from the same stamp, or count them.</strong> Listed length and effective cutting length can disagree, and two bars of one called length can still take two loops. The count is <a href="/guides/how-to-count-drive-links/">how to count drive links</a>.</li>
+      </ol>
+    </section>
+
+    <div class="callout"><b>⚠ Same inches, different loops</b><p>On the <a href="/saws/stihl-ms-661/">MS 661</a>, STIHL lists two 28″ bars in 3/8″ .050″, one with 91 drive links and one with 92, because the nose sprockets differ. Measuring 28″ does not tell those bars apart. <a href="/guides/longer-bar-on-chainsaw/">Longer bar on a chainsaw</a> is the question of whether a length is even approved for the saw. The chain for a length you already have is the count on that bar.</p></div>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/how-to-verify-chain-size/">Verify the stamp</a> · <a href="/guides/how-to-count-drive-links/">Count drive links</a> · <a href="/guides/longer-bar-on-chainsaw/">Longer bar</a> · <a href="/guides/chainsaw-bar-maintenance/">Bar maintenance</a> · <a href="/guides/pole-saw-chain-size/">Pole saw bars</a> · <a href="/bars/">Bars by called length</a></p>
+  </div>
+</Base>
