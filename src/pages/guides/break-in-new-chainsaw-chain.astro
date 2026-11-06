@@ -1,0 +1,66 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+
+const path = '/guides/break-in-new-chainsaw-chain/';
+const modified = (dates as Record<string, string>)[path];
+const shop = guideShop('break-in-new-chainsaw-chain');
+const ORE = 'https://apps.oregonproducts.com/pdfs/OregonMMANUAL_EN_A106971ab.pdf';
+
+const desc = 'How to break in a new chainsaw chain, from Oregon’s manual: oil it, leave it off a worn sprocket, run at half throttle before any cut, keep the first cuts light, and retension after it cools.';
+const faqs = [
+  { q: 'How do you break in a new chainsaw chain?', a: 'Oregon’s manual lists five steps. Oil the chain before use. Do not run it on a worn rim or spur, especially when the chain is new, and replace that sprocket every two chains or sooner. Run at half throttle for several minutes before cutting so oil reaches the bar and the chain, and let the saw warm up. Stop, let the chain cool, and reset tension often. Keep the first cuts light, with extra oil, and do not lean on the saw.' },
+  { q: 'Do I tension a new chain before it has run?', a: 'Yes. The chain goes on with the engine off, and tension is set while the chain is cool, before the first cut. Oregon’s break-in then says to stop again, let it cool, and adjust often once it has been running. The tension chapter of the same manual says a chain that heat has lengthened is left alone until it cools, because it shrinks and can damage the bar and the chain.' },
+  { q: 'Can a new chain go on the sprocket I already have?', a: 'Only if that sprocket is not worn out. Oregon’s break-in says never to run any chain on a worn rim or spur, especially a new chain. The drive-sprocket chapter says not to run an old chain on a new sprocket or a new chain on an old sprocket, and to use two new chains in rotation with each new sprocket. Replace the sprocket every two chains, or sooner.' },
+  { q: 'How soon will a new chain need another tension check?', a: 'During the running-in, not after a long session. Oregon says to adjust often in operation, and the tension chapter says to pay particular attention through the first half hour. If the chain loosens, stop and let the saw cool before you turn the adjuster. The first cuts stay light, with extra oil on the bar and chain.' },
+  { q: 'Does break-in change pitch, gauge or drive links?', a: 'No. Break-in is oil, a sound sprocket, a gentle first run, and tension. The loop still has to match the bar stamp. A chain with the wrong drive-link count cannot be bedded in until it fits.' },
+];
+const jsonld = [webPageLd('Break in a new chainsaw chain', path, desc, modified), faqLd(faqs)];
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Break in a new chain', path }];
+---
+<Base title="Break In a New Chainsaw Chain" description={desc} path={path} nav="verify" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Break in a new chain' }]} />
+      <h1>Break in a new chainsaw chain</h1>
+      <p class="lede">Tension the new chain while it is cold, then run moderate first cuts and set the tension again as the loop stretches. Oregon’s break-in says to oil the chain, warm the saw at half throttle before you cut, and keep those first cuts light. A new chain does not go on a worn sprocket.</p>
+    </div>
+
+    <section class="block">
+      <h2>Oregon’s five steps, in order</h2>
+      <p style="max-width:72ch">The manual gives the section a direct title: how to break in a new saw chain. It says the life of the chain can be extended by a few steps taken before you use it. They are numbered.</p>
+      <ol class="steps">
+        <li><strong>Oil the chain before it runs.</strong> Oregon also recommends dipping the chain in bar-and-chain oil, or drizzling oil along the chain on the bar, so the rivets and the bearing surfaces are wet. That oil is bar-and-chain oil. The tank rules are <a href="/guides/chainsaw-bar-and-chain-oil/">bar and chain oil</a>.</li>
+        <li><strong>Look at the drive sprocket before the chain goes on.</strong> The manual says never to run any chain on a worn rim or spur, and it singles out a new chain. Replace the rim or spur after every two chains, or sooner. The drive-sprocket chapter repeats the pair: do not put an old chain on a new sprocket, or a new chain on an old sprocket. Use two new chains in rotation so they wear with the sprocket. Details are <a href="/guides/chainsaw-drive-sprocket/">drive sprocket and pitch</a>.</li>
+        <li><strong>Half throttle, several minutes, no wood yet.</strong> Oregon’s reason is oil delivery. The new chain runs at half throttle long enough for oil to reach the bar and the chain, and the saw and the cutting system warm up fully. Cutting starts after that, not instead of it.</li>
+        <li><strong>Stop, cool the chain, and set tension again.</strong> The break-in list points this step at the tension procedure. You adjust often once the saw is in use. The tension chapter says to recheck through the first half hour, and if the chain loosens, to stop and let the saw cool before the next adjustment. Heat lengthens a chain. Setting it while it is long leaves it too tight after it shrinks. The wrench sequence and the snap test are <a href="/guides/chainsaw-chain-tension/">how to tension a chain</a>.</li>
+        <li><strong>The first cuts stay light.</strong> Extra oil on the cutting system during those cuts. Oregon says not to apply heavy pressure. A new loop is not bedded in by burying the bar and forcing the cut.</li>
+      </ol>
+      <p class="src">Oregon <a href={ORE} rel="nofollow">Maintenance and Safety Manual</a>, “How to Break in a New Saw Chain,” the tension chapter’s half-hour note, and drive-sprocket maintenance item 7 (two chains in rotation, replace every two chains or sooner).</p>
+    </section>
+    <ShopBlock groups={shop.groups} compact />
+
+    <section class="block">
+      <h2>What those steps are protecting</h2>
+      <p style="max-width:72ch">A new chain’s rivets and straps settle under the first load. Oregon’s response is oil at the rivets, a sprocket whose teeth are not already hooked, and a light cut so the chain is not asked to do full work while it is still seating. The tension checks are how you notice the stretch. They are not a sign the loop was the wrong length, provided the drive-link count matched the bar when you installed it. Install order, cutters forward on top of the bar and the nuts only finger-tight until tension is set, is <a href="/guides/how-to-install-chainsaw-chain/">how to install a chain</a>.</p>
+      <p style="max-width:72ch">The sprocket rule is the one that ruins a new loop fastest. Oregon prints it in the break-in list and again with the sprocket tasks. A rim or spur that has already run two chains, or that shows the wear the troubleshooting page describes, comes off before the new chain goes on. Tooth count and pitch still have to match the chain. This page does not assign a tooth count to a pitch, because the clutch differs by saw.</p>
+    </section>
+
+    <section class="block">
+      <h2>The chain you are breaking in is still a spec</h2>
+      <p style="max-width:72ch">Break-in assumes the box matched the stamp: pitch, gauge, drive links. An 18″ bar and a 20″ bar on one saw are often different counts. A .043″ narrow-kerf loop and a .050″ loop are different grooves even when a catalog calls both of them a 16″ chain. Confirm the three numbers with <a href="/guides/how-to-verify-chain-size/">the verification guide</a> if the stamp is the thing you trust, or with <a href="/guides/oregon-chain-numbers/">Oregon’s number pattern</a> if the only clue left is a code such as 91PX056 or S56.</p>
+      <p style="max-width:72ch">If the chain will not pull by hand once it is cool, or a drive link will not stay in the groove, more break-in time will not fix it. Look at the count, the gauge, and whether the bar rails are still fit to hold a new loop. <a href="/guides/when-to-replace-chainsaw-bar/">When to replace a bar</a> is that last check. A bar with a shallow groove or blue rails will eat the chain you just oiled.</p>
+    </section>
+
+    <div class="callout"><b>⚠ Half throttle means no cutting yet</b><p>Oregon’s third step is several minutes at half throttle before any cutting, so oil is on the bar and the chain and the saw is warm. The light cuts come after that. Forcing the first cut at full throttle skips both the oil step and the light-cut step.</p></div>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/chainsaw-chain-tension/">Tension</a> · <a href="/guides/how-to-install-chainsaw-chain/">Install</a> · <a href="/guides/chainsaw-drive-sprocket/">Drive sprocket</a> · <a href="/guides/chainsaw-bar-and-chain-oil/">Bar oil</a> · <a href="/guides/when-to-replace-chainsaw-chain/">When to replace a chain</a></p>
+    <ShopBlock groups={shop.groups} title="Bar oil and a scrench (Amazon)" lead="Oil the chain before the first run. The scrench is for the cold tension check after the chain has stretched. Look up the loop on this site before you buy a replacement." />
+  </div>
+</Base>

@@ -67,6 +67,10 @@ const GUIDE_LINK_CAP: Record<string, number> = {
   'how-to-measure-chainsaw-bar': 3,
   'chainsaw-depth-gauge': 6,
   'husqvarna-pixel-chain': 3,
+  'when-to-replace-chainsaw-bar': 2,
+  'full-kerf-vs-narrow-kerf-chain': 3,
+  'oregon-chain-numbers': 2,
+  'break-in-new-chainsaw-chain': 3,
 };
 const LINK_CAP: Record<string, number> = {
   'model:husqvarna-t540-xp-mark-iii': 3,
@@ -288,6 +292,18 @@ export function guideShop(slug: string): { groups: ShopGroup[]; count: number } 
       break;
     case 'chainsaw-bar-maintenance':
       add('Bar, oil and dressing tools', [barOilLink(), BAR_DRESS(), product('scabbard-18-22'), product('kit-field'), LOOKUP()]);
+      break;
+    case 'when-to-replace-chainsaw-bar':
+      add('Dress what you can still save', [BAR_DRESS(), barOilLink()]);
+      break;
+    case 'full-kerf-vs-narrow-kerf-chain':
+      add('Three gauges that do not share a bar', [CHAIN_90(), CHAIN_91(), CHAIN_72()], true);
+      break;
+    case 'oregon-chain-numbers':
+      add('Match the family number, then the drive-link count', [CHAIN_91(), CHAIN_72()]);
+      break;
+    case 'break-in-new-chainsaw-chain':
+      add('Oil and the wrench for the first retension', [LOOKUP(), SCRENCH(), barOilLink()]);
       break;
     case 'why-a-chainsaw-chain-comes-off':
       add('The parts that hold the chain on', [LOOKUP(), SCRENCH(), CALIPER(), SPROCKET(), barOilLink(), glovesLink()]);
