@@ -1,0 +1,201 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { getModels, modelUrl, chainUrl, chainKey, pitchShort, gaugeShort, type Model, type Bar } from '../../lib/data';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+
+const path = '/guides/oregon-chain-numbers/';
+const modified = (dates as Record<string, string>)[path];
+const shop = guideShop('oregon-chain-numbers');
+const ORE = 'https://apps.oregonproducts.com/pdfs/OregonMMANUAL_EN_A106971ab.pdf';
+const ORE_ID = 'https://www.oregonproducts.com/en/product-support/chainsaw/saw-chain-terminology/c/saw-chain-terminology-s';
+const TSC = 'https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf';
+const S56 = 'https://www.oregonproducts.com/en/advancecut%C3%A2%E2%80%9E%C2%A2-saw-chain,-16%22/p/s56';
+
+/**
+ * Oregon's drive-link number table (Maintenance and Safety Manual, "Saw Chain Drive Link Number Identification").
+ * The two digits are pitch and gauge. Letters after them are the cutter series, not a second gauge.
+ * 80 is Oregon's ".325 Low Profile" row. This site's pitch list has no separate key for that row; none of our parts use 80.
+ */
+const FAMILY: Record<string, { pitch: string; gauge: number; note: string }> = {
+  '25': { pitch: '1/4', gauge: 0.05, note: '1/4″' },
+  '80': { pitch: '325', gauge: 0.043, note: '.325″ low profile' },
+  '90': { pitch: '3/8-lp', gauge: 0.043, note: '3/8″ low profile' },
+  '91': { pitch: '3/8-lp', gauge: 0.05, note: '3/8″ low profile' },
+  '20': { pitch: '325', gauge: 0.05, note: '.325″' },
+  '95': { pitch: '325', gauge: 0.05, note: '.325″' },
+  '21': { pitch: '325', gauge: 0.058, note: '.325″' },
+  '22': { pitch: '325', gauge: 0.063, note: '.325″' },
+  '72': { pitch: '3/8', gauge: 0.05, note: '3/8″' },
+  '73': { pitch: '3/8', gauge: 0.058, note: '3/8″' },
+  '75': { pitch: '3/8', gauge: 0.063, note: '3/8″' },
+  '26': { pitch: '404', gauge: 0.058, note: '.404″' },
+  '58': { pitch: '404', gauge: 0.058, note: '.404″' },
+  '27': { pitch: '404', gauge: 0.063, note: '.404″' },
+  '59': { pitch: '404', gauge: 0.063, note: '.404″' },
+  '68': { pitch: '404', gauge: 0.063, note: '.404″' },
+};
+
+/** Retail loops in Oregon's selection guide: one letter, then the drive-link count. Readings below are the rows this site cites. */
+const RETAIL: Record<string, { pitch: string; gauge: number; blurb: string }> = {
+  S: { pitch: '3/8-lp', gauge: 0.05, blurb: 'AdvanceCut, 3/8″ low profile .050″' },
+  R: { pitch: '3/8-lp', gauge: 0.043, blurb: '3/8″ low profile .043″' },
+  D: { pitch: '3/8', gauge: 0.05, blurb: 'standard 3/8″ .050″' },
+  M: { pitch: '325', gauge: 0.05, blurb: '.325″ .050″, printed under Narrow Kerf' },
+};
+
+type Decoded = { token: string; pitch: string; gauge: number; dl: number | null; kind: 'loop' | 'family' | 'retail'; series: string };
+const decode = (token: string): Decoded | null => {
+  const numbered = token.match(/^(M)?(\d{2})([A-Z]{1,4})(?:-?(\d{3})([A-Z])?)?$/);
+  if (numbered) {
+    const fam = FAMILY[numbered[2]];
+    if (!fam) throw new Error(`Oregon code ${token} uses family ${numbered[2]}, which is not in the manual's number table`);
+    return { token, pitch: fam.pitch, gauge: fam.gauge, dl: numbered[4] ? Number(numbered[4]) : null, kind: numbered[4] ? 'loop' : 'family', series: `${numbered[1] ?? ''}${numbered[2]}${numbered[3]}` };
+  }
+  const retail = token.match(/^([SRDM])(\d{2,3})$/);
+  if (retail) {
+    const spec = RETAIL[retail[1]];
+    return { token, pitch: spec.pitch, gauge: spec.gauge, dl: Number(retail[2]), kind: 'retail', series: retail[1] };
+  }
+  return null;
+};
+const tokensOf = (part: string) => part
+  .replace(/\bfamily\b/ig, ' ')
+  .split(/[\s,()/]+/)
+  .map((t) => t.trim())
+  .filter((t) => t && !/^(with|drive|links|stone|speedcut)$/i.test(t));
+
+type Hit = { m: Model; bar: Bar; part: string; decoded: Decoded };
+const models = await getModels();
+const hits: Hit[] = [];
+const skipped: { m: Model; part: string }[] = [];
+for (const m of models) {
+  for (const bar of m.data.bars) {
+    for (const c of bar.chains) {
+      if (c.brand.toLowerCase() !== 'oregon') continue;
+      const tokens = tokensOf(c.part_no);
+      const decoded = tokens.flatMap((t) => { const d = decode(t); return d ? [d] : []; });
+      if (!decoded.length) { skipped.push({ m, part: c.part_no }); continue; }
+      for (const d of decoded) {
+        if (bar.pitch && d.pitch !== bar.pitch) throw new Error(`${m.id} Oregon ${c.part_no} (${d.token}) decodes to pitch ${d.pitch}, row is ${bar.pitch}`);
+        if (bar.gauge != null && d.gauge !== bar.gauge) throw new Error(`${m.id} Oregon ${c.part_no} (${d.token}) decodes to gauge ${d.gauge}, row is ${bar.gauge}`);
+        if (bar.drive_links && d.dl && d.dl !== bar.drive_links) throw new Error(`${m.id} Oregon ${c.part_no} (${d.token}) decodes to ${d.dl} drive links, row is ${bar.drive_links}`);
+        hits.push({ m, bar, part: c.part_no, decoded: d });
+      }
+    }
+  }
+}
+if (!hits.length) throw new Error('Oregon number check matched no parts');
+
+const specHref = (p: string, g: number) => chainUrl(chainKey(p, g));
+const specText = (p: string, g: number) => `${pitchShort(p)} · ${gaugeShort(g)}`;
+type Group = { series: string; pitch: string; gauge: number; kind: Decoded['kind']; dls: number[]; parts: string[]; saws: Model[] };
+const groups = new Map<string, Group>();
+for (const h of hits) {
+  const k = `${h.decoded.series}|${h.decoded.pitch}|${h.decoded.gauge}|${h.decoded.kind}`;
+  if (!groups.has(k)) groups.set(k, { series: h.decoded.series, pitch: h.decoded.pitch, gauge: h.decoded.gauge, kind: h.decoded.kind, dls: [], parts: [], saws: [] });
+  const g = groups.get(k)!;
+  if (h.decoded.dl && !g.dls.includes(h.decoded.dl)) g.dls.push(h.decoded.dl);
+  if (!g.parts.includes(h.decoded.token)) g.parts.push(h.decoded.token);
+  if (!g.saws.includes(h.m)) g.saws.push(h.m);
+}
+const table = [...groups.values()].sort((a, b) => a.pitch.localeCompare(b.pitch) || a.gauge - b.gauge || a.series.localeCompare(b.series));
+const loopHits = hits.filter((h) => h.decoded.kind !== 'family');
+const familyOnly = hits.filter((h) => h.decoded.kind === 'family');
+
+const manualRows: { num: string; pitch: string; gauge: string }[] = [
+  { num: '25', pitch: '1/4″', gauge: '.050″ (1.3 mm)' },
+  { num: '80', pitch: '.325″ low profile', gauge: '.043″ (1.1 mm)' },
+  { num: '90', pitch: '3/8″ low profile', gauge: '.043″ (1.1 mm)' },
+  { num: '91', pitch: '3/8″ low profile', gauge: '.050″ (1.3 mm)' },
+  { num: '20 and 95', pitch: '.325″', gauge: '.050″ (1.3 mm)' },
+  { num: '21', pitch: '.325″', gauge: '.058″ (1.5 mm)' },
+  { num: '22', pitch: '.325″', gauge: '.063″ (1.6 mm)' },
+  { num: '72', pitch: '3/8″', gauge: '.050″ (1.3 mm)' },
+  { num: '73', pitch: '3/8″', gauge: '.058″ (1.5 mm)' },
+  { num: '75', pitch: '3/8″', gauge: '.063″ (1.6 mm)' },
+  { num: '26 and 58', pitch: '.404″', gauge: '.058″ (1.5 mm)' },
+  { num: '27, 59 and 68', pitch: '.404″', gauge: '.063″ (1.6 mm)' },
+];
+
+const desc = 'Oregon chain numbers decoded: the two-digit family is pitch and gauge, the letters are the cutter series, and the last three digits of a loop such as 72LPX072 are the drive links. S56 is the retail form of that count.';
+const faqs = [
+  { q: 'What does Oregon 72LPX072 mean?', a: '72 is Oregon’s number for 3/8″ pitch at .050″ gauge, stamped on the drive link. LPX is the cutter series (PowerCut chisel, standard sequence, in the manual’s identification table). 072 is the drive-link count, 72 links. The same shape with a hyphen is the manual’s ordering example, 72LGX-068G: part 72LGX, 68 drive links.' },
+  { q: 'What does Oregon S56 mean?', a: 'S56 is a retail loop, not a family-plus-letters code. Oregon’s S56 product page calls it AdvanceCut chain for a 16″ bar: 3/8″ low profile, .050″ gauge, 56 drive links. The selection guide prints that same S56 as 56 links, .050″, 3/8″ low profile. The digits are the count. The letter is the retail family.' },
+  { q: 'Do the letters on an Oregon chain tell me the gauge?', a: 'No. Oregon’s manual says the numbers indicate pitch and gauge, and the letters come after them. 72LPX and 73LPX share the letters LPX and differ in the number: 72 is .050″ and 73 is .058″. 91PX and 90PX share a low-profile pitch and differ the same way: 91 is .050″ and 90 is .043″.' },
+  { q: 'Is 91PX056 the same chain as S56?', a: 'On the rows where this site stores both, yes: 91 is 3/8″ low profile .050″, and 056 is 56 drive links, which is what S56 names. Poulan 2150 stores them as one equivalent, “91PX056 (S56)”. The build checks that the two tokens agree with the row. A different count, such as 91PX057, would be 57 links in the same 91 family, not an S56.' },
+  { q: 'What is Oregon 560507?', a: 'It is a catalog number on the Oregon CS300, written on this site as “560507 (52 drive links, with stone)”. The count is in the words, not in a 90/91/72 suffix. This page does not decode that catalog number. Read the 52 from the row, or from the bar.' },
+];
+const jsonld = [webPageLd('Oregon chain numbers: 72LPX072, 91PX and S56', path, desc, modified), faqLd(faqs)];
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Oregon chain numbers', path }];
+---
+<Base title="Oregon Chain Numbers: 72LPX072, 91PX and S56" description={desc} path={path} nav="chart" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Oregon chain numbers' }]} />
+      <h1>Oregon chain numbers</h1>
+      <p class="lede">On a loop such as 72LPX072, the first two digits are the chain’s size and the last three are the drive links. 72 means 3/8″ pitch and .050″ gauge. LPX is the cutter series. 072 means 72 drive links. A retail loop such as S56 puts that count after a single letter: S56 is 56 links of 3/8″ low-profile .050″ chain. The letters are not a gauge.</p>
+    </div>
+
+    <section class="block">
+      <h2>The number stamped on the drive link</h2>
+      <p style="max-width:72ch">Oregon’s maintenance manual says nearly every saw chain is named by a number followed by one, two or three letters. The examples it gives are 72LPX and 91PX. The numbers, it says, are stamped on the drive links and indicate pitch and gauge. The same page’s ordering example splits a packaged loop in two: 72LGX-068G is the part number, then the drive-link count. Dealers are told to have the saw’s make and model, the bar’s called length, and that part number plus the count.</p>
+      <div class="tblwrap">
+        <table>
+          <caption class="sr-only">Oregon drive-link numbers for pitch and gauge</caption>
+          <thead><tr><th scope="col">Number</th><th scope="col">Pitch</th><th scope="col">Gauge</th></tr></thead>
+          <tbody>
+            {manualRows.map((r) => <tr><td class="num">{r.num}</td><td>{r.pitch}</td><td class="num">{r.gauge}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+      <p class="src">Number table: Oregon <a href={ORE} rel="nofollow">Maintenance and Safety Manual</a>, “Saw Chain Drive Link Number Identification,” including the .404″ pairs on that table. The same families are on Oregon’s <a href={ORE_ID} rel="nofollow">saw-chain terminology</a> chart (90 and 91 under 3/8″ low profile, 20 and 95 under .325″, 72/73/75 under 3/8″). STIHL, Husqvarna and Echo codes are a different page: <a href="/guides/chain-part-numbers/">chain part numbers</a>.</p>
+    </section>
+    <ShopBlock groups={shop.groups} compact />
+
+    <section class="block">
+      <h2>Letters, then the three-digit count</h2>
+      <p style="max-width:72ch">The letters name which cutter Oregon put on that size. In the manual’s identification tables, 72LPX is PowerCut chisel in a standard sequence at .050″, and 72EXL is also PowerCut chisel at .050″. 73LPX keeps the letters and moves the gauge to .058″ because the number changed, not the letters. 91PX is AdvanceCut chamfer-chisel at 3/8″ low profile .050″. 90PX is the .043″ low-profile chain. 95TXL is SpeedCut micro-chisel at .325″ .050″. 91VXL is VersaCut at the 91 size. A packaged loop appends the count. 72LPX072 is 72LPX with 72 drive links. 91PX056 is 91PX with 56. 90PX055 is 90PX with 55. 95TXL072 is 95TXL with 72. A trailing letter can sit on the count: the CS1500’s 91PS062X is family 91, series PS, 62 links, with X after the count. The hyphenated form in the manual (72LGX-068G) is the same idea with a dash and a final G.</p>
+      <p style="max-width:72ch">None of those letters is a second copy of the gauge. Filing still follows the pitch, with the .043″ low-profile exception already on the <a href="/guides/chainsaw-chain-file-size/">file-size guide</a>. 72 and 73 share a 7/32″ file on Oregon’s chart and do not share a bar groove. That comparison is <a href="/guides/oregon-72-vs-73-chain/">72 vs 73</a>.</p>
+    </section>
+
+    <section class="block">
+      <h2>S56, R56, D66 and M72</h2>
+      <p style="max-width:72ch">Some boxes skip the family-and-letters form and print one letter plus the count. Oregon’s <a href={S56} rel="nofollow">S56 product page</a>, the source on the Craftsman S165 row, calls S56 an AdvanceCut chain: 3/8″ low profile, .050″, 56 drive links, 16″ bar. Oregon’s <a href={TSC} rel="nofollow">saw-chain selection guide</a> prints that S56 as 56 links, .050″, 3/8″ low profile. The same guide’s columns are how the other three letters on this site are read. R56, the single chain under Poulan Pro PRCS16i, is 56 links, .043″, 3/8″ low profile. D66, the single chain under Poulan Pro PP4818AVX, is 66 links, .050″, 3/8″, and the guide does not mark that row low profile. M72, on the 18″ narrow-kerf line of the 450 Rancher’s Oregon equivalent, is 72 links of .325″ .050″, under the guide’s Narrow Kerf heading.</p>
+      <p style="max-width:72ch">So the digit string on these four is the drive-link count, and the letter picks the pitch and gauge. S56 and 91PX056 are two names for one 56-link low-profile .050″ loop where a row stores both. R56 is the .043″ low-profile loop, which is family 90, not family 91. D66 is family 72 at 66 links. M72 is family 95 (or 20) at 72 links, not family 72. The number 72 in M72 is the count. The number 72 in 72LPX is the family.</p>
+    </section>
+
+    <section class="block">
+      <h2>Checked against the Oregon parts on this site</h2>
+      <p style="max-width:72ch">Every Oregon part number stored on a saw page is run through the two patterns above at build time. A token that matches a family-and-letters code, with or without a three-digit count, has to agree with that row’s pitch and gauge, and with the drive-link count when both the code and the row have one. A token that matches S, R, D or M plus a count is checked the same way. The build fails on a disagreement. {loopHits.length} tokens carried a count. {familyOnly.length} tokens were a family name without a count (“72LPX / 72EXL family”, “95TXL / 20BPX family”), so only pitch and gauge were available to check. {skipped.length} part {skipped.length === 1 ? 'string' : 'strings'} matched neither pattern: {skipped.map((s) => s.part).filter((p, i, a) => a.indexOf(p) === i).join('; ')}. Those are catalog numbers with the count written beside them, not a 72LPX072-style code.</p>
+      <div class="tblwrap">
+        <table>
+          <caption class="sr-only">Oregon codes on this site, decoded</caption>
+          <thead><tr><th scope="col">Series</th><th scope="col">Pitch · gauge</th><th scope="col">Drive links in the code</th><th scope="col">Codes</th><th scope="col">Saws</th></tr></thead>
+          <tbody>
+            {table.map((g) => (
+              <tr>
+                <td class="num">{g.series}</td>
+                <td class="num"><a href={specHref(g.pitch, g.gauge)}>{specText(g.pitch, g.gauge)}</a></td>
+                <td class="num">{g.dls.length ? g.dls.sort((a, b) => a - b).join(', ') : 'family name only'}</td>
+                <td class="small">{g.parts.join(', ')}</td>
+                <td class="small">{g.saws.sort((a, b) => a.data.name.localeCompare(b.data.name)).map((m, i) => <>{i ? ', ' : ''}<a href={modelUrl(m)}>{m.data.name}</a></>)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="src">Rows: Oregon parts already stored on this site, role oem or equivalent. The decoder is the manual’s number table plus the four retail readings cited above. A conflict row that stores pitch and gauge but no single drive-link count is checked on pitch and gauge only.</p>
+    </section>
+
+    <div class="callout"><b>⚠ 72 in the middle of a code is not 72 links</b><p>72LPX072 is family 72 and also 72 links, which is a coincidence of that one length. 72LPX070 is the same family with 70 links. M72 is 72 links of a .325″ chain. Read the family from the manual’s number, then read the count from the end of a loop or from the retail digits.</p></div>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/chain-part-numbers/">STIHL, Husqvarna and Echo numbers</a> · <a href="/guides/oregon-72-vs-73-chain/">72 vs 73</a> · <a href="/guides/full-kerf-vs-narrow-kerf-chain/">Full kerf vs narrow kerf</a> · <a href="/guides/how-to-count-drive-links/">Count the drive links</a> · <a href="/chain/">Chain specs</a></p>
+    <ShopBlock groups={shop.groups} title="91 and 72 loops, by drive-link count (Amazon)" lead="91PX is 3/8″ low profile .050″. 72 is standard 3/8″ .050″. Pick the count on your bar. S56 is the 56-link retail name for the 91 size." />
+  </div>
+</Base>

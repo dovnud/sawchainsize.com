@@ -1,0 +1,132 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { getModels, getBrands, chainUrl, chainKey, pitchShort, gaugeShort } from '../../lib/data';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+
+const path = '/guides/full-kerf-vs-narrow-kerf-chain/';
+const modified = (dates as Record<string, string>)[path];
+const shop = guideShop('full-kerf-vs-narrow-kerf-chain');
+const ORE = 'https://apps.oregonproducts.com/pdfs/OregonMMANUAL_EN_A106971ab.pdf';
+const ORE_CHART = 'https://oregonproducts.com/medias/2020-FilingGrindingAngles.pdf?attachment=true&context=bWFzdGVyfHJvb3R8NDA2MDY0fGFwcGxpY2F0aW9uL3BkZnxoNjUvaGJmLzg4NTMxOTkzODg3MDIucGRmfGQ4MmNmZWZjZDA5MWQ3MmM0NmY0OTM4ZmFhN2MxZWUwMDA2MzgzM2Q4Y2U1MzgyYjQwMzZmYzZhZmY3ZWMzNjQ';
+const ORE_ID = 'https://www.oregonproducts.com/en/product-support/chainsaw/saw-chain-terminology/c/saw-chain-terminology-s';
+const STIHL = 'https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf';
+
+const models = await getModels();
+const brands = await getBrands();
+const brandName = new Map(brands.map((b) => [b.id, b.data.name]));
+type Bucket = { gauge: number; rows: number; saws: Set<string>; brands: Set<string> };
+const buckets = new Map<number, Bucket>();
+const narrowPitch = new Map<string, { rows: number; saws: Set<string> }>();
+for (const m of models) {
+  for (const bar of m.data.bars) {
+    if (bar.status !== 'ok' || bar.gauge == null || !bar.pitch) continue;
+    if (!buckets.has(bar.gauge)) buckets.set(bar.gauge, { gauge: bar.gauge, rows: 0, saws: new Set(), brands: new Set() });
+    const b = buckets.get(bar.gauge)!;
+    b.rows += 1;
+    b.saws.add(m.id);
+    b.brands.add(m.data.brand);
+    if (bar.gauge === 0.043) {
+      if (!narrowPitch.has(bar.pitch)) narrowPitch.set(bar.pitch, { rows: 0, saws: new Set() });
+      const n = narrowPitch.get(bar.pitch)!;
+      n.rows += 1;
+      n.saws.add(m.id);
+    }
+  }
+}
+const gaugeRows = [...buckets.values()].sort((a, b) => a.gauge - b.gauge);
+const narrowRows = [...narrowPitch.entries()].sort((a, b) => a[0].localeCompare(b[0]));
+const narrowBrands = [...(buckets.get(0.043)?.brands ?? [])].map((id) => brandName.get(id) ?? id).sort();
+const narrowSaws = buckets.get(0.043)?.saws.size ?? 0;
+const narrowCount = buckets.get(0.043)?.rows ?? 0;
+const otherCount = gaugeRows.filter((g) => g.gauge !== 0.043).reduce((n, g) => n + g.rows, 0);
+if (!narrowCount) throw new Error('expected verified .043 rows');
+
+const desc = 'Full-kerf vs narrow-kerf chainsaw chain: .043″ chain (Oregon 90PX, STIHL Picco Micro Mini) needs a matching bar. .050″, .058″ and .063″ are a different groove. Oregon also calls .050″ SpeedCut narrow kerf.';
+const faqs = [
+  { q: 'Can I put a .050″ chain on a .043″ bar?', a: 'No. Oregon defines gauge as the drive-link thickness where it enters the bar groove, and says the chain gauge and the bar gauge have to match. A .050″ drive link is thicker than a .043″ groove. Oregon’s 90PX page says to use that .043″ chain with bars designed for narrow-kerf chain.' },
+  { q: 'Is every “narrow kerf” chain .043″?', a: 'No. Oregon uses “narrow kerf” for 90PX, which is .043″, and also for SpeedCut 95TXL, which is .325″ at .050″. The 95TXL sentence in the manual says to run that chain with a SpeedCut bar or another narrow-kerf bar. Read the gauge on the stamp. The word on the box is not the measurement.' },
+  { q: 'What is STIHL Picco Micro Mini?', a: 'In the 2025 catalog, Picco Micro Mini 3 (PMM3) is the .043″ Picco chain: 61 PMM3 on the 3/8″ Picco chart, with part-number family 3610. Picco Micro 3 (63 PM3) on that same chart is .050″. The catalog says the bar groove has to match the drive-link thickness, and the chain, bar and saw have to share a pitch. Rapid (RS3, RM3) is the larger-saw family, at .050″, .058″ or .063″ depending on the loop.' },
+  { q: 'Is Husqvarna Pixel the same as .043″?', a: 'Mini Pixel is Husqvarna’s .043″ name. Pixel without “Mini” is a .050″ .325″ name in the same fit-up guide. The saw-by-saw tables are on the Pixel guide. This page does not repeat them.' },
+  { q: 'Does a narrower chain need a different sprocket?', a: 'The sprocket has to match pitch, which is separate from gauge. Oregon 90 and Oregon 91 are both 3/8″ low profile, so they are the low-profile pitch, and they differ in gauge (.043″ versus .050″). The bar still has to match the gauge. A standard 3/8″ chain (Oregon 72, 73 or 75) is a different pitch family from low profile, so the drive sprocket changes as well as the groove.' },
+];
+const jsonld = [webPageLd('Full-kerf vs narrow-kerf chainsaw chain', path, desc, modified), faqLd(faqs)];
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Full kerf vs narrow kerf', path }];
+---
+<Base title="Full-Kerf vs Narrow-Kerf Chainsaw Chain" description={desc} path={path} nav="chart" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Full kerf vs narrow kerf' }]} />
+      <h1>Full-kerf vs narrow-kerf chain</h1>
+      <p class="lede">A .043″ chain cuts a thinner slot and has to live on a bar grooved for .043″. Oregon’s 90PX, STIHL’s Picco Micro Mini and Husqvarna’s Mini Pixel are that class. A .050″, .058″ or .063″ loop is a thicker drive link. It is not a drop-in substitute. The sprocket still has to match the chain’s pitch, which is a separate number from the groove.</p>
+    </div>
+
+    <section class="block">
+      <h2>What Oregon measures, and what it names</h2>
+      <p style="max-width:72ch">Kerf is the width of wood the cutters remove. Gauge is the thickness of the drive link in the bar groove. Oregon’s terminology page lists four gauges, .043″, .050″, .058″ and .063″, and says the chain and the bar have to name the same one. The family chart on that page puts .043″ in one cell: 3/8″ low profile, family 90. Family 91, beside it, is 3/8″ low profile at .050″. Standard 3/8″ starts at 72 (.050″), 73 (.058″) and 75 (.063″). There is no .043″ cell on the standard 3/8″ row.</p>
+      <p style="max-width:72ch">The maintenance manual’s 90PX section is where “narrow” becomes a fitting rule. It says the narrow .043″ gauge cuts the weight of the bar and chain by roughly 15 percent, and that 90PX needs less power from the saw than a standard cutting system. The line under the specs is the fitting rule: always use it with guide bars designed for narrow-kerf saw chain. 90PX replaces 90SG. The 2020 filing chart still prints 90PX and 90SG on one 3/8″ low-profile row, with a 4.5 mm file, and prints 91PX on the next row with a 5/32″ file. The file split is the <a href="/guides/chainsaw-chain-file-size/">file-size guide</a>. The groove split is this one.</p>
+      <p class="src">Oregon <a href={ORE} rel="nofollow">Maintenance and Safety Manual</a>, 90PX and 95TXL sections and the drive-link number table; Oregon <a href={ORE_CHART} rel="nofollow">2020 filing chart</a>, 3/8″ low-profile rows; Oregon <a href={ORE_ID} rel="nofollow">saw-chain terminology</a>, gauge definition and family chart.</p>
+    </section>
+    <ShopBlock groups={shop.groups} compact />
+
+    <section class="block">
+      <h2>STIHL’s Picco Micro Mini is the .043″ Picco chain</h2>
+      <p style="max-width:72ch">STIHL’s 2025 catalog separates Picco Micro Mini 3 from Picco Micro 3. PMM3 is described as a low-vibration chain for saws and pole pruners under 1.5 kW (2.0 bhp). On the chain-type grid its 3/8″ Picco cell is .043″, code 3610. The saw chart then lists 61 PMM3 at .043″. PM3 on the 3/8″ Picco chart is the .050″ loop, 63 PM3. Rapid Super and Rapid Micro (33 RS3, 36 RS3, 26 RM3) are the chains for the larger saws, at .050″, .063″ or the .325″ gauges those charts print. The catalog’s fitting sentence is the same shape as Oregon’s: the groove width of the bar has to match the drive-link thickness, and the pitch of the chain, the bar and the saw have to agree.</p>
+      <p style="max-width:72ch">STIHL also uses “narrower kerf” for a different comparison. The HEXA page says RAPID HEXA cuts a narrower kerf than RAPID Super and cites a 10 percent cutting-performance difference. That sentence is HEXA versus RS. It is not the .043″ gauge, and it does not make a 33 RS3 loop fit a Picco Micro Mini bar. Green and yellow labels, which mark kickback class, are <a href="/guides/stihl-green-vs-yellow-chain/">STIHL green vs yellow</a>.</p>
+      <p style="max-width:72ch">Husqvarna’s fit-up guide uses Mini Pixel for its .043″ chains and Pixel for a .050″ .325″ name. One sentence is enough here. The pitch, gauge, file and saw tables are <a href="/guides/husqvarna-pixel-chain/">Husqvarna Pixel, Mini Pixel and X-Cut</a>.</p>
+    </section>
+
+    <section class="block">
+      <h2>SpeedCut is narrow kerf at .050″</h2>
+      <p style="max-width:72ch">Oregon’s 95TXL section calls SpeedCut a narrow-kerf cutting system that needs less power than a standard system, and the gauge printed next to 95TXL is .050″ (1.3 mm) at .325″ pitch. The fitting line is its own sentence: always use SpeedCut narrow-kerf chain with a SpeedCut bar or another narrow-kerf bar. That .050″ chain does not go in a 90PX groove, and a 72-series 3/8″ chain does not go on the SpeedCut bar either. “Narrow kerf” on an Oregon box is a matching instruction. The gauge and the pitch, stamped on the bar, say which instruction you are looking at. The <a href="/guides/chainsaw-chain-gauge/">gauge guide</a> is the four thicknesses. <a href="/guides/3-8-low-profile-vs-standard-chain/">Low profile versus standard 3/8″</a> is the pitch-family mistake that sits next to gauge.</p>
+    </section>
+
+    <section class="block">
+      <h2>Verified rows on this site, by gauge</h2>
+      <p style="max-width:72ch">{narrowCount} verified rows are .043″, across {narrowSaws} saws and {narrowBrands.length} brands ({narrowBrands.join(', ')}). The other verified rows, {otherCount} of them, are .050″, .058″ or .063″. Counts are status “ok” only. A conflict or verify row is not in the table.</p>
+      <div class="tblwrap">
+        <table>
+          <caption class="sr-only">Verified bar rows by gauge</caption>
+          <thead><tr><th scope="col">Gauge</th><th scope="col">Verified rows</th><th scope="col">Saws</th><th scope="col">Brands</th></tr></thead>
+          <tbody>
+            {gaugeRows.map((g) => (
+              <tr>
+                <td class="num">{gaugeShort(g.gauge)}</td>
+                <td class="num">{g.rows}</td>
+                <td class="num">{g.saws.size}</td>
+                <td class="small">{[...g.brands].map((id) => brandName.get(id) ?? id).sort().join(', ')}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div class="tblwrap">
+        <table>
+          <caption class="sr-only">Verified .043 inch rows by pitch</caption>
+          <thead><tr><th scope="col">.043″ pitch</th><th scope="col">Verified rows</th><th scope="col">Saws</th><th scope="col">Chain page</th></tr></thead>
+          <tbody>
+            {narrowRows.map(([pitch, n]) => (
+              <tr>
+                <td>{pitchShort(pitch)}</td>
+                <td class="num">{n.rows}</td>
+                <td class="num">{n.saws.size}</td>
+                <td><a href={chainUrl(chainKey(pitch, 0.043))}>{pitchShort(pitch)} · .043″</a></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="src">Counted from verified bars in this site’s model files at build time. Pitch and gauge on those rows come from the manual or fit-up chart cited on each saw page.</p>
+    </section>
+
+    <div class="callout"><b>⚠ Same pitch, different groove</b><p>Oregon 90 and Oregon 91 are both 3/8″ low profile. Only the gauge changes. The drive sprocket follows pitch. The bar follows gauge. A 90PX loop on a 91 bar is the mismatch the 90PX fitting line is written to prevent.</p></div>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/chainsaw-chain-gauge/">Gauge</a> · <a href="/guides/husqvarna-pixel-chain/">Husqvarna Pixel</a> · <a href="/guides/oregon-chain-numbers/">Oregon chain numbers</a> · <a href="/guides/3-8-low-profile-vs-standard-chain/">Low profile vs standard 3/8″</a> · <a href="/chain/3-8-lp-043/">3/8″ low profile · .043″</a> · <a href="/chain/325-043/">.325″ · .043″</a></p>
+    <ShopBlock groups={shop.groups} title="90PX, 91PX and 72-series searches (Amazon)" lead="90PX is 3/8″ low profile .043″. 91PX is the .050″ low-profile chain. 72 is standard 3/8″ .050″. Match the stamp, then the drive-link count." />
+  </div>
+</Base>

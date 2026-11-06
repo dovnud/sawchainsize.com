@@ -1,0 +1,106 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { getModels, barUrl } from '../../lib/data';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+
+const path = '/guides/when-to-replace-chainsaw-bar/';
+const modified = (dates as Record<string, string>)[path];
+const shop = guideShop('when-to-replace-chainsaw-bar');
+const ORE = 'https://apps.oregonproducts.com/pdfs/OregonMMANUAL_EN_A106971ab.pdf';
+
+const models = await getModels();
+const byLen = new Map<number, Set<string>>();
+const pageLen = new Map<number, Set<string>>();
+for (const m of models) {
+  for (const bar of m.data.bars) {
+    for (const len of bar.lengths_in) {
+      if (!pageLen.has(len)) pageLen.set(len, new Set());
+      pageLen.get(len)!.add(m.id);
+      if (bar.status !== 'ok') continue;
+      if (!byLen.has(len)) byLen.set(len, new Set());
+      byLen.get(len)!.add(m.id);
+    }
+  }
+}
+const lengths = [...byLen.entries()].sort((a, b) => a[0] - b[0]);
+if (lengths.length < 2) throw new Error('expected verified bar lengths');
+
+const desc = 'When to replace a chainsaw bar: Oregon’s troubleshooting list retires a bar for a shallow groove, a rail worn thin or low, blue rails from heat, and a nose sprocket that no longer works.';
+const faqs = [
+  { q: 'When should a chainsaw bar be replaced instead of dressed?', a: 'Oregon’s bar troubleshooting says to replace the bar when the rails are worn down and the groove is shallow, when one rail is worn thin, when one rail is worn low, and when rails show blue spots from heat. Wire edges on the outside of the rails are a dressing job with a flat file or a rail dresser, not an automatic new bar. Dressing is the maintenance page.' },
+  { q: 'What does a worn-out bar groove look like?', a: 'Oregon’s first rail condition: the chain rides on the bottom of the groove, drive links get damaged, and the chain leans in the cut. The cause line is normal wear. The remedy line is that the bar is at the end of its life. A separate chain row says straight tangs come from a shallow body groove and concave tangs come from a shallow nose groove, and the remedy there is to replace the bar, the drive sprocket, or both.' },
+  { q: 'Does a clogged oil hole mean I need a new bar?', a: 'Cleaning the oil hole is a maintenance task Oregon lists with cleaning the groove. A bar, the same chapter says, requires a constant supply of oil while it runs. Replace the bar when lack of oil has already heated the rails: blue discoloration, which Oregon ties to temperatures around 600°F (315°C), softened rails, and drive-link damage. The remedy on that row is a new bar and a new chain.' },
+  { q: 'When is a sprocket-nose bar finished?', a: 'Check the gap at the tip between the rail tops and the chassis, and replace the nose sprocket before a cutter or a tie strap touches the chassis. Oregon prints that gap as 0.8 mm. If the nose sprocket is broken, or the tip rails have spread and the bearings are gone, the remedy is to replace the sprocket parts. Rivets should stay tight and still let the sprocket turn. A nose that is loose, or that will not turn, is not left in the saw.' },
+  { q: 'Will the old chain’s length fit the new bar?', a: 'Only if the new bar’s stamp names the same pitch, the same gauge and the same drive-link count. Called length is a separate measurement, from the front of the saw to the tip with the bar mounted. The lengths in the table on this page are the called lengths on verified rows, not a chain size.' },
+];
+const jsonld = [webPageLd('When to replace a chainsaw bar', path, desc, modified), faqLd(faqs)];
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'When to replace a bar', path }];
+---
+<Base title="When to Replace a Chainsaw Bar" description={desc} path={path} nav="chart" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'When to replace a bar' }]} />
+      <h1>When to replace a chainsaw bar</h1>
+      <p class="lede">Replace the bar when the rails are worn down and the groove is too shallow for the drive links, when one rail is worn thin or worn low, when the rails have turned blue from heat, or when the nose sprocket is broken or will not turn. A burr on the rail edge is a dressing job. A blocked oil hole is a cleaning job until the rails have already overheated.</p>
+    </div>
+
+    <section class="block">
+      <h2>The row that says the bar is finished</h2>
+      <p style="max-width:72ch">Oregon’s guide-bar troubleshooting opens by saying most bar trouble is in the rails, from four causes: not enough oil, wrong chain tension, and accidents or odd technique that pinch the rails or shove the drive links sideways. The first numbered condition is the replacement line. Rails worn down, groove gone shallow. Cause: ordinary wear. What you see: the chain rides on the groove bottom, drive links get damaged, the chain leans while it cuts. Remedy, in Oregon’s words: the bar is at the end of its life, replace it. If that wear showed up early, the same row says to check oil, chain sharpness and how hard the bar is being pushed.</p>
+      <p style="max-width:72ch">The chain chapter describes the same groove from the tangs. Straight bottoms on the drive links mean a shallow groove in the bar body. Concave bottoms mean a shallow groove in the nose. The chain throws. Oregon’s remedy is to replace the bar, the drive sprocket, or both, and to replace the chain if the tangs cannot be filed back. That sprocket interval is <a href="/guides/chainsaw-drive-sprocket/">drive sprocket and pitch</a>. The chain’s own retirement list is <a href="/guides/when-to-replace-chainsaw-chain/">when to replace a chain</a>.</p>
+      <p class="src">Oregon <a href={ORE} rel="nofollow">Maintenance and Safety Manual</a>, “Guide Bar Troubleshooting” (rail conditions 1, 3, 6, 7, 8 and 9; nose conditions 11, 12 and 14) and saw-chain drive-link wear. Daily cleaning and dressing are <a href="/guides/chainsaw-bar-maintenance/">bar maintenance</a>.</p>
+    </section>
+    <ShopBlock groups={shop.groups} compact />
+
+    <section class="block">
+      <h2>Burrs get dressed. A rail worn thin gets replaced.</h2>
+      <p style="max-width:72ch">Condition 2 is a wire edge along the outside of the rail. Oregon calls that normal wear. Left alone, the edge can break off and take rail metal with it. The remedy is a flat file or a grinder, squaring the rails and taking the wire edge off. That is the bar-rail dresser (Oregon part 111589 in the maintenance chapter), used so the grinding dust goes toward the saw, then the groove is cleaned. It is not, by itself, a new bar. If the wire edge comes back quickly, Oregon points at oil, sharpness and feed pressure.</p>
+      <p style="max-width:72ch">Uneven is a different row. Condition 3: one rail worn thin. Oregon’s causes are dull or damaged cutters on one side, a chain leaning in a worn groove, or a .063″ chain run in a bar grooved .080″. The cut does not finish, the saw leads to one side, the bar binds. Remedy: replace the bar, confirm the chain gauge, and replace the chain if it still cuts crooked after a proper sharpening. Condition 8 is the short version of the same fault, one rail worn low, often from cutters hitting rock on the side nearest the ground. Remedy again: replace the bar, and replace the chain if sharpening does not stop the crooked cut.</p>
+      <p style="max-width:72ch">Spread rails, condition 7, are the “groove too wide” case. Oregon’s remedy is to hammer the rails back together with a drive link in the groove as a spacer, and to stop the sideways hits that opened them. That is a repair, not the first sentence of “buy a bar.” If the chain still leans, or the tangs are worn straight or concave, you are back on the replace-the-bar rows above. Chips out of the middle of a rail, condition 9, become a new bar when the damage is extensive. Minor chipping is the row where Oregon instead says to ease off, oil more, and be careful in frozen wood.</p>
+    </section>
+
+    <section class="block">
+      <h2>Oil hole, then blue rails</h2>
+      <p style="max-width:72ch">The maintenance schedule says to clean grooves and oil holes often. The note above that list says a bar needs oil the whole time it is cutting. A hole packed with chips makes a full oil tank look like a working oiler. Open the hole, and confirm oil is reaching the chain, before you call the bar dead. The replacement row is what happens after it ran dry. Condition 6: blue color on the rails along the body or around a sprocket-nose tip. Oregon’s cause is pinched rails, no lubrication, or a technique that shoves drive links sideways and builds friction. Blue spots, it says, mean the steel reached about 600°F (315°C) and softened. The rails then wear fast, and the drive links are damaged. Remedy: replace the bar and replace the chain. <a href="/guides/chainsaw-bar-and-chain-oil/">Bar and chain oil</a> is what belongs in the tank. Used motor oil is not it.</p>
+    </section>
+
+    <section class="block">
+      <h2>A nose that will not turn</h2>
+      <p style="max-width:72ch">On a sprocket-nose bar, Oregon says to look at the clearance around the tip, between the tops of the rails and the chassis, and to replace the nose sprocket before cutters or tie straps meet that chassis. The figure in the manual is 0.8 mm. That is a wear limit on the nose, not a tension setting. The <a href="/guides/chainsaw-chain-tension/">tension guide</a> is how tight the chain should be while the nose is still good.</p>
+      <p style="max-width:72ch">Two nose failures are parts replacements in the troubleshooting list. Condition 11: tip rails spread and the bearings fall out, after the nose was twisted or the drive links were shoved sideways. Condition 12: the sprocket itself breaks, from high tension or from the chain being pulled out of the rails, and the nose no longer works. Both say to replace the sprocket parts. Loose or missing rivets, condition 14, are checked on a long interval (Oregon says every 100 machine hours), rehammered if loose, and replaced if the head is gone. The rebuild note on a riveted nose says the rivet heads stay snug and the sprocket still has to turn freely. A nose with play, or a sprocket that will not rotate, is that list. Oregon’s PowerCut nose is a replaceable tip with its own rivet procedure, which the maintenance page already walks through. A nose that is not sold as a replaceable tip is a complete bar.</p>
+      <p style="max-width:72ch">The replacement bar has to carry the chain you actually run. Pitch, gauge and drive-link count come off the stamp on the tail. Called length, the inch in a catalog, is measured with the bar mounted, from the front of the saw to the tip. How that differs from the length of the steel is <a href="/guides/how-to-measure-chainsaw-bar/">how to measure a chainsaw bar</a>. A new chain still does not go onto a drive sprocket that has worn through its two chains.</p>
+    </section>
+
+    <section class="block">
+      <h2>Called lengths on verified rows</h2>
+      <p style="max-width:72ch">These are the bar lengths that appear on at least one verified row in this site’s model files. The count is saws, not chains. Two saws can share a called length and need different drive-link counts. The length page is the list of those setups.</p>
+      <div class="tblwrap">
+        <table>
+          <caption class="sr-only">Called bar lengths on verified saw rows</caption>
+          <thead><tr><th scope="col">Called length</th><th scope="col">Verified saws</th><th scope="col">Setups</th></tr></thead>
+          <tbody>
+            {lengths.map(([len, saws]) => (
+              <tr>
+                <td class="num">{len}″</td>
+                <td class="num">{saws.size}</td>
+                <td>{(pageLen.get(len)?.size ?? 0) >= 2 ? <a href={barUrl(len)}>{len}″ bars</a> : 'listed on one saw'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="src">Counted from bars with status “ok” at build time. A length shared by fewer than two saws has no index page, which is the site’s existing rule for bar-length URLs. Conflict and verify rows are left out.</p>
+    </section>
+
+    <div class="callout"><b>⚠ A new chain will not square a dead rail</b><p>Oregon’s chain troubleshooting tells you to dress rails that have worn the bottoms of tie straps out of square, and to replace the chain if that wear is extensive. Putting the new loop on rails that are still thin, low, or blue copies the old damage into the new cutters.</p></div>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/chainsaw-bar-maintenance/">Bar maintenance</a> · <a href="/guides/how-to-measure-chainsaw-bar/">Measure a bar</a> · <a href="/guides/when-to-replace-chainsaw-chain/">When to replace a chain</a> · <a href="/guides/chainsaw-drive-sprocket/">Drive sprocket</a> · <a href="/bars/">Bars by called length</a></p>
+    <ShopBlock groups={shop.groups} title="Rail dresser and bar oil (Amazon)" lead="A dresser is for wire edges and minor rail wear. Bar oil is what keeps the rails from turning blue. A replacement bar has to match the stamp: length, pitch, gauge and drive links." />
+  </div>
+</Base>
