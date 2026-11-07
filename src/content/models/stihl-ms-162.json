@@ -1,0 +1,44 @@
+{
+  "brand": "stihl",
+  "model": "MS 162",
+  "name": "STIHL MS 162",
+  "aliases": [
+    "MS 162",
+    "MS162"
+  ],
+  "type": "gas",
+  "displacement_cc": 30.1,
+  "popular": true,
+  "blurb": "30.1 cc. STIHL lists a 16\u2033 bar and 3/8\u2033 PICCO PMM3 chain. PMM3 in this catalog is .043\u2033. The drive-link count is not in the chart.",
+  "intro": "The STIHL MS 162 is a 30.1 cc gas saw. STIHL's specification table (catalog p. 64, specifications as of 1 October 2024) lists a 16\u2033 bar and 3/8\u2033 PICCO PMM3 chain. The saw-chain chart in the same catalog lists PMM3 at .043\u2033 only (code 3610). STIHL's drive-link chart (catalog pp. 166\u2013167) does not name this model, so this page does not print a drive-link count. Count the drive links on the bar stamp before you order. STIHL's file table lists a 5/32\u2033 (4.0 mm) file for 3/8\u2033 PICCO.",
+  "notice": "No drive-link count is published for the MS 162 in this catalog. Use the bar stamp.",
+  "bars": [
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.043,
+      "drive_links": null,
+      "file_size": "5/32",
+      "status": "verify",
+      "chains": [],
+      "source_ids": [
+        "stihl-chain-chart-2025"
+      ],
+      "note": "Specification table (catalog p. 64, as of 1 October 2024): 16\u2033 bar, 3/8\u2033 PICCO, chain type PMM3. The chain-type chart lists PMM3 at .043\u2033 (code 3610). No drive-link count is printed for the MS 162. STIHL's file table lists 5/32\u2033 for 3/8\u2033 PICCO."
+    }
+  ],
+  "sources": [
+    {
+      "id": "stihl-chain-chart-2025",
+      "type": "fitup-chart",
+      "publisher": "STIHL",
+      "title": "STIHL 2025 Full Line catalog: specification tables (catalog pp. 64\u201367, specifications as of 1 October 2024) and the guide-bar drive-link chart (catalog pp. 166\u2013167), including the file table and the PMM3/PM3 chain-type rows",
+      "url": "https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf",
+      "retrieved": "2026-11-07"
+    }
+  ],
+  "sources_note": "STIHL 2025 Full Line catalog, specification table (catalog p. 64, as of 1 October 2024) and PMM3 chain-type row, read 7 Nov 2026. The drive-link chart on catalog pp. 166\u2013167 was checked the same day and does not name the MS 162.",
+  "last_verified": "2026-11-07"
+}

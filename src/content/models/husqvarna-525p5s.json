@@ -1,0 +1,48 @@
+{
+  "brand": "husqvarna",
+  "model": "525P5S",
+  "name": "Husqvarna 525P5S",
+  "aliases": [
+    "525P5S",
+    "525 P5S"
+  ],
+  "type": "gas",
+  "popular": false,
+  "blurb": "Gas pole saw. 12\u2033 bar, 3/8\u2033 low profile, .050\u2033 gauge, 45 drive links, chain S93G X-Cut, from the 2027 fit-up guide.",
+  "intro": "The Husqvarna 525P5S is listed as a professional gas pole saw. Husqvarna's Bar & Chain Fit-up Guide (cover year 2027) prints the same row as the 525P4S: 12\u2033 laminate bar 596009745, chain S93G X-Cut 585422145, 3/8\u2033 Mini, .050\u2033 gauge, 45 drive links, 5/32\u2033 file. The 525PT5S on the next line is 44 drive links.",
+  "bars": [
+    {
+      "lengths_in": [
+        12
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 45,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "S93G X-Cut 585422145",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 12\u2033 setup with bar Laminate 596009745 and chain S93G X-Cut 585422145."
+    }
+  ],
+  "sources": [
+    {
+      "id": "husqvarna-fitup-2027",
+      "type": "fitup-chart",
+      "publisher": "Husqvarna",
+      "title": "Bar & Chain Fit-up Guide, cover year 2027: certified/approved bar and chain combinations per saw",
+      "url": "https://media.husqvarnagroup.com/original/DI-328359.pdf",
+      "retrieved": "2026-11-07"
+    }
+  ],
+  "sources_note": "Husqvarna Bar & Chain Fit-up Guide, cover year 2027, 525P5S row, read 7 Nov 2026.",
+  "last_verified": "2026-11-07"
+}

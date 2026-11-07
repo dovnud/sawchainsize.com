@@ -1,0 +1,48 @@
+{
+  "brand": "husqvarna",
+  "model": "115iPT4",
+  "name": "Husqvarna 115iPT4",
+  "aliases": [
+    "115iPT4",
+    "115i PT4"
+  ],
+  "type": "battery",
+  "popular": false,
+  "blurb": "Battery pole saw. 10\u2033 bar, 3/8\u2033 low profile, .050\u2033 gauge, 40 drive links, chain H37, from the 2027 fit-up guide.",
+  "intro": "The Husqvarna 115iPT4 is listed as a residential battery pole saw. Husqvarna's Bar & Chain Fit-up Guide (cover year 2027) pairs a 10\u2033 laminate bar 596298540 with chain H37 591106040: 3/8\u2033 Mini, .050\u2033 gauge, 40 drive links, 5/32\u2033 file. The 120iTK4-P uses the same chain and a different bar part.",
+  "bars": [
+    {
+      "lengths_in": [
+        10
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 40,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "H37 591106040",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 10\u2033 setup with bar Laminate 596298540 and chain H37 591106040."
+    }
+  ],
+  "sources": [
+    {
+      "id": "husqvarna-fitup-2027",
+      "type": "fitup-chart",
+      "publisher": "Husqvarna",
+      "title": "Bar & Chain Fit-up Guide, cover year 2027: certified/approved bar and chain combinations per saw",
+      "url": "https://media.husqvarnagroup.com/original/DI-328359.pdf",
+      "retrieved": "2026-11-07"
+    }
+  ],
+  "sources_note": "Husqvarna Bar & Chain Fit-up Guide, cover year 2027 (https://media.husqvarnagroup.com/original/DI-328359.pdf), 115iPT4 row, read 7 Nov 2026.",
+  "last_verified": "2026-11-07"
+}

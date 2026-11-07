@@ -1,0 +1,48 @@
+{
+  "brand": "craftsman",
+  "model": "35084 / 35085",
+  "name": "Craftsman 35084 / 35085",
+  "aliases": [
+    "35084",
+    "35085"
+  ],
+  "type": "gas",
+  "popular": false,
+  "blurb": "Oregon's narrow-kerf line for 35084 and 35085: 18\u2033 bar, .325\u2033 pitch, .050\u2033 gauge, 72 drive links (M72).",
+  "intro": "Oregon's saw-chain selection guide prints Craftsman 35084 and 35085 under the Narrow Kerf heading with chain M72: 18\u2033 bar, 72 drive links, .050\u2033 gauge, .325\u2033 pitch. M72 is Oregon's retail narrow-kerf code. The number 72 is the drive-link count, not the 72LPX family. The guide does not print a file size.",
+  "bars": [
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "325",
+      "gauge": 0.05,
+      "drive_links": 72,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "M72",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-tsc-fit-guide"
+      ],
+      "note": "Oregon prints M72 under the Narrow Kerf heading for Craftsman 35084 and 35085: 18\u2033 bar, 72 drive links, .050\u2033 gauge, .325\u2033 pitch. No file size is printed."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide: model line printed with saw-chain code, bar length, drive links, gauge and pitch",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-07"
+    }
+  ],
+  "sources_note": "Oregon Saw Chain Selection Guide (https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf), read 7 Nov 2026. The guide does not print a file size on these rows.",
+  "last_verified": "2026-11-07"
+}

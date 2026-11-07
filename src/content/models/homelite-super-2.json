@@ -1,0 +1,113 @@
+{
+  "brand": "homelite",
+  "model": "Super 2",
+  "name": "Homelite Super 2",
+  "aliases": [
+    "Super 2",
+    "SUPER 2",
+    "Super 2CC",
+    "VI Super 2"
+  ],
+  "type": "gas",
+  "popular": true,
+  "blurb": "Oregon lists the Super 2 block with four 3/8\u2033 low-profile .050\u2033 chains: 12\u2033/48, 14\u2033/53, 16\u2033/59 and 18\u2033/64 drive links.",
+  "intro": "Oregon's saw-chain selection guide prints Homelite Super 2, Super 2CC and VI Super 2 in one block with other older Homelite names. Under that block it prints four 3/8\u2033 low-profile chains at .050\u2033 gauge: S48 on 12\u2033 (48 drive links), S53 on 14\u2033 (53 drive links), S59 on 16\u2033 (59 drive links) and S64 on 18\u2033 (64 drive links). Oregon does not split those four lengths across the names. The bar on the saw picks the count. A 245 built before serial XE339 is in this block. A 245 after that serial is in a different .325\u2033 block and is not this page. The guide does not print a file size.",
+  "bars": [
+    {
+      "lengths_in": [
+        12
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 48,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "S48",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-tsc-fit-guide"
+      ],
+      "note": "Oregon prints S48 under the Homelite Super 2 block: 12\u2033 bar, 48 drive links, .050\u2033 gauge, 3/8\u2033 low profile. No file size is printed."
+    },
+    {
+      "lengths_in": [
+        14
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 53,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "S53",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-tsc-fit-guide"
+      ],
+      "note": "Oregon prints S53 under the Homelite Super 2 block: 14\u2033 bar, 53 drive links, .050\u2033 gauge, 3/8\u2033 low profile. No file size is printed."
+    },
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 59,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "S59",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-tsc-fit-guide"
+      ],
+      "note": "Oregon prints S59 under the Homelite Super 2 block: 16\u2033 bar, 59 drive links, .050\u2033 gauge, 3/8\u2033 low profile. No file size is printed."
+    },
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 64,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "S64",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-tsc-fit-guide"
+      ],
+      "note": "Oregon prints S64 under the Homelite Super 2 block: 18\u2033 bar, 64 drive links, .050\u2033 gauge, 3/8\u2033 low profile. No file size is printed."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide: model line printed with saw-chain code, bar length, drive links, gauge and pitch",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-07"
+    }
+  ],
+  "sources_note": "Oregon Saw Chain Selection Guide (https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf), read 7 Nov 2026. The guide does not print a file size on these rows.",
+  "last_verified": "2026-11-07"
+}

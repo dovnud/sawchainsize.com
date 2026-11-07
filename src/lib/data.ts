@@ -6,8 +6,8 @@ export const SITE = {
   name: 'SawChainSize.com',
   tagline: 'Chainsaw Chain Size Lookup by Saw Model & Bar',
   email: 'contact@sawchainsize.com',
-  dataDate: '2026-11-05',
-  dataDateLabel: '5 November 2026',
+  dataDate: '2026-11-07',
+  dataDateLabel: '7 November 2026',
   defaultOg: '/og/default.png',
 };
 
@@ -301,7 +301,8 @@ export function compareText(a: Model, b: Model): string {
   const onlyB = [...B.keys()].filter((l) => !A.has(l)).sort((x, y) => x - y);
   const parts: string[] = [];
   const an = a.data.name, bn = b.data.name;
-  if (a.data.type !== b.data.type) parts.push(`the ${an} is a ${a.data.type === 'battery' ? 'battery' : 'gas'} saw and the ${bn} is a ${b.data.type === 'battery' ? 'battery' : 'gas'} saw`);
+  const powerWord = (t: string) => (t === 'battery' ? 'battery' : t === 'electric' ? 'electric' : 'gas');
+  if (a.data.type !== b.data.type) parts.push(`the ${an} is a ${powerWord(a.data.type)} saw and the ${bn} is a ${powerWord(b.data.type)} saw`);
   else if (a.data.displacement_cc && b.data.displacement_cc && a.data.displacement_cc !== b.data.displacement_cc) parts.push(`the ${an} is ${a.data.displacement_cc} cc against the ${bn}'s ${b.data.displacement_cc} cc`);
   if (same.length && !diff.length && !onlyA.length && !onlyB.length) parts.push(`both list the same bar lengths (${lenList(same)}) with identical pitch, gauge and drive-link counts`);
   else {

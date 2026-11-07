@@ -1,0 +1,47 @@
+{
+  "brand": "poulan",
+  "model": "PLN1514",
+  "name": "Poulan PLN1514",
+  "aliases": [
+    "PLN1514"
+  ],
+  "type": "gas",
+  "popular": false,
+  "blurb": "Oregon prints one chain under PLN1514: 14\u2033 bar, 3/8\u2033 low profile, .050\u2033 gauge, 49 drive links (S49).",
+  "intro": "Oregon's saw-chain selection guide prints Poulan PLN1514 on its own line with chain S49: 14\u2033 bar, 49 drive links, .050\u2033 gauge, 3/8\u2033 low profile. 49 links is what the guide prints. It is not the 52-link loop on many other 14\u2033 low-profile bars. The guide does not print a file size.",
+  "bars": [
+    {
+      "lengths_in": [
+        14
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 49,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "S49",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-tsc-fit-guide"
+      ],
+      "note": "Oregon prints S49 directly under Poulan PLN1514: 14\u2033 bar, 49 drive links, .050\u2033 gauge, 3/8\u2033 low profile. No file size is printed."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide: model line printed with saw-chain code, bar length, drive links, gauge and pitch",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-07"
+    }
+  ],
+  "sources_note": "Oregon Saw Chain Selection Guide (https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf), read 7 Nov 2026. The guide does not print a file size on these rows.",
+  "last_verified": "2026-11-07"
+}

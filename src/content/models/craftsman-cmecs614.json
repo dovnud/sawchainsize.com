@@ -1,0 +1,47 @@
+{
+  "brand": "craftsman",
+  "model": "CMECS614",
+  "name": "Craftsman CMECS614",
+  "aliases": [
+    "CMECS614"
+  ],
+  "type": "electric",
+  "popular": false,
+  "blurb": "Corded saw. Oregon prints one chain under CMECS614: 14\u2033 bar, 3/8\u2033 low profile, .050\u2033 gauge, 52 drive links (S52).",
+  "intro": "Oregon's saw-chain selection guide prints Craftsman CMECS614 under Corded electric with chain S52: 14\u2033 bar, 52 drive links, .050\u2033 gauge, 3/8\u2033 low profile. The guide does not print a file size.",
+  "bars": [
+    {
+      "lengths_in": [
+        14
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 52,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "S52",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-tsc-fit-guide"
+      ],
+      "note": "Oregon prints S52 under corded-electric Craftsman CMECS614: 14\u2033 bar, 52 drive links, .050\u2033 gauge, 3/8\u2033 low profile. No file size is printed."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide: model line printed with saw-chain code, bar length, drive links, gauge and pitch",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-07"
+    }
+  ],
+  "sources_note": "Oregon Saw Chain Selection Guide (https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf), read 7 Nov 2026. The guide does not print a file size on these rows.",
+  "last_verified": "2026-11-07"
+}

@@ -1,0 +1,48 @@
+{
+  "brand": "echo",
+  "model": "CCS-58V",
+  "name": "Echo CCS-58V",
+  "aliases": [
+    "CCS-58V",
+    "CCS-58V4AH"
+  ],
+  "type": "battery",
+  "popular": false,
+  "blurb": "Oregon prints one chain for CCS-58V and CCS-58V4AH: 16\u2033 bar, 3/8\u2033 low profile, .043\u2033 gauge, 56 drive links (R56).",
+  "intro": "Oregon's saw-chain selection guide prints Echo CCS-58V and CCS-58V4AH on one line with chain R56: 16\u2033 bar, 56 drive links, .043\u2033 gauge, 3/8\u2033 low profile. R56 is the .043\u2033 low-profile retail code. An S56 is .050\u2033 and is a different groove. The guide does not print a file size. The model string is the one Oregon prints.",
+  "bars": [
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.043,
+      "drive_links": 56,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "R56",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-tsc-fit-guide"
+      ],
+      "note": "Oregon prints R56 under Echo CCS-58V and CCS-58V4AH: 16\u2033 bar, 56 drive links, .043\u2033 gauge, 3/8\u2033 low profile. No file size is printed."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide: model line printed with saw-chain code, bar length, drive links, gauge and pitch",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-07"
+    }
+  ],
+  "sources_note": "Oregon Saw Chain Selection Guide (https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf), read 7 Nov 2026. The guide does not print a file size on these rows.",
+  "last_verified": "2026-11-07"
+}

@@ -1,0 +1,47 @@
+{
+  "brand": "craftsman",
+  "model": "CMCCSP20M1",
+  "name": "Craftsman CMCCSP20M1",
+  "aliases": [
+    "CMCCSP20M1"
+  ],
+  "type": "battery",
+  "popular": false,
+  "blurb": "Pole saw. Oregon prints one chain under CMCCSP20M1: 8\u2033 bar, 3/8\u2033 low profile, .043\u2033 gauge, 34 drive links (R34).",
+  "intro": "Oregon's saw-chain selection guide prints Craftsman CMCCSP20M1 under Pole saw with chain R34: 8\u2033 bar, 34 drive links, .043\u2033 gauge, 3/8\u2033 low profile. R34 is the .043\u2033 low-profile retail code, not an S-series .050\u2033 loop. The guide does not print a file size. The model string is the one Oregon prints. This page does not add a voltage.",
+  "bars": [
+    {
+      "lengths_in": [
+        8
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.043,
+      "drive_links": 34,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "R34",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-tsc-fit-guide"
+      ],
+      "note": "Oregon prints R34 under Craftsman pole saw CMCCSP20M1: 8\u2033 bar, 34 drive links, .043\u2033 gauge, 3/8\u2033 low profile. No file size is printed."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide: model line printed with saw-chain code, bar length, drive links, gauge and pitch",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-07"
+    }
+  ],
+  "sources_note": "Oregon Saw Chain Selection Guide (https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf), read 7 Nov 2026. The guide does not print a file size on these rows.",
+  "last_verified": "2026-11-07"
+}

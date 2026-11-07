@@ -1,0 +1,89 @@
+{
+  "brand": "homelite",
+  "model": "UT10517",
+  "name": "Homelite UT10517",
+  "aliases": [
+    "UT10517"
+  ],
+  "type": "gas",
+  "popular": true,
+  "blurb": "Oregon lists UT10517 with three 3/8\u2033 low-profile .050\u2033 chains: 14\u2033/52, 16\u2033/56 and 18\u2033/62 drive links.",
+  "intro": "The Homelite UT10517 is in Oregon's first large Homelite block. Oregon's saw-chain selection guide does not give this model its own line. It prints the model in one Homelite block with other model numbers, and under that block it prints three chains, all 3/8\u2033 low profile at .050\u2033 gauge: S52 on 14\u2033 (52 drive links), S56 on 16\u2033 (56 drive links) and S62 on 18\u2033 (62 drive links). Oregon does not say which of the three lengths left the factory on this model number. The bar on the saw picks the count. The same block includes the UT10517 and the UT43122. The guide does not print a file size.",
+  "bars": [
+    {
+      "lengths_in": [
+        14
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 52,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "S52",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-tsc-fit-guide"
+      ],
+      "note": "Oregon prints S52 under this Homelite block: 14\u2033 bar, 52 drive links, .050\u2033 gauge, 3/8\u2033 low profile. The block lists many model numbers. No file size is printed."
+    },
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 56,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "S56",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-tsc-fit-guide"
+      ],
+      "note": "Oregon prints S56 under this Homelite block: 16\u2033 bar, 56 drive links, .050\u2033 gauge, 3/8\u2033 low profile. The block lists many model numbers. No file size is printed."
+    },
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 62,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "S62",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-tsc-fit-guide"
+      ],
+      "note": "Oregon prints S62 under this Homelite block: 18\u2033 bar, 62 drive links, .050\u2033 gauge, 3/8\u2033 low profile. The block lists many model numbers. No file size is printed."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide: model line printed with saw-chain code, bar length, drive links, gauge and pitch",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-07"
+    }
+  ],
+  "sources_note": "Oregon Saw Chain Selection Guide (https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf), read 7 Nov 2026. The guide does not print a file size on these rows.",
+  "last_verified": "2026-11-07"
+}
