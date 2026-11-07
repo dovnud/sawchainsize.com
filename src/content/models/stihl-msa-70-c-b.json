@@ -1,0 +1,49 @@
+{
+  "brand": "stihl",
+  "model": "MSA 70 C-B",
+  "name": "STIHL MSA 70 C-B",
+  "aliases": [
+    "MSA 70",
+    "MSA 70 C-B",
+    "MSA70"
+  ],
+  "type": "battery",
+  "popular": false,
+  "blurb": "Battery saw. One bar in STIHL's 2025 chart: 12\u2033, 1/4\u2033 PICCO, .043\u2033 gauge, 64 drive links (71 PM3 64).",
+  "intro": "The STIHL MSA 70 C-B is a battery saw. STIHL's 2025 battery chart lists one loop: 12\u2033 bar, 1/4\u2033 PICCO Micro Mini, .043\u2033 gauge, 64 drive links, chain 71 PM3 64, recommended bar 3005 008 3405. The specification table (catalog p. 64) agrees on a 12\u2033 bar and 1/4\u2033 P PM3. STIHL's file table lists 1/8\u2033 (3.2 mm) for 1/4\u2033 PICCO.",
+  "bars": [
+    {
+      "lengths_in": [
+        12
+      ],
+      "pitch": "1/4",
+      "gauge": 0.043,
+      "drive_links": 64,
+      "file_size": "1/8",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "71 PM3 64",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2025"
+      ],
+      "note": "STIHL's 2025 battery chart lists chain 71 PM3 64 with recommended bar 3005 008 3405. 1/4\u2033 PICCO, .043\u2033 gauge, 12\u2033 bar, sprocket nose R with 8 teeth. The marketing number starts with 71: the Identifying STIHL Saw Chain panel defines 7 as 1/4\u2033 PICCO and 1 as .043\u2033. STIHL's file table lists a 3.2 mm (1/8\u2033) file for 1/4\u2033 PICCO."
+    }
+  ],
+  "sources": [
+    {
+      "id": "stihl-chain-chart-2025",
+      "type": "fitup-chart",
+      "publisher": "STIHL",
+      "title": "STIHL 2025 Full Line catalog: specification tables (catalog pp. 64\u201367, specifications as of 1 October 2024) and the guide-bar drive-link chart (catalog pp. 166\u2013167), including the file table and the PMM3/PM3 chain-type rows",
+      "url": "https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf",
+      "retrieved": "2026-11-07"
+    }
+  ],
+  "sources_note": "STIHL 2025 Full Line catalog, battery guide-bar chart (catalog p. 167) and specification table (catalog p. 64, as of 1 October 2024), read 7 Nov 2026. File size from the catalog file table: 1/8\u2033 for 1/4\u2033 PICCO.",
+  "last_verified": "2026-11-07"
+}

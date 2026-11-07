@@ -1,0 +1,91 @@
+{
+  "brand": "stihl",
+  "model": "MSE 250",
+  "name": "STIHL MSE 250",
+  "aliases": [
+    "MSE 250",
+    "MSE250"
+  ],
+  "type": "electric",
+  "popular": false,
+  "blurb": "120 V saw. 16\u2033, 18\u2033 and 20\u2033 bars on standard 3/8\u2033 chain, .050\u2033 gauge, 60, 66 and 72 drive links (33 RS3).",
+  "intro": "The STIHL MSE 250 is the corded saw STIHL's 2025 drive-link chart groups with the MS 311 and MS 391. The chart lists standard 3/8\u2033 pitch at .050\u2033 gauge: 33 RS3 60 on 16\u2033 (bar 3003 008 8913), 33 RS3 66 on 18\u2033 (bar 3003 008 8917) and 33 RS3 72 on 20\u2033 (bar 3003 008 8921). The specification table (catalog p. 66, as of 1 October 2024) calls it a 120 V saw and prints the chain type as \u201c3/8\u2033 RS3 or RM3\u201d for 16\u201320\u2033 bars. RM3 is a different cutter. This page does not add an RM3 loop, because the drive-link chart does not print one for this block. STIHL's file table lists 13/64\u2033 (5.2 mm) for 3/8\u2033 chain.",
+  "notice": "The specification table also says RM3. The drive-link chart prints 33 RS3 only. Order the loop that matches the bar stamp.",
+  "bars": [
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 60,
+      "file_size": "13/64",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "33 RS3 60",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2025"
+      ],
+      "note": "STIHL's 2025 drive-link chart lists chain 33 RS3 60 with recommended bar 3003 008 8913. The block header names the MS 311, MS 391 and MSE 250 together. Standard 3/8\u2033 pitch, .050\u2033 gauge, 16\u2033 bar. STIHL's file table lists a 13/64\u2033 (5.2 mm) file for 3/8\u2033 chain."
+    },
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 66,
+      "file_size": "13/64",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "33 RS3 66",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2025"
+      ],
+      "note": "STIHL's 2025 drive-link chart lists chain 33 RS3 66 with recommended bar 3003 008 8917. The block header names the MS 311, MS 391 and MSE 250 together. Standard 3/8\u2033 pitch, .050\u2033 gauge, 18\u2033 bar. STIHL's file table lists a 13/64\u2033 (5.2 mm) file for 3/8\u2033 chain."
+    },
+    {
+      "lengths_in": [
+        20
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 72,
+      "file_size": "13/64",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "33 RS3 72",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2025"
+      ],
+      "note": "STIHL's 2025 drive-link chart lists chain 33 RS3 72 with recommended bar 3003 008 8921. The block header names the MS 311, MS 391 and MSE 250 together. Standard 3/8\u2033 pitch, .050\u2033 gauge, 20\u2033 bar. STIHL's file table lists a 13/64\u2033 (5.2 mm) file for 3/8\u2033 chain."
+    }
+  ],
+  "sources": [
+    {
+      "id": "stihl-chain-chart-2025",
+      "type": "fitup-chart",
+      "publisher": "STIHL",
+      "title": "STIHL 2025 Full Line catalog: specification tables (catalog pp. 64\u201367, specifications as of 1 October 2024) and the guide-bar drive-link chart (catalog pp. 166\u2013167), including the file table and the PMM3/PM3 chain-type rows",
+      "url": "https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf",
+      "retrieved": "2026-11-07"
+    }
+  ],
+  "sources_note": "STIHL 2025 Full Line catalog, read 7 Nov 2026. Loops from the guide-bar chart (catalog p. 166), MSE 250 / MS 311 / MS 391 block. 120 V and the \u201cRS3 or RM3\u201d chain-type words from the specification table (catalog p. 66, as of 1 October 2024). File size from the catalog file table: 13/64\u2033 for 3/8\u2033 chain.",
+  "last_verified": "2026-11-07"
+}

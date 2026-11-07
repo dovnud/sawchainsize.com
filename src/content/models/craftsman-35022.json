@@ -1,0 +1,47 @@
+{
+  "brand": "craftsman",
+  "model": "35022",
+  "name": "Craftsman 35022",
+  "aliases": [
+    "35022"
+  ],
+  "type": "gas",
+  "popular": false,
+  "blurb": "Oregon prints one chain under 35022: 20\u2033 bar, .325\u2033 pitch, .050\u2033 gauge, 78 drive links (H78).",
+  "intro": "Oregon's saw-chain selection guide prints Craftsman 35022 on its own line with chain H78: 20\u2033 bar, 78 drive links, .050\u2033 gauge, .325\u2033 pitch. The guide does not print a file size.",
+  "bars": [
+    {
+      "lengths_in": [
+        20
+      ],
+      "pitch": "325",
+      "gauge": 0.05,
+      "drive_links": 78,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "H78",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-tsc-fit-guide"
+      ],
+      "note": "Oregon prints H78 directly under Craftsman 35022: 20\u2033 bar, 78 drive links, .050\u2033 gauge, .325\u2033 pitch. No file size is printed."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide: model line printed with saw-chain code, bar length, drive links, gauge and pitch",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-07"
+    }
+  ],
+  "sources_note": "Oregon Saw Chain Selection Guide (https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf), read 7 Nov 2026. The guide does not print a file size on these rows.",
+  "last_verified": "2026-11-07"
+}

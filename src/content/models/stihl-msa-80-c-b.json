@@ -1,0 +1,44 @@
+{
+  "brand": "stihl",
+  "model": "MSA 80 C-B",
+  "name": "STIHL MSA 80 C-B",
+  "aliases": [
+    "MSA 80",
+    "MSA 80 C-B",
+    "MSA80"
+  ],
+  "type": "battery",
+  "popular": false,
+  "blurb": "Battery saw. STIHL lists a 14\u2033 bar and 1/4\u2033 PICCO PM3 chain. PM3 at 1/4\u2033 PICCO is .043\u2033 in this catalog. The drive-link count is not in the chart.",
+  "intro": "The STIHL MSA 80 C-B is marked NEW on the 2025 specification table (catalog p. 64, specifications as of 1 October 2024). That row lists a 14\u2033 bar and 1/4\u2033 PICCO PM3 chain. The saw-chain chart lists PM3 at .043\u2033 for 1/4\u2033 PICCO (code 3670). STIHL's drive-link chart (catalog pp. 166\u2013167) does not name this model, so this page does not print a drive-link count. Count the drive links on the bar stamp before you order. The MSA 70 C-B, which the drive-link chart does list, is the same 1/4\u2033 PM3 family at .043\u2033 with 64 links on a 12\u2033 bar. That count is not this saw's count. STIHL's file table lists 1/8\u2033 (3.2 mm) for 1/4\u2033 PICCO.",
+  "notice": "No drive-link count is published for the MSA 80 C-B in this catalog. Use the bar stamp.",
+  "bars": [
+    {
+      "lengths_in": [
+        14
+      ],
+      "pitch": "1/4",
+      "gauge": 0.043,
+      "drive_links": null,
+      "file_size": "1/8",
+      "status": "verify",
+      "chains": [],
+      "source_ids": [
+        "stihl-chain-chart-2025"
+      ],
+      "note": "Specification table (catalog p. 64, as of 1 October 2024): 14\u2033 bar, 1/4\u2033 PICCO, chain type PM3. The chain-type chart lists 1/4\u2033 PICCO PM3 at .043\u2033 (code 3670). No drive-link count is printed for the MSA 80 C-B. STIHL's file table lists 1/8\u2033 for 1/4\u2033 PICCO."
+    }
+  ],
+  "sources": [
+    {
+      "id": "stihl-chain-chart-2025",
+      "type": "fitup-chart",
+      "publisher": "STIHL",
+      "title": "STIHL 2025 Full Line catalog: specification tables (catalog pp. 64\u201367, specifications as of 1 October 2024) and the guide-bar drive-link chart (catalog pp. 166\u2013167), including the file table and the PMM3/PM3 chain-type rows",
+      "url": "https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf",
+      "retrieved": "2026-11-07"
+    }
+  ],
+  "sources_note": "STIHL 2025 Full Line catalog, specification table (catalog p. 64, as of 1 October 2024) and PM3 chain-type row (1/4\u2033 PICCO at .043\u2033, code 3670), read 7 Nov 2026. The battery drive-link chart (catalog p. 167) does not name the MSA 80 C-B.",
+  "last_verified": "2026-11-07"
+}

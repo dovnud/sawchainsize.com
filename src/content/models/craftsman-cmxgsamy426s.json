@@ -1,0 +1,48 @@
+{
+  "brand": "craftsman",
+  "model": "CMXGSAMY426S",
+  "name": "Craftsman CMXGSAMY426S",
+  "aliases": [
+    "CMXGSAMY426S",
+    "172.345460"
+  ],
+  "type": "gas",
+  "popular": false,
+  "blurb": "Oregon prints one chain for CMXGSAMY426S and 172.345460: 16\u2033 bar, 3/8\u2033 low profile, .050\u2033 gauge, 57 drive links (S57).",
+  "intro": "Oregon's saw-chain selection guide prints Craftsman CMXGSAMY426S and 172.345460 on one line with chain S57: 16\u2033 bar, 57 drive links, .050\u2033 gauge, 3/8\u2033 low profile. 57 links is what the guide prints. It is not the 56-link loop on the CMECS600 / S160 line. The guide does not print a file size.",
+  "bars": [
+    {
+      "lengths_in": [
+        16
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 57,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "S57",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-tsc-fit-guide"
+      ],
+      "note": "Oregon prints S57 under CMXGSAMY426S and 172.345460: 16\u2033 bar, 57 drive links, .050\u2033 gauge, 3/8\u2033 low profile. No file size is printed."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide: model line printed with saw-chain code, bar length, drive links, gauge and pitch",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-07"
+    }
+  ],
+  "sources_note": "Oregon Saw Chain Selection Guide (https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf), read 7 Nov 2026. The guide does not print a file size on these rows.",
+  "last_verified": "2026-11-07"
+}
