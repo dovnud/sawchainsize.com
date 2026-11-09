@@ -71,6 +71,10 @@ const GUIDE_LINK_CAP: Record<string, number> = {
   'full-kerf-vs-narrow-kerf-chain': 3,
   'oregon-chain-numbers': 2,
   'break-in-new-chainsaw-chain': 3,
+  'full-chisel-vs-semi-chisel-chain': 3,
+  'chainsaw-skip-chain': 3,
+  'ripping-chainsaw-chain': 3,
+  'sprocket-nose-vs-solid-nose-bar': 2,
 };
 const LINK_CAP: Record<string, number> = {
   'model:husqvarna-t540-xp-mark-iii': 3,
@@ -307,6 +311,33 @@ export function guideShop(slug: string): { groups: ShopGroup[]; count: number } 
       break;
     case 'why-a-chainsaw-chain-comes-off':
       add('The parts that hold the chain on', [LOOKUP(), SCRENCH(), CALIPER(), SPROCKET(), barOilLink(), glovesLink()]);
+      break;
+    case 'full-chisel-vs-semi-chisel-chain':
+      add('Same family number, different cutter', [
+        search('Oregon 72LPX chainsaw chain 3/8 pitch .050 gauge', 'Oregon 72LPX (chisel, standard sequence): pick the drive-link count'),
+        search('Oregon 72DPX semi-chisel chainsaw chain 3/8 .050', 'Oregon 72DPX (semi-chisel, same 3/8″ .050″ family): pick the drive-link count'),
+        search('Oregon 91VXL chainsaw chain 3/8 low profile .050', 'Oregon 91VXL (semi-chisel, 3/8″ low profile .050″): pick the drive-link count'),
+      ], true);
+      break;
+    case 'chainsaw-skip-chain':
+      add('Skip and semi-skip, then match the count', [
+        search('Oregon 72JGX skip chainsaw chain 3/8 .050', 'Oregon 72JGX (chisel, skip sequence): match the drive-link count'),
+        search('Oregon 72CK semi-skip square ground chainsaw chain', 'Oregon 72CK (square-ground chisel, semi-skip)'),
+        search('STIHL RSF full skip chainsaw chain 3/8 .050', 'STIHL RSF full skip (3/8″ .050″): match the drive-link count'),
+      ], true);
+      break;
+    case 'ripping-chainsaw-chain':
+      add('Ripping chain only, matched to the bar', [
+        search('Oregon 72RD RipCut ripping chainsaw chain 3/8 .050', 'Oregon 72RD RipCut (3/8″ .050″, ripping only)'),
+        search('Oregon 27R RipCut ripping chainsaw chain .404 .063', 'Oregon 27R RipCut (.404″ .063″, ripping only)'),
+        search('STIHL RMX ripping chainsaw chain', 'STIHL RMX ripping chain: match pitch, gauge and drive links'),
+      ], true);
+      break;
+    case 'sprocket-nose-vs-solid-nose-bar':
+      add('Match the nose, then the stamp', [
+        search('Oregon replaceable sprocket nose chainsaw guide bar', 'Replaceable sprocket-nose bar. Match pitch, gauge, length and the mount'),
+        search('chainsaw solid nose guide bar hard tip alloy', 'Solid-nose bar. Match the stamp, including gauge and drive links'),
+      ], true);
       break;
     case 'gifts-for-chainsaw-owners-2026':
       add('Tier 1, used up this season', [

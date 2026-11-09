@@ -1,0 +1,98 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+
+const path = '/guides/full-chisel-vs-semi-chisel-chain/';
+const modified = (dates as Record<string, string>)[path];
+const shop = guideShop('full-chisel-vs-semi-chisel-chain');
+const desc = 'Full chisel, semi-chisel, chamfer, micro-chisel and chipper are cutter shapes. Pitch, gauge and drive links still come from the bar stamp.';
+const ORE = 'https://apps.oregonproducts.com/pdfs/OregonMMANUAL_EN_A106971ab.pdf';
+const ORE_TERMS = 'https://www.oregonproducts.com/en/product-support/chainsaw/saw-chain-terminology/c/saw-chain-terminology-s';
+const STIHL = 'https://www.stihlusa.com/content/dam/stihl/vu/us/en/download-files/pdf-files/2025_STIHL_Power_Tools_Catalog_VU_D_2025-1.pdf';
+const STIHL_2017 = 'https://assets.unilogcorp.com/187/ITEM/DOC/Stihl_102205325_Catalog.pdf';
+const ECHO = 'https://www.echo-usa.com/getmedia/f0410e25-c7f5-4247-a9cb-8045d8e57b63/ECHO_chainsaws.pdf';
+const faqs = [
+  { q: 'Can a full-chisel chain replace a semi-chisel chain?', a: 'When the pitch, gauge and drive-link count match, the bar will take either cutter. Oregon 72LPX and 72DPX are both family 72, which the identification table lists as 3/8″ at .050″. The letters change the cutter: chisel on LPX, semi-chisel on DPX. Kickback parts can differ between those letters. Matching the three numbers does not put a professional chisel chain and a low-kickback chain in the same safety class.' },
+  { q: 'Is chipper the same thing as semi-chisel?', a: 'Oregon’s terminology page lists them as two cutter types, chipper and semi-chisel, along with chamfer chisel, micro chisel and chisel. In the current maintenance manual’s identification grids, chain numbers are assigned to chisel, semi-chisel, micro chisel and chamfer chisel. Chipper is named on the terminology page and is not given a chain number in those grids. Semi-chisel is the name on chains such as 72DPX and 91VXL.' },
+  { q: 'Is STIHL Micro semi-chisel?', a: 'STIHL’s 2025 catalog legend prints M as Micro (Semi Chisel) and S as Super (Full Chisel). H in the cutter-shape position is HEXA (Full Chisel). The 2017 identification panel prints S as Super (Chisel) and M as Micro, without the words semi-chisel. The 2025 chain pages call RS and RS3 full-chisel. The letter H in the special-feature position is a different code, semi-skip or harvester, covered on the skip-chain page.' },
+  { q: 'Is Echo PX full chisel?', a: 'Echo’s catalog key calls PX low-vibration chisel cutters with ramped depth gauges and bumper drive links. Oregon’s identification table calls 91PX chamfer chisel, and the 91PX product page says those cutters are comparable to round-cornered chains. Echo’s key calls PXL and VXL semi-chisel, which matches Oregon’s table for 91PXL and 91VXL. Use the definition from the brand whose name is on the chain.' },
+  { q: 'Which file sharpens which cutter?', a: 'File diameter follows pitch. Angles follow the chain-type code. Both tables are already on this site. Square-ground chisel (Oregon CL, CK and CJ, and STIHL’s L chains) is sharpened with the square-ground file that maker specifies, not with the round file used on round-ground chisel.' },
+];
+const howto = {
+  '@context': 'https://schema.org', '@type': 'HowTo', name: 'How to tell which cutter is on a chainsaw chain',
+  description: 'Read the number and the letters on the drive link, then match the cutter name the chain maker prints for that code.',
+  tool: [{ '@type': 'HowToTool', name: 'Work gloves' }, { '@type': 'HowToTool', name: 'The chain box or a readable drive-link stamp' }],
+  step: [
+    { '@type': 'HowToStep', name: 'Stop the saw', text: 'Engine off, chain cool, gloves on. Read the chain with it off the wood.' },
+    { '@type': 'HowToStep', name: 'Read the number on a drive link', text: 'Oregon’s number is pitch and gauge. 72 is 3/8″ .050″, 73 is 3/8″ .058″, 75 is 3/8″ .063″, 91 is 3/8″ low profile .050″, 90 is 3/8″ low profile .043″.' },
+    { '@type': 'HowToStep', name: 'Read the letters', text: 'The letters are the cutter series. LPX, EXL and LGX are chisel in Oregon’s identification table. DPX and 91VXL are semi-chisel. 90PX and 91PX are chamfer chisel. 95TXL and 20BPX are micro chisel.' },
+    { '@type': 'HowToStep', name: 'Match the drive-link count', text: 'A different cutter in the same pitch and gauge is still the wrong loop if the drive-link count disagrees with the bar stamp.' },
+  ],
+};
+const jsonld = [webPageLd('Full chisel vs semi-chisel vs chipper chain', path, desc, modified), howto, faqLd(faqs)];
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Chisel, semi-chisel, chipper', path }];
+---
+<Base title="Full Chisel vs Semi-Chisel vs Chipper" description={desc} path={path} nav="chart" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Chisel, semi-chisel, chipper' }]} />
+      <h1>Full chisel vs semi-chisel vs chipper</h1>
+      <p class="lede">The cutter’s working corner is what these names describe. Oregon lists five cutter types: chipper, semi-chisel, chamfer chisel, micro chisel and chisel. A square chisel corner cuts a full-width kerf on each pass. A rounded corner has to re-cut the end grain to get there. None of those names is a pitch or a gauge. The bar stamp still decides the loop.</p>
+    </div>
+
+    <section class="block">
+      <h2>What Oregon measures, and what it names</h2>
+      <p style="max-width:72ch">Oregon’s terminology page puts cutter type next to gauge, pitch and sequence as one of the four facts that identify a chain. The five types it prints are chipper, semi-chisel, chamfer chisel, micro chisel and chisel. The same page’s answer to why chisel chain cuts faster is geometric: rounded cutters have to re-cut the end grain until the kerf is full width, and square chisel cutters take that full width on every pass. Kerf here is the slot width, which is a different number from gauge. Gauge is the drive-link thickness in the bar groove, covered in <a href="/guides/chainsaw-chain-gauge/">chain gauge</a> and <a href="/guides/full-kerf-vs-narrow-kerf-chain/">full kerf vs narrow kerf</a>.</p>
+      <p style="max-width:72ch">The maintenance manual’s identification grids are where those names meet a chain number. Chipper appears on the terminology list. In the round-ground, square-ground and specialty grids of this manual, the cutter column is chisel, semi-chisel, micro chisel or chamfer chisel. There is no chipper row with a part number. If a box says chipper and the drive link says 72DPX, the drive link is the chain you file: 72DPX is semi-chisel in the grid.</p>
+      <p class="src">Oregon <a href={ORE_TERMS} rel="nofollow">saw-chain terminology</a>, cutter-type list and the chisel-speed note, read 9 Nov 2026. Oregon <a href={ORE} rel="nofollow">Maintenance and Safety Manual</a>, “Saw Chain Identification” grids and the PowerCut, VersaCut, ControlCut and AdvanceCut product pages.</p>
+    </section>
+    <ShopBlock groups={shop.groups} compact />
+
+    <section class="block">
+      <h2>Oregon chain numbers, by the identification table</h2>
+      <p style="max-width:72ch">The number is the family. The letters are the cutter and, in a later column, the sequence. Sequence (standard, skip, semi-skip) is <a href="/guides/chainsaw-skip-chain/">its own guide</a>. This table is the cutter column. Gauges are the ones printed on those rows: 72 is .050″, 73 is .058″, 75 is .063″, and the low-profile split is 90 at .043″ and 91 at .050″.</p>
+      <div class="tblwrap">
+        <table>
+          <caption class="sr-only">Oregon cutter type by chain series</caption>
+          <thead><tr><th scope="col">Oregon series</th><th scope="col">Cutter in the identification table</th><th scope="col">Pitch family</th></tr></thead>
+          <tbody>
+            <tr><td>72 / 73 / 75 LPX, EXL, LGX, V</td><td>Chisel. The product pages call LPX, EXL, LGX and the 72V family full chisel.</td><td><a href="/chain/3-8-050/">3/8″ .050″</a>, <a href="/chain/3-8-058/">.058″</a>, <a href="/chain/3-8-063/">.063″</a></td></tr>
+            <tr><td>72 / 73 / 75 CL, CK, CJ</td><td>Chisel, square ground. CL is standard sequence, CK is semi-skip, CJ is skip.</td><td>Same 3/8″ families</td></tr>
+            <tr><td>20 / 21 / 22 LPX and LGX</td><td>Chisel. The product pages call them full chisel.</td><td><a href="/chain/325-050/">20 is .325″ .050″</a>, <a href="/chain/325-058/">21 is .058″</a>, <a href="/chain/325-063/">22 is .063″</a></td></tr>
+            <tr><td>72 / 73 / 75 DPX, M72 / M73 / M75 DPX, 72APX</td><td>Semi-chisel. The DuraCut page says the semi-chisel cutters are for abrasive conditions.</td><td>3/8″, gauge from the 72 / 73 / 75 number</td></tr>
+            <tr><td>91PXL, 91VXL, M91VXL</td><td>Semi-chisel, standard sequence.</td><td><a href="/chain/3-8-lp-050/">3/8″ low profile .050″</a></td></tr>
+            <tr><td>90PX, 91PX</td><td>Chamfer chisel. The 91PX page says the twin cutting corners are comparable to round-cornered chains.</td><td><a href="/chain/3-8-lp-043/">90 is .043″</a>, 91 is .050″</td></tr>
+            <tr><td>95TXL, 20 / 21 / 22 BPX, 25AP, 72 / 73 / 75 RD, 27R</td><td>Micro chisel. RD and 27R are the ripping chains.</td><td>Pitch and gauge from the family number</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="max-width:72ch">One label inside the manual disagrees with that grid. The identification table lists 72LPX, 73LPX and 75LPX as chisel in a standard sequence, and the product paragraph calls the cutters full chisel. The closing mark on that same product page reads Semi-Chisel beside Kickback Safety. The table and the paragraph agree with each other. The closing mark does not. File the chain by the type code on the drive link, and use the angles for that code. If the box in your hand uses a different word than the table, the box is the chain you bought. Tell us, with a photo of the drive link, if a current box has moved.</p>
+      <p class="src">Cutter and sequence columns from the manual’s round-ground, square-ground and specialty identification grids. The 72LPX closing mark is on the PowerCut “72, 73, 75 LPX / 72 JPX” product page. Family gauges are the same grid’s gauge column, which matches the <a href="/guides/oregon-chain-numbers/">Oregon chain-number</a> decoder.</p>
+    </section>
+
+    <section class="block">
+      <h2>STIHL’s letters, then Echo’s</h2>
+      <p style="max-width:72ch">STIHL’s 2025 catalog says the chain type is the shape of the tooth, and the identification legend on the saw chart prints the words. S is Super (Full Chisel). M is Micro (Semi Chisel). H in the cutter-shape position is HEXA (Full Chisel). The chain pages use the same words in prose: RS is an aggressive full-chisel cutter, and RS3 is an aggressive full-chisel chain with a single-humped drive link. The 2017 identification panel, which this site’s part-number decoder was built from, prints S as Super (Chisel) and M as Micro, and does not print “semi-chisel.” The letters did not change. The 2025 chart is the one that spells out semi-chisel. HEXA’s narrower kerf versus RAPID Super is a performance comparison on the HEXA page, already noted in <a href="/guides/full-kerf-vs-narrow-kerf-chain/">full kerf vs narrow kerf</a>. It is not a gauge.</p>
+      <p style="max-width:72ch">Echo’s bars-and-chains key is explicit and short. Professional: LPX is round-ground chisel with bumper drive links and a standard sequence, and VXL is a low-vibration semi-chisel cutter with ramped depth gauges and a longer top plate. Low-kickback: PX is low-vibration chisel with ramped depth gauges, bumper drive links and a standard sequence; BPX is low-vibration chisel with bumper drive links; PXL is low-vibration semi-chisel with ramped depth gauges, bumper drive links and a longer top plate. Echo does not use the word chipper in that key.</p>
+      <p style="max-width:72ch">Put Echo’s PX next to Oregon’s 91PX and the words diverge. Echo says chisel. Oregon’s grid says chamfer chisel, and Oregon’s 91PX page says the cutters are comparable to round-cornered chains. Echo’s PXL and VXL lines up with Oregon: both call 91PXL and 91VXL semi-chisel. Echo’s LPX lines up with Oregon’s chisel column for 72LPX and 20LPX. A box that says “chisel” is the brand’s chisel, which is why the drive-link code is the thing to match, and why <a href="/guides/chain-part-numbers/">part numbers</a> and <a href="/guides/how-to-verify-chain-size/">the bar stamp</a> outrank the adjective.</p>
+      <p class="src">STIHL USA, <a href={STIHL} rel="nofollow">2025 Power Tools catalog</a> (specifications note dated 1 Oct 2024), saw-chain type pages and the identification legend, read 9 Nov 2026. STIHL <a href={STIHL_2017} rel="nofollow">2017 Saw Chain Selection and Identification</a> panel. <a href={ECHO} rel="nofollow">ECHO chainsaws catalog</a>, Bars and Chains, chain-type key.</p>
+    </section>
+
+    <section class="block">
+      <h2>What stays the same when the cutter changes</h2>
+      <p style="max-width:72ch">Pitch, gauge and the drive-link count are the fit. Oregon 72LPX and 72DPX share a family number, so they share 3/8″ pitch and .050″ gauge, and a 68-link loop of either one is 68 drive links. They do not share a cutter. They also may not share kickback parts. Oregon’s low-kickback features (bumper drive links, ramped depth gauges) are a separate design, and the manual says not to file them off. STIHL’s green and yellow labels mark that class on STIHL chain. <a href="/guides/stihl-green-vs-yellow-chain/">Green vs yellow</a> and <a href="/guides/chainsaw-kickback/">kickback</a> are those rules. Swapping a 91-series low-kickback loop for a standard 3/8″ chisel chain changes the sprocket family as well as the cutter, which is <a href="/guides/3-8-low-profile-vs-standard-chain/">low profile vs standard 3/8″</a>.</p>
+      <p style="max-width:72ch">The file and the angles follow the type code, not the word “chisel” alone. Round-ground 72LPX is a 7/32″ file at 25° on Oregon’s chart. Square-ground 72CL has no round-file size on that chart. STIHL’s 2025 file table lists 13/64″ for its 3/8″ chain, which is the file-size conflict already printed on <a href="/guides/chainsaw-chain-file-size/">file size</a> and <a href="/guides/stihl-chain-file-size/">STIHL file size</a>. Depth-gauge settings stay on <a href="/guides/chainsaw-sharpening-angles/">sharpening angles</a>.</p>
+    </section>
+
+    <div class="callout"><b>Read the drive-link code</b><p>A chisel cutter and a semi-chisel cutter can share a bar when the pitch, the gauge and the drive-link count match. Chipper, semi-chisel and chamfer are different words on the makers’ pages. Read the code stamped on the drive link, then the maker’s row for that code. If the stamp and a chart disagree, the stamp wins.</p></div>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/chainsaw-skip-chain/">Skip chain</a> · <a href="/guides/oregon-chain-numbers/">Oregon chain numbers</a> · <a href="/guides/chainsaw-sharpening-angles/">Sharpening angles</a> · <a href="/guides/chainsaw-chain-glossary/">Glossary</a> · <a href="/guides/how-to-verify-chain-size/">Verify the stamp</a></p>
+    <ShopBlock groups={shop.groups} title="Chisel and semi-chisel searches (Amazon)" lead="72LPX and 72DPX are the same 3/8″ .050″ family with different cutters. 91VXL is semi-chisel at 3/8″ low profile .050″. Pick the drive-link count on your stamp. These searches do not cover chipper, because the current Oregon grids do not assign it a number." />
+  </div>
+</Base>

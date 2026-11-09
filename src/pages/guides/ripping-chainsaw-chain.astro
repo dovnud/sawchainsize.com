@@ -1,0 +1,91 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+
+const path = '/guides/ripping-chainsaw-chain/';
+const modified = (dates as Record<string, string>)[path];
+const shop = guideShop('ripping-chainsaw-chain');
+const desc = 'Ripping chain is the 10° with-the-grain grind for a mill. Oregon RipCut is for ripping only. Match pitch, gauge and drive links on the bar.';
+const ORE = 'https://apps.oregonproducts.com/pdfs/OregonMMANUAL_EN_A106971ab.pdf';
+const ORE_RIP = 'https://www.oregonproducts.com/en/products/forestry/saw-chain-families/ripcut/c/ripcut-sc-p';
+const ORE_CHART = 'https://oregonproducts.com/medias/2020-FilingGrindingAngles.pdf?attachment=true&context=bWFzdGVyfHJvb3R8NDA2MDY0fGFwcGxpY2F0aW9uL3BkZnxoNjUvaGJmLzg4NTMxOTkzODg3MDIucGRmfGQ4MmNmZWZjZDA5MWQ3MmM0NmY0OTM4ZmFhN2MxZWUwMDA2MzgzM2Q4Y2U1MzgyYjQwMzZmYzZhZmY3ZWMzNjQ';
+const STIHL = 'https://www.stihlusa.com/content/dam/stihl/vu/us/en/download-files/pdf-files/2025_STIHL_Power_Tools_Catalog_VU_D_2025-1.pdf';
+const STIHL_38 = 'https://www.stihlusa.com/en/ap/rmx-ripping-saw-chain-3-8%22-1027254';
+const STIHL_404 = 'https://www.stihlusa.com/en/ap/rmx-ripping-saw-chain-040%22-1027516';
+const faqs = [
+  { q: 'Can I fell or buck with ripping chain?', a: 'Oregon says no. RipCut is for ripping cuts only, on chain-type sawmills, and Oregon says not to use it for any other cut and does not recommend it for handheld use. The RipCut page also says the chain does not comply with low-kickback performance requirements. STIHL’s catalog describes RMX as a professional chain for small sawmills. One STIHL product page for the .404″ RMX loop also lists freehand longitudinal cutting. Follow the sentence on the chain you are holding. Oregon’s ban and STIHL’s freehand line are not the same instruction.' },
+  { q: 'What angle do you file ripping chain?', a: 'Oregon’s 2020 filing chart sets a 10° top-plate angle and a 10° down angle. Depth gauge is .025″ on 72, 73 and 75RD, and .030″ on 27R, 27RX and 27RA. The file is 7/32″. STIHL’s catalog gives RMX a 10-degree filing angle and does not print a depth-gauge figure there. If the number stamped on the depth gauge differs from the chart, use the stamped number.' },
+  { q: 'Is ripping chain a skip chain?', a: 'Sometimes, and only when the sequence column says so. 72RD, 73RD, 75RD and 27R are standard sequence. 27RA is skip. 27RX is super skip, which Oregon says is for greater chip clearance on extra-wide cuts. STIHL describes RMX as semi-chisel ripping chain, not as a skip pattern. Sequence is the skip-chain guide.' },
+  { q: 'Will ordinary chain work in a mill?', a: 'Oregon and STIHL each sell a separate chain for the with-the-grain cut. Crosscut chain on the angles guide is the 25° or 30° grind used for felling and bucking. Ripping chain is the 10° grind. Pitch, gauge and drive links still have to match the bar on the mill.' },
+  { q: 'Which pitch and gauge is RipCut?', a: 'Oregon: 72RD is 3/8″ .050″, 73RD is 3/8″ .058″, 75RD is 3/8″ .063″, and 27R / 27RX is .404″ .063″. STIHL’s 3/8″ RMX product page lists .063″ gauge and loops of 72, 84, 105 and 114 drive links. The .404″ RMX page lists .063″ gauge and 108 drive links. The page slug on that .404″ listing says .040″. The technical table says .404″. Use the table, then the bar on the mill.' },
+];
+const howto = {
+  '@context': 'https://schema.org', '@type': 'HowTo', name: 'How to identify ripping chainsaw chain',
+  description: 'Read the chain code, confirm it is a ripping grind, and match pitch, gauge and drive links to the bar before using it for a with-the-grain cut.',
+  tool: [{ '@type': 'HowToTool', name: 'The chain box or drive-link stamp' }, { '@type': 'HowToTool', name: 'The bar stamp on the mill or the saw' }],
+  step: [
+    { '@type': 'HowToStep', name: 'Read the type code', text: 'Oregon RipCut codes are 72RD, 73RD, 75RD, 27R, 27RA and 27RX. STIHL’s ripping code is X, on RMX. A 25° or 30° crosscut chain is a different grind.' },
+    { '@type': 'HowToStep', name: 'Read the maker’s use line', text: 'Oregon limits RipCut to ripping cuts on chain-type sawmills and says it is not for handheld use. STIHL describes RMX for professional use with small sawmills. The .404″ RMX product page also names freehand longitudinal cutting. Do not copy one brand’s sentence onto the other brand’s chain.' },
+    { '@type': 'HowToStep', name: 'File at 10 degrees', text: 'Oregon’s chart is 10° top plate and 10° down. Depth gauge is .025″ on the 3/8″ RD chains and .030″ on the .404″ ripping chains. STIHL prints 10° for RMX and does not print a depth-gauge number in that catalog entry. Use the figure stamped on the depth gauge when it differs.' },
+    { '@type': 'HowToStep', name: 'Match the bar', text: 'Pitch, gauge and drive-link count still have to match the bar. Ripping chain is not a universal mill loop.' },
+  ],
+};
+const jsonld = [webPageLd('Ripping chainsaw chain for milling', path, desc, modified), howto, faqLd(faqs)];
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Ripping chain', path }];
+---
+<Base title="Ripping Chainsaw Chain for Milling" description={desc} path={path} nav="chart" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Ripping chain' }]} />
+      <h1>Ripping chain, for milling with the grain</h1>
+      <p class="lede">Ripping chain is the grind for cuts parallel to the wood grain, the cut a chainsaw mill makes when it turns a log into boards. Oregon’s name is RipCut: 72RD, 73RD, 75RD and 27R, filed at 10°, and limited to that cut. STIHL’s name is RMX, a semi-chisel chain with the same 10° filing angle, for small sawmills. A felling chain is a different grind. The bar on the mill still sets pitch, gauge and drive links.</p>
+    </div>
+
+    <section class="block">
+      <h2>Oregon RipCut is a mill chain</h2>
+      <p style="max-width:72ch">Oregon’s RipCut page and the maintenance manual describe the same chain. The cutters are micro chisel. The grind is for dimensional boards and planks. The use line is ripping only: do not use these chains for any other kind of cut. The manual adds that they are for chain-type sawmills and are not recommended for handheld use. The product page says the chain does not comply with low-kickback performance requirements, and it marks the ANSI status professional. That is a narrower permission than “it came on a roll, so it can go on the saw you fell with.”</p>
+      <p style="max-width:72ch">The sizes are a short list. 72RD is 3/8″ at .050″, 73RD is 3/8″ at .058″, 75RD is 3/8″ at .063″, all standard sequence. 27R is .404″ at .063″, standard sequence. 27RX is the same pitch and gauge in a super-skip sequence, which Oregon says is there for chip clearance on extra-wide cuts. The identification grid also lists 27RA as skip. Super skip and skip are spacing. They are not a second kind of rip. Spacing is <a href="/guides/chainsaw-skip-chain/">skip chain</a>. Micro chisel as a cutter name is <a href="/guides/full-chisel-vs-semi-chisel-chain/">the cutter guide</a>.</p>
+      <p class="src">Oregon <a href={ORE_RIP} rel="nofollow">RipCut</a> product page, including the “ripping cuts only” line and the low-kickback note, read 9 Nov 2026. Oregon <a href={ORE} rel="nofollow">Maintenance and Safety Manual</a>, RipCut product pages for 72/73/75RD and 27R/RX, and the specialty identification grid.</p>
+    </section>
+    <ShopBlock groups={shop.groups} compact />
+
+    <section class="block">
+      <h2>The filing angles are 10°, and the depth gauge is not one number</h2>
+      <p style="max-width:72ch">Crosscut chain on Oregon’s filing chart is mostly 25° or 30° at the top plate. Ripping chain is the 10° row. The 2020 chart, which is the table already restated on <a href="/guides/chainsaw-sharpening-angles/">sharpening angles</a>, gives both ripping families a 7/32″ round file, a 10° top plate, a 10° down angle and a 75° side plate. The depth gauge splits. 72, 73 and 75RD are .025″. 27R, 27RX and 27RA are .030″. That split is why a single “ripping chain raker setting” is the wrong note to copy onto every loop. Most Oregon chains have the setting stamped on the depth gauge. The stamped figure is the one to file to when it and a chart disagree. The method, including leaving bumper links alone, is the <a href="/guides/chainsaw-depth-gauge/">depth-gauge guide</a>.</p>
+      <div class="tblwrap">
+        <table>
+          <caption class="sr-only">Oregon ripping chain filing settings</caption>
+          <thead><tr><th scope="col">Chain</th><th scope="col">Pitch · gauge</th><th scope="col">Sequence</th><th scope="col">Top plate</th><th scope="col">Depth gauge</th></tr></thead>
+          <tbody>
+            <tr><td>72RD</td><td>3/8″ · .050″</td><td>Standard</td><td class="num">10°</td><td class="num">.025″</td></tr>
+            <tr><td>73RD</td><td>3/8″ · .058″</td><td>Standard</td><td class="num">10°</td><td class="num">.025″</td></tr>
+            <tr><td>75RD</td><td>3/8″ · .063″</td><td>Standard</td><td class="num">10°</td><td class="num">.025″</td></tr>
+            <tr><td>27R</td><td>.404″ · .063″</td><td>Standard</td><td class="num">10°</td><td class="num">.030″</td></tr>
+            <tr><td>27RA</td><td>.404″ · .063″</td><td>Skip</td><td class="num">10°</td><td class="num">.030″</td></tr>
+            <tr><td>27RX</td><td>.404″ · .063″</td><td>Super skip</td><td class="num">10°</td><td class="num">.030″</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="src">Angles and depth gauges: Oregon <a href={ORE_CHART} rel="nofollow">2020 filing chart</a>, rows “72, 73, 75RD” and “27R, RX, RA”. Sequence and gauges: the maintenance manual’s specialty grid and the RipCut product page. Down angle on both rows is 10°. Side plate on both rows is 75°.</p>
+    </section>
+
+    <section class="block">
+      <h2>STIHL RMX is also a 10° mill chain, with a different use line</h2>
+      <p style="max-width:72ch">STIHL’s 2025 catalog lists RMX under special-application chain. The sentence is specific: RMX is primarily for professional use with small sawmills, it is a semi-chisel tooth, and it has a 10-degree filing angle, with low vibration and a smoother surface after the cut. The identification legend’s special-feature letter X is “Ripping Chain.” The catalog entry points at STIHL’s kickback warning rather than calling RMX a green-label low-kickback chain. <a href="/guides/stihl-green-vs-yellow-chain/">Green vs yellow</a> is how to read that warning when it is printed on the box.</p>
+      <p style="max-width:72ch">Two STIHL product pages add loop sizes the catalog paragraph does not spell as a table. The 3/8″ RMX page lists .063″ gauge (1.6 mm) and 72, 84, 105 or 114 drive links, and describes the chain for professional lumber with a semi-chisel cutter and a shallow 10° filing angle. The other listing’s address says .040″. Its technical table says pitch .404″ (10.26 mm), gauge .063″ (1.6 mm), and 108 drive links, and the bullets name large longitudinal cutting machines or freehand longitudinal cutting. The table and the address disagree about .040″ versus .404″. The table is the specification. Confirm it on the page at the time you buy, because a slug can be wrong while a table is right, or the reverse. This site does not treat .040″ as a chainsaw gauge.</p>
+      <p style="max-width:72ch">Read Oregon and STIHL side by side and keep their verbs. Oregon: chain-type sawmills, ripping only, not recommended for handheld use, not a low-kickback chain. STIHL catalog: small sawmills, professional use, 10°, semi-chisel. STIHL’s .404″ product page: those mills, and also freehand longitudinal cutting. Putting an Oregon 72RD on a saw because a STIHL page mentioned freehand, or refusing a STIHL RMX because Oregon banned handheld RipCut, mixes two manuals. The chain in the box has one of those sentences on it.</p>
+      <p class="src">STIHL USA, <a href={STIHL} rel="nofollow">2025 Power Tools catalog</a>, RMX entry and the “X = Ripping Chain” legend. STIHL <a href={STIHL_38} rel="nofollow">3/8″ RMX</a> and <a href={STIHL_404} rel="nofollow">.404″ RMX</a> product pages, read 9 Nov 2026. The second address contains “040”; the technical table on that page says .404″.</p>
+    </section>
+
+    <div class="callout"><b>10° is the rip, 25° and 30° are the crosscut</b><p>Filing a ripping chain out to a crosscut angle, or the other way around, abandons the grind the maker published. Oregon’s depth gauge on that 10° grind is .025″ for 72/73/75RD and .030″ for the .404″ ripping chains. The stamp on the depth gauge is the figure to follow when the chain in your vise carries one.</p></div>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/chainsaw-sharpening-angles/">Sharpening angles</a> · <a href="/guides/chainsaw-skip-chain/">Skip chain</a> · <a href="/guides/chainsaw-kickback/">Kickback</a> · <a href="/guides/chainsaw-safety-gear/">Safety gear</a> · <a href="/chain/404-063/">.404″ · .063″</a></p>
+    <ShopBlock groups={shop.groups} title="Ripping-chain searches (Amazon)" lead="72RD is Oregon 3/8″ .050″ RipCut. 27R is .404″ .063″ RipCut. RMX is STIHL’s ripping chain. All three are for the with-the-grain cut. Match gauge and drive links to the bar on the mill. Oregon’s own page says RipCut is not a handheld crosscut chain." />
+  </div>
+</Base>
