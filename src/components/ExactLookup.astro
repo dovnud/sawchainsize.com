@@ -1,0 +1,55 @@
+---
+import Crumbs from './Crumbs.astro';
+import FaqList from './FaqList.astro';
+import ShopBlock from './ShopBlock.astro';
+import Base from '../layouts/Base.astro';
+import { faqLd, webPageLd } from '../lib/ld';
+import type { resolveLookup } from '../lib/exact';
+
+interface Props {
+  page: Awaited<ReturnType<typeof resolveLookup>>;
+  crumb: string;
+  hub: string;
+}
+const { page, crumb, hub } = Astro.props;
+const { entry, path, answer, facts, sources, chips, groups, faqs } = page;
+const desc = answer.split(/(?<=\.)\s+/)[0];
+const jsonld = [webPageLd(entry.query, path, desc, entry.last_verified), faqLd(faqs)];
+const crumbs = [{ name: crumb, path: hub }, { name: entry.query, path }];
+---
+<Base title={entry.query} description={desc} path={path} nav={entry.kind === 'bar-length' ? 'models' : 'chart'} crumbs={crumbs} jsonld={jsonld} modified={entry.last_verified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: crumb, path: hub }, { name: entry.query }]} />
+      <h1>{entry.query}</h1>
+      <p class="lede">{answer}</p>
+      <p class="small muted">Last verified <time datetime={entry.last_verified}>{entry.last_verified}</time>.</p>
+    </div>
+    <section class="block" style="padding-top:10px">
+      <h2>Facts</h2>
+      <div class="tblwrap"><table>
+        <thead><tr><th scope="col">Saw</th><th scope="col">Bar length</th><th scope="col">Pitch</th><th scope="col">Gauge</th><th scope="col">Drive links</th><th scope="col">File</th><th scope="col">Part numbers</th></tr></thead>
+        <tbody>
+          {facts.map((f) => (
+            <tr>
+              <td><a href={f.href}>{f.saw}</a></td>
+              <td class="num">{f.bar}</td>
+              <td class="num">{f.pitch}</td>
+              <td class="num">{f.gauge}</td>
+              <td class="num">{f.dl}</td>
+              <td class="num">{f.file}</td>
+              <td>{f.parts}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table></div>
+      <p class="src">Sources: {sources.map((s, i) => <>{i > 0 && ' '}{s.url ? <a href={s.url} rel="nofollow">{s.publisher}</a> : s.publisher}: {s.title} <span class="mono small">[retrieved {s.retrieved}]</span>. </>)}</p>
+    </section>
+    <ShopBlock groups={groups} anchor lead="The button searches or opens the chain that matches this pitch, gauge and drive-link count. Confirm the three numbers on your bar stamp before you buy." />
+    <section class="block">
+      <h2>Related lookups</h2>
+      <ul class="chips">{chips.map((c) => <li><a href={c.href}>{c.label}</a></li>)}</ul>
+    </section>
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+  </div>
+</Base>

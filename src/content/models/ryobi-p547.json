@@ -1,0 +1,54 @@
+{
+  "brand": "ryobi",
+  "model": "P547",
+  "name": "Ryobi P547",
+  "aliases": [
+    "P547",
+    "P540",
+    "P540A",
+    "P540B",
+    "P542",
+    "P543",
+    "P545",
+    "RY52003"
+  ],
+  "type": "battery",
+  "popular": false,
+  "blurb": "10″ bar, 3/8″ low profile chain, .043″ gauge, 40 drive links (Oregon R40), from Oregon's saw-chain selection guide.",
+  "intro": "Oregon's saw-chain selection guide gives Ryobi P547 its own line: Oregon R40, a 10″ bar, 40 drive links, .043″ gauge, 3/8″ low profile. The guide does not print a file size. Oregon prints P540, P540A, P540B, P542, P543, P545, P547, RY52003, RY52003A and TP30 CS1800 on one line against R40.",
+  "bars": [
+    {
+      "lengths_in": [
+        10
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.043,
+      "drive_links": 40,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "R40",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-tsc-fit-guide"
+      ],
+      "note": "Oregon prints R40 for this model line: 10″ bar, 40 drive links, .043″ gauge, 3/8″ low profile. No file size is printed."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide: model line printed with saw-chain code, bar length, drive links, gauge and pitch",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-09"
+    }
+  ],
+  "sources_note": "Oregon Saw Chain Selection Guide (https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf), read 9 Nov 2026. The row restates the model line Oregon prints for this saw. Oregon does not print a file size on that line.",
+  "last_verified": "2026-11-09"
+}

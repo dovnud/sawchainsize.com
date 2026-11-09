@@ -1,0 +1,47 @@
+{
+  "brand": "milwaukee",
+  "model": "2527-21",
+  "name": "Milwaukee 2527-21",
+  "aliases": [
+    "2527-21"
+  ],
+  "type": "battery",
+  "popular": false,
+  "blurb": "6″ bar, 3/8″ low profile chain, .043″ gauge, 28 drive links (Oregon R28), from Oregon's saw-chain selection guide.",
+  "intro": "Oregon's saw-chain selection guide gives Milwaukee 2527-21 its own line: Oregon R28, a 6″ bar, 28 drive links, .043″ gauge, 3/8″ low profile. The guide does not print a file size. Oregon's line is 2527-21. The bar length on that line is 6″.",
+  "bars": [
+    {
+      "lengths_in": [
+        6
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.043,
+      "drive_links": 28,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "R28",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-tsc-fit-guide"
+      ],
+      "note": "Oregon prints R28 for this model line: 6″ bar, 28 drive links, .043″ gauge, 3/8″ low profile. No file size is printed."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide: model line printed with saw-chain code, bar length, drive links, gauge and pitch",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-09"
+    }
+  ],
+  "sources_note": "Oregon Saw Chain Selection Guide (https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf), read 9 Nov 2026. The row restates the model line Oregon prints for this saw. Oregon does not print a file size on that line.",
+  "last_verified": "2026-11-09"
+}

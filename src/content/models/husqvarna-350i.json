@@ -1,0 +1,47 @@
+{
+  "brand": "husqvarna",
+  "model": "350i",
+  "name": "Husqvarna 350i",
+  "aliases": [
+    "350i"
+  ],
+  "type": "battery",
+  "popular": true,
+  "blurb": "18″ bar on 3/8″ low-profile chain, .050″ gauge, 62 drive links, from Husqvarna's 2027 fit-up guide.",
+  "intro": "The 350i is a battery rear-handle saw. Husqvarna's Bar & Chain Fit-up Guide (cover year 2027) lists one approved combination: an 18″ bar, 3/8″ mini (low profile), .050″ gauge, 62 drive links, file 5/32″, chain S93G X-Cut 597469562, bar Laminate 597533262.",
+  "bars": [
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 62,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "S93G X-Cut 597469562",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 18″ setup with bar Laminate 597533262 and chain S93G X-Cut 597469562. Pitch in the guide is 3/8 Mini, which is 3/8″ low profile. File size 5/32″."
+    }
+  ],
+  "sources": [
+    {
+      "id": "husqvarna-fitup-2027",
+      "type": "fitup-chart",
+      "publisher": "Husqvarna",
+      "title": "Bar & Chain Fit-up Guide (cover year 2027): certified/approved bar and chain combinations, with bar length, pitch, gauge, drive links, file size, bar part and chain part",
+      "url": "https://media.husqvarnagroup.com/original/DI-328359.pdf",
+      "retrieved": "2026-11-09"
+    }
+  ],
+  "sources_note": "Husqvarna Bar & Chain Fit-up Guide, cover dated 2027, PDF read 9 Nov 2026 (https://media.husqvarnagroup.com/original/DI-328359.pdf). Every row restates that saw's entry in the guide.",
+  "last_verified": "2026-11-09"
+}

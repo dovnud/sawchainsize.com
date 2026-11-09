@@ -40,9 +40,9 @@
       "label": "1/4″",
       "short": "1/4″",
       "chart_label": "1/4″",
-      "used_on": "n/a",
-      "gauges": "n/a",
-      "file": "n/a",
+      "used_on": "Compact battery saws on Husqvarna 1/4″ mini chain",
+      "gauges": ".043″ (1.1 mm)",
+      "file": "9/64″ per Husqvarna's bar and chain fit-up guide",
       "slug": "1-4"
     }
   },
@@ -70,6 +70,7 @@
   },
   "files": {
     "1/8": "1/8″",
+    "9/64": "9/64″",
     "5/32": "5/32″ (4.0 mm)",
     "11/64": "11/64″ (4.5 mm)",
     "3/16": "3/16″ (4.8 mm)",
@@ -147,6 +148,14 @@
       "oregon": "75 (75LPX)",
       "stihl": "36 RS3",
       "husqvarna": "H83",
+      "carlton": "n/a"
+    },
+    {
+      "pitch": "1/4",
+      "gauge": 0.043,
+      "oregon": "n/a",
+      "stihl": "n/a",
+      "husqvarna": "SP11G X-Cut",
       "carlton": "n/a"
     },
     {

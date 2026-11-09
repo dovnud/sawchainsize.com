@@ -1,0 +1,48 @@
+{
+  "brand": "husqvarna",
+  "model": "525iDEPS",
+  "name": "Husqvarna 525iDEPS",
+  "aliases": [
+    "525iDEPS",
+    "525iDEPS MADSAW"
+  ],
+  "type": "battery",
+  "popular": false,
+  "blurb": "12″ pole-saw bar on 3/8″ low-profile chain, .050″ gauge, 44 drive links, from Husqvarna's 2027 fit-up guide.",
+  "intro": "The 525iDEPS is listed in Husqvarna's Bar & Chain Fit-up Guide (cover year 2027) as a battery pole saw, on the MADSAW row. The guide gives one combination: a 12″ bar, 3/8″ mini (low profile), .050″ gauge, 44 drive links, file 5/32″, chain S93G X-Cut 585422144, bar Laminate 596298544.",
+  "bars": [
+    {
+      "lengths_in": [
+        12
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 44,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "S93G X-Cut 585422144",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 12″ setup with bar Laminate 596298544 and chain S93G X-Cut 585422144. Pitch in the guide is 3/8 Mini. File size 5/32″. The guide's model cell reads 525iDEPS MADSAW."
+    }
+  ],
+  "sources": [
+    {
+      "id": "husqvarna-fitup-2027",
+      "type": "fitup-chart",
+      "publisher": "Husqvarna",
+      "title": "Bar & Chain Fit-up Guide (cover year 2027): certified/approved bar and chain combinations, with bar length, pitch, gauge, drive links, file size, bar part and chain part",
+      "url": "https://media.husqvarnagroup.com/original/DI-328359.pdf",
+      "retrieved": "2026-11-09"
+    }
+  ],
+  "sources_note": "Husqvarna Bar & Chain Fit-up Guide, cover dated 2027, PDF read 9 Nov 2026 (https://media.husqvarnagroup.com/original/DI-328359.pdf). Every row restates that saw's entry in the guide.",
+  "last_verified": "2026-11-09"
+}

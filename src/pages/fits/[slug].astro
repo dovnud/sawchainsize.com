@@ -1,0 +1,11 @@
+---
+import ExactLookup from '../../components/ExactLookup.astro';
+import { LOOKUPS, resolveLookup } from '../../lib/exact';
+
+export async function getStaticPaths() {
+  const entries = LOOKUPS.filter((l) => l.kind === 'fits');
+  return Promise.all(entries.map(async (entry) => ({ params: { slug: entry.slug }, props: { page: await resolveLookup(entry) } })));
+}
+const { page } = Astro.props;
+---
+<ExactLookup page={page} crumb="Drive-link lookups" hub="/fits/" />

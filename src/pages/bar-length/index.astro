@@ -1,0 +1,21 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import { lookupsByKind, lookupPath } from '../../lib/exact';
+import { webPageLd } from '../../lib/ld';
+import { SITE } from '../../lib/data';
+const items = lookupsByKind('bar-length');
+const path = '/bar-length/';
+const desc = 'Chainsaw bar length by model: the bar lengths on verified rows, with the pitch, gauge, drive links and part number that go with each length.';
+---
+<Base title="Chainsaw bar length by model" description={desc} path={path} nav="models" crumbs={[{ name: 'Bar length', path }]} jsonld={[webPageLd('Bar length by saw model', path, desc, SITE.dataDate)]} modified={SITE.dataDate}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Bar length' }]} />
+      <h1>Bar length by saw model</h1>
+      <p class="lede">One page per model, answering the bar-length question first. Each length in the table is a verified row, with the chain that row stores. The <a href="/bars/">bar-length hubs</a> list every saw that shares a called length.</p>
+    </div>
+    <ul class="chips">{items.map((l) => <li><a href={lookupPath(l)}>{l.query}</a></li>)}</ul>
+    <p style="margin-top:18px"><a href="/saws/">Chain size by model</a> · <a href="/xref/">Part-number cross references</a> · <a href="/fits/">Drive-link lookups</a> · <a href="/guides/how-to-measure-chainsaw-bar/">How to measure a bar</a></p>
+  </div>
+</Base>

@@ -1,0 +1,49 @@
+{
+  "brand": "greenworks",
+  "model": "GCS80420",
+  "name": "Greenworks GCS80420",
+  "aliases": [
+    "GCS80420",
+    "GCS80421",
+    "200002"
+  ],
+  "type": "battery",
+  "popular": false,
+  "blurb": "18″ bar, 3/8″ low profile chain, .050″ gauge, 62 drive links (Oregon S62), from Oregon's saw-chain selection guide.",
+  "intro": "Oregon's saw-chain selection guide gives Greenworks GCS80420 its own line: Oregon S62, a 18″ bar, 62 drive links, .050″ gauge, 3/8″ low profile. The guide does not print a file size. Oregon's line reads GCS80420, GCS80421, 200002 80V.",
+  "bars": [
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 62,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "S62",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-tsc-fit-guide"
+      ],
+      "note": "Oregon prints S62 for this model line: 18″ bar, 62 drive links, .050″ gauge, 3/8″ low profile. No file size is printed."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide: model line printed with saw-chain code, bar length, drive links, gauge and pitch",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-09"
+    }
+  ],
+  "sources_note": "Oregon Saw Chain Selection Guide (https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf), read 9 Nov 2026. The row restates the model line Oregon prints for this saw. Oregon does not print a file size on that line.",
+  "last_verified": "2026-11-09"
+}

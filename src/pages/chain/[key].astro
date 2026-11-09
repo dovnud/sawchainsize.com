@@ -44,9 +44,16 @@ const jsonld = [
 ];
 import ShopBlock from '../../components/ShopBlock.astro';
 import { chainSpecShop } from '../../lib/shop';
+import { fitLinksFor, xrefLinksForParts } from '../../lib/exact';
+import { existsSync } from 'node:fs';
 const shop = chainSpecShop(group);
+const chainOg = existsSync(`./public/og/chain-${group.key}.png`) ? `/og/chain-${group.key}.png` : undefined;
+const exactLinks = [
+  ...fitLinksFor(pitch, gauge),
+  ...xrefLinksForParts(parts),
+].filter((l, i, a) => a.findIndex((x) => x.href === l.href) === i);
 ---
-<Base title={`${pitchLabel(pitch)} · ${gaugeLabel(gauge)} Chainsaw Chain: Codes, Saws & File Size`} description={desc} path={path} nav="chart" og={`/og/chain-${group.key}.png`} ogAlt={name}
+<Base title={`${pitchLabel(pitch)} · ${gaugeLabel(gauge)} Chainsaw Chain: Codes, Saws & File Size`} description={desc} path={path} nav="chart" og={chainOg} ogAlt={name}
   crumbs={[{ name: 'Chain specs', path: '/chain/' }, { name: `${pitchShort(pitch)} · ${gaugeShort(gauge)}`, path }]} jsonld={jsonld} modified={SITE.dataDate}>
   <div class="wrap">
     <div class="pagehead">
@@ -74,6 +81,7 @@ const shop = chainSpecShop(group);
           ))}
         </tbody></table></div>
       <p>Loop part numbers for one drive-link count of this pitch and gauge are on <a href={`/tools/find-my-chain/?pitch=${encodeURIComponent(pitch)}&gauge=${gauge}`}>Find my chain</a>. Compare a box with a bar on the <a href="/tools/chain-compatibility/">compatibility checker</a>.</p>
+      {exactLinks.length > 0 && <ul class="chips">{exactLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>}
       <details class="faq" style="margin-top:18px"><summary>Part numbers on file ({parts.length})</summary>
         <div class="a"><ul class="plain">{parts.map((c) => <li>{partText(c)} <span class="small muted">({c.role === 'oem' ? 'OEM' : 'equivalent'})</span></li>)}</ul></div>
       </details>
