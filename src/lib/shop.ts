@@ -75,6 +75,9 @@ const GUIDE_LINK_CAP: Record<string, number> = {
   'chainsaw-skip-chain': 3,
   'ripping-chainsaw-chain': 3,
   'sprocket-nose-vs-solid-nose-bar': 2,
+  '1-4-pitch-chainsaw-chain': 3,
+  'can-you-change-chainsaw-chain-pitch': 3,
+  'oregon-chain-on-stihl-husqvarna': 3,
 };
 const LINK_CAP: Record<string, number> = {
   'model:husqvarna-t540-xp-mark-iii': 3,
@@ -308,6 +311,19 @@ export function guideShop(slug: string): { groups: ShopGroup[]; count: number } 
       break;
     case 'break-in-new-chainsaw-chain':
       add('Oil and the wrench for the first retension', [LOOKUP(), SCRENCH(), barOilLink()]);
+      break;
+    case '1-4-pitch-chainsaw-chain':
+      add('1/4″ .043″ chain and the two file sizes', [
+        search('1/4 pitch .043 gauge chainsaw chain', '1/4″ · .043″ chain: pick the drive-link count on your bar'),
+        search('1/8 chainsaw round file 3.2mm', '1/8″ (3.2 mm) round files (STIHL 1/4″ PICCO)'),
+        search('9/64 chainsaw round file 3.6mm', '9/64″ (3.6 mm) round files (Husqvarna SP11G)'),
+      ], true);
+      break;
+    case 'can-you-change-chainsaw-chain-pitch':
+      add('Measure the pitch, then the sprocket', [PITCH_GAUGE_TOOL(), SPROCKET(), LOOKUP()]);
+      break;
+    case 'oregon-chain-on-stihl-husqvarna':
+      add('Oregon loops by family, then the drive-link count', [CHAIN_90(), CHAIN_72(), LOOKUP()], true);
       break;
     case 'why-a-chainsaw-chain-comes-off':
       add('The parts that hold the chain on', [LOOKUP(), SCRENCH(), CALIPER(), SPROCKET(), barOilLink(), glovesLink()]);

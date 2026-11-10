@@ -1,0 +1,110 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { getModels, modelUrl, chainUrl, chainKey, pitchShort, gaugeShort, type Model } from '../../lib/data';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+
+const path = '/guides/can-you-change-chainsaw-chain-pitch/';
+const modified = (dates as Record<string, string>)[path];
+const ORE = 'https://apps.oregonproducts.com/pdfs/OregonMMANUAL_EN_A106971ab.pdf';
+const ORE_FAQ = 'https://www.oregonproducts.com/en_gb/faq';
+const HUSQ = 'https://media.husqvarnagroup.com/original/DI-328359.pdf';
+const shop = guideShop('can-you-change-chainsaw-chain-pitch');
+
+const models = await getModels();
+type PitchRow = { pitch: string; gauge: number; lens: { len: number; dl: number | null }[] };
+type Dual = { m: Model; pitches: PitchRow[] };
+const dual: Dual[] = [];
+for (const m of models) {
+  const by = new Map<string, { pitch: string; gauge: number; lens: { len: number; dl: number | null }[] }>();
+  for (const b of m.data.bars) {
+    if (b.status !== 'ok' || !b.pitch || b.gauge == null) continue;
+    const k = `${b.pitch}|${b.gauge}`;
+    if (!by.has(k)) by.set(k, { pitch: b.pitch, gauge: b.gauge, lens: [] });
+    const g = by.get(k)!;
+    for (const len of b.lengths_in) {
+      if (!g.lens.some((x) => x.len === len && x.dl === (b.drive_links ?? null))) g.lens.push({ len, dl: b.drive_links ?? null });
+    }
+  }
+  const pitches = [...by.values()].sort((a, b) => a.pitch.localeCompare(b.pitch) || a.gauge - b.gauge);
+  const distinct = new Set(pitches.map((p) => p.pitch));
+  if (distinct.size >= 2) dual.push({ m, pitches });
+}
+dual.sort((a, b) => a.m.data.name.localeCompare(b.m.data.name));
+if (dual.length < 4) throw new Error(`expected several dual-pitch saws, got ${dual.length}`);
+if (!dual.some((d) => d.m.id === 'husqvarna-540-xp-mark-iii')) throw new Error('540 XP Mark III should be in the dual-pitch table');
+
+const desc = 'You cannot change chainsaw chain pitch by swapping only the loop. The drive sprocket, the chain, and usually the bar have to be one set. Some saws are approved for two complete systems; those still do not mix.';
+const faqs = [
+  { q: 'Can I put a .325″ chain on a 3/8″ chainsaw?', a: 'Not as a chain-only swap. Oregon says the drive sprocket must be the same pitch as the chain, and that a sprocket-nose bar’s nose must match as well. A .325″ loop on a 3/8″ sprocket will not mesh. If a maker lists both pitches for one saw, those are two complete bar, chain and sprocket systems, not two loops for one bar.' },
+  { q: 'Can I change pitch by changing only the bar?', a: 'No. A new bar of a different pitch still needs a chain and a drive sprocket in that pitch. The nose sprocket, if the bar has one, comes with the bar and has to match the new chain. Gauge has to match the new groove too. A 3/8″ low-profile bar and a standard 3/8″ bar are also different families, even though both names say 3/8″.' },
+  { q: 'If my saw is listed with two pitches, can I mix the parts?', a: 'No. The dual-pitch table on this page is the saws we list with at least two verified pitches. Each pitch sits on its own bars, with its own drive-link counts. The Husqvarna 540 XP Mark III is the worked example: .325″ Mini Pixel .043″ on one bar type, 3/8″ Mini .050″ on another. The saw page says not to put one system’s chain on the other system’s bar.' },
+  { q: 'Is 3/8″ low profile the same pitch as standard 3/8″?', a: 'They share a 3/8″ name and they do not share a sprocket. Oregon’s chart splits types 90 and 91 (low profile) from types 72, 73 and 75 (standard 3/8″). Matching a .050″ gauge does not make them substitutes. That split is its own guide: 3/8″ low profile vs standard.' },
+  { q: 'What has to change to convert pitch?', a: 'The chain, the drive sprocket (rim or spur, including tooth count for that clutch), and usually the bar, because the groove gauge and the nose pitch have to match the new chain. Drive-link count will almost always change, even at the same called bar length. File diameter changes with the new pitch. Only do this when the saw’s fit-up chart or manual lists the new system. This site does not invent a conversion kit for a saw that has one listed pitch.' },
+];
+const jsonld = [webPageLd('Can you change chainsaw chain pitch?', path, desc, modified), faqLd(faqs)];
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Changing chain pitch', path }];
+const Q = '″';
+const fmt = (p: PitchRow) => {
+  const lens = p.lens.sort((a, b) => a.len - b.len).map((x) => `${x.len}${Q}${x.dl ? `/${x.dl}` : ''}`).join(', ');
+  return { label: `${pitchShort(p.pitch)} · ${gaugeShort(p.gauge)}`, href: chainUrl(chainKey(p.pitch, p.gauge)), lens };
+};
+---
+<Base title="Can You Change Chainsaw Chain Pitch?" description={desc} path={path} nav="chart" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Changing chain pitch' }]} />
+      <h1>Can you change chainsaw chain pitch?</h1>
+      <p class="lede">No, not by changing only the chain. Pitch is a set: the loop, the drive sprocket, and the bar nose if the bar has a sprocket. A .325″ chain will not run on a 3/8″ sprocket, and a 3/8″ low-profile chain will not run on a standard 3/8″ sprocket. Some saws are approved for two complete systems. Those still do not mix.</p>
+    </div>
+
+    <section class="block">
+      <h2>Pitch is not a chain-only number</h2>
+      <p style="max-width:72ch">Oregon defines pitch as the distance between any three consecutive rivets, divided by two: about 0.500″ for 1/4″, about 0.650″ for .325″, about 0.750″ for 3/8″, about 0.808″ for .404″. The same spans are in the <a href="/guides/how-to-verify-chain-size/">verification guide</a>. Oregon also says the drive sprocket must be that pitch, and that a sprocket-nose bar’s nose sprocket must match as well. The teeth on the sprocket pick up the drive links at that spacing. A loop whose rivets do not match those teeth climbs, hammers, or leaves the bar.</p>
+      <p style="max-width:72ch">That is why a “it almost fits” conversion is a good way to ruin a bar nose and a new loop in the same afternoon. Gauge can match and the pitch can still be wrong. A 450 Rancher’s .325″ .050″ 72-link chain and a 460 Rancher’s 3/8″ .050″ chain share a gauge and a brand and are not alternatives. <a href="/chain/325-050/">.325″ · .050″</a> and <a href="/chain/3-8-050/">3/8″ · .050″</a> collect the saws we have in each. The sprocket rule, and Oregon’s every-two-chains replacement interval, is <a href="/guides/chainsaw-drive-sprocket/">drive sprocket and pitch</a>.</p>
+      <p class="src">Pitch definition, sprocket match, and nose-sprocket match: Oregon <a href={ORE} rel="nofollow">Maintenance and Safety Manual</a> and Oregon <a href={ORE_FAQ} rel="nofollow">FAQ</a>, the same citations as the drive-sprocket guide.</p>
+    </section>
+    <ShopBlock groups={shop.groups} compact />
+
+    <section class="block">
+      <h2>What actually has to change</h2>
+      <p style="max-width:72ch">A real pitch change is a set of parts, and only when the saw’s own fit-up chart or manual lists the new system:</p>
+      <ul>
+        <li>The chain, in the new pitch, with the gauge of the new bar and the drive-link count of that bar length.</li>
+        <li>The drive sprocket (rim or spur) in the new pitch, with the tooth count that saw’s clutch uses. This page does not invent a tooth count.</li>
+        <li>Usually the bar. The groove has to be the new gauge, and a sprocket nose has to be the new pitch. A solid-nose bar has no nose sprocket; the drive sprocket and the groove still have to match.</li>
+      </ul>
+      <p style="max-width:72ch">The file diameter follows the new pitch, which is why the <a href="/guides/chainsaw-chain-file-size/">file-size guide</a> is organized by pitch, not by “chainsaw chain.” Drive-link count almost always changes even when the called bar length stays the same: on the 540 XP Mark III, a 16″ bar is 64 links in .325″ Mini Pixel .043″ and 56 links in 3/8″ Mini .050″. <a href="/guides/longer-bar-on-chainsaw/">Putting a longer bar on a saw</a> is a different question. That guide is about length inside a pitch the saw is already approved for, not a jump from .325″ to 3/8″ because a longer bar was on sale.</p>
+    </section>
+
+    <section class="block">
+      <h2>Saws we list with more than one verified pitch</h2>
+      <p style="max-width:72ch">These are the models on this site that have at least two different pitches on verified rows. Each pitch is a separate system. The lengths and drive-link counts below are the verified rows only; a length flagged verify or conflict on the saw page is not in the list. Read the saw page before you order parts. The maker’s chart is what approves the second system, not this table.</p>
+      <div class="tblwrap">
+        <table>
+          <caption class="sr-only">Saws with two or more verified pitches</caption>
+          <thead><tr><th scope="col">Saw</th><th scope="col">Verified systems</th></tr></thead>
+          <tbody>
+            {dual.map((d) => (
+              <tr>
+                <td><a href={modelUrl(d.m)}>{d.m.data.name}</a></td>
+                <td class="small">{d.pitches.map((p, i) => { const f = fmt(p); return <><span>{i ? ' · ' : ''}<a href={f.href}>{f.label}</a> ({f.lens})</span></>; })}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="src">{dual.length} saws with two or more verified pitches, generated from this site’s model rows at build time. Husqvarna 540 XP Mark III systems are from the <a href={HUSQ} rel="nofollow">Bar &amp; Chain Fit-up Guide</a> (cover year 2027), already cited on that saw page. Other rows use the sources printed on each saw page.</p>
+    </section>
+
+    <div class="callout"><b>⚠ 3/8″ low profile is not a conversion to standard 3/8″</b><p>Oregon splits 3/8″ low profile (types 90 and 91) from standard 3/8″ (types 72, 73 and 75). They are different sprockets and different files, and both families are sold in .050″ gauge. Matching the gauge does not make them interchangeable. That comparison is <a href="/guides/3-8-low-profile-vs-standard-chain/">3/8″ low profile vs standard</a>, not a footnote on this page.</p></div>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/chainsaw-drive-sprocket/">Drive sprocket and pitch</a> · <a href="/saws/husqvarna-540-xp-mark-iii/">540 XP Mark III</a> · <a href="/guides/3-8-low-profile-vs-standard-chain/">Low profile vs standard 3/8″</a> · <a href="/guides/longer-bar-on-chainsaw/">Longer bar</a> · <a href="/guides/how-to-verify-chain-size/">Verify the size</a> · <a href="/tools/chain-compatibility/">Compatibility checker</a></p>
+    <ShopBlock groups={shop.groups} title="Measure the pitch, then match the sprocket (Amazon)" lead="A pitch gauge or caliper tells you what is on the saw today. A sprocket search is not a specific part: match the pitch and the tooth count to the clutch in the saw’s parts list." />
+  </div>
+</Base>

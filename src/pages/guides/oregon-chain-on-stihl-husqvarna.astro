@@ -1,0 +1,134 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { getModels, modelUrl, chainUrl, chainKey, pitchShort, gaugeShort, type Model } from '../../lib/data';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+
+const path = '/guides/oregon-chain-on-stihl-husqvarna/';
+const modified = (dates as Record<string, string>)[path];
+const ORE = 'https://apps.oregonproducts.com/pdfs/OregonMMANUAL_EN_A106971ab.pdf';
+const shop = guideShop('oregon-chain-on-stihl-husqvarna');
+
+type Hit = { m: Model; brand: string; lens: number[]; pitch: string; gauge: number; dl: number | null; oem: string[]; oregon: string[]; exact: boolean };
+const models = await getModels();
+const hits: Hit[] = [];
+for (const m of models) {
+  for (const b of m.data.bars) {
+    if (b.status !== 'ok' || !b.pitch || b.gauge == null) continue;
+    const oregon = [...new Set(b.chains.filter((c) => c.role === 'equivalent' && c.brand.toLowerCase() === 'oregon').map((c) => c.part_no))];
+    if (!oregon.length) continue;
+    const oem = [...new Set(b.chains.filter((c) => c.role === 'oem').map((c) => `${c.brand} ${c.part_no}`))];
+    hits.push({
+      m,
+      brand: m.data.brand,
+      lens: [...b.lengths_in],
+      pitch: b.pitch,
+      gauge: b.gauge,
+      dl: b.drive_links ?? null,
+      oem,
+      oregon,
+      exact: b.drive_links != null,
+    });
+  }
+}
+if (!hits.length) throw new Error('no Oregon equivalent rows');
+const featuredIds = new Set(['stihl', 'husqvarna']);
+const featured = hits.filter((h) => featuredIds.has(h.brand)).sort((a, b) => a.m.data.name.localeCompare(b.m.data.name) || a.pitch.localeCompare(b.pitch) || a.gauge - b.gauge || (a.dl ?? 0) - (b.dl ?? 0));
+if (!featured.some((h) => h.m.id === 'stihl-ms-170-180')) throw new Error('MS 170/180 Oregon 90PX055 row missing');
+if (!featured.some((h) => h.m.id.startsWith('husqvarna-455') || h.m.id.startsWith('husqvarna-450'))) throw new Error('Rancher Oregon equivalent missing');
+const otherBrands = new Map<string, { n: number; saws: Set<string> }>();
+for (const h of hits) {
+  if (featuredIds.has(h.brand)) continue;
+  if (!otherBrands.has(h.brand)) otherBrands.set(h.brand, { n: 0, saws: new Set() });
+  const g = otherBrands.get(h.brand)!;
+  g.n++;
+  g.saws.add(h.m.data.name);
+}
+const others = [...otherBrands.entries()].map(([brand, g]) => ({ brand, rows: g.n, saws: g.saws.size })).sort((a, b) => b.saws - a.saws || a.brand.localeCompare(b.brand));
+const sawCount = new Set(hits.map((h) => h.m.id)).size;
+const exactCount = hits.filter((h) => h.exact).length;
+
+const desc = 'An Oregon chain can replace a STIHL or Husqvarna loop when pitch, gauge and drive links match the bar stamp. The equivalents we list are cited on each saw page; they are the same size, not a claim that the cutters are the same.';
+const faqs = [
+  { q: 'Can I put Oregon chain on a STIHL or Husqvarna saw?', a: 'You can use an Oregon loop when it matches the three numbers on the bar: pitch, gauge and drive-link count. The sprocket also has to be that pitch, including the difference between 3/8″ low profile and standard 3/8″. Where a saw page on this site lists an Oregon part as an equivalent, that cross-reference is cited on that page. It is a size match, not a claim that the Oregon cutter is the same as the OEM cutter.' },
+  { q: 'Is Oregon 90PX055 the same as STIHL 61 PMM3 55?', a: 'On the 16″ MS 170 / MS 180 row, both are 3/8″ low profile, .043″ gauge, 55 drive links. The saw page cites a dealer listing of STIHL part 3610 005 0055 and cross-reference listings that name Oregon 90PX. The file sizes already disagree: STIHL lists 5/32″ for 3/8″ PICCO, Oregon lists 4.5 mm (11/64″) for 90PX. Size can match and the file can still differ. Use the file the maker of the loop in front of you publishes.' },
+  { q: 'Is Oregon 72LPX072 the same as Husqvarna H80-72?', a: 'On the 455 Rancher’s 20″ 3/8″ .050″ row, this site stores H80-72 as the OEM loop and 72LPX072 (and 72EXL072) as Oregon equivalents, both at 72 drive links. 72 is Oregon’s number for 3/8″ .050″. It is not Oregon 73, which is .058″, and it is not a 3/8″ low-profile 91-series loop. Read 72 vs 73 before you order by the family number alone.' },
+  { q: 'What if the Oregon number has no drive-link count?', a: 'A family name such as “95TXL / 20BPX family” only tells you pitch and gauge. It does not pick a loop. Use the drive-link count on the bar stamp, or a packaged code that includes the count, such as 95TXL072 or M72. Oregon chain numbers explains how those codes are read. A row on this site that stores a family name without a count is not an exact loop you can add to a cart.' },
+  { q: 'Does an Oregon equivalent change the bar or the sprocket?', a: 'Not when the pitch and gauge stay the same. An equivalent is a same-size loop for the bar that is already mounted. If the Oregon family you are looking at is a different pitch, including low-profile 3/8″ versus standard 3/8″, or a different gauge, it is not an equivalent for that bar. That is a system change, covered in the pitch-change guide.' },
+];
+const jsonld = [webPageLd('Oregon chain on a STIHL or Husqvarna', path, desc, modified), faqLd(faqs)];
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Oregon chain on STIHL or Husqvarna', path }];
+const Q = '″';
+---
+<Base title="Oregon Chain on a STIHL or Husqvarna" description={desc} path={path} nav="chart" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Oregon chain on STIHL or Husqvarna' }]} />
+      <h1>Oregon chain on a STIHL or Husqvarna</h1>
+      <p class="lede">An Oregon loop can replace a STIHL or Husqvarna loop when it matches the bar stamp: the same pitch, the same gauge, and the same drive-link count. The sprocket still has to be that pitch. Equivalents listed on this site are size cross-references cited on the saw page. They are not a claim that the cutters, the file, or the kickback label are the same.</p>
+    </div>
+
+    <section class="block">
+      <h2>Fit is the three numbers, not the brand on the box</h2>
+      <p style="max-width:72ch">The chain follows the bar that is mounted. Pitch, gauge and drive-link count are stamped on the tail of the bar. If those three numbers match the Oregon loop, the loop is the right size for that bar, whether the box says Oregon, STIHL or Husqvarna. If they do not match, the brand does not save it. The <a href="/guides/how-to-verify-chain-size/">verification guide</a> is how you read the stamp when the box is gone.</p>
+      <p style="max-width:72ch">Oregon’s own naming is how you check a candidate loop. On a code such as 90PX055, 90 is 3/8″ low profile .043″ and 055 is 55 drive links. On 72LPX072, 72 is standard 3/8″ .050″ and 072 is 72 links. On 95TXL072 or the retail code M72, the family is .325″ .050″ and the count is 72. That decoder, including the S56-style retail codes, is <a href="/guides/oregon-chain-numbers/">Oregon chain numbers</a>. STIHL and Husqvarna codes are <a href="/guides/chain-part-numbers/">chain part numbers</a>.</p>
+      <p style="max-width:72ch">Two traps sit next to a correct size match. The first is file diameter. STIHL and Oregon already disagree on some families: 5/32″ versus 11/64″ on 3/8″ PICCO / 90PX, 13/64″ versus 7/32″ on standard 3/8″, and 1/8″ versus 9/64″ on 1/4″. File the loop with the diameter its maker lists, not the OEM table, if you have switched brands. The second is cutter type and kickback labeling. An equivalent part number is a size. It is not a promise that the Oregon cutter is the same grind as 61 PMM3 or H80, or that a green STIHL label and an Oregon low-kickback mark are one system. <a href="/guides/stihl-green-vs-yellow-chain/">STIHL’s green and yellow labels</a> are kickback marks, not sizes.</p>
+      <p class="src">Oregon number table and the three facts a dealer is told to collect (make and model, called bar length, part number plus drive-link count): Oregon <a href={ORE} rel="nofollow">Maintenance and Safety Manual</a>, the same pages cited on <a href="/guides/oregon-chain-numbers/">Oregon chain numbers</a>. Each equivalent in the tables below is stored on its saw page with that page’s sources. This guide does not add a new cross-reference.</p>
+    </section>
+    <ShopBlock groups={shop.groups} compact />
+
+    <section class="block">
+      <h2>STIHL and Husqvarna rows that already list an Oregon equivalent</h2>
+      <p style="max-width:72ch">These are the verified STIHL and Husqvarna bars on this site that already store an Oregon part as an equivalent. A family name without a drive-link count is not an exact loop. A length flagged verify or conflict on the saw page is not in the list. If the stamp and a row disagree, the stamp wins.</p>
+      <div class="tblwrap">
+        <table>
+          <caption class="sr-only">STIHL and Husqvarna bars with an Oregon equivalent</caption>
+          <thead><tr><th scope="col">Saw</th><th scope="col">Bar</th><th scope="col">Pitch · gauge · DL</th><th scope="col">OEM</th><th scope="col">Oregon equivalent</th></tr></thead>
+          <tbody>
+            {featured.map((h) => (
+              <tr>
+                <td><a href={modelUrl(h.m)}>{h.m.data.name}</a></td>
+                <td class="num">{h.lens.map((n) => `${n}${Q}`).join(', ')}</td>
+                <td class="num"><a href={chainUrl(chainKey(h.pitch, h.gauge))}>{pitchShort(h.pitch)} · {gaugeShort(h.gauge)}</a>{h.dl ? ` · ${h.dl}` : ' · count not stored'}</td>
+                <td class="small">{h.oem.length ? h.oem.join('; ') : '—'}</td>
+                <td class="small">{h.oregon.join('; ')}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="src">Worked examples already on those pages: the 16″ <a href="/saws/stihl-ms-170-180/">MS 170 / MS 180</a> row stores 61 PMM3 55 (part 3610 005 0055) and Oregon 90PX055, from the dealer listing and the cross-reference listings cited there. The 20″ <a href="/saws/husqvarna-455-rancher/">455 Rancher</a> 3/8″ .050″ row stores H80-72 and Oregon 72LPX072 / 72EXL072. The 18″ <a href="/saws/husqvarna-450-rancher/">450 Rancher</a> .325″ .050″ row stores H30-72 / SP33G and Oregon 95TXL072 / M72. The .325″ “family” row on the 455 is a family name only, not a loop count.</p>
+    </section>
+
+    <section class="block">
+      <h2>The same rule on other brands</h2>
+      <p style="max-width:72ch">The three-number test is not unique to STIHL and Husqvarna. This site currently stores an Oregon equivalent on {sawCount} saws, {exactCount} of those rows with a drive-link count in the Oregon code or on the bar. Most of those saws are not STIHL or Husqvarna. The counts below are verified rows only, so you can see where the cross-references already live. Open the saw page for the part numbers and the source.</p>
+      <div class="tblwrap">
+        <table>
+          <caption class="sr-only">Other brands with an Oregon equivalent stored</caption>
+          <thead><tr><th scope="col">Brand</th><th scope="col">Saws</th><th scope="col">Verified rows with an Oregon equivalent</th></tr></thead>
+          <tbody>
+            {others.map((o) => (
+              <tr>
+                <td><a href={`/brands/${o.brand}/`}>{o.brand}</a></td>
+                <td class="num">{o.saws}</td>
+                <td class="num">{o.rows}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p style="max-width:72ch">To check a loop you already have, use the <a href="/tools/chain-compatibility/">compatibility checker</a>. To look up a part number, use <a href="/tools/find-my-chain/">Find my chain</a>. Neither tool will tell you that a different pitch or a different gauge is “close enough.”</p>
+    </section>
+
+    <div class="callout"><b>⚠ An equivalent is a size, not a file or a cutter</b><p>If you switch from a STIHL or Husqvarna loop to an Oregon loop of the same pitch, gauge and count, keep using a file the Oregon chart lists for that family. Do not assume the OEM file table still applies. And do not treat 72 and 73, or 90 and 91, as a brand swap: those are different gauges, written up in <a href="/guides/oregon-72-vs-73-chain/">72 vs 73</a> and in <a href="/guides/3-8-low-profile-vs-standard-chain/">low profile vs standard 3/8″</a>.</p></div>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/oregon-chain-numbers/">Oregon chain numbers</a> · <a href="/guides/chain-part-numbers/">STIHL, Husqvarna and Echo numbers</a> · <a href="/guides/can-you-change-chainsaw-chain-pitch/">Changing pitch</a> · <a href="/guides/stihl-green-vs-yellow-chain/">STIHL green vs yellow</a> · <a href="/tools/chain-compatibility/">Compatibility checker</a> · <a href="/saws/stihl-ms-170-180/">MS 170 / MS 180</a></p>
+    <ShopBlock groups={shop.groups} title="Oregon loops by family, then count (Amazon)" lead="90PX is 3/8″ low profile .043″, the size stored as the MS 170 / 180 16″ equivalent. 72 is standard 3/8″ .050″, the size stored on the 455 Rancher 20″ row. Pick the drive-link count on your bar." />
+  </div>
+</Base>
