@@ -1,0 +1,74 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+
+const path = '/guides/sprocket-nose-vs-solid-nose-bar/';
+const modified = (dates as Record<string, string>)[path];
+const shop = guideShop('sprocket-nose-vs-solid-nose-bar');
+const desc = 'A sprocket-nose bar has a wheel in the tip. A solid nose has a hard tip and no wheel. Oregon tensions the sprocket nose tighter. Read the stamp.';
+const ORE = 'https://apps.oregonproducts.com/pdfs/OregonMMANUAL_EN_A106971ab.pdf';
+const ORE_FIND = 'https://www.oregonproducts.com/en/product-support/chainsaw/finding-the-right-saw-chain/c/finding-the-right-saw-chain-s';
+const STIHL = 'https://www.stihlusa.com/content/dam/stihl/vu/us/en/download-files/pdf-files/2025_STIHL_Power_Tools_Catalog_VU_D_2025-1.pdf';
+const ECHO = 'https://www.echo-usa.com/getmedia/f0410e25-c7f5-4247-a9cb-8045d8e57b63/ECHO_chainsaws.pdf';
+const faqs = [
+  { q: 'Is a solid bar the same thing as a solid nose?', a: 'The body and the tip are different parts. Oregon says a PowerCut solid-body bar can have different noses installed, and that the part number changes with the nose. STIHL’s Rollomatic E Super is a solid-machined bar with a replaceable sprocket nose. STIHL’s Duromatic E is a solid bar with hard-surface alloy tipping on the nose. Echo’s chart uses “solid bars” for body construction: the starred part numbers are solid, and the others are laminated, in a column headed Sprocket Nose Bar.' },
+  { q: 'Which nose is tensioned tighter?', a: 'Oregon says sprocket-nose tension must be tighter than solid-nose tension. On a solid nose, the bottoms of the tie straps and cutters just touch the rail. On a sprocket nose they solidly contact the rail. Both adjustments are made with the engine off, the chain cool, and the nose held up. The steps are the tension guide.' },
+  { q: 'Does the nose sprocket have to match the chain?', a: 'Yes, when the bar has one. Oregon says the drive sprocket must be the same pitch as the chain, and the bar-nose sprocket must match when the bar has one. A solid nose has no nose sprocket. The drive sprocket on the saw is still there, and it still has to match the chain. Replacing an Oregon PowerCut nose means choosing a nose of the correct pitch. Oregon says a reduced-kickback Double Guard replacement nose can go on any PowerCut bar and uses the same drive-link count.' },
+  { q: 'Can every sprocket nose be replaced?', a: 'Oregon’s PowerCut type codes EXL, RN, PM and RW are replaceable sprocket noses. Echo’s bars-and-chains chart marks each sprocket nose Replaceable or Non-Replaceable. A non-replaceable nose is replaced by replacing the bar. The wear limits that say when a nose is done are on the bar-replacement guide.' },
+  { q: 'What if the stamp and the nose type disagree with a listing?', a: 'The stamp wins. It carries length, pitch, gauge and, usually, the drive-link count. Nose type tells you how the tip is built and how Oregon wants the chain tensioned. It does not pick a different pitch or gauge than the one stamped on that bar.' },
+];
+const howto = {
+  '@context': 'https://schema.org', '@type': 'HowTo', name: 'How to tell a sprocket-nose bar from a solid-nose bar',
+  description: 'With the saw stopped, identify the tip, read an Oregon type code if the bar has one, and tension to the rule for that tip.',
+  tool: [{ '@type': 'HowToTool', name: 'Work gloves' }, { '@type': 'HowToTool', name: 'The bar stamp and, on an Oregon bar, the type code' }],
+  step: [
+    { '@type': 'HowToStep', name: 'Stop the saw', text: 'Engine off, chain cool, gloves on. Do not spin the chain to inspect the tip.' },
+    { '@type': 'HowToStep', name: 'Look at the tip', text: 'Oregon’s bar diagram shows a nose sprocket, nose rivets and a grease hole on a sprocket-nose bar, and a solid-nose armor tip on a solid nose. A wheel in the tip is a sprocket nose. A hard tip with no wheel is a solid nose.' },
+    { '@type': 'HowToStep', name: 'Read an Oregon type code if it is etched on the bar', text: 'EXL, RN, PM and RW are replaceable sprocket noses. DXL and AT are solid noses with a laser-welded, wear-resistant tip. A solid-body PowerCut bar can still carry a sprocket nose.' },
+    { '@type': 'HowToStep', name: 'Match pitch, then tension', text: 'The nose sprocket, when there is one, has to be the chain’s pitch. Tension a sprocket nose tighter than a solid nose, only after the chain has cooled, with the nose held up.' },
+  ],
+};
+const jsonld = [webPageLd('Sprocket-nose vs solid-nose chainsaw bar', path, desc, modified), howto, faqLd(faqs)];
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Sprocket nose vs solid nose', path }];
+---
+<Base title="Sprocket-Nose vs Solid-Nose Bar" description={desc} path={path} nav="chart" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Sprocket nose vs solid nose' }]} />
+      <h1>Sprocket-nose vs solid-nose bar</h1>
+      <p class="lede">A sprocket-nose bar carries the chain around the tip on a toothed wheel. A solid nose, sometimes called a hardnose, has a hardened tip and no wheel. Oregon tensions the sprocket nose tighter. The wheel, when it exists, has to match the chain’s pitch. A solid steel body is a different fact: that bar can still have a sprocket in the tip. The stamp on the tail is still pitch, gauge and drive links.</p>
+    </div>
+
+    <section class="block">
+      <h2>Two tips, and a body that is neither of them</h2>
+      <p style="max-width:72ch">Oregon’s guide-bar diagram draws both tips on one page. The sprocket nose has a nose sprocket, nose rivets, and a grease hole. The other tip is labeled solid nose armor tip. The part-number key then names which bars are which. On PowerCut, EXL, RN, PM and RW are replaceable sprocket noses. On DuraCut, DXL and AT are solid noses with a laser-welded tip and a wear-resistant alloy. AdvanceCut codes SX, PX, GD, ML, SF and SD are sprocket noses, some of them narrow-kerf, some with Guard Mate holes. The body is a separate choice. Oregon notes that a PowerCut solid-body bar may be stamped with different letters because different noses can be installed on that body, and the part number changes when the nose changes.</p>
+      <p style="max-width:72ch">STIHL’s 2025 catalog draws the same line with different trade names. Rollomatic E Super is a solid-machined steel bar with the groove milled in and a replaceable sprocket-nose assembly riveted on. The sprocket in that nose carries the chain from the top of the bar to the bottom. Duromatic E is a solid bar of high-carbon alloy steel with induction-hardened rails and hard-surface alloy tipping on the nose. The Light bars (Light 04, Light 06, Light P04, Light P01) are laminated plates with a sprocket nose, four rivets, six rivets, or one. The carving bar is the catalog’s solid-nose specialist: 12″, and limited to the PICCO chains that page names. Rollomatic ES Light is the in-between case worth remembering, a lightened solid bar that still has a replaceable sprocket nose.</p>
+      <p style="max-width:72ch">Echo’s chart uses “solid” for the body. The column is headed Sprocket Nose Bar, each row is marked Replaceable or Non-Replaceable, and the footnote on the starred part numbers says those are solid bars and the other bars are laminated. A solid Echo bar in that table is still in the sprocket-nose column. Laminated versus solid is how the steel is built. Sprocket versus armor is what is in the tip.</p>
+      <p class="src">Oregon <a href={ORE} rel="nofollow">Maintenance and Safety Manual</a>, “Guide Bar Terms,” “Using the Guide Bar Number System,” and the PowerCut bar page, read 9 Nov 2026. STIHL USA, <a href={STIHL} rel="nofollow">2025 Power Tools catalog</a>, guide-bar pages (Rollomatic E Super, Rollomatic ES Light, Duromatic E, Light bars, carving bar). <a href={ECHO} rel="nofollow">ECHO chainsaws catalog</a>, Bars and Chains, the sprocket-nose column and the solid-versus-laminated footnote.</p>
+    </section>
+    <ShopBlock groups={shop.groups} compact />
+
+    <section class="block">
+      <h2>Tension and pitch follow the tip</h2>
+      <p style="max-width:72ch">Oregon’s tension procedure splits on the tip, before it splits on anything else. With the engine off and the chain cool, hold the nose up. On a solid-nose bar, turn the screw until the bottoms of the lowest tie straps and cutters come up and just touch the rail. On a sprocket-nose bar, tension must be tighter: those same bottoms solidly contact the rail. The snap test and the cold-chain rule live in <a href="/guides/chainsaw-chain-tension/">chain tension</a>. Heat is the same problem on either tip. A chain tensioned while expanded shrinks as it cools and can damage the bar and the chain. A sprocket nose does not get a pass on that rule because it wants to run tighter.</p>
+      <p style="max-width:72ch">Pitch is the other match. Oregon’s finding page says the drive sprocket must be the same pitch as the chain, and the bar-nose sprocket must match when the bar has one. A solid nose has nothing at the tip to match. The clutch sprocket is still there. Changing from a .325″ sprocket-nose bar to a 3/8″ sprocket-nose bar is a chain, a drive sprocket, and a nose, which is the set described in <a href="/guides/chainsaw-drive-sprocket/">drive sprocket and pitch</a>. When Oregon’s PowerCut nose is replaced, the manual says to select a nose with the correct pitch for that bar and chain. A reduced-kickback Double Guard replacement nose can be installed on any PowerCut bar and is used with the same drive-link count. The nose kit does not authorize a longer loop.</p>
+    </section>
+
+    <section class="block">
+      <h2>What wears out is different, and the stamp is not</h2>
+      <p style="max-width:72ch">Oregon’s troubleshooting list splits by tip. A solid nose shows small cracks or broken-out sections in the rails around the tip, or rails split at the bottom of the groove, from impacts and from drive links pushed sideways. A sprocket nose shows blue rails when friction has heated the steel, spread tip rails that let the bearings out, and a sprocket that breaks. The replacement test Oregon prints for the sprocket nose is the clearance at the tip, before a cutter or a tie strap meets the chassis. Those limits, including the 0.8 mm figure, are <a href="/guides/when-to-replace-chainsaw-bar/">when to replace a bar</a>. Daily groove cleaning, and the rule against flipping a Guard Tip bar, are <a href="/guides/chainsaw-bar-maintenance/">bar maintenance</a>. This page stops at telling the two tips apart.</p>
+      <p style="max-width:72ch">Ordering the replacement still starts at the tail. Called length, pitch, gauge and drive links are stamped there. Nose type tells you whether the new bar needs a matching nose sprocket and which of Oregon’s two tension settings to use. It does not change a .050″ groove into a .058″ groove. <a href="/guides/how-to-measure-chainsaw-bar/">Measuring a bar</a> is called length with the bar mounted. <a href="/guides/how-to-verify-chain-size/">Verifying the chain</a> is the stamp, then a drive-link count if the stamp is faint. If a listing says “sprocket nose” and your stamp says .058″, the listing fits only if it also says .058″ and the drive-link count you counted.</p>
+    </section>
+
+    <div class="callout"><b>Body, tip, stamp</b><p>Solid body can mean a sprocket nose, on Oregon PowerCut and on STIHL Rollomatic E Super. Solid nose means the armor tip, Oregon DXL and AT, and STIHL Duromatic. Echo’s “solid bar” footnote means the body, inside a column of sprocket noses. Tension the tip you actually have. Buy the pitch, gauge and drive-link count on the stamp.</p></div>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/chainsaw-chain-tension/">Tension</a> · <a href="/guides/chainsaw-drive-sprocket/">Drive sprocket</a> · <a href="/guides/when-to-replace-chainsaw-bar/">When to replace a bar</a> · <a href="/guides/how-to-measure-chainsaw-bar/">Measure a bar</a> · <a href="/bars/">Bars by length</a></p>
+    <ShopBlock groups={shop.groups} title="Nose-type searches (Amazon)" lead="One search is a replaceable sprocket nose. The other is a solid nose. Either bar still has to match the mount, the length, and the pitch, gauge and drive links on your stamp." />
+  </div>
+</Base>

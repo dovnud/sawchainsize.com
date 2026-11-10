@@ -36,6 +36,10 @@ const pages = [
   ['guides-1-4-pitch-chainsaw-chain', 'GUIDE', '1/4″ pitch chainsaw chain', '.043″ gauge · 1/8″ or 9/64″ file'],
   ['guides-can-you-change-chainsaw-chain-pitch', 'GUIDE', 'Can you change chain pitch?', 'Not a chain-only swap'],
   ['guides-full-kerf-vs-narrow-kerf-chain', 'GUIDE', 'Full kerf vs narrow kerf', '.043″ chain needs its own bar'],
+  ['guides-full-chisel-vs-semi-chisel-chain', 'GUIDE', 'Chisel vs semi-chisel', 'Chipper is a separate cutter type'],
+  ['guides-chainsaw-skip-chain', 'GUIDE', 'Skip and semi-skip chain', 'Standard · semi-skip · full skip'],
+  ['guides-ripping-chainsaw-chain', 'GUIDE', 'Ripping chain for milling', '10° grind · with the grain'],
+  ['guides-sprocket-nose-vs-solid-nose-bar', 'GUIDE', 'Sprocket nose vs solid nose', 'Wheel in the tip · armor tip'],
   ['guides-break-in-new-chainsaw-chain', 'GUIDE', 'Break in a new chain', 'Oil · half throttle · light cuts'],
   ['guides-when-to-replace-chainsaw-bar', 'GUIDE', 'When to replace a bar', 'Shallow groove · blue rails · nose'],
   ['guides-stihl-chain-order-numbers', 'GUIDE', 'STIHL chain order numbers', '33 RS3 72 = 3624 005 0072'],
@@ -55,6 +59,8 @@ const items = [
   ...brands.map((b) => ({ file: `brand-${b.id}`, kicker: 'BY BRAND', title: `${b.name} chain sizes`, sub: 'Every verified saw model' })),
   ...[...chains].map(([k, t]) => ({ file: `chain-${k}`, kicker: 'CHAIN SPEC', title: `${t} chain`, sub: 'Codes · file size · saws that use it' })),
 ];
+const only = process.argv.slice(2).filter((arg) => !arg.startsWith('-'));
+const wanted = (file) => !only.length || only.some((arg) => file.includes(arg));
 const html = (i) => `<body style="margin:0;width:1200px;height:630px;background:#f6f3ec;font-family:Barlow,Arial,sans-serif;position:relative;overflow:hidden">
 <div style="position:absolute;left:0;top:0;bottom:0;width:28px;background:#cf4a08"></div>
 <div style="position:absolute;left:84px;top:70px;font:600 28px monospace;letter-spacing:4px;color:#cf4a08">${i.kicker}</div>
@@ -63,5 +69,6 @@ const html = (i) => `<body style="margin:0;width:1200px;height:630px;background:
 <div style="position:absolute;left:0;right:0;bottom:0;height:90px;background:#232a30;color:#f2efe7;font:600 32px monospace;line-height:90px;padding-left:84px;letter-spacing:2px">SAWCHAINSIZE.COM</div></body>`;
 const b = await chromium.launch(); const p = await b.newPage({ viewport: { width: 1200, height: 630 } });
 fs.mkdirSync('public/og', { recursive: true });
-for (const i of items) { await p.setContent(html(i)); await p.screenshot({ path: `public/og/${i.file}.png` }); }
-await b.close(); console.log(items.length, 'og images');
+const picked = items.filter((i) => wanted(i.file));
+for (const i of picked) { await p.setContent(html(i)); await p.screenshot({ path: `public/og/${i.file}.png` }); }
+await b.close(); console.log(picked.length, 'og images', only.length ? `(filtered from ${items.length})` : '');

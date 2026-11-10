@@ -1,0 +1,94 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+
+const path = '/guides/chainsaw-skip-chain/';
+const modified = (dates as Record<string, string>)[path];
+const shop = guideShop('chainsaw-skip-chain');
+const desc = 'Full-comp, semi-skip and full-skip describe cutter spacing. Oregon calls the closest spacing standard. The drive-link count stays on the bar stamp.';
+const ORE = 'https://apps.oregonproducts.com/pdfs/OregonMMANUAL_EN_A106971ab.pdf';
+const ORE_TERMS = 'https://www.oregonproducts.com/en/product-support/chainsaw/saw-chain-terminology/c/saw-chain-terminology-s';
+const ORE_FIND = 'https://www.oregonproducts.com/en_eu/findingtherightsawchainforyou';
+const STIHL = 'https://www.stihlusa.com/content/dam/stihl/vu/us/en/download-files/pdf-files/2025_STIHL_Power_Tools_Catalog_VU_D_2025-1.pdf';
+const STIHL_2017 = 'https://assets.unilogcorp.com/187/ITEM/DOC/Stihl_102205325_Catalog.pdf';
+const faqs = [
+  { q: 'Does skip chain have fewer drive links?', a: 'The drive-link count is the length of the loop. STIHL’s fitting page says to count drive links, and that the cutting teeth are not part of that count. Full-skip chain has two tie straps between every two cutting teeth, so a given loop has fewer cutters than the regular pattern of the same count. The number you match to the bar is still the drive-link count on the stamp.' },
+  { q: 'What is full-comp chain?', a: 'Full-comp is the shop name for the closest cutter spacing. Oregon’s word is standard sequence. STIHL’s word, on the RSLH page, is regular pattern. Oregon’s recommended bar length for standard sequence is up to 24″ (61 cm).' },
+  { q: 'What does H mean on a STIHL chain?', a: 'In the special-feature position, H means semi-skip (half-skip) or harvester. STIHL’s own example of the harvester reading is .404″ RMH, which the catalog limits to hydraulic harvester heads. RSLH is the semi-skip reading: it alternates cutter spacing between full-skip RSLF and regular-pattern RSL. H in the cutter-shape position is a different letter job. There it means HEXA, which is full chisel.' },
+  { q: 'Can skip chain go on a short bar?', a: 'Oregon recommends standard sequence up to 24″, semi-skip from 24″ to 32″, and skip from 32″ up, for chip clearance on larger wood. STIHL says full-skip suits long bars and large-diameter logs and can be used on short bars as well. Both still require the pitch, gauge and drive-link count on the stamp. The inch bands are use recommendations from each maker.' },
+  { q: 'Is ripping chain the same as skip chain?', a: 'They are different columns. Oregon 72RD is micro-chisel ripping chain in a standard sequence. 27RX is micro-chisel ripping chain in a super-skip sequence. Ripping is the with-the-grain grind. Skip is how the cutters are spaced. The ripping guide is the grind.' },
+];
+const howto = {
+  '@context': 'https://schema.org', '@type': 'HowTo', name: 'How to identify full-comp, semi-skip and full-skip chain',
+  description: 'Read the sequence from the chain maker’s code, then match pitch, gauge and drive links to the bar stamp.',
+  tool: [{ '@type': 'HowToTool', name: 'The chain box or the drive-link stamp' }],
+  step: [
+    { '@type': 'HowToStep', name: 'Read pitch and gauge first', text: 'On Oregon chain the digits are the family (72 is 3/8″ .050″). On STIHL chain the first digit is pitch and the second is gauge.' },
+    { '@type': 'HowToStep', name: 'Read the sequence code', text: 'Oregon’s identification table prints Standard, Skip, Semi-Skip or Super Skip. STIHL’s special letter F is full skip. STIHL’s special letter H is semi-skip (half-skip) or harvester.' },
+    { '@type': 'HowToStep', name: 'Count drive links', text: 'Count the tangs, not the cutters. The bar stamp’s drive-link count is the loop length whether the sequence is standard or skip.' },
+    { '@type': 'HowToStep', name: 'Use the maker’s length note as a use note', text: 'Oregon’s bands are up to 24″ for standard, 24″ to 32″ for semi-skip, and 32″ and longer for skip. STIHL also allows full-skip on short bars. The saw’s own bar list still limits which lengths belong on that powerhead.' },
+  ],
+};
+const jsonld = [webPageLd('Full-comp vs semi-skip vs full-skip chainsaw chain', path, desc, modified), howto, faqLd(faqs)];
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Skip chain', path }];
+---
+<Base title="Skip, Semi-Skip and Full-Skip Chain" description={desc} path={path} nav="chart" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Skip chain' }]} />
+      <h1>Full-comp, semi-skip and full-skip chain</h1>
+      <p class="lede">Full-comp, semi-skip and full-skip describe how close the cutters sit. They do not describe the cutter’s corner, and they do not replace pitch, gauge or the drive-link count. Oregon’s names are standard, semi-skip and skip. STIHL’s full skip has two tie straps between every two cutting teeth. The bar stamp is still the loop you buy.</p>
+    </div>
+
+    <section class="block">
+      <h2>Three sequences, and what each maker calls them</h2>
+      <p style="max-width:72ch">Oregon’s terms page draws three cutter sequences: standard, semi-skip and skip. The terminology page says standard is the general-purpose sequence, and that semi-skip and skip are for work where chip clearance matters, including larger-diameter wood. A separate Oregon page prints recommended bar lengths for those three: standard up to 24″ (61 cm), semi-skip from 24″ to 32″ (61–81 cm), and skip for 32″ and longer (81 cm and up). The specialty grid adds two more names that are not in that three-row table: super skip, on 27RX, and full-house sequence, on the 25F carving chain.</p>
+      <p style="max-width:72ch">Full-comp is the shop name for the closest of those spacings. Oregon does not print “full-comp.” Oregon’s word is standard. STIHL’s phrase for that same spacing, on the half-skip page, is regular pattern. A full-comp loop is one of those two names, plus the pitch, gauge and drive-link count on the stamp.</p>
+      <p class="src">Oregon <a href={ORE} rel="nofollow">Maintenance and Safety Manual</a>, “Saw Chain Cutter Sequence Terms” and the identification grids. Oregon <a href={ORE_TERMS} rel="nofollow">saw-chain terminology</a>, sequence paragraph. Oregon <a href={ORE_FIND} rel="nofollow">Finding the Right Saw Chain</a> (EU), recommended bar lengths. All three read 9 Nov 2026.</p>
+    </section>
+    <ShopBlock groups={shop.groups} compact />
+
+    <section class="block">
+      <h2>The same Oregon family, three sequences</h2>
+      <p style="max-width:72ch">On 3/8″ chain the family number stays put and the letters move. The identification table’s sequence column is the part that changes. Cutter shape for these rows is <a href="/guides/full-chisel-vs-semi-chisel-chain/">chisel or semi-chisel</a>, which is the other column.</p>
+      <div class="tblwrap">
+        <table>
+          <caption class="sr-only">Oregon 3/8 inch sequence by chain series</caption>
+          <thead><tr><th scope="col">Series</th><th scope="col">Sequence in the table</th><th scope="col">Cutter</th></tr></thead>
+          <tbody>
+            <tr><td>72 / 73 / 75 LPX, LGX, EXL, V, DPX</td><td>Standard</td><td>Chisel, except DPX which is semi-chisel</td></tr>
+            <tr><td>72 / 73 / 75 JPX, JGX, EXJ</td><td>Skip</td><td>Chisel</td></tr>
+            <tr><td>72APX</td><td>Skip</td><td>Semi-chisel</td></tr>
+            <tr><td>72 / 73 / 75 CL</td><td>Standard</td><td>Square-ground chisel</td></tr>
+            <tr><td>72 / 73 / 75 CK</td><td>Semi-skip</td><td>Square-ground chisel</td></tr>
+            <tr><td>72 / 75 CJ</td><td>Skip</td><td>Square-ground chisel</td></tr>
+            <tr><td>27R</td><td>Standard</td><td>Micro chisel, ripping</td></tr>
+            <tr><td>27RA</td><td>Skip</td><td>Micro chisel, ripping</td></tr>
+            <tr><td>27RX</td><td>Super skip</td><td>Micro chisel, ripping</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="max-width:72ch">72LPX and 72JPX are the clean pair. Both are family 72, so both are 3/8″ at .050″, and the product page treats LPX and JPX as one chisel family. The grid’s sequence column says standard for LPX and skip for JPX. A 72-link 72LPX and a 72-link 72JPX are the same pitch, gauge and drive-link count, with different cutter spacing. The count still has to be the count on the bar. <a href="/guides/how-to-count-drive-links/">Counting drive links</a> is a lap of the tangs, not a lap of the cutters.</p>
+      <p style="max-width:72ch">Semi-skip is the narrow column. In this manual’s grids the semi-skip rows are the square-ground 72CK, 73CK and 75CK chains. Skip, by contrast, shows up on several round-ground and square-ground series. Oregon’s length bands still apply as recommendations: the manual does not say a 20″ bar is incapable of turning a skip loop that has the right drive-link count. It says which sequence it recommends as the wood gets larger.</p>
+    </section>
+
+    <section class="block">
+      <h2>STIHL: two tie straps, and an H that means two things</h2>
+      <p style="max-width:72ch">STIHL’s 2025 catalog describes full skip the same way on RMF, RSF, RSLF and RHF: two tie straps between every two cutting teeth, for chip discharge and higher chain speed. The RMF page adds that full-skip chain has an extra drive link and tie straps between each cutter, and that there are fewer cutters to sharpen than on RM. RSF says the same extra-drive-link sentence, and says full skip is especially suited to long bars on large logs and can be used on short bars as well. That short-bar sentence is STIHL’s. Oregon’s chart recommends skip from 32″ up. Both can be true of the chain each company sells. They are not one rule. Fit remains the four figures STIHL prints on the bar: length, pitch, drive-link count, and groove width.</p>
+      <p style="max-width:72ch">Half skip is RSLH. STIHL says it alternates cutter spacing so the cutting and the sharpening sit between full-skip RSLF and regular-pattern RSL. The identification legend then makes H do double duty. In the special-feature position, H is “Semi Skip (Half-Skip) or Harvester,” and the example in parentheses is .404″ RMH. The RMH product text is the harvester reading: a reinforced .404″ chain for hydraulic harvester heads only. RSLH is the half-skip reading. The letter alone, pulled off a box with no other characters, is not enough. F is only full skip. The 2017 panel uses the same F and H gloss, which is what <a href="/guides/chain-part-numbers/">the part-number guide</a> decodes.</p>
+      <p style="max-width:72ch">Full skip is also a kickback class on STIHL’s chart. Types without the low-kickback “3,” including RSF and RMF, carry the warning symbol: increased kickback risk, for cutters with the training the label names. Green versus yellow is <a href="/guides/stihl-green-vs-yellow-chain/">that label</a>. A full-skip loop that matches the stamp is still the chain the warning was printed for.</p>
+      <p class="src">STIHL USA, <a href={STIHL} rel="nofollow">2025 Power Tools catalog</a>, RMF, RSF, RSLH, RHF and RMH entries, and the identification legend (F, H, and the note that drive links, not cutting teeth, are counted). STIHL <a href={STIHL_2017} rel="nofollow">2017 identification panel</a> for the same F and H gloss. Read 9 Nov 2026.</p>
+    </section>
+
+    <div class="callout"><b>Count tangs, then read the letters</b><p>Standard, semi-skip and full skip change how many cutters share a drive-link count. They do not change the count. Oregon’s 24″ / 32″ bands and STIHL’s “short bars as well” are use notes from two makers. The stamp on the bar is the loop.</p></div>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/full-chisel-vs-semi-chisel-chain/">Chisel, semi-chisel, chipper</a> · <a href="/guides/ripping-chainsaw-chain/">Ripping chain</a> · <a href="/guides/chain-part-numbers/">Part numbers</a> · <a href="/guides/how-to-count-drive-links/">Count drive links</a> · <a href="/guides/longer-bar-on-chainsaw/">Longer bar</a></p>
+    <ShopBlock groups={shop.groups} title="Skip and semi-skip searches (Amazon)" lead="72JGX is Oregon’s skip-sequence chisel in the 72 family (3/8″ .050″). 72CK is the square-ground semi-skip. RSF is STIHL full skip. Match the drive-link count after the search." />
+  </div>
+</Base>
