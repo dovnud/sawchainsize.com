@@ -1,0 +1,48 @@
+{
+  "brand": "dewalt",
+  "model": "DCPS620",
+  "name": "DEWALT DCPS620",
+  "aliases": [
+    "DCPS620",
+    "DCPS620B"
+  ],
+  "type": "battery",
+  "popular": false,
+  "blurb": "8″ bar, 3/8″ low profile chain, .043″ gauge, 34 drive links (Oregon R34), from Oregon's saw-chain selection guide.",
+  "intro": "Oregon's saw-chain selection guide gives DEWALT DCPS620 its own line: Oregon R34, a 8″ bar, 34 drive links, .043″ gauge, 3/8″ low profile. The guide does not print a file size. Oregon's line is DCPS620B.",
+  "bars": [
+    {
+      "lengths_in": [
+        8
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.043,
+      "drive_links": 34,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "R34",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-tsc-fit-guide"
+      ],
+      "note": "Oregon prints R34 for this model line: 8″ bar, 34 drive links, .043″ gauge, 3/8″ low profile. No file size is printed."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide: model line printed with saw-chain code, bar length, drive links, gauge and pitch",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-09"
+    }
+  ],
+  "sources_note": "Oregon Saw Chain Selection Guide (https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf), read 9 Nov 2026. The row restates the model line Oregon prints for this saw. Oregon does not print a file size on that line.",
+  "last_verified": "2026-11-09"
+}

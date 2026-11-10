@@ -1,0 +1,21 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import { lookupsByKind, lookupPath } from '../../lib/exact';
+import { webPageLd } from '../../lib/ld';
+import { SITE } from '../../lib/data';
+const items = lookupsByKind('fits');
+const path = '/fits/';
+const desc = 'Which chainsaw a pitch, gauge and drive-link count fits. Each page lists only verified bar rows that store those three numbers.';
+---
+<Base title="Which saws a drive-link count fits" description={desc} path={path} nav="chart" crumbs={[{ name: 'Drive-link lookups', path }]} jsonld={[webPageLd('Drive-link count lookups', path, desc, SITE.dataDate)]} modified={SITE.dataDate}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Drive-link lookups' }]} />
+      <h1>Drive-link count lookups</h1>
+      <p class="lede">One page per pitch, gauge and drive-link count. The table is the verified bars that use that loop. A different drive-link count is a different chain, even when the pitch and gauge match.</p>
+    </div>
+    <ul class="chips">{items.map((l) => <li><a href={lookupPath(l)}>{l.query}</a></li>)}</ul>
+    <p style="margin-top:18px"><a href="/xref/">Part-number cross references</a> · <a href="/bar-length/">Bar length by model</a> · <a href="/guides/how-to-count-drive-links/">How to count drive links</a> · <a href="/chain/">Chain specs by pitch and gauge</a></p>
+  </div>
+</Base>

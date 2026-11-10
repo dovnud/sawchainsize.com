@@ -1,0 +1,70 @@
+{
+  "brand": "makita",
+  "model": "XCU06",
+  "name": "Makita XCU06",
+  "aliases": [
+    "XCU06",
+    "XCU05"
+  ],
+  "type": "battery",
+  "popular": false,
+  "blurb": "Oregon lists XCU05 and XCU06 with two 3/8″ low-profile .043″ chains: 8″ / 33 drive links (R33) and 10″ / 40 drive links (R40).",
+  "intro": "Oregon's saw-chain selection guide prints XCU05, XCU06 as one pair with two chains: R33 (8″, 33 drive links, .043″, 3/8″ low profile) and R40 (10″, 40 drive links, .043″, 3/8″ low profile). It does not say which length belongs to which model number. This is a different table from the XCU03 / XCU04 manual, which lists 12″, 14″ and 16″ bars. No file size is printed.",
+  "bars": [
+    {
+      "lengths_in": [
+        8
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.043,
+      "drive_links": 33,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "R33",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-tsc-fit-guide"
+      ],
+      "note": "Oregon prints R33 under XCU05, XCU06: 8″ bar, 33 drive links, .043″ gauge, 3/8″ low profile. The guide does not assign this length to XCU05 or XCU06 alone. No file size is printed."
+    },
+    {
+      "lengths_in": [
+        10
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.043,
+      "drive_links": 40,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "R40",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-tsc-fit-guide"
+      ],
+      "note": "Oregon prints R40 under XCU05, XCU06: 10″ bar, 40 drive links, .043″ gauge, 3/8″ low profile. The guide does not assign this length to XCU05 or XCU06 alone. No file size is printed."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide: model line printed with saw-chain code, bar length, drive links, gauge and pitch",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-09"
+    }
+  ],
+  "sources_note": "Oregon Saw Chain Selection Guide (https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf), read 9 Nov 2026. The row restates the model line Oregon prints for this saw. Oregon does not print a file size on that line.",
+  "last_verified": "2026-11-09",
+  "notice": "Oregon prints both chains under XCU05 and XCU06 together. Read the bar stamp before you pick 33 or 40 drive links."
+}

@@ -1,0 +1,73 @@
+{
+  "brand": "ryobi",
+  "model": "RY10520",
+  "name": "Ryobi RY10520",
+  "aliases": [
+    "RY10520",
+    "RY10518",
+    "RY10519",
+    "RY10521",
+    "RY5020"
+  ],
+  "type": "gas",
+  "popular": false,
+  "blurb": "Oregon lists this model group with two .325″ .050″ chains: 18″ / 72 drive links (H72) and 20″ / 78 drive links (H78).",
+  "intro": "Oregon's saw-chain selection guide prints RY5020, RY10518, RY10519, RY10520 and RY10521 as one group, with two chains under it: H72 (18″, 72 drive links, .050″, .325″) and H78 (20″, 78 drive links, .050″, .325″). The guide does not say which model number left the factory with which length. The stamp on the bar is the assignment. No file size is printed.",
+  "bars": [
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "325",
+      "gauge": 0.05,
+      "drive_links": 72,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "H72",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-tsc-fit-guide"
+      ],
+      "note": "Oregon prints H72 under the model group RY5020, RY10518, RY10519, RY10520, RY10521: 18″ bar, 72 drive links, .050″ gauge, .325″ pitch. The guide does not assign this length to one model number in the group. No file size is printed."
+    },
+    {
+      "lengths_in": [
+        20
+      ],
+      "pitch": "325",
+      "gauge": 0.05,
+      "drive_links": 78,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "H78",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-tsc-fit-guide"
+      ],
+      "note": "Oregon prints H78 under the same model group: 20″ bar, 78 drive links, .050″ gauge, .325″ pitch. The guide does not assign this length to one model number in the group. No file size is printed."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide: model line printed with saw-chain code, bar length, drive links, gauge and pitch",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-09"
+    }
+  ],
+  "sources_note": "Oregon Saw Chain Selection Guide (https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf), read 9 Nov 2026. The row restates the model line Oregon prints for this saw. Oregon does not print a file size on that line.",
+  "last_verified": "2026-11-09",
+  "notice": "Oregon prints both lengths under the whole model group. It does not assign 18″ to one model number and 20″ to another."
+}

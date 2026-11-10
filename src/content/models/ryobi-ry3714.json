@@ -1,0 +1,47 @@
+{
+  "brand": "ryobi",
+  "model": "RY3714",
+  "name": "Ryobi RY3714",
+  "aliases": [
+    "RY3714"
+  ],
+  "type": "gas",
+  "popular": true,
+  "blurb": "14″ bar, 3/8″ low profile chain, .050″ gauge, 52 drive links (Oregon S52), from Oregon's saw-chain selection guide.",
+  "intro": "Oregon's saw-chain selection guide gives Ryobi RY3714 its own line: Oregon S52, a 14″ bar, 52 drive links, .050″ gauge, 3/8″ low profile. The guide does not print a file size. Oregon prints RY3714 on its own line as S52. A later line groups RY3714 with RY40530 and RY40503, still S52.",
+  "bars": [
+    {
+      "lengths_in": [
+        14
+      ],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 52,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Oregon",
+          "part_no": "S52",
+          "role": "equivalent"
+        }
+      ],
+      "source_ids": [
+        "oregon-tsc-fit-guide"
+      ],
+      "note": "Oregon prints S52 for this model line: 14″ bar, 52 drive links, .050″ gauge, 3/8″ low profile. No file size is printed."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide: model line printed with saw-chain code, bar length, drive links, gauge and pitch",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-09"
+    }
+  ],
+  "sources_note": "Oregon Saw Chain Selection Guide (https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf), read 9 Nov 2026. The row restates the model line Oregon prints for this saw. Oregon does not print a file size on that line.",
+  "last_verified": "2026-11-09"
+}

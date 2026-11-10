@@ -2,6 +2,7 @@ import { getModels, getBrands, chainGroups, barGroups, modelUrl, brandUrl, barUr
 import { GUIDES } from '../data/guides';
 import { BF_PATH, GIFT_PATH } from '../data/holiday-2026';
 import { MATCHER_PATH } from './tool-types';
+import { LOOKUPS, lookupPath } from './exact';
 
 const abs = (p: string) => SITE.url + p;
 
@@ -22,6 +23,9 @@ export async function llmsTxt() {
   for (const b of brands) L.push(`- [${b.data.name}](${abs(brandUrl(b.id))}): ${b.data.summary}`);
   L.push('', '## Chain specs (pitch x gauge)', '');
   for (const g of chains) L.push(`- [${pitchLabel(g.pitch)} pitch, ${gaugeLabel(g.gauge)} gauge](${abs(chainUrl(g.key))})`);
+  L.push('', '## Exact lookups', '');
+  L.push('One page per query. Each answer is the pitch, gauge, drive links, bar length and part numbers from verified rows, with the source those rows cite.');
+  for (const l of LOOKUPS) L.push(`- [${l.query}](${abs(lookupPath(l))})`);
   L.push('', '## Bar lengths', '');
   for (const g of bars) L.push(`- [${g.length}-inch bar](${abs(barUrl(g.length))})`);
   L.push('', '## Tools', '');

@@ -1,0 +1,398 @@
+{
+  "brand": "stihl",
+  "model": "MS 441",
+  "name": "STIHL MS 441 / MS 461",
+  "aliases": [
+    "MS 441",
+    "MS 441 C-M",
+    "MS 441 C-MQ",
+    "MS 441 RC-M",
+    "MS 461",
+    "MS 461 R"
+  ],
+  "type": "gas",
+  "popular": true,
+  "blurb": "18″ to 28″ bars on 3/8″ chain, .050″ (33 RS3) or .063″ (36 RS3), from STIHL's 2017 selection chart. The 2025 chart does not repeat this model block.",
+  "intro": "STIHL's 2017 saw-chain selection chart (specifications as of 1 October 2017) lists the MS 441 RC-M, MS 441 C-M, MS 441 C-MQ, MS 461 R and MS 461 in one block with the MS 362. The block has two gauges. At .050″ the loops are 33 RS3: 66 drive links on 18″, 72 on 20″, 84 on 25″ and 91 on 28″, plus asterisked 25″ and 28″ bars. At .063″ the loops are 36 RS3: 66 on 18″, 72 on 20″, 76 on 22″, 84 on 25″ and 91 on 28″. An asterisk, in STIHL's note, means a green-labeled reduced-kickback bar is not available at that length and a yellow-labeled bar is listed. The STIHL 2025 catalog chart names the MS 362 and MS 400 in this part of the table and does not name the MS 441 or MS 461. File size is where STIHL and Oregon disagree: STIHL's 2025 file table lists 13/64″ (5.2 mm) for 3/8″ chain, and Oregon's 2020 filing chart lists 7/32″ (5.5 mm) for standard 3/8″ chain.",
+  "notice": "Two gauges are in the same chart block. .050″ chain is 33 RS3. .063″ chain is 36 RS3. The 2025 catalog chart does not list the MS 441 or MS 461. Read the stamp.",
+  "bars": [
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 66,
+      "file_size": null,
+      "file_conflict": [
+        {
+          "size": "13/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "7/32",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "33 RS3 66",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "STIHL's 2017 chart lists chain 33 RS3 66 with bar 3003 008 8917 for the MS 362 / MS 441 / MS 461 block. 3/8″ pitch, .050″ gauge, 18″, 66 drive links. Rollomatic bar. Not marked with an asterisk. File size: STIHL's 2025 file table lists 13/64″ (5.2 mm) for 3/8″ chain; Oregon's 2020 filing chart lists 7/32″ for standard 3/8″ chain."
+    },
+    {
+      "lengths_in": [
+        20
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 72,
+      "file_size": null,
+      "file_conflict": [
+        {
+          "size": "13/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "7/32",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "33 RS3 72",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "STIHL's 2017 chart lists chain 33 RS3 72 with bar 3003 008 8921 for the MS 362 / MS 441 / MS 461 block. 3/8″ pitch, .050″ gauge, 20″, 72 drive links. Rollomatic bar. Not marked with an asterisk. File size: STIHL's 2025 file table lists 13/64″ (5.2 mm) for 3/8″ chain; Oregon's 2020 filing chart lists 7/32″ for standard 3/8″ chain."
+    },
+    {
+      "lengths_in": [
+        25
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 84,
+      "file_size": null,
+      "file_conflict": [
+        {
+          "size": "13/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "7/32",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "33 RS3 84",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "STIHL's 2017 chart lists chain 33 RS3 84 with bar 3003 000 4030 for the MS 362 / MS 441 / MS 461 block. 3/8″ pitch, .050″ gauge, 25″, 84 drive links. Exchangeable-nose (RS) bar. The length is not marked with an asterisk. File size: STIHL's 2025 file table lists 13/64″ (5.2 mm) for 3/8″ chain; Oregon's 2020 filing chart lists 7/32″ for standard 3/8″ chain.",
+      "label": "25″"
+    },
+    {
+      "lengths_in": [
+        28
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 91,
+      "file_size": null,
+      "file_conflict": [
+        {
+          "size": "13/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "7/32",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "33 RS3 91",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "STIHL's 2017 chart lists chain 33 RS3 91 with bar 3003 000 8838 for the MS 362 / MS 441 / MS 461 block. 3/8″ pitch, .050″ gauge, 28″, 91 drive links. The chart prints an asterisk on bar 3003 000 8838. STIHL says green-labeled reduced-kickback bars are not available in lengths marked with an asterisk, and a yellow-labeled bar is listed instead. File size: STIHL's 2025 file table lists 13/64″ (5.2 mm) for 3/8″ chain; Oregon's 2020 filing chart lists 7/32″ for standard 3/8″ chain.",
+      "label": "28″"
+    },
+    {
+      "lengths_in": [
+        25
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 84,
+      "file_size": null,
+      "file_conflict": [
+        {
+          "size": "13/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "7/32",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "33 RS3 84",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "STIHL's 2017 chart lists chain 33 RS3 84 with bar 3003 000 9630 for the MS 362 / MS 441 / MS 461 block. 3/8″ pitch, .050″ gauge, 25″, 84 drive links. The chart marks this length and bar 3003 000 9630 with an asterisk: a yellow-labeled bar, not a green reduced-kickback bar. File size: STIHL's 2025 file table lists 13/64″ (5.2 mm) for 3/8″ chain; Oregon's 2020 filing chart lists 7/32″ for standard 3/8″ chain.",
+      "label": "25″*"
+    },
+    {
+      "lengths_in": [
+        28
+      ],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 91,
+      "file_size": null,
+      "file_conflict": [
+        {
+          "size": "13/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "7/32",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "33 RS3 91",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "STIHL's 2017 chart lists chain 33 RS3 91 with bar 3003 000 9638 for the MS 362 / MS 441 / MS 461 block. 3/8″ pitch, .050″ gauge, 28″, 91 drive links. The chart marks this length and bar 3003 000 9638 with an asterisk: a yellow-labeled bar, not a green reduced-kickback bar. File size: STIHL's 2025 file table lists 13/64″ (5.2 mm) for 3/8″ chain; Oregon's 2020 filing chart lists 7/32″ for standard 3/8″ chain.",
+      "label": "28″*"
+    },
+    {
+      "lengths_in": [
+        18
+      ],
+      "pitch": "3/8",
+      "gauge": 0.063,
+      "drive_links": 66,
+      "file_size": null,
+      "file_conflict": [
+        {
+          "size": "13/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "7/32",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "36 RS3 66",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "STIHL's 2017 chart lists chain 36 RS3 66 with bar 3003 008 6117 for the MS 362 / MS 441 / MS 461 block. 3/8″ pitch, .063″ gauge, 18″, 66 drive links. Rollomatic bar, .063″ gauge. Not marked with an asterisk. File size: STIHL's 2025 file table lists 13/64″ (5.2 mm) for 3/8″ chain; Oregon's 2020 filing chart lists 7/32″ for standard 3/8″ chain.",
+      "label": "18″ .063″"
+    },
+    {
+      "lengths_in": [
+        20
+      ],
+      "pitch": "3/8",
+      "gauge": 0.063,
+      "drive_links": 72,
+      "file_size": null,
+      "file_conflict": [
+        {
+          "size": "13/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "7/32",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "36 RS3 72",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "STIHL's 2017 chart lists chain 36 RS3 72 with bar 3003 008 6121 for the MS 362 / MS 441 / MS 461 block. 3/8″ pitch, .063″ gauge, 20″, 72 drive links. Rollomatic bar, .063″ gauge. Not marked with an asterisk. File size: STIHL's 2025 file table lists 13/64″ (5.2 mm) for 3/8″ chain; Oregon's 2020 filing chart lists 7/32″ for standard 3/8″ chain.",
+      "label": "20″ .063″"
+    },
+    {
+      "lengths_in": [
+        22
+      ],
+      "pitch": "3/8",
+      "gauge": 0.063,
+      "drive_links": 76,
+      "file_size": null,
+      "file_conflict": [
+        {
+          "size": "13/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "7/32",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "36 RS3 76",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "STIHL's 2017 chart lists chain 36 RS3 76 with bar 3003 000 9425 for the MS 362 / MS 441 / MS 461 block. 3/8″ pitch, .063″ gauge, 22″, 76 drive links. The chart marks bar 3003 000 9425 with an asterisk. .063″ gauge, 76 drive links. File size: STIHL's 2025 file table lists 13/64″ (5.2 mm) for 3/8″ chain; Oregon's 2020 filing chart lists 7/32″ for standard 3/8″ chain.",
+      "label": "22″*"
+    },
+    {
+      "lengths_in": [
+        25
+      ],
+      "pitch": "3/8",
+      "gauge": 0.063,
+      "drive_links": 84,
+      "file_size": null,
+      "file_conflict": [
+        {
+          "size": "13/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "7/32",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "36 RS3 84",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "STIHL's 2017 chart lists chain 36 RS3 84 with bar 3003 000 9831 for the MS 362 / MS 441 / MS 461 block. 3/8″ pitch, .063″ gauge, 25″, 84 drive links. The chart marks this length and bar 3003 000 9831 with an asterisk. .063″ gauge. File size: STIHL's 2025 file table lists 13/64″ (5.2 mm) for 3/8″ chain; Oregon's 2020 filing chart lists 7/32″ for standard 3/8″ chain.",
+      "label": "25″* .063″"
+    },
+    {
+      "lengths_in": [
+        28
+      ],
+      "pitch": "3/8",
+      "gauge": 0.063,
+      "drive_links": 91,
+      "file_size": null,
+      "file_conflict": [
+        {
+          "size": "13/64",
+          "source_id": "stihl-chain-chart-2025"
+        },
+        {
+          "size": "7/32",
+          "source_id": "oregon-filing-2020"
+        }
+      ],
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "STIHL",
+          "part_no": "36 RS3 91",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "stihl-chain-chart-2017"
+      ],
+      "note": "STIHL's 2017 chart lists chain 36 RS3 91 with bar 3003 000 6038 for the MS 362 / MS 441 / MS 461 block. 3/8″ pitch, .063″ gauge, 28″, 91 drive links. The chart prints an asterisk on bar 3003 000 6038. .063″ gauge. File size: STIHL's 2025 file table lists 13/64″ (5.2 mm) for 3/8″ chain; Oregon's 2020 filing chart lists 7/32″ for standard 3/8″ chain.",
+      "label": "28″ .063″"
+    }
+  ],
+  "sources": [
+    {
+      "id": "stihl-chain-chart-2017",
+      "type": "fitup-chart",
+      "publisher": "STIHL",
+      "title": "Saw Chain Selection and Identification (STIHL USA catalog page 173; specifications as of 1 October 2017): recommended chain loop and guide bar per saw model",
+      "url": "https://assets.unilogcorp.com/187/ITEM/DOC/Stihl_102205325_Catalog.pdf",
+      "retrieved": "2026-11-09"
+    },
+    {
+      "id": "stihl-chain-chart-2025",
+      "type": "fitup-chart",
+      "publisher": "STIHL",
+      "title": "STIHL 2025 Full Line catalog: Saw Chain Selection and Identification chart (catalog pages 166–167), chainsaw spec tables, saw chain and file pages",
+      "url": "https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf",
+      "retrieved": "2026-11-09"
+    },
+    {
+      "id": "oregon-filing-2020",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Saw Chain Filing Angles / Grinding Angles chart (2020): 7/32″ round file for standard 3/8″ chain (types 72, 73, 75)",
+      "url": "https://oregonproducts.com/medias/2020-FilingGrindingAngles.pdf?attachment=true&context=bWFzdGVyfHJvb3R8NDA2MDY0fGFwcGxpY2F0aW9uL3BkZnxoNjUvaGJmLzg4NTMxOTkzODg3MDIucGRmfGQ4MmNmZWZjZDA5MWQ3MmM0NmY0OTM4ZmFhN2MxZWUwMDA2MzgzM2Q4Y2U1MzgyYjQwMzZmYzZhZmY3ZWMzNjQ",
+      "retrieved": "2026-11-09"
+    }
+  ],
+  "sources_note": "STIHL USA “Saw Chain Selection and Identification” chart (catalog page 173, specifications as of 1 October 2017), read 9 Nov 2026. The 2025 Full Line catalog chart (catalog p. 166), read 9 Nov 2026, does not name the MS 441 or MS 461. File sizes: STIHL 2025 file table (catalog p. 167: 5.2 mm / 13/64″ for 3/8″) and Oregon Saw Chain Filing Angles chart (2020: 7/32″ for 72, 73, 75).",
+  "last_verified": "2026-11-09"
+}

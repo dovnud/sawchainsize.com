@@ -5,7 +5,7 @@ import { glob } from 'astro/loaders';
 export const PITCHES = ['1/4', '3/8-lp', '325', '3/8', '404'] as const;
 export const GAUGES = [0.043, 0.05, 0.058, 0.063] as const;
 /** Round-file sizes. 11/64 is Oregon's file for .043″ low profile (90PX, 4.5 mm) and one of STIHL's two .325″ files. 13/64 is STIHL's size for standard 3/8″ chain (2025 catalog file table). */
-export const FILES = ['1/8', '5/32', '11/64', '3/16', '13/64', '7/32'] as const;
+export const FILES = ['1/8', '9/64', '5/32', '11/64', '3/16', '13/64', '7/32'] as const;
 export const STATUSES = ['ok', 'verify', 'conflict'] as const;
 export const SOURCE_TYPES = ['manual', 'fitup-chart', 'chain-maker', 'dealer', 'roundup', 'marketplace', 'blog', 'forum'] as const;
 /** A bar may only be "ok" when at least one of its sources is one of these. */
@@ -37,7 +37,7 @@ const reported = z.object({
 });
 
 const bar = z.object({
-  lengths_in: z.array(z.number().int().min(8).max(72)).min(1),
+  lengths_in: z.array(z.number().int().min(6).max(72)).min(1),
   label: z.string().optional(),
   pitch: pitch.nullable(),
   gauge: gauge.nullable(),

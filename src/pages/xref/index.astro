@@ -1,0 +1,21 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import { lookupsByKind, lookupPath } from '../../lib/exact';
+import { webPageLd } from '../../lib/ld';
+import { SITE } from '../../lib/data';
+const items = lookupsByKind('xref');
+const path = '/xref/';
+const desc = 'Chainsaw chain part-number cross references: Oregon, STIHL and Husqvarna loop numbers, each tied to pitch, gauge and drive links from a verified row.';
+---
+<Base title="Chainsaw chain part number cross reference" description={desc} path={path} nav="chart" crumbs={[{ name: 'Cross references', path }]} jsonld={[webPageLd('Chain part-number cross reference', path, desc, SITE.dataDate)]} modified={SITE.dataDate}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Cross references' }]} />
+      <h1>Chain part-number cross reference</h1>
+      <p class="lede">One page per loop number. The answer is the pitch, gauge and drive-link count stored on a verified row, plus the other part numbers stored for those same three numbers. A code that is not on a verified row is not given a page.</p>
+    </div>
+    <ul class="chips">{items.map((l) => <li><a href={lookupPath(l)}>{l.query}</a></li>)}</ul>
+    <p style="margin-top:18px"><a href="/fits/">Drive-link lookups</a> · <a href="/bar-length/">Bar length by model</a> · <a href="/guides/chain-part-numbers/">How part numbers are decoded</a> · <a href="/guides/oregon-chain-numbers/">Oregon chain numbers</a></p>
+  </div>
+</Base>
