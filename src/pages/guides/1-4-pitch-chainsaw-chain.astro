@@ -1,0 +1,139 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { getModels, modelUrl, chainUrl, chainKey, pitchShort, gaugeShort, type Model } from '../../lib/data';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+
+const path = '/guides/1-4-pitch-chainsaw-chain/';
+const modified = (dates as Record<string, string>)[path];
+const STIHL = 'https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf';
+const HUSQ = 'https://media.husqvarnagroup.com/original/DI-328359.pdf';
+const ORE = 'https://apps.oregonproducts.com/pdfs/OregonMMANUAL_EN_A106971ab.pdf';
+const shop = guideShop('1-4-pitch-chainsaw-chain');
+
+const models = await getModels();
+type Row = { m: Model; len: number; dl: number | null; file: string | null; part: string; status: string };
+const rows: Row[] = [];
+const flagged: { m: Model; lens: number[]; note: string }[] = [];
+for (const m of models) {
+  for (const b of m.data.bars) {
+    if (b.pitch !== '1/4') continue;
+    const oem = b.chains.filter((c) => c.role === 'oem');
+    const part = oem.map((c) => c.part_no).join(', ') || 'not listed';
+    if (b.status !== 'ok' || b.gauge == null) {
+      flagged.push({ m, lens: b.lengths_in, note: b.status === 'ok' ? 'missing gauge or count' : b.status });
+      continue;
+    }
+    if (b.gauge !== 0.043) throw new Error(`${m.id} 1/4″ row is gauge ${b.gauge}, not .043″`);
+    for (const len of b.lengths_in) rows.push({ m, len, dl: b.drive_links ?? null, file: b.file_size ?? null, part, status: b.status });
+  }
+}
+if (!rows.length) throw new Error('no verified 1/4″ rows');
+const files = [...new Set(rows.map((r) => r.file).filter(Boolean))];
+if (!files.includes('1/8') || !files.includes('9/64')) throw new Error('expected both STIHL 1/8″ and Husqvarna 9/64″ file sizes on 1/4″ rows');
+
+type Group = { m: Model; part: string; file: string | null; pairs: { len: number; dl: number | null }[] };
+const grouped = () => {
+  const by = new Map<string, Group>();
+  for (const r of rows) {
+    const k = `${r.m.id}|${r.part}|${r.file}`;
+    if (!by.has(k)) by.set(k, { m: r.m, part: r.part, file: r.file, pairs: [] });
+    const g = by.get(k)!;
+    if (!g.pairs.some((p) => p.len === r.len && p.dl === r.dl)) g.pairs.push({ len: r.len, dl: r.dl });
+  }
+  return [...by.values()].map((g) => ({ ...g, pairs: g.pairs.sort((a, b) => a.len - b.len) })).sort((a, b) => a.m.data.name.localeCompare(b.m.data.name));
+};
+const stihl = grouped().filter((g) => g.m.data.brand === 'stihl');
+const husq = grouped().filter((g) => g.m.data.brand === 'husqvarna');
+const other = grouped().filter((g) => g.m.data.brand !== 'stihl' && g.m.data.brand !== 'husqvarna');
+if (!stihl.length || !husq.length) throw new Error('1/4″ table missing a brand group');
+
+const desc = '1/4″ pitch chainsaw chain on this site is .043″ gauge: STIHL 71 PM3 / 71 PMM3 with a 1/8″ file, Husqvarna SP11G with a 9/64″ file, and drive-link counts that are not shared at the same bar length.';
+const faqs = [
+  { q: 'What is 1/4″ pitch chainsaw chain?', a: 'It is a smaller pitch than 3/8″ low profile or .325″. On every verified 1/4″ row on this site the gauge is .043″. STIHL’s 2025 catalog calls that family 1/4″ PICCO and numbers it 71 PM3 or 71 PMM3 (the first digit 7 is 1/4″ PICCO). Husqvarna’s fit-up guide lists SP11G X-Cut on the 125i. Oregon’s drive-link number table has a different 1/4″ chain: family 25, which is .050″ gauge, not .043″.' },
+  { q: 'What file size for 1/4″ chain?', a: 'It depends whose chain you are filing. STIHL’s 2025 catalog file table lists 3.2 mm (1/8″) for 1/4″ STIHL PICCO, part 7010 871 0400. Husqvarna’s Bar & Chain Fit-up Guide lists a 9/64″ file on the 125i’s SP11G rows. Those are not the same diameter. Use the file the maker of that loop publishes. Do not average them.' },
+  { q: 'Can I put a STIHL 71 PM3 loop on a Husqvarna 125i bar?', a: 'Not as a length-for-length swap. Both are 1/4″ pitch and .043″ gauge, but the drive-link counts differ. A 10″ STIHL bar in the table below is 56 links; the 125i’s 10″ bar is 60. A 12″ STIHL bar is 64 links (65 on the MSA 161 T); the 125i’s 12″ bar is 68. Pitch and gauge are not enough. Count the links, or read the count on the bar stamp.' },
+  { q: 'Is Oregon 25 the same as STIHL 71 PM3?', a: 'No. Oregon’s maintenance manual lists family 25 as 1/4″ pitch at .050″ (1.3 mm) gauge. The STIHL and Husqvarna 1/4″ loops on this site are .043″. A .050″ loop does not belong in a .043″ groove. This site does not yet store a 1/4″ .050″ row.' },
+  { q: 'How do I measure 1/4″ pitch?', a: 'Oregon defines pitch as the distance between any three consecutive rivets, divided by two. For 1/4″ pitch that span is 1/2″ (0.500″). The same method, and the spans for .325″, 3/8″ and .404″, is in the verification guide. Confirm gauge with a caliper on a drive link, and confirm the drive-link count by marking one tang and counting around the loop.' },
+];
+const jsonld = [webPageLd('1/4″ pitch chainsaw chain', path, desc, modified), faqLd(faqs)];
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: '1/4″ pitch chain', path }];
+const Q = '″';
+const specHref = chainUrl(chainKey('1/4', 0.043));
+---
+<Base title="1/4″ Pitch Chainsaw Chain: .043″ Gauge, 1/8″ or 9/64″ File" description={desc} path={path} nav="chart" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: '1/4″ pitch chain' }]} />
+      <h1>1/4″ pitch chainsaw chain</h1>
+      <p class="lede">Every verified 1/4″ row on this site is .043″ gauge. STIHL lists that family as 1/4″ PICCO (71 PM3 or 71 PMM3) and files it with 1/8″. Husqvarna lists SP11G X-Cut on the 125i and files it with 9/64″. The pitch and gauge match. The file and the drive-link counts do not. Oregon’s 1/4″ family 25 is .050″, which is a different groove.</p>
+    </div>
+
+    <section class="block">
+      <h2>A compact pitch, not a third 3/8″</h2>
+      <p style="max-width:72ch">1/4″ is its own pitch. It is not 3/8″ low profile, and it is not a “mini” name for .325″. Oregon’s definition still applies: pitch is the distance between any three consecutive rivets, divided by two. For 1/4″ that span is 1/2″. The sprocket, and the nose sprocket if the bar has one, have to be 1/4″ as well. <a href="/guides/chainsaw-drive-sprocket/">Drive sprocket and pitch</a> is that rule. Putting a 3/8″ low-profile loop on a 1/4″ bar is the wrong family, even when both loops are sold for short battery bars.</p>
+      <p style="max-width:72ch">On this site the 1/4″ rows are compact battery saws. STIHL’s 2025 Full Line catalog places 71 PM3 and 71 PMM3 in the 1/4″ PICCO column of the battery guide-bar chart. The first digit 7 is STIHL’s code for 1/4″ PICCO; the second digit 1 is .043″ gauge, which is how 71 PM3 and 71 PMM3 are read in <a href="/guides/stihl-chain-order-numbers/">STIHL chain order numbers</a>. Husqvarna’s Bar &amp; Chain Fit-up Guide (cover year 2027) lists the 125i on SP11G X-Cut, 1/4″ pitch, .043″ gauge. The <a href={specHref}>1/4″ · .043″</a> spec page collects those rows.</p>
+      <p class="src">STIHL names, gauges and the 1/8″ file: <a href={STIHL} rel="nofollow">2025 Full Line catalog</a>, file table and battery guide-bar chart, catalog pp. 166–167 (already cited on the MSA pages). Husqvarna SP11G, 9/64″ file and drive-link counts: <a href={HUSQ} rel="nofollow">Bar &amp; Chain Fit-up Guide</a>, cover year 2027, already cited on the 125i page. Oregon family 25: <a href={ORE} rel="nofollow">Maintenance and Safety Manual</a>, “Saw Chain Drive Link Number Identification,” the same table used on <a href="/guides/oregon-chain-numbers/">Oregon chain numbers</a>.</p>
+    </section>
+    <ShopBlock groups={shop.groups} compact />
+
+    <section class="block">
+      <h2>STIHL 1/4″ PICCO</h2>
+      <p style="max-width:72ch">These are the verified STIHL 1/4″ rows on this site. All of them are .043″ gauge with a 1/8″ file from STIHL’s file table. MSA 160 C-B, MSA 200 C-B and MSA 70 C-B use 71 PM3. MSA 60 C-B uses 71 PMM3 at the same pitch, gauge, file and drive-link counts. This page does not invent a cutter difference between PM3 and PMM3. The catalog lists both types on these saws at the same size. The MSA 161 T is the odd count: 65 links on a 12″ bar, not 64.</p>
+      <div class="tblwrap">
+        <table>
+          <caption class="sr-only">Verified STIHL 1/4″ bars</caption>
+          <thead><tr><th scope="col">Saw</th><th scope="col">OEM chain</th><th scope="col">File</th><th scope="col">Bars</th></tr></thead>
+          <tbody>
+            {stihl.map((g) => (
+              <tr>
+                <td><a href={modelUrl(g.m)}>{g.m.data.name}</a></td>
+                <td class="num">{g.part}</td>
+                <td class="num">{g.file}{Q}</td>
+                <td class="num">{g.pairs.map((p) => `${p.len}${Q} · ${p.dl ?? '?'} DL`).join(', ')}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Husqvarna 1/4″ mini</h2>
+      <p style="max-width:72ch">The 125i is the Husqvarna 1/4″ saw on this site. The fit-up guide gives SP11G X-Cut, a 9/64″ file, 60 drive links at 10″ and 68 at 12″. Those counts are not the STIHL counts at the same lengths. A 56- or 64-link STIHL loop is the right pitch and the right gauge and still the wrong loop for the 125i bar.</p>
+      <div class="tblwrap">
+        <table>
+          <caption class="sr-only">Verified Husqvarna 1/4″ bars</caption>
+          <thead><tr><th scope="col">Saw</th><th scope="col">OEM chain</th><th scope="col">File</th><th scope="col">Bars</th></tr></thead>
+          <tbody>
+            {husq.map((g) => (
+              <tr>
+                <td><a href={modelUrl(g.m)}>{g.m.data.name}</a></td>
+                <td class="num">{g.part}</td>
+                <td class="num">{g.file}{Q}</td>
+                <td class="num">{g.pairs.map((p) => `${p.len}${Q} · ${p.dl ?? '?'} DL`).join(', ')}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {other.length ? <p class="src">Other brands with a verified 1/4″ row: {other.map((g) => g.m.data.name).join(', ')}. None are stored today.</p> : null}
+      <p class="src">Tables are generated from verified 1/4″ rows already stored on the saw pages. A length flagged verify or conflict is left out. {flagged.length ? <>Flagged and omitted: {flagged.map((f, i) => <>{i ? '; ' : ''}<a href={modelUrl(f.m)}>{f.m.data.name}</a> {f.lens.map((n) => `${n}${Q}`).join('/')} ({f.note})</>)}.</> : null}</p>
+    </section>
+
+    <div class="callout"><b>⚠ The file size is not one number</b><p>STIHL publishes 1/8″ (3.2 mm) for 1/4″ PICCO. Husqvarna publishes 9/64″ (3.6 mm) for SP11G on the 125i. Both chains are 1/4″ × .043″. The files are different. Use the diameter the maker of the loop in front of you lists, the same way this site already treats the 3/8″ and .325″ file conflicts between STIHL and Oregon. The two tables are on <a href="/guides/stihl-chain-file-size/">STIHL file size</a> and <a href="/guides/chainsaw-chain-file-size/">chain file size</a>.</p></div>
+
+    <section class="block">
+      <h2>Oregon 25 is 1/4″ at a different gauge</h2>
+      <p style="max-width:72ch">Oregon’s number table, the one decoded on <a href="/guides/oregon-chain-numbers/">Oregon chain numbers</a>, lists family 25 as 1/4″ pitch and .050″ gauge. That is a useful number if you are looking at an Oregon 25-series loop. It is not a substitute for 71 PM3, 71 PMM3 or SP11G. Those loops run in a .043″ groove. <a href="/guides/full-kerf-vs-narrow-kerf-chain/">Narrow kerf versus full kerf</a> and the <a href="/guides/chainsaw-chain-gauge/">gauge guide</a> are the same warning at a larger scale: a close gauge is still the wrong chain. This site does not currently list a saw with a 1/4″ .050″ bar, so there is no Oregon 25 row to check against a model page here.</p>
+    </section>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href={specHref}>1/4″ · .043″ chain spec</a> · <a href="/saws/husqvarna-125i/">Husqvarna 125i</a> · <a href="/saws/stihl-msa-160-c-b/">MSA 160 C-B</a> · <a href="/guides/stihl-chain-file-size/">STIHL file size</a> · <a href="/guides/oregon-chain-numbers/">Oregon chain numbers</a> · <a href="/guides/how-to-verify-chain-size/">Verify the size</a> · <a href="/guides/chainsaw-drive-sprocket/">Drive sprocket</a></p>
+    <ShopBlock groups={shop.groups} title="1/4″ .043″ chain and the two file sizes (Amazon)" lead="Match the drive-link count on your bar. The 1/8″ file is the STIHL 1/4″ PICCO size. The 9/64″ file is the size Husqvarna lists for SP11G. They are not interchangeable." />
+  </div>
+</Base>
