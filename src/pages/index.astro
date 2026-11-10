@@ -39,7 +39,7 @@ const jsonld = [
   faqLd(HOME_FAQS),
   organizationLd,
 ];
-const ticker = SPEC.codes.map((c) => ({ code: c.oregon.split(' ')[0].replace('/', ''), spec: `${pitchShort(c.pitch)} · ${gaugeShort(c.gauge)}` }));
+const ticker = SPEC.codes.filter((c) => c.oregon !== 'n/a').map((c) => ({ code: c.oregon.split(' ')[0].replace('/', ''), spec: `${pitchShort(c.pitch)} · ${gaugeShort(c.gauge)}` }));
 const tick = [
   ['72LPX', '3/8″ · .050″'], ['61PMM3', '3/8″ LP · .043″'], ['H30', '.325″ · .050″'], ['73LPX', '3/8″ · .058″'],
   ['90PX', '3/8″ LP · .043″'], ['20BPX', '.325″ · .050″'], ['H80', '3/8″ · .050″'], ['95TXL', '.325″ · .050″'],
@@ -110,6 +110,7 @@ const tick = [
       <div class="grid3">{popular.map((m) => <ModelCard model={m} />)}</div>
       <p style="margin-top:16px"><a href="/saws/">All saw models →</a></p>
       <p>Buying the loop: the <a href="/tools/replacement-chain-bar-matcher/">replacement chain and bar matcher</a> returns the chain, the bar and the part numbers on one verified row. <a href="/tools/find-my-chain/">Find my chain</a> lists the part numbers in this dataset that share a pitch, gauge and drive-link count. The <a href="/tools/chain-compatibility/">compatibility checker</a> says whether a chain you are about to buy matches a published bar, and why.</p>
+      <p>Exact queries: <a href="/bar-length/">bar length by model</a>, <a href="/xref/">a chain part-number cross reference</a>, and <a href="/fits/">which saws a drive-link count fits</a>.</p>
       <p>Holiday lists, with no invented prices: <a href="/guides/gifts-for-chainsaw-owners-2026/">gifts for chainsaw owners and woodcutters, 2026</a> and <a href="/guides/black-friday-chainsaw-chain/">Black Friday chainsaw chain and accessories</a>.</p>
     </section>
   </div></div>

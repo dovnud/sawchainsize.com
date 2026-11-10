@@ -4,6 +4,7 @@ import Crumbs from '../../components/Crumbs.astro';
 import ModelCard from '../../components/ModelCard.astro';
 import { getBrands, getModels, brandUrl, modelUrl, chainUrl, barChainKey, pitchShort, gaugeShort, SITE } from '../../lib/data';
 import { webPageLd } from '../../lib/ld';
+import { existsSync } from 'node:fs';
 export async function getStaticPaths() {
   const brands = await getBrands();
   return brands.map((b) => ({ params: { brand: b.id }, props: { brand: b } }));
@@ -20,8 +21,10 @@ const jsonld = [{ ...webPageLd(`${b.name} chainsaw chain sizes`, path, desc, SIT
 import ShopBlock from '../../components/ShopBlock.astro';
 import { brandShop } from '../../lib/shop';
 const shop = brandShop(brand.id, b.name, models);
+const ogFile = `./public/og/brand-${brand.id}.png`;
+const ogName = existsSync(ogFile) ? `/og/brand-${brand.id}.png` : undefined;
 ---
-<Base title={`${b.name} Chainsaw Chain Sizes by Model`} description={desc} path={path} nav="brands" og={`/og/brand-${brand.id}.png`} ogAlt={`${b.name} chainsaw chain sizes`}
+<Base title={`${b.name} Chainsaw Chain Sizes by Model`} description={desc} path={path} nav="brands" og={ogName} ogAlt={`${b.name} chainsaw chain sizes`}
   crumbs={[{ name: 'Brands', path: '/brands/' }, { name: b.name, path }]} jsonld={jsonld} modified={SITE.dataDate}>
   <div class="wrap">
     <div class="pagehead">

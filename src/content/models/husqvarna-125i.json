@@ -1,0 +1,68 @@
+{
+  "brand": "husqvarna",
+  "model": "125i",
+  "name": "Husqvarna 125i",
+  "aliases": [
+    "125i"
+  ],
+  "type": "battery",
+  "popular": true,
+  "blurb": "10″ and 12″ bars on 1/4″ mini chain, .043″ gauge, 60 and 68 drive links, from Husqvarna's 2027 fit-up guide.",
+  "intro": "The 125i is a battery rear-handle saw. Husqvarna's Bar & Chain Fit-up Guide (cover year 2027) lists two combinations, both 1/4″ mini pitch, .043″ gauge, file 9/64″: a 10″ bar with 60 drive links (SP11G X-Cut 548823260, bar Laminate 548823360) and a 12″ bar with 68 drive links (SP11G X-Cut 548823268, bar Laminate 548823368). This is not 3/8″ low-profile chain.",
+  "bars": [
+    {
+      "lengths_in": [
+        10
+      ],
+      "pitch": "1/4",
+      "gauge": 0.043,
+      "drive_links": 60,
+      "file_size": "9/64",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "SP11G X-Cut 548823260",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 10″ setup with bar Laminate 548823360 and chain SP11G X-Cut 548823260. The guide's pitch column says 1/4 mini. File size 9/64″."
+    },
+    {
+      "lengths_in": [
+        12
+      ],
+      "pitch": "1/4",
+      "gauge": 0.043,
+      "drive_links": 68,
+      "file_size": "9/64",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "SP11G X-Cut 548823268",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-fitup-2027"
+      ],
+      "note": "Husqvarna's 2027 fit-up guide pairs this 12″ setup with bar Laminate 548823368 and chain SP11G X-Cut 548823268. The guide's pitch column says 1/4 mini. File size 9/64″."
+    }
+  ],
+  "sources": [
+    {
+      "id": "husqvarna-fitup-2027",
+      "type": "fitup-chart",
+      "publisher": "Husqvarna",
+      "title": "Bar & Chain Fit-up Guide (cover year 2027): certified/approved bar and chain combinations, with bar length, pitch, gauge, drive links, file size, bar part and chain part",
+      "url": "https://media.husqvarnagroup.com/original/DI-328359.pdf",
+      "retrieved": "2026-11-09"
+    }
+  ],
+  "sources_note": "Husqvarna Bar & Chain Fit-up Guide, cover dated 2027, PDF read 9 Nov 2026 (https://media.husqvarnagroup.com/original/DI-328359.pdf). Every row restates that saw's entry in the guide.",
+  "last_verified": "2026-11-09"
+}

@@ -34,6 +34,9 @@ for (const m of models) for (const b of m.bars) {
 }
 for (const [k, v] of chains) out[`/chain/${k}/`] = max(v);
 for (const [l, v] of bars) out[`/bars/${l}-inch/`] = max(v);
+const lookups = JSON.parse(fs.readFileSync('src/data/exact-lookups.json', 'utf8'));
+const lookupPrefix = { xref: '/xref/', fits: '/fits/', 'bar-length': '/bar-length/' };
+for (const l of lookups) out[`${lookupPrefix[l.kind]}${l.slug}/`] = l.last_verified;
 const dataNewest = max(models.map((m) => m.last_verified));
 const idx = (url, ...tpl) => (out[url] = max([dataNewest, gitDate(...tpl)]));
 idx('/', 'src/pages/index.astro');
@@ -41,6 +44,9 @@ idx('/saws/', 'src/pages/saws/index.astro');
 idx('/brands/', 'src/pages/brands/index.astro');
 idx('/chain/', 'src/pages/chain/index.astro');
 idx('/bars/', 'src/pages/bars/index.astro');
+idx('/xref/', 'src/pages/xref/index.astro');
+idx('/fits/', 'src/pages/fits/index.astro');
+idx('/bar-length/', 'src/pages/bar-length/index.astro');
 idx('/data/', 'src/pages/data/index.astro');
 for (const [url, f] of [['/about/', 'about'], ['/how-we-verify/', 'how-we-verify'], ['/affiliate-disclosure/', 'affiliate-disclosure'], ['/privacy/', 'privacy'], ['/terms/', 'terms'], ['/contact/', 'contact']]) out[url] = gitDate(`src/pages/${f}.astro`);
 out['/guides/'] = gitDate('src/pages/guides/index.astro');

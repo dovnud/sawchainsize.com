@@ -10,6 +10,7 @@ import { getModels, getBrands, modelUrl, brandUrl, barUrl, chainUrl, barChainKey
 import { faqLd, modelLd } from '../../lib/ld';
 import { MATCHER_PATH } from '../../lib/tool-types';
 import { existsSync } from 'node:fs';
+import { lookupLinksForModel, fitLinksFor, xrefLinksForParts } from '../../lib/exact';
 
 export async function getStaticPaths() {
   const models = await getModels();
@@ -34,6 +35,11 @@ const related = await relatedModels(model);
 const facts = glanceFacts(model);
 const compares = related.slice(0, 3).map((m) => ({ m, text: compareText(model, m) })).filter((c) => c.text);
 const jsonld = [modelLd(model, path), faqLd(faqs)];
+const exactLinks = [
+  ...lookupLinksForModel(model.id),
+  ...xrefLinksForParts(d.bars.flatMap((b) => b.chains)),
+  ...d.bars.flatMap((b) => fitLinksFor(b.pitch, b.gauge, b.drive_links)),
+].filter((l, i, a) => a.findIndex((x) => x.href === l.href) === i);
 const ogFile = `./public/og/${model.id}.png`;
 const ogName = existsSync(ogFile) ? `/og/${model.id}.png` : undefined;
 ---
@@ -114,6 +120,7 @@ const ogName = existsSync(ogFile) ? `/og/${model.id}.png` : undefined;
         <li><a href="/guides/chainsaw-chain-tension/">Tension</a></li>
         <li><a href="/guides/chainsaw-safety-gear/">Safety gear</a></li>
         <li><a href="/guides/">All guides</a></li>
+        {exactLinks.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
         <li><a href="/saws/">← All models</a></li>
         <li><a href="/">Chain Finder</a></li>
       </ul>
