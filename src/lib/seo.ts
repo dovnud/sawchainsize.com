@@ -32,8 +32,9 @@ function shorten(input: string, maxHtml: number): string {
 export function serpTitle(input: string): string {
   const primary = primaryTitle(input);
   const branded = (text: string) => `${text}${SEP}${BRAND}`;
+  if (/sawchainsize\.com/i.test(primary) && primary.length >= 15) return shorten(primary, 60);
   const fitted = shorten(primary, 60 - htmlLen(SEP + BRAND));
-  if (fitted.length >= 15 && htmlLen(branded(fitted)) <= 60) return branded(fitted);
+  if (fitted.length >= 4 && htmlLen(branded(fitted)) <= 60) return branded(fitted);
   const bare = shorten(primary, 60);
   return bare.length >= 15 ? bare : shorten(`${primary} chain size`, 60);
 }

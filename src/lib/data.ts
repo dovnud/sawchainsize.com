@@ -101,7 +101,8 @@ export const equivParts = (b: Bar) => b.chains.filter((c) => c.role === 'equival
 export const partText = (c: { brand: string; part_no: string }) => `${c.brand} ${c.part_no}`;
 export function oregonType(b: Bar): string {
   const o = b.chains.find((c) => c.brand === 'Oregon');
-  return o ? o.part_no.split(' ')[0] : 'n/a';
+  // Only an Oregon loop stored on this verified row counts. No row-level source, no code: the finder hides the field.
+  return o ? o.part_no.split(' ')[0] : '';
 }
 
 export const statusLabel = (s: string) => (s === 'ok' ? 'Verified' : s === 'conflict' ? 'Sources conflict' : 'Verify on bar stamp');
@@ -192,7 +193,7 @@ export function modelFaqs(m: Model): Faq[] {
       const vb = d.bars.map((b) => `${barLabel(b)} bar: ${b.pitch ? `${pitchLabel(b.pitch)} pitch` : 'pitch not confirmed'}${b.gauge ? `, ${gaugeLabel(b.gauge)} gauge` : ''}, drive-link count not confirmed`);
       faqs.push({ q: `What size chain does a ${d.name} take?`, a: `${vb.join('; ')}. We only print a drive-link count when a source states it, so count the links on your old chain or read the bar-tail stamp before ordering.` });
     } else
-    faqs.push({ q: `What size chain does a ${d.name} take?`, a: `${lines.join('; ')}.${okBars.length < d.bars.length ? ' Other bar lengths are listed as "verify on your bar stamp" because we only print drive-link counts we can trace to a citable source.' : ''} Always confirm pitch, gauge and drive links on your own bar stamp.` });
+    faqs.push({ q: `What size chain does a ${d.name} take?`, a: `${lines.join('; ')}.${okBars.length < d.bars.length ? ' Other bar lengths are listed as "verify on your bar stamp" because we only print drive-link counts we can trace to a citable source.' : ''}` });
   }
   const lens = [...new Set(d.bars.flatMap((b) => b.lengths_in))].sort((a, b) => a - b);
   faqs.push({ q: `Which bar lengths does the ${d.name} come with, and does the drive-link count change?`, a: `${lenList(lens)} bars are on file for the ${d.name}. ${okBars.length ? (okBars.length <= 4 ? `Drive links by bar: ${okBars.map((b) => `${barLabel(b)} → ${b.drive_links}`).join(', ')}.` : `Verified drive-link counts run from ${Math.min(...okBars.map((b) => b.drive_links!))} to ${Math.max(...okBars.map((b) => b.drive_links!))} across ${okBars.length} setups; the table gives each bar's count.`) : 'We have no source-confirmed drive-link count for it, so the stamp on the bar tail is the only reliable number.'} ${d.bars.some((b) => b.status !== 'ok') ? 'Setups flagged conflict or verify in the table are not asserted here.' : ''}`.trim() });

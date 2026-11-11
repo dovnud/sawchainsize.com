@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import SawHero from '../components/SawHero.astro';
 import ModelCard from '../components/ModelCard.astro';
 import FaqList from '../components/FaqList.astro';
-import { SITE, HOME_FAQS, getModels, getBrands, barGroups, chainGroups, modelUrl, brandUrl, barUrl, chainUrl, barLabel, pitchText, gaugeText, dlText, fileText, oregonType, barHasLength, SPEC, pitchShort, gaugeShort } from '../lib/data';
+import { SITE, HOME_FAQS, getModels, getBrands, barGroups, chainGroups, modelUrl, brandUrl, barUrl, chainUrl, barLabel, pitchText, gaugeText, dlText, fileText, oregonType, barHasLength, pitchShort, gaugeShort } from '../lib/data';
 import { chainLink, okSpec } from '../lib/shop';
 import { faqLd, publisher, organizationLd } from '../lib/ld';
 
@@ -39,20 +39,14 @@ const jsonld = [
   faqLd(HOME_FAQS),
   organizationLd,
 ];
-const ticker = SPEC.codes.filter((c) => c.oregon !== 'n/a').map((c) => ({ code: c.oregon.split(' ')[0].replace('/', ''), spec: `${pitchShort(c.pitch)} · ${gaugeShort(c.gauge)}` }));
-const tick = [
-  ['72LPX', '3/8″ · .050″'], ['61PMM3', '3/8″ LP · .043″'], ['H30', '.325″ · .050″'], ['73LPX', '3/8″ · .058″'],
-  ['90PX', '3/8″ LP · .043″'], ['20BPX', '.325″ · .050″'], ['H80', '3/8″ · .050″'], ['95TXL', '.325″ · .050″'],
-];
 ---
 <Base title="Chainsaw Chain Size by Saw and Bar" description={description} path="/" nav="home" jsonld={jsonld} modified={SITE.dataDate}>
   <div class="hero">
     <div class="wrap hero-in">
-      <SawHero />
       <div class="hero-grid">
         <div class="hero-copy">
           <h1>Chainsaw chain size by saw and bar</h1>
-          <p class="lede">Select the saw and the bar fitted to it. The result is pitch, gauge, drive-link count, file size, and the Oregon chain code, taken from manufacturer fit-up charts. Confirm the three numbers on the bar stamp before you order.</p>
+          <p class="lede">Select the saw and the bar fitted to it. The result is pitch, gauge, drive-link count, file size and, where a source lists one, the Oregon chain code, taken from manufacturer fit-up charts. Confirm the three numbers on the bar stamp before you order.</p>
         </div>
         <div class="finder" id="finder">
           <div class="finder-head">Chain finder <span>United States and Canada</span></div>
@@ -80,14 +74,12 @@ const tick = [
           </div>
         </div>
       </div>
+      <div class="hero-saw-small"><SawHero /></div>
       <script type="application/json" id="finder-data" set:html={JSON.stringify(finderDb).replace(/</g, '\\u003c')} />
-      <p class="small muted hero-hint">No saw handy? The answer is stamped on your bar. Jump to the <a href="/guides/how-to-verify-chain-size/">bar-stamp verification guide</a>. It takes about a minute with the chain off. <span class="muted">The house saw above is always running: tooth spacing is compressed for clarity; a real 72-link loop carries all 72 drive links around this same path.</span></p>
+      <p class="small muted hero-hint">No saw handy? The answer is stamped on your bar. Jump to the <a href="/guides/how-to-verify-chain-size/">bar-stamp verification guide</a>. It takes about a minute with the chain off.</p>
     </div>
   </div>
 
-  <div class="ticker" aria-hidden="true"><div class="ticker-track">
-    {[0, 1].map(() => <span>{tick.map(([c, s]) => <><>{c} </><b set:html={s.replace(/″/g, '&Prime;')} /><> &nbsp;·&nbsp; </></>)}</span>)}
-  </div></div>
 
   <div class="band"><div class="wrap">
     <section class="block">

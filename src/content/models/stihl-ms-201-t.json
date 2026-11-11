@@ -9,8 +9,8 @@
   ],
   "type": "gas",
   "popular": false,
-  "blurb": "12″, 14″ and 16″ bars on 3/8″ low-profile “Picco” chain, .050″ gauge, 44, 50 and 55 drive links, per STIHL’s chain-selection chart.",
-  "intro": "The MS 201 T C-M is STIHL's top-handle arborist saw, and its chain is STIHL's 3/8″ PICCO (63 PM3) loop, the low-profile family, not the standard 3/8″ chain used on the larger MS 311 or MS 362. STIHL's selection chart lists 12″, 14″ and 16″ lightweight bars for it, in a block shared with the MS 192 and MS 193 saws. Each row below restates the chart's drive-link count and chain marketing number.",
+  "blurb": "12″, 14″ and 16″ bars on 3/8″ low-profile “Picco” chain, .050″ gauge, 44, 50 and 55 drive links, per STIHL’s 2025 and 2017 chain-selection charts.",
+  "intro": "The MS 201 T C-M is STIHL's top-handle arborist saw, and its chain is STIHL's 3/8″ PICCO (63 PM3) loop, the low-profile family, not the standard 3/8″ chain used on the larger MS 311 or MS 362. STIHL's 2025 selection chart lists 12″, 14″ and 16″ lightweight bars for it, in a block shared with the MS 194 and MS 201 C-EM; the 2017 chart lists the same loops and bars in a block with the MS 192 and MS 193. Each row below restates the chart's drive-link count and chain marketing number.",
   "bars": [
     {
       "lengths_in": [
@@ -29,9 +29,10 @@
         }
       ],
       "source_ids": [
+        "stihl-chain-chart-2025",
         "stihl-chain-chart-2017"
       ],
-      "note": "STIHL's chart lists chain 63 PM3 44 (3/8″ PICCO) with lightweight bar 3005 000 7405 for this group of saws. The STIHL chart we could read is dated 1 October 2017, so for any saw made after that, confirm against the bar stamp or STIHL's current chart before ordering."
+      "note": "STIHL's 2025 selection chart and the 2017 chart both list chain 63 PM3 44 (3/8″ PICCO) with lightweight bar 3005 000 7405 for the MS 194 / MS 201 group of saws."
     },
     {
       "lengths_in": [
@@ -50,9 +51,10 @@
         }
       ],
       "source_ids": [
+        "stihl-chain-chart-2025",
         "stihl-chain-chart-2017"
       ],
-      "note": "STIHL's chart lists chain 63 PM3 50 (3/8″ PICCO) with lightweight bar 3005 000 7409 for this group of saws. The STIHL chart we could read is dated 1 October 2017, so for any saw made after that, confirm against the bar stamp or STIHL's current chart before ordering."
+      "note": "STIHL's 2025 selection chart and the 2017 chart both list chain 63 PM3 50 (3/8″ PICCO) with lightweight bar 3005 000 7409 for the MS 194 / MS 201 group of saws."
     },
     {
       "lengths_in": [
@@ -71,12 +73,21 @@
         }
       ],
       "source_ids": [
+        "stihl-chain-chart-2025",
         "stihl-chain-chart-2017"
       ],
-      "note": "STIHL's chart lists chain 63 PM3 55 (3/8″ PICCO) with lightweight bar 3005 000 7413 for this group of saws. The STIHL chart we could read is dated 1 October 2017, so for any saw made after that, confirm against the bar stamp or STIHL's current chart before ordering."
+      "note": "STIHL's 2025 selection chart and the 2017 chart both list chain 63 PM3 55 (3/8″ PICCO) with lightweight bar 3005 000 7413 for the MS 194 / MS 201 group of saws."
     }
   ],
   "sources": [
+    {
+      "id": "stihl-chain-chart-2025",
+      "type": "fitup-chart",
+      "publisher": "STIHL",
+      "title": "STIHL 2025 Full Line catalog: Saw Chain Selection and Identification chart (catalog pages 166–167; specifications as of 1 October 2024)",
+      "url": "https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf",
+      "retrieved": "2026-11-10"
+    },
     {
       "id": "stihl-chain-chart-2017",
       "type": "fitup-chart",
@@ -86,6 +97,6 @@
       "retrieved": "2026-10-24"
     }
   ],
-  "sources_note": "STIHL USA “Saw Chain Selection and Identification” chart (catalog page 173, specifications as of 1 October 2017), read on 24 Oct 2026.",
-  "last_verified": "2026-10-24"
+  "sources_note": "STIHL USA “Saw Chain Selection and Identification” charts: the 2025 Full Line catalog (pp. 166–167, specifications as of 1 October 2024), read 10 Nov 2026, and the chart with specifications as of 1 October 2017 (catalog p. 173), read 24 Oct 2026. Both list the same loops and bars.",
+  "last_verified": "2026-11-10"
 }

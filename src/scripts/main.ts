@@ -143,8 +143,9 @@ syncToggle();
       const p = el('p', undefined, `Published sources give different specs for the ${m.name}. The numbers below are what is reported; the stamp on your bar tail is the version that fits your saw. `);
       const a = el('a', undefined, 'How to read it →'); a.setAttribute('href', '/guides/how-to-verify-chain-size/'); p.append(a); d.append(p); fResult.append(d);
     }
-    const strip = el('div', 'spec-strip');
-    strip.append(cell('Pitch', b.pitch), cell('Gauge', b.gauge), cell('Drive links', b.dl), cell('File size', b.file), cell('Oregon type', b.oregon));
+    const strip = el('div', b.oregon ? 'spec-strip' : 'spec-strip c4');
+    strip.append(cell('Pitch', b.pitch), cell('Gauge', b.gauge), cell('Drive links', b.dl), cell('File size', b.file));
+    if (b.oregon) strip.append(cell('Oregon type', b.oregon));
     fResult.append(strip, el('p', 'result-note', b.note));
     if (b.status === 'ok' && b.shop) {
       const btn = el('a', 'shop-btn');

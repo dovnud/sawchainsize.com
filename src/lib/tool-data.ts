@@ -8,7 +8,7 @@ export { AFFILIATE_REL, AFFILIATE_TARGET };
 
 const SHOP_WHY = {
   product: 'Product page whose title matched this spec when it was checked. Confirm the listing still shows the same pitch, gauge and drive links.',
-  search: 'Amazon search for this description, not one listing. Match the result to your bar stamp before you buy.',
+  search: 'Amazon search for this description, not one listing.',
 };
 const BAR_SHOP_WHY = 'Amazon search for this bar length with the pitch, gauge and drive-link count on the row. Match the listing to the bar part number when the row stores one, and to the stamp. This is not a claim that the first result is the factory bar.';
 
