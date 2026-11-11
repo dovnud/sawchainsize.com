@@ -43,6 +43,7 @@ const pages = [
   ['guides-break-in-new-chainsaw-chain', 'GUIDE', 'Break in a new chain', 'Oil · half throttle · light cuts'],
   ['guides-when-to-replace-chainsaw-bar', 'GUIDE', 'When to replace a bar', 'Shallow groove · blue rails · nose'],
   ['guides-stihl-chain-order-numbers', 'GUIDE', 'STIHL chain order numbers', '33 RS3 72 = 3624 005 0072'],
+  ['guides-battery-chainsaw-chain-size', 'GUIDE', 'Battery chainsaw chain size', '3/8″ LP .043″ / .050″ · .325″ · 1/4″'],
   ['guides-pole-saw-chain-size', 'GUIDE', 'Pole saw chain size', '10″ = 39–40 DL · 12″ = 44–45 DL'],
   ['guides-chainsaw-chain-glossary', 'GUIDE', 'Chain & bar glossary', 'Pitch · gauge · drive links · rakers'],
   ['guides-longer-bar-on-chainsaw', 'GUIDE', 'Longer bar on your saw?', 'Listed bar range for every saw'],
