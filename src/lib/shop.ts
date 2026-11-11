@@ -158,7 +158,7 @@ export function holidayChain(model: Model): ShopLink | null {
   const link = chainLink(pick.s, `${barLabel(pick.b)} bar: `);
   const otherGauge = specs.some((x) => x !== pick && x.b.lengths_in.some((l) => pick.b.lengths_in.includes(l)) && (x.s.gauge !== pick.s.gauge || x.s.pitch !== pick.s.pitch));
   const otherLength = specs.some((x) => x !== pick && x.b.lengths_in[0] !== pick.b.lengths_in[0]);
-  let text = `Matches the ${barLabel(pick.b)} bar on this page (${specText(pick.s.pitch, pick.s.gauge, pick.s.dl)}). Buy it only if your bar stamp shows those three numbers.`;
+  let text = `Matches the ${barLabel(pick.b)} bar on this page (${specText(pick.s.pitch, pick.s.gauge, pick.s.dl)}).`;
   if (otherGauge) text += ' This saw is also listed with another pitch or gauge. This listing does not fit that bar.';
   if (otherLength) text += ' A different bar length on this page takes a different drive-link count.';
   if (model.data.bars.some((b) => b.status !== 'ok')) text += ' Rows marked verify or conflict are not what this button is for.';

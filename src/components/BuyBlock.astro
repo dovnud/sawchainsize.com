@@ -4,13 +4,15 @@ import ShopBlock from './ShopBlock.astro';
 import StampSearch from './StampSearch.astro';
 import { modelShop } from '../lib/shop';
 const { model, anchor = false } = Astro.props as { model: Model; anchor?: boolean };
+// The bar-stamp reminder is said once per page, in the first buy block next to the table.
+const chainLead = anchor ? 'The button uses the pitch, gauge and drive links in the table. Confirm them on your bar stamp before you buy.' : 'The button uses the pitch, gauge and drive links in the table.';
 const shop = modelShop(model);
 const hasChain = shop.groups.some((g) => g.allButtons && g.links.length);
 const okBars = model.data.bars.filter((b) => b.status === 'ok');
 ---
 <div class="shop-slot" id={anchor ? 'shop' : undefined}>
   {hasChain ? (
-    <ShopBlock groups={shop.groups} flagged={shop.flagged} title="The chain for this saw" lead="The button uses the pitch, gauge and drive links in the table. Confirm them on your bar stamp before you buy." />
+    <ShopBlock groups={shop.groups} flagged={shop.flagged} title="The chain for this saw" lead={chainLead} />
   ) : (
     <>
       <div class="buy">

@@ -7,7 +7,7 @@ const { link } = Astro.props;
 const image = compliantAmazonImage(link.image);
 const why = link.why ?? link.note ?? (link.kind === 'product'
   ? 'Product page whose title matched this spec when it was checked. Confirm the listing still shows the same pitch, gauge and drive links.'
-  : 'Amazon search for this description, not one listing. Match the result to your bar stamp before you buy.');
+  : 'Amazon search for this description, not one listing.');
 const kind = link.kind === 'product' ? 'Amazon product page' : 'Amazon search';
 ---
 <article class="product-card">
