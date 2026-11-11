@@ -1,0 +1,213 @@
+---
+import Base from '../../layouts/Base.astro';
+import Crumbs from '../../components/Crumbs.astro';
+import FaqList from '../../components/FaqList.astro';
+import ShopBlock from '../../components/ShopBlock.astro';
+import { getModels, modelUrl, chainUrl, chainKey, pitchShort, gaugeShort, type Model } from '../../lib/data';
+import { webPageLd, faqLd } from '../../lib/ld';
+import { guideShop } from '../../lib/shop';
+import dates from '../../data/page-dates.json';
+
+const path = '/guides/battery-chainsaw-chain-size/';
+const modified = (dates as Record<string, string>)[path];
+const shop = guideShop('battery-chainsaw-chain-size');
+const Q = '″';
+
+type Row = { len: number; pitch: string; gauge: number; dl: number; parts: string[] };
+type Saw = { m: Model; rows: Row[] };
+const all = await getModels();
+const collect = (type: string): Saw[] => all
+  .filter((m) => m.data.type === type)
+  .map((m) => {
+    const rows: Row[] = [];
+    for (const b of m.data.bars) {
+      if (b.status !== 'ok' || !b.pitch || b.gauge == null || !b.drive_links) continue;
+      for (const len of b.lengths_in) {
+        const ex = rows.find((r) => r.len === len && r.pitch === b.pitch && r.gauge === b.gauge && r.dl === b.drive_links);
+        const parts = b.chains.map((c) => `${c.brand} ${c.part_no}`);
+        if (ex) { for (const p of parts) if (!ex.parts.includes(p)) ex.parts.push(p); }
+        else rows.push({ len, pitch: b.pitch, gauge: b.gauge, dl: b.drive_links, parts });
+      }
+    }
+    rows.sort((a, b) => a.len - b.len || a.gauge - b.gauge);
+    return { m, rows };
+  })
+  .sort((a, b) => a.m.data.name.localeCompare(b.m.data.name));
+
+const battery = collect('battery');
+const corded = collect('electric');
+const batOk = battery.filter((s) => s.rows.length);
+const cordOk = corded.filter((s) => s.rows.length);
+const batNone = battery.filter((s) => !s.rows.length);
+const cordNone = corded.filter((s) => !s.rows.length);
+
+// Family summary: pitch x gauge -> saws, per power type.
+type Fam = { key: string; pitch: string; gauge: number; bat: Model[]; cord: Model[] };
+const fams = new Map<string, Fam>();
+const addFam = (s: Saw, which: 'bat' | 'cord') => {
+  for (const r of s.rows) {
+    const k = chainKey(r.pitch, r.gauge);
+    if (!fams.has(k)) fams.set(k, { key: k, pitch: r.pitch, gauge: r.gauge, bat: [], cord: [] });
+    const f = fams.get(k)!;
+    if (!f[which].includes(s.m)) f[which].push(s.m);
+  }
+};
+batOk.forEach((s) => addFam(s, 'bat'));
+cordOk.forEach((s) => addFam(s, 'cord'));
+const famList = [...fams.values()].sort((a, b) => (b.bat.length + b.cord.length) - (a.bat.length + a.cord.length));
+const famCount = (pitch: string, gauge: number, which: 'bat' | 'cord') => fams.get(chainKey(pitch, gauge))?.[which].length ?? 0;
+const batWith = (pitch: string) => batOk.filter((s) => s.rows.some((r) => r.pitch === pitch));
+
+// Same called length, different loop.
+type Combo = { pitch: string; gauge: number; dl: number; saws: Model[] };
+const byLen = new Map<number, Combo[]>();
+for (const s of [...batOk, ...cordOk]) for (const r of s.rows) {
+  if (!byLen.has(r.len)) byLen.set(r.len, []);
+  const list = byLen.get(r.len)!;
+  let c = list.find((x) => x.pitch === r.pitch && x.gauge === r.gauge && x.dl === r.dl);
+  if (!c) { c = { pitch: r.pitch, gauge: r.gauge, dl: r.dl, saws: [] }; list.push(c); }
+  if (!c.saws.includes(s.m)) c.saws.push(s.m);
+}
+const lengths = [...byLen.keys()].sort((a, b) => a - b);
+for (const l of lengths) byLen.get(l)!.sort((a, b) => a.pitch.localeCompare(b.pitch) || a.gauge - b.gauge || a.dl - b.dl);
+
+// Sources actually behind the verified rows.
+const srcMap = new Map<string, { publisher: string; title: string; url: string }>();
+for (const s of [...batOk, ...cordOk]) {
+  const ids = new Set(s.m.data.bars.filter((b) => b.status === 'ok').flatMap((b) => b.source_ids));
+  for (const src of s.m.data.sources) if (ids.has(src.id) && src.url && !srcMap.has(src.url)) srcMap.set(src.url, { publisher: src.publisher, title: src.title, url: src.url });
+}
+const srcs = [...srcMap.values()].sort((a, b) => a.publisher.localeCompare(b.publisher) || a.title.localeCompare(b.title));
+const publishers = [...new Set(srcs.map((s) => s.publisher))].sort();
+
+// Facts stated in the copy are checked against the data at build time.
+const lp = batWith('3/8-lp').length, q325 = batWith('325').length, q14 = batWith('1/4').length;
+if (!(lp > q325 && lp > q14 && lp * 2 > batOk.length)) throw new Error('3/8 LP should be the majority battery family');
+const bat16 = [...new Set(batOk.flatMap((s) => s.rows.filter((r) => r.len === 16).map((r) => r.dl)))].sort((a, b) => a - b);
+const bat16g = new Set(batOk.flatMap((s) => s.rows.filter((r) => r.len === 16 && r.pitch === '3/8-lp').map((r) => r.gauge)));
+if (bat16.length < 4 || !bat16g.has(0.043) || !bat16g.has(0.05)) throw new Error('16″ battery rows should span several DL counts and both LP gauges');
+const id = (x: string) => all.find((m) => m.id === x)!;
+const rowsOf = (x: string) => [...batOk, ...cordOk].find((s) => s.m.id === x)?.rows ?? [];
+if (!rowsOf('stihl-mse-250').every((r) => r.pitch === '3/8' && r.gauge === 0.05)) throw new Error('MSE 250 should be standard 3/8 .050');
+if (!['husqvarna-535i-xp', 'husqvarna-540i-xp', 'husqvarna-542i-xp'].every((x) => rowsOf(x).length && rowsOf(x).every((r) => r.pitch === '325' && r.gauge === 0.043))) throw new Error('Husqvarna 5xxi XP should be .325 .043');
+if (!['stihl-msa-60-c-b', 'stihl-msa-70-c-b', 'stihl-msa-160-c-b', 'stihl-msa-161-t', 'stihl-msa-200-c-b'].every((x) => rowsOf(x).length && rowsOf(x).every((r) => r.pitch === '1/4'))) throw new Error('small STIHL MSA should be 1/4');
+const oreRS = [...batOk, ...cordOk].flatMap((s) => s.rows).flatMap((r) => r.parts.filter((p) => /^Oregon [RS]\d+$/.test(p)).map((p) => ({ p, g: r.gauge })));
+if (famList.some((f) => f.bat.length && (f.pitch === '3/8' || f.pitch === '404'))) throw new Error('no standard 3/8 or .404 battery rows expected');
+const oreDl = [...batOk, ...cordOk].flatMap((s) => s.rows).every((r) => r.parts.every((p) => { const m = /^Oregon [RS](\d+)$/.exec(p); return !m || Number(m[1]) === r.dl; }));
+if (!oreDl) throw new Error('Oregon R/S number should equal drive links');
+if (!oreRS.length || !oreRS.every((x) => (x.p.startsWith('Oregon R') ? x.g === 0.043 : x.g === 0.05))) throw new Error('Oregon R codes should be .043, S codes .050 on these rows');
+const cordStd = cordOk.filter((s) => s.rows.some((r) => r.pitch === '3/8'));
+if (cordStd.length !== 1 || cordStd[0].m.id !== 'stihl-mse-250') throw new Error('expected MSE 250 as the only corded standard-3/8 saw');
+const cordLp050 = famCount('3/8-lp', 0.05, 'cord');
+const both = batOk.filter((s) => s.rows.some((r) => r.gauge === 0.043 && r.pitch === '3/8-lp') && s.rows.some((r) => r.gauge === 0.05 && r.pitch === '3/8-lp'));
+if (!both.some((s) => s.m.data.brand === 'makita')) throw new Error('Makita should list both LP gauges');
+
+const specLabel = (pitch: string, gauge: number) => `${pitchShort(pitch)} · ${gaugeShort(gauge)}`;
+const names = (ms: Model[]) => ms.map((m) => m.data.name).join(', ');
+const len16 = (byLen.get(16) ?? []).filter((c) => c.saws.some((m) => m.data.type === 'battery'));
+const desc = `Most battery chainsaws run 3/8″ low-profile chain in .043″ or .050″ gauge. Small STIHL battery saws run 1/4″, Husqvarna’s pro battery saws .325″. ${batOk.length} battery and ${cordOk.length} corded saws, by bar length and drive links.`;
+const faqs = [
+  { q: 'Is battery chainsaw chain different from gas chainsaw chain?', a: `Not as a size system. Battery saws use the same pitch and gauge families as gas saws, identified the same way: pitch, gauge and drive-link count on the bar stamp. What is different is which families show up. On the ${batOk.length} battery saws we have verified rows for, ${lp} run 3/8″ low profile, ${q325} run .325″ and ${q14} run 1/4″. None of our battery rows is standard 3/8″ or .404″.` },
+  { q: 'What chain fits a 16″ battery chainsaw?', a: `There is no single 16″ battery loop. Our verified 16″ battery rows are ${len16.map((c) => `${specLabel(c.pitch, c.gauge)} with ${c.dl} drive links (${c.saws.filter((m) => m.data.type === 'battery').length} saw${c.saws.filter((m) => m.data.type === 'battery').length > 1 ? 's' : ''})`).join('; ')}. Read the stamp on your bar or find the saw in the table on this page.` },
+  { q: 'Can I put a .050″ chain on a .043″ battery chainsaw bar?', a: 'No. Gauge is the thickness of the drive links and it has to match the bar groove. A .050″ loop will not seat in a .043″ groove, and a .043″ loop in a .050″ groove sits loose and can leave the bar. Both gauges are common in 3/8″ low profile on battery saws, and the two loops can share a bar length and a drive-link count. That makes the gauge the thing to check.' },
+  { q: 'Why does Makita list two chains for the same bar?', a: 'Makita’s 36V manuals print the same bar lengths and drive-link counts with a 90PX-type chain for .043″ gauge and a 91PX-type chain for .050″ gauge. The saw can be fitted with either bar. The gauge stamped on the bar you have decides the loop, so the Makita saw pages list both rows.' },
+  { q: 'Do corded electric chainsaws use a different chain?', a: `Same families again. ${cordLp050} of the ${cordOk.length} corded saws we have verified rows for run 3/8″ low profile .050″. The STIHL MSE 250 is the exception here: STIHL lists standard 3/8″ .050″ (33 RS3) on 16″, 18″ and 20″ bars, the same chain family as many mid-size gas saws.` },
+];
+const jsonld = [webPageLd('Battery chainsaw chain size', path, desc, modified), faqLd(faqs)];
+const crumbs = [{ name: 'Guides', path: '/guides/' }, { name: 'Battery chainsaw chain size', path }];
+---
+<Base title="Battery Chainsaw Chain Size: Every Cordless and Corded Saw We List" description={desc} path={path} nav="chart" crumbs={crumbs} jsonld={jsonld} modified={modified}>
+  <div class="wrap">
+    <div class="pagehead">
+      <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: 'Battery chainsaw chain size' }]} />
+      <h1>Battery chainsaw chain size</h1>
+      <p class="lede">Most battery chainsaws run 3/8″ low-profile chain, in either .043″ or .050″ gauge: {lp} of the {batOk.length} battery saws we have verified rows for. The small STIHL battery saws (MSA 60, 70, 160, 161 T and 200) run 1/4″ PICCO .043″. Husqvarna’s pro battery saws run .325″. The motor does not decide the loop, the bar does: our verified 16″ battery bars take {bat16.join(', ')} drive links depending on the saw.</p>
+    </div>
+
+    <section class="block">
+      <h2>Chain families on battery and corded saws</h2>
+      <p style="max-width:72ch">Each row counts the saws with at least one verified bar in that pitch and gauge. A saw approved for more than one system is counted once in each. Battery saws stay in three pitches: 3/8″ low profile (at .043″ or .050″), .325″ and 1/4″. Standard 3/8″ appears once, on a corded STIHL.</p>
+      <div class="tblwrap">
+        <table>
+          <caption class="sr-only">Chain families by power type</caption>
+          <thead><tr><th scope="col">Pitch · gauge</th><th scope="col" class="num">Battery saws</th><th scope="col" class="num">Corded saws</th></tr></thead>
+          <tbody>
+            {famList.map((f) => (
+              <tr><td><a href={chainUrl(f.key)}>{specLabel(f.pitch, f.gauge)}</a></td><td class="num">{f.bat.length}</td><td class="num">{f.cord.length}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p style="max-width:72ch">Two notes on the codes. On these rows, Oregon’s saw-chain selection guide prints R codes for .043″ loops (R56 is 56 drive links) and S codes for .050″ loops (S56). The number after the letter is the drive-link count. STIHL’s 71 PM3 and 71 PMM3 are 1/4″ PICCO; 63 PM3 and 63 PS3 are 3/8″ PICCO .050″. The decode is in <a href="/guides/stihl-chain-order-numbers/">STIHL chain order numbers</a>. Husqvarna’s SP21G is .325″ Mini Pixel .043″, covered in <a href="/guides/husqvarna-pixel-chain/">Husqvarna Pixel chain</a>.</p>
+    </section>
+    <ShopBlock groups={shop.groups} compact />
+
+    <section class="block">
+      <h2>Same bar length, different chain</h2>
+      <p style="max-width:72ch">Bar length alone does not pick a battery chain. This table groups every verified battery and corded row by called bar length. Each line is a different loop, and they do not swap: a different gauge will not sit in the groove, and a different drive-link count will not tension. Read the stamp, or the <a href="/guides/how-to-count-drive-links/">drive-link count</a> on the old loop.</p>
+      <div class="tblwrap">
+        <table>
+          <caption class="sr-only">Battery and corded saw chains by bar length</caption>
+          <thead><tr><th scope="col" class="num">Bar</th><th scope="col">Pitch · gauge</th><th scope="col" class="num">Drive links</th><th scope="col">Saws</th></tr></thead>
+          <tbody>
+            {lengths.flatMap((l) => byLen.get(l)!.map((c, i) => (
+              <tr>
+                <td class="num">{i === 0 ? `${l}${Q}` : ''}</td>
+                <td><a href={chainUrl(chainKey(c.pitch, c.gauge))}>{specLabel(c.pitch, c.gauge)}</a></td>
+                <td class="num">{c.dl}</td>
+                <td class="small">{c.saws.map((m, j) => <>{j ? ', ' : ''}<a href={modelUrl(m)}>{m.data.name}</a>{m.data.type === 'electric' ? ' (corded)' : ''}</>)}</td>
+              </tr>
+            )))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="callout"><b>⚠ .043″ and .050″ low profile look alike</b><p>{both.length} of the battery saws here are listed with both 3/8″ low-profile gauges on the same bar lengths, with the same drive-link counts: {names(both.map((s) => s.m))}. A loop that matches the length and the count can still be the wrong gauge. The stamp on the bar tail prints it, and a caliper on a drive link settles it. <a href="/guides/chainsaw-chain-gauge/">Chain gauge</a> has the measurement, and <a href="/guides/full-kerf-vs-narrow-kerf-chain/">full kerf vs narrow kerf</a> explains why a .043″ loop needs its own bar.</p></div>
+
+    <section class="block">
+      <h2>Battery saws</h2>
+      <p style="max-width:72ch">Verified rows only. Each saw page shows the source for its rows and any length we still mark verify on the bar stamp.{batNone.length ? ` ${names(batNone.map((s) => s.m))} ${batNone.length > 1 ? 'have' : 'has'} no verified drive-link row yet, so ${batNone.length > 1 ? 'they are' : 'it is'} not in the table; see the saw page.` : ''}</p>
+      <div class="tblwrap">
+        <table>
+          <caption class="sr-only">Battery chainsaw chain sizes</caption>
+          <thead><tr><th scope="col">Saw</th><th scope="col">Bar · pitch · gauge · drive links</th><th scope="col">Chain listed</th></tr></thead>
+          <tbody>
+            {batOk.map((s) => (
+              <tr>
+                <td><a href={modelUrl(s.m)}>{s.m.data.name}</a></td>
+                <td class="small">{s.rows.map((r, i) => <>{i ? <br /> : ''}{r.len}{Q} · {specLabel(r.pitch, r.gauge)} · {r.dl} DL</>)}</td>
+                <td class="small">{s.rows.map((r, i) => <>{i ? <br /> : ''}{r.parts.slice(0, 2).join(' / ') || '—'}</>)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>Corded electric saws</h2>
+      <p style="max-width:72ch">Corded saws use the same families. Most here are 3/8″ low profile .050″. The STIHL MSE 250 runs standard 3/8″ .050″ on 16″ to 20″ bars, so a low-profile loop will not fit it.{cordNone.length ? ` ${names(cordNone.map((s) => s.m))} ${cordNone.length > 1 ? 'have' : 'has'} no verified drive-link row yet; see the saw page.` : ''}</p>
+      <div class="tblwrap">
+        <table>
+          <caption class="sr-only">Corded electric chainsaw chain sizes</caption>
+          <thead><tr><th scope="col">Saw</th><th scope="col">Bar · pitch · gauge · drive links</th><th scope="col">Chain listed</th></tr></thead>
+          <tbody>
+            {cordOk.map((s) => (
+              <tr>
+                <td><a href={modelUrl(s.m)}>{s.m.data.name}</a></td>
+                <td class="small">{s.rows.map((r, i) => <>{i ? <br /> : ''}{r.len}{Q} · {specLabel(r.pitch, r.gauge)} · {r.dl} DL</>)}</td>
+                <td class="small">{s.rows.map((r, i) => <>{i ? <br /> : ''}{r.parts.slice(0, 2).join(' / ') || '—'}</>)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="src">Tables generated at build time from this site’s verified model rows ({batOk.length} battery, {cordOk.length} corded). Rows come from {publishers.join(', ')} documents: {srcs.map((s, i) => <>{i ? '; ' : ''}<a href={s.url} rel="nofollow">{s.publisher}: {s.title}</a></>)}.</p>
+    </section>
+
+    <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>
+    <p><a href="/guides/3-8-low-profile-vs-standard-chain/">Low profile vs standard 3/8″</a> · <a href="/guides/1-4-pitch-chainsaw-chain/">1/4″ pitch chain</a> · <a href="/guides/husqvarna-pixel-chain/">Husqvarna Pixel</a> · <a href="/guides/chainsaw-chain-gauge/">Chain gauge</a> · <a href="/guides/pole-saw-chain-size/">Pole saw chain</a> · <a href="/tools/find-my-chain/">Find my chain</a></p>
+    <ShopBlock groups={shop.groups} title="Low-profile loops and a caliper for the gauge (Amazon)" lead="Search links, not a specific part. Match pitch, gauge and drive links to the stamp on your bar." />
+  </div>
+</Base>

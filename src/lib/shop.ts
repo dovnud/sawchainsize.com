@@ -78,6 +78,7 @@ const GUIDE_LINK_CAP: Record<string, number> = {
   '1-4-pitch-chainsaw-chain': 3,
   'can-you-change-chainsaw-chain-pitch': 3,
   'oregon-chain-on-stihl-husqvarna': 3,
+  'battery-chainsaw-chain-size': 3,
 };
 const LINK_CAP: Record<string, number> = {
   'model:husqvarna-t540-xp-mark-iii': 3,
@@ -321,6 +322,9 @@ export function guideShop(slug: string): { groups: ShopGroup[]; count: number } 
       break;
     case 'can-you-change-chainsaw-chain-pitch':
       add('Measure the pitch, then the sprocket', [PITCH_GAUGE_TOOL(), SPROCKET(), LOOKUP()]);
+      break;
+    case 'battery-chainsaw-chain-size':
+      add('Low-profile loops by gauge, then the drive-link count', [CHAIN_90(), CHAIN_91(), CALIPER()], true);
       break;
     case 'oregon-chain-on-stihl-husqvarna':
       add('Oregon loops by family, then the drive-link count', [CHAIN_90(), CHAIN_72(), LOOKUP()], true);
