@@ -1,0 +1,35 @@
+{
+  "brand": "worx",
+  "model": "WG307 JawSaw",
+  "name": "Worx WG307 JawSaw",
+  "aliases": ["WG307", "WG308", "WG320", "WG321", "JawSaw"],
+  "type": "electric",
+  "popular": false,
+  "blurb": "Oregon prints the Worx JawSaw on its own line: A42, a 6 inch bar, 42 drive links, .050 inch, 1/4 inch pitch. That is not the 3/8 inch low-profile chain used on the WG300 and WG322.",
+  "intro": "The Worx JawSaw is a different pitch from every other Worx saw in Oregon's selection guide. Oregon prints WG307 JawSaw, WG308 JawSaw pole saw, WG320 JawSaw and WG321 JawSaw on one line: saw chain A42, bar length 6 inches, 42 drive links, gauge .050 inch, pitch 1/4 inch. There is no \"low profile\" tag on that line, because 1/4 inch is its own pitch, not a small 3/8 inch chain. A 3/8 inch low-profile loop, including the 40-link chain for the WG322 and the 53, 57 and 63-link chains for the WG300 family, does not match a 1/4 inch sprocket or a 1/4 inch bar nose. The drive links are a different shape and a different spacing. Forty-two links is also not a number that shows up on the 8, 10, 14, 16 or 18 inch Worx lines. The guide does not print a file size for A42, so this page does not borrow the 1/8 inch or 5/32 inch file used on other 1/4 inch chains unless a Worx or Oregon filing source for this loop says so. It does not print a bar part number or a sprocket tooth count. The WG308 is called out as a pole saw in the model name Oregon prints, and it is on this same A42 line, so the pole version does not get a longer chain in this guide. The WG320 and WG321 are the other JawSaw catalog numbers on the line. If the tool in your hands is a WG322, a WG303 or a WG309, leave this page. Those are 3/8 inch low-profile saws, and their gauges are not all the same either. The JawSaw is the 6 inch, 1/4 inch, .050 inch, 42-link loop Oregon printed, and only that. The rest of the Worx section shows how easy the mix-up is if you shop by brand. WG300, WG303 and WG304 are S53, S57 and S63: 14, 16 and 18 inches, 53, 57 and 63 links, .050 inch, 3/8 inch low profile. WG305 is S52, 14 inches, 52 links, still .050 inch low profile, one link off the WG300's 14 inch chain. WG309 is S40, 10 inches, 40 links, .050 inch low profile. WG310 is S34, 8 inches, 34 links, .050 inch low profile. None of those is 1/4 inch, and none of them is 6 inches. The WG322 manual, a different document, is 10 inches, 40 links, 0.043 inch, Oregon 90PX040G. That manual's chain is low profile 3/8 inch as well. Putting any of those loops on a JawSaw asks the 1/4 inch drive sprocket to pull a 3/8 inch chain. Oregon's pitch column is the column that stops that order. A42 is the code, 42 is the link count, and the pitch printed beside it is 1/4, not 3/8 low profile. There is no second length on the JawSaw line, so a longer bar is not a variant Oregon approved in this guide.",
+  "bars": [
+    {
+      "lengths_in": [6],
+      "pitch": "1/4",
+      "gauge": 0.05,
+      "drive_links": 42,
+      "file_size": null,
+      "status": "ok",
+      "chains": [{"brand": "Oregon", "part_no": "A42", "role": "equivalent"}],
+      "source_ids": ["oregon-tsc-fit-guide"],
+      "note": "Oregon prints A42 for WG307 JawSaw, WG308 JawSaw pole saw, WG320 JawSaw and WG321 JawSaw: 6 inch bar, 42 drive links, .050 inch gauge, 1/4 inch pitch. No file size is printed."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide: Worx JawSaw line A42",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-12"
+    }
+  ],
+  "sources_note": "Oregon Saw Chain Selection Guide, Worx section, read 12 Nov 2026. The JawSaw is the only 1/4 inch line in that Worx section.",
+  "last_verified": "2026-11-12"
+}

@@ -1,0 +1,49 @@
+{
+  "brand": "milwaukee",
+  "model": "2826-20",
+  "name": "Milwaukee 2826-20",
+  "aliases": ["2826-20", "2826-20T", "2826-20C", "M18 FUEL top handle"],
+  "type": "battery",
+  "popular": true,
+  "blurb": "M18 FUEL top-handle saw. Milwaukee's manual: .325 inch low profile, .043 inch groove, 14 inch chain listed as 59 chain teeth (49-16-2744) and 12 inch as 51 (49-16-2742). The file is 5/32 inch at a 25 degree top plate.",
+  "notice": "The specification table says Chain Teeth, not drive links. The counts are 59 at 14 inches and 51 at 12 inches. Confirm the count on the chain before you order if the box uses the words drive links.",
+  "intro": "Milwaukee's operator's manual 58-14-0514 covers catalog number 2826-20 as one saw sold in two bar lengths. The 14 inch configuration is 2826-20T. The 12 inch configuration is 2826-20C. The manual's title line is the M18 FUEL 14 inch and 12 inch top-handle chainsaw. Voltage is 18 DC, battery and charger type M18. No-load speed is 7,700 rpm. Ingress protection is IPX4. Chain speed is 2,953 ft/min (15 m/s). Chain oil capacity is 5.1 oz (150 ml). Bar groove width is 0.043 inch (1.1 mm). Chain pitch is printed as Chain Pitch (Low Profile) 0.325 inch (8.3 mm). That is .325 inch low profile, not 3/8 inch low profile and not standard .325 inch full-height chain from a farm saw. The 14 inch replacement bar is 49-16-2745. The 12 inch bar is 49-16-2743. The 14 inch replacement chain is 49-16-2744. The 12 inch chain is 49-16-2742. Chain type is low kickback. Under the heading Chain Teeth the manual prints 59 for 14 inches and 51 for 12 inches. Cutting capacity is 13.5 inches (342.9 mm) on the 14 inch bar and 11.5 inches (292.1 mm) on the 12 inch bar, shorter than the called bar length. Weight of the bare tool with the 14 inch bar and chain is under 8.6 lb (under 3.9 kg). Milwaukee's product page for the 14 inch tool says the saw can also take the 12 inch bar, chain, and the 14 inch bar-and-chain set 49-16-2820, and that 2826 is sold in the 14 inch configuration as 2826-20T, 21T and 22T. The file is in the sharpening section, and it is not the 3/16 inch file many .325 inch chains use. The manual says to use a 5/32 inch diameter round file and holder, keep the file level with the top plate, lift it on the return stroke, and file all the left cutters in one direction before moving to the right. The correct top-plate angle is 25 degrees, using the guide marks on the file holder. The side-plate angle it calls correct is 80 degrees, produced when the right diameter file is held in the file holder. A file that is too small, or held too low, hooks the tooth. The manual says a hooked cutter grabs, dulls quickly, and raises kickback. It also says that as the chain is sharpened through its life it loses some of the low-kickback behavior, and that only a replacement chain equivalent to the original, or certified low-kickback under ANSI B175.1, should be used. Tension is a snap test, not a sag guess. Battery out, drive cover off, tension screw clockwise until the chain is snug. Correct tension is when the chain snaps back after being pulled 1/8 inch (3 mm) off the bar, with no visible sag. Over-tension wears the chain and can damage the bar. New chains stretch in the first two hours, and the manual says to pull the battery and recheck often during that time. When a dull chain is replaced with a sharp one, flip the guide bar. The oil reservoir is part of the hot-chain troubleshooting table: a bar that smokes can be an over-tight chain or an empty oil tank. There is a lanyard loop. The manual limits it to energy-absorbing lanyards or dynamic climbing rope, and it says not to use a lanyard at full tension. Oregon's selection guide does not list 2826-20. It lists 2727-20 and 2727-21HD as R56, a 16 inch .043 inch 3/8 inch low-profile loop. That is a different pitch from this top-handle saw. A 16 inch R56 chain is the wrong family for a 2826 bar.",
+  "bars": [
+    {
+      "lengths_in": [14],
+      "pitch": "325",
+      "gauge": 0.043,
+      "drive_links": 59,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [{"brand": "Milwaukee", "part_no": "49-16-2744", "role": "oem"}],
+      "source_ids": ["milwaukee-2826-manual"],
+      "label": "14″ (2826-20T)",
+      "note": "Manual: bar 49-16-2745, chain 49-16-2744, groove 0.043 inch, pitch 0.325 inch low profile. The specification table prints 59 under Chain Teeth. File 5/32 inch, top plate 25 degrees, side plate 80 degrees. Cutting capacity 13.5 inches."
+    },
+    {
+      "lengths_in": [12],
+      "pitch": "325",
+      "gauge": 0.043,
+      "drive_links": 51,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [{"brand": "Milwaukee", "part_no": "49-16-2742", "role": "oem"}],
+      "source_ids": ["milwaukee-2826-manual"],
+      "label": "12″ (2826-20C)",
+      "note": "Manual: bar 49-16-2743, chain 49-16-2742, same pitch and groove as the 14 inch bar. The specification table prints 51 under Chain Teeth. Cutting capacity 11.5 inches. Same 5/32 inch file and 25 degree top plate."
+    }
+  ],
+  "sources": [
+    {
+      "id": "milwaukee-2826-manual",
+      "type": "manual",
+      "publisher": "Milwaukee",
+      "title": "Operator's manual 58-14-0514 for catalog 2826-20, M18 FUEL 14 inch and 12 inch top-handle chainsaw: specifications, sharpening angles, and tension procedure",
+      "url": "https://documents.milwaukeetool.com/58-14-0514d5.pdf",
+      "retrieved": "2026-11-12"
+    }
+  ],
+  "sources_note": "Milwaukee operator's manual 58-14-0514, read 12 Nov 2026. The link counts are the manual's Chain Teeth figures. Oregon's selection guide does not list this catalog number.",
+  "last_verified": "2026-11-12"
+}

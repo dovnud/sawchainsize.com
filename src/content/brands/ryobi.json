@@ -4,6 +4,6 @@
   "country": "Japan",
   "site": "https://www.ryobitools.com",
   "order": 7,
-  "summary": "Ryobi's RY3818 parts list identifies the factory chain by pitch and drive-link count (“18 in. chain, 3/8LP, 62DL”) but doesn't print the gauge, which we take from the chain makers' fitment data and mark as such on the page.",
+  "summary": "Ryobi's RY3818 parts list identifies the factory chain by pitch and drive-link count (“18 in. chain, 3/8LP, 62DL”) but doesn't print the gauge, which we take from the chain makers' fitment data and mark as such on the page. RY10518 and RY10519 are on the RY10520 page. RY43155 is Oregon's S56 line, the same 16\" .050\" low-profile loop as the RY3716, and it redirects there instead of getting a second page.",
   "trademark": "Ryobi is a trademark of its respective owner. SawChainSize.com is not affiliated with or endorsed by Ryobi."
 }

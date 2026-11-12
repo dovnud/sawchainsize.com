@@ -1,0 +1,35 @@
+{
+  "brand": "oregon",
+  "model": "PS250",
+  "name": "Oregon PS250",
+  "aliases": ["PS250", "PS250-E6", "PS250-A6"],
+  "type": "battery",
+  "popular": false,
+  "blurb": "Oregon's selection guide lists the PS250, PS250-E6 and PS250-A6 as a cordless pole saw: R34, an 8 inch bar, 34 drive links, .043 inch, 3/8 inch low profile. That is not the CS1400's 16 inch .050 inch chain.",
+  "intro": "Oregon's saw-chain selection guide gives the PS250 its own heading: cordless pole saw. The model line is PS250, PS250-E6 and PS250-A6. The chain is R34. Bar length is 8 inches. Drive links are 34. Gauge is .043 inch. Pitch is 3/8 inch low profile. The guide does not print a file size, a bar part number, or a sprocket tooth count, so those are not filled in. R34 means Oregon's .043 inch low-profile family, and the number is the drive-link count. It is not a 34 inch bar, and it is not the 34-link .050 inch chain Oregon prints for the Worx WG310. Gauge is the difference between those two 8 inch, 34-link possibilities if you are holding a different brand. On this pole saw the guide's own line is .043 inch. The CS1400, Oregon's corded chainsaw, is a 16 inch bar, .050 inch gauge, 56 drive links, chain 91PXL056G. The CS1500 is an 18 inch .050 inch saw with 62 links. Neither chain fits an 8 inch .043 inch pole-saw bar. The pitch family is low profile on all three, which is why a shelf of \"3/8 inch pole saw chain\" is not a match until the gauge and the link count are read. An 8 inch bar with 34 drive links is a short loop. A 10 inch .043 inch loop such as Oregon R40, which the same guide prints for other pole saws, is 40 links and will not tension on this bar. The guide does not say the PS250 accepts a second bar length. One line, one chain. The E6 and A6 suffixes are on that same line, so this page does not invent a different loop for them. Confirm the stamp on the bar that is on the pole. If it reads something other than 8 inches, .043 inch and 34 drive links, the stamp wins, because a replacement bar may have been fitted and the guide only records the line Oregon printed. The letter in the code is the gauge. In this guide, R is the .043 inch low-profile family and S is the .050 inch low-profile family. R34 is therefore not S34. S34 is what Oregon prints for the Worx WG310: also 8 inches and also 34 links, at .050 inch. Two 8 inch, 34-link chains, two gauges. The CS1400 manual, for Oregon's own corded saw, specifies .050 inch and a 16 inch bar, chain 91PXL056G, which the selection guide lists as S56, 56 links. That saw's sprocket has 6 teeth and the tensioning gear bolts to the bar. None of that hardware is described for the PS250, and this page does not copy it over. The CS300 is a third Oregon saw, with its own page, and it is not this pole. A pole saw chain also has to fit the bar that is actually on the shaft. Oregon's heading says cordless pole saw, so the power source on this line is the guide's own words, not a guess from the model number. The E6 and A6 suffixes stay on the R34 line until a manual for those exact suffixes says otherwise. No file size is printed, and no file size is added from the 5/32 or 11/64 sizes used on other low-profile chains.",
+  "bars": [
+    {
+      "lengths_in": [8],
+      "pitch": "3/8-lp",
+      "gauge": 0.043,
+      "drive_links": 34,
+      "file_size": null,
+      "status": "ok",
+      "chains": [{"brand": "Oregon", "part_no": "R34", "role": "oem"}],
+      "source_ids": ["oregon-tsc-fit-guide"],
+      "note": "Oregon Saw Chain Selection Guide, cordless pole saw heading: PS250, PS250-E6, PS250-A6, chain R34, 8 inch bar, 34 drive links, .043 inch, 3/8 inch low profile. No file size is printed."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide: cordless pole saw PS250, PS250-E6, PS250-A6, chain R34",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-12"
+    }
+  ],
+  "sources_note": "Oregon Saw Chain Selection Guide, read 12 Nov 2026. The PS250 is under the cordless pole saw heading in the Oregon brand section. No operator's manual for the PS250 was used for these figures.",
+  "last_verified": "2026-11-12"
+}

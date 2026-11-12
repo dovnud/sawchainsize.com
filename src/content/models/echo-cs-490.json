@@ -1,0 +1,87 @@
+{
+  "brand": "echo",
+  "model": "CS-490",
+  "name": "Echo CS-490",
+  "aliases": ["CS-490", "CS490"],
+  "type": "gas",
+  "displacement_cc": 50.2,
+  "popular": true,
+  "blurb": "50.2 cm3. Echo's CS-490 manual specifies one chain: Oregon 20BPX, .325\" pitch, .050\" gauge, 66/72/78 drive links on 16/18/20 inch bars. The 18 inch bar is the standard length. Oregon's selection guide also prints .058\" loops for a CS-490 line. Those are not in the manual.",
+  "notice": "Oregon's selection guide prints J66 and J72 (.325\" .058\") against a CS-490 line, and leaves the 20 inch .058\" drive-link cell blank. Echo's operator's manual does not list a .058\" bar. The table follows the manual.",
+  "intro": "The Echo CS-490 is a 50.2 ml saw in its current operator's manual (X7503312406). Dry weight without chain and guide bar is 4.8 kg (10.6 lb). That is a larger engine than the CS-450, which is 45.0 ml and which Echo fits with both 20BPX and 95VP. The CS-490 manual specifies a single chain family. The guide bar is 0.050 inch gauge with a sprocket nose. Standard length is 18.0 inches, with 16 and 20 inches optional. The saw chain is Oregon 20BPX at 0.325 inch pitch. The sprocket is a rim, 7-tooth, 0.325 inch pitch. The chain tensioner is a side-access system. The manual's feature list says the decompression device is without, the Kick Guard is without, and a spiked bumper is with. Kick Guard is described as optional, bought through a dealer, and the combination table warns that operating without the optional Kick Guard in place, or using a bar or chain other than the ones specified, may cause severe kickback. The combination table itself is three rows, all 0.325 pitch. A 406 mm (16 inch) bar, Echo part 16F0AD3366, takes chain 20BPX66CQ, 66 drive links. A 457 mm (18 inch) bar, 18F0AD3372, takes 20BPX72CQ, 72 drive links. A 508 mm (20 inch) bar, 20F0AD3378, takes 20BPX78CQ, 78 drive links. The parts catalog for serial range C34312001001 through C34312999999 repeats those three chains and calls them Micro Chisel, and it repeats the three Pro-Lite bars. The same catalog lists a chain sharpening kit, part 99988800722, which is Echo's 3/16 inch kit in the later catalog's file table. The operator's manual says the round file is 3/16 inch diameter, used with a flat file. There is no second chain type on the 16 or 18 inch bar, which is the difference from the CS-450. There is no .043 inch row and no 3/8 inch low-profile row. The side-access tensioner is adjusted with the sprocket-guard nuts loosened first. The manual's assembly section says an improperly assembled sprocket guard, particularly a brake band that is not around the clutch drum, will cause severe saw damage if the engine is started, and it says to check the chain brake after the guard is replaced. Chain oil is specified as a high-quality bar and chain oil. The manual says not to use used or reclaimed oil, and to refill the chain-oil tank when you refuel. A lubrication check is to hold the chain just above a dry surface, open the throttle to half speed for 30 seconds, and look for a thin line of thrown oil. Fuel is Echo's 50:1 mix. Oregon's saw-chain selection guide, read the same day as the manual, gives the CS-490 its own block rather than burying it in the long low-profile list. That block prints H66, H72 and H78, which are .325 inch .050 inch loops at 16 / 66, 18 / 72 and 20 / 78. Those three lines agree with the manual's 20BPX counts. The same block then prints J66 and J72, which are .325 inch at .058 inch, 66 and 72 links, and a 20 inch .058 inch line with no drive-link count. The operator's manual does not list a .058 inch bar or a J-code chain. A .058 inch loop will not seat in the .050 inch groove the manual specifies. Those Oregon .058 lines are the reason the notice is on this page. They are not rows in the table. The CS-4910 and CS-4920 pages on this site come from Echo's later bars-and-chains chart and use 20BPX as well, at the same 66, 72 and 78 counts, on different bar part numbers. The CS-490's own part numbers are the F0AD bars above. Match the part number on the bar, not only the length.",
+  "bars": [
+    {
+      "lengths_in": [16],
+      "pitch": "325",
+      "gauge": 0.05,
+      "drive_links": 66,
+      "file_size": "3/16",
+      "status": "ok",
+      "chains": [
+        {"brand": "Echo", "part_no": "20BPX66CQ", "role": "oem"},
+        {"brand": "Oregon", "part_no": "20BPX066", "role": "equivalent"}
+      ],
+      "source_ids": ["echo-cs490-manual", "echo-cs490-parts"],
+      "label": "16″ optional",
+      "note": "Operator's manual: bar 16F0AD3366, chain 20BPX66CQ, 66 links, pitch 0.325, and the specification line states 0.050 inch gauge. Parts catalog repeats 20BPX66CQ as the 16 inch Micro Chisel chain and 16F0AD3366 as the 16 inch Pro-Lite bar. File 3/16 inch."
+    },
+    {
+      "lengths_in": [18],
+      "pitch": "325",
+      "gauge": 0.05,
+      "drive_links": 72,
+      "file_size": "3/16",
+      "status": "ok",
+      "chains": [
+        {"brand": "Echo", "part_no": "20BPX72CQ", "role": "oem"},
+        {"brand": "Oregon", "part_no": "20BPX072", "role": "equivalent"}
+      ],
+      "source_ids": ["echo-cs490-manual", "echo-cs490-parts"],
+      "label": "18″ standard",
+      "note": "Operator's manual: 18.0 inch is the standard length. Bar 18F0AD3372, chain 20BPX72CQ, 72 links. Parts catalog agrees."
+    },
+    {
+      "lengths_in": [20],
+      "pitch": "325",
+      "gauge": 0.05,
+      "drive_links": 78,
+      "file_size": "3/16",
+      "status": "ok",
+      "chains": [
+        {"brand": "Echo", "part_no": "20BPX78CQ", "role": "oem"},
+        {"brand": "Oregon", "part_no": "20BPX078", "role": "equivalent"}
+      ],
+      "source_ids": ["echo-cs490-manual", "echo-cs490-parts"],
+      "label": "20″ optional",
+      "note": "Operator's manual: bar 20F0AD3378, chain 20BPX78CQ, 78 links. Oregon's selection guide prints a 20 inch .058 inch line for the CS-490 with no drive-link count. That line is not this bar."
+    }
+  ],
+  "sources": [
+    {
+      "id": "echo-cs490-manual",
+      "type": "manual",
+      "publisher": "Echo",
+      "title": "CS-490 operator's manual X7503312406: specifications, guide bar and chain combination table, 3/16 inch file, side-access tensioner",
+      "url": "https://www.echo-usa.com/getattachment/478e43e4-dbd0-4955-8b69-c3f2acb16514/v2_CS-490_C68315_110119_es.pdf",
+      "retrieved": "2026-11-12"
+    },
+    {
+      "id": "echo-cs490-parts",
+      "type": "manual",
+      "publisher": "Echo",
+      "title": "CS-490 parts catalog, serial C34312001001–C34312999999: 16/18/20 inch Pro-Lite bars and 20BPX Micro Chisel chains",
+      "url": "https://www.echo-usa.com/getattachment/479357a7-bc91-4870-ae36-23208040c3d7/CS-490es_C34312_030315.pdf",
+      "retrieved": "2026-11-12"
+    },
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide: CS-490 block with H66/H72/H78 at .050 inch and J66/J72 at .058 inch",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-12"
+    }
+  ],
+  "sources_note": "Echo CS-490 operator's manual and the matching parts catalog, read 12 Nov 2026. The table uses those documents. Oregon's selection guide was read the same day. Its .050 inch H-codes agree with the manual's link counts. Its .058 inch J-codes are not in the manual and are not rows.",
+  "last_verified": "2026-11-12"
+}

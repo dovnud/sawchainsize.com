@@ -1,0 +1,85 @@
+{
+  "brand": "husqvarna",
+  "model": "235 / 236",
+  "name": "Husqvarna 235 / 236",
+  "aliases": ["235", "236", "H235", "H236"],
+  "type": "gas",
+  "popular": true,
+  "blurb": "The 2011 manual approves two pitches on one saw: .325\" H30 (13\" / 56 links, 15\" / 64) and 3/8\" low profile H37 or Oregon 91PX (14\" / 52, 16\" / 56, 18\" / 62). The 235 is 34 cm3. The 236 is 38 cm3. The 240 in that same manual is not the current 240 fit-up.",
+  "notice": "The 2011 manual also lists the Husqvarna 240 on this table. The current 240 fit-up is on the 120 Mark II page and uses different chains. Do not order a 240 from this page.",
+  "intro": "Husqvarna's operator's manual of May 2011 covers the 235, the 236 and the 240 in one technical-data table, with three columns in that order. Cylinder displacement is 34 cm3 for the 235 and 38 cm3 for the 236 and the 240. Stroke is 32 mm on all three. Idle is 3,000 rpm. European power is 1.3 kW at 9,000 rpm for the 235 and 1.4 kW at 9,000 rpm for the 236. The fuel tank is 0.3 liters. The oil tank is 0.20 liters. Oil pump capacity at 8,500 rpm is 7 ml/min, and the pump is automatic. Weight without bar or chain, tanks empty, is 4.6 kg for the 235 and 4.7 kg for the 236. The spark plug is a Champion RCJ 7Y, gap 0.5 mm. Standard bar length is 16 inches (40 cm). Recommended bar lengths run from 12 to 18 inches (31 to 46 cm). Usable cutting length is 11 to 17 inches (29 to 43 cm), one inch under the called length, the same pattern Husqvarna prints on larger saws. The technical data lists two pitches: 0.325 inch / 8.3 mm, and 3/8 inch / 9.52 mm. Drive-link thickness for the saw is 0.050 inch / 1.3 mm. The drive sprocket is 7 teeth for .325 inch and 6 teeth for 3/8 inch. Chain speed at maximum power is 17.3 m/s. That 3/8 inch figure is the low-profile family, not standard 3/8 inch, because the chains the manual names on those bars are Husqvarna H37 and Oregon 91PX. The approved table is explicit. A 13 inch bar is .325 inch, 10T nose, Husqvarna H30, 56 drive links. A 15 inch bar is .325 inch, 10T, H30, 64 drive links. A 14 inch bar is 3/8 inch, gauge 1.3 mm, Husqvarna H37, 52 drive links. A 16 inch bar is 3/8 inch, 7T nose, Oregon 91PX, 56 drive links. An 18 inch bar is 3/8 inch, Oregon 91PX, 62 drive links. The gauge column in the extracted table is fully printed on the 14 inch row (1.3 mm) and the technical-data line states 0.050 inch / 1.3 mm for the saw, so the rows below use .050 inch. A 16 inch 235 can be the .325 inch 15 inch bar's neighbor at 56 links of 91PX, or someone can order H30 because the .325 inch 13 inch bar is also 56 links. Those two 56-link loops are different pitches. The 7-tooth sprocket is the 3/8 inch one. The .325 inch sprocket is 7 teeth as well in the technical data, while the bar nose on the H30 rows is 10T. Pitch still has to match from the drive sprocket through the chain to the nose. The manual's mounting steps are the older clutch-cover design: chain brake off, bar nuts and cover off, transportation ring off, bar on the bolts in its rearmost position, chain over the drive sprocket starting at the top of the bar with the cutters facing forward, cover on so the adjuster pin finds the hole in the bar, nuts fingertight, then the tensioning screw clockwise with the combination spanner until the chain does not sag under the bar. The manual says a slack chain moves sideways and is harder to sharpen, and that you file from the inside face, one side of the saw and then the other. It points the file diameter at the technical data. The combination table as read does not print a round-file diameter, so this page does not invent one. The 240 column in this 2011 manual shares the displacement and the bar list with the 236. Husqvarna's later fit-up guide, which is what the 120 Mark II / 240 page on this site uses, lists the 240 with 14 and 16 inch bars on S93G chain, 52 and 56 drive links. That is a different document and a different chain family from H30 and 91PX. If the saw in front of you is a 240, use that page and the bar stamp. This page is the 235 and the 236, from the 2011 manual's own table.",
+  "bars": [
+    {
+      "lengths_in": [13],
+      "pitch": "325",
+      "gauge": 0.05,
+      "drive_links": 56,
+      "file_size": null,
+      "status": "ok",
+      "chains": [{"brand": "Husqvarna", "part_no": "H30", "role": "oem"}],
+      "source_ids": ["husqvarna-235-manual"],
+      "label": "13″, .325″, H30",
+      "note": "2011 manual, approved for 235, 236 and 240: 13 inch, pitch 0.325, nose 10T, Husqvarna H30, 56 drive links. Drive-link thickness in the technical data is 0.050 inch / 1.3 mm. Sprocket for .325 inch: 7 teeth. No round-file diameter is printed in the combination table."
+    },
+    {
+      "lengths_in": [15],
+      "pitch": "325",
+      "gauge": 0.05,
+      "drive_links": 64,
+      "file_size": null,
+      "status": "ok",
+      "chains": [{"brand": "Husqvarna", "part_no": "H30", "role": "oem"}],
+      "source_ids": ["husqvarna-235-manual"],
+      "label": "15″, .325″, H30",
+      "note": "2011 manual: 15 inch, pitch 0.325, nose 10T, Husqvarna H30, 64 drive links."
+    },
+    {
+      "lengths_in": [14],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 52,
+      "file_size": null,
+      "status": "ok",
+      "chains": [{"brand": "Husqvarna", "part_no": "H37", "role": "oem"}],
+      "source_ids": ["husqvarna-235-manual"],
+      "label": "14″, H37",
+      "note": "2011 manual: 14 inch, pitch printed as 3/8 inch, gauge 1.3 mm, Husqvarna H37, 52 drive links. Treated as 3/8 inch low profile because the named chain is H37, not a standard 3/8 inch chain. Sprocket for 3/8 inch: 6 teeth."
+    },
+    {
+      "lengths_in": [16],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 56,
+      "file_size": null,
+      "status": "ok",
+      "chains": [{"brand": "Oregon", "part_no": "91PX", "role": "oem"}],
+      "source_ids": ["husqvarna-235-manual"],
+      "label": "16″, Oregon 91PX",
+      "note": "2011 manual: 16 inch, pitch printed as 3/8 inch, nose 7T, Oregon 91PX, 56 drive links. The .325 inch 13 inch bar is also 56 links, on H30. Pitch is the difference. 91PX is low profile. The manual does not add a drive-link suffix to the Oregon name."
+    },
+    {
+      "lengths_in": [18],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 62,
+      "file_size": null,
+      "status": "ok",
+      "chains": [{"brand": "Oregon", "part_no": "91PX", "role": "oem"}],
+      "source_ids": ["husqvarna-235-manual"],
+      "label": "18″, Oregon 91PX",
+      "note": "2011 manual: 18 inch, pitch printed as 3/8 inch, Oregon 91PX, 62 drive links. Gauge from the saw's technical-data line, 0.050 inch / 1.3 mm."
+    }
+  ],
+  "sources": [
+    {
+      "id": "husqvarna-235-manual",
+      "type": "manual",
+      "publisher": "Husqvarna",
+      "title": "235, 236, 240 operator's manual, May 2011: technical data and the bar and chain combination table",
+      "url": "https://www-static-nw.husqvarna.com/hbd/tdrdownload/v2/pub000049971/doc000089398/OM/-zrzKvVConLk6S1p7KtHKpZ5NrE?httproute=True",
+      "retrieved": "2026-11-12"
+    }
+  ],
+  "sources_note": "Husqvarna 235 / 236 / 240 operator's manual, May 2011, read 12 Nov 2026. The 240 column in that manual is not the current 240 fit-up published on the 120 Mark II page. No file diameter is printed in the combination table, so the file cell is empty.",
+  "last_verified": "2026-11-12"
+}

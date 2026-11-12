@@ -1,0 +1,57 @@
+{
+  "brand": "makita",
+  "model": "DCS430 / DCS431",
+  "name": "Makita DCS430 / DCS431",
+  "aliases": ["DCS430", "DCS431"],
+  "type": "gas",
+  "popular": false,
+  "blurb": "Oregon prints the DCS430 and DCS431 together on .325 inch, .050 inch chain: 16 inch / 66 links (H66), 18 inch / 72 (H72), 20 inch / 78 (H78). The DCS6000I page is standard 3/8 inch, not this pitch.",
+  "intro": "The DCS430 and DCS431 share one block in Oregon's saw-chain selection guide, and the block is .325 inch rather than the low-profile chain on Makita's cordless saws or the standard 3/8 inch chain on the DCS6000I. Oregon prints three chains. H66 is 16 inches, 66 drive links, .050 inch, .325 inch. H72 is 18 inches, 72 drive links, .050 inch, .325 inch. H78 is 20 inches, 78 drive links, .050 inch, .325 inch. The letter is the family: H is Oregon's .325 inch .050 inch chain, and the number is the drive-link count. The guide does not say which length was fitted at the factory. Both model numbers sit on all three lines. The bar that is on the saw now is the length you buy for. A 16 inch .325 inch .050 inch chain at 66 links is a common count, and it is still the wrong chain if the saw is wearing the 18 or 20 inch bar. Seventy-two links is where this page collides with the DCS6000I. That saw's Oregon line is D72, also 72 drive links, at standard 3/8 inch, on a 20 inch bar. H72 is 72 links at .325 inch on an 18 inch bar. The boxes can both say 72. The pitch and the bar length are different, and the sprocket has to match the pitch. The guide prints no file size on these lines. It prints no bar part number and no sprocket tooth count. Those stay blank. It also prints no displacement, so this page does not add one. The narrow-kerf M codes, which Oregon uses for some other Makita and Echo .325 inch saws, are not on the DCS430 block. M72 would be a different chain at the same nominal pitch and gauge family, and it is not what this line says. If your bar is stamped .058 inch, this guide did not print a .058 inch chain for the DCS430 or DCS431. Stop and use the stamp. Oregon's .058 inch .325 inch code is J, and it is not in this block. The neighboring Makita lines show the other mistakes. DCS6000I and DCS6800I are D72 only: standard 3/8 inch, .050 inch, 20 inches, 72 links. DCS6400 through DCS7901 are D60, D68 and D72, standard 3/8 inch at 16, 18 and 20 inches. A D-code chain is the wrong pitch for a bar Oregon marked with an H code. The cordless Makita lines, XCU03 through EA3501S, are R and S codes, 3/8 inch low profile at .043 or .050 inch, with link counts in the 45 to 56 range on 12 to 16 inch bars. Low profile 3/8 inch and .325 inch share neither the drive-sprocket spacing nor, on these lines, the link counts. H66 at 66 links is not S56 at 56 links. The guide also prints a narrow-kerf note on some Makita lines, including M72 for a CS40EA18. Narrow kerf is a different chain body. It is not printed on the DCS430 block, so an M72 loop is not the H72 loop with a new label. File size stays blank because the guide's H lines for this pair do not name one. Tensioning steps are not in a selection guide. They live in the saw's own manual, which this page does not have, so none are described.",
+  "bars": [
+    {
+      "lengths_in": [16],
+      "pitch": "325",
+      "gauge": 0.05,
+      "drive_links": 66,
+      "file_size": null,
+      "status": "ok",
+      "chains": [{"brand": "Oregon", "part_no": "H66", "role": "equivalent"}],
+      "source_ids": ["oregon-tsc-fit-guide"],
+      "note": "Oregon prints H66 for the DCS430 and DCS431: 16 inch, 66 drive links, .050 inch, .325 inch. No file size."
+    },
+    {
+      "lengths_in": [18],
+      "pitch": "325",
+      "gauge": 0.05,
+      "drive_links": 72,
+      "file_size": null,
+      "status": "ok",
+      "chains": [{"brand": "Oregon", "part_no": "H72", "role": "equivalent"}],
+      "source_ids": ["oregon-tsc-fit-guide"],
+      "note": "Oregon prints H72 for the same pair: 18 inch, 72 drive links, .050 inch, .325 inch. The DCS6000I D72 line is also 72 links, at standard 3/8 inch on a 20 inch bar."
+    },
+    {
+      "lengths_in": [20],
+      "pitch": "325",
+      "gauge": 0.05,
+      "drive_links": 78,
+      "file_size": null,
+      "status": "ok",
+      "chains": [{"brand": "Oregon", "part_no": "H78", "role": "equivalent"}],
+      "source_ids": ["oregon-tsc-fit-guide"],
+      "note": "Oregon prints H78 for the same pair: 20 inch, 78 drive links, .050 inch, .325 inch."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide: Makita DCS430 and DCS431, chains H66, H72 and H78",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-12"
+    }
+  ],
+  "sources_note": "Oregon Saw Chain Selection Guide, Makita section, read 12 Nov 2026. Three .325 inch .050 inch chains. No file size is printed.",
+  "last_verified": "2026-11-12"
+}

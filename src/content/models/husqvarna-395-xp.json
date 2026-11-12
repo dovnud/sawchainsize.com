@@ -1,0 +1,541 @@
+{
+  "brand": "husqvarna",
+  "model": "395 XP",
+  "name": "Husqvarna 395 XP",
+  "aliases": [
+    "395 XP",
+    "395XP",
+    "395 XP G",
+    "395XPG"
+  ],
+  "type": "gas",
+  "displacement_cc": 94,
+  "popular": true,
+  "blurb": "94 cm3. The May 2023 manual approves 3/8 inch chain at .050 and .058 inch (H42, C85, C83, S85) and .404 inch H64. One 7/32 inch file, four different depth and angle settings. Oil output is set by bar length.",
+  "notice": "An 18 inch bar on this saw can be 68 drive links at .050 or .058 inch, on more than one chain type. The .404 inch H64 row prints the gauge as 0.062 inch / 1.6 mm, so that row is not given a single .063 inch label.",
+  "intro": "The Husqvarna 395 XP and 395 XP G are the same 94 cm3 saw in the operator's manual dated May 2023 (publication 1159862-26). The G model is the one with the higher weight: 7.9 kg for the 395 XP and 8.1 kg for the 395 XP G, both without quoting a bar. Idle is 2,500 rpm. Maximum power is 4.9 kW (6.6 hp) at 8,700 rpm on both. The fuel tank is 0.90 liters. The oil tank is 0.50 liters, and the oil pump is automatic. The spark plug is a Champion RCJ 6Y with a 0.5 mm gap, and the manual says the wrong plug can damage the piston and cylinder. The drive sprocket is a rim with 7 teeth. Chain speed at 133 percent of maximum engine power speed is 27.7 m/s. The manual says the usable cutting length is usually 1 inch less than the nominal bar length, so a bar sold as 28 inches is not 28 inches of cut.\n\nThe approved combinations are printed as one safety list for both the 395 XP and the 395 XP G, evaluated to EN ISO 11681-1:2011. Four chain types share the standard 3/8 inch pitch, and one chain is .404 inch. Husqvarna H42 is 3/8 inch, gauge 0.058 inch / 1.5 mm, on 18, 20, 24 and 28 inch bars, with 68, 72, 84 and 92 drive links. The nose column on that H42 block is printed as 11T / 34 mm, so both a sprocket nose and a solid nose are on the same chain and the same link count. Husqvarna C85 is also 0.058 inch 3/8 inch, nose 11T, and it starts shorter: 15 inch / 56 links, 16 / 60, 18 / 68, 20 / 72, 24 / 84, 28 / 92. Husqvarna S85 repeats those C85 lengths and link counts at 0.058 inch, with a 34 mm solid nose instead of 11T. Husqvarna C83 repeats the C85 lengths and link counts at 0.050 inch / 1.3 mm, nose 11T. An 18 inch 395 can therefore be 68 drive links at either .050 or .058 inch, on H42, C85, C83 or S85 depending on the nose and the chain type. The link count does not identify the gauge.\n\nThe .404 inch chain is Husqvarna H64. The manual prints the gauge as 0.062 inch / 1.6 mm, which is not a figure this site stores as .063 inch without saying so. Lengths are 24 inch / 76 links (34 mm nose), 28 inch / 84 (34 mm), 30 inch / 92 (42 mm nose) and 36 inch / 104 (42 mm). Those counts are in the note on the .404 row. The row stays on \"verify\" because the printed gauge is 0.062 inch / 1.6 mm. Filing is not one setup. The manual's filing table gives every chain here a 5.5 mm / 7/32 inch round file, then splits the depth gauge and the angles. H64 is depth 0.030 inch / 0.76 mm, 35 degrees and 85 degrees, file gauge 505 69 81-15. H42 is depth 0.025 inch / 0.65 mm, 25 degrees and 60 degrees, file gauge 505 24 35-01. C85 and C83 share depth 0.025 inch, 30 degrees and 60 degrees, file gauge 586 93 85-01. S85 is the same depth and angles with file gauge 586 93 86-01. A 7/32 inch file is the diameter. It does not set the depth or the angle. The manual says to use a Husqvarna file gauge, and it tells you to identify the chain type if you are not sure, rather than filing every loop on the saw the same way.\n\nOil output is adjusted by bar length, from the initial position: 0 turn for 18 to 20 inch bars, 3/4 turn for 20 to 24 inch, 1 1/2 turns for 24 to 28 inch, and 1 3/4 turns for 28 inch and longer. The manual's Pixel paragraph says a Pixel bar and a Pixel chain have to be used together, and that Pixel is marked with its own symbol. The approved list for the 395 XP does not include a Pixel chain. The narrow-kerf SP chains used on Husqvarna's smaller saws are not on this table. The EU declaration in the manual covers serial numbers from 2016 onward and names the type as 395 XP, 395 XP G.",
+  "bars": [
+    {
+      "lengths_in": [
+        18
+      ],
+      "label": "18\u2033, H42, 11T / 34 mm",
+      "pitch": "3/8",
+      "gauge": 0.058,
+      "drive_links": 68,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "H42",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-395-manual"
+      ],
+      "note": "Husqvarna 395 XP / 395 XP G operator's manual, May 2023, approved combinations. H42, nose 11T / 34 mm, 68 drive links. Filing table: 5.5 mm / 7/32 inch file, depth 0.025 inch / 0.65 mm, angles 25\u00b0 and 60\u00b0, file gauge 505 24 35-01."
+    },
+    {
+      "lengths_in": [
+        20
+      ],
+      "label": "20\u2033, H42, 11T / 34 mm",
+      "pitch": "3/8",
+      "gauge": 0.058,
+      "drive_links": 72,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "H42",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-395-manual"
+      ],
+      "note": "Husqvarna 395 XP / 395 XP G operator's manual, May 2023, approved combinations. H42, nose 11T / 34 mm, 72 drive links. Filing table: 5.5 mm / 7/32 inch file, depth 0.025 inch / 0.65 mm, angles 25\u00b0 and 60\u00b0, file gauge 505 24 35-01."
+    },
+    {
+      "lengths_in": [
+        24
+      ],
+      "label": "24\u2033, H42, 11T / 34 mm",
+      "pitch": "3/8",
+      "gauge": 0.058,
+      "drive_links": 84,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "H42",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-395-manual"
+      ],
+      "note": "Husqvarna 395 XP / 395 XP G operator's manual, May 2023, approved combinations. H42, nose 11T / 34 mm, 84 drive links. Filing table: 5.5 mm / 7/32 inch file, depth 0.025 inch / 0.65 mm, angles 25\u00b0 and 60\u00b0, file gauge 505 24 35-01."
+    },
+    {
+      "lengths_in": [
+        28
+      ],
+      "label": "28\u2033, H42, 11T / 34 mm",
+      "pitch": "3/8",
+      "gauge": 0.058,
+      "drive_links": 92,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "H42",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-395-manual"
+      ],
+      "note": "Husqvarna 395 XP / 395 XP G operator's manual, May 2023, approved combinations. H42, nose 11T / 34 mm, 92 drive links. Filing table: 5.5 mm / 7/32 inch file, depth 0.025 inch / 0.65 mm, angles 25\u00b0 and 60\u00b0, file gauge 505 24 35-01."
+    },
+    {
+      "lengths_in": [
+        15
+      ],
+      "label": "15\u2033, C85, 11T",
+      "pitch": "3/8",
+      "gauge": 0.058,
+      "drive_links": 56,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C85",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-395-manual"
+      ],
+      "note": "Husqvarna 395 XP / 395 XP G operator's manual, May 2023, approved combinations. C85, nose 11T, 56 drive links. Filing table: 5.5 mm / 7/32 inch file, depth 0.025 inch / 0.65 mm, angles 30\u00b0 and 60\u00b0, file gauge 586 93 85-01."
+    },
+    {
+      "lengths_in": [
+        15
+      ],
+      "label": "15\u2033, C83, 11T",
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 56,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C83",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-395-manual"
+      ],
+      "note": "Husqvarna 395 XP / 395 XP G operator's manual, May 2023, approved combinations. C83, nose 11T, 56 drive links. Filing table: 5.5 mm / 7/32 inch file, depth 0.025 inch / 0.65 mm, angles 30\u00b0 and 60\u00b0, file gauge 586 93 85-01."
+    },
+    {
+      "lengths_in": [
+        15
+      ],
+      "label": "15\u2033, S85, 34 mm",
+      "pitch": "3/8",
+      "gauge": 0.058,
+      "drive_links": 56,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "S85",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-395-manual"
+      ],
+      "note": "Husqvarna 395 XP / 395 XP G operator's manual, May 2023, approved combinations. S85, nose 34 mm, 56 drive links. Filing table: 5.5 mm / 7/32 inch file, depth 0.025 inch / 0.65 mm, angles 30\u00b0 and 60\u00b0, file gauge 586 93 86-01."
+    },
+    {
+      "lengths_in": [
+        16
+      ],
+      "label": "16\u2033, C85, 11T",
+      "pitch": "3/8",
+      "gauge": 0.058,
+      "drive_links": 60,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C85",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-395-manual"
+      ],
+      "note": "Husqvarna 395 XP / 395 XP G operator's manual, May 2023, approved combinations. C85, nose 11T, 60 drive links. Filing table: 5.5 mm / 7/32 inch file, depth 0.025 inch / 0.65 mm, angles 30\u00b0 and 60\u00b0, file gauge 586 93 85-01."
+    },
+    {
+      "lengths_in": [
+        16
+      ],
+      "label": "16\u2033, C83, 11T",
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 60,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C83",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-395-manual"
+      ],
+      "note": "Husqvarna 395 XP / 395 XP G operator's manual, May 2023, approved combinations. C83, nose 11T, 60 drive links. Filing table: 5.5 mm / 7/32 inch file, depth 0.025 inch / 0.65 mm, angles 30\u00b0 and 60\u00b0, file gauge 586 93 85-01."
+    },
+    {
+      "lengths_in": [
+        16
+      ],
+      "label": "16\u2033, S85, 34 mm",
+      "pitch": "3/8",
+      "gauge": 0.058,
+      "drive_links": 60,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "S85",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-395-manual"
+      ],
+      "note": "Husqvarna 395 XP / 395 XP G operator's manual, May 2023, approved combinations. S85, nose 34 mm, 60 drive links. Filing table: 5.5 mm / 7/32 inch file, depth 0.025 inch / 0.65 mm, angles 30\u00b0 and 60\u00b0, file gauge 586 93 86-01."
+    },
+    {
+      "lengths_in": [
+        18
+      ],
+      "label": "18\u2033, C85, 11T",
+      "pitch": "3/8",
+      "gauge": 0.058,
+      "drive_links": 68,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C85",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-395-manual"
+      ],
+      "note": "Husqvarna 395 XP / 395 XP G operator's manual, May 2023, approved combinations. C85, nose 11T, 68 drive links. Filing table: 5.5 mm / 7/32 inch file, depth 0.025 inch / 0.65 mm, angles 30\u00b0 and 60\u00b0, file gauge 586 93 85-01."
+    },
+    {
+      "lengths_in": [
+        18
+      ],
+      "label": "18\u2033, C83, 11T",
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 68,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C83",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-395-manual"
+      ],
+      "note": "Husqvarna 395 XP / 395 XP G operator's manual, May 2023, approved combinations. C83, nose 11T, 68 drive links. Filing table: 5.5 mm / 7/32 inch file, depth 0.025 inch / 0.65 mm, angles 30\u00b0 and 60\u00b0, file gauge 586 93 85-01."
+    },
+    {
+      "lengths_in": [
+        18
+      ],
+      "label": "18\u2033, S85, 34 mm",
+      "pitch": "3/8",
+      "gauge": 0.058,
+      "drive_links": 68,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "S85",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-395-manual"
+      ],
+      "note": "Husqvarna 395 XP / 395 XP G operator's manual, May 2023, approved combinations. S85, nose 34 mm, 68 drive links. Filing table: 5.5 mm / 7/32 inch file, depth 0.025 inch / 0.65 mm, angles 30\u00b0 and 60\u00b0, file gauge 586 93 86-01."
+    },
+    {
+      "lengths_in": [
+        20
+      ],
+      "label": "20\u2033, C85, 11T",
+      "pitch": "3/8",
+      "gauge": 0.058,
+      "drive_links": 72,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C85",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-395-manual"
+      ],
+      "note": "Husqvarna 395 XP / 395 XP G operator's manual, May 2023, approved combinations. C85, nose 11T, 72 drive links. Filing table: 5.5 mm / 7/32 inch file, depth 0.025 inch / 0.65 mm, angles 30\u00b0 and 60\u00b0, file gauge 586 93 85-01."
+    },
+    {
+      "lengths_in": [
+        20
+      ],
+      "label": "20\u2033, C83, 11T",
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 72,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C83",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-395-manual"
+      ],
+      "note": "Husqvarna 395 XP / 395 XP G operator's manual, May 2023, approved combinations. C83, nose 11T, 72 drive links. Filing table: 5.5 mm / 7/32 inch file, depth 0.025 inch / 0.65 mm, angles 30\u00b0 and 60\u00b0, file gauge 586 93 85-01."
+    },
+    {
+      "lengths_in": [
+        20
+      ],
+      "label": "20\u2033, S85, 34 mm",
+      "pitch": "3/8",
+      "gauge": 0.058,
+      "drive_links": 72,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "S85",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-395-manual"
+      ],
+      "note": "Husqvarna 395 XP / 395 XP G operator's manual, May 2023, approved combinations. S85, nose 34 mm, 72 drive links. Filing table: 5.5 mm / 7/32 inch file, depth 0.025 inch / 0.65 mm, angles 30\u00b0 and 60\u00b0, file gauge 586 93 86-01."
+    },
+    {
+      "lengths_in": [
+        24
+      ],
+      "label": "24\u2033, C85, 11T",
+      "pitch": "3/8",
+      "gauge": 0.058,
+      "drive_links": 84,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C85",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-395-manual"
+      ],
+      "note": "Husqvarna 395 XP / 395 XP G operator's manual, May 2023, approved combinations. C85, nose 11T, 84 drive links. Filing table: 5.5 mm / 7/32 inch file, depth 0.025 inch / 0.65 mm, angles 30\u00b0 and 60\u00b0, file gauge 586 93 85-01."
+    },
+    {
+      "lengths_in": [
+        24
+      ],
+      "label": "24\u2033, C83, 11T",
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 84,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C83",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-395-manual"
+      ],
+      "note": "Husqvarna 395 XP / 395 XP G operator's manual, May 2023, approved combinations. C83, nose 11T, 84 drive links. Filing table: 5.5 mm / 7/32 inch file, depth 0.025 inch / 0.65 mm, angles 30\u00b0 and 60\u00b0, file gauge 586 93 85-01."
+    },
+    {
+      "lengths_in": [
+        24
+      ],
+      "label": "24\u2033, S85, 34 mm",
+      "pitch": "3/8",
+      "gauge": 0.058,
+      "drive_links": 84,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "S85",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-395-manual"
+      ],
+      "note": "Husqvarna 395 XP / 395 XP G operator's manual, May 2023, approved combinations. S85, nose 34 mm, 84 drive links. Filing table: 5.5 mm / 7/32 inch file, depth 0.025 inch / 0.65 mm, angles 30\u00b0 and 60\u00b0, file gauge 586 93 86-01."
+    },
+    {
+      "lengths_in": [
+        28
+      ],
+      "label": "28\u2033, C85, 11T",
+      "pitch": "3/8",
+      "gauge": 0.058,
+      "drive_links": 92,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C85",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-395-manual"
+      ],
+      "note": "Husqvarna 395 XP / 395 XP G operator's manual, May 2023, approved combinations. C85, nose 11T, 92 drive links. Filing table: 5.5 mm / 7/32 inch file, depth 0.025 inch / 0.65 mm, angles 30\u00b0 and 60\u00b0, file gauge 586 93 85-01."
+    },
+    {
+      "lengths_in": [
+        28
+      ],
+      "label": "28\u2033, C83, 11T",
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 92,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "C83",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-395-manual"
+      ],
+      "note": "Husqvarna 395 XP / 395 XP G operator's manual, May 2023, approved combinations. C83, nose 11T, 92 drive links. Filing table: 5.5 mm / 7/32 inch file, depth 0.025 inch / 0.65 mm, angles 30\u00b0 and 60\u00b0, file gauge 586 93 85-01."
+    },
+    {
+      "lengths_in": [
+        28
+      ],
+      "label": "28\u2033, S85, 34 mm",
+      "pitch": "3/8",
+      "gauge": 0.058,
+      "drive_links": 92,
+      "file_size": "7/32",
+      "status": "ok",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "S85",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-395-manual"
+      ],
+      "note": "Husqvarna 395 XP / 395 XP G operator's manual, May 2023, approved combinations. S85, nose 34 mm, 92 drive links. Filing table: 5.5 mm / 7/32 inch file, depth 0.025 inch / 0.65 mm, angles 30\u00b0 and 60\u00b0, file gauge 586 93 86-01."
+    },
+    {
+      "lengths_in": [
+        24,
+        28,
+        30,
+        36
+      ],
+      "label": ".404\" H64, gauge printed 0.062 inch / 1.6 mm",
+      "pitch": "404",
+      "gauge": null,
+      "gauge_note": "Manual prints 0.062 inch / 1.6 mm",
+      "drive_links": null,
+      "file_size": "7/32",
+      "status": "verify",
+      "chains": [
+        {
+          "brand": "Husqvarna",
+          "part_no": "H64",
+          "role": "oem"
+        }
+      ],
+      "source_ids": [
+        "husqvarna-395-manual"
+      ],
+      "note": "Manual: Husqvarna H64, pitch .404 inch, gauge printed as 0.062 inch / 1.6 mm. Drive links by length: 24 inch 76 (34 mm nose), 28 inch 84 (34 mm), 30 inch 92 (42 mm nose), 36 inch 104 (42 mm). Filing table: 5.5 mm / 7/32 inch file, depth 0.030 inch / 0.76 mm, angles 35\u00b0 and 85\u00b0, file gauge 505 69 81-15. The link counts stay in this note because the printed gauge is 0.062 inch / 1.6 mm."
+    }
+  ],
+  "sources": [
+    {
+      "id": "husqvarna-395-manual",
+      "type": "manual",
+      "publisher": "Husqvarna",
+      "title": "395 XP, 395 XP G operator's manual, May 2023 (1159862-26): technical data, approved bar and chain combinations, filing table, and oil-pump settings by bar length",
+      "url": "https://content.tdr.dss.husqvarnagroup.net/pub000092655/doc000231938",
+      "retrieved": "2026-11-12"
+    }
+  ],
+  "sources_note": "Husqvarna 395 XP / 395 XP G operator's manual, May 2023, publication 1159862-26, read 12 Nov 2026. Every approved 3/8 inch row is taken from that table. The .404 inch H64 counts are quoted from the same table and left as verify because the manual prints the gauge as 0.062 inch / 1.6 mm.",
+  "last_verified": "2026-11-12"
+}

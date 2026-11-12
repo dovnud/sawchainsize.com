@@ -1,0 +1,109 @@
+{
+  "brand": "echo",
+  "model": "CS-450",
+  "name": "Echo CS-450",
+  "aliases": ["CS-450", "CS450"],
+  "type": "gas",
+  "displacement_cc": 45,
+  "popular": true,
+  "blurb": "45.0 cm3. Echo's CS-450 manual lists two .325\" .050\" chains on the 16\" and 18\" bars: 20BPX and 95VP, same drive-link counts. The 20\" bar is 20BPX only. Technical data also names 33SL, which the combination table does not assign to a bar.",
+  "notice": "Oregon's selection guide prints a narrow-kerf M-series .325\" line for a group that includes the CS-450 along with other Echo models. Those M codes are not in this saw's combination table. The table below follows the manual.",
+  "intro": "The Echo CS-450 operator's manual (X7503196706, September 2013) is a 45.0 ml saw: bore 43.0 mm, stroke 31.0 mm, dry weight 5.1 kg (11.2 lb) without chain and guide bar. Fuel capacity is 450 ml (15.2 US fl oz) at 50:1 with Echo's two-stroke oil. The manual says to use 89 octane unleaded and not to use fuel with more than 10 percent ethyl alcohol. Chain oil capacity is 280 ml (9.5 US fl oz). The oiler is adjustable and automatic. The chain brake is an automatic band. Idle is 2,700 rpm, clutch engagement 4,000 rpm, wide-open throttle 12,500 rpm. The sprocket is a rim, 7-tooth, 0.325 inch pitch. The tensioner is a side-access system. Standard features listed include a spiked bumper, a chain catcher and a spark-arrestor muffler. The combination table is the part that does not match a single-chain saw. Every approved bar is 0.325 inch pitch (8.26 mm) and 0.050 inch gauge. The 16 inch (406 mm) bar comes two ways: Echo bar 16F0AD3366 with chain 20BPX66CQ, 66 drive links, and Echo bar 16F0MD3366 with chain 95VP66CQ, also 66 drive links. The 18 inch (457 mm) bar is the same split: 18F0AD3372 with 20BPX72CQ, 72 links, and 18F0MD3372 with 95VP72CQ, 72 links. The 20 inch (508 mm) bar is only 20F0AD3378 with 20BPX78CQ, 78 links. There is no 95VP row at 20 inches. The link count follows the length. The chain type follows the bar part number. Ordering \"a 16 inch .325 chain for a CS-450\" still leaves 20BPX versus 95VP. Both are low-kickback chains in Echo's later catalog language, and this manual says every combination in the table meets ANSI B175.1 and/or CSA Z62.3. It also says that using a bar or chain other than the ones specified, or running without the tip guard in place, can cause severe kickback. The technical-data line for saw chain reads 20BPX/95VP/33SL. 33SL is not in the combination table. There is no bar length, no gauge row and no drive-link count for it on this saw. The sharpening section treats it as its own chain: 20BPX and 95VP use a 4.8 mm (3/16 inch) round file and a flat file, with a 30 degree top plate. The same section mentions 33SL at a 25 degree top plate. Because the combination table never assigns 33SL to a bar, this page does not publish a 33SL loop. The 3/16 inch file is the one for the chains that are actually listed. Sprocket wear is called out separately. The manual says to check the sprocket when you install a new chain, and to replace the sprocket when it has worn 0.5 mm (0.020 inch) or more, because a damaged sprocket wears the next chain. After each use it says to wash the bar and sprocket, then coat the metal with light oil, because some tree sap is corrosive. Tension is the side adjuster: unlock the chain brake, loosen the sprocket-guard nuts before turning the adjuster, or the guard and the tensioner will be damaged, then tighten until the chain contacts the underside of the bar. Oregon's selection guide, read the same day, prints the CS-450 inside a group with the CS-450P, CS-500P, CS-501P, CS-530 and CS-550P, and that group includes both standard H-series .325\" .050\" loops and a narrow-kerf M-series. The CS-501P already has its own page from Echo's later bars-and-chains chart, on 20LPX rather than 20BPX. The M-series codes are not repeated here as approved CS-450 bars. If a bar on the saw is stamped with a different gauge or a different link count than the table, the stamp wins, and the manual's warning about non-specified bars is the reason.",
+  "bars": [
+    {
+      "lengths_in": [16],
+      "label": "16″, 20BPX",
+      "pitch": "325",
+      "gauge": 0.05,
+      "drive_links": 66,
+      "file_size": "3/16",
+      "status": "ok",
+      "chains": [
+        {"brand": "Echo", "part_no": "20BPX66CQ", "role": "oem"},
+        {"brand": "Oregon", "part_no": "20BPX066", "role": "equivalent"}
+      ],
+      "source_ids": ["echo-cs450-manual"],
+      "note": "Echo bar 16F0AD3366. Chain 20BPX66CQ. Pitch 0.325 inch (8.26 mm), gauge 0.050, 66 drive links. File 4.8 mm (3/16 inch) for 20BPX. The 16 inch 95VP bar is a different part number and the same link count."
+    },
+    {
+      "lengths_in": [16],
+      "label": "16″, 95VP",
+      "pitch": "325",
+      "gauge": 0.05,
+      "drive_links": 66,
+      "file_size": "3/16",
+      "status": "ok",
+      "chains": [
+        {"brand": "Echo", "part_no": "95VP66CQ", "role": "oem"},
+        {"brand": "Oregon", "part_no": "95VP066", "role": "equivalent"}
+      ],
+      "source_ids": ["echo-cs450-manual"],
+      "note": "Echo bar 16F0MD3366. Chain 95VP66CQ. Same pitch, gauge and 66 drive links as 20BPX66CQ. The bar part number is the difference. File 4.8 mm (3/16 inch) for 95VP."
+    },
+    {
+      "lengths_in": [18],
+      "label": "18″, 20BPX",
+      "pitch": "325",
+      "gauge": 0.05,
+      "drive_links": 72,
+      "file_size": "3/16",
+      "status": "ok",
+      "chains": [
+        {"brand": "Echo", "part_no": "20BPX72CQ", "role": "oem"},
+        {"brand": "Oregon", "part_no": "20BPX072", "role": "equivalent"}
+      ],
+      "source_ids": ["echo-cs450-manual"],
+      "note": "Echo bar 18F0AD3372. Chain 20BPX72CQ, 72 drive links."
+    },
+    {
+      "lengths_in": [18],
+      "label": "18″, 95VP",
+      "pitch": "325",
+      "gauge": 0.05,
+      "drive_links": 72,
+      "file_size": "3/16",
+      "status": "ok",
+      "chains": [
+        {"brand": "Echo", "part_no": "95VP72CQ", "role": "oem"},
+        {"brand": "Oregon", "part_no": "95VP072", "role": "equivalent"}
+      ],
+      "source_ids": ["echo-cs450-manual"],
+      "note": "Echo bar 18F0MD3372. Chain 95VP72CQ, 72 drive links."
+    },
+    {
+      "lengths_in": [20],
+      "label": "20″, 20BPX only",
+      "pitch": "325",
+      "gauge": 0.05,
+      "drive_links": 78,
+      "file_size": "3/16",
+      "status": "ok",
+      "chains": [
+        {"brand": "Echo", "part_no": "20BPX78CQ", "role": "oem"},
+        {"brand": "Oregon", "part_no": "20BPX078", "role": "equivalent"}
+      ],
+      "source_ids": ["echo-cs450-manual"],
+      "note": "Echo bar 20F0AD3378. Chain 20BPX78CQ, 78 drive links. The manual does not list a 95VP chain at 20 inches."
+    }
+  ],
+  "sources": [
+    {
+      "id": "echo-cs450-manual",
+      "type": "manual",
+      "publisher": "Echo",
+      "title": "CS-450 instruction manual X7503196706 (September 2013): combination table, technical data, sharpening section and sprocket-wear limit",
+      "url": "https://www.echo-usa.com/getattachment/e74dc6b8-2478-4450-9b87-c506c938abe5/CS450es12_092613.pdf",
+      "retrieved": "2026-11-12"
+    },
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide: group line that names the CS-450 among other Echo models, including a narrow-kerf M series not used in the table on this page",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-12"
+    }
+  ],
+  "sources_note": "Echo CS-450 instruction manual, September 2013, read 12 Nov 2026. Oregon's selection guide was read the same day and is cited only to say which of its codes are not in the manual's table. 33SL is named in the manual's technical data and is not given a bar, so it is not a row.",
+  "last_verified": "2026-11-12"
+}

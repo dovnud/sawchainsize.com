@@ -1,0 +1,36 @@
+{
+  "brand": "greenworks",
+  "model": "1400102",
+  "name": "Greenworks 1400102",
+  "aliases": ["1400102", "20302", "20352", "20612", "20672", "PSPH40B00", "20192"],
+  "type": "battery",
+  "popular": false,
+  "blurb": "Oregon's pole-saw heading, not a rear-handle chainsaw. The line is S33: an 8 inch bar, 33 drive links, .050 inch, 3/8 inch low profile. Model strings on the line include 24V, 20V and 40V numbers, plus 20192 marked 6.5A.",
+  "notice": "Oregon prints 20192 as 6.5A on this same chain line. That label is amps, not a battery voltage. The chain Oregon printed is still S33. Confirm the tool before you treat 20192 as one of the battery pole saws.",
+  "intro": "This is a pole-saw line. Oregon's selection guide puts it under a pole saw heading in the Greenworks section, separate from the rear-handle chainsaws. The chain is S33. Bar length is 8 inches. Drive links are 33. Gauge is .050 inch. Pitch is 3/8 inch low profile. The model strings on that one line are 1400102 24V lithium-ion, 20192 6.5A, 20302 40V G-MAX, 20352 24V lithium-ion, 20612 20V lithium-ion, 20672 40V G-MAX, and PSPH40B00. Oregon did not print a different chain for the 24V tool and the 40V tool. One 8 inch loop covers the line as the guide is written. The 6.5A marking on 20192 is not a voltage. It sits in the same list, so the chain code is the same, and the power source may not be. This page does not reclassify 20192 as a battery saw. It reports the chain Oregon attached to the name. Thirty-three drive links is a short loop. The 10 inch pole-saw line just below it in the guide is S40, 40 drive links, .050 inch low profile, on a different set of model numbers (20062, 20362, 2000102 and PSCS06B00). Those 40 links will not tension on an 8 inch bar, and 33 links will not wrap a 10 inch bar. The rear-handle 20262 page is a 12 inch S45, 45 links. The 20222 page is a 14 inch S52, 52 links. All of those are .050 inch 3/8 inch low profile, which means the gauge matches and the length does not. Gauge match is not a fit. The guide does not print a file size for S33, or a bar part number, or a sprocket count. An 8 inch pole-saw chain is also not the Oregon PS250 chain. That pole saw, on its own page, is R34: 8 inches, 34 links, .043 inch. One more link, and the other gauge. An 8 inch bar can still be the wrong chain if you shop by length alone. Read the stamp on the pole-saw bar. If it says .043, you are not on S33. If it says 10 inches, you are on the other Greenworks pole line, not this one. That 10 inch line is worth naming so it is not ordered by accident. Oregon prints S40, 40 drive links, .050 inch, 3/8 inch low profile, for 20062 marked 7A 2-in-1, 20362 24V, 2000102 24V, and PSCS06B00. Forty links on 10 inches versus 33 links on 8 inches, same gauge. The rear-handle 12 inch block, the 20262 page, is S45, 45 links. From 8 inches to 10 inches to 12 inches the guide steps 33, 40, 45. None of those steps is optional. A chain that is one length off will not tension, even though every one of them is .050 inch low profile and would pass a glance at the gauge. The .043 inch Greenworks chains are a different letter. R56 is 16 inches, 56 links, .043 inch, on the DigiPro 20152, 20312 and 20322 lines. R versus S is the gauge. An 8 inch bar is short enough that people substitute a pruning-saw loop from another brand. Oregon's own PS250 pole saw is the example already on this site: R34, 8 inches, 34 links, .043 inch. One more link than S33, and .043 inch instead of .050 inch. Length alone would call both of them an 8 inch pole chain. The guide's code is the difference. This page is only the Greenworks pole line Oregon marked S33. No file size is printed for it, and no file size is supplied from another Greenworks row.",
+  "bars": [
+    {
+      "lengths_in": [8],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 33,
+      "file_size": null,
+      "status": "ok",
+      "chains": [{"brand": "Oregon", "part_no": "S33", "role": "equivalent"}],
+      "source_ids": ["oregon-tsc-fit-guide"],
+      "note": "Oregon pole-saw line: 1400102 24V, 20192 6.5A, 20302 40V G-MAX, 20352 24V, 20612 20V, 20672 40V G-MAX, PSPH40B00. Chain S33, 8 inch, 33 drive links, .050 inch, 3/8 inch low profile. No file size. 20192 is printed as 6.5A, not as a voltage."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide: Greenworks pole saw line S33, including 1400102",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-12"
+    }
+  ],
+  "sources_note": "Oregon Saw Chain Selection Guide, Greenworks pole-saw heading, read 12 Nov 2026. One chain for every model string on that line. The neighboring 10 inch pole line is a different chain and is not given a separate page.",
+  "last_verified": "2026-11-12"
+}
