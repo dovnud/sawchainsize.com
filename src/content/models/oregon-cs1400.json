@@ -1,0 +1,46 @@
+{
+  "brand": "oregon",
+  "model": "CS1400",
+  "name": "Oregon CS1400",
+  "aliases": ["CS1400", "CS1400-091"],
+  "type": "electric",
+  "popular": true,
+  "blurb": "Corded 15 amp saw. Oregon's CS1400 manual: 16 inch max bar, 3/8 inch low profile, .050 inch gauge, replacement chain 91PXL056G, bar 160SDEA041, 6-tooth sprocket. The selection guide's line for the CS1400 is S56, 56 drive links. The chain-tensioning gear is bolted to the bar.",
+  "intro": "The CS1400-091 is Oregon's corded chainsaw, and the manual is explicit about what it is not for. It is for occasional light-duty use. It is not designed to fell large trees or cut large-diameter logs, and it is not designed for tree service. Do not cut anything with a diameter greater than the effective cutting length, which the manual sets at 16 inches (40 cm) as the maximum bar and 15 inches (37 cm) as the effective cut. Power is 120 VAC, 60 Hz, 15 amps, 1,800 watts. Oil capacity is 4.7 oz (140 ml), and the oil Oregon names is Oregon bar and chain oil. Dry weight assembled is 12.9 lb (5.9 kg). Dry weight without bar and chain is 11 lb (5 kg). No-load chain speed is 48.1 ft/s (14.7 m/s). Chain pitch is 3/8 inch Low Profile. Chain gauge is .050 inch. The drive sprocket has 6 teeth, part 570964. The replacement bar is 160SDEA041. The replacement chain is 91PXL056G. The manual says that using any other cutting attachment raises the risk of injury, and that the wrong attachment can cause serious or fatal injury. It does not print the words \"56 drive links.\" Oregon's saw-chain selection guide does. The CS1400 line in that guide is S56, 16 inch bar, 56 drive links, .050 inch, 3/8 inch low profile. The 056 in 91PXL056G is that same count. S56 is the guide's retail code. 91PXL056G is the loop the manual tells you to install. They are both Oregon, and they are both this pitch and gauge. The CS1500 page is a different corded saw: 18 inch maximum, chain 91PS062X, 62 drive links, and a PowerSharp sharpener. The CS1400 manual does not describe a PowerSharp stone. It describes a chain-tensioning gear, part 570963, that bolts to the guide bar. A rubber o-ring has to be in place around the pin on the tensioner before the tensioner is screwed onto the bar. The gear sits on the side of the bar facing you so the rectangular piece does not stick past the bar, and the mounting stud passes through the gear. Tensioning is done cold. The manual says a hot chain can contract as it cools and damage the bar or the chain. Unplug the saw, hold the nose up, and turn the chain-tensioning ring clockwise until the lowest cutters underneath the bar solidly contact the bar. A light pull should snap the chain back after it is pulled 3 mm off the bar. If the chain is still loose at maximum tension, replace the chain. The oiler has to be primed if the saw is new or has been stored. Unplug it, take the side cover off, and look for oil on the bar pad. If the pad is dry, refit the cover, run it, and check again. The manual says never to run the saw if oil is not visible in the window, and never to use a lubricant that was not made for bar and chain, because the oil system can clog. A little oil seeping from the bar in storage is normal. The bar cover, and an absorbent pad under the bar, is the manual's way of living with that. The file diameter is not in the specification table. This page does not add one.",
+  "bars": [
+    {
+      "lengths_in": [16],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 56,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {"brand": "Oregon", "part_no": "91PXL056G", "role": "oem"},
+        {"brand": "Oregon", "part_no": "S56", "role": "equivalent"}
+      ],
+      "source_ids": ["oregon-cs1400-manual", "oregon-tsc-fit-guide"],
+      "note": "Manual: bar 160SDEA041, chain 91PXL056G, pitch 3/8 inch Low Profile, gauge .050 inch, 6-tooth sprocket part 570964, tensioning gear part 570963, 16 inch maximum bar, 15 inch effective cut. Selection guide: CS1400, S56, 16 inch, 56 drive links, .050 inch, 3/8 inch low profile. No round-file diameter is printed."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-cs1400-manual",
+      "type": "manual",
+      "publisher": "Oregon",
+      "title": "CS1400-091 original instruction manual: specifications, replacement chain 91PXL056G, bar 160SDEA041, sprocket, tensioning gear and oiler prime",
+      "url": "https://www.oregonproducts.com/medias/604195ab-CS1400-OM-NA-web.pdf?attachment=true&context=bWFzdGVyfHJvb3R8MTM2MjMxMzJ8YXBwbGljYXRpb24vcGRmfGFEaGlMMmhtTVM4NE9UQXlNRGMwTVRBMU9EZzJMbkJrWmd8OTMwZTE0NzBlODFhYzkzMjJkYjg5MmU0OTU4Y2M1YmE4NWU0OTI0ODQwOTExOTcwMzFlYjU0MWY1ZmQ3MzY4OA",
+      "retrieved": "2026-11-12"
+    },
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide: CS1400 line S56, 16 inch, 56 drive links, .050 inch, 3/8 inch low profile",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-12"
+    }
+  ],
+  "sources_note": "Oregon CS1400-091 instruction manual and Oregon's Saw Chain Selection Guide, both read 12 Nov 2026. The manual names 91PXL056G and the pitch and gauge. The selection guide supplies the words 56 drive links on the CS1400 line.",
+  "last_verified": "2026-11-12"
+}

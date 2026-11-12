@@ -1,0 +1,49 @@
+{
+  "brand": "dewalt",
+  "model": "DCCS672 / DCCS677",
+  "name": "DEWALT DCCS672 / DCCS677",
+  "aliases": ["DCCS672", "DCCS672B", "DCCS672X1", "DCCS677", "DCCS677B"],
+  "type": "battery",
+  "popular": true,
+  "blurb": "60V max saws in one DEWALT manual. The DCCS672 takes 18 inch chain DWO1DT618 and bar DWZCSB18, and is rated to cut logs up to 16 inches. The DCCS677 takes 20 inch chain DWO1DT620 and bar DWZCSB20, logs up to 18 inches. The manual does not print pitch, gauge or drive links.",
+  "notice": "Pitch, gauge and drive-link count are not in the instruction manual. Order the chain part number the manual names, and read the stamp on the bar before you accept a substitute loop.",
+  "intro": "DEWALT's instruction manual NA031192 covers the DCCS672 and the DCCS677 as 60V max chain saws. They are not two lengths of one part number. The DCCS672 is for cutting logs up to 16 inches (406 mm) in diameter. The DCCS677 is for logs up to 18 inches (508 mm). The manual's replacement paragraph is specific. The DCCS672 requires replacement 18 inch (45 cm) chain DWO1DT618 and replacement 18 inch (45 cm) bar DWZCSB18. The DCCS677 requires replacement 20 inch (50 cm) chain DWO1DT620 and replacement 20 inch (50 cm) bar DWZCSB20. Those are the part numbers the manual tells you to take to a service center. It does not print a pitch, a gauge, or a drive-link count next to them. This page does not borrow those three numbers from a retail cross-reference. The older DEWALT saws already on this site, the DCCS620, DCCS670 and DCCS690, are in Oregon's selection guide as .043 inch low-profile loops. The DCCS672 and DCCS677 are not lines in that guide. Treating them as another R56 or R45 saw would be a guess. What the manual does print is the service procedure, and it is different from the tool-free knobs on many 20V saws. Chain changes start with the battery removed. The sprocket cover comes off, and the tension screw, turned with the flat screwdriver end of the included wrench, lets the bar move back so the chain can come out of the groove. The new chain goes in the bar slot with the cutters facing the direction shown by the arrow on the sprocket cover. The cover goes back on, the bar-lock nuts are snugged and then loosened one full turn so the chain can be tensioned, and the tension screw is turned clockwise until the chain is snug. The tension check is a pull of 1/4 inch (6 mm) from the middle of the bar with finger and thumb. The chain should snap back, and there should be no sag on the underside. The bar-lock nuts are then tightened to 6 ft lbs (8 Nm). A new chain stretches in the first few hours. The manual says to check tension often during the first two hours, battery removed. Over-tension wears the bar and the chain. Every time the chain is replaced, flip the bar so the rails wear evenly. Oil is an automatic system. The level indicator is on the saw. If the oil is under a quarter full, the battery comes out and the tank is filled. The manual says to empty the oil tank when you finish cutting. The specified oil is a high-quality bar and chain oil. A non-detergent SAE 30 motor oil is allowed as a temporary substitute. Vegetable-based bar and chain oil is what it recommends when pruning, because mineral oil may harm trees. Waste oil and very thick oil are ruled out because they can damage the saw. Sharpening has a hard stop the other manuals on this site do not share. DEWALT says not to over-file the rakers, because that increases kickback, and it says that if the chain has been sharpened more than four times, replace it. Each sharpening, it says, costs some of the low-kickback behavior. Cutters that touch dirt or a nail are dull immediately. The chain brake is the front hand guard. Push it forward until it clicks to engage the brake. In a kickback the left hand is expected to hit that guard and stop the tool. The manual wants the brake engaged and the battery out whenever the saw is not in use. Felling instructions in the same book are the ordinary notch and hinge: notch about one third of the diameter, back cut at least 2 inches (51 mm) above the notch, leave hinge wood. That section does not change the chain part number. The chain part number changes with the model: DWO1DT618 on the 18 inch saw, DWO1DT620 on the 20 inch saw.",
+  "bars": [
+    {
+      "lengths_in": [18],
+      "label": "DCCS672, 18″",
+      "pitch": null,
+      "gauge": null,
+      "drive_links": null,
+      "file_size": null,
+      "status": "verify",
+      "chains": [{"brand": "DEWALT", "part_no": "DWO1DT618", "role": "oem"}],
+      "source_ids": ["dewalt-dccs672-manual"],
+      "note": "Manual: DCCS672 replacement chain DWO1DT618 and bar DWZCSB18, both 18 inch (45 cm). Rated log diameter 16 inches (406 mm). Pitch, gauge and drive links are not printed. Tension check is a 1/4 inch (6 mm) pull. Bar nuts tightened to 6 ft lbs (8 Nm). Replace the chain after more than four sharpenings."
+    },
+    {
+      "lengths_in": [20],
+      "label": "DCCS677, 20″",
+      "pitch": null,
+      "gauge": null,
+      "drive_links": null,
+      "file_size": null,
+      "status": "verify",
+      "chains": [{"brand": "DEWALT", "part_no": "DWO1DT620", "role": "oem"}],
+      "source_ids": ["dewalt-dccs672-manual"],
+      "note": "Manual: DCCS677 replacement chain DWO1DT620 and bar DWZCSB20, both 20 inch (50 cm). Rated log diameter 18 inches (508 mm). Pitch, gauge and drive links are not printed. Same tension and oil procedure as the DCCS672. The chain part number is not DWO1DT618."
+    }
+  ],
+  "sources": [
+    {
+      "id": "dewalt-dccs672-manual",
+      "type": "manual",
+      "publisher": "DEWALT",
+      "title": "DCCS672, DCCS677 instruction manual NA031192: intended use, replacement chain and bar part numbers, tension, oil and the four-sharpening limit",
+      "url": "https://assets.dewalt.com/GLOBALBOM/QU/DCCS672B/1/Instruction_Manual/EN/NA031192_DCCS672_677.pdf",
+      "retrieved": "2026-11-12"
+    }
+  ],
+  "sources_note": "DEWALT instruction manual NA031192 for the DCCS672 and DCCS677, read 12 Nov 2026. Pitch, gauge and drive links are not in that manual, so they are not filled from another brand's fit guide.",
+  "last_verified": "2026-11-12"
+}

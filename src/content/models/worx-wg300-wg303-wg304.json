@@ -1,0 +1,97 @@
+{
+  "brand": "worx",
+  "model": "WG300 / WG303 / WG304",
+  "name": "Worx WG300 / WG303 / WG304",
+  "aliases": ["WG300", "WG303", "WG303.1", "WG304", "WG304.1", "WG305", "WG309", "WG310"],
+  "type": "electric",
+  "popular": false,
+  "blurb": "Oregon's selection guide, not the WG322 manual. The WG300, WG303 and WG304 are printed with 14 inch / 53 links, 16 inch / 57 links and 18 inch / 63 links, all .050 inch low profile. Those counts are one link off the common 52, 56 and 62 loops.",
+  "notice": "WG305 is 14 inch / 52 links on the same guide. WG309 is 10 inch / 40 links at .050 inch. The WG322 manual is 10 inch / 40 links at 0.043 inch. Same length and link count, different gauge. The JawSaw is a different pitch and has its own page.",
+  "intro": "Oregon's saw-chain selection guide is the document for these Worx catalog numbers. It does not list the WG322. The WG300, WG303, WG303.1, WG304 and WG304.1 are printed as one block against three chains. S53 is a 14 inch bar, 53 drive links, .050 inch, 3/8 inch low profile. S57 is 16 inch, 57 drive links, the same gauge and pitch. S63 is 18 inch, 63 drive links, the same gauge and pitch. The guide does not say which of those three lengths left the factory on which catalog number. It lists the models once, beside all three chains, which is how Oregon marks a model line approved for more than one bar. The stamp on the bar is the length you have. The counts are the reason this page exists. A 14 inch low-profile .050 inch chain is usually 52 drive links. Oregon prints 53 for this block. A 16 inch low-profile .050 inch chain is usually 56. Oregon prints 57. An 18 inch low-profile .050 inch chain is usually 62. Oregon prints 63. One extra drive link is a loop that will not tension on the shorter bar, and one missing link is a loop that will not reach. The boxes look like the common S52, S56 and S62 chains. The last digit is the whole difference. The guide does not print a file size, a bar part number, or a sprocket tooth count for this block, so those cells are empty. Other Worx lines on the same page of the guide are not this block, and they are easy to mix up because the lengths overlap. WG305 and WG305.1 are S52: 14 inch, 52 drive links, .050 inch low profile. That is the common 14 inch count, and it is not the 53-link chain printed for the WG300 block. A 14 inch Worx saw can be either, and the model number is the first cut, the bar stamp the second. WG309 is S40: 10 inch, 40 drive links, .050 inch low profile. The WG322 manual, which has its own page, is also 10 inch and 40 drive links, at 0.043 inch, Oregon 90PX040G. Forty links does not mean the chains interchange. WG310 is S34: 8 inch, 34 drive links, .050 inch low profile. The JawSaw models WG307, WG308, WG320 and WG321 are A42: 6 inch, 42 drive links, .050 inch, 1/4 inch pitch. That is not a low-profile 3/8 inch chain at all, and it is on the JawSaw page. Oregon does not print tensioning steps in the selection guide. The WG322 manual's ratchet knob and half-a-drive-link check belong to that saw, not to this chart. Until a WG300 manual is the source, this page stops at the chains Oregon printed.",
+  "bars": [
+    {
+      "lengths_in": [14],
+      "label": "WG300 / WG303 / WG304, 14″",
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 53,
+      "file_size": null,
+      "status": "ok",
+      "chains": [{"brand": "Oregon", "part_no": "S53", "role": "equivalent"}],
+      "source_ids": ["oregon-tsc-fit-guide"],
+      "note": "Oregon prints S53 for WG300, WG303, WG303.1, WG304 and WG304.1: 14 inch, 53 drive links, .050 inch, 3/8 inch low profile. No file size. This is not the WG305 line, which Oregon prints as S52 (52 links) at the same length and gauge."
+    },
+    {
+      "lengths_in": [16],
+      "label": "WG300 / WG303 / WG304, 16″",
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 57,
+      "file_size": null,
+      "status": "ok",
+      "chains": [{"brand": "Oregon", "part_no": "S57", "role": "equivalent"}],
+      "source_ids": ["oregon-tsc-fit-guide"],
+      "note": "Oregon prints S57 on the same model block: 16 inch, 57 drive links, .050 inch, 3/8 inch low profile."
+    },
+    {
+      "lengths_in": [18],
+      "label": "WG300 / WG303 / WG304, 18″",
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 63,
+      "file_size": null,
+      "status": "ok",
+      "chains": [{"brand": "Oregon", "part_no": "S63", "role": "equivalent"}],
+      "source_ids": ["oregon-tsc-fit-guide"],
+      "note": "Oregon prints S63 on the same model block: 18 inch, 63 drive links, .050 inch, 3/8 inch low profile."
+    },
+    {
+      "lengths_in": [14],
+      "label": "WG305, 14″",
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 52,
+      "file_size": null,
+      "status": "ok",
+      "chains": [{"brand": "Oregon", "part_no": "S52", "role": "equivalent"}],
+      "source_ids": ["oregon-tsc-fit-guide"],
+      "note": "Oregon prints S52 for WG305 and WG305.1: 14 inch, 52 drive links, .050 inch, 3/8 inch low profile. One link fewer than the WG300 block's 14 inch chain."
+    },
+    {
+      "lengths_in": [10],
+      "label": "WG309, 10″",
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 40,
+      "file_size": null,
+      "status": "ok",
+      "chains": [{"brand": "Oregon", "part_no": "S40", "role": "equivalent"}],
+      "source_ids": ["oregon-tsc-fit-guide"],
+      "note": "Oregon prints S40 for the WG309: 10 inch, 40 drive links, .050 inch, 3/8 inch low profile. The WG322 manual is also 10 inch and 40 links, at 0.043 inch."
+    },
+    {
+      "lengths_in": [8],
+      "label": "WG310, 8″",
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 34,
+      "file_size": null,
+      "status": "ok",
+      "chains": [{"brand": "Oregon", "part_no": "S34", "role": "equivalent"}],
+      "source_ids": ["oregon-tsc-fit-guide"],
+      "note": "Oregon prints S34 for the WG310: 8 inch, 34 drive links, .050 inch, 3/8 inch low profile."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide: Worx section, WG300 family, WG305, WG309 and WG310",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-12"
+    }
+  ],
+  "sources_note": "Oregon Saw Chain Selection Guide, Worx section, read 12 Nov 2026. No file size is printed. The JawSaw A42 line is on its own page. The WG322 is not in this guide.",
+  "last_verified": "2026-11-12"
+}

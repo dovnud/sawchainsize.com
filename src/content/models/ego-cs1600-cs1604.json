@@ -1,0 +1,54 @@
+{
+  "brand": "ego",
+  "model": "CS1600 / CS1604",
+  "name": "EGO CS1600 / CS1604",
+  "aliases": ["CS1600", "CS1604", "AC1600"],
+  "type": "battery",
+  "popular": true,
+  "blurb": "56V 16 inch saw. The CS1604 is the CS1600 with a battery and charger. EGO's manual names Oregon chain 90PX056X and bar 164MLEA041, gauge 0.043 inch. EGO's product page calls the pitch 3/8 inch low profile. Oregon's 90PX056 listing is 56 drive links.",
+  "notice": "The manual prints the pitch as 3/8 inch (9.5 mm). The chain it names is Oregon 90PX, which is 3/8 inch low profile, not standard 3/8 inch. A standard 3/8 inch 56-link loop is the wrong chain.",
+  "intro": "EGO's operator's manual for the 56V cordless chain saw is written for the CS1600. The CS1604 is the same saw sold with a 5.0 Ah battery and charger. EGO's product page lists both names under the 16 inch saw and states a .043 inch gauge chain with 3/8 inch low-profile pitch, a chain kickback brake, and a reversible bar. The manual's specification table is more literal and less careful about the word low profile. It lists chain pitch 3/8 inch (9.5 mm), chain gauge 0.043 inch (1.1 mm), and chain type 90PX056X (Oregon). The guide bar in the replacement table is 16 inch, Oregon 164MLEA041, EGO part AG1600, part number 3705964001. The saw chain is 90PX056X, EGO part AC1600, part number 3810671001. The manual says to order the bar listed in the manual when you replace it, because the saw comes with a small-radius nose and a small nose has less kickback potential. It also says the only replacement bars and chains are the ones the manufacturer specifies. Oregon's product page for 90PX056 states the loop as 3/8 inch low profile, .043 inch, 56 drive links, for a 16 inch bar, and it names the EGO CS1600 and CS1604 among the saws that loop fits. That is the drive-link count. The manual itself puts the count in the part number 90PX056X and does not add the words drive links. Fifty-six links of standard 3/8 inch chain, the chain used on many 16 inch gas saws at .050 or .063 inch, will not match this bar. The pitch family is low profile, and the gauge is .043 inch. The CS1400 page on this site is a different EGO saw: Oregon's selection guide prints it as R52, a 14 inch .043 inch loop. The CS1804 page is S62, an 18 inch .050 inch loop. Neither number is this 16 inch 90PX056X chain. Tension on the CS1600 is a side-cover knob plus a chain-tensioning knob, and the manual also mentions a slotted screwdriver. The chain is correctly tensioned when there is no sag on the underside and the chain is snug but can be turned by hand without binding. The side-cover knob is checked before use. Replacement starts with the battery out and the oil cap tight. The saw goes on its side, side cover up. Gloves on. The side cover comes off by turning the knob counterclockwise. The tensioning knob is turned toward the front handle as far as it will go, then the bar and chain come off. The manual says that moment is when you inspect the drive sprocket for wear. The new chain is laid out and unkinked. Drive links go in the bar groove with a loop at the back of the bar. Small arrows engraved in the chain have to point the same way as the arrow molded into the housing. If they oppose each other, the chain and bar are turned over. The tension adjusting pin has to enter its hole as the side cover goes on. Slack comes out by turning the tensioning knob clockwise until the drive links sit in the bar. The manual warns that a chain that is still loose at maximum tension should be replaced. Oil is part of the same job. The saw is not described as maintenance-free. The automatic oiler needs bar and chain oil, and the manual tells you to keep the oil cap tight before you tip the saw onto its side for a chain change. A chain run without oil wears the bar, the chain and the sprocket, and the manual connects that wear to a chain that breaks or derails. The CS1604 does not get a different chain because a battery was in the box. AC1600 is the chain EGO lists for the CS1600, and the Oregon number on that row is 90PX056X.",
+  "bars": [
+    {
+      "lengths_in": [16],
+      "pitch": "3/8-lp",
+      "gauge": 0.043,
+      "drive_links": 56,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {"brand": "EGO", "part_no": "AC1600", "role": "oem"},
+        {"brand": "Oregon", "part_no": "90PX056X", "role": "oem"}
+      ],
+      "source_ids": ["ego-cs1600-manual", "ego-cs1600-page", "oregon-90px056"],
+      "note": "EGO manual: chain 90PX056X, EGO AC1600, part 3810671001; bar 164MLEA041, EGO AG1600, part 3705964001; gauge 0.043 inch; pitch printed as 3/8 inch (9.5 mm). EGO's 16 inch saw page calls that pitch 3/8 inch low profile. Oregon's 90PX056 page: 56 drive links, .043 inch, 3/8 inch low profile, 16 inch bar, and it names the CS1600 and CS1604. No round-file diameter is printed in the manual table."
+    }
+  ],
+  "sources": [
+    {
+      "id": "ego-cs1600-manual",
+      "type": "manual",
+      "publisher": "EGO",
+      "title": "CS1600 56V cordless chain saw operator's manual: specification table (90PX056X, 0.043 inch, 3/8 inch) and the chain-replacement and tension procedure. The CS1604 is the same saw with a battery and charger.",
+      "retrieved": "2026-11-12"
+    },
+    {
+      "id": "ego-cs1600-page",
+      "type": "manual",
+      "publisher": "EGO",
+      "title": "EGO 16 inch chain saw product page: CS1600 and CS1604, .043 inch gauge, 3/8 inch low-profile pitch",
+      "url": "https://egopowerplus.com/16-inch-chain-saw/",
+      "retrieved": "2026-11-12"
+    },
+    {
+      "id": "oregon-90px056",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon 90PX056 product page: 3/8 inch low profile, .043 inch, 56 drive links, 16 inch bar, fitment includes EGO CS1600 and CS1604",
+      "url": "https://www.oregonproducts.com/en/oregon-90px-advancecut-chainsaw-chain-for-16-inch-bar--56-drive-links-%e2%80%93-fits-dewalt%2c-echo%2c-makita%2c-milwaukee%2c-craftsman/p/90px056g",
+      "retrieved": "2026-11-12"
+    }
+  ],
+  "sources_note": "EGO CS1600 operator's manual and EGO's 16 inch saw page, plus Oregon's 90PX056 product page, read 12 Nov 2026. The drive-link count is Oregon's. The manual supplies the part number, the gauge, and the 3/8 inch pitch wording. Low profile is EGO's product page plus Oregon's page for the named chain.",
+  "last_verified": "2026-11-12"
+}

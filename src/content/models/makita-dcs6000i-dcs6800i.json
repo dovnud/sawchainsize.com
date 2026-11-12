@@ -1,0 +1,35 @@
+{
+  "brand": "makita",
+  "model": "DCS6000I / DCS6800I",
+  "name": "Makita DCS6000I / DCS6800I",
+  "aliases": ["DCS6000I", "DCS6800I", "DCS6000", "DCS6800"],
+  "type": "gas",
+  "popular": false,
+  "blurb": "Oregon prints these two Makita saws on one line: D72, a 20 inch bar, 72 drive links, .050 inch, standard 3/8 inch. That is not the low-profile chain on Makita's battery saws.",
+  "intro": "Makita's battery saws on this site live in Oregon's R and S codes, which are 3/8 inch low profile. The DCS6000I and DCS6800I are a different line in the same selection guide. Oregon prints the two model numbers together against one chain: D72, bar length 20 inches, 72 drive links, gauge .050 inch, pitch 3/8 inch. The pitch cell does not say low profile. D72 is Oregon's standard 3/8 inch, .050 inch chain. Seventy-two drive links on a 20 inch bar is the count used on full-size 3/8 inch farm saws. A 20 inch low-profile chain is a different pitch and a different link count, and it will not run on a standard 3/8 inch sprocket. The guide does not print a second bar length for this pair, so a 16 or 18 inch loop is not authorized by this line. It does not print a file size. Standard 3/8 inch chain is often filed with 7/32 inch, and STIHL's catalog uses 13/64 inch for its own 3/8 inch chain. Neither number is printed on this Oregon line, so the file cell is empty. It does not print a bar part number or a sprocket tooth count. The DCS430 and DCS431, which have their own page, are the .325 inch Makita pair in the same guide: H66, H72 and H78 at .050 inch. H72 is 18 inch and 72 links at .325 inch. D72 is 20 inch and 72 links at standard 3/8 inch. The link count matches. The pitch and the length do not. Ordering \"72 drive links for a Makita\" without the pitch is how those two pages get confused. Oregon does not give displacement, weight, or a tension procedure for the DCS6000I. This page is the chain line only. Read the stamp. If the bar says .325 or low profile, you are not on the chain Oregon printed for this pair. The same Makita section of the guide is full of other pitches, which is why a Makita logo on the saw is not a chain size. XCU03, XCU04, EA3200S and EA3500S are printed with both R codes (.043 inch low profile) and S codes (.050 inch low profile) at 12, 14 and 16 inches. XCU05 and XCU06 are short R codes, 8 and 10 inches. DCS6400, DCS6421, DCS7300 and DCS7900 are a standard 3/8 inch block at D60, D68 and D72: 16 inch / 60 links, 18 inch / 68, 20 inch / 72. That D72 is 20 inches and 72 links, the same length and link count as this page, on a longer list of model numbers. The DCS6000I line is only D72. It is not given the 16 and 18 inch D60 and D68 rows those other saws get. EA6100 and several DCS5000-series saws are a starred .325 inch block at H66, H72 and H78. The star is printed and not defined in the guide text, and those H codes are the DCS430 page, not this one. Using a low-profile 91PX loop because the saw says Makita puts a smaller chain on a standard 3/8 inch sprocket. Using an H72 loop because the link count is also 72 puts a .325 inch chain on a 3/8 inch sprocket. D72 means standard 3/8 inch, .050 inch, 72 drive links, 20 inch bar, for these two model numbers, and the guide stops there.",
+  "bars": [
+    {
+      "lengths_in": [20],
+      "pitch": "3/8",
+      "gauge": 0.05,
+      "drive_links": 72,
+      "file_size": null,
+      "status": "ok",
+      "chains": [{"brand": "Oregon", "part_no": "D72", "role": "equivalent"}],
+      "source_ids": ["oregon-tsc-fit-guide"],
+      "note": "Oregon prints D72 for DCS6000I and DCS6800I: 20 inch bar, 72 drive links, .050 inch, standard 3/8 inch. The guide does not mark this line low profile. No file size is printed."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide: Makita DCS6000I and DCS6800I, chain D72",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-12"
+    }
+  ],
+  "sources_note": "Oregon Saw Chain Selection Guide, Makita section, read 12 Nov 2026. One chain is printed for the pair. No file size.",
+  "last_verified": "2026-11-12"
+}

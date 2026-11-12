@@ -18,18 +18,21 @@ const shop = guideShop('1-4-pitch-chainsaw-chain');
 const models = await getModels();
 type Row = { m: Model; len: number; dl: number | null; file: string | null; part: string; status: string };
 const rows: Row[] = [];
+const rows050: Row[] = [];
 const flagged: { m: Model; lens: number[]; note: string }[] = [];
 for (const m of models) {
   for (const b of m.data.bars) {
     if (b.pitch !== '1/4') continue;
     const oem = b.chains.filter((c) => c.role === 'oem');
-    const part = oem.map((c) => c.part_no).join(', ') || 'not listed';
+    const equiv = b.chains.filter((c) => c.role === 'equivalent');
+    const part = oem.map((c) => c.part_no).join(', ') || equiv.map((c) => `${c.brand} ${c.part_no}`).join(', ') || 'not listed';
     if (b.status !== 'ok' || b.gauge == null) {
       flagged.push({ m, lens: b.lengths_in, note: b.status === 'ok' ? 'missing gauge or count' : b.status });
       continue;
     }
-    if (b.gauge !== 0.043) throw new Error(`${m.id} 1/4″ row is gauge ${b.gauge}, not .043″`);
-    for (const len of b.lengths_in) rows.push({ m, len, dl: b.drive_links ?? null, file: b.file_size ?? null, part, status: b.status });
+    if (b.gauge !== 0.043 && b.gauge !== 0.05) throw new Error(`${m.id} 1/4″ row is gauge ${b.gauge}, not .043″ or .050″`);
+    const bucket = b.gauge === 0.043 ? rows : rows050;
+    for (const len of b.lengths_in) bucket.push({ m, len, dl: b.drive_links ?? null, file: b.file_size ?? null, part, status: b.status });
   }
 }
 if (!rows.length) throw new Error('no verified 1/4″ rows');
@@ -52,12 +55,12 @@ const husq = grouped().filter((g) => g.m.data.brand === 'husqvarna');
 const other = grouped().filter((g) => g.m.data.brand !== 'stihl' && g.m.data.brand !== 'husqvarna');
 if (!stihl.length || !husq.length) throw new Error('1/4″ table missing a brand group');
 
-const desc = '1/4″ pitch chainsaw chain on this site is .043″ gauge: STIHL 71 PM3 / 71 PMM3 with a 1/8″ file, Husqvarna SP11G with a 9/64″ file, and drive-link counts that are not shared at the same bar length.';
+const desc = '1/4″ pitch chain on the STIHL and Husqvarna saws here is .043″ gauge: 71 PM3 / 71 PMM3 with a 1/8″ file, Husqvarna SP11G with a 9/64″ file. The Worx JawSaw is the exception Oregon prints at 1/4″ .050″.';
 const faqs = [
-  { q: 'What is 1/4″ pitch chainsaw chain?', a: 'It is a smaller pitch than 3/8″ low profile or .325″. On every verified 1/4″ row on this site the gauge is .043″. STIHL’s 2025 catalog calls that family 1/4″ PICCO and numbers it 71 PM3 or 71 PMM3 (the first digit 7 is 1/4″ PICCO). Husqvarna’s fit-up guide lists SP11G X-Cut on the 125i. Oregon’s drive-link number table has a different 1/4″ chain: family 25, which is .050″ gauge, not .043″.' },
+  { q: 'What is 1/4″ pitch chainsaw chain?', a: 'It is a smaller pitch than 3/8″ low profile or .325″. The verified STIHL and Husqvarna 1/4″ rows on this site are .043″ gauge. STIHL’s 2025 catalog calls that family 1/4″ PICCO and numbers it 71 PM3 or 71 PMM3 (the first digit 7 is 1/4″ PICCO). Husqvarna’s fit-up guide lists SP11G X-Cut on the 125i. Oregon’s drive-link number table has a different 1/4″ chain: family 25, which is .050″ gauge, not .043″. Oregon’s selection guide also prints that .050″ gauge on the Worx JawSaw (A42, 6″, 42 drive links).' },
   { q: 'What file size for 1/4″ chain?', a: 'It depends whose chain you are filing. STIHL’s 2025 catalog file table lists 3.2 mm (1/8″) for 1/4″ STIHL PICCO, part 7010 871 0400. Husqvarna’s Bar & Chain Fit-up Guide lists a 9/64″ file on the 125i’s SP11G rows. Those are not the same diameter. Use the file the maker of that loop publishes. Do not average them.' },
   { q: 'Can I put a STIHL 71 PM3 loop on a Husqvarna 125i bar?', a: 'Not as a length-for-length swap. Both are 1/4″ pitch and .043″ gauge, but the drive-link counts differ. A 10″ STIHL bar in the table below is 56 links; the 125i’s 10″ bar is 60. A 12″ STIHL bar is 64 links (65 on the MSA 161 T); the 125i’s 12″ bar is 68. Pitch and gauge are not enough. Count the links, or read the count on the bar stamp.' },
-  { q: 'Is Oregon 25 the same as STIHL 71 PM3?', a: 'No. Oregon’s maintenance manual lists family 25 as 1/4″ pitch at .050″ (1.3 mm) gauge. The STIHL and Husqvarna 1/4″ loops on this site are .043″. A .050″ loop does not belong in a .043″ groove. This site does not yet store a 1/4″ .050″ row.' },
+  { q: 'Is Oregon 25 the same as STIHL 71 PM3?', a: 'No. Oregon’s maintenance manual lists family 25 as 1/4″ pitch at .050″ (1.3 mm) gauge. The STIHL and Husqvarna 1/4″ loops on this site are .043″. A .050″ loop does not belong in a .043″ groove. The Worx JawSaw is the saw page that stores a 1/4″ .050″ loop: Oregon’s selection guide prints A42, 6″, 42 drive links. That is not a 71 PM3 substitute.' },
   { q: 'How do I measure 1/4″ pitch?', a: 'Oregon defines pitch as the distance between any three consecutive rivets, divided by two. For 1/4″ pitch that span is 1/2″ (0.500″). The same method, and the spans for .325″, 3/8″ and .404″, is in the verification guide. Confirm gauge with a caliper on a drive link, and confirm the drive-link count by marking one tang and counting around the loop.' },
 ];
 const jsonld = [webPageLd('1/4″ pitch chainsaw chain', path, desc, modified), faqLd(faqs)];
@@ -70,7 +73,7 @@ const specHref = chainUrl(chainKey('1/4', 0.043));
     <div class="pagehead">
       <Crumbs crumbs={[{ name: 'Guides', path: '/guides/' }, { name: '1/4″ pitch chain' }]} />
       <h1>1/4″ pitch chainsaw chain</h1>
-      <p class="lede">Every verified 1/4″ row on this site is .043″ gauge. STIHL lists that family as 1/4″ PICCO (71 PM3 or 71 PMM3) and files it with 1/8″. Husqvarna lists SP11G X-Cut on the 125i and files it with 9/64″. The pitch and gauge match. The file and the drive-link counts do not. Oregon’s 1/4″ family 25 is .050″, which is a different groove.</p>
+      <p class="lede">The verified STIHL and Husqvarna 1/4″ rows on this site are .043″ gauge. STIHL lists that family as 1/4″ PICCO (71 PM3 or 71 PMM3) and files it with 1/8″. Husqvarna lists SP11G X-Cut on the 125i and files it with 9/64″. The pitch and gauge match. The file and the drive-link counts do not. Oregon’s 1/4″ family 25 is .050″, a different groove, and Oregon’s selection guide prints that gauge on the Worx JawSaw.</p>
     </div>
 
     <section class="block">
@@ -121,7 +124,8 @@ const specHref = chainUrl(chainKey('1/4', 0.043));
           </tbody>
         </table>
       </div>
-      {other.length ? <p class="src">Other brands with a verified 1/4″ row: {other.map((g) => g.m.data.name).join(', ')}. None are stored today.</p> : null}
+      {other.length ? <p class="src">Other brands with a verified 1/4″ .043″ row: {other.map((g) => g.m.data.name).join(', ')}.</p> : null}
+      {rows050.length ? <p class="src">Verified 1/4″ .050″ {rows050.length === 1 ? 'row' : 'rows'}: {rows050.map((r) => <a href={modelUrl(r.m)}>{r.m.data.name}</a>)} {rows050.map((r) => `${r.len}${Q} · ${r.dl ?? '?'} DL · ${r.part}`).join('; ')}. Gauge .050″, not the .043″ tables above.</p> : null}
       <p class="src">Tables are generated from verified 1/4″ rows already stored on the saw pages. A length flagged verify or conflict is left out. {flagged.length ? <>Flagged and omitted: {flagged.map((f, i) => <>{i ? '; ' : ''}<a href={modelUrl(f.m)}>{f.m.data.name}</a> {f.lens.map((n) => `${n}${Q}`).join('/')} ({f.note})</>)}.</> : null}</p>
     </section>
 
@@ -129,7 +133,7 @@ const specHref = chainUrl(chainKey('1/4', 0.043));
 
     <section class="block">
       <h2>Oregon 25 is 1/4″ at a different gauge</h2>
-      <p style="max-width:72ch">Oregon’s number table, the one decoded on <a href="/guides/oregon-chain-numbers/">Oregon chain numbers</a>, lists family 25 as 1/4″ pitch and .050″ gauge. That is a useful number if you are looking at an Oregon 25-series loop. It is not a substitute for 71 PM3, 71 PMM3 or SP11G. Those loops run in a .043″ groove. <a href="/guides/full-kerf-vs-narrow-kerf-chain/">Narrow kerf versus full kerf</a> and the <a href="/guides/chainsaw-chain-gauge/">gauge guide</a> are the same warning at a larger scale: a close gauge is still the wrong chain. This site does not currently list a saw with a 1/4″ .050″ bar, so there is no Oregon 25 row to check against a model page here.</p>
+      <p style="max-width:72ch">Oregon’s number table, the one decoded on <a href="/guides/oregon-chain-numbers/">Oregon chain numbers</a>, lists family 25 as 1/4″ pitch and .050″ gauge. That is a useful number if you are looking at an Oregon 25-series loop. It is not a substitute for 71 PM3, 71 PMM3 or SP11G. Those loops run in a .043″ groove. <a href="/guides/full-kerf-vs-narrow-kerf-chain/">Narrow kerf versus full kerf</a> and the <a href="/guides/chainsaw-chain-gauge/">gauge guide</a> are the same warning at a larger scale: a close gauge is still the wrong chain. Oregon’s saw-chain selection guide does print one 1/4″ .050″ saw line: the <a href="/saws/worx-wg307-jawsaw/">Worx JawSaw</a>, code A42, 6″ bar, 42 drive links. The guide does not print a file size on that line, and this page does not treat A42 as a renamed 71 PM3.</p>
     </section>
 
     <section class="block"><h2>Questions</h2><FaqList faqs={faqs} /></section>

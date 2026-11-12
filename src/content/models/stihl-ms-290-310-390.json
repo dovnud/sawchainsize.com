@@ -1,0 +1,82 @@
+{
+  "brand": "stihl",
+  "model": "MS 290 / MS 310 / MS 390",
+  "name": "STIHL MS 290 / MS 310 / MS 390",
+  "aliases": ["MS 290", "MS290", "MS 310", "MS310", "MS 390", "MS390"],
+  "type": "gas",
+  "popular": true,
+  "blurb": "One STIHL manual covers all three saws. It approves .325\" and 3/8\" chain, both at 1.6 mm gauge, and it does not print a drive-link count. Oregon's selection guide splits the model numbers and prints a .050\" 3/8\" loop the manual does not.",
+  "notice": "The manual prints bar lengths in centimeters and does not print a drive-link count. Oregon prints inch lengths and link counts for groups of many STIHL saws, and it prints an asterisk after MS 290 that the guide text does not define. Use the stamp on the bar that is mounted now.",
+  "intro": "The MS 290, MS 310 and MS 390 share one STIHL instruction manual, 0458-209-0121-B. The engines are three displacements, not one saw with three stickers. That manual lists the MS 290 at 56.5 cm3, bore 46 mm, stroke 34 mm, 3.0 kW (4.1 hp) at 9,500 rpm. The MS 310 is 59.0 cm3, bore 47 mm, 3.2 kW (4.4 hp) at 9,500 rpm. The MS 390 is 64.1 cm3, bore 49 mm, 3.4 kW (4.6 hp) at 9,500 rpm. Idle is 2,800 rpm on all three, with the manual's tolerance of plus or minus 50 rpm under ISO 11681. The fuel tank is 560 cm3 (0.56 l). Chain oil is a fully automatic speed-controlled pump with a rotary piston plus a manual oil-flow control, and the oil tank is 330 cm3 (0.33 l). The spark plug is a suppressed Bosch WSR 6 F or NGK BPMR 7 A, gap 0.5 mm. The cutting attachment is where owners order the wrong loop. The manual says a cutting attachment is the chain, the guide bar and the chain sprocket together, and that the pitch of the chain, the drive sprocket and the nose sprocket of a Rollomatic bar have to match. The drive-link gauge has to match the bar groove. Non-matching parts, it says, can destroy the cutting attachment after a short time. For these three saws the manual lists Rollomatic bars in two pitches and one groove width. For .325\" pitch the specified bar lengths are 32, 37, 40, 45 and 50 cm. For 3/8\" pitch the list is those lengths plus 63 cm. Groove width on every one of those bars is 1.6 mm. The manual then names the chains. .325\" chains are Rapid Micro 3 (26 RM3) type 3634, Rapid Micro (26 RM) type 3629 and Rapid Super (26 RS) type 3639, pitch .325\" (8.25 mm), drive-link gauge 1.6 mm. 3/8\" chains are Rapid Micro (36 RM) type 3652, Rapid Super (36 RS) type 3621 and Rapid Super 3 (36 RS3) type 3626, pitch 3/8\" (9.32 mm), drive-link gauge 1.6 mm. STIHL's own chain-identification chart equates the drive-link mark 6 with .063\" (1.6 mm), which is why the .325\" row below is filed at .063\". The manual does not print a drive-link count for any of those bars. It does print the sprockets: 7-tooth spur and 7-tooth rim for 3/8\", and 7-tooth spur and 7-tooth rim for .325\". Maximum chain speed under ISO 11681 is 27.5 m/s for the 3/8\" sprockets and for the .325\" spur, with 21.7 m/s at maximum power. The .325\" rim is listed separately at 27.8 m/s maximum and 22.0 m/s at maximum power. Changing pitch means changing the sprocket, not only the loop. Tensioning is the side screw, not a tool-free knob. With the chain brake released, the nuts come off, the tensioner screw is turned counterclockwise until the tensioner slide stops at the left of the slot, the bar goes on the studs with the top cutters pointing right, and the tensioner peg has to sit in the bar's locating hole while the chain goes over the sprocket. The screw is then turned clockwise until there is very little sag and the drive-link tangs are in the groove. The nuts go on fingertight, then the bar nose is held up and the screw is finished. Cold, the chain should sit against the underside of the bar and still pull by hand. At operating temperature the manual says the drive links must not come out of the groove on the underside. A chain tensioned while hot and left that way as it cools can damage the crankshaft and bearings, so the manual says to slacken it. A new chain needs retensioning more often than a worn one. Sharpening in the same manual is 30 degrees for STIHL chains, 10 degrees only for a ripping chain whose designation contains X. Micro teeth, and the manual's examples include 26 RM3 and 36 RM, take a 75 degree side-plate angle. Super teeth, examples 26 RS and 36 RS3, take 60 degrees. The sharpening-tool table in that manual assigns a 4.8 mm (3/16\") round file to .325\" pitch and a 5.2 mm (13/64\") round file to 3/8\" pitch. Oregon's saw-chain selection guide does not copy this manual. It places MS 290 and MS 390, with an asterisk the extracted guide text does not define, in a long group of older STIHL saws that includes the MS 260 and MS 261. That group is printed with .325\" .063\" loops at 16\" / 67 links, 18\" / 74 and 20\" / 81 (Oregon L and V codes) and also with standard 3/8\" .050\" loops at 16\" / 60, 18\" / 66 and 20\" / 72 (Oregon D codes). The MS 310 is not in that group. Oregon prints the MS 310 with the MS 311, MS 361 and MS 362 on the 3/8\" .050\" D60, D66 and D72 lines only. The manual still lists .325\" bars for the MS 310. A .050\" 3/8\" chain is a different gauge from the 1.6 mm groove the manual prints, so those Oregon D-code loops are shown below as a conflict, not as the chain to buy. The MS 261, MS 311 and MS 362 already have their own pages from STIHL's later catalog, which does print drive-link counts for those saws. This page does not reuse those counts for the MS 290.",
+  "bars": [
+    {
+      "lengths_in": [16, 18, 20],
+      "label": ".325\" at 1.6 mm, drive links not in the manual",
+      "pitch": "325",
+      "gauge": 0.063,
+      "drive_links": null,
+      "file_size": "3/16",
+      "status": "verify",
+      "chains": [
+        {"brand": "STIHL", "part_no": "26 RM3 (type 3634)", "role": "oem"},
+        {"brand": "STIHL", "part_no": "26 RM (type 3629)", "role": "oem"},
+        {"brand": "STIHL", "part_no": "26 RS (type 3639)", "role": "oem"}
+      ],
+      "source_ids": ["stihl-ms290-manual", "stihl-chain-id-2017"],
+      "note": "Manual: .325\" (8.25 mm) Rollomatic bars at 32, 37, 40, 45 and 50 cm, groove 1.6 mm. Chains 26 RM3, 26 RM and 26 RS, drive-link gauge 1.6 mm. STIHL's identification chart equates mark 6 with .063\" (1.6 mm). No drive-link count is printed. Sprockets listed: 7-tooth spur and 7-tooth rim. File in the same manual's sharpening table: 4.8 mm (3/16\"). The 16/18/20 inch lengths are the inch lines Oregon uses for this family; they are not a drive-link assignment."
+    },
+    {
+      "lengths_in": [16, 18, 20],
+      "label": "3/8\" gauge: manual 1.6 mm, Oregon group .050\"",
+      "pitch": null,
+      "gauge": null,
+      "drive_links": null,
+      "file_size": null,
+      "status": "conflict",
+      "chains": [
+        {"brand": "STIHL", "part_no": "36 RM (type 3652)", "role": "oem"},
+        {"brand": "STIHL", "part_no": "36 RS (type 3621)", "role": "oem"},
+        {"brand": "STIHL", "part_no": "36 RS3 (type 3626)", "role": "oem"},
+        {"brand": "Oregon", "part_no": "D60", "role": "equivalent"},
+        {"brand": "Oregon", "part_no": "D66", "role": "equivalent"},
+        {"brand": "Oregon", "part_no": "D72", "role": "equivalent"}
+      ],
+      "reported": [
+        {"source_id": "stihl-ms290-manual", "pitch": "3/8", "gauge": 0.063},
+        {"source_id": "oregon-tsc-fit-guide", "pitch": "3/8", "gauge": 0.05, "drive_links": 60},
+        {"source_id": "oregon-tsc-fit-guide", "pitch": "3/8", "gauge": 0.05, "drive_links": 66},
+        {"source_id": "oregon-tsc-fit-guide", "pitch": "3/8", "gauge": 0.05, "drive_links": 72}
+      ],
+      "source_ids": ["stihl-ms290-manual", "oregon-tsc-fit-guide"],
+      "note": "Manual: 3/8\" (9.32 mm) bars at 32, 37, 40, 45, 50 and 63 cm, groove 1.6 mm, chains 36 RM, 36 RS and 36 RS3, 7-tooth spur and rim sprockets, 5.2 mm (13/64\") file in the sharpening table. Oregon's selection guide prints D60 (16\", 60 links), D66 (18\", 66) and D72 (20\", 72) at .050\" standard 3/8\" for a group that includes MS 290 and MS 390, and a separate group that includes the MS 310 with only those D codes. The .050\" gauge is not the manual's 1.6 mm groove. No single loop is asserted."
+    }
+  ],
+  "sources": [
+    {
+      "id": "stihl-ms290-manual",
+      "type": "manual",
+      "publisher": "STIHL",
+      "title": "MS 290, MS 310, MS 390 instruction manual 0458-209-0121-B: engine specifications, cutting attachment (bar lengths, 1.6 mm groove, chain types, sprockets), tensioning, and the sharpening-tool table",
+      "url": "https://ssc.stihl.com/tsa/techdoc-documents/DVS_STIHL%2FZBA%2FZBA%2F0458-209-0121-B_ZBA_04_01.pdf",
+      "retrieved": "2026-11-12"
+    },
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide: STIHL section groups that include MS 290, MS 310 and MS 390",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-12"
+    },
+    {
+      "id": "stihl-chain-id-2017",
+      "type": "fitup-chart",
+      "publisher": "STIHL",
+      "title": "STIHL Saw Chain Selection and Identification chart, specifications as of 1 October 2017: drive-link gauge mark 6 = .063\" (1.6 mm)",
+      "url": "https://assets.unilogcorp.com/187/ITEM/DOC/Stihl_102205325_Catalog.pdf",
+      "retrieved": "2026-11-12"
+    }
+  ],
+  "sources_note": "STIHL MS 290 / 310 / 390 instruction manual 0458-209-0121-B, read 12 Nov 2026, for displacement, bar lengths in centimeters, 1.6 mm groove, chain type numbers, sprockets, tensioning and file diameters. The .063\" reading of 1.6 mm is STIHL's own 1 October 2017 identification chart (mark 6). Oregon's Saw Chain Selection Guide, read the same day, is the conflicting 3/8\" .050\" group. Oregon's link counts are not copied onto the .325\" row.",
+  "last_verified": "2026-11-12"
+}

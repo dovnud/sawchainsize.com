@@ -1,0 +1,40 @@
+{
+  "brand": "worx",
+  "model": "WG322 / WG323",
+  "name": "Worx WG322 / WG323",
+  "aliases": ["WG322", "WG322.9", "WG323", "WG323.9"],
+  "type": "battery",
+  "popular": true,
+  "blurb": "20V 10 inch saw. Worx's manual: 3/8 inch pitch, 0.043 inch gauge, 40 drive links, Oregon chain 90PX040G, bar 104MLEA041. The WG323 is the same cutting head on an extension pole. Oil capacity is 4.5 ounces, and the saw ships without oil.",
+  "notice": "Worx's older WG309 is also a 10 inch, 40-link saw in Oregon's selection guide, at .050 inch gauge. This manual's gauge is 0.043 inch. The link count matches. The gauge does not.",
+  "intro": "Worx's owner's manual covers four catalog numbers as one cutting head: WG322, WG322.9, WG323 and WG323.9. The WG322 is the 20V chainsaw. The WG323 is the 20V 2-in-1 pole saw and chainsaw. The .9 versions are the tool-only listings. The technical data does not change the chain between them. Voltage is printed as 20V, with the note that this is measured without a workload, the initial battery voltage reaches 20 volts, and nominal voltage is 18 volts. Bar length is 10 inches. Chain speed is 12.5 ft/s (3.8 m/s). Oil tank capacity is 4.5 ounces (130 ml). Chain pitch is 3/8 inch. The Spanish section of the same manual prints that pitch as 9.5 mm, which is the low-profile 3/8 inch measurement, and the chain it names is Oregon 90PX040G. Number of chain drive links is 40. Chain gauge is 0.043 inch (1.1 mm). Adaptive chain types are ES 3/8.043-40E, QIRUI A0(T)-40E, and Oregon 90PX040G. Adaptive bar types are ES ES104SDEA041, QIRUI PO10-43SR(T), and Oregon 104MLEA041. The WG322 with battery weighs 6.2 lb. The WG322.9 tool-only weighs 5.3 lb. The WG323 with the pole weighs 10.0 lb. The WG323.9 weighs 9.2 lb. The pole is accessory WA0167, included on the WG323 and not on the WG322. The chain, the bar and the transport cover are included on all four. Charger WA3742 and battery WA3575 come with the versions that are not tool-only. Putting the chain on is a glove job, battery out. The chain goes in the bar slot in the direction of the chain icon on the bar, or the direction symbol on the saw body. The bar tensioning plate faces outward. The chain then goes onto the drive sprocket so the fastening-bar hole and the two bar-locating tabs on the bar pad enter the bar. Drive links have to sit fully in the sprocket. A kink is pulled out just ahead of the kink, and the chain should spin freely before the cover goes on. The chain cover is tightened with the chain-tensioning knob, and the manual warns that the chain is not tensioned yet. Tension is the same knob. It has a ratchet that increases tension as you turn it clockwise and is meant to keep the setting from backing off. The saw is tilted so the bar tip is pushed up, which takes the slack out, and the knob is tightened fully. The check is specific: using one hand, raise the chain against the weight of the saw at the center of the bar. Correct tension is about half the drive-link depth off the bar, with the drive link still inside the rail. A loose chain, the manual says, raises kickback, can jump the groove, and wears the chain, the bar and the sprocket. A new chain stretches and has to be checked often at first. The oil tank is empty from the factory. The manual says never to run the saw without chain oil, because that does extensive damage. Fill with the recommended bar and chain oil until the tank is full, battery removed, cap facing up. Small breather channels between the cap and the strainer vent the tank, so the saw is stored horizontal with the oil cap up to limit leaks. Chain life, it says, depends on that oil, and the oiler runs automatically while you cut. The extension pole does not change the chain. It changes the reach. The manual says to extend it only as far as the limb you are cutting, and to take the battery off before you fit or remove the pole. Oregon's selection guide does not list the WG322. It lists the older WG300 family at .050 inch with odd link counts, and it lists the WG309 as S40: 10 inches, 40 drive links, .050 inch. That is the same length and the same link count as this saw, at the other common low-profile gauge. A 40-link .050 inch chain will not fit a 0.043 inch bar. The WG300 page is that other Worx chart. This page is the manual for the WG322 and WG323.",
+  "bars": [
+    {
+      "lengths_in": [10],
+      "pitch": "3/8-lp",
+      "gauge": 0.043,
+      "drive_links": 40,
+      "file_size": null,
+      "status": "ok",
+      "chains": [
+        {"brand": "Oregon", "part_no": "90PX040G", "role": "oem"},
+        {"brand": "Worx", "part_no": "ES 3/8.043-40E", "role": "oem"},
+        {"brand": "Worx", "part_no": "QIRUI A0(T)-40E", "role": "oem"}
+      ],
+      "source_ids": ["worx-wg322-manual"],
+      "note": "Worx manual technical data: 10 inch bar, pitch 3/8 inch (9.5 mm in the Spanish specifications), gauge 0.043 inch, 40 drive links. Oregon chain 90PX040G and Oregon bar 104MLEA041. Alternate chains named in the same table: ES 3/8.043-40E and QIRUI A0(T)-40E. Alternate bars: ES104SDEA041 and QIRUI PO10-43SR(T). The pitch is filed as 3/8 inch low profile because the named Oregon chain is 90PX. No file diameter is printed. The WG323 pole uses this same chain."
+    }
+  ],
+  "sources": [
+    {
+      "id": "worx-wg322-manual",
+      "type": "manual",
+      "publisher": "Worx",
+      "title": "WG322, WG322.9, WG323, WG323.9 owner's manual: technical data, chain assembly, ratchet tensioner and oil-tank instructions",
+      "url": "https://cx1.unilogcorp.com/cx1/view/catalogs/api/asset/v1/dam/assets/ITEM/DOC/file/187/WORX_100305317_Owners_User_Manual.pdf",
+      "retrieved": "2026-11-12"
+    }
+  ],
+  "sources_note": "Worx owner's manual for the WG322 and WG323 family, read 12 Nov 2026. Oregon's selection guide does not list these catalog numbers. The WG309 comparison is that guide's S40 line, described on the WG300 page.",
+  "last_verified": "2026-11-12"
+}

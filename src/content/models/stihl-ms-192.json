@@ -1,0 +1,102 @@
+{
+  "brand": "stihl",
+  "model": "MS 192 C-E / MS 192 T",
+  "name": "STIHL MS 192 C-E / MS 192 T",
+  "aliases": ["MS 192", "MS192", "MS 192 C-E", "MS 192 T", "MS 192 T C-E"],
+  "type": "gas",
+  "popular": true,
+  "blurb": "The 1 October 2017 STIHL chart puts the MS 192 on both .043\" 61 PMM3 and .050\" 63 PM3. The drive-link counts match (44, 50, 55). The gauge and the nose-sprocket tooth count do not.",
+  "notice": "Same bar length, same drive-link count, two gauges. Counting links will not tell a 61 PMM3 loop from a 63 PM3 loop. Read the gauge on the bar.",
+  "intro": "The MS 192 is on STIHL's Saw Chain Selection and Identification chart with specifications as of 1 October 2017, and it is named in more than one block. The 2025 chart no longer carries this model. The 2017 chart is the one this page uses, the same chart already cited for saws that chart still covers and the 2025 book dropped. In the .043\" block the models are MS 170, MS 171, MS 180, MS 180 C-BE, MS 181 C-BE, MS 192 C-E and MS 192 T C-E. Pitch is 3/8\" STIHL PICCO, Micro Mini, gauge .043\". The loops are 61 PMM3 44 on a 12\" bar, recommended bar 3005 000 3905, type R, 7-tooth nose; 61 PMM3 50 on 14\", bar 3005 000 3909, type R, 7-tooth nose; 61 PMM3 55 on 16\", bar 3005 008 3913, type R, 7-tooth nose. Type R on that chart is a laminated bar. A second block names MS 150 C-E, MS 150 T C-E, MS 192 C-E, MS 192 T C-E, MS 201 T, MS 201 C-E, MS 211, MS 211 C-BE, MSE 170 C-BQ and MSE 210 C-BQ on 3/8\" PICCO at .050\". The counts are again 44, 50 and 55, but the chain is 63 PM3 and the nose is 9 teeth. Bars in that block are 3005 000 4805 (12\", R), 3005 000 4809 (14\", R), 3005 008 4813 (16\", R) and a lightweight 14\" bar 3005 000 7409. A third block names MS 192 C-E and MS 192 T, this time without the C-E on the T model, together with the MS 193 and the MS 201, on .050\" 63 PM3 with lightweight bars: 3005 000 7405 at 12\" / 44 links, 3005 000 7409 at 14\" / 50, and 3005 000 7413 at 16\" / 55. The chart's legend says LW is lightweight and R is laminated. The chart also says the listed bar length can differ from the effective cutting length depending on which powerhead the bar is installed on. The trap is the gauge. A 16\" MS 192 bar in this chart takes 55 drive links whether it is .043\" or .050\". The 14\" bar takes 50 either way, and the 12\" bar takes 44 either way. The chain that fits is 61 PMM3 on the .043\" bar and 63 PM3 on the .050\" bar. The nose sprocket changes with them: 7 teeth on the .043\" Rollomatic bars, 9 teeth on the .050\" bars. A sprocket-nose bar has to match the chain pitch, and these two chains are both 3/8\" PICCO, so the pitch matches while the gauge and the nose tooth count still have to be read off the bar. STIHL's 2025 catalog file table assigns a 4.0 mm (5/32\") round file to 3/8\" PICCO. That is the file printed on these rows. It is STIHL's file for STIHL PICCO chain. Oregon's filing chart for Oregon 90PX .043\" chain is a different publisher and a different chain, and it is not applied to the 61 PMM3 row. The MS 170 page on this site is the .043\" 61 PMM3 saw from the later chart. The MS 211 page is the .050\" 63 PM3 saw. The MS 192 is the model the 2017 chart puts in both blocks, which is why it has its own page. The MS 150 appears only in the .050\" block of that chart, on the same 63 PM3 loops as the MS 211, so it is not given a separate page. Green and yellow on the chart are kickback marks, not sizes. Green is the low-kickback loop with a green tie strap. Lengths marked with an asterisk, where a green reduced-kickback bar is not available, are a different warning, and none of the MS 192 bar part numbers above carry that asterisk.",
+  "bars": [
+    {
+      "lengths_in": [12],
+      "pitch": "3/8-lp",
+      "gauge": 0.043,
+      "drive_links": 44,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [{"brand": "STIHL", "part_no": "61 PMM3 44", "role": "oem"}],
+      "source_ids": ["stihl-chain-chart-2017", "stihl-file-2025"],
+      "note": "2017 chart, .043\" PICCO block that names the MS 192 C-E and MS 192 T C-E. Chain 61 PMM3 44. Recommended bar 3005 000 3905, laminated (R), 7-tooth nose. File 5/32\" from STIHL's 2025 file table for 3/8\" PICCO."
+    },
+    {
+      "lengths_in": [14],
+      "pitch": "3/8-lp",
+      "gauge": 0.043,
+      "drive_links": 50,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [{"brand": "STIHL", "part_no": "61 PMM3 50", "role": "oem"}],
+      "source_ids": ["stihl-chain-chart-2017", "stihl-file-2025"],
+      "note": "2017 chart. Chain 61 PMM3 50. Bar 3005 000 3909, laminated (R), 7-tooth nose."
+    },
+    {
+      "lengths_in": [16],
+      "pitch": "3/8-lp",
+      "gauge": 0.043,
+      "drive_links": 55,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [{"brand": "STIHL", "part_no": "61 PMM3 55", "role": "oem"}],
+      "source_ids": ["stihl-chain-chart-2017", "stihl-file-2025"],
+      "note": "2017 chart. Chain 61 PMM3 55. Bar 3005 008 3913, laminated (R), 7-tooth nose. The .050\" 16\" bar on this saw is also 55 links. Gauge decides."
+    },
+    {
+      "lengths_in": [12],
+      "label": "12\", .050\", laminated",
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 44,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [{"brand": "STIHL", "part_no": "63 PM3 44", "role": "oem"}],
+      "source_ids": ["stihl-chain-chart-2017", "stihl-file-2025"],
+      "note": "2017 chart, .050\" block naming MS 192 C-E and MS 192 T C-E. Chain 63 PM3 44. Bar 3005 000 4805, laminated (R), 9-tooth nose. The lightweight block also lists 63 PM3 44 with bar 3005 000 7405."
+    },
+    {
+      "lengths_in": [14],
+      "label": "14\", .050\"",
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 50,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [{"brand": "STIHL", "part_no": "63 PM3 50", "role": "oem"}],
+      "source_ids": ["stihl-chain-chart-2017", "stihl-file-2025"],
+      "note": "2017 chart. Chain 63 PM3 50. Laminated bar 3005 000 4809, 9-tooth nose. Lightweight bar 3005 000 7409 is listed on both the MS 192 C-E block and the MS 192 T lightweight block."
+    },
+    {
+      "lengths_in": [16],
+      "label": "16\", .050\"",
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 55,
+      "file_size": "5/32",
+      "status": "ok",
+      "chains": [{"brand": "STIHL", "part_no": "63 PM3 55", "role": "oem"}],
+      "source_ids": ["stihl-chain-chart-2017", "stihl-file-2025"],
+      "note": "2017 chart. Chain 63 PM3 55. Laminated bar 3005 008 4813, 9-tooth nose. Lightweight bar 3005 000 7413 is on the block that names MS 192 C-E and MS 192 T."
+    }
+  ],
+  "sources": [
+    {
+      "id": "stihl-chain-chart-2017",
+      "type": "fitup-chart",
+      "publisher": "STIHL",
+      "title": "Saw Chain Selection and Identification, specifications as of 1 October 2017: MS 192 blocks for 61 PMM3 (.043\") and 63 PM3 (.050\"), with bar part numbers and nose-sprocket tooth counts",
+      "url": "https://assets.unilogcorp.com/187/ITEM/DOC/Stihl_102205325_Catalog.pdf",
+      "retrieved": "2026-11-12"
+    },
+    {
+      "id": "stihl-file-2025",
+      "type": "fitup-chart",
+      "publisher": "STIHL",
+      "title": "STIHL 2025 Full Line catalog file table: 4.0 mm (5/32\") round file for 3/8\" PICCO chain",
+      "url": "https://cdnassets.stihlusa.com/1733333284-stih24_15533_2025fullline_wcov.pdf",
+      "retrieved": "2026-11-12"
+    }
+  ],
+  "sources_note": "STIHL chart with specifications as of 1 October 2017, read 12 Nov 2026. The 2025 catalog chart does not name the MS 192. File size is the 2025 catalog file table for 3/8\" PICCO, read the same day. Rows are only the blocks that print the MS 192 by name.",
+  "last_verified": "2026-11-12"
+}

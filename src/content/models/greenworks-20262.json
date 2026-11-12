@@ -1,0 +1,35 @@
+{
+  "brand": "greenworks",
+  "model": "20262",
+  "name": "Greenworks 20262",
+  "aliases": ["20262", "20202", "20292", "20082", "20297"],
+  "type": "battery",
+  "popular": false,
+  "blurb": "Oregon prints one 12 inch chain for a block of 40V Greenworks saws that includes the 20262: S45, 45 drive links, .050 inch, 3/8 inch low profile. The 14 inch 20222 on this site is 52 links. The counts do not swap.",
+  "intro": "Oregon's saw-chain selection guide prints five Greenworks model strings on one 12 inch line: 20202 40V G-MAX, 20262 40V G-MAX, 20292 40V G-MAX, 20082 40V, and 20297 40V G-MAX. The chain is S45. Bar length is 12 inches. Drive links are 45. Gauge is .050 inch. Pitch is 3/8 inch low profile. The guide does not split that line by model number, so it does not say the 20262 left the factory on a different bar from the 20202. One chain is what Oregon printed for the block. The file size is not printed. A 12 inch low-profile .050 inch chain at 45 links is a specific loop. The Greenworks 20222 page on this site is the next length up in the same guide: S52, 14 inches, 52 drive links, .050 inch low profile, for the 20222 and the 20012 9A electric saw. Those are 52 links, not 45. The 80V GCS80420 page is S62, 18 inches, 62 links, still .050 inch low profile. Same gauge family, three lengths, three link counts. Buying the 14 inch chain because the saw \"looks like a 40V Greenworks\" puts 52 links on a bar Oregon sized for 45, or the other way around. The guide also prints a 16 inch .043 inch line, R56, for other Greenworks model numbers, including the 20312. That is the other gauge. A .043 inch chain in this .050 inch groove is the loose fit. A .050 inch chain in a .043 inch groove does not seat. The 20262 block is the .050 inch 12 inch loop only. Oregon's 20332 line is deliberately not a page on this site: the guide prints both 62 and 63 drive links for an 18 inch .050 inch bar under that model number, and the brand page says so. Nothing on the 20262 line has that split. One count, 45. The guide does not print a tension procedure or a sprocket tooth count for these 40V saws. Confirm the bar stamp. If the bar is 14 inches, you are on the 20222 page's chain, not this one, even if the battery is also 40 volts. The rest of the Greenworks section is a map of lengths, and this 12 inch line is only one cell of it. Pole saws sit under their own heading: an 8 inch S33 at 33 links, and a 10 inch S40 at 40 links, both .050 inch low profile, on model numbers that include 24V and 40V tools. Those pole chains are not a short version of S45. The link counts are 33 and 40, not 45. Rear-handle corded lines include 20012 and 20222 at S52 (14 inches, 52 links) and 20022 and 20232 at S56 (16 inches, 56 links). The 80V GCS80420, GCS80421 and 200002 are S62, 18 inches, 62 links. DigiPro models 20152, 20312 and 20322 are R56, 16 inches, 56 links, .043 inch. Same 16 inch length as the S56 line, other gauge. The 20262 block does not include an R code. It is .050 inch only. Oregon's 20332 entry is the one this site refuses to turn into a page, because the guide prints both 62 and 63 links at 18 inches for that number. The 20262 line has a single count. Forty-five links, 12 inches, .050 inch, 3/8 inch low profile, S45, for the five model strings named above. No file, no sprocket tooth count, no second bar.",
+  "bars": [
+    {
+      "lengths_in": [12],
+      "pitch": "3/8-lp",
+      "gauge": 0.05,
+      "drive_links": 45,
+      "file_size": null,
+      "status": "ok",
+      "chains": [{"brand": "Oregon", "part_no": "S45", "role": "equivalent"}],
+      "source_ids": ["oregon-tsc-fit-guide"],
+      "note": "Oregon prints S45 for 20202 40V G-MAX, 20262 40V G-MAX, 20292 40V G-MAX, 20082 40V and 20297 40V G-MAX: 12 inch bar, 45 drive links, .050 inch, 3/8 inch low profile. No file size."
+    }
+  ],
+  "sources": [
+    {
+      "id": "oregon-tsc-fit-guide",
+      "type": "chain-maker",
+      "publisher": "Oregon",
+      "title": "Oregon Saw Chain Selection Guide: Greenworks 12 inch line S45, including model 20262",
+      "url": "https://apps.oregonproducts.com/pdfs/TSC-Chain-Fit-Guide.pdf",
+      "retrieved": "2026-11-12"
+    }
+  ],
+  "sources_note": "Oregon Saw Chain Selection Guide, Greenworks section, read 12 Nov 2026. One chain for the five model strings on that line. No file size is printed.",
+  "last_verified": "2026-11-12"
+}
